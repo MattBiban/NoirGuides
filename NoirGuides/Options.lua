@@ -28,7 +28,7 @@ Options.DEFAULTS = {
   -- General
   shown = true, locked = false, hideInRaid = false, minimap = true, minimapAngle = 225,
   -- Guide window
-  windowHidden = false, cardsBelow = false, windowScale = 1, fontSize = "standard", stepList = true,
+  windowHidden = false, cardsBelow = false, windowScale = 1, fontSize = "standard", accent = "class", stepList = true,
   hideFinished = false, otherSections = false, highlight = true, itemButtons = true, buttonBackground = true,
   buttonScale = 1,
   -- Navigation
@@ -47,6 +47,7 @@ Options.RANGES = {
   minimapAngle = { min = 0, max = 360 },
   windowScale = { min = 0.2, max = 2 },
   fontSize = { choices = { "standard", "large" } },
+  accent = { choices = { "class", "gold" } },
   buttonScale = { min = 0.8, max = 3 },
   arrowScale = { min = 0.2, max = 2 },
   arrowText = { min = 8, max = 20, whole = true },

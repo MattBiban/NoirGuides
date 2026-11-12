@@ -1511,11 +1511,11 @@ function Client:buildGlobals()
     local other = (a == "target" or b == "target") and targetDef()
     return other ~= nil and other ~= false and other.enemy == true
   end
+  -- Protected on the Forever client: an addon calling it gets ADDON_ACTION_FORBIDDEN and nothing is marked. Only a
+  -- secure macro text ("/tm <index>", see Client:secureAction) sets a marker.
   G.SetRaidTarget = function(unit, index)
     record("SetRaidTarget", unit, index)
-    if unit ~= "target" or not c.target then return end
-    c.marks[c.target] = (index and index > 0) and index or nil
-    c:fire("RAID_TARGET_UPDATE")
+    c.violations[#c.violations + 1] = "ADDON_ACTION_FORBIDDEN: SetRaidTarget"
   end
   G.GetRaidTargetIndex = function(unit)
     if unit == "target" and c.target then return c.marks[c.target] end
@@ -3365,8 +3365,9 @@ function Client:near(npc, on)
 end
 
 -- What a protected button does when clicked, from its attributes: type "item" uses the item ("item:6948", a name or
--- an ID), "spell" casts a known spell, "macro" runs a macrotext of the form "/targetexact <name>". Returns
--- "item <id>", "spell <id>", "target <npc>" or nil when nothing happened.
+-- an ID), "spell" casts a known spell, "macro" runs a macrotext of lines "/cleartarget", "/targetexact <name>" and
+-- "/tm <index>" (the raid marker on the target, if any). Returns "item <id>", "spell <id>", "target <npc>" or nil
+-- when nothing was targeted.
 function Client:secureAction(frame)
   local kind = frame:GetAttribute("type")
   if kind == "item" then
@@ -3394,17 +3395,34 @@ function Client:secureAction(frame)
     return nil
   elseif kind == "macro" then
     local text = frame:GetAttribute("macrotext") or ""
-    local name = text:match("^/targetexact (.+)$")
-    assert(name, "the mock runs only /targetexact <name> macro texts, got " .. tostring(text))
-    for npc in pairs(self.nearby) do
-      local def = self.world.npcs[npc]
-      if def and def.name == name then
-        self.target = npc
-        self:fire("PLAYER_TARGET_CHANGED")
-        return "target " .. npc
+    local result
+    for line in (text .. "\n"):gmatch("(.-)\n") do
+      local name, mark = line:match("^/targetexact (.+)$"), tonumber(line:match("^/tm (%d+)$"))
+      if line == "/cleartarget" then
+        if self.target then
+          self.target = nil
+          self:fire("PLAYER_TARGET_CHANGED")
+        end
+      elseif name then
+        for npc in pairs(self.nearby) do
+          local def = self.world.npcs[npc]
+          if def and def.name == name then
+            self.target = npc
+            self:fire("PLAYER_TARGET_CHANGED")
+            result = "target " .. npc
+          end
+        end
+      elseif mark then
+        self.calls[#self.calls + 1] = { "SecureMarker", "target", mark }
+        if self.target then
+          self.marks[self.target] = mark > 0 and mark or nil
+          self:fire("RAID_TARGET_UPDATE")
+        end
+      else
+        error("the mock runs only /cleartarget, /targetexact <name> and /tm <index> lines, got " .. tostring(line))
       end
     end
-    return nil
+    return result
   end
   return nil
 end

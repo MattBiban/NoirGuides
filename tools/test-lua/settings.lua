@@ -12,7 +12,7 @@ local KEY = "Tester-Mock"
 -- The tab of spec 6.1 each option key lives in.
 local TAB_OF = {
   shown = "General", locked = "General", hideInRaid = "General", minimap = "General", minimapAngle = "General",
-  windowHidden = "Guide window", cardsBelow = "Guide window", windowScale = "Guide window", fontSize = "Guide window",
+  windowHidden = "Guide window", cardsBelow = "Guide window", windowScale = "Guide window", fontSize = "Guide window", accent = "Guide window",
   stepList = "Guide window", hideFinished = "Guide window", otherSections = "Guide window", highlight = "Guide window",
   itemButtons = "Guide window", buttonBackground = "Guide window", buttonScale = "Guide window",
   arrow = "Navigation", arrowScale = "Navigation", arrowText = "Navigation", minimapPins = "Navigation",
@@ -230,6 +230,25 @@ test("a slider follows a click on its track and a drag of its thumb", function()
   c:setCursor(left + (right - left) * 0.5, (bottom + top) / 2)
   ok(c:click(slider))
   near(Noir.Options.Get("windowScale"), 1.1, 1e-9, "the middle, on a step of 0.05")
+  eq(c:offScreen(), {})
+end)
+
+test("the accent color asks and reloads the UI", function()
+  local c, Noir, S = at({ settingsApi = "modern" })
+  S.Open("Guide window")
+  eq(control(S, "accent").value, "class", "the class color by default")
+  c:setCursor(400, 400)
+  ok(c:click(S.Control("accent")))
+  ok(c:click(menuRow(Noir, "gold")))
+  eq(Noir.Panel.ConfirmRead().shown, true, "a question first")
+  c:click(Noir.Panel.ConfirmButton("no"))
+  eq(Noir.Options.Get("accent"), "class", "no: nothing changes")
+  eq(c.reloads, 0)
+  ok(c:click(S.Control("accent")))
+  ok(c:click(menuRow(Noir, "gold")))
+  c:click(Noir.Panel.ConfirmButton("yes"))
+  eq(Noir.Options.Get("accent"), "gold")
+  eq(c.reloads, 1, "yes: the interface reloads")
   eq(c:offScreen(), {})
 end)
 

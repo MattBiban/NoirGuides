@@ -155,7 +155,7 @@ end
 -- Each line kind's icon has a color of its own, the way the game marks quests: gold for taking and handing in,
 -- red for what to kill, purple for items, blue for travel, green for trainers. Shape still tells them apart too.
 Window.ICON_COLORS = {
-  accept = "lamp", turnin = "lamp", objective = "enemy", kill = "enemy", item = "loot", vendor = "buy",
+  accept = "quest", turnin = "quest", objective = "enemy", kill = "enemy", item = "loot", vendor = "buy",
   trainer = "ok", xp = "ok", gossip = "friend", flight = "friend", flightpoint = "friend", hearth = "friend",
   bind = "friend", ["goto"] = "friend", error = "warning", note = "dim",
 }
@@ -507,11 +507,11 @@ local function create()
   local bay = frame:CreateTexture(nil, "BACKGROUND")
   Theme.Paint(bay, "bay", m.alpha)
   bay:SetAllPoints(frame)
-  -- a one-pixel border, so the window reads as one panel against the world
+  -- a one-pixel border, so the window reads as one panel against the world; in the class color with that accent
   for _, side in ipairs({ { "TOPLEFT", "TOPRIGHT", true }, { "BOTTOMLEFT", "BOTTOMRIGHT", true },
       { "TOPLEFT", "BOTTOMLEFT", false }, { "TOPRIGHT", "BOTTOMRIGHT", false } }) do
     local edge = frame:CreateTexture(nil, "BORDER")
-    Theme.Paint(edge, "track")
+    Theme.Paint(edge, Theme.Border())
     edge:SetPoint(side[1], frame, side[1], 0, 0)
     edge:SetPoint(side[2], frame, side[2], 0, 0)
     if side[3] then edge:SetHeight(1) else edge:SetWidth(1) end

@@ -24,7 +24,7 @@
 -- quest cleanup", "Report a problem"; Guide window "Reset item buttons", "Preview window positions"; Navigation
 -- "Reset arrow"; Route "Profession to level with the route" (Professions.SetPlanned); Advanced "Find my place
 -- again"; Profiles the profile in use, a name box, new, copy, delete, reset, "Use as default for new characters"
--- and "Reset guide progress for this character". Asked first with Panel.Confirm: fontSize (then ReloadUI()),
+-- and "Reset guide progress for this character". Asked first with Panel.Confirm: fontSize and accent (then ReloadUI()),
 -- outlevel (then the section is loaded again), deleting or resetting a profile and resetting guide progress.
 -- "Show Noir Guides" calls Screen.SetShown, "Hide in raids" sets hideInRaid (Screen hides and shows), "Preview
 -- window positions" turns Screen.Preview on and off.
@@ -45,6 +45,7 @@ SettingsPanel.WIDTH = 440      -- the free window, and the width the controls ar
 SettingsPanel.TAB_WIDTH = 110
 
 SettingsPanel.FONT_QUESTION = "Changing the font size reloads the interface. Change it and reload now?"
+SettingsPanel.ACCENT_QUESTION = "Changing the accent color reloads the interface. Change it and reload now?"
 SettingsPanel.OUTLEVEL_QUESTION = "Changing this loads the section again, and steps may pass or come back. Go on?"
 SettingsPanel.RESET_QUESTION = "Put every setting and window place of the profile %s back to its default?"
 SettingsPanel.DELETE_QUESTION = "Delete the profile %s? Its settings and window places are lost."
@@ -218,22 +219,27 @@ local function profileItems()
   return items
 end
 
-local function fontItems()
-  local items = {}
-  for _, choice in ipairs(Noir.Options.RANGES.fontSize.choices) do
-    local value = choice
-    items[#items + 1] = {
-      text = value, checked = function() return option("fontSize") == value end,
-      on = function()
-        if option("fontSize") == value then return end
-        Panel.Confirm(SettingsPanel.FONT_QUESTION, function()
-          if setOption("fontSize", value) then ReloadUI() end
-        end)
-      end,
-    }
+-- The choices of an option that is only applied when the interface loads: asked first, then a reload.
+local function reloadItems(key, question)
+  return function()
+    local items = {}
+    for _, choice in ipairs(Noir.Options.RANGES[key].choices) do
+      local value = choice
+      items[#items + 1] = {
+        text = value, checked = function() return option(key) == value end,
+        on = function()
+          if option(key) == value then return end
+          Panel.Confirm(question, function()
+            if setOption(key, value) then ReloadUI() end
+          end)
+        end,
+      }
+    end
+    return items
   end
-  return items
 end
+local fontItems = reloadItems("fontSize", SettingsPanel.FONT_QUESTION)
+local accentItems = reloadItems("accent", SettingsPanel.ACCENT_QUESTION)
 
 local function reloadSection()
   local Guide, Progress = Noir.Guide, Noir.Progress
@@ -277,6 +283,7 @@ SettingsPanel.CONTROLS = {
     tick("cardsBelow", "Current steps below the window"),
     slider("windowScale", "Window scale", 0.05, "percent"),
     { key = "fontSize", kind = "choice", text = "Font size", items = fontItems, value = function() return option("fontSize") end },
+    { key = "accent", kind = "choice", text = "Accent color", items = accentItems, value = function() return option("accent") end },
     tick("stepList", "Show the step list"),
     tick("hideFinished", "Hide finished steps"),
     tick("otherSections", "Show sections for other races and classes"),

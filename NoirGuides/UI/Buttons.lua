@@ -25,9 +25,10 @@
 -- Target buttons: enemies in the top group, friendly NPCs below, PER_ROW to a row, from the cards' `targets` and
 -- target lines (the current step's first, then a detour's, then the reminders'), named from Noir.Data.npcs.
 -- type = "macro" with the attribute macrotext = "/targetexact <name>": an attribute of the button, not a macro (no
--- macro is ever created). With "markers" on, a click that targets the unit
--- puts the raid marker of the button's position on it. The portrait shows once the unit was seen as the target, else
--- a placeholder; the tooltip is the name. A friendly NPC the player talks to leaves the list until the place moves.
+-- macro is ever created). With "markers" on, the macro text also puts the raid marker of the button's position on the
+-- unit: "/cleartarget", "/targetexact <name>", "/tm <mark>", so a miss marks nothing. The marker is set by the macro,
+-- never by the addon's code: SetRaidTarget is protected on the Forever client (ADDON_ACTION_FORBIDDEN).
+-- The portrait shows once the unit was seen as the target, else a placeholder; the tooltip is the name. A friendly NPC the player talks to leaves the list until the place moves.
 -- Hidden on a flight, while casting the Hearthstone or Astral Recall, in a raid, without targets, and with
 -- "targetButtons" off. "nameplates" raises the nameplate distance to NAMEPLATE_MAX where the client has the setting,
 -- and gives the old value back when switched off.
@@ -340,14 +341,6 @@ local function targetButton(group, i)
   local button = newButton(targetsBar, i <= Buttons.NAMED and (prefix .. i) or nil)
   button:SetAttribute("type", "macro")
   button.group, button.position = group, i
-  button:SetScript("PostClick", function(self)
-    if not option("markers") or not self.target then return end
-    local mark = marks(self.group)[self.position]
-    if not mark or not (SetRaidTarget and UnitName) then return end
-    if UnitName("target") ~= self.target then return end
-    if GetRaidTargetIndex and GetRaidTargetIndex("target") == mark then return end
-    SetRaidTarget("target", mark)
-  end)
   button:SetScript("OnEnter", function(self)
     if not (GameTooltip and self.target) then return end
     GameTooltip:SetOwner(self, "ANCHOR_TOP")
@@ -461,6 +454,13 @@ local function drawPortrait(button)
   if button.portrait then button.portraitOf = button.target end
 end
 
+-- The macro text of a target button: target the name, and with "markers" on mark it (see the header).
+local function macroText(group, i, name)
+  local mark = option("markers") and marks(group)[i]
+  if not mark then return "/targetexact " .. name end
+  return "/cleartarget\n/targetexact " .. name .. "\n/tm " .. mark
+end
+
 local function drawGroup(group, entries, buttons, top)
   local s, g, p = size(), gap(), pad()
   for i, e in ipairs(entries) do
@@ -468,7 +468,11 @@ local function drawGroup(group, entries, buttons, top)
     if button.target ~= e.name then
       button.target = e.name
       button.portrait = false
-      button:SetAttribute("macrotext", "/targetexact " .. e.name)
+    end
+    local text = macroText(group, i, e.name)
+    if button.macro ~= text then
+      button.macro = text
+      button:SetAttribute("macrotext", text)
     end
     if seen[e.name] then drawPortrait(button) elseif not button.portrait then placeholder(button) end
     local row, col = math.floor((i - 1) / Buttons.PER_ROW), (i - 1) % Buttons.PER_ROW
@@ -671,7 +675,8 @@ Noir.On("NOIR_OPTION", function(_, key)
     end
   elseif key == "nameplates" then
     nameplates()
-  elseif key == "buttonScale" or key == "itemButtons" or key == "targetButtons" or key == "shown" or key == "hideInRaid" then
+  elseif key == "buttonScale" or key == "itemButtons" or key == "targetButtons" or key == "shown" or key == "hideInRaid"
+    or key == "markers" then
     Buttons.Refresh()
   end
 end)

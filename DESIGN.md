@@ -16,7 +16,7 @@ Two things live outside the window and belong to the same system: **the arrow**,
 
 Rules that follow from the idea:
 
-1. One accent. The lamp color marks what is current: the current card's side bar and badge, the rail's fill, the arrow, the current step's pin. Nothing else uses it for long: the side bar of a new current card shows the step's kind for three seconds and then returns to the lamp color.
+1. One accent. The lamp color (the player's class color, or gold; see Accent) marks what is current: the current card's side bar and badge, the rail's fill, the arrow, the current step's pin. Nothing else uses it for long: the side bar of a new current card shows the step's kind for three seconds and then returns to the lamp color.
 2. The window says what the game's state says. It never shows a step as done, and it never hides a step, on its own judgment. A line the player ticks is shown ticked; a step the engine passed says why when the mouse is on its row.
 3. Text is short and built from parts: an action, a name, a place. A step's own text and its notes are the only sentences.
 4. The interface is quiet. No sound and no flashing on a step change. The card slide and the talent ring are the only motion in the interface: a new current card slides in once, and the talent ring turns while talent points wait.
@@ -30,7 +30,8 @@ The window sits over the game world, so it is dark and nearly opaque, and its te
 |---|---|---|
 | `bay` | `#1C2027` | The window's background, at the opacity given under Measures. |
 | `strip` | `#2E343E` | A card's background; a row of the step list under the mouse. |
-| `lamp` | `#F2B33D` | The accent: the current card's side bar and badge, a ticked box, the rail's fill, the arrow, the current step's pin, the addon's name in chat. |
+| `lamp` | `#F2B33D` | The accent: the current card's side bar and badge, a ticked box, the rail's fill, the arrow, the current step's pin, the addon's name in chat. This is its gold; with the class accent it is the class color (see Accent). |
+| `quest` | `#F2B33D` | The quest icons (accept, hand in) and the accept mark on a new card: gold whatever the accent, so the icon colors keep their meaning. |
 | `paper` | `#ECE7DB` | Primary text: the lines of the cards and of the steps still to do, the arrow's distance. |
 | `dim` | `#A6A195` | Secondary text: a step's own text, the subgroup, the footer, lines already done. |
 | `faint` | `#8F8A80` | A reminder's side bar, the step numbers in the list, the next steps' pins. |
@@ -45,6 +46,24 @@ The window sits over the game world, so it is dark and nearly opaque, and its te
 | `buy` | `#B8D97A` | An item to buy named in a line. |
 
 Named things are colored by meaning while the "highlight" setting is on (the default); with it off every line is in one color.
+
+## Accent
+
+The "Accent color" setting (Guide window) is `class` by default: the lamp becomes the player's class color, and the guide window's one-pixel border takes it too. With `gold` the lamp is `#F2B33D` and the border is track, as before. The accent is set when the interface loads, so changing it asks and reloads. Quest icons stay `quest` gold either way.
+
+| Class | Hex | Ratio on strip |
+|---|---|---|
+| Warrior | `#C69B6D` | 5.0 |
+| Paladin | `#F48CBA` | 5.6 |
+| Hunter | `#AAD372` | 7.3 |
+| Rogue | `#FFF468` | 11.0 |
+| Priest | `#B4A7E8` | 5.7 |
+| Shaman | `#4FA3F2` | 4.7 |
+| Mage | `#3FC7EB` | 6.3 |
+| Warlock | `#9A9BF2` | 5.0 |
+| Druid | `#FF7C0A` | 4.9 |
+
+These are the game's class colors with three changes, so every accent reads on a card at 4.5 to 1 or more: the priest's white is a lavender, unlike the text, and the shaman's and the warlock's blues are lighter. A class with no color here keeps the gold.
 
 ## Contrast
 

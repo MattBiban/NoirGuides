@@ -27,9 +27,30 @@ local function keys(t)
   return out
 end
 
-local function theme()
-  local c = sample({ race = "Undead", class = "ROGUE" }):login()
+-- A character whose profile has the given accent ("gold" by default: the design's own colors).
+local function login(class, accent)
+  local saved = { account = {}, characters = {} }
+  if accent ~= false then
+    saved.account.NoirGuidesDB = { schema = 2, defaultProfile = "Default",
+      profiles = { Default = { accent = accent or "gold" } } }
+  end
+  local c = sample({ race = "Undead", class = class or "ROGUE", saved = saved }):login()
   return c.G.Noir.Theme, c
+end
+
+local function theme()
+  return login("ROGUE", "gold")
+end
+
+-- The border textures of the guide window: its 1-pixel edges, painted on the BORDER layer of the frame itself.
+local function borderColor(c)
+  local frame = c.G.Noir.Window.frame
+  for _, region in ipairs(frame.__regions) do
+    if region.GetDrawLayer and region:GetDrawLayer() == "BORDER" and region.__color then
+      local w, h = region:GetWidth(), region:GetHeight()
+      if w == 1 or h == 1 then return region.__color end
+    end
+  end
 end
 
 test("every color of the theme is the color the design gives it, and the design names no other", function()
@@ -159,4 +180,65 @@ test("the design describes the card stack and the step list, and names the only 
   has(text, "step list")
   has(text, "The card slide and the talent ring are the only motion in the interface")
   ok(not text:find("%f[%a][Rr]ack%f[%A]"), "the Strip Bay rack is gone")
+end)
+
+test("the accent is the class color by default, and the design's gold with the gold accent", function()
+  local Theme, c = login("MAGE", false)
+  eq(c.G.Noir.Options.Get("accent"), "class")
+  eq(Theme.Hex("lamp"), "3FC7EB", "a mage's accent is the mage color")
+  eq(Theme.Border(), "lamp", "the window's border takes the class color")
+  eq(Theme.Hex("quest"), "F2B33D", "quest icons stay gold")
+  c:takeChat()
+  c:slash("/noir version")
+  has(c:chatText(), "|cff3FC7EBNoir|r", "the addon's name in chat too")
+  local Gold = login("MAGE", "gold")
+  eq(Gold.Hex("lamp"), "F2B33D")
+  eq(Gold.Border(), "track", "gold: the window as it was, grey border included")
+end)
+
+test("every class has an accent that reads on the window, and the priest's is not white", function()
+  local Theme = theme()
+  local function luminance(hex)
+    local sum = 0
+    for i, weight in ipairs({ 0.2126, 0.7152, 0.0722 }) do
+      local v = tonumber(hex:sub(i * 2 - 1, i * 2), 16) / 255
+      v = v <= 0.03928 and v / 12.92 or ((v + 0.055) / 1.055) ^ 2.4
+      sum = sum + weight * v
+    end
+    return sum
+  end
+  local function ratio(a, b)
+    local x, y = luminance(a), luminance(b)
+    if x < y then x, y = y, x end
+    return (x + 0.05) / (y + 0.05)
+  end
+  for _, class in ipairs({ "WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "MAGE", "WARLOCK", "DRUID" }) do
+    local hex = Theme.CLASS_COLORS[class]
+    ok(hex, class .. " has a color")
+    ok(ratio(hex, Theme.Hex("strip")) >= 4.5, class .. " reads on a card (4.5 to 1)")
+    local Class = login(class, "class")
+    eq(Class.Hex("lamp"), hex, class)
+  end
+  ok(Theme.CLASS_COLORS.PRIEST ~= "FFFFFF", "the priest's accent is not white")
+end)
+
+test("a class without a color keeps the gold accent", function()
+  local Theme, c = login("MAGE", "class")
+  eq(Theme.Hex("lamp"), "3FC7EB")
+  Theme.CLASS_COLORS.MAGE = nil -- a class the table does not know
+  Theme.ApplyAccent()
+  eq(Theme.Hex("lamp"), "F2B33D")
+  eq({ Theme.Color("lamp") }, { Theme.Color("quest") })
+  eq(Theme.Border(), "track")
+  eq(c.errors, {})
+end)
+
+test("the window's border is grey with gold, in the class color with the class accent", function()
+  local _, gold = login("MAGE", "gold")
+  local _, class = login("MAGE", "class")
+  local GoldTheme, ClassTheme = gold.G.Noir.Theme, class.G.Noir.Theme
+  local g, k = borderColor(gold), borderColor(class)
+  ok(g and k, "the border is found")
+  eq(g, { GoldTheme.Color("track") })
+  eq(k, { ClassTheme.Color("lamp") })
 end)

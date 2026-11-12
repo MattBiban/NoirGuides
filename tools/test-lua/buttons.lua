@@ -187,17 +187,22 @@ test("target buttons target the exact name and set markers by position", functio
   eq(Buttons.Targets(), { enemy = { "Mindless Zombie", "Wretched Ghoul", "Young Scavenger", "Rattlecage Skeleton" }, friend = {} })
   local second = c.G.NoirGuidesEnemy2
   eq(second:GetAttribute("type"), "macro")
-  eq(second:GetAttribute("macrotext"), "/targetexact Wretched Ghoul")
+  eq(second:GetAttribute("macrotext"), "/cleartarget\n/targetexact Wretched Ghoul\n/tm 7",
+    "the marker is set by the secure macro, never by the addon's code (SetRaidTarget is protected)")
   c:near(1502)
   eq(c:secureClick(second), "target 1502")
   eq(c.marks[1502], 7, "the second enemy gets the cross")
   c:near(1501)
   c:secureClick(c.G.NoirGuidesEnemy1)
   eq(c.marks[1501], 8, "the first enemy gets the skull")
-  -- Not near: nothing is targeted and nothing marked.
-  local before = #c:callsTo("SetRaidTarget")
-  c:secureClick(c.G.NoirGuidesEnemy3)
-  eq(#c:callsTo("SetRaidTarget"), before)
+  -- Not near: nothing is targeted and nothing marked, not even the unit targeted before.
+  local before = #c:callsTo("SecureMarker")
+  eq(c:secureClick(c.G.NoirGuidesEnemy3), nil)
+  eq(c.target, nil, "the miss cleared the target, so /tm had nothing to mark")
+  eq(#c:callsTo("SecureMarker"), before + 1)
+  eq(c.marks[1501], 8, "the unit targeted before keeps its own marker")
+  eq(c:callsTo("SetRaidTarget"), {}, "the addon never calls the protected function")
+  eq(c.violations, {})
   -- The portrait shows once the unit was the target; until then a placeholder.
   local read = Buttons.Read().targets
   eq({ read.enemy[1].portrait, read.enemy[3].portrait }, { true, false })
@@ -210,6 +215,7 @@ test("target buttons target the exact name and set markers by position", functio
   eq(f.marks[1950], 1)
   -- Markers off: targeting only.
   Noir2.Options.Set("markers", false)
+  eq(f.G.NoirGuidesEnemy1:GetAttribute("macrotext"), "/targetexact Worg")
   f:near(1765)
   f:secureClick(f.G.NoirGuidesEnemy1)
   eq(f.marks[1765], nil)

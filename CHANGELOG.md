@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.2
+
+- **The skin takes your class color.** The accent (the current step's side bar and badge, ticked boxes, the rail, the arrow, the current map pin, menus, the minimap button and "Noir" in chat) and the guide window's border are now in your class color. The priest's white is a lavender, so it stands apart from the text, and the shaman's and warlock's blues are a little lighter so they stay readable. Quest icons stay gold. To go back to the gold look: Settings, Guide window, Accent color, gold (the interface reloads).
+- **Fixed: target buttons no longer cause an "AddOn tried to call the protected function SetRaidTarget()" error.** The raid marker is now set by the button's own click, which the game allows. A click on a mob that is out of range now clears your target instead of marking whatever you had targeted before.
+
 ## 0.2.1
 
 - **Smooth arrow.** It looked where the player is 20 times a second; it now does every frame, and its direction eases toward the true one, so turning glides instead of stepping.

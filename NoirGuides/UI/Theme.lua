@@ -15,6 +15,10 @@
 --   Theme.Paint(texture, name [, alpha])   a solid color
 --   Theme.Tint(texture, name [, alpha])    colors one of the addon's white textures
 --   Theme.fontFile                the addon's own font file, once it ships one (nil: the client's default font)
+--   Theme.CLASS_COLORS            class token -> the hex the lamp takes for that class with the "class" accent
+--   Theme.ApplyAccent()           sets the lamp to the class color or the design's gold, as the "accent" option says;
+--                                 runs on NOIR_INIT before any window is built (a change takes a reload)
+--   Theme.Border()                -> the guide window border's color name: lamp with the class accent, else track
 --
 -- Fonts are only ever set by file, with SetFont. A font object is never handed to a font string: the Forever
 -- client crashes when SetFontObject is given anything but one of its own named font objects.
@@ -31,6 +35,7 @@ local HEX = {
   bay = "1C2027",     -- the window's background
   strip = "2E343E",   -- a card's background, a lit row of the step list
   lamp = "F2B33D",    -- the accent: the current card's side bar, the badge, the rail, the arrow, the current pin
+  quest = "F2B33D",   -- the quest icons (accept, hand in) and the accept mark: gold whatever the accent
   paper = "ECE7DB",   -- primary text
   dim = "A6A195",     -- secondary text
   faint = "8F8A80",   -- a reminder's side bar, the step numbers, the next steps' pins
@@ -46,14 +51,24 @@ local HEX = {
   buy = "B8D97A",     -- an item to buy
 }
 
-Theme.colors = {}
-for name, hex in pairs(HEX) do
-  Theme.colors[name] = {
+local function rgb(hex)
+  return {
     tonumber(string.sub(hex, 1, 2), 16) / 255,
     tonumber(string.sub(hex, 3, 4), 16) / 255,
     tonumber(string.sub(hex, 5, 6), 16) / 255,
   }
 end
+
+Theme.colors = {}
+for name, hex in pairs(HEX) do Theme.colors[name] = rgb(hex) end
+local GOLD = HEX.lamp
+
+-- The game's class colors, except where one would not read as an accent on the window (DESIGN.md, Accent): the
+-- priest's white is a lavender, unlike the text; the shaman's and the warlock's blues are lighter, to 4.5 to 1.
+Theme.CLASS_COLORS = {
+  WARRIOR = "C69B6D", PALADIN = "F48CBA", HUNTER = "AAD372", ROGUE = "FFF468", PRIEST = "B4A7E8",
+  SHAMAN = "4FA3F2", MAGE = "3FC7EB", WARLOCK = "9A9BF2", DRUID = "FF7C0A",
+}
 
 Theme.sizes = { kicker = 10, name = 14, body = 11, small = 10 }
 
@@ -86,7 +101,7 @@ Theme.ICONS = { "accept", "turnin", "objective", "kill", "item", "vendor", "trai
 for _, icon in ipairs(Theme.ICONS) do Theme.textures["icon-" .. icon] = true end
 
 -- The side bar of a new current card shows the step's kind for metrics.mark seconds, in this color (spec 4.2).
-Theme.MARKS = { turnin = "ok", accept = "lamp", train = "friend", objective = "enemy", travel = "dim" }
+Theme.MARKS = { turnin = "ok", accept = "quest", train = "friend", objective = "enemy", travel = "dim" }
 
 function Theme.Color(name, alpha)
   local color = Theme.colors[name]
@@ -159,5 +174,31 @@ function Theme.Tint(texture, name, alpha)
   texture:SetVertexColor(Theme.Color(name, alpha))
 end
 
--- Chat lines start with the addon's name in the accent color.
-Noir.prefix = "|cff" .. HEX.lamp .. "Noir|r: "
+-- ---------------------------------------------------------------------------------------------------------------
+-- Accent
+-- ---------------------------------------------------------------------------------------------------------------
+
+local classAccent = false
+
+function Theme.ApplyAccent()
+  local hex = GOLD
+  classAccent = false
+  local Options = Noir.Options
+  if Options and Options.Get("accent") == "class" and UnitClass then
+    local _, token = UnitClass("player")
+    local color = type(token) == "string" and Theme.CLASS_COLORS[token]
+    if color then hex, classAccent = color, true end
+  end
+  HEX.lamp = hex
+  Theme.colors.lamp = rgb(hex)
+  -- Chat lines start with the addon's name in the accent color.
+  Noir.prefix = "|cff" .. hex .. "Noir|r: "
+end
+
+function Theme.Border()
+  return classAccent and "lamp" or "track"
+end
+
+Theme.ApplyAccent()
+-- Registered here, before any interface file registers its own: the lamp is set before a window is built.
+Noir.On("NOIR_INIT", Theme.ApplyAccent)
