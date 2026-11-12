@@ -15,7 +15,7 @@ Everything needed to create the project and upload the first file. Each block be
 | Game version | WoW Forever (Interface 16001) |
 | License | GNU General Public License v3.0 (GPL-3.0-only) |
 | Source | https://github.com/MattBiban/NoirGuides |
-| Icon | 400 × 400 PNG with the Noir mark (to be made) |
+| Icon | `docs/images/icon-400.png` (400 × 400 PNG) |
 
 ---
 
@@ -126,6 +126,7 @@ CurseForge shows these on the project page. Use 16:9 and hide other UI clutter.
 ## Before publishing: checklist
 
 - [ ] Play 0.2.1 in game for a session or two. The simulator passes, but `docs/INGAME-CHECKLIST.md` lists what only the real game can confirm.
-- [ ] Take the screenshots above and make the 400 × 400 icon.
+- [x] The 400 × 400 icon: `docs/images/icon-400.png`.
+- [ ] Take the screenshots above.
 - [ ] Create the project, then connect it to GitHub for automatic uploads (`docs/RELEASING.md`). From then on every version tag uploads itself.
 - [ ] If CurseForge gives the project a different address than `noir-guides`, update the CurseForge link at the top of `README.md`.
