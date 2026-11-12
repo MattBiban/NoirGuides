@@ -1,0 +1,19 @@
+{
+  "name": "noir-guides-tools",
+  "private": true,
+  "license": "GPL-3.0-only",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "test:lua": "node harness/run.js",
+    "fetch": "node fetch_data.js",
+    "routes": "node build_routes.js",
+    "textures": "node gen_textures.js",
+    "ports": "node gen_ports.js",
+    "sim": "node sim_all.js",
+    "package": "node package_addon.js"
+  },
+  "devDependencies": {
+    "fengari": "0.1.5",
+    "luaparse": "0.3.1"
+  }
+}

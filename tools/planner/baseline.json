@@ -1,0 +1,122 @@
+{
+  "about": [
+    "The routes of commit 37a4f8c, the last ones of the first planner, measured by tools/baseline.js. Generated; do not edit.",
+    "steps, quests, endLevel, grindSteps, straightYards: as that commit's docs/routes/REPORT.md gives them (the distance is straight lines between steps).",
+    "zoneChanges, travelSeconds, walkedYards, unreachable: measured by planner/measure.js from that commit's route files. The old format has no travel legs, so each",
+    "route is given the fastest way lib/travel.js finds between two places in a row, with every transport open to it and today's XP estimates for its level.",
+    "That flatters the old routes: a comparison against these numbers errs against the new planner."
+  ],
+  "commit": "37a4f8c",
+  "races": {
+    "Human": {
+      "steps": 2154,
+      "quests": 766,
+      "endLevel": 60,
+      "straightYards": 1327001,
+      "grindSteps": 0,
+      "zoneChanges": 214,
+      "travelSeconds": 160157,
+      "walkedYards": 936223,
+      "unreachable": 2
+    },
+    "Orc": {
+      "steps": 2015,
+      "quests": 692,
+      "endLevel": 60,
+      "straightYards": 1211032,
+      "grindSteps": 1,
+      "zoneChanges": 206,
+      "travelSeconds": 154596,
+      "walkedYards": 920085,
+      "unreachable": 2
+    },
+    "Dwarf": {
+      "steps": 2221,
+      "quests": 794,
+      "endLevel": 60,
+      "straightYards": 1343292,
+      "grindSteps": 0,
+      "zoneChanges": 217,
+      "travelSeconds": 164623,
+      "walkedYards": 957169,
+      "unreachable": 2
+    },
+    "NightElf": {
+      "steps": 2230,
+      "quests": 795,
+      "endLevel": 60,
+      "straightYards": 1395005,
+      "grindSteps": 0,
+      "zoneChanges": 203,
+      "travelSeconds": 169292,
+      "walkedYards": 1007696,
+      "unreachable": 2
+    },
+    "Undead": {
+      "steps": 2090,
+      "quests": 725,
+      "endLevel": 60,
+      "straightYards": 1232768,
+      "grindSteps": 1,
+      "zoneChanges": 182,
+      "travelSeconds": 161923,
+      "walkedYards": 967604,
+      "unreachable": 2
+    },
+    "Tauren": {
+      "steps": 2049,
+      "quests": 709,
+      "endLevel": 60,
+      "straightYards": 1222164,
+      "grindSteps": 1,
+      "zoneChanges": 199,
+      "travelSeconds": 156736,
+      "walkedYards": 923557,
+      "unreachable": 2
+    },
+    "Gnome": {
+      "steps": 2221,
+      "quests": 794,
+      "endLevel": 60,
+      "straightYards": 1343292,
+      "grindSteps": 0,
+      "zoneChanges": 217,
+      "travelSeconds": 164623,
+      "walkedYards": 957169,
+      "unreachable": 2
+    },
+    "Troll": {
+      "steps": 2015,
+      "quests": 692,
+      "endLevel": 60,
+      "straightYards": 1211032,
+      "grindSteps": 1,
+      "zoneChanges": 206,
+      "travelSeconds": 154596,
+      "walkedYards": 920085,
+      "unreachable": 2
+    },
+    "HighOrder": {
+      "steps": 2220,
+      "quests": 788,
+      "endLevel": 60,
+      "straightYards": 1299878,
+      "grindSteps": 1,
+      "zoneChanges": 212,
+      "travelSeconds": 155399,
+      "walkedYards": 915714,
+      "unreachable": 3
+    },
+    "Windshaper": {
+      "steps": 1979,
+      "quests": 680,
+      "endLevel": 60,
+      "straightYards": 1185085,
+      "grindSteps": 1,
+      "zoneChanges": 200,
+      "travelSeconds": 152571,
+      "walkedYards": 891664,
+      "unreachable": 2
+    }
+  }
+}

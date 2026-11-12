@@ -1,0 +1,19 @@
+<!-- Noir Guides, GPLv3. See LICENSE. -->
+<!-- Key bindings. The client reads this file by itself (the toc does not list it). Each binding clicks one of the
+     addon's named secure buttons (UI/Buttons.lua): the first four item buttons and the first four friendly and enemy
+     target buttons. The header and binding names are the BINDING_HEADER_NOIRGUIDES and BINDING_NAME_* globals that
+     UI/Buttons.lua sets. Nothing is bound from Lua. -->
+<Bindings>
+  <Binding name="CLICK NoirGuidesItem1:LeftButton" header="NOIRGUIDES" category="ADDONS"/>
+  <Binding name="CLICK NoirGuidesItem2:LeftButton" category="ADDONS"/>
+  <Binding name="CLICK NoirGuidesItem3:LeftButton" category="ADDONS"/>
+  <Binding name="CLICK NoirGuidesItem4:LeftButton" category="ADDONS"/>
+  <Binding name="CLICK NoirGuidesFriend1:LeftButton" category="ADDONS"/>
+  <Binding name="CLICK NoirGuidesFriend2:LeftButton" category="ADDONS"/>
+  <Binding name="CLICK NoirGuidesFriend3:LeftButton" category="ADDONS"/>
+  <Binding name="CLICK NoirGuidesFriend4:LeftButton" category="ADDONS"/>
+  <Binding name="CLICK NoirGuidesEnemy1:LeftButton" category="ADDONS"/>
+  <Binding name="CLICK NoirGuidesEnemy2:LeftButton" category="ADDONS"/>
+  <Binding name="CLICK NoirGuidesEnemy3:LeftButton" category="ADDONS"/>
+  <Binding name="CLICK NoirGuidesEnemy4:LeftButton" category="ADDONS"/>
+</Bindings>

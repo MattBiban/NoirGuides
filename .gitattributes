@@ -1,0 +1,7 @@
+*.lua text eol=lf
+*.js text eol=lf
+*.md text eol=lf
+*.toc text eol=lf
+LICENSE text eol=lf
+*.tga binary
+*.xml text eol=lf

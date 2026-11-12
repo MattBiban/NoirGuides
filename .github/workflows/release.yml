@@ -1,0 +1,48 @@
+# Noir Guides, GPLv3. See LICENSE.
+# On a version tag (v0.2.2): checks the tag matches the toc and the changelog, builds the zip, publishes a GitHub
+# release with it, and uploads it to CurseForge. One-time setup: docs/RELEASING.md.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check the version
+        id: version
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          TOC=$(sed -n 's/^## Version:[[:space:]]*//p' NoirGuides/NoirGuides.toc | tr -d '\r')
+          if [ "$TAG" != "$TOC" ]; then echo "Tag v$TAG does not match the toc version $TOC"; exit 1; fi
+          node tools/release_notes.js "$TAG" > release-notes.md
+          echo "version=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Build the zip
+        run: node tools/package_addon.js
+
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" "dist/NoirGuides-${{ steps.version.outputs.version }}.zip" \
+            --title "Noir Guides ${{ steps.version.outputs.version }}" --notes-file release-notes.md
+
+      - name: Upload to CurseForge
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
+          CF_GAME_VERSIONS: ${{ vars.CF_GAME_VERSIONS }}
+          CF_RELEASE_TYPE: ${{ vars.CF_RELEASE_TYPE }}
+        run: node tools/cf_upload.js "dist/NoirGuides-${{ steps.version.outputs.version }}.zip" "${{ steps.version.outputs.version }}"
