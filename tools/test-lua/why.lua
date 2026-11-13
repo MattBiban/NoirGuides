@@ -61,7 +61,7 @@ end)
 
 test("every kind has its words", function()
   local _, Why = login({ level = 2 })
-  local kinds = { "done", "moot", "cannot", "condition", "outleveled", "tick", "jump", "place", "section", "route" }
+  local kinds = { "done", "moot", "cannot", "condition", "outleveled", "deferred", "tick", "jump", "place", "section", "route" }
   local seen = {}
   for _, kind in ipairs(kinds) do
     local words = Why.Words(kind)

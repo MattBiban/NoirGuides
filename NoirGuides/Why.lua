@@ -28,6 +28,7 @@ Why.KINDS = {
   cannot = "cannot be done",      -- its quest is not in the log and nothing earlier in the section accepts it
   condition = "skip condition",   -- one of the step's skip conditions held
   outleveled = "above its level", -- the character is above the step's maximum level
+  deferred = "saved for later",   -- under its level: the place moved on to work it can do now; it comes back at the level
   tick = "ticked by hand",        -- the player ticked its last open line (or used skip)
   jump = "moved by hand",         -- the player went to another step
   place = "place found",          -- the place was worked out from the quest log

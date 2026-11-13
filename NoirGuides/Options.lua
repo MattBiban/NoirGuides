@@ -38,7 +38,7 @@ Options.DEFAULTS = {
   autoQuests = true, guideRewards = false, rewardMarker = true, bestReward = false, train = false, flights = true,
   hearth = true, dialogue = true, buy = true, sellJunk = true, targetButtons = true, nameplates = true, markers = true,
   -- Route
-  outlevel = true, groupQuests = false, talents = true,
+  outlevel = true, workAhead = true, groupQuests = false, talents = true,
   -- Advanced
   neverSkip = false, offerCleanup = true, conflicts = true, debug = false,
 }

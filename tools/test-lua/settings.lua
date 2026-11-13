@@ -23,7 +23,7 @@ local TAB_OF = {
   train = "Automation", flights = "Automation", hearth = "Automation", dialogue = "Automation", buy = "Automation",
   sellJunk = "Automation",
   targetButtons = "Automation", nameplates = "Automation", markers = "Automation",
-  outlevel = "Route", groupQuests = "Route", talents = "Route",
+  outlevel = "Route", workAhead = "Route", groupQuests = "Route", talents = "Route",
   neverSkip = "Advanced", offerCleanup = "Advanced", conflicts = "Advanced", debug = "Advanced",
 }
 

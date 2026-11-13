@@ -74,6 +74,10 @@ function Cleanup.RouteQuests()
   for i = index or 1, #steps do addStep(need, steps[i]) end
   if Progress and Progress.Cards and placed == section then
     for _, card in ipairs(Progress.Cards()) do addStep(need, card.step) end
+    -- Steps put off until a level (work ahead) are behind the place but still to do.
+    if Progress.Deferred then
+      for _, d in ipairs(Progress.Deferred()) do addStep(need, steps[d.index]) end
+    end
   end
   local chain = Guide.Chain(section)
   for i = 2, #chain do

@@ -126,6 +126,8 @@ end
 -- The line a step's own place stands for: the first open line without a place of its own (a card's line states
 -- tell which are open), else the first line without a place.
 local function placeLine(step, card)
+  -- A card that asks for a grind: its pin is the place to grind at.
+  if card and card.gated and card.lines and card.lines[1] then return card.lines[1].line end
   if card then
     for _, l in ipairs(card.lines or {}) do
       if type(l.index) == "number" and l.index > 0 and not l.line.at
@@ -629,7 +631,7 @@ local function rebuild()
   paths = {}
   for _, card in ipairs(cards) do
     local step = card.step
-    if type(step.path) == "table" and step.at then paths[#paths + 1] = step end
+    if type(step.path) == "table" and step.at and not card.gated then paths[#paths + 1] = step end
   end
   drawWorld()
   drawMinimap()

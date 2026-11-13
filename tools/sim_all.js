@@ -1,5 +1,8 @@
 // Noir Guides, GPLv3. See LICENSE.
 // CLI: npm run sim [-- --race Undead] [--class ROGUE] [--join 25] [--joiners all|only|none] [--api modern]
+//      [--xp-scale 0.7] [--threads N]
+// --xp-scale: every XP the simulated world gives is multiplied by it (a slower pace, so steps under their level come
+// up and work ahead is played); a run at another scale than 1 does not write docs/routes/SIM.md.
 // The real engine plays every route: the whole addon as the toc loads it (with the shipped format 3 routes and data)
 // runs in the mock client, in a world built here from the quest data and the character's flattened steps, and
 // tools/harness/sim.lua's scripted player does what the cards on screen say. By default 56 fresh characters (level
@@ -239,6 +242,7 @@ function simulate(facts, options = {}) {
   if (options.join) opts.join = options.join;
   if (options.trace) opts.trace = true;
   if (options.maxActions) opts.maxActions = options.maxActions;
+  if (options.xpScale && options.xpScale !== 1) opts.xpScale = options.xpScale;
   if (options.register) {
     opts.register = true;
     opts.swap = [{ match: "^Data/", with: [] }, { match: "^Routes/", with: [] }];
@@ -263,6 +267,7 @@ function problems(r) {
   if (n(r.unexplained)) out.push(`${n(r.unexplained)} unexplained`);
   if (n(r.errors)) out.push(`${n(r.errors)} errors`);
   if (r.slash) out.push(`${r.slash} slash`);
+  if (r.gatedAims) out.push(`${r.gatedAims} arrow aims at a step under its level`);
   if (n(r.offScreen)) out.push(`${n(r.offScreen)} off screen`);
   if (!(r.level >= 60)) out.push(`level ${r.level}`);
   if (r.join && !(r.placement && r.placement.inside)) out.push("placed outside its window");
@@ -276,6 +281,8 @@ function summarize(results) {
   const s = { characters: results.length, at60: results.filter((r) => r.level >= 60).length, stuck: count("stuck"), cannot: count("cannot"),
     unexplained: count("unexplained"), errors: count("errors"), manual: count("manual"), finished: results.filter((r) => r.finished).length,
     slash: results.reduce((sum, r) => sum + (r.slash || 0), 0), offScreen: count("offScreen"),
+    deferrals: results.reduce((sum, r) => sum + ((r.passed && r.passed.deferred) || 0), 0),
+    grindCards: results.reduce((sum, r) => sum + (r.grindCards || 0), 0), gatedAims: results.reduce((sum, r) => sum + (r.gatedAims || 0), 0),
     joiners: results.filter((r) => r.join).length, inside: results.filter((r) => r.join && r.placement && r.placement.inside).length };
   s.passed = results.filter(passed).length;
   s.ok = s.characters > 0 && s.passed === s.characters;
@@ -312,6 +319,7 @@ function failureLines(r) {
   if (!r.finished) out.push("- the route was not played to its end");
   if (!(r.level >= 60)) out.push(`- ends at level ${r.level}`);
   if (r.slash) out.push(`- ${r.slash} slash command(s)`);
+  for (const x of (r.gatedAimSteps || []).slice(0, 5)) out.push(`- the arrow aimed at a step under its level: ${x}`);
   for (const f of (r.offScreen || []).slice(0, 5)) out.push(`- off the screen at the end: ${f}`);
   if (r.join && !(r.placement && r.placement.inside)) {
     const p = r.placement || {};
@@ -414,7 +422,7 @@ function workerMain() {
     try {
       const key = `${ch.race}`;
       if (!routes.has(key)) routes.set(key, routeFor(ch));
-      result = simulate(buildFacts(world.db, world.graph, world.inns, routes.get(key), ch), { api: workerData.api, join: ch.join });
+      result = simulate(buildFacts(world.db, world.graph, world.inns, routes.get(key), ch), { api: workerData.api, join: ch.join, xpScale: workerData.xpScale });
     } catch (e) {
       result = emptyResult(ch, e);
     }
@@ -435,6 +443,7 @@ async function main(argv) {
   const { Worker } = require("worker_threads");
   const race = argValue(argv, "--race"), cls = argValue(argv, "--class"), api = argValue(argv, "--api") || "classic";
   const joinArg = argValue(argv, "--join"), joinersArg = argValue(argv, "--joiners");
+  const xpScale = Number(argValue(argv, "--xp-scale")) || 1;
   const characters = combos(DATA);
   const match = (c) => (!race || c.race === race) && (!cls || c.cls === cls);
   let joiners = joinerList(characters, JOIN_LEVELS, joinersArg === "all").filter(match);
@@ -453,14 +462,14 @@ async function main(argv) {
   const status = (done) => fs.writeFileSync(STATUS, JSON.stringify({ phase: "Simulator", total: all.length, done, started,
     characters: results.filter(Boolean).map((r) => ({ race: r.race, cls: r.class, join: r.join, passed: passed(r), level: r.level, stuck: r.stuck.length,
       cannot: r.cannot.length, unexplained: r.unexplained.length, errors: r.errors.length })) }, null, 1) + "\n");
-  console.log(`simulating ${fresh.length} fresh characters and ${joiners.length} joiners on ${threads} threads (quest log API: ${api})`);
+  console.log(`simulating ${fresh.length} fresh characters and ${joiners.length} joiners on ${threads} threads (quest log API: ${api}${xpScale !== 1 ? `, XP scale ${xpScale}` : ""})`);
   status(0);
   // Longest first: joiners at low levels and fresh characters play the whole route.
   const order = all.map((_, i) => i).sort((a, b) => (all[a].join || 0) - (all[b].join || 0));
   let next = 0, done = 0;
   await new Promise((resolve) => {
     for (let t = 0; t < threads; t++) {
-      const worker = new Worker(__filename, { workerData: { worker: true, api } });
+      const worker = new Worker(__filename, { workerData: { worker: true, api, xpScale } });
       const feed = () => {
         if (next >= order.length) { worker.postMessage(null); return; }
         const i = order[next++];
@@ -470,7 +479,7 @@ async function main(argv) {
           const p = r.placement;
           console.log(`${passed(r) ? "pass" : "FAIL"}  ${name(r)}: level ${r.level}, ${r.shown} steps shown, ${r.stuck.length} stuck, ` +
             `${r.cannot.length} cannot, ${r.unexplained.length} unexplained, ${r.errors.length} errors, ${r.slash || 0} slash, ` +
-            `${(r.offScreen || []).length} off screen, ${r.sellLines || 0} sell lines (${r.sold || 0}c), ${r.skillRaised || 0} skill raises${p ? `, placed at ${p.landed} (window ${p.from} to ${p.to})` : ""} (${r.seconds} s)`);
+            `${(r.offScreen || []).length} off screen, ${r.sellLines || 0} sell lines (${r.sold || 0}c), ${r.skillRaised || 0} skill raises, ${(r.passed && r.passed.deferred) || 0} deferrals, ${r.grindCards || 0} grind cards, ${r.gatedAims || 0} gated arrow aims${p ? `, placed at ${p.landed} (window ${p.from} to ${p.to})` : ""} (${r.seconds} s)`);
           status(done);
           if (done === all.length) resolve();
           feed();
@@ -482,13 +491,13 @@ async function main(argv) {
   });
   const freshResults = results.slice(0, fresh.length), joinResults = results.slice(fresh.length);
   const s = summarize(results), f = summarize(freshResults), j = summarize(joinResults);
-  if (!race && !cls && !joinArg && !joinersArg) {
+  if (!race && !cls && !joinArg && !joinersArg && xpScale === 1) {
     fs.mkdirSync(path.dirname(REPORT), { recursive: true });
     fs.writeFileSync(REPORT, reportMarkdown(freshResults, joinResults, api));
   }
   console.log(`${f.passed} of ${f.characters} fresh and ${j.passed} of ${j.characters} joiners pass: ${s.at60} at level 60, ${s.stuck} stuck, ` +
     `${s.cannot} cannot, ${s.unexplained} unexplained, ${s.errors} Lua errors, ${s.slash} slash, ${s.offScreen} off screen, ` +
-    `${j.inside} of ${j.joiners} joiners inside their window (${Math.round((Date.now() - started) / 1000)} s)`);
+    `${j.inside} of ${j.joiners} joiners inside their window; ${s.deferrals} deferrals, ${s.grindCards} grind cards, ${s.gatedAims} arrow aims at a step under its level (${Math.round((Date.now() - started) / 1000)} s)`);
   return s.ok ? 0 : 1;
 }
 

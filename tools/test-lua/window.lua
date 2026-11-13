@@ -120,6 +120,7 @@ end)
 
 test("reminders show as their own cards above the current card", function()
   local c, Noir, W = at("a3901", { done = { 363 }, log = { 364, 376 } })
+  c:giveItem(2834, 4) -- the collect step beside the objectives done: no nearby card (that case: workahead.lua)
   c:acceptQuest(3901, QUEST3901)
   c:advance(0.5)
   eq(placeId(Noir), "o364.o376")

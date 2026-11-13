@@ -1,26 +1,40 @@
 -- Noir Guides, GPLv3. See LICENSE.
 -- Progress v3 (spec 2.4, 2.5, 3.3 to 3.7): the place in the current section, what is on screen (the current step,
--- open reminders and detours), when the place moves, and where a character that joins mid-way stands. It follows
--- the game by itself: no command is needed for anything here.
+-- open reminders, detours, deferred steps and nearby objective steps), when the place moves, and where a character
+-- that joins mid-way stands. It follows the game by itself: no command is needed for anything here.
 --
 --   Progress.PASS_SECONDS = 0.1     one update pass; the place moves at most one step per pass
 --   Progress.ARRIVAL_SECONDS = 0.33 position checks while a place with a radius (or a move) is on screen
 --   Progress.SIGNAL_QUIET = 1       NOIR_STEP_DONE / NOIR_OBJECTIVE_DONE only this long after the last place change
 --   Progress.LOOKAHEAD_TEXT = 8     steps after the current one whose text the step list keeps up to date
 --   Progress.BEHIND_STEPS = 3       quest steps a saved place must be behind the quest log before it moves ahead
+--   Progress.WORK_AHEAD_STEPS = 8   working ahead under a level gate reaches at most this many steps past the
+--                                   earliest step still waiting for its level
+--   Progress.WORK_AHEAD_YARDS = 300 a step worked ahead on lies in the gated step's zone, this near the player or the
+--                                   gated step's place (a hub and the fields around it)
+--   Progress.NEARBY_YARDS = 150     objective steps this near the current objective step's area are shown with it
+--                                   (the planner's objective bundling radius, tools/planner/bundle.js OBJECTIVE_YARDS)
+--   Progress.NEARBY_CARDS = 3       at most this many nearby cards
 --
 --   Progress.Load(sectionId [, how]) (on NOIR_SECTION) the saved place by step id, else by n while the section's
 --                                   signature is unchanged, else placement inside the section (Progress.Locate);
 --                                   a section reached by playing on (how "next", or "step" for a step's load) with no
 --                                   saved place starts at its first step instead (spec 2.4.4: done steps pass by
 --                                   themselves)
---   Progress.Cards() -> { { step, index, kind, lines = { { line, state, ticked, text, icon, counter, why, index } } } }
---                                   kind "reminder", "detour", "current"; reminders and detours first in step order,
---                                   then the current step. `index` of a line is its index in step.lines (0 for the
---                                   synthetic grind line a current step under its minLevel gets first)
+--   Progress.Cards() -> { { step, index, kind, gated, lines = { { line, state, ticked, text, icon, counter, why,
+--                                   index } } } }
+--                                   kind "deferred", "reminder", "detour", "nearby", "current"; deferred steps first,
+--                                   then reminders and detours in step order, then nearby steps in step order, then
+--                                   the current card (always last). `index` of a line is its index in step.lines (0
+--                                   for the synthetic grind line). gated = true on a current card that asks for a
+--                                   grind: its only place is the grind line's own `at` (the area to grind in, or none),
+--                                   never the gated step's NPC (Arrow.CardPlaces)
+--   Progress.Deferred() -> { { index, level, gated } } steps the place moved past while under level, in step order
 --   Progress.Place() -> sectionId, index, count, step
 --   Progress.Steps() -> the section's steps for this character (Guide.Steps)
---   Progress.StepState(index) -> "done" | "current" | "reminder" | "ahead" | "behind" | "hidden"
+--   Progress.StepState(index) -> "done" | "current" | "reminder" | "deferred" | "ahead" | "behind" | "hidden"
+--                                   ("reminder" for every card that is not the current one; "deferred" for a step
+--                                   put off until a level that is not reached yet)
 --   Progress.Tick(index, lineIndex, on)   tick or untick a line of a step on screen (saved in places[section].ticks)
 --   Progress.Jump(index, how)       how "list", "skip", "back": go to any step at once, no confirmation (why "jump")
 --   Progress.Skip()                 tick every active line of the current step
@@ -53,12 +67,37 @@
 --   * a skip condition that holds passes the step or jumps to its label (why "condition"), never while the addon is
 --     hidden and, with "neverSkip" on, only when it is a gate ("notturnedin" on a quest an accept line of the step
 --     requires: the game will not offer that accept, so the step would wait forever);
+--   * work ahead ("workAhead", default on; spec 3.7): a step under its minLevel is deferred (why "deferred", saved in
+--     places[section].deferred as step id -> level) and the place moves on, when a step the player can do now lies
+--     ahead: the scan runs from the step after it to WORK_AHEAD_STEPS past the earliest step still waiting for its
+--     level, passes steps that pass by themselves (hidden, reminders, done, outleveled, a skip condition holds),
+--     defers every step under its level and every step that needs a deferred one (it uses a quest a deferred step
+--     still has to accept, accepts a quest that needs one a deferred step still hands in or accepts, or `requires`
+--     its label), and takes the first other step if it is work (no movement step) in the gated step's zone within
+--     WORK_AHEAD_YARDS of the player or the gated step; any other step ends the scan with nothing found. While a step
+--     waits for its level, a later step at the place that needs it is deferred the same way, and one the scan would
+--     not take (too far in steps or yards, a movement step, a hub elsewhere) is not shown: a grind card stands in its
+--     place until the level comes. A deferred step stays hidden until its level, then comes back as a "deferred" card
+--     (first, so the arrow points at it) until its lines are done (no why), it is already done when it comes back
+--     (why "done"), outleveled or skipped by a condition. Deferred steps with work left hold the end of the section
+--     like reminders; a reminder whose `ends` step is deferred stays open until that step is done. Never for a step the
+--     player jumped to;
+--   * a step under its minLevel that is not deferred (nothing to work on ahead, workAhead off, or jumped to) shows a
+--     synthetic grind line first and waits; the card is `gated` and the grind line's place is the gated step's own
+--     objective area, else the area of the last objective, collect or grind step before it in the section in the same
+--     zone (not deferred), else none: never the gated step's NPC;
 --   * a step whose active lines are all done, skipped or ticked completes, unless its `requires` label is on screen or
---     ahead, or it is under its minLevel (a synthetic grind line shows that). Done before it was ever shown: why
---     "done"; finished by a tick: why "tick";
+--     ahead, or it is under its minLevel (the grind line). Done before it was ever shown: why "done"; finished by a
+--     tick: why "tick";
 --   * a movement step whose next work step is already done is passed (why "moot") unless the work left lies that way
 --     or the player jumped to it; a movement step is also passed (why "moot") when a later move of its journey
 --     (up to the next work step) goes to the zone the player already stands in.
+-- Nearby: while the current step is an objective step (only objective and collect lines), the objective steps right
+-- after it whose areas lie within NEARBY_YARDS of its area, whose quests are in the log, that are at or above their
+-- level and need nothing the current step does, show as "nearby" cards (at most NEARBY_CARDS; steps already done are
+-- passed over, the first step that does not qualify ends the run; never a hub or movement step). Their lines latch
+-- while shown, so when the place reaches them they pass as done without a why entry (they were done in front of the
+-- player); a nearby step whose lines are all done is no longer shown but keeps its latches.
 -- An open turn-in shows earlier steps with its quest's open objectives as detour cards, and an open accept those with
 -- open objectives or the hand-in of a quest it requires that is still in the log (not on a step the player jumped to). A "missing" objective or turn-in
 -- line (skipIfMissing or not) waits when an earlier open line of its own step accepts
@@ -84,6 +123,10 @@ Progress.ARRIVAL_SECONDS = 0.33
 Progress.SIGNAL_QUIET = 1
 Progress.LOOKAHEAD_TEXT = 8
 Progress.BEHIND_STEPS = 3
+Progress.WORK_AHEAD_STEPS = 8
+Progress.WORK_AHEAD_YARDS = 300
+Progress.NEARBY_YARDS = 150
+Progress.NEARBY_CARDS = 3
 
 local EPSILON = 1e-6
 local QUEST_LINE = { accept = true, turnin = true, objective = true }
@@ -105,6 +148,10 @@ local screen = {}       -- step id -> { since, latched = { [i] = { state, eviden
                         --              open = seen incomplete as the current step, tried = { [quest] = true } }
 local lineStates = {}   -- step id -> { [line index] = state } as last published
 local detours = {}      -- step index -> true: detour cards of the last pass
+local companions = {}   -- step index -> true: deferred and nearby cards, and the gated step of a grind card, of the
+                        -- last pass
+local keepIds = {}      -- step id -> true: deferred and nearby steps of the last pass whose latches are kept
+local grindPlaces = {}  -- step id -> the place to grind at for that gated step, or false (none)
 local pinned = nil      -- id of the step the player jumped to: never passed as moot
 local pastEnd = false   -- placement put the place past the last step: index is #steps, the end is still to handle
 local looped = {}       -- section id -> true once a loop section wrapped in this session
@@ -143,6 +190,21 @@ end
 
 local function levelOk(step)
   return not (type(step.minLevel) == "number" and level() < step.minLevel)
+end
+
+local function workAheadOn()
+  return option("workAhead") ~= false
+end
+
+local function outleveled(step)
+  return outlevelOn() and type(step.maxLevel) == "number" and level() > step.maxLevel
+end
+
+-- The level a deferred step waits for (places[section].deferred), or nil when it is not deferred.
+local function deferredLevel(step)
+  local all = saved and saved.deferred
+  local at = type(all) == "table" and step and all[step.id] or nil
+  return type(at) == "number" and at or nil
 end
 
 local function applies(line)
@@ -261,13 +323,18 @@ end
 
 -- The first place at which reminder `r` is no longer open: just past its `ends` step ("next": the step after it).
 -- With no end link (format 3 always writes one; a hand-edited route may not), spec 3.6: it ends at the first later
--- step that requires it, so that step is not held by it; else it stays open to the end of the section.
+-- step that requires it, so that step is not held by it; else it stays open to the end of the section. An `ends`
+-- step the place moved past while under its level (deferred, work ahead) is not done yet: the reminder stays open
+-- until it is ("raise the skill to the trainer's gate" lasts until the deferred trainer visit).
 local function closesAt(r)
   local step = steps[r]
   local ends = step.reminder and step.reminder.ends
-  if ends == "next" then return r + 2 end
-  local at = labelIndex(ends)
-  if at then return at + 1 end
+  local at
+  if ends == "next" then at = r + 1 else at = labelIndex(ends) end
+  if at then
+    if steps[at] and at < index and deferredLevel(steps[at]) then return #steps + 1 end
+    return at + 1
+  end
   if step.label then
     for j = r + 1, #steps do
       if steps[j].requires == step.label then return j end
@@ -284,6 +351,21 @@ local function openReminders(shownOnly)
     local step = steps[r]
     if step.reminder and not done[step.id] and index < closesAt(r) and (not shownOnly or levelOk(step)) then
       out[#out + 1] = r
+    end
+  end
+  return out
+end
+
+-- Deferred steps behind the place, in step order: { index, level, gated } (gated: the level is not reached yet).
+local function openDeferred()
+  local out = {}
+  local all = saved and saved.deferred
+  if type(all) ~= "table" or next(all) == nil then return out end
+  for r = 1, math.min(index - 1, #steps) do
+    local step = steps[r]
+    local at = all[step.id]
+    if type(at) == "number" then
+      out[#out + 1] = { index = r, level = at, gated = level() < at or not levelOk(step) }
     end
   end
   return out
@@ -320,6 +402,7 @@ local function onScreenIds()
   if step then set[step.id] = true end
   local open = openReminders(true)
   for i = 1, #open do set[steps[open[i]].id] = true end
+  for id in pairs(keepIds) do set[id] = true end
   return set
 end
 
@@ -327,6 +410,13 @@ end
 -- entered again).
 local function dropOffScreen(also)
   local keep = onScreenIds()
+  -- A step shown as nearby keeps its latches until the place passes it.
+  for id, e in pairs(screen) do
+    if e.nearby then
+      local at = indexOfId(steps, id)
+      if at and at >= index then keep[id] = true end
+    end
+  end
   if also then keep[also] = nil end
   for id in pairs(screen) do
     if not keep[id] then screen[id] = nil end
@@ -393,6 +483,8 @@ local function cardLine(line, step, i, state, evidence, counter, ticked)
     counter = counter, why = evidence, index = i }
 end
 
+local grindPlace -- defined with the work-ahead rules below
+
 -- Evaluates a step on screen. Returns its card lines and a summary { done, active, byTick, evidence, detours }.
 -- As the current step, missing quest lines open detours or are passed as impossible.
 local function evaluate(step, at, asCurrent)
@@ -401,7 +493,7 @@ local function evaluate(step, at, asCurrent)
   local out = {}
   local sum = { done = true, active = false, byTick = false, evidence = nil, detours = {} }
   if asCurrent and not levelOk(step) then
-    local grind = { kind = "grind", level = step.minLevel, synthetic = true }
+    local grind = { kind = "grind", level = step.minLevel, synthetic = true, at = grindPlace(at) }
     local state, evidence, counter = Lines.Check(grind, step, { since = e.since })
     out[1] = cardLine(grind, step, 0, state, evidence, counter, false)
     sum.done, sum.active = false, true
@@ -632,16 +724,346 @@ local function stillLeads(step, i)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------
+-- Working ahead under a level gate, the place to grind at, and nearby objective steps
+-- ---------------------------------------------------------------------------------------------------------------
+
+local OBJECTIVE_WORK = { objective = true, collect = true, grind = true }
+local NEARBY_WORK = { objective = true, collect = true }
+
+local function zoneOnly(place)
+  return (place.x or 0) == 0 and (place.y or 0) == 0
+end
+
+-- A skip condition of the step holds now, as a pass would judge it.
+local function conditionHolds(step)
+  if option("shown") == false then return false end
+  return Lines.Condition(step, option("neverSkip") == true) ~= nil
+end
+
+-- The area of the step's first objective, collect or grind line (its own place, else the step's), or nil.
+local function workArea(step)
+  for i = 1, #step.lines do
+    local line = step.lines[i]
+    if OBJECTIVE_WORK[line.kind] and Lines.Active(line) and applies(line) then
+      local place = line.at or step.at
+      if place and not zoneOnly(place) then return place end
+    end
+  end
+  return nil
+end
+
+-- Where to grind while step `at` waits for its level: its own objective area, else the area of the last objective,
+-- collect or grind step before it in the section, in the same zone and not deferred. Never the gated step's NPC.
+-- The place has no radius: the arrow points at it and it never completes on arrival.
+grindPlace = function(at)
+  local step = steps[at]
+  if not step then return nil end
+  local known = grindPlaces[step.id]
+  if known ~= nil then return known or nil end
+  local found = workArea(step)
+  if not found then
+    local own = placeOf(step)
+    local zone = own and own.zone or State.zone
+    for j = at - 1, 1, -1 do
+      local other = steps[j]
+      if not other.reminder and not deferredLevel(other) then
+        local area = workArea(other)
+        if area and sameZone(area.zone, zone) then
+          found = area
+          break
+        end
+      end
+    end
+  end
+  local place = found and { zone = found.zone, x = found.x, y = found.y } or false
+  grindPlaces[step.id] = place
+  return place or nil
+end
+
+-- Whether `step` needs `other` done first: it `requires` other's label, uses a quest other still has to accept, or
+-- accepts a quest whose prerequisite (requires, ifDone) other still hands in or accepts.
+local function needsStep(step, other)
+  if type(step.requires) == "string" and step.requires == other.label then return true end
+  local accepts, turnins = {}, {}
+  for i = 1, #other.lines do
+    local line = other.lines[i]
+    if line.quest and applies(line) then
+      if line.kind == "accept" and not State.HasQuest(line.quest) and not State.IsDone(line.quest) then
+        accepts[line.quest] = true
+      elseif line.kind == "turnin" and not State.IsDone(line.quest) then
+        turnins[line.quest] = true
+      end
+    end
+  end
+  for i = 1, #step.lines do
+    local line = step.lines[i]
+    if applies(line) then
+      if line.quest and line.kind ~= "accept" and accepts[line.quest] then return true end
+      if line.kind == "accept" then
+        local list = type(line.requires) == "table" and line.requires or {}
+        for r = 1, #list do
+          if turnins[list[r]] or accepts[list[r]] then return true end
+        end
+        if line.ifDone and (turnins[line.ifDone] or accepts[line.ifDone]) then return true end
+      end
+    end
+  end
+  return false
+end
+
+-- The highest level among the deferred entries of `set` ({ index, level }) that `step` needs, or nil.
+local function dependency(step, set)
+  local worst = nil
+  for k = 1, #set do
+    if needsStep(step, steps[set[k].index]) then worst = math.max(worst or 0, set[k].level) end
+  end
+  return worst
+end
+
+-- Whether step `j` is work the player can do now while `anchor` (the earliest step waiting for its level) waits:
+-- inside the lookahead, work and not movement, in the anchor's zone and near the player or the anchor's place.
+local function workable(step, j, anchor)
+  if j > anchor + Progress.WORK_AHEAD_STEPS then return false end
+  if isMove(step) or not isWork(step) then return false end
+  local place = placeOf(step)
+  if not place or zoneOnly(place) then return false end
+  local origin = placeOf(steps[anchor])
+  if origin then
+    if not sameZone(place.zone, origin.zone) then return false end
+  elseif not inZone(place.zone) then
+    return false
+  end
+  local yards = Lines.Yards(place)
+  if yards and yards <= Progress.WORK_AHEAD_YARDS then return true end
+  local between = origin and Lines.Between(place, origin)
+  return between ~= nil and between <= Progress.WORK_AHEAD_YARDS
+end
+
+-- The first step after `from` the player can work on while the steps of `set` ({ index, level }) wait for their
+-- levels, or nil (the rules in the header).
+local function aheadTarget(anchor, from, set)
+  local scanned = {}
+  for k = 1, #set do scanned[k] = set[k] end
+  for j = from + 1, math.min(#steps, anchor + Progress.WORK_AHEAD_STEPS) do
+    local step = steps[j]
+    if step.reminder or allHidden(step) or outleveled(step) or conditionHolds(step) then
+      -- passes by itself
+    elseif not levelOk(step) then
+      scanned[#scanned + 1] = { index = j, level = step.minLevel }
+    elseif not doneNow(step) then
+      local need = dependency(step, scanned)
+      if need then
+        scanned[#scanned + 1] = { index = j, level = need }
+      elseif workable(step, j, anchor) then
+        return j
+      else
+        return nil
+      end
+    end
+  end
+  return nil
+end
+
+local function objectiveStep(step)
+  local any = false
+  for i = 1, #step.lines do
+    local line = step.lines[i]
+    if Lines.Active(line) and applies(line) then
+      if not NEARBY_WORK[line.kind] then return false end
+      any = true
+    end
+  end
+  return any
+end
+
+local function questsInLog(step)
+  for i = 1, #step.lines do
+    local line = step.lines[i]
+    if NEARBY_WORK[line.kind] and line.quest and applies(line) and not State.HasQuest(line.quest)
+      and not State.IsDone(line.quest) then
+      return false
+    end
+  end
+  return true
+end
+
+-- The objective steps right after the current objective step `at` that are worked together with it (the rules in
+-- the header). `limit`: the last index they may have (the work-ahead lookahead while a step waits for its level).
+local function nearbySteps(at, limit)
+  local out = {}
+  local current = steps[at]
+  if not (current and objectiveStep(current)) then return out end
+  local origin = workArea(current)
+  if not origin then return out end
+  local shown = 0
+  for j = at + 1, math.min(#steps, at + Progress.LOOKAHEAD_TEXT, limit or #steps) do
+    local step = steps[j]
+    if step.reminder or allHidden(step) or outleveled(step) then
+      -- passes by itself
+    elseif not levelOk(step) or deferredLevel(step) or not objectiveStep(step) or not questsInLog(step)
+      or needsStep(step, current) then
+      break
+    else
+      -- A step already done passes by itself, unless it was shown as nearby: then it is judged once more so its
+      -- lines latch (it is not shown and does not count toward the cap).
+      local done = doneNow(step)
+      if not done or (screen[step.id] and screen[step.id].nearby) then
+        local area = workArea(step)
+        local yards = area and Lines.Between(origin, area)
+        if not (yards and yards <= Progress.NEARBY_YARDS) then break end
+        out[#out + 1] = j
+        if not done then
+          shown = shown + 1
+          if shown >= Progress.NEARBY_CARDS then break end
+        end
+      end
+    end
+  end
+  return out
+end
+
+-- ---------------------------------------------------------------------------------------------------------------
 -- The cards and what the current step asks for
 -- ---------------------------------------------------------------------------------------------------------------
 
--- Builds the cards. Returns them; when the place should move, { to = index, kind = why kind or nil, text }; and the
--- number of reminders on screen that have work left (they hold the place at the end of the section, spec 2.4).
+local function quiet()
+  return lastMove == nil or now() - lastMove > Progress.SIGNAL_QUIET
+end
+
+-- The current step judged as on screen (spec 3.3): its card and, when the place should move, the decision.
+local function judgeCurrent(step, onScreen)
+  local lines, sum = evaluate(step, index, true)
+  local card = { step = step, index = index, kind = "current", lines = lines, gated = (not levelOk(step)) or nil }
+  for j in pairs(sum.detours) do
+    detours[j] = true
+    onScreen[j] = true
+  end
+  local e = entry(step)
+  local decision = nil
+  if #lines == 0 then
+    decision = { to = index + 1 }
+  elseif outleveled(step) then
+    decision = { to = index + 1, kind = "outleveled",
+      text = string.format("you are level %d and the step is for level %d and below", level(), step.maxLevel) }
+  else
+    local reason, jump
+    -- With "neverSkip" on, only a gate still holds: an accept the game will not offer would otherwise wait forever.
+    if option("shown") ~= false then reason, jump = Lines.Condition(step, option("neverSkip") == true) end
+    if reason then
+      local to = labelIndex(jump) or (index + 1)
+      decision = { to = to, kind = "condition", text = reason }
+    elseif sum.done and not waiting(step, onScreen) then
+      if not sum.active then
+        decision = { to = index + 1, kind = "done",
+          text = "it has only notes and markers on it, nothing to do" }
+      elseif sum.byTick then
+        decision = { to = index + 1, kind = "tick", text = "you ticked its last open line", signal = true }
+      elseif not e.open then
+        decision = { to = index + 1, kind = "done",
+          text = "already done when the guide came to it: " .. tostring(sum.evidence or "the game shows it done") }
+      else
+        decision = { to = index + 1, signal = true }
+      end
+    elseif isMove(step) and pinned ~= step.id then
+      local j = nextWork(index)
+      local k = pastOnJourney(step, index)
+      if j and doneNow(steps[j]) and not stillLeads(step, index) then
+        decision = { to = index + 1, kind = "moot",
+          text = string.format("the step it leads to (step %s, %s) is already done", tostring(steps[j].n), Why.Describe(steps[j])) }
+      elseif k then
+        decision = { to = index + 1, kind = "moot",
+          text = string.format("you already stand where a later move of the way (step %s, %s) goes", tostring(steps[k].n), Why.Describe(steps[k])) }
+      end
+    end
+  end
+  if not decision then e.open = true end
+  return card, decision
+end
+
+-- The card that asks for a grind while `gate` ({ index, level }) waits: the gated step's badge, one synthetic grind
+-- line with the place to grind at.
+local function grindCard(gate)
+  local step = steps[gate.index]
+  local line = { kind = "grind", level = gate.level, synthetic = true, at = grindPlace(gate.index) }
+  local state, evidence, counter = Lines.Check(line, step, { since = now() })
+  return { step = step, index = gate.index, kind = "current", gated = true,
+    lines = { cardLine(line, step, 0, state, evidence, counter, false) } }
+end
+
+-- What work ahead makes of the current step (the rules in the header): "defer" and the level it waits for, "grind"
+-- (it waits for its level here: the normal card with its grind line), "blocked" (not shown while a deferred step
+-- waits for its level), or nil.
+local function workAhead(step, gated)
+  local gate = gated[1]
+  if levelOk(step) and not gate then return nil end
+  if not workAheadOn() or pinned == step.id or outleveled(step) or conditionHolds(step) then return nil end
+  local set = {}
+  for k = 1, #gated do set[k] = gated[k] end
+  if not levelOk(step) then
+    set[#set + 1] = { index = index, level = step.minLevel }
+    if aheadTarget(gate and gate.index or index, index, set) then return "defer", step.minLevel end
+    return "grind"
+  end
+  if not gate or doneNow(step) then return nil end
+  local need = dependency(step, set)
+  if need then
+    set[#set + 1] = { index = index, level = need }
+    if aheadTarget(gate.index, index, set) then return "defer", need end
+    return "blocked"
+  end
+  if not workable(step, index, gate.index) then return "blocked" end
+  return nil
+end
+
+-- Builds the cards. Returns them; when the place should move, { to = index, kind = why kind or nil, text [, defer =
+-- level] }; and the number of reminders and deferred steps that have work left (they hold the place at the end of
+-- the section, spec 2.4).
 local function build()
   local cards, holds = {}, 0
   if finished or not current then return cards, nil, 0 end
   local onScreen, shownReminder = {}, {}
-  local reminders = {}
+  local reminders, front, near = {}, {}, {}
+  companions, keepIds = {}, {}
+  -- Deferred steps: hidden while their level is not reached, then a card until they are done.
+  local gated, gatedAt = {}, {}
+  local deferred = openDeferred()
+  for k = 1, #deferred do
+    local d = deferred[k]
+    local step = steps[d.index]
+    if d.gated then
+      gated[#gated + 1] = d
+      gatedAt[d.index] = true
+      holds = holds + 1
+    else
+      local kind, text
+      local lines, sum = nil, nil
+      if outleveled(step) then
+        kind = "outleveled"
+        text = string.format("you are level %d and the step is for level %d and below", level(), step.maxLevel)
+      elseif conditionHolds(step) then
+        kind, text = "condition", Lines.Condition(step, option("neverSkip") == true)
+      else
+        lines, sum = evaluate(step, d.index, false)
+      end
+      local e = entry(step)
+      if kind or sum.done then
+        -- Back at its level and finished: done in front of the player when its card was shown, else already done.
+        if not kind and not e.open then
+          kind = "done"
+          text = "already done when it came back at level " .. tostring(d.level)
+        end
+        if kind then why(step, kind, text) elseif quiet() then Noir.Fire("NOIR_STEP_DONE", current, step.id) end
+        saved.deferred[step.id] = nil
+        screen[step.id], lineStates[step.id] = nil, nil
+        if saved.ticks then saved.ticks[step.id] = nil end
+      else
+        e.open = true
+        onScreen[d.index], companions[d.index], keepIds[step.id] = true, true, true
+        if sum.active then holds = holds + 1 end
+        front[#front + 1] = { step = step, index = d.index, kind = "deferred", lines = lines }
+      end
+    end
+  end
   local open = openReminders(true)
   for k = 1, #open do
     local r = open[k]
@@ -661,6 +1083,11 @@ local function build()
       reminders[#reminders + 1] = { step = step, index = r, kind = "reminder", lines = lines }
     end
   end
+  -- The gate to grind for: the waiting step with the lowest level (the first such in step order).
+  local soonest = nil
+  for k = 1, #gated do
+    if not soonest or gated[k].level < soonest.level then soonest = gated[k] end
+  end
   local step = steps[index]
   local decision, currentCard = nil, nil
   detours = {}
@@ -671,61 +1098,54 @@ local function build()
     if step.reminder then
       decision = { to = index + 1 }
     else
-      local lines, sum = evaluate(step, index, true)
-      currentCard = { step = step, index = index, kind = "current", lines = lines }
-      for j in pairs(sum.detours) do
-        detours[j] = true
-        onScreen[j] = true
-      end
-      local e = entry(step)
-      if #lines == 0 then
-        decision = { to = index + 1 }
-      elseif outlevelOn() and type(step.maxLevel) == "number" and level() > step.maxLevel then
-        decision = { to = index + 1, kind = "outleveled",
-          text = string.format("you are level %d and the step is for level %d and below", level(), step.maxLevel) }
+      local mode, wait = workAhead(step, gated)
+      if mode == "defer" then
+        decision = { to = index + 1, kind = "deferred", defer = wait,
+          text = string.format("deferred until level %d: you are level %d, and there is work after it you can do now",
+            wait, level()) }
+      elseif mode == "blocked" then
+        currentCard = grindCard(soonest)
+        companions[soonest.index] = true
       else
-        local reason, jump
-        -- With "neverSkip" on, only a gate still holds: an accept the game will not offer would otherwise wait forever.
-        if option("shown") ~= false then reason, jump = Lines.Condition(step, option("neverSkip") == true) end
-        if reason then
-          local to = labelIndex(jump) or (index + 1)
-          decision = { to = to, kind = "condition", text = reason }
-        elseif sum.done and not waiting(step, onScreen) then
-          if not sum.active then
-            decision = { to = index + 1, kind = "done",
-              text = "it has only notes and markers on it, nothing to do" }
-          elseif sum.byTick then
-            decision = { to = index + 1, kind = "tick", text = "you ticked its last open line", signal = true }
-          elseif not e.open then
-            decision = { to = index + 1, kind = "done",
-              text = "already done when the guide came to it: " .. tostring(sum.evidence or "the game shows it done") }
-          else
-            decision = { to = index + 1, signal = true }
-          end
-        elseif isMove(step) and pinned ~= step.id then
-          local j = nextWork(index)
-          local k = pastOnJourney(step, index)
-          if j and doneNow(steps[j]) and not stillLeads(step, index) then
-            decision = { to = index + 1, kind = "moot",
-              text = string.format("the step it leads to (step %s, %s) is already done", tostring(steps[j].n), Why.Describe(steps[j])) }
-          elseif k then
-            decision = { to = index + 1, kind = "moot",
-              text = string.format("you already stand where a later move of the way (step %s, %s) goes", tostring(steps[k].n), Why.Describe(steps[k])) }
+        currentCard, decision = judgeCurrent(step, onScreen)
+        if not decision and not currentCard.gated then
+          local limit = gated[1] and (gated[1].index + Progress.WORK_AHEAD_STEPS) or nil
+          local list = nearbySteps(index, limit)
+          for k = 1, #list do
+            local j = list[k]
+            local other = steps[j]
+            local lines, sum = evaluate(other, j, false)
+            keepIds[other.id] = true
+            entry(other).nearby = true
+            if not (sum.done and sum.active) then
+              entry(other).open = true
+              onScreen[j], companions[j] = true, true
+              near[#near + 1] = { step = other, index = j, kind = "nearby", lines = lines }
+            end
           end
         end
       end
-      if not decision then e.open = true end
     end
   end
-  -- Reminders and detours in step order, then the current step.
+  -- The end of the section while a deferred step waits for its level: the place holds there with a grind card.
+  if decision and decision.to > #steps and soonest then
+    currentCard = grindCard(soonest)
+    companions[soonest.index] = true
+  end
+  -- Deferred steps, then reminders and detours in step order, then nearby steps, then the current step. A detour
+  -- never shows a step that waits for its level, nor one already on screen as a deferred or nearby card.
   for j in pairs(detours) do
-    if steps[j] and not shownReminder[j] then
+    if gatedAt[j] or companions[j] then
+      detours[j] = nil
+    elseif steps[j] and not shownReminder[j] then
       local lines = evaluate(steps[j], j, false)
       reminders[#reminders + 1] = { step = steps[j], index = j, kind = "detour", lines = lines }
     end
   end
   table.sort(reminders, function(a, b) return a.index < b.index end)
+  for k = 1, #front do cards[#cards + 1] = front[k] end
   for k = 1, #reminders do cards[#cards + 1] = reminders[k] end
+  for k = 1, #near do cards[#cards + 1] = near[k] end
   if currentCard then cards[#cards + 1] = currentCard end
   return cards, decision, holds
 end
@@ -744,10 +1164,6 @@ local function cardsSignature(cards)
     parts[k] = piece
   end
   return table.concat(parts, ";")
-end
-
-local function quiet()
-  return lastMove == nil or now() - lastMove > Progress.SIGNAL_QUIET
 end
 
 -- Sends NOIR_LINE for lines that changed state, NOIR_OBJECTIVE_DONE for objectives just done, and NOIR_STEP when the
@@ -948,7 +1364,7 @@ local function passBody()
   if decision then
     local step = steps[index]
     local hold = false
-    -- Open reminders with work left hold the place on the last step (a loop section wraps first).
+    -- Open reminders and deferred steps with work left hold the place on the last step (a loop section wraps first).
     if decision.to > #steps and holds > 0 and not (section.loop and not looped[current]) then hold = true end
     if not hold then
       if lastMove and now() - lastMove < Progress.PASS_SECONDS - EPSILON then
@@ -958,6 +1374,8 @@ local function passBody()
       end
       if decision.signal and quiet() then Noir.Fire("NOIR_STEP_DONE", current, step.id) end
       if decision.kind then why(step, decision.kind, decision.text) end
+      -- A deferred step is remembered with the level it waits for; a step the place leaves otherwise is no longer.
+      if type(saved.deferred) == "table" and not pastEnd then saved.deferred[step.id] = decision.defer end
       if moveTo(decision.to) or gen ~= generation then return end
       if finished then return end
       cards = build()
@@ -1133,7 +1551,7 @@ local function catchUpBehind()
   local places = Noir.Table(Noir.Table(Noir.char, "guide"), "places")
   places[id] = {
     step = target and target.id or nil, n = target and target.n or (#sec.steps + 1), sig = signature(sec),
-    reminders = {}, ticks = {},
+    reminders = {}, ticks = {}, deferred = {},
   }
   Guide.Select(id, "auto")
   return true
@@ -1157,7 +1575,7 @@ function Progress.Load(sectionId, how)
   generation = generation + 1
   current, section = sec.id, sec
   steps = Guide.Steps(sec.id)
-  screen, lineStates, detours = {}, {}, {}
+  screen, lineStates, detours, companions, keepIds, grindPlaces = {}, {}, {}, {}, {}, {}
   pinned, finished, published, movedSinceLoad, pastEnd = nil, false, nil, false, false
   local places = Noir.Table(Noir.Table(Noir.char, "guide"), "places")
   local place = places[sec.id]
@@ -1191,6 +1609,7 @@ function Progress.Load(sectionId, how)
   saved.sig = sig
   if fresh or type(saved.reminders) ~= "table" then saved.reminders = {} end
   if fresh or type(saved.ticks) ~= "table" then saved.ticks = {} end
+  if fresh or type(saved.deferred) ~= "table" then saved.deferred = {} end
   if fresh and PLAYED_ON[how] then
     at = settle(steps, 1)
   elseif fresh then
@@ -1245,6 +1664,11 @@ function Progress.Complete()
   return finished
 end
 
+function Progress.Deferred()
+  if finished or not current then return {} end
+  return openDeferred()
+end
+
 function Progress.Lookahead()
   if finished then return nil end
   return steps[index + 1]
@@ -1255,11 +1679,12 @@ function Progress.StepState(i)
   if not step then return nil end
   if allHidden(step) then return "hidden" end
   if i == index and not finished and not pastEnd then return "current" end
-  if detours[i] then return "reminder" end
+  if detours[i] or companions[i] then return "reminder" end
   local open = openReminders(true)
   for k = 1, #open do
     if open[k] == i then return "reminder" end
   end
+  if i < index and not finished and deferredLevel(step) then return "deferred" end
   if i < index or finished or (pastEnd and i == index) then
     if step.reminder and saved and saved.reminders[step.id] then return "done" end
     return doneNow(step) and "done" or "behind"
@@ -1294,7 +1719,7 @@ end
 
 local function isOnScreen(i)
   if i == index and not pastEnd then return true end
-  if detours[i] then return true end
+  if detours[i] or companions[i] then return true end
   local open = openReminders(true)
   for k = 1, #open do
     if open[k] == i then return true end
@@ -1395,7 +1820,7 @@ Noir.On("NOIR_STATE", function()
   pass()
 end)
 Noir.On("NOIR_OPTION", function(_, key)
-  if key == "shown" or key == "neverSkip" or key == "outlevel" then pass() end
+  if key == "shown" or key == "neverSkip" or key == "outlevel" or key == "workAhead" then pass() end
 end)
 for _, event in ipairs({
   "PLAYER_XP_UPDATE", "PLAYER_CONTROL_LOST", "PLAYER_CONTROL_GAINED", "TAXIMAP_OPENED", "TAXIMAP_CLOSED",

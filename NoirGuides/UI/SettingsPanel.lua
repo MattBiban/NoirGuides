@@ -334,6 +334,7 @@ SettingsPanel.CONTROLS = {
   },
   Route = {
     tick("outlevel", "Skip content you outlevel", { ask = SettingsPanel.OUTLEVEL_QUESTION, after = reloadSection }),
+    tick("workAhead", "Work ahead while under level"),
     tick("groupQuests", "Group quests", { set = setGroupQuests }),
     tick("talents", "Talent guides"),
     { key = "profession", kind = "choice", text = "Profession to level with the route", items = professionItems,
