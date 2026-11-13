@@ -7,6 +7,18 @@ Noir.Route("alliance-dwarf", {
       id = "dwarf-01-11-dun-morogh", name = "1-11 Dun Morogh", names = { HUNTER = "1-12 Dun Morogh", ROGUE = "1-12 Dun Morogh", WARRIOR = "1-12 Dun Morogh" }, group = "Alliance", subgroup = "1-20", minLevel = 1, maxLevel = 14, zone = 1, start = true,
       next = { { section = "dwarf-11-20-darkshore" } },
       steps = {
+        { id = "p164-2-skill", when = { profession = 164 }, reminder = { ends = "train164_2" },
+          lines = {
+            { kind = "skill", skill = 164, value = 50 },
+          } },
+        { id = "p186-2-skill", when = { profession = 186 }, reminder = { ends = "train186_2" },
+          lines = {
+            { kind = "skill", skill = 186, value = 50 },
+          } },
+        { id = "p202-2-skill", when = { profession = 202 }, reminder = { ends = "train202_2" },
+          lines = {
+            { kind = "skill", skill = 202, value = 50 },
+          } },
         { id = "a179", at = { zone = 1, x = 29.93, y = 71.2, r = 10 }, maxLevel = 9, targets = { friend = { 658 } },
           lines = {
             { kind = "accept", quest = 179, npc = 658 },
@@ -22,26 +34,32 @@ Noir.Route("alliance-dwarf", {
         { id = "tHUNTER-2", at = { zone = 1, x = 29.18, y = 67.45, r = 10 }, when = { class = "HUNTER" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "HUNTER", npc = 895 },
+            { kind = "selljunk", at = { zone = 1, x = 29.19, y = 67.73, r = 10 }, npc = 267336 },
           } },
         { id = "tPALADIN-2", at = { zone = 1, x = 28.83, y = 68.33, r = 10 }, when = { class = "PALADIN" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "PALADIN", npc = 926 },
+            { kind = "selljunk", at = { zone = 1, x = 28.79, y = 67.84, r = 10 }, npc = 1104 },
           } },
         { id = "tPRIEST-2", at = { zone = 1, x = 28.6, y = 66.39, r = 10 }, when = { class = "PRIEST" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "PRIEST", npc = 837 },
+            { kind = "selljunk", at = { zone = 1, x = 28.77, y = 66.37, r = 10 }, npc = 836 },
           } },
         { id = "tROGUE-2", at = { zone = 1, x = 28.37, y = 67.51, r = 10 }, when = { class = "ROGUE" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "ROGUE", npc = 916 },
+            { kind = "selljunk", at = { zone = 1, x = 28.66, y = 67.74, r = 10 }, npc = 945 },
           } },
         { id = "tSHAMAN-2", at = { zone = 1, x = 28.79, y = 66.18, r = 10 }, when = { class = "SHAMAN" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "SHAMAN", npc = 257446 },
+            { kind = "selljunk", at = { zone = 1, x = 28.8, y = 66.16, r = 10 }, npc = 6376 },
           } },
         { id = "tWARRIOR-2", at = { zone = 1, x = 28.83, y = 67.24, r = 10 }, when = { class = "WARRIOR" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "WARRIOR", npc = 912 },
+            { kind = "selljunk", at = { zone = 1, x = 28.93, y = 67.72, r = 10 }, npc = 267337 },
           } },
         { id = "t179.a233.a170", at = { zone = 1, x = 29.93, y = 71.2, r = 10 }, items = { 2187 }, targets = { friend = { 658, 713 } },
           lines = {
@@ -126,26 +144,32 @@ Noir.Route("alliance-dwarf", {
         { id = "tHUNTER-6", at = { zone = 1, x = 29.18, y = 67.45, r = 10 }, when = { class = "HUNTER" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "HUNTER", npc = 895 },
+            { kind = "selljunk", at = { zone = 1, x = 29.19, y = 67.73, r = 10 }, npc = 267336 },
           } },
         { id = "tPALADIN-6", at = { zone = 1, x = 28.83, y = 68.33, r = 10 }, when = { class = "PALADIN" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "PALADIN", npc = 926 },
+            { kind = "selljunk", at = { zone = 1, x = 28.79, y = 67.84, r = 10 }, npc = 1104 },
           } },
         { id = "tPRIEST-6", at = { zone = 1, x = 28.6, y = 66.39, r = 10 }, when = { class = "PRIEST" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "PRIEST", npc = 837 },
+            { kind = "selljunk", at = { zone = 1, x = 28.77, y = 66.37, r = 10 }, npc = 836 },
           } },
         { id = "tROGUE-6", at = { zone = 1, x = 28.37, y = 67.51, r = 10 }, when = { class = "ROGUE" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "ROGUE", npc = 916 },
+            { kind = "selljunk", at = { zone = 1, x = 28.66, y = 67.74, r = 10 }, npc = 945 },
           } },
         { id = "tSHAMAN-6", at = { zone = 1, x = 28.79, y = 66.18, r = 10 }, when = { class = "SHAMAN" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "SHAMAN", npc = 257446 },
+            { kind = "selljunk", at = { zone = 1, x = 28.8, y = 66.16, r = 10 }, npc = 6376 },
           } },
         { id = "tWARRIOR-6", at = { zone = 1, x = 28.83, y = 67.24, r = 10 }, when = { class = "WARRIOR" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "WARRIOR", npc = 912 },
+            { kind = "selljunk", at = { zone = 1, x = 28.93, y = 67.72, r = 10 }, npc = 267337 },
           } },
         { id = "t3361.t3364.a3365", label = "turnin3361", at = { zone = 1, x = 28.55, y = 67.64, r = 10 }, minLevel = 4, items = { 10439, 10440 }, targets = { friend = { 8416, 836 } },
           lines = {
@@ -230,26 +254,32 @@ Noir.Route("alliance-dwarf", {
         { id = "tHUNTER-8", at = { zone = 1, x = 45.81, y = 53.04, r = 10 }, when = { class = "HUNTER" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "HUNTER", npc = 1231 },
+            { kind = "selljunk", at = { zone = 1, x = 45.29, y = 52.19, r = 10 }, npc = 1273 },
           } },
         { id = "tPALADIN-8", at = { zone = 1, x = 47.6, y = 52.07, r = 10 }, when = { class = "PALADIN" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "PALADIN", npc = 1232 },
+            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
           } },
         { id = "tPRIEST-8", at = { zone = 1, x = 47.34, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "PRIEST", npc = 1226 },
+            { kind = "selljunk", at = { zone = 1, x = 47.19, y = 52.4, r = 10 }, npc = 1691 },
           } },
         { id = "tROGUE-8", at = { zone = 1, x = 47.56, y = 52.61, r = 10 }, when = { class = "ROGUE" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "ROGUE", npc = 1234 },
+            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
           } },
         { id = "tSHAMAN-8", at = { zone = 1, x = 47.58, y = 51.95, r = 10 }, when = { class = "SHAMAN" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "SHAMAN", npc = 258113 },
+            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
           } },
         { id = "tWARRIOR-8", at = { zone = 1, x = 47.36, y = 52.65, r = 10 }, when = { class = "WARRIOR" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "WARRIOR", npc = 1229 },
+            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
           } },
         { id = "t317.a318.t313", at = { zone = 1, x = 49.43, y = 48.41, r = 10 }, minLevel = 2, targets = { friend = { 1378, 1377 } },
           lines = {
@@ -293,41 +323,47 @@ Noir.Route("alliance-dwarf", {
             { kind = "objective", quest = 319, index = 2, npc = 1127 },
             { kind = "objective", quest = 319, index = 3, npc = 1201 },
           } },
-        { id = "p164-2", at = { zone = 1, x = 45.34, y = 51.94, r = 10 }, when = { profession = 164 },
+        { id = "p164-2", label = "train164_2", at = { zone = 1, x = 45.34, y = 51.94, r = 10 }, when = { profession = 164 },
           lines = {
             { kind = "train", skill = 164, rank = 2, npc = 1241 },
           } },
-        { id = "p186-2", at = { zone = 1, x = 50.01, y = 50.31, r = 10 }, when = { profession = 186 },
+        { id = "p186-2", label = "train186_2", at = { zone = 1, x = 50.01, y = 50.31, r = 10 }, when = { profession = 186 },
           lines = {
             { kind = "train", skill = 186, rank = 2, npc = 5392 },
           } },
-        { id = "p202-2", at = { zone = 1, x = 50.18, y = 50.38, r = 10 }, when = { profession = 202 },
+        { id = "p202-2", label = "train202_2", at = { zone = 1, x = 50.18, y = 50.38, r = 10 }, when = { profession = 202 },
           lines = {
             { kind = "train", skill = 202, rank = 2, npc = 1702 },
           } },
         { id = "tHUNTER-10", at = { zone = 1, x = 45.81, y = 53.04, r = 10 }, when = { class = "HUNTER" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "HUNTER", npc = 1231 },
+            { kind = "selljunk", at = { zone = 1, x = 45.29, y = 52.19, r = 10 }, npc = 1273 },
           } },
         { id = "tPALADIN-10", at = { zone = 1, x = 47.6, y = 52.07, r = 10 }, when = { class = "PALADIN" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "PALADIN", npc = 1232 },
+            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
           } },
         { id = "tPRIEST-10", at = { zone = 1, x = 47.34, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "PRIEST", npc = 1226 },
+            { kind = "selljunk", at = { zone = 1, x = 47.19, y = 52.4, r = 10 }, npc = 1691 },
           } },
         { id = "tROGUE-10", at = { zone = 1, x = 47.56, y = 52.61, r = 10 }, when = { class = "ROGUE" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "ROGUE", npc = 1234 },
+            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
           } },
         { id = "tSHAMAN-10", at = { zone = 1, x = 47.58, y = 51.95, r = 10 }, when = { class = "SHAMAN" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "SHAMAN", npc = 258113 },
+            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
           } },
         { id = "tWARRIOR-10", at = { zone = 1, x = 47.36, y = 52.65, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "WARRIOR", npc = 1229 },
+            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
           } },
         { id = "t412", at = { zone = 1, x = 45.85, y = 49.37, r = 10 }, targets = { friend = { 1269 } },
           lines = {
@@ -585,6 +621,7 @@ Noir.Route("alliance-dwarf", {
         { id = "tWARRIOR-12", at = { zone = 1537, x = 65.9, y = 88.41, r = 10 }, when = { class = "WARRIOR" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "WARRIOR", npc = 5114 },
+            { kind = "selljunk", at = { zone = 1537, x = 62.55, y = 88.71, r = 10 }, npc = 5121 },
           } },
         { id = "t1681.a1682.t1682", at = { zone = 1537, x = 48.64, y = 42.48, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, targets = { friend = { 6031 } },
           lines = {
@@ -606,7 +643,15 @@ Noir.Route("alliance-dwarf", {
       id = "dwarf-11-20-darkshore", name = "11-20 Darkshore", names = { HUNTER = "12-20 Darkshore", ROGUE = "12-20 Darkshore", WARRIOR = "12-20 Darkshore" }, group = "Alliance", subgroup = "1-20", minLevel = 11, maxLevel = 23, zone = 148,
       next = { { section = "dwarf-20-20-darkshore" } },
       steps = {
-        { id = "p182-2", at = { zone = 11, x = 7.99, y = 55.84, r = 10 }, when = { profession = 182 },
+        { id = "p182-2-skill", when = { profession = 182 }, reminder = { ends = "train182_2" },
+          lines = {
+            { kind = "skill", skill = 182, value = 50 },
+          } },
+        { id = "p197-2-skill", when = { profession = 197 }, reminder = { ends = "train197_2" },
+          lines = {
+            { kind = "skill", skill = 197, value = 50 },
+          } },
+        { id = "p182-2", label = "train182_2", at = { zone = 11, x = 7.99, y = 55.84, r = 10 }, when = { profession = 182 },
           lines = {
             { kind = "train", skill = 182, rank = 2, npc = 1458 },
           } },
@@ -622,7 +667,7 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "transport", to = { zone = 148, x = 32.3, y = 44.1 }, mode = "boat", at = { zone = 11, x = 4.5, y = 56.6, r = 15 } },
           } },
-        { id = "p197-2", at = { zone = 148, x = 38.24, y = 40.53, r = 10 }, when = { profession = 197 },
+        { id = "p197-2", label = "train197_2", at = { zone = 148, x = 38.24, y = 40.53, r = 10 }, when = { profession = 197 },
           lines = {
             { kind = "train", skill = 197, rank = 2, npc = 4193 },
           } },
@@ -692,6 +737,7 @@ Noir.Route("alliance-dwarf", {
         { id = "tPALADIN-12", at = { zone = 1537, x = 23.13, y = 6.14, r = 10 }, when = { class = "PALADIN" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "PALADIN", npc = 5149 },
+            { kind = "selljunk", at = { zone = 1537, x = 22.77, y = 15.92, r = 10 }, npc = 5152 },
           } },
         { id = "a2999.t2999", at = { zone = 1537, x = 23.13, y = 6.14, r = 10 }, when = { class = "PALADIN" }, minLevel = 12, targets = { friend = { 5149, 6179 } },
           lines = {
@@ -705,6 +751,7 @@ Noir.Route("alliance-dwarf", {
         { id = "tROGUE-12", at = { zone = 141, x = 56.38, y = 60.14, r = 10 }, when = { class = "ROGUE" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "ROGUE", npc = 3599 },
+            { kind = "selljunk", at = { zone = 141, x = 56.12, y = 60.25, r = 10 }, npc = 3611 },
           } },
         { id = "a2241", at = { zone = 141, x = 56.38, y = 60.14, r = 10 }, when = { class = "ROGUE" }, minLevel = 10, maxLevel = 18, items = { 7735 }, targets = { friend = { 3599 } },
           lines = {
@@ -842,6 +889,7 @@ Noir.Route("alliance-dwarf", {
         { id = "tWARRIOR-14", at = { zone = 1657, x = 58.71, y = 34.9, r = 10 }, when = { class = "WARRIOR" }, minLevel = 14,
           lines = {
             { kind = "train", level = 14, class = "WARRIOR", npc = 4087 },
+            { kind = "selljunk", at = { zone = 1657, x = 58.02, y = 34.52, r = 10 }, npc = 15351 },
           } },
         { id = "t1686.a1692.t1692.a1693.t1693", at = { zone = 1657, x = 57.3, y = 34.61, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, items = { 6812 }, targets = { friend = { 4088, 6142 } },
           lines = {
@@ -1068,6 +1116,7 @@ Noir.Route("alliance-dwarf", {
         { id = "tROGUE-18", at = { zone = 141, x = 56.38, y = 60.14, r = 10 }, when = { class = "ROGUE" }, minLevel = 18,
           lines = {
             { kind = "train", level = 18, class = "ROGUE", npc = 3599 },
+            { kind = "selljunk", at = { zone = 141, x = 56.12, y = 60.25, r = 10 }, npc = 3611 },
           } },
         { id = "a2259", at = { zone = 141, x = 56.38, y = 60.14, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, maxLevel = 24, targets = { friend = { 3599 } },
           lines = {
@@ -1119,7 +1168,11 @@ Noir.Route("alliance-dwarf", {
       id = "dwarf-20-20-darkshore", name = "20 Darkshore", names = { ROGUE = "20-21 Darkshore", WARRIOR = "20-21 Darkshore" }, group = "Alliance", subgroup = "20-30", minLevel = 20, maxLevel = 23, zone = 148,
       next = { { section = "dwarf-20-23-ashenvale" } },
       steps = {
-        { id = "p186-3", at = { zone = 148, x = 38.25, y = 41.01, r = 10 }, when = { profession = 186 },
+        { id = "p186-3-skill", when = { profession = 186 }, reminder = { ends = "train186_3" },
+          lines = {
+            { kind = "skill", skill = 186, value = 125 },
+          } },
+        { id = "p186-3", label = "train186_3", at = { zone = 148, x = 38.25, y = 41.01, r = 10 }, when = { profession = 186 },
           lines = {
             { kind = "train", skill = 186, rank = 3, npc = 6297 },
           } },
@@ -1157,6 +1210,7 @@ Noir.Route("alliance-dwarf", {
         { id = "tROGUE-20", at = { zone = 1537, x = 51.96, y = 14.84, r = 10 }, when = { class = "ROGUE" }, minLevel = 20,
           lines = {
             { kind = "train", level = 20, class = "ROGUE", npc = 5165 },
+            { kind = "selljunk", at = { zone = 1537, x = 52.95, y = 13.71, r = 10 }, npc = 5169 },
           } },
         { id = "a2298", at = { zone = 1537, x = 51.96, y = 14.84, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, maxLevel = 24, targets = { friend = { 5165 } },
           lines = {
@@ -1201,15 +1255,47 @@ Noir.Route("alliance-dwarf", {
       id = "dwarf-20-23-ashenvale", name = "20-23 Ashenvale", names = { ROGUE = "21-24 Ashenvale", WARRIOR = "21-23 Ashenvale" }, group = "Alliance", subgroup = "20-30", minLevel = 20, maxLevel = 26, zone = 331,
       next = { { section = "dwarf-23-27-duskwood" } },
       steps = {
+        { id = "p164-3-skill", when = { profession = 164 }, reminder = { ends = "train164_3" },
+          lines = {
+            { kind = "skill", skill = 164, value = 125 },
+          } },
+        { id = "p165-3-skill", when = { profession = 165 }, reminder = { ends = "train165_3" },
+          lines = {
+            { kind = "skill", skill = 165, value = 125 },
+          } },
+        { id = "p171-3-skill", when = { profession = 171 }, reminder = { ends = "train171_3" },
+          lines = {
+            { kind = "skill", skill = 171, value = 125 },
+          } },
+        { id = "p182-3-skill", when = { profession = 182 }, reminder = { ends = "train182_3" },
+          lines = {
+            { kind = "skill", skill = 182, value = 125 },
+          } },
+        { id = "p197-3-skill", when = { profession = 197 }, reminder = { ends = "train197_3" },
+          lines = {
+            { kind = "skill", skill = 197, value = 125 },
+          } },
+        { id = "p202-3-skill", when = { profession = 202 }, reminder = { ends = "train202_3" },
+          lines = {
+            { kind = "skill", skill = 202, value = 125 },
+          } },
+        { id = "p333-3-skill", when = { profession = 333 }, reminder = { ends = "train333_3" },
+          lines = {
+            { kind = "skill", skill = 333, value = 125 },
+          } },
+        { id = "p393-3-skill", when = { profession = 393 }, reminder = { ends = "train393_3" },
+          lines = {
+            { kind = "skill", skill = 393, value = 125 },
+          } },
         { id = "h#7", text = "Use your hearthstone to return to Darkshore.",
           lines = {
             { kind = "hearth", to = { zone = 148, x = 37.04, y = 44.13 } },
           } },
-        { id = "p165-3", at = { zone = 331, x = 35.98, y = 52.1, r = 10 }, when = { profession = 165 },
+        { id = "p165-3", label = "train165_3", at = { zone = 331, x = 35.98, y = 52.1, r = 10 }, when = { profession = 165 },
           lines = {
             { kind = "train", skill = 165, rank = 3, npc = 3967 },
           } },
-        { id = "p171-3", at = { zone = 331, x = 50.85, y = 67.11, r = 10 }, when = { profession = 171 },
+        { id = "p171-3", label = "train171_3", at = { zone = 331, x = 50.85, y = 67.11, r = 10 }, when = { profession = 171 },
           lines = {
             { kind = "train", skill = 171, rank = 3, npc = 3964 },
           } },
@@ -1439,27 +1525,27 @@ Noir.Route("alliance-dwarf", {
             { kind = "accept", quest = 5641, npc = 11406 },
             { kind = "turnin", quest = 5641, npc = 11406 },
           } },
-        { id = "p164-3", at = { zone = 1537, x = 52.36, y = 42.55, r = 10 }, when = { profession = 164 },
+        { id = "p164-3", label = "train164_3", at = { zone = 1537, x = 52.36, y = 42.55, r = 10 }, when = { profession = 164 },
           lines = {
             { kind = "train", skill = 164, rank = 3, npc = 10276 },
           } },
-        { id = "p182-3", at = { zone = 1537, x = 55.9, y = 59.13, r = 10 }, when = { profession = 182 },
+        { id = "p182-3", label = "train182_3", at = { zone = 1537, x = 55.9, y = 59.13, r = 10 }, when = { profession = 182 },
           lines = {
             { kind = "train", skill = 182, rank = 3, npc = 5137 },
           } },
-        { id = "p197-3", at = { zone = 1537, x = 43.15, y = 29.36, r = 10 }, when = { profession = 197 },
+        { id = "p197-3", label = "train197_3", at = { zone = 1537, x = 43.15, y = 29.36, r = 10 }, when = { profession = 197 },
           lines = {
             { kind = "train", skill = 197, rank = 3, npc = 5153 },
           } },
-        { id = "p202-3", at = { zone = 1537, x = 67.48, y = 42.91, r = 10 }, when = { profession = 202 },
+        { id = "p202-3", label = "train202_3", at = { zone = 1537, x = 67.48, y = 42.91, r = 10 }, when = { profession = 202 },
           lines = {
             { kind = "train", skill = 202, rank = 3, npc = 11029 },
           } },
-        { id = "p333-3", at = { zone = 1537, x = 59.77, y = 45.45, r = 10 }, when = { profession = 333 },
+        { id = "p333-3", label = "train333_3", at = { zone = 1537, x = 59.77, y = 45.45, r = 10 }, when = { profession = 333 },
           lines = {
             { kind = "train", skill = 333, rank = 3, npc = 5157 },
           } },
-        { id = "p393-3", at = { zone = 1537, x = 39.86, y = 32.5, r = 10 }, when = { profession = 393 },
+        { id = "p393-3", label = "train393_3", at = { zone = 1537, x = 39.86, y = 32.5, r = 10 }, when = { profession = 393 },
           lines = {
             { kind = "train", skill = 393, rank = 3, npc = 6291 },
           } },
@@ -2424,6 +2510,14 @@ Noir.Route("alliance-dwarf", {
       id = "dwarf-32-35-stranglethorn-vale", name = "32-35 Stranglethorn Vale", names = { ROGUE = "32-36 Stranglethorn Vale", WARRIOR = "32-36 Stranglethorn Vale" }, group = "Alliance", subgroup = "30-40", minLevel = 32, maxLevel = 38, zone = 33,
       next = { { section = "dwarf-35-37-desolace" } },
       steps = {
+        { id = "p164-4-skill", when = { profession = 164 }, reminder = { ends = "train164_4" },
+          lines = {
+            { kind = "skill", skill = 164, value = 200 },
+          } },
+        { id = "p186-4-skill", when = { profession = 186 }, reminder = { ends = "train186_4" },
+          lines = {
+            { kind = "skill", skill = 186, value = 200 },
+          } },
         { id = "y6-7", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "WARRIOR" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
@@ -2646,7 +2740,7 @@ Noir.Route("alliance-dwarf", {
             { kind = "turnin", quest = 577, at = { zone = 33, x = 28.29, y = 77.59, r = 10 }, npc = 2495 },
             { kind = "accept", quest = 628, at = { zone = 33, x = 28.29, y = 77.59, r = 10 }, npc = 2495, requires = { 577 } },
           } },
-        { id = "p164-4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
+        { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
           lines = {
             { kind = "train", skill = 164, rank = 4, npc = 2836 },
           } },
@@ -2699,7 +2793,7 @@ Noir.Route("alliance-dwarf", {
             { kind = "turnin", quest = 207, npc = 739, skipIfMissing = true },
             { kind = "turnin", quest = 574, npc = 469, skipIfMissing = true },
           } },
-        { id = "p186-4", at = { zone = 10, x = 74.05, y = 49.62, r = 10 }, when = { profession = 186 },
+        { id = "p186-4", label = "train186_4", at = { zone = 10, x = 74.05, y = 49.62, r = 10 }, when = { profession = 186 },
           lines = {
             { kind = "train", skill = 186, rank = 4, npc = 3137 },
           } },

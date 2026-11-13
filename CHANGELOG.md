@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0
+
+- **Sell your greys before training.** On class trainer visits up to level 20, a line "Sell your grey items at <vendor>" points you to the nearest vendor by the trainer, but only when you carry grey items and may be short of money. Once your class has visited a trainer at that level on any character of the account, the line says what the training cost then and what you have ("training costs about 1s 20c, you have 85c"); until then it shows only while you carry less than 10 silver. If the trainer lists a spell you cannot afford while its window is open, the line shows too.
+- **Grey items sold for you.** At any vendor, your grey items are sold one by one and a chat line tells you how many and for how much. Nothing better than grey is ever sold, nor an item a step still asks you to collect. Switch it off in Settings, Automation, "Sell grey items at vendors", or hold Shift, Ctrl or Alt as you open the vendor.
+- **Profession skill reminders.** With a profession learned or planned, a reminder "Raise <profession> to 50" (then 125 and 200) with your skill counter stays on screen from the start of the section that holds its trainer step, so you reach WoW Forever's skill gate before you get there. It ticks itself at the gate.
+
 ## 0.3.0
 
 - **A new look.** The guide is restyled after the game's own tooltips, with ElvUI-sharp edges: a lighter blue-black panel you can see the world through, a black-and-accent double border, cards as lifted plates with a soft sheen, the game's text shadow, a gold line of section facts in the header, and a glossy progress bar. Menus, dialogs, the setup wizard, quest cleanup, the bug report and the item and target buttons share the look.

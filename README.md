@@ -16,9 +16,11 @@ Noir Guides shows you what to do next and where to go, and moves on by itself wh
 - **Clickable step list.** Scroll the whole section; double-click any step to jump to it.
 - **Smooth arrow and map pins.** The arrow shows the distance in yards. Pins mark the current and next steps on the world map and the minimap.
 - **Starts wherever you are.** An existing character is placed from its quest log and the quests it has handed in. Chat tells you where it landed.
-- **Automation you control.** It accepts and hands in guide quests, takes flights, binds the hearthstone and buys what a step needs. It can also choose rewards and train spells. Each part has its own switch; hold Ctrl or Shift at an NPC to do it yourself.
+- **Automation you control.** It accepts and hands in guide quests, takes flights, binds the hearthstone, buys what a step needs and sells your grey items. It can also choose rewards and train spells. Each part has its own switch; hold Ctrl or Shift at an NPC to do it yourself.
 - **Item and target buttons.** Quest items and quest mobs get their own buttons.
 - **Trainer visits.** You're sent to your class trainer every few levels, and to profession trainers at WoW Forever's skill gates (50, 125, 200).
+- **Grey items and training money.** Early trainer visits remind you to sell your grey items when you may be short of money, and vendors buy your greys by themselves (its own switch).
+- **Profession skill reminders.** Before each profession trainer step, a reminder with your skill counter tells you to raise the profession to the trainer's gate.
 - **Talents, professions and quest cleanup.** A talent build per class, a profession plan, and a quest log cleanup that abandons nothing unless you tick it.
 - **Movable, resizable windows** that can never open off screen, with settings kept per profile.
 

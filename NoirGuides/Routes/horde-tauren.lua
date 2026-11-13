@@ -32,18 +32,22 @@ Noir.Route("horde-tauren", {
         { id = "tDRUID-2", at = { zone = 215, x = 44.65, y = 76.55, r = 10 }, when = { class = "DRUID" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "DRUID", npc = 3060 },
+            { kind = "selljunk", at = { zone = 215, x = 44.49, y = 76.69, r = 10 }, npc = 267330 },
           } },
         { id = "tHUNTER-2", at = { zone = 215, x = 43.96, y = 76.35, r = 10 }, when = { class = "HUNTER" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "HUNTER", npc = 3061 },
+            { kind = "selljunk", at = { zone = 215, x = 44.49, y = 76.69, r = 10 }, npc = 267330 },
           } },
         { id = "tSHAMAN-2", at = { zone = 215, x = 44.58, y = 76.56, r = 10 }, when = { class = "SHAMAN" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "SHAMAN", npc = 3062 },
+            { kind = "selljunk", at = { zone = 215, x = 44.49, y = 76.69, r = 10 }, npc = 267330 },
           } },
         { id = "tWARRIOR-2", at = { zone = 215, x = 43.75, y = 76.72, r = 10 }, when = { class = "WARRIOR" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "WARRIOR", npc = 3059 },
+            { kind = "selljunk", at = { zone = 215, x = 43.86, y = 77.65, r = 10 }, npc = 3074 },
           } },
         { id = "a3376.t747.a750", label = "turnin747", at = { zone = 215, x = 44.18, y = 77.03, r = 10 }, minLevel = 3, targets = { friend = { 3209, 2980 } },
           lines = {
@@ -79,18 +83,22 @@ Noir.Route("horde-tauren", {
         { id = "tDRUID-4", at = { zone = 215, x = 47.48, y = 62.95, r = 10 }, when = { class = "DRUID" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "DRUID", npc = 3064 },
+            { kind = "selljunk", at = { zone = 215, x = 46.65, y = 62.08, r = 10 }, npc = 3685 },
           } },
         { id = "tHUNTER-4", at = { zone = 215, x = 46.93, y = 59.65, r = 10 }, when = { class = "HUNTER" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "HUNTER", npc = 3065 },
+            { kind = "selljunk", at = { zone = 215, x = 46.67, y = 59.13, r = 10 }, npc = 5940 },
           } },
         { id = "tSHAMAN-4", at = { zone = 215, x = 47.4, y = 62.54, r = 10 }, when = { class = "SHAMAN" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "SHAMAN", npc = 3066 },
+            { kind = "selljunk", at = { zone = 215, x = 46.65, y = 62.08, r = 10 }, npc = 3685 },
           } },
         { id = "tWARRIOR-4", at = { zone = 215, x = 48.35, y = 63.74, r = 10 }, when = { class = "WARRIOR" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "WARRIOR", npc = 3063 },
+            { kind = "selljunk", at = { zone = 215, x = 46.77, y = 64.49, r = 10 }, npc = 3884 },
           } },
         { id = "a748.a761", at = { zone = 215, x = 47.52, y = 63.58, r = 10 }, minLevel = 4, maxLevel = 13, targets = { friend = { 2948, 2947 } },
           lines = {
@@ -130,18 +138,22 @@ Noir.Route("horde-tauren", {
         { id = "tDRUID-6", at = { zone = 215, x = 47.48, y = 62.95, r = 10 }, when = { class = "DRUID" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "DRUID", npc = 3064 },
+            { kind = "selljunk", at = { zone = 215, x = 46.65, y = 62.08, r = 10 }, npc = 3685 },
           } },
         { id = "tHUNTER-6", at = { zone = 215, x = 46.93, y = 59.65, r = 10 }, when = { class = "HUNTER" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "HUNTER", npc = 3065 },
+            { kind = "selljunk", at = { zone = 215, x = 46.67, y = 59.13, r = 10 }, npc = 5940 },
           } },
         { id = "tSHAMAN-6", at = { zone = 215, x = 47.4, y = 62.54, r = 10 }, when = { class = "SHAMAN" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "SHAMAN", npc = 3066 },
+            { kind = "selljunk", at = { zone = 215, x = 46.65, y = 62.08, r = 10 }, npc = 3685 },
           } },
         { id = "tWARRIOR-6", at = { zone = 215, x = 48.35, y = 63.74, r = 10 }, when = { class = "WARRIOR" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "WARRIOR", npc = 3063 },
+            { kind = "selljunk", at = { zone = 215, x = 46.77, y = 64.49, r = 10 }, npc = 3884 },
           } },
         { id = "a746.t745.t748.a754.t761.b@215", at = { zone = 215, x = 46.67, y = 63.38, r = 10 }, minLevel = 6, items = { 4702, 5411 }, targets = { friend = { 2993, 2948, 2947 } },
           lines = {
@@ -206,6 +218,7 @@ Noir.Route("horde-tauren", {
         { id = "tSHAMAN-8", at = { zone = 14, x = 42.39, y = 69, r = 10 }, when = { class = "SHAMAN" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "SHAMAN", npc = 3157 },
+            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "t1516.a1517", at = { zone = 14, x = 42.4, y = 69.17, r = 10 }, when = { class = "SHAMAN" }, minLevel = 4, items = { 6635 }, targets = { friend = { 5887 } },
           lines = {
@@ -239,6 +252,14 @@ Noir.Route("horde-tauren", {
       id = "tauren-07-12-mulgore", name = "7-12 Mulgore", names = { SHAMAN = "8-12 Mulgore" }, group = "Horde", subgroup = "1-20", minLevel = 7, maxLevel = 15, zone = 215,
       next = { { section = "tauren-12-20-the-barrens" } },
       steps = {
+        { id = "p165-2-skill", when = { profession = 165 }, reminder = { ends = "train165_2" },
+          lines = {
+            { kind = "skill", skill = 165, value = 50 },
+          } },
+        { id = "p202-2-skill", when = { profession = 202 }, reminder = { ends = "train202_2" },
+          lines = {
+            { kind = "skill", skill = 202, value = 50 },
+          } },
         { id = "h", text = "Use your hearthstone to return to Mulgore.",
           lines = {
             { kind = "hearth", to = { zone = 215, x = 45.93, y = 64.16 } },
@@ -323,11 +344,11 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "objective", quest = 833, index = 1, npc = 3232, skipIfMissing = true },
           } },
-        { id = "p165-2", at = { zone = 215, x = 44.94, y = 61.46, r = 10 }, when = { profession = 165 },
+        { id = "p165-2", label = "train165_2", at = { zone = 215, x = 44.94, y = 61.46, r = 10 }, when = { profession = 165 },
           lines = {
             { kind = "train", skill = 165, rank = 2, npc = 3069 },
           } },
-        { id = "p202-2", at = { zone = 215, x = 58.65, y = 39.38, r = 10 }, when = { profession = 202 },
+        { id = "p202-2", label = "train202_2", at = { zone = 215, x = 58.65, y = 39.38, r = 10 }, when = { profession = 202 },
           lines = {
             { kind = "train", skill = 202, rank = 2, npc = 10993 },
           } },
@@ -342,18 +363,22 @@ Noir.Route("horde-tauren", {
         { id = "tDRUID-10", at = { zone = 215, x = 44.65, y = 76.55, r = 10 }, when = { class = "DRUID" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "DRUID", npc = 3060 },
+            { kind = "selljunk", at = { zone = 215, x = 44.49, y = 76.69, r = 10 }, npc = 267330 },
           } },
         { id = "tHUNTER-10", at = { zone = 215, x = 43.96, y = 76.35, r = 10 }, when = { class = "HUNTER" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "HUNTER", npc = 3061 },
+            { kind = "selljunk", at = { zone = 215, x = 44.49, y = 76.69, r = 10 }, npc = 267330 },
           } },
         { id = "tSHAMAN-10", at = { zone = 215, x = 44.58, y = 76.56, r = 10 }, when = { class = "SHAMAN" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "SHAMAN", npc = 3062 },
+            { kind = "selljunk", at = { zone = 215, x = 44.49, y = 76.69, r = 10 }, npc = 267330 },
           } },
         { id = "tWARRIOR-10", at = { zone = 215, x = 43.75, y = 76.72, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "WARRIOR", npc = 3059 },
+            { kind = "selljunk", at = { zone = 215, x = 43.86, y = 77.65, r = 10 }, npc = 3074 },
           } },
         { id = "t753.a755.t3376.t750.a780", at = { zone = 215, x = 43.89, y = 76.66, r = 10 }, targets = { friend = { 2981, 3209, 2980 } },
           lines = {
@@ -441,6 +466,7 @@ Noir.Route("horde-tauren", {
         { id = "tSHAMAN-12", at = { zone = 215, x = 47.4, y = 62.54, r = 10 }, when = { class = "SHAMAN" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "SHAMAN", npc = 3066 },
+            { kind = "selljunk", at = { zone = 215, x = 46.65, y = 62.08, r = 10 }, npc = 3685 },
           } },
         { id = "t758.a759", at = { zone = 215, x = 47.52, y = 63.58, r = 10 }, minLevel = 4, items = { 5415 }, targets = { friend = { 2948 } },
           lines = {
@@ -459,6 +485,7 @@ Noir.Route("horde-tauren", {
         { id = "tDRUID-12", at = { zone = 1638, x = 76.48, y = 27.22, r = 10 }, when = { class = "DRUID" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "DRUID", npc = 3033 },
+            { kind = "selljunk", at = { zone = 1638, x = 70.56, y = 27.83, r = 10 }, npc = 15898 },
           } },
         { id = "a5922", at = { zone = 1638, x = 76.48, y = 27.22, r = 10 }, when = { class = "DRUID" }, minLevel = 10, maxLevel = 18, targets = { friend = { 3033 } },
           lines = {
@@ -475,6 +502,7 @@ Noir.Route("horde-tauren", {
         { id = "tHUNTER-12", at = { zone = 215, x = 46.93, y = 59.65, r = 10 }, when = { class = "HUNTER" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "HUNTER", npc = 3065 },
+            { kind = "selljunk", at = { zone = 215, x = 46.67, y = 59.13, r = 10 }, npc = 5940 },
           } },
         { id = "a6061", at = { zone = 215, x = 46.93, y = 59.65, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, maxLevel = 18, items = { 15914 }, targets = { friend = { 3065 } },
           lines = {
@@ -491,6 +519,7 @@ Noir.Route("horde-tauren", {
         { id = "tWARRIOR-12", at = { zone = 1638, x = 57.24, y = 87.37, r = 10 }, when = { class = "WARRIOR" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "WARRIOR", npc = 3041 },
+            { kind = "selljunk", at = { zone = 1638, x = 57.8, y = 76.4, r = 10 }, npc = 15350 },
           } },
         { id = "a1505", at = { zone = 1638, x = 57.24, y = 87.37, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, maxLevel = 18, targets = { friend = { 3041 } },
           lines = {
@@ -542,11 +571,19 @@ Noir.Route("horde-tauren", {
       id = "tauren-12-20-the-barrens", name = "12-20 The Barrens", group = "Horde", subgroup = "1-20", minLevel = 12, maxLevel = 23, zone = 17,
       next = { { section = "tauren-20-23-the-barrens" } },
       steps = {
-        { id = "p164-2", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
+        { id = "p164-2-skill", when = { profession = 164 }, reminder = { ends = "train164_2" },
+          lines = {
+            { kind = "skill", skill = 164, value = 50 },
+          } },
+        { id = "p197-2-skill", when = { profession = 197 }, reminder = { ends = "train197_2" },
+          lines = {
+            { kind = "skill", skill = 197, value = 50 },
+          } },
+        { id = "p164-2", label = "train164_2", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
           lines = {
             { kind = "train", skill = 164, rank = 2, npc = 3478 },
           } },
-        { id = "p197-2", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
+        { id = "p197-2", label = "train197_2", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
           lines = {
             { kind = "train", skill = 197, rank = 2, npc = 3704 },
           } },
@@ -751,6 +788,7 @@ Noir.Route("horde-tauren", {
         { id = "tDRUID-14", at = { zone = 1638, x = 76.48, y = 27.22, r = 10 }, when = { class = "DRUID" }, minLevel = 14,
           lines = {
             { kind = "train", level = 14, class = "DRUID", npc = 3033 },
+            { kind = "selljunk", at = { zone = 1638, x = 70.56, y = 27.83, r = 10 }, npc = 15898 },
           } },
         { id = "t5932.a6126", at = { zone = 1638, x = 76.48, y = 27.22, r = 10 }, when = { class = "DRUID" }, minLevel = 14, targets = { friend = { 3033 } },
           lines = {
@@ -768,6 +806,7 @@ Noir.Route("horde-tauren", {
         { id = "tWARRIOR-14", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 14,
           lines = {
             { kind = "train", level = 14, class = "WARRIOR", npc = 2131 },
+            { kind = "selljunk", at = { zone = 85, x = 61.55, y = 52.61, r = 10 }, npc = 5750 },
           } },
         { id = "a1820", at = { zone = 85, x = 58.2, y = 51.45, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, maxLevel = 18, targets = { friend = { 1496 } },
           lines = {
@@ -919,6 +958,7 @@ Noir.Route("horde-tauren", {
         { id = "tDRUID-16", at = { zone = 493, x = 52.53, y = 40.57, r = 10 }, when = { class = "DRUID" }, minLevel = 16,
           lines = {
             { kind = "train", level = 16, class = "DRUID", npc = 12042 },
+            { kind = "selljunk", at = { zone = 493, x = 53.34, y = 42.7, r = 10 }, npc = 12029 },
           } },
         { id = "t6126.a6127", at = { zone = 493, x = 56.21, y = 30.64, r = 10 }, when = { class = "DRUID" }, minLevel = 14, items = { 15842 }, targets = { friend = { 11802 } },
           lines = {
@@ -1103,6 +1143,7 @@ Noir.Route("horde-tauren", {
         { id = "tDRUID-20", at = { zone = 493, x = 52.53, y = 40.57, r = 10 }, when = { class = "DRUID" }, minLevel = 20,
           lines = {
             { kind = "train", level = 20, class = "DRUID", npc = 12042 },
+            { kind = "selljunk", at = { zone = 493, x = 53.34, y = 42.7, r = 10 }, npc = 12029 },
           } },
         { id = "t6129.a6130", at = { zone = 493, x = 56.21, y = 30.64, r = 10 }, when = { class = "DRUID" }, minLevel = 14, items = { 15826 }, targets = { friend = { 11802 } },
           lines = {
@@ -1143,15 +1184,35 @@ Noir.Route("horde-tauren", {
       id = "tauren-20-23-the-barrens", name = "20-23 The Barrens", names = { DRUID = "20-24 The Barrens", WARRIOR = "20-24 The Barrens" }, group = "Horde", subgroup = "20-30", minLevel = 20, maxLevel = 26, zone = 17,
       next = { { section = "tauren-23-26-stonetalon-mountains" } },
       steps = {
-        { id = "p164-3", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
+        { id = "p164-3-skill", when = { profession = 164 }, reminder = { ends = "train164_3" },
+          lines = {
+            { kind = "skill", skill = 164, value = 125 },
+          } },
+        { id = "p165-3-skill", when = { profession = 165 }, reminder = { ends = "train165_3" },
+          lines = {
+            { kind = "skill", skill = 165, value = 125 },
+          } },
+        { id = "p197-3-skill", when = { profession = 197 }, reminder = { ends = "train197_3" },
+          lines = {
+            { kind = "skill", skill = 197, value = 125 },
+          } },
+        { id = "p333-2-skill", when = { profession = 333 }, reminder = { ends = "train333_2" },
+          lines = {
+            { kind = "skill", skill = 333, value = 50 },
+          } },
+        { id = "p333-3-skill", when = { profession = 333 }, reminder = { ends = "train333_3" },
+          lines = {
+            { kind = "skill", skill = 333, value = 125 },
+          } },
+        { id = "p164-3", label = "train164_3", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
           lines = {
             { kind = "train", skill = 164, rank = 3, npc = 3478 },
           } },
-        { id = "p165-3", at = { zone = 17, x = 44.84, y = 59.46, r = 10 }, when = { profession = 165 },
+        { id = "p165-3", label = "train165_3", at = { zone = 17, x = 44.84, y = 59.46, r = 10 }, when = { profession = 165 },
           lines = {
             { kind = "train", skill = 165, rank = 3, npc = 3703 },
           } },
-        { id = "p197-3", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
+        { id = "p197-3", label = "train197_3", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
           lines = {
             { kind = "train", skill = 197, rank = 3, npc = 3704 },
           } },
@@ -1269,6 +1330,7 @@ Noir.Route("horde-tauren", {
         { id = "tSHAMAN-20", at = { zone = 215, x = 47.4, y = 62.54, r = 10 }, when = { class = "SHAMAN" }, minLevel = 20,
           lines = {
             { kind = "train", level = 20, class = "SHAMAN", npc = 3066 },
+            { kind = "selljunk", at = { zone = 215, x = 46.65, y = 62.08, r = 10 }, npc = 3685 },
           } },
         { id = "a2986", at = { zone = 215, x = 47.4, y = 62.54, r = 10 }, when = { class = "SHAMAN" }, minLevel = 20, maxLevel = 28, targets = { friend = { 3066 } },
           lines = {
@@ -1411,11 +1473,11 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "fly", from = 77, to = 25 },
           } },
-        { id = "p333-2", at = { zone = 406, x = 49.18, y = 57.18, r = 10 }, when = { profession = 333 },
+        { id = "p333-2", label = "train333_2", at = { zone = 406, x = 49.18, y = 57.18, r = 10 }, when = { profession = 333 },
           lines = {
             { kind = "train", skill = 333, rank = 2, npc = 11074 },
           } },
-        { id = "p333-3", at = { zone = 406, x = 49.18, y = 57.18, r = 10 }, when = { profession = 333 },
+        { id = "p333-3", label = "train333_3", at = { zone = 406, x = 49.18, y = 57.18, r = 10 }, when = { profession = 333 },
           lines = {
             { kind = "train", skill = 333, rank = 3, npc = 11074 },
           } },
@@ -2410,6 +2472,14 @@ Noir.Route("horde-tauren", {
       id = "tauren-32-35-stranglethorn-vale", name = "32-35 Stranglethorn Vale", names = { DRUID = "33-35 Stranglethorn Vale", SHAMAN = "33-36 Stranglethorn Vale", WARRIOR = "33-36 Stranglethorn Vale" }, group = "Horde", subgroup = "30-40", minLevel = 32, maxLevel = 38, zone = 33,
       next = { { section = "tauren-35-37-desolace" } },
       steps = {
+        { id = "p164-4-skill", when = { profession = 164 }, reminder = { ends = "train164_4" },
+          lines = {
+            { kind = "skill", skill = 164, value = 200 },
+          } },
+        { id = "p393-4-skill", when = { profession = 393 }, reminder = { ends = "train393_4" },
+          lines = {
+            { kind = "skill", skill = 393, value = 200 },
+          } },
         { id = "y55-23", at = { zone = 15, x = 35.56, y = 31.88, r = 10 }, text = "Fly from Brackenwall Village, Dustwallow Marsh to Orgrimmar, Durotar.",
           lines = {
             { kind = "fly", from = 55, to = 23 },
@@ -2607,7 +2677,7 @@ Noir.Route("horde-tauren", {
             { kind = "turnin", quest = 201, npc = 773 },
             { kind = "sethearth", npc = 6807 },
           } },
-        { id = "p164-4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
+        { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
           lines = {
             { kind = "train", skill = 164, rank = 4, npc = 2836 },
           } },
@@ -2686,7 +2756,7 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "fly", from = 80, to = 29 },
           } },
-        { id = "p393-4", at = { zone = 405, x = 23.24, y = 69.72, r = 10 }, when = { profession = 393 },
+        { id = "p393-4", label = "train393_4", at = { zone = 405, x = 23.24, y = 69.72, r = 10 }, when = { profession = 393 },
           lines = {
             { kind = "train", skill = 393, rank = 4, npc = 12030 },
           } },
@@ -2758,6 +2828,22 @@ Noir.Route("horde-tauren", {
       id = "tauren-35-37-desolace", name = "35-37 Desolace", names = { SHAMAN = "36-37 Desolace", WARRIOR = "36-37 Desolace" }, group = "Horde", subgroup = "30-40", minLevel = 35, maxLevel = 40, zone = 405,
       next = { { section = "tauren-37-40-arathi-highlands" } },
       steps = {
+        { id = "p171-4-skill", when = { profession = 171 }, reminder = { ends = "train171_4" },
+          lines = {
+            { kind = "skill", skill = 171, value = 200 },
+          } },
+        { id = "p182-4-skill", when = { profession = 182 }, reminder = { ends = "train182_4" },
+          lines = {
+            { kind = "skill", skill = 182, value = 200 },
+          } },
+        { id = "p186-4-skill", when = { profession = 186 }, reminder = { ends = "train186_4" },
+          lines = {
+            { kind = "skill", skill = 186, value = 200 },
+          } },
+        { id = "p197-4-skill", when = { profession = 197 }, reminder = { ends = "train197_4" },
+          lines = {
+            { kind = "skill", skill = 197, value = 200 },
+          } },
         { id = "g85@85#5", at = { zone = 85, x = 60.6, y = 58.9, r = 20 }, text = "Head into Tirisfal Glades.", when = { class = "WARRIOR" },
           lines = {
             { kind = "goto", at = { zone = 85, x = 60.6, y = 58.9, r = 20 } },
@@ -2979,19 +3065,19 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "transport", to = { zone = 85, x = 60.6, y = 58.9 }, mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 } },
           } },
-        { id = "p171-4", at = { zone = 1497, x = 47.77, y = 73.34, r = 10 }, when = { profession = 171 },
+        { id = "p171-4", label = "train171_4", at = { zone = 1497, x = 47.77, y = 73.34, r = 10 }, when = { profession = 171 },
           lines = {
             { kind = "train", skill = 171, rank = 4, npc = 4611 },
           } },
-        { id = "p182-4", at = { zone = 1497, x = 54, y = 49.55, r = 10 }, when = { profession = 182 },
+        { id = "p182-4", label = "train182_4", at = { zone = 1497, x = 54, y = 49.55, r = 10 }, when = { profession = 182 },
           lines = {
             { kind = "train", skill = 182, rank = 4, npc = 4614 },
           } },
-        { id = "p186-4", at = { zone = 1497, x = 56.03, y = 37.45, r = 10 }, when = { profession = 186 },
+        { id = "p186-4", label = "train186_4", at = { zone = 1497, x = 56.03, y = 37.45, r = 10 }, when = { profession = 186 },
           lines = {
             { kind = "train", skill = 186, rank = 4, npc = 4598 },
           } },
-        { id = "p197-4", at = { zone = 1497, x = 70.76, y = 30.69, r = 10 }, when = { profession = 197 },
+        { id = "p197-4", label = "train197_4", at = { zone = 1497, x = 70.76, y = 30.69, r = 10 }, when = { profession = 197 },
           lines = {
             { kind = "train", skill = 197, rank = 4, npc = 4576 },
           } },

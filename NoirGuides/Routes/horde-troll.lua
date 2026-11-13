@@ -7,6 +7,42 @@ Noir.Route("horde-troll", {
       id = "troll-01-12-durotar", name = "1-12 Durotar", names = { HUNTER = "1-13 Durotar" }, group = "Horde", subgroup = "1-20", minLevel = 1, maxLevel = 15, zone = 14, start = true,
       next = { { section = "troll-12-20-the-barrens" } },
       steps = {
+        { id = "p164-2-skill", when = { profession = 164 }, reminder = { ends = "train164_2" },
+          lines = {
+            { kind = "skill", skill = 164, value = 50 },
+          } },
+        { id = "p165-2-skill", when = { profession = 165 }, reminder = { ends = "train165_2" },
+          lines = {
+            { kind = "skill", skill = 165, value = 50 },
+          } },
+        { id = "p171-2-skill", when = { profession = 171 }, reminder = { ends = "train171_2" },
+          lines = {
+            { kind = "skill", skill = 171, value = 50 },
+          } },
+        { id = "p182-2-skill", when = { profession = 182 }, reminder = { ends = "train182_2" },
+          lines = {
+            { kind = "skill", skill = 182, value = 50 },
+          } },
+        { id = "p186-2-skill", when = { profession = 186 }, reminder = { ends = "train186_2" },
+          lines = {
+            { kind = "skill", skill = 186, value = 50 },
+          } },
+        { id = "p197-2-skill", when = { profession = 197 }, reminder = { ends = "train197_2" },
+          lines = {
+            { kind = "skill", skill = 197, value = 50 },
+          } },
+        { id = "p202-2-skill", when = { profession = 202 }, reminder = { ends = "train202_2" },
+          lines = {
+            { kind = "skill", skill = 202, value = 50 },
+          } },
+        { id = "p333-2-skill", when = { profession = 333 }, reminder = { ends = "train333_2" },
+          lines = {
+            { kind = "skill", skill = 333, value = 50 },
+          } },
+        { id = "p393-2-skill", when = { profession = 393 }, reminder = { ends = "train393_2" },
+          lines = {
+            { kind = "skill", skill = 393, value = 50 },
+          } },
         { id = "a788.a4641.t4641", at = { zone = 14, x = 42.06, y = 68.33, r = 10 }, targets = { friend = { 3143, 10176 } },
           lines = {
             { kind = "accept", quest = 788, npc = 3143 },
@@ -20,30 +56,37 @@ Noir.Route("horde-troll", {
         { id = "tHUNTER-2", at = { zone = 14, x = 42.84, y = 69.33, r = 10 }, when = { class = "HUNTER" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "HUNTER", npc = 3154 },
+            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "tMAGE-2", at = { zone = 14, x = 42.51, y = 69.04, r = 10 }, when = { class = "MAGE" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "MAGE", npc = 5884 },
+            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "tPRIEST-2", at = { zone = 14, x = 42.36, y = 68.81, r = 10 }, when = { class = "PRIEST" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "PRIEST", npc = 3707 },
+            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "tROGUE-2", at = { zone = 14, x = 41.28, y = 68, r = 10 }, when = { class = "ROGUE" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "ROGUE", npc = 3155 },
+            { kind = "selljunk", at = { zone = 14, x = 40.78, y = 67.86, r = 10 }, npc = 267327 },
           } },
         { id = "tSHAMAN-2", at = { zone = 14, x = 42.39, y = 69, r = 10 }, when = { class = "SHAMAN" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "SHAMAN", npc = 3157 },
+            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "tWARLOCK-2", at = { zone = 14, x = 40.65, y = 68.52, r = 10 }, when = { class = "WARLOCK" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "WARLOCK", npc = 3156 },
+            { kind = "selljunk", at = { zone = 14, x = 40.56, y = 68.44, r = 10 }, npc = 12776 },
           } },
         { id = "tWARRIOR-2", at = { zone = 14, x = 42.89, y = 69.44, r = 10 }, when = { class = "WARRIOR" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "WARRIOR", npc = 3153 },
+            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "t788.a789.a4402", at = { zone = 14, x = 42.06, y = 68.33, r = 10 }, targets = { friend = { 3143, 9796 } },
           lines = {
@@ -129,6 +172,7 @@ Noir.Route("horde-troll", {
         { id = "tROGUE-4", at = { zone = 14, x = 41.28, y = 68, r = 10 }, when = { class = "ROGUE" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "ROGUE", npc = 3155 },
+            { kind = "selljunk", at = { zone = 14, x = 40.78, y = 67.86, r = 10 }, npc = 267327 },
           } },
         { id = "t3083", at = { zone = 14, x = 41.28, y = 68, r = 10 }, when = { class = "ROGUE" }, items = { 9554 }, targets = { friend = { 3155 } },
           lines = {
@@ -137,26 +181,32 @@ Noir.Route("horde-troll", {
         { id = "tHUNTER-4", at = { zone = 14, x = 42.84, y = 69.33, r = 10 }, when = { class = "HUNTER" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "HUNTER", npc = 3154 },
+            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "tMAGE-4", at = { zone = 14, x = 42.51, y = 69.04, r = 10 }, when = { class = "MAGE" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "MAGE", npc = 5884 },
+            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "tPRIEST-4", at = { zone = 14, x = 42.36, y = 68.81, r = 10 }, when = { class = "PRIEST" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "PRIEST", npc = 3707 },
+            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "tSHAMAN-4", at = { zone = 14, x = 42.39, y = 69, r = 10 }, when = { class = "SHAMAN" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "SHAMAN", npc = 3157 },
+            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "tWARLOCK-4", at = { zone = 14, x = 40.65, y = 68.52, r = 10 }, when = { class = "WARLOCK" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "WARLOCK", npc = 3156 },
+            { kind = "selljunk", at = { zone = 14, x = 40.56, y = 68.44, r = 10 }, npc = 12776 },
           } },
         { id = "tWARRIOR-4", at = { zone = 14, x = 42.89, y = 69.44, r = 10 }, when = { class = "WARRIOR" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "WARRIOR", npc = 3153 },
+            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "o789.o4402", at = { zone = 14, x = 42.64, y = 63.56, r = 40 }, targets = { enemy = { 3124, 3281 } },
           lines = {
@@ -181,26 +231,32 @@ Noir.Route("horde-troll", {
         { id = "tHUNTER-6", at = { zone = 14, x = 51.85, y = 43.49, r = 10 }, when = { class = "HUNTER" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "HUNTER", npc = 3171 },
+            { kind = "selljunk", at = { zone = 14, x = 51.13, y = 42.63, r = 10 }, npc = 3881 },
           } },
         { id = "tPRIEST-6", at = { zone = 14, x = 54.26, y = 42.93, r = 10 }, when = { class = "PRIEST" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "PRIEST", npc = 3706 },
+            { kind = "selljunk", at = { zone = 14, x = 54.39, y = 42.18, r = 10 }, npc = 3164 },
           } },
         { id = "tROGUE-6", at = { zone = 14, x = 51.98, y = 43.69, r = 10 }, when = { class = "ROGUE" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "ROGUE", npc = 3170 },
+            { kind = "selljunk", at = { zone = 14, x = 51.13, y = 42.63, r = 10 }, npc = 3881 },
           } },
         { id = "tSHAMAN-6", at = { zone = 14, x = 54.42, y = 42.59, r = 10 }, when = { class = "SHAMAN" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "SHAMAN", npc = 3173 },
+            { kind = "selljunk", at = { zone = 14, x = 54.39, y = 42.18, r = 10 }, npc = 3164 },
           } },
         { id = "tWARLOCK-6", at = { zone = 14, x = 54.38, y = 41.2, r = 10 }, when = { class = "WARLOCK" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "WARLOCK", npc = 3172 },
+            { kind = "selljunk", at = { zone = 14, x = 54.71, y = 41.5, r = 10 }, npc = 6027 },
           } },
         { id = "tWARRIOR-6", at = { zone = 14, x = 54.19, y = 42.47, r = 10 }, when = { class = "WARRIOR" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "WARRIOR", npc = 3169 },
+            { kind = "selljunk", at = { zone = 14, x = 54.39, y = 42.18, r = 10 }, npc = 3164 },
           } },
         { id = "t784.a825.a815.b@14", at = { zone = 14, x = 51.95, y = 43.5, r = 10 }, minLevel = 6, targets = { friend = { 3139, 3191 } },
           lines = {
@@ -224,6 +280,7 @@ Noir.Route("horde-troll", {
         { id = "tMAGE-6", at = { zone = 14, x = 56.31, y = 75.11, r = 10 }, when = { class = "MAGE" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "MAGE", npc = 5880 },
+            { kind = "selljunk", at = { zone = 14, x = 56.41, y = 73.79, r = 10 }, npc = 3187 },
           } },
         { id = "a817.a818.a808.a823", at = { zone = 14, x = 55.96, y = 73.93, r = 10 }, minLevel = 5, maxLevel = 15, targets = { friend = { 3194, 3304, 3188 } },
           lines = {
@@ -292,6 +349,7 @@ Noir.Route("horde-troll", {
         { id = "tPRIEST-8", at = { zone = 14, x = 54.26, y = 42.93, r = 10 }, when = { class = "PRIEST" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "PRIEST", npc = 3706 },
+            { kind = "selljunk", at = { zone = 14, x = 54.39, y = 42.18, r = 10 }, npc = 3164 },
           } },
         { id = "o5648", at = { zone = 14, x = 53.1, y = 46.46, r = 40 }, text = "Grunt Kor'ja is east of your last stop.", when = { class = "PRIEST" }, targets = { enemy = { 12430 } },
           lines = {
@@ -300,22 +358,27 @@ Noir.Route("horde-troll", {
         { id = "tHUNTER-8", at = { zone = 14, x = 51.85, y = 43.49, r = 10 }, when = { class = "HUNTER" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "HUNTER", npc = 3171 },
+            { kind = "selljunk", at = { zone = 14, x = 51.13, y = 42.63, r = 10 }, npc = 3881 },
           } },
         { id = "tROGUE-8", at = { zone = 14, x = 51.98, y = 43.69, r = 10 }, when = { class = "ROGUE" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "ROGUE", npc = 3170 },
+            { kind = "selljunk", at = { zone = 14, x = 51.13, y = 42.63, r = 10 }, npc = 3881 },
           } },
         { id = "tSHAMAN-8", at = { zone = 14, x = 54.42, y = 42.59, r = 10 }, when = { class = "SHAMAN" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "SHAMAN", npc = 3173 },
+            { kind = "selljunk", at = { zone = 14, x = 54.39, y = 42.18, r = 10 }, npc = 3164 },
           } },
         { id = "tWARLOCK-8", at = { zone = 14, x = 54.38, y = 41.2, r = 10 }, when = { class = "WARLOCK" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "WARLOCK", npc = 3172 },
+            { kind = "selljunk", at = { zone = 14, x = 54.71, y = 41.5, r = 10 }, npc = 6027 },
           } },
         { id = "tWARRIOR-8", at = { zone = 14, x = 54.19, y = 42.47, r = 10 }, when = { class = "WARRIOR" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "WARRIOR", npc = 3169 },
+            { kind = "selljunk", at = { zone = 14, x = 54.39, y = 42.18, r = 10 }, npc = 3164 },
           } },
         { id = "a806.t837", at = { zone = 14, x = 52.24, y = 43.15, r = 10 }, minLevel = 4, targets = { friend = { 3142, 3139 } },
           lines = {
@@ -345,6 +408,7 @@ Noir.Route("horde-troll", {
         { id = "tMAGE-8", at = { zone = 14, x = 42.51, y = 69.04, r = 10 }, when = { class = "MAGE" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "MAGE", npc = 5884 },
+            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "r5441", at = { zone = 14, x = 43.95, y = 64.51, r = 40 }, text = "The Lazy Peons are south of your last stop.", reminder = { ends = "turnin5441" }, items = { 16114 }, targets = { enemy = { 10556 } },
           lines = {
@@ -454,6 +518,7 @@ Noir.Route("horde-troll", {
         { id = "tSHAMAN-10", at = { zone = 215, x = 44.58, y = 76.56, r = 10 }, when = { class = "SHAMAN" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "SHAMAN", npc = 3062 },
+            { kind = "selljunk", at = { zone = 215, x = 44.49, y = 76.69, r = 10 }, npc = 267330 },
           } },
         { id = "t1521", at = { zone = 215, x = 44.35, y = 76.77, r = 10 }, when = { class = "SHAMAN" }, items = { 6656, 6635 }, targets = { friend = { 5888 } },
           lines = {
@@ -490,19 +555,19 @@ Noir.Route("horde-troll", {
             { kind = "objective", quest = 786, index = 2, object = 3190, skipIfMissing = true },
             { kind = "objective", quest = 786, index = 3, object = 3192, skipIfMissing = true },
           } },
-        { id = "p164-2", at = { zone = 14, x = 52.03, y = 40.72, r = 10 }, when = { profession = 164 },
+        { id = "p164-2", label = "train164_2", at = { zone = 14, x = 52.03, y = 40.72, r = 10 }, when = { profession = 164 },
           lines = {
             { kind = "train", skill = 164, rank = 2, npc = 3174 },
           } },
-        { id = "p171-2", at = { zone = 14, x = 55.41, y = 73.95, r = 10 }, when = { profession = 171 },
+        { id = "p171-2", label = "train171_2", at = { zone = 14, x = 55.41, y = 73.95, r = 10 }, when = { profession = 171 },
           lines = {
             { kind = "train", skill = 171, rank = 2, npc = 3184 },
           } },
-        { id = "p202-2", at = { zone = 14, x = 52.18, y = 40.8, r = 10 }, when = { profession = 202 },
+        { id = "p202-2", label = "train202_2", at = { zone = 14, x = 52.18, y = 40.8, r = 10 }, when = { profession = 202 },
           lines = {
             { kind = "train", skill = 202, rank = 2, npc = 11025 },
           } },
-        { id = "p333-2", at = { zone = 14, x = 56.69, y = 73.74, r = 10 }, when = { profession = 333 },
+        { id = "p333-2", label = "train333_2", at = { zone = 14, x = 56.69, y = 73.74, r = 10 }, when = { profession = 333 },
           lines = {
             { kind = "train", skill = 333, rank = 2, npc = 266881 },
           } },
@@ -517,22 +582,27 @@ Noir.Route("horde-troll", {
         { id = "tHUNTER-10", at = { zone = 14, x = 51.85, y = 43.49, r = 10 }, when = { class = "HUNTER" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "HUNTER", npc = 3171 },
+            { kind = "selljunk", at = { zone = 14, x = 51.13, y = 42.63, r = 10 }, npc = 3881 },
           } },
         { id = "tPRIEST-10", at = { zone = 14, x = 54.26, y = 42.93, r = 10 }, when = { class = "PRIEST" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "PRIEST", npc = 3706 },
+            { kind = "selljunk", at = { zone = 14, x = 54.39, y = 42.18, r = 10 }, npc = 3164 },
           } },
         { id = "tROGUE-10", at = { zone = 14, x = 51.98, y = 43.69, r = 10 }, when = { class = "ROGUE" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "ROGUE", npc = 3170 },
+            { kind = "selljunk", at = { zone = 14, x = 51.13, y = 42.63, r = 10 }, npc = 3881 },
           } },
         { id = "tWARLOCK-10", at = { zone = 14, x = 54.38, y = 41.2, r = 10 }, when = { class = "WARLOCK" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "WARLOCK", npc = 3172 },
+            { kind = "selljunk", at = { zone = 14, x = 54.71, y = 41.5, r = 10 }, npc = 6027 },
           } },
         { id = "tWARRIOR-10", at = { zone = 14, x = 54.19, y = 42.47, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "WARRIOR", npc = 3169 },
+            { kind = "selljunk", at = { zone = 14, x = 54.39, y = 42.18, r = 10 }, npc = 3164 },
           } },
         { id = "a840.t806.a828", at = { zone = 14, x = 50.84, y = 43.59, r = 10 }, minLevel = 10, items = { 4992 }, targets = { friend = { 3336, 3142 } },
           lines = {
@@ -586,6 +656,7 @@ Noir.Route("horde-troll", {
         { id = "tMAGE-10", at = { zone = 14, x = 56.31, y = 75.11, r = 10 }, when = { class = "MAGE" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "MAGE", npc = 5880 },
+            { kind = "selljunk", at = { zone = 14, x = 56.41, y = 73.79, r = 10 }, npc = 3187 },
           } },
         { id = "a1884", at = { zone = 14, x = 56.31, y = 75.11, r = 10 }, when = { class = "MAGE" }, minLevel = 10, maxLevel = 18, targets = { friend = { 5880 } },
           lines = {
@@ -631,6 +702,7 @@ Noir.Route("horde-troll", {
         { id = "tHUNTER-12", at = { zone = 14, x = 51.85, y = 43.49, r = 10 }, when = { class = "HUNTER" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "HUNTER", npc = 3171 },
+            { kind = "selljunk", at = { zone = 14, x = 51.13, y = 42.63, r = 10 }, npc = 3881 },
           } },
         { id = "t6062.t6069.a6083", at = { zone = 14, x = 51.85, y = 43.49, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, items = { 15917, 15919 }, targets = { friend = { 3171 } },
           lines = {
@@ -641,16 +713,17 @@ Noir.Route("horde-troll", {
         { id = "tSHAMAN-12", at = { zone = 14, x = 54.42, y = 42.59, r = 10 }, when = { class = "SHAMAN" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "SHAMAN", npc = 3173 },
+            { kind = "selljunk", at = { zone = 14, x = 54.39, y = 42.18, r = 10 }, npc = 3164 },
           } },
         { id = "t815", at = { zone = 14, x = 51.11, y = 42.45, r = 10 }, targets = { friend = { 3191 } },
           lines = {
             { kind = "turnin", quest = 815, npc = 3191 },
           } },
-        { id = "p165-2", at = { zone = 17, x = 45.97, y = 35.85, r = 10 }, when = { profession = 165 },
+        { id = "p165-2", label = "train165_2", at = { zone = 17, x = 45.97, y = 35.85, r = 10 }, when = { profession = 165 },
           lines = {
             { kind = "train", skill = 165, rank = 2, npc = 5784 },
           } },
-        { id = "p197-2", at = { zone = 17, x = 52.2, y = 31.7, r = 10 }, when = { profession = 197 },
+        { id = "p197-2", label = "train197_2", at = { zone = 17, x = 52.2, y = 31.7, r = 10 }, when = { profession = 197 },
           lines = {
             { kind = "train", skill = 197, rank = 2, npc = 3484 },
           } },
@@ -673,6 +746,7 @@ Noir.Route("horde-troll", {
         { id = "tWARLOCK-12", at = { zone = 85, x = 61.59, y = 52.4, r = 10 }, when = { class = "WARLOCK" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "WARLOCK", npc = 2127 },
+            { kind = "selljunk", at = { zone = 85, x = 61.55, y = 52.61, r = 10 }, npc = 5750 },
           } },
         { id = "a1478", at = { zone = 85, x = 61.62, y = 52.68, r = 10 }, when = { class = "WARLOCK" }, minLevel = 10, maxLevel = 18, targets = { friend = { 5724 } },
           lines = {
@@ -704,15 +778,15 @@ Noir.Route("horde-troll", {
           lines = {
             { kind = "turnin", quest = 816, npc = 3193, skipIfMissing = true },
           } },
-        { id = "p182-2", at = { zone = 1637, x = 55.62, y = 39.46, r = 10 }, when = { profession = 182 },
+        { id = "p182-2", label = "train182_2", at = { zone = 1637, x = 55.62, y = 39.46, r = 10 }, when = { profession = 182 },
           lines = {
             { kind = "train", skill = 182, rank = 2, npc = 3404 },
           } },
-        { id = "p186-2", at = { zone = 1637, x = 73.12, y = 26.08, r = 10 }, when = { profession = 186 },
+        { id = "p186-2", label = "train186_2", at = { zone = 1637, x = 73.12, y = 26.08, r = 10 }, when = { profession = 186 },
           lines = {
             { kind = "train", skill = 186, rank = 2, npc = 3357 },
           } },
-        { id = "p393-2", at = { zone = 1637, x = 63.36, y = 45.42, r = 10 }, when = { profession = 393 },
+        { id = "p393-2", label = "train393_2", at = { zone = 1637, x = 63.36, y = 45.42, r = 10 }, when = { profession = 393 },
           lines = {
             { kind = "train", skill = 393, rank = 2, npc = 7088 },
           } },
@@ -723,14 +797,17 @@ Noir.Route("horde-troll", {
         { id = "tMAGE-12", at = { zone = 1637, x = 38.78, y = 85.67, r = 10 }, when = { class = "MAGE" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "MAGE", npc = 5883 },
+            { kind = "selljunk", at = { zone = 1637, x = 33.82, y = 79.84, r = 10 }, npc = 8404 },
           } },
         { id = "tPRIEST-12", at = { zone = 1637, x = 36.01, y = 87.73, r = 10 }, when = { class = "PRIEST" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "PRIEST", npc = 6014 },
+            { kind = "selljunk", at = { zone = 1637, x = 33.82, y = 79.84, r = 10 }, npc = 8404 },
           } },
         { id = "tROGUE-12", at = { zone = 1637, x = 43.9, y = 54.63, r = 10 }, when = { class = "ROGUE" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "ROGUE", npc = 3328 },
+            { kind = "selljunk", at = { zone = 1637, x = 45.65, y = 55.96, r = 10 }, npc = 3331 },
           } },
         { id = "f23", at = { zone = 1637, x = 45.12, y = 63.89, r = 10 },
           lines = {
@@ -884,6 +961,7 @@ Noir.Route("horde-troll", {
         { id = "tWARRIOR-14", at = { zone = 1637, x = 79.79, y = 31.42, r = 10 }, text = "Fly to Orgrimmar for class training, then use your hearthstone to return.", when = { class = "WARRIOR" }, minLevel = 14,
           lines = {
             { kind = "train", level = 14, class = "WARRIOR", npc = 3353 },
+            { kind = "selljunk", at = { zone = 1637, x = 80.68, y = 30.51, r = 10 }, npc = 15350 },
           } },
         { id = "tWARRIOR-14:back1", text = "Use your hearthstone to return to The Barrens.", when = { class = "WARRIOR" },
           lines = {
@@ -900,6 +978,7 @@ Noir.Route("horde-troll", {
         { id = "tMAGE-14", at = { zone = 1638, x = 25.18, y = 20.96, r = 10 }, when = { class = "MAGE" }, minLevel = 14,
           lines = {
             { kind = "train", level = 14, class = "MAGE", npc = 3049 },
+            { kind = "selljunk", at = { zone = 1638, x = 28.4, y = 19.2, r = 10 }, npc = 207743 },
           } },
         { id = "a1883", at = { zone = 1638, x = 25.18, y = 20.96, r = 10 }, when = { class = "MAGE" }, minLevel = 10, maxLevel = 18, targets = { friend = { 3049 } },
           lines = {
@@ -912,6 +991,7 @@ Noir.Route("horde-troll", {
         { id = "tROGUE-14", at = { zone = 1637, x = 43.05, y = 53.74, r = 10 }, when = { class = "ROGUE" }, minLevel = 14,
           lines = {
             { kind = "train", level = 14, class = "ROGUE", npc = 3401 },
+            { kind = "selljunk", at = { zone = 1637, x = 45.65, y = 55.96, r = 10 }, npc = 3331 },
           } },
         { id = "t1963", at = { zone = 1637, x = 42.73, y = 53.55, r = 10 }, when = { class = "ROGUE" }, targets = { friend = { 6446 } },
           lines = {
@@ -1061,6 +1141,7 @@ Noir.Route("horde-troll", {
         { id = "tSHAMAN-16", at = { zone = 14, x = 54.42, y = 42.59, r = 10 }, text = "Fly to Durotar for class training, then return.", when = { class = "SHAMAN" }, minLevel = 16,
           lines = {
             { kind = "train", level = 16, class = "SHAMAN", npc = 3173 },
+            { kind = "selljunk", at = { zone = 14, x = 54.39, y = 42.18, r = 10 }, npc = 3164 },
           } },
         { id = "tSHAMAN-16:back1", text = "Head north into Orgrimmar.", when = { class = "SHAMAN" },
           lines = {
@@ -1104,6 +1185,7 @@ Noir.Route("horde-troll", {
         { id = "tWARLOCK-16", at = { zone = 14, x = 40.65, y = 68.52, r = 10 }, text = "Fly to Durotar for class training, then return.", when = { class = "WARLOCK" }, minLevel = 16,
           lines = {
             { kind = "train", level = 16, class = "WARLOCK", npc = 3156 },
+            { kind = "selljunk", at = { zone = 14, x = 40.56, y = 68.44, r = 10 }, npc = 12776 },
           } },
         { id = "tWARLOCK-16:back1", when = { class = "WARLOCK" },
           lines = {
@@ -1212,6 +1294,7 @@ Noir.Route("horde-troll", {
         { id = "tMAGE-16", at = { zone = 85, x = 61.97, y = 52.47, r = 10 }, when = { class = "MAGE" }, minLevel = 16,
           lines = {
             { kind = "train", level = 16, class = "MAGE", npc = 2128 },
+            { kind = "selljunk", at = { zone = 85, x = 61.8, y = 52, r = 10 }, npc = 208920 },
           } },
         { id = "a1959", at = { zone = 85, x = 61.97, y = 52.47, r = 10 }, when = { class = "MAGE" }, minLevel = 15, maxLevel = 23, targets = { friend = { 2128 } },
           lines = {
@@ -1235,6 +1318,7 @@ Noir.Route("horde-troll", {
         { id = "tMAGE-18", at = { zone = 1497, x = 85.02, y = 14.02, r = 10 }, when = { class = "MAGE" }, minLevel = 18,
           lines = {
             { kind = "train", level = 18, class = "MAGE", npc = 4566 },
+            { kind = "selljunk", at = { zone = 1497, x = 85.7, y = 16.08, r = 10 }, npc = 5753 },
           } },
         { id = "t1961.a1962.t1962", at = { zone = 1497, x = 70.76, y = 30.69, r = 10 }, when = { class = "MAGE" }, minLevel = 15, targets = { friend = { 4576 } },
           lines = {
@@ -1319,6 +1403,7 @@ Noir.Route("horde-troll", {
         { id = "tROGUE-18", at = { zone = 14, x = 51.98, y = 43.69, r = 10 }, when = { class = "ROGUE" }, minLevel = 18,
           lines = {
             { kind = "train", level = 18, class = "ROGUE", npc = 3170 },
+            { kind = "selljunk", at = { zone = 14, x = 51.13, y = 42.63, r = 10 }, npc = 3881 },
           } },
         { id = "a2380", at = { zone = 14, x = 51.98, y = 43.69, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, maxLevel = 24, targets = { friend = { 3170 } },
           lines = {
@@ -1410,15 +1495,31 @@ Noir.Route("horde-troll", {
       id = "troll-20-23-the-barrens", name = "20-23 The Barrens", names = { MAGE = "20-24 The Barrens", ROGUE = "20-24 The Barrens", SHAMAN = "20-24 The Barrens", WARRIOR = "20-24 The Barrens" }, group = "Horde", subgroup = "20-30", minLevel = 20, maxLevel = 26, zone = 17,
       next = { { section = "troll-23-26-stonetalon-mountains" } },
       steps = {
-        { id = "p164-3", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
+        { id = "p164-3-skill", when = { profession = 164 }, reminder = { ends = "train164_3" },
+          lines = {
+            { kind = "skill", skill = 164, value = 125 },
+          } },
+        { id = "p165-3-skill", when = { profession = 165 }, reminder = { ends = "train165_3" },
+          lines = {
+            { kind = "skill", skill = 165, value = 125 },
+          } },
+        { id = "p197-3-skill", when = { profession = 197 }, reminder = { ends = "train197_3" },
+          lines = {
+            { kind = "skill", skill = 197, value = 125 },
+          } },
+        { id = "p333-3-skill", when = { profession = 333 }, reminder = { ends = "train333_3" },
+          lines = {
+            { kind = "skill", skill = 333, value = 125 },
+          } },
+        { id = "p164-3", label = "train164_3", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
           lines = {
             { kind = "train", skill = 164, rank = 3, npc = 3478 },
           } },
-        { id = "p165-3", at = { zone = 17, x = 44.84, y = 59.46, r = 10 }, when = { profession = 165 },
+        { id = "p165-3", label = "train165_3", at = { zone = 17, x = 44.84, y = 59.46, r = 10 }, when = { profession = 165 },
           lines = {
             { kind = "train", skill = 165, rank = 3, npc = 3703 },
           } },
-        { id = "p197-3", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
+        { id = "p197-3", label = "train197_3", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
           lines = {
             { kind = "train", skill = 197, rank = 3, npc = 3704 },
           } },
@@ -1452,6 +1553,7 @@ Noir.Route("horde-troll", {
         { id = "tWARLOCK-20", at = { zone = 14, x = 40.65, y = 68.52, r = 10 }, text = "Fly to Durotar for class training, then return.", when = { class = "WARLOCK" }, minLevel = 20,
           lines = {
             { kind = "train", level = 20, class = "WARLOCK", npc = 3156 },
+            { kind = "selljunk", at = { zone = 14, x = 40.56, y = 68.44, r = 10 }, npc = 12776 },
           } },
         { id = "tWARLOCK-20:back1", when = { class = "WARLOCK" },
           lines = {
@@ -1781,7 +1883,7 @@ Noir.Route("horde-troll", {
           lines = {
             { kind = "fly", from = 80, to = 25 },
           } },
-        { id = "p333-3", at = { zone = 406, x = 49.18, y = 57.18, r = 10 }, when = { profession = 333 },
+        { id = "p333-3", label = "train333_3", at = { zone = 406, x = 49.18, y = 57.18, r = 10 }, when = { profession = 333 },
           lines = {
             { kind = "train", skill = 333, rank = 3, npc = 11074 },
           } },
@@ -2989,6 +3091,14 @@ Noir.Route("horde-troll", {
       id = "troll-32-35-stranglethorn-vale", name = "32-35 Stranglethorn Vale", names = { MAGE = "33-36 Stranglethorn Vale", ROGUE = "33-36 Stranglethorn Vale", SHAMAN = "33-36 Stranglethorn Vale", WARLOCK = "33-36 Stranglethorn Vale", WARRIOR = "33-36 Stranglethorn Vale" }, group = "Horde", subgroup = "30-40", minLevel = 32, maxLevel = 38, zone = 33,
       next = { { section = "troll-35-37-desolace" } },
       steps = {
+        { id = "p164-4-skill", when = { profession = 164 }, reminder = { ends = "train164_4" },
+          lines = {
+            { kind = "skill", skill = 164, value = 200 },
+          } },
+        { id = "p393-4-skill", when = { profession = 393 }, reminder = { ends = "train393_4" },
+          lines = {
+            { kind = "skill", skill = 393, value = 200 },
+          } },
         { id = "y55-23", at = { zone = 15, x = 35.56, y = 31.88, r = 10 }, text = "Fly from Brackenwall Village, Dustwallow Marsh to Orgrimmar, Durotar.",
           lines = {
             { kind = "fly", from = 55, to = 23 },
@@ -3190,7 +3300,7 @@ Noir.Route("horde-troll", {
             { kind = "turnin", quest = 201, npc = 773 },
             { kind = "sethearth", npc = 6807 },
           } },
-        { id = "p164-4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
+        { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
           lines = {
             { kind = "train", skill = 164, rank = 4, npc = 2836 },
           } },
@@ -3366,7 +3476,7 @@ Noir.Route("horde-troll", {
           lines = {
             { kind = "fly", from = 80, to = 29 },
           } },
-        { id = "p393-4", at = { zone = 405, x = 23.24, y = 69.72, r = 10 }, when = { profession = 393 },
+        { id = "p393-4", label = "train393_4", at = { zone = 405, x = 23.24, y = 69.72, r = 10 }, when = { profession = 393 },
           lines = {
             { kind = "train", skill = 393, rank = 4, npc = 12030 },
           } },
@@ -3438,6 +3548,22 @@ Noir.Route("horde-troll", {
       id = "troll-35-37-desolace", name = "35-37 Desolace", names = { MAGE = "36-37 Desolace", ROGUE = "36-37 Desolace", SHAMAN = "36-37 Desolace", WARLOCK = "36-38 Desolace", WARRIOR = "36-37 Desolace" }, group = "Horde", subgroup = "30-40", minLevel = 35, maxLevel = 40, zone = 405,
       next = { { section = "troll-37-40-arathi-highlands" } },
       steps = {
+        { id = "p171-4-skill", when = { profession = 171 }, reminder = { ends = "train171_4" },
+          lines = {
+            { kind = "skill", skill = 171, value = 200 },
+          } },
+        { id = "p182-4-skill", when = { profession = 182 }, reminder = { ends = "train182_4" },
+          lines = {
+            { kind = "skill", skill = 182, value = 200 },
+          } },
+        { id = "p186-4-skill", when = { profession = 186 }, reminder = { ends = "train186_4" },
+          lines = {
+            { kind = "skill", skill = 186, value = 200 },
+          } },
+        { id = "p197-4-skill", when = { profession = 197 }, reminder = { ends = "train197_4" },
+          lines = {
+            { kind = "skill", skill = 197, value = 200 },
+          } },
         { id = "g85@85#8", at = { zone = 85, x = 60.6, y = 58.9, r = 20 }, text = "Head into Tirisfal Glades.", when = { class = "WARRIOR" },
           lines = {
             { kind = "goto", at = { zone = 85, x = 60.6, y = 58.9, r = 20 } },
@@ -3749,19 +3875,19 @@ Noir.Route("horde-troll", {
           lines = {
             { kind = "transport", to = { zone = 85, x = 60.6, y = 58.9 }, mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 } },
           } },
-        { id = "p171-4", at = { zone = 1497, x = 47.77, y = 73.34, r = 10 }, when = { profession = 171 },
+        { id = "p171-4", label = "train171_4", at = { zone = 1497, x = 47.77, y = 73.34, r = 10 }, when = { profession = 171 },
           lines = {
             { kind = "train", skill = 171, rank = 4, npc = 4611 },
           } },
-        { id = "p182-4", at = { zone = 1497, x = 54, y = 49.55, r = 10 }, when = { profession = 182 },
+        { id = "p182-4", label = "train182_4", at = { zone = 1497, x = 54, y = 49.55, r = 10 }, when = { profession = 182 },
           lines = {
             { kind = "train", skill = 182, rank = 4, npc = 4614 },
           } },
-        { id = "p186-4", at = { zone = 1497, x = 56.03, y = 37.45, r = 10 }, when = { profession = 186 },
+        { id = "p186-4", label = "train186_4", at = { zone = 1497, x = 56.03, y = 37.45, r = 10 }, when = { profession = 186 },
           lines = {
             { kind = "train", skill = 186, rank = 4, npc = 4598 },
           } },
-        { id = "p197-4", at = { zone = 1497, x = 70.76, y = 30.69, r = 10 }, when = { profession = 197 },
+        { id = "p197-4", label = "train197_4", at = { zone = 1497, x = 70.76, y = 30.69, r = 10 }, when = { profession = 197 },
           lines = {
             { kind = "train", skill = 197, rank = 4, npc = 4576 },
           } },
