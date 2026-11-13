@@ -80,6 +80,21 @@ Noir.Route("horde-tauren", {
             { kind = "turnin", quest = 1656, npc = 6747, skipIfMissing = true },
             { kind = "accept", quest = 767, at = { zone = 215, x = 46.67, y = 63.38, r = 10 }, npc = 2993 },
           } },
+        { id = "a748.a761", at = { zone = 215, x = 47.52, y = 63.58, r = 10 }, minLevel = 4, maxLevel = 13, targets = { friend = { 2948, 2947 } },
+          lines = {
+            { kind = "accept", quest = 748, npc = 2948 },
+            { kind = "accept", quest = 761, at = { zone = 215, x = 47.67, y = 62.68, r = 10 }, npc = 2947 },
+          } },
+        { id = "t767.a771", at = { zone = 215, x = 46.88, y = 61.19, r = 10 }, minLevel = 3, targets = { friend = { 3054 } },
+          lines = {
+            { kind = "turnin", quest = 767, npc = 3054 },
+            { kind = "accept", quest = 771, npc = 3054, requires = { 767 } },
+          } },
+        { id = "o771", at = { zone = 215, x = 46.91, y = 52.73, r = 40 }, text = "Well Stone is north of Zarlman Two-Moons.", targets = { enemy = { 12258 } },
+          lines = {
+            { kind = "objective", quest = 771, index = 1, item = 4808 },
+            { kind = "objective", quest = 771, index = 2, item = 4809 },
+          } },
         { id = "tDRUID-4", at = { zone = 215, x = 47.48, y = 62.95, r = 10 }, when = { class = "DRUID" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "DRUID", npc = 3064 },
@@ -99,21 +114,6 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "train", level = 4, class = "WARRIOR", npc = 3063 },
             { kind = "selljunk", at = { zone = 215, x = 46.77, y = 64.49, r = 10 }, npc = 3884 },
-          } },
-        { id = "a748.a761", at = { zone = 215, x = 47.52, y = 63.58, r = 10 }, minLevel = 4, maxLevel = 13, targets = { friend = { 2948, 2947 } },
-          lines = {
-            { kind = "accept", quest = 748, npc = 2948 },
-            { kind = "accept", quest = 761, at = { zone = 215, x = 47.67, y = 62.68, r = 10 }, npc = 2947 },
-          } },
-        { id = "t767.a771", at = { zone = 215, x = 46.88, y = 61.19, r = 10 }, minLevel = 3, targets = { friend = { 3054 } },
-          lines = {
-            { kind = "turnin", quest = 767, npc = 3054 },
-            { kind = "accept", quest = 771, npc = 3054, requires = { 767 } },
-          } },
-        { id = "o771", at = { zone = 215, x = 46.91, y = 52.73, r = 40 }, text = "Well Stone is north of Zarlman Two-Moons.", targets = { enemy = { 12258 } },
-          lines = {
-            { kind = "objective", quest = 771, index = 1, item = 4808 },
-            { kind = "objective", quest = 771, index = 2, item = 4809 },
           } },
         { id = "a766.t771.a772", at = { zone = 215, x = 46.23, y = 60.8, r = 10 }, minLevel = 5, items = { 4823 }, targets = { friend = { 3055, 3054 } },
           lines = {
@@ -193,11 +193,6 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "turnin", quest = 792, npc = 3145, skipIfMissing = true },
           } },
-        { id = "tHUNTER-8", at = { zone = 14, x = 42.84, y = 69.33, r = 10 }, when = { class = "HUNTER" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "HUNTER", npc = 3154 },
-            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
-          } },
         { id = "a792#2", at = { zone = 14, x = 42.85, y = 69.15, r = 10 }, when = { class = "HUNTER" }, minLevel = 2, maxLevel = 12, targets = { friend = { 3145 } },
           lines = {
             { kind = "accept", quest = 792, npc = 3145 },
@@ -209,11 +204,6 @@ Noir.Route("horde-tauren", {
         { id = "t792#2", at = { zone = 14, x = 42.85, y = 69.15, r = 10 }, when = { class = "HUNTER" }, targets = { friend = { 3145 } },
           lines = {
             { kind = "turnin", quest = 792, npc = 3145, skipIfMissing = true },
-          } },
-        { id = "tSHAMAN-8", at = { zone = 14, x = 42.39, y = 69, r = 10 }, when = { class = "SHAMAN" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "SHAMAN", npc = 3157 },
-            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "a792#3", at = { zone = 14, x = 42.85, y = 69.15, r = 10 }, when = { class = "SHAMAN" }, minLevel = 2, maxLevel = 12, targets = { friend = { 3145 } },
           lines = {
@@ -232,6 +222,11 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "objective", quest = 1516, index = 1, item = 6640 },
           } },
+        { id = "tSHAMAN-8", at = { zone = 14, x = 42.39, y = 69, r = 10 }, when = { class = "SHAMAN" }, minLevel = 8,
+          lines = {
+            { kind = "train", level = 8, class = "SHAMAN", npc = 3157 },
+            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
+          } },
         { id = "t1516.a1517", at = { zone = 14, x = 42.4, y = 69.17, r = 10 }, when = { class = "SHAMAN" }, minLevel = 4, items = { 6635 }, targets = { friend = { 5887 } },
           lines = {
             { kind = "turnin", quest = 1516, npc = 5887 },
@@ -245,11 +240,6 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "turnin", quest = 1517, npc = 5891 },
             { kind = "accept", quest = 1518, npc = 5891, requires = { 1517 } },
-          } },
-        { id = "tWARRIOR-8", at = { zone = 14, x = 42.89, y = 69.44, r = 10 }, when = { class = "WARRIOR" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "WARRIOR", npc = 3153 },
-            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "a792#4", at = { zone = 14, x = 42.85, y = 69.15, r = 10 }, when = { class = "WARRIOR" }, minLevel = 2, maxLevel = 12, targets = { friend = { 3145 } },
           lines = {
@@ -334,6 +324,16 @@ Noir.Route("horde-tauren", {
             { kind = "train", level = 8, class = "DRUID", npc = 3060 },
             { kind = "selljunk", at = { zone = 215, x = 44.49, y = 76.69, r = 10 }, npc = 267330 },
           } },
+        { id = "tHUNTER-8", at = { zone = 215, x = 43.96, y = 76.35, r = 10 }, when = { class = "HUNTER" }, minLevel = 8,
+          lines = {
+            { kind = "train", level = 8, class = "HUNTER", npc = 3061 },
+            { kind = "selljunk", at = { zone = 215, x = 44.49, y = 76.69, r = 10 }, npc = 267330 },
+          } },
+        { id = "tWARRIOR-8", at = { zone = 215, x = 43.75, y = 76.72, r = 10 }, when = { class = "WARRIOR" }, minLevel = 8,
+          lines = {
+            { kind = "train", level = 8, class = "WARRIOR", npc = 3059 },
+            { kind = "selljunk", at = { zone = 215, x = 43.86, y = 77.65, r = 10 }, npc = 3074 },
+          } },
         { id = "t750.a780.t3376.t753.a755", at = { zone = 215, x = 44.47, y = 77.5, r = 10 }, targets = { friend = { 2980, 3209, 2981 } },
           lines = {
             { kind = "turnin", quest = 750, npc = 2980, skipIfMissing = true },
@@ -369,11 +369,6 @@ Noir.Route("horde-tauren", {
         { id = "o746", at = { zone = 215, x = 33.1, y = 54.8, r = 40 }, text = "Broken Tools are northwest of Grull Hawkwind.", items = { 4702 },
           lines = {
             { kind = "objective", quest = 746, index = 1, item = 4703, skipIfMissing = true },
-          } },
-        { id = "tSHAMAN-10", at = { zone = 14, x = 42.39, y = 69, r = 10 }, when = { class = "SHAMAN" }, minLevel = 10,
-          lines = {
-            { kind = "train", level = 10, class = "SHAMAN", npc = 3157 },
-            { kind = "selljunk", at = { zone = 14, x = 42.8, y = 68, r = 10 }, npc = 233428 },
           } },
         { id = "t1518", at = { zone = 14, x = 42.4, y = 69.17, r = 10 }, when = { class = "SHAMAN" }, items = { 6656, 6635 }, targets = { friend = { 5887 } },
           lines = {
@@ -424,21 +419,6 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "objective", quest = 756, index = 1, item = 4801, skipIfMissing = true },
             { kind = "objective", quest = 756, index = 2, item = 4802, skipIfMissing = true },
-          } },
-        { id = "tDRUID-10", at = { zone = 215, x = 47.48, y = 62.95, r = 10 }, when = { class = "DRUID" }, minLevel = 10,
-          lines = {
-            { kind = "train", level = 10, class = "DRUID", npc = 3064 },
-            { kind = "selljunk", at = { zone = 215, x = 46.65, y = 62.08, r = 10 }, npc = 3685 },
-          } },
-        { id = "tHUNTER-10", at = { zone = 215, x = 46.93, y = 59.65, r = 10 }, when = { class = "HUNTER" }, minLevel = 10,
-          lines = {
-            { kind = "train", level = 10, class = "HUNTER", npc = 3065 },
-            { kind = "selljunk", at = { zone = 215, x = 46.67, y = 59.13, r = 10 }, npc = 5940 },
-          } },
-        { id = "tWARRIOR-10", at = { zone = 215, x = 48.35, y = 63.74, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10,
-          lines = {
-            { kind = "train", level = 10, class = "WARRIOR", npc = 3063 },
-            { kind = "selljunk", at = { zone = 215, x = 46.77, y = 64.49, r = 10 }, npc = 3884 },
           } },
         { id = "t766", at = { zone = 215, x = 46.23, y = 60.8, r = 10 }, targets = { friend = { 3055 } },
           lines = {
@@ -497,6 +477,26 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "accept", quest = 2984, npc = 3066 },
           } },
+        { id = "tDRUID-10", at = { zone = 215, x = 47.48, y = 62.95, r = 10 }, when = { class = "DRUID" }, minLevel = 10,
+          lines = {
+            { kind = "train", level = 10, class = "DRUID", npc = 3064 },
+            { kind = "selljunk", at = { zone = 215, x = 46.65, y = 62.08, r = 10 }, npc = 3685 },
+          } },
+        { id = "tHUNTER-10", at = { zone = 215, x = 46.93, y = 59.65, r = 10 }, when = { class = "HUNTER" }, minLevel = 10,
+          lines = {
+            { kind = "train", level = 10, class = "HUNTER", npc = 3065 },
+            { kind = "selljunk", at = { zone = 215, x = 46.67, y = 59.13, r = 10 }, npc = 5940 },
+          } },
+        { id = "tSHAMAN-10", at = { zone = 215, x = 47.4, y = 62.54, r = 10 }, when = { class = "SHAMAN" }, minLevel = 10,
+          lines = {
+            { kind = "train", level = 10, class = "SHAMAN", npc = 3066 },
+            { kind = "selljunk", at = { zone = 215, x = 46.65, y = 62.08, r = 10 }, npc = 3685 },
+          } },
+        { id = "tWARRIOR-10", at = { zone = 215, x = 48.35, y = 63.74, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10,
+          lines = {
+            { kind = "train", level = 10, class = "WARRIOR", npc = 3063 },
+            { kind = "selljunk", at = { zone = 215, x = 46.77, y = 64.49, r = 10 }, npc = 3884 },
+          } },
         { id = "t758.a759", at = { zone = 215, x = 47.52, y = 63.58, r = 10 }, minLevel = 4, items = { 5415 }, targets = { friend = { 2948 } },
           lines = {
             { kind = "turnin", quest = 758, npc = 2948, skipIfMissing = true },
@@ -505,11 +505,6 @@ Noir.Route("horde-tauren", {
         { id = "o759", at = { zone = 215, x = 52.91, y = 43.75, r = 40 }, text = "Prairie Alpha Tooth is north of Mull Thunderhorn.", targets = { enemy = { 2960 } },
           lines = {
             { kind = "objective", quest = 759, index = 1, item = 4803, skipIfMissing = true },
-          } },
-        { id = "tSHAMAN-12", at = { zone = 215, x = 47.4, y = 62.54, r = 10 }, when = { class = "SHAMAN" }, minLevel = 12,
-          lines = {
-            { kind = "train", level = 12, class = "SHAMAN", npc = 3066 },
-            { kind = "selljunk", at = { zone = 215, x = 46.65, y = 62.08, r = 10 }, npc = 3685 },
           } },
         { id = "t759.a760", at = { zone = 215, x = 47.52, y = 63.58, r = 10 }, minLevel = 4, items = { 5416 }, targets = { friend = { 2948 } },
           lines = {
@@ -524,11 +519,6 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "turnin", quest = 772, npc = 2984, skipIfMissing = true },
             { kind = "accept", quest = 773, npc = 2984, ifDone = 772, requires = { 772 } },
-          } },
-        { id = "tHUNTER-12", at = { zone = 1638, x = 58.49, y = 88.33, r = 10 }, when = { class = "HUNTER" }, minLevel = 12,
-          lines = {
-            { kind = "train", level = 12, class = "HUNTER", npc = 3038 },
-            { kind = "selljunk", at = { zone = 1638, x = 57.8, y = 76.4, r = 10 }, npc = 15350 },
           } },
         { id = "a6065", at = { zone = 1638, x = 58.49, y = 88.33, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, maxLevel = 18, targets = { friend = { 3038 } },
           lines = {
@@ -590,11 +580,6 @@ Noir.Route("horde-tauren", {
         { id = "h#3", text = "Use your hearthstone to return to Mulgore.",
           lines = {
             { kind = "hearth", to = { zone = 215, x = 45.93, y = 64.16 } },
-          } },
-        { id = "tDRUID-12", at = { zone = 215, x = 47.48, y = 62.95, r = 10 }, when = { class = "DRUID" }, minLevel = 12,
-          lines = {
-            { kind = "train", level = 12, class = "DRUID", npc = 3064 },
-            { kind = "selljunk", at = { zone = 215, x = 46.65, y = 62.08, r = 10 }, npc = 3685 },
           } },
         { id = "t760", at = { zone = 215, x = 47.52, y = 63.58, r = 10 }, items = { 5416 }, targets = { friend = { 2948 } },
           lines = {
@@ -746,9 +731,9 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "turnin", quest = 855, npc = 3389, skipIfMissing = true },
           } },
-        { id = "tDRUID-14", at = { zone = 493, x = 52.53, y = 40.57, r = 10 }, when = { class = "DRUID" }, minLevel = 14,
+        { id = "tDRUID-12", at = { zone = 493, x = 52.53, y = 40.57, r = 10 }, when = { class = "DRUID" }, minLevel = 12,
           lines = {
-            { kind = "train", level = 14, class = "DRUID", npc = 12042 },
+            { kind = "train", level = 12, class = "DRUID", npc = 12042 },
             { kind = "selljunk", at = { zone = 493, x = 53.34, y = 42.7, r = 10 }, npc = 12029 },
           } },
         { id = "t5922.a5930", at = { zone = 493, x = 56.21, y = 30.64, r = 10 }, when = { class = "DRUID" }, minLevel = 10, targets = { friend = { 11802 } },
@@ -773,14 +758,14 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "transport", to = { zone = 85, x = 60.6, y = 58.9 }, mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 } },
           } },
-        { id = "tWARRIOR-14", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 14,
-          lines = {
-            { kind = "train", level = 14, class = "WARRIOR", npc = 2131 },
-            { kind = "selljunk", at = { zone = 85, x = 61.55, y = 52.61, r = 10 }, npc = 5750 },
-          } },
         { id = "a1820", at = { zone = 85, x = 58.2, y = 51.45, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, maxLevel = 18, targets = { friend = { 1496 } },
           lines = {
             { kind = "accept", quest = 1820, npc = 1496, ifDone = 1498, requires = { 1498 } },
+          } },
+        { id = "tWARRIOR-12", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 12,
+          lines = {
+            { kind = "train", level = 12, class = "WARRIOR", npc = 2131 },
+            { kind = "selljunk", at = { zone = 85, x = 61.55, y = 52.61, r = 10 }, npc = 5750 },
           } },
         { id = "t1820.a1821", at = { zone = 85, x = 61.72, y = 52.29, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, targets = { friend = { 1500 } },
           lines = {
@@ -890,6 +875,11 @@ Noir.Route("horde-tauren", {
         { id = "a6548", at = { zone = 17, x = 35.19, y = 27.76, r = 10 }, minLevel = 12, maxLevel = 26, targets = { friend = { 11857 } },
           lines = {
             { kind = "accept", quest = 6548, npc = 11857 },
+          } },
+        { id = "tDRUID-14", at = { zone = 493, x = 52.53, y = 40.57, r = 10 }, when = { class = "DRUID" }, minLevel = 14,
+          lines = {
+            { kind = "train", level = 14, class = "DRUID", npc = 12042 },
+            { kind = "selljunk", at = { zone = 493, x = 53.34, y = 42.7, r = 10 }, npc = 12029 },
           } },
         { id = "t6126.a6127", at = { zone = 493, x = 56.21, y = 30.64, r = 10 }, when = { class = "DRUID" }, minLevel = 14, items = { 15842 }, targets = { friend = { 11802 } },
           lines = {
@@ -1221,9 +1211,9 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "objective", quest = 6129, index = 1, npc = 12296, skipIfMissing = true },
           } },
-        { id = "tDRUID-20", at = { zone = 493, x = 52.53, y = 40.57, r = 10 }, when = { class = "DRUID" }, minLevel = 20,
+        { id = "tDRUID-18", at = { zone = 493, x = 52.53, y = 40.57, r = 10 }, when = { class = "DRUID" }, minLevel = 18,
           lines = {
-            { kind = "train", level = 20, class = "DRUID", npc = 12042 },
+            { kind = "train", level = 18, class = "DRUID", npc = 12042 },
             { kind = "selljunk", at = { zone = 493, x = 53.34, y = 42.7, r = 10 }, npc = 12029 },
           } },
         { id = "t6129.a6130", at = { zone = 493, x = 56.21, y = 30.64, r = 10 }, when = { class = "DRUID" }, minLevel = 14, items = { 15826 }, targets = { friend = { 11802 } },
@@ -1344,9 +1334,10 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "fly", from = 77, to = 48 },
           } },
-        { id = "tDRUID-22", at = { zone = 493, x = 52.53, y = 40.57, r = 10 }, when = { class = "DRUID" }, minLevel = 22,
+        { id = "tDRUID-20", at = { zone = 493, x = 52.53, y = 40.57, r = 10 }, when = { class = "DRUID" }, minLevel = 20,
           lines = {
-            { kind = "train", level = 22, class = "DRUID", npc = 12042 },
+            { kind = "train", level = 20, class = "DRUID", npc = 12042 },
+            { kind = "selljunk", at = { zone = 493, x = 53.34, y = 42.7, r = 10 }, npc = 12029 },
           } },
         { id = "t27.a28", at = { zone = 493, x = 56.21, y = 30.64, r = 10 }, when = { class = "DRUID" }, minLevel = 16, items = { 15877 }, targets = { friend = { 11802 } },
           lines = {
@@ -1690,9 +1681,9 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "fly", from = 29, to = 22 },
           } },
-        { id = "tWARRIOR-26", at = { zone = 1638, x = 57.24, y = 87.37, r = 10 }, when = { class = "WARRIOR" }, minLevel = 26,
+        { id = "tWARRIOR-24", at = { zone = 1638, x = 57.24, y = 87.37, r = 10 }, when = { class = "WARRIOR" }, minLevel = 24,
           lines = {
-            { kind = "train", level = 26, class = "WARRIOR", npc = 3041 },
+            { kind = "train", level = 24, class = "WARRIOR", npc = 3041 },
           } },
         { id = "a1823", at = { zone = 1638, x = 57.24, y = 87.37, r = 10 }, when = { class = "WARRIOR" }, minLevel = 20, maxLevel = 28, targets = { friend = { 3041 } },
           lines = {
@@ -1733,39 +1724,27 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "turnin", quest = 6481, npc = 11861, skipIfMissing = true },
           } },
-        { id = "tDRUID-26:go1", at = { zone = 406, x = 45.12, y = 59.84, r = 10 }, text = "Fly from Sun Rock Retreat, Stonetalon Mountains to Thunder Bluff, Mulgore.", when = { class = "DRUID" },
+        { id = "tDRUID-25:go1", at = { zone = 406, x = 45.12, y = 59.84, r = 10 }, text = "Fly from Sun Rock Retreat, Stonetalon Mountains to Thunder Bluff, Mulgore.", when = { class = "DRUID" },
           lines = {
             { kind = "fly", from = 29, to = 22 },
           } },
-        { id = "tDRUID-26", at = { zone = 1638, x = 77.15, y = 29.82, r = 10 }, text = "Fly to Thunder Bluff for class training, then use your hearthstone to return.", when = { class = "DRUID" }, minLevel = 26,
+        { id = "tDRUID-25", at = { zone = 1638, x = 77.15, y = 29.82, r = 10 }, text = "Fly to Thunder Bluff for class training, then use your hearthstone to return.", when = { class = "DRUID" }, minLevel = 25,
           lines = {
-            { kind = "train", level = 26, class = "DRUID", npc = 3036 },
+            { kind = "train", level = 25, class = "DRUID", npc = 3036 },
           } },
-        { id = "tDRUID-26:back1", text = "Use your hearthstone to return to Stonetalon Mountains.", when = { class = "DRUID" },
+        { id = "tDRUID-25:back1", text = "Use your hearthstone to return to Stonetalon Mountains.", when = { class = "DRUID" },
           lines = {
             { kind = "hearth", to = { zone = 406, x = 47.47, y = 62.13 } },
           } },
-        { id = "tHUNTER-26:go1", at = { zone = 406, x = 45.12, y = 59.84, r = 10 }, text = "Fly from Sun Rock Retreat, Stonetalon Mountains to Thunder Bluff, Mulgore.", when = { class = "HUNTER" },
+        { id = "tHUNTER-25:go1", at = { zone = 406, x = 45.12, y = 59.84, r = 10 }, text = "Fly from Sun Rock Retreat, Stonetalon Mountains to Thunder Bluff, Mulgore.", when = { class = "HUNTER" },
           lines = {
             { kind = "fly", from = 29, to = 22 },
           } },
-        { id = "tHUNTER-26", at = { zone = 1638, x = 59.13, y = 86.87, r = 10 }, text = "Fly to Thunder Bluff for class training, then use your hearthstone to return.", when = { class = "HUNTER" }, minLevel = 26,
+        { id = "tHUNTER-25", at = { zone = 1638, x = 59.13, y = 86.87, r = 10 }, text = "Fly to Thunder Bluff for class training, then use your hearthstone to return.", when = { class = "HUNTER" }, minLevel = 25,
           lines = {
-            { kind = "train", level = 26, class = "HUNTER", npc = 3040 },
+            { kind = "train", level = 25, class = "HUNTER", npc = 3040 },
           } },
-        { id = "tHUNTER-26:back1", text = "Use your hearthstone to return to Stonetalon Mountains.", when = { class = "HUNTER" },
-          lines = {
-            { kind = "hearth", to = { zone = 406, x = 47.47, y = 62.13 } },
-          } },
-        { id = "tSHAMAN-26:go1", at = { zone = 406, x = 45.12, y = 59.84, r = 10 }, text = "Fly from Sun Rock Retreat, Stonetalon Mountains to Thunder Bluff, Mulgore.", when = { class = "SHAMAN" },
-          lines = {
-            { kind = "fly", from = 29, to = 22 },
-          } },
-        { id = "tSHAMAN-26", at = { zone = 1638, x = 22.82, y = 21.11, r = 10 }, text = "Fly to Thunder Bluff for class training, then use your hearthstone to return.", when = { class = "SHAMAN" }, minLevel = 26,
-          lines = {
-            { kind = "train", level = 26, class = "SHAMAN", npc = 3030 },
-          } },
-        { id = "tSHAMAN-26:back1", text = "Use your hearthstone to return to Stonetalon Mountains.", when = { class = "SHAMAN" },
+        { id = "tHUNTER-25:back1", text = "Use your hearthstone to return to Stonetalon Mountains.", when = { class = "HUNTER" },
           lines = {
             { kind = "hearth", to = { zone = 406, x = 47.47, y = 62.13 } },
           } },
@@ -1999,9 +1978,9 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "goto", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 } },
           } },
-        { id = "tSHAMAN-28", at = { zone = 1637, x = 38.8, y = 36.37, r = 10 }, when = { class = "SHAMAN" }, minLevel = 28,
+        { id = "tSHAMAN-26", at = { zone = 1637, x = 38.8, y = 36.37, r = 10 }, when = { class = "SHAMAN" }, minLevel = 26,
           lines = {
-            { kind = "train", level = 28, class = "SHAMAN", npc = 3344 },
+            { kind = "train", level = 26, class = "SHAMAN", npc = 3344 },
           } },
         { id = "f23.y23-30", at = { zone = 1637, x = 45.12, y = 63.89, r = 10 }, text = "Fly from Orgrimmar, Durotar to Freewind Post, Thousand Needles.", when = { class = "SHAMAN" },
           lines = {
@@ -2140,6 +2119,10 @@ Noir.Route("horde-tauren", {
         { id = "g1637@1637#2", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 }, text = "Head north into Orgrimmar.", when = { class = "SHAMAN" },
           lines = {
             { kind = "goto", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 } },
+          } },
+        { id = "tSHAMAN-28", at = { zone = 1637, x = 38.8, y = 36.37, r = 10 }, when = { class = "SHAMAN" }, minLevel = 28,
+          lines = {
+            { kind = "train", level = 28, class = "SHAMAN", npc = 3344 },
           } },
         { id = "y23-80", at = { zone = 1637, x = 45.12, y = 63.89, r = 10 }, text = "Fly from Orgrimmar, Durotar to Ratchet, The Barrens.", when = { class = "SHAMAN" },
           lines = {
@@ -2448,17 +2431,17 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "goto", at = { zone = 85, x = 60.6, y = 58.9, r = 20 } },
           } },
-        { id = "tWARRIOR-32", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 32,
+        { id = "tWARRIOR-30", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30,
           lines = {
-            { kind = "train", level = 32, class = "WARRIOR", npc = 2131 },
+            { kind = "train", level = 30, class = "WARRIOR", npc = 2131 },
           } },
         { id = "x14#3", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Durotar.",
           lines = {
             { kind = "transport", to = { zone = 14, x = 51, y = 13.9 }, mode = "zeppelin", at = { zone = 85, x = 60.6, y = 58.9, r = 15 } },
           } },
-        { id = "tSHAMAN-32", at = { zone = 1637, x = 37.84, y = 36.45, r = 10 }, when = { class = "SHAMAN" }, minLevel = 32,
+        { id = "tSHAMAN-30", at = { zone = 1637, x = 37.84, y = 36.45, r = 10 }, when = { class = "SHAMAN" }, minLevel = 30,
           lines = {
-            { kind = "train", level = 32, class = "SHAMAN", npc = 3403 },
+            { kind = "train", level = 30, class = "SHAMAN", npc = 3403 },
           } },
         { id = "a1531", at = { zone = 1637, x = 37.96, y = 37.73, r = 10 }, when = { class = "SHAMAN" }, minLevel = 30, maxLevel = 38, targets = { friend = { 5892 } },
           lines = {
@@ -2576,9 +2559,9 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "transport", to = { zone = 33, x = 31.2, y = 30.4 }, mode = "zeppelin", at = { zone = 14, x = 50.5, y = 12.7, r = 15 } },
           } },
-        { id = "tHUNTER-32", at = { zone = 33, x = 31.23, y = 28.68, r = 10 }, when = { class = "HUNTER" }, minLevel = 32,
+        { id = "tHUNTER-30", at = { zone = 33, x = 31.23, y = 28.68, r = 10 }, when = { class = "HUNTER" }, minLevel = 30,
           lines = {
-            { kind = "train", level = 32, class = "HUNTER", npc = 1404 },
+            { kind = "train", level = 30, class = "HUNTER", npc = 1404 },
           } },
         { id = "f20.a581.a638.t1240", at = { zone = 33, x = 32.54, y = 29.35, r = 10 }, minLevel = 32, items = { 5918 }, targets = { friend = { 2497, 2519 } },
           lines = {
@@ -2625,6 +2608,10 @@ Noir.Route("horde-tauren", {
         { id = "o195", at = { zone = 33, x = 35.05, y = 23.35, r = 40 }, text = "The Lashtail Raptors are southwest of your last stop.", targets = { enemy = { 686 } },
           lines = {
             { kind = "objective", quest = 195, index = 1, npc = 686 },
+          } },
+        { id = "tHUNTER-32", at = { zone = 33, x = 31.23, y = 28.68, r = 10 }, when = { class = "HUNTER" }, minLevel = 32,
+          lines = {
+            { kind = "train", level = 32, class = "HUNTER", npc = 1404 },
           } },
         { id = "a568.t581", at = { zone = 33, x = 32.17, y = 28.9, r = 10 }, minLevel = 33, targets = { friend = { 2464, 2497 } },
           lines = {
@@ -2681,10 +2668,6 @@ Noir.Route("horde-tauren", {
         { id = "o189", at = { zone = 33, x = 30, y = 19.16, r = 40 }, text = "Bloodscalp Ear is north of your last stop.", targets = { enemy = { 587, 697, 694, 702, 699, 701 } },
           lines = {
             { kind = "objective", quest = 189, index = 1, item = 1519 },
-          } },
-        { id = "tHUNTER-34", at = { zone = 33, x = 31.23, y = 28.68, r = 10 }, when = { class = "HUNTER" }, minLevel = 34,
-          lines = {
-            { kind = "train", level = 34, class = "HUNTER", npc = 1404 },
           } },
         { id = "a582.a596.a629.a569", at = { zone = 33, x = 32.16, y = 27.72, r = 10 }, minLevel = 33, maxLevel = 45, targets = { friend = { 2497, 2519, 2464 } },
           lines = {
@@ -2796,6 +2779,10 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "accept", quest = 192, npc = 718, requires = { 191 } },
           } },
+        { id = "tHUNTER-34", at = { zone = 33, x = 31.23, y = 28.68, r = 10 }, when = { class = "HUNTER" }, minLevel = 34,
+          lines = {
+            { kind = "train", level = 34, class = "HUNTER", npc = 1404 },
+          } },
         { id = "t570", at = { zone = 33, x = 32.12, y = 29.24, r = 10 }, targets = { friend = { 2465 } },
           lines = {
             { kind = "turnin", quest = 570, npc = 2465 },
@@ -2865,9 +2852,9 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "goto", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 } },
           } },
-        { id = "tSHAMAN-36", at = { zone = 1637, x = 38.8, y = 36.37, r = 10 }, when = { class = "SHAMAN" }, minLevel = 36,
+        { id = "tSHAMAN-34", at = { zone = 1637, x = 38.8, y = 36.37, r = 10 }, when = { class = "SHAMAN" }, minLevel = 34,
           lines = {
-            { kind = "train", level = 36, class = "SHAMAN", npc = 3344 },
+            { kind = "train", level = 34, class = "SHAMAN", npc = 3344 },
           } },
         { id = "y23-29", at = { zone = 1637, x = 45.12, y = 63.89, r = 10 }, text = "Fly from Orgrimmar, Durotar to Sun Rock Retreat, Stonetalon Mountains.",
           lines = {
@@ -2952,10 +2939,6 @@ Noir.Route("horde-tauren", {
         { id = "g85@85#4", at = { zone = 85, x = 60.6, y = 58.9, r = 20 }, text = "Head into Tirisfal Glades.", when = { class = "WARRIOR" },
           lines = {
             { kind = "goto", at = { zone = 85, x = 60.6, y = 58.9, r = 20 } },
-          } },
-        { id = "tWARRIOR-36", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 36,
-          lines = {
-            { kind = "train", level = 36, class = "WARRIOR", npc = 2131 },
           } },
         { id = "x14#5", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Durotar.", when = { class = "WARRIOR" },
           lines = {
@@ -3177,6 +3160,10 @@ Noir.Route("horde-tauren", {
         { id = "g1497@1497", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 }, text = "Head into Undercity.",
           lines = {
             { kind = "goto", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 } },
+          } },
+        { id = "tWARRIOR-36", at = { zone = 1497, x = 47.4, y = 17.29, r = 10 }, when = { class = "WARRIOR" }, minLevel = 36,
+          lines = {
+            { kind = "train", level = 36, class = "WARRIOR", npc = 4595 },
           } },
         { id = "f11.y11-13", at = { zone = 1497, x = 63.25, y = 48.56, r = 10 }, text = "Fly from Undercity, Tirisfal to Tarren Mill, Hillsbrad.",
           lines = {
@@ -3650,29 +3637,23 @@ Noir.Route("horde-tauren", {
             { kind = "turnin", quest = 607, at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, npc = 2501 },
             { kind = "accept", quest = 609, at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, npc = 2501, requires = { 607 } },
           } },
-        { id = "o576.o587", at = { zone = 33, x = 27.43, y = 73.21, r = 40 }, targets = { enemy = { 1561, 1562, 2545, 1564, 1563, 2548 } },
+        { id = "o576.o587.o604", at = { zone = 33, x = 27.43, y = 73.21, r = 40 }, targets = { enemy = { 1561, 1562, 2545, 1564, 1563, 2548 } },
           lines = {
             { kind = "objective", quest = 576, index = 1, item = 3897, skipIfMissing = true },
             { kind = "objective", quest = 587, index = 1, item = 3910, skipIfMissing = true },
-          } },
-        { id = "a348.t587.t576", at = { zone = 33, x = 27.61, y = 76.74, r = 10 }, minLevel = 40, targets = { friend = { 2486, 2488, 2493 } },
-          lines = {
-            { kind = "accept", quest = 348, npc = 2486 },
-            { kind = "turnin", quest = 587, at = { zone = 33, x = 26.92, y = 77.35, r = 10 }, npc = 2488, skipIfMissing = true },
-            { kind = "turnin", quest = 576, at = { zone = 33, x = 28.59, y = 75.9, r = 10 }, npc = 2493, skipIfMissing = true },
-          } },
-        { id = "o604", at = { zone = 33, x = 27.43, y = 73.21, r = 40 }, targets = { enemy = { 1563 } },
-          lines = {
             { kind = "objective", quest = 604, index = 1, npc = 1563, skipIfMissing = true },
             { kind = "objective", quest = 604, index = 2, item = 3920, skipIfMissing = true },
             { kind = "objective", quest = 604, index = 3, item = 3921, skipIfMissing = true },
           } },
-        { id = "t604.a608", at = { zone = 33, x = 27.17, y = 77.01, r = 10 }, minLevel = 37, targets = { friend = { 2487 } },
+        { id = "a348.t587.t576.t604.a608", at = { zone = 33, x = 27.61, y = 76.74, r = 10 }, minLevel = 40, targets = { friend = { 2486, 2488, 2493, 2487 } },
           lines = {
-            { kind = "turnin", quest = 604, npc = 2487, skipIfMissing = true },
-            { kind = "accept", quest = 608, npc = 2487, ifDone = 604, requires = { 604 } },
+            { kind = "accept", quest = 348, npc = 2486 },
+            { kind = "turnin", quest = 587, at = { zone = 33, x = 26.92, y = 77.35, r = 10 }, npc = 2488, skipIfMissing = true },
+            { kind = "turnin", quest = 576, at = { zone = 33, x = 28.59, y = 75.9, r = 10 }, npc = 2493, skipIfMissing = true },
+            { kind = "turnin", quest = 604, at = { zone = 33, x = 27.17, y = 77.01, r = 10 }, npc = 2487, skipIfMissing = true },
+            { kind = "accept", quest = 608, at = { zone = 33, x = 27.17, y = 77.01, r = 10 }, npc = 2487, ifDone = 604, requires = { 604 } },
           } },
-        { id = "o608", at = { zone = 33, x = 32.87, y = 88.2, r = 40 }, text = "Captain Stillwater is southeast of Fleet Master Seahorn.", targets = { enemy = { 2550, 2546, 2548 } },
+        { id = "o608", at = { zone = 33, x = 32.87, y = 88.2, r = 40 }, text = "Captain Stillwater is southeast of Fin Fizracket.", targets = { enemy = { 2550, 2546, 2548 } },
           lines = {
             { kind = "objective", quest = 608, index = 1, npc = 2550, skipIfMissing = true },
             { kind = "objective", quest = 608, index = 2, npc = 2548, skipIfMissing = true },
@@ -3745,10 +3726,6 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "objective", quest = 598, index = 1, item = 3916, skipIfMissing = true },
           } },
-        { id = "tHUNTER-42", at = { zone = 33, x = 31.23, y = 28.68, r = 10 }, when = { class = "HUNTER" }, minLevel = 42,
-          lines = {
-            { kind = "train", level = 42, class = "HUNTER", npc = 1404 },
-          } },
         { id = "y20-18#5", at = { zone = 33, x = 32.54, y = 29.35, r = 10 }, text = "Fly from Grom'gol, Stranglethorn to Booty Bay, Stranglethorn.",
           lines = {
             { kind = "fly", from = 20, to = 18 },
@@ -3760,6 +3737,10 @@ Noir.Route("horde-tauren", {
         { id = "o196", at = { zone = 33, x = 28.94, y = 44.94, r = 40 }, text = "The Jungle Stalkers are north of \"Sea Wolf\" MacKinley.", targets = { enemy = { 687 } },
           lines = {
             { kind = "objective", quest = 196, index = 1, npc = 687, skipIfMissing = true },
+          } },
+        { id = "tHUNTER-42", at = { zone = 33, x = 31.23, y = 28.68, r = 10 }, when = { class = "HUNTER" }, minLevel = 42,
+          lines = {
+            { kind = "train", level = 42, class = "HUNTER", npc = 1404 },
           } },
         { id = "t572.a571.t598.t584.a585.a586.b@33", at = { zone = 33, x = 32.12, y = 29.24, r = 10 }, minLevel = 33, targets = { friend = { 2465, 2519 } },
           lines = {
@@ -3838,10 +3819,6 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "hearth", to = { zone = 33, x = 31.49, y = 29.75 } },
           } },
-        { id = "tHUNTER-44", at = { zone = 33, x = 31.23, y = 28.68, r = 10 }, when = { class = "HUNTER" }, minLevel = 44,
-          lines = {
-            { kind = "train", level = 44, class = "HUNTER", npc = 1404 },
-          } },
         { id = "y20-18#6", at = { zone = 33, x = 32.54, y = 29.35, r = 10 }, text = "Fly from Grom'gol, Stranglethorn to Booty Bay, Stranglethorn.",
           lines = {
             { kind = "fly", from = 20, to = 18 },
@@ -3886,15 +3863,15 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "objective", quest = 592, index = 1, item = 3913, skipIfMissing = true },
           } },
-        { id = "tWARRIOR-44:go1", at = { zone = 33, x = 31.5, y = 29.1, r = 15 }, text = "Take the zeppelin from Stranglethorn Vale to Tirisfal Glades.", when = { class = "WARRIOR" },
+        { id = "tWARRIOR-43:go1", at = { zone = 33, x = 31.5, y = 29.1, r = 15 }, text = "Take the zeppelin from Stranglethorn Vale to Tirisfal Glades.", when = { class = "WARRIOR" },
           lines = {
             { kind = "transport", to = { zone = 85, x = 61.9, y = 58.9 }, mode = "zeppelin", at = { zone = 33, x = 31.5, y = 29.1, r = 15 } },
           } },
-        { id = "tWARRIOR-44", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, text = "Fly to Tirisfal Glades for class training, then use your hearthstone to return.", when = { class = "WARRIOR" }, minLevel = 44,
+        { id = "tWARRIOR-43", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, text = "Fly to Tirisfal Glades for class training, then use your hearthstone to return.", when = { class = "WARRIOR" }, minLevel = 43,
           lines = {
-            { kind = "train", level = 44, class = "WARRIOR", npc = 2131 },
+            { kind = "train", level = 43, class = "WARRIOR", npc = 2131 },
           } },
-        { id = "tWARRIOR-44:back1", text = "Use your hearthstone to return to Stranglethorn Vale.", when = { class = "WARRIOR" },
+        { id = "tWARRIOR-43:back1", text = "Use your hearthstone to return to Stranglethorn Vale.", when = { class = "WARRIOR" },
           lines = {
             { kind = "hearth", to = { zone = 33, x = 31.49, y = 29.75 } },
           } },
@@ -3916,9 +3893,9 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "goto", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 } },
           } },
-        { id = "tSHAMAN-44", at = { zone = 1637, x = 38.8, y = 36.37, r = 10 }, when = { class = "SHAMAN" }, minLevel = 44,
+        { id = "tSHAMAN-42", at = { zone = 1637, x = 38.8, y = 36.37, r = 10 }, when = { class = "SHAMAN" }, minLevel = 42,
           lines = {
-            { kind = "train", level = 44, class = "SHAMAN", npc = 3344 },
+            { kind = "train", level = 42, class = "SHAMAN", npc = 3344 },
           } },
         { id = "y23-30", at = { zone = 1637, x = 45.12, y = 63.89, r = 10 }, text = "Fly from Orgrimmar, Durotar to Freewind Post, Thousand Needles.",
           lines = {
@@ -3927,10 +3904,6 @@ Noir.Route("horde-tauren", {
         { id = "g357@357", at = { zone = 357, x = 75.45, y = 44.36, r = 20 }, text = "Head southwest into Feralas.",
           lines = {
             { kind = "goto", at = { zone = 357, x = 75.45, y = 44.36, r = 20 } },
-          } },
-        { id = "tDRUID-44", at = { zone = 357, x = 75.99, y = 42.28, r = 10 }, when = { class = "DRUID" }, minLevel = 44,
-          lines = {
-            { kind = "train", level = 44, class = "DRUID", npc = 8142 },
           } },
         { id = "f42.a2987.a2975", at = { zone = 357, x = 75.45, y = 44.36, r = 10 }, minLevel = 38, items = { 9466 }, targets = { friend = { 8021, 7777 } },
           lines = {
@@ -3976,6 +3949,10 @@ Noir.Route("horde-tauren", {
         { id = "h#28", text = "Use your hearthstone to return to Feralas.",
           lines = {
             { kind = "hearth", to = { zone = 357, x = 74.8, y = 45.18 } },
+          } },
+        { id = "tDRUID-42", at = { zone = 357, x = 75.99, y = 42.28, r = 10 }, when = { class = "DRUID" }, minLevel = 42,
+          lines = {
+            { kind = "train", level = 42, class = "DRUID", npc = 8142 },
           } },
         { id = "t2987.t2975.a2980.t2973.a2974", at = { zone = 357, x = 75.7, y = 44.31, r = 10 }, minLevel = 38, items = { 9466 }, targets = { friend = { 8021, 7777, 4544 } },
           lines = {
@@ -4027,6 +4004,10 @@ Noir.Route("horde-tauren", {
         { id = "o2863", at = { zone = 357, x = 70.37, y = 54.73, r = 40 }, text = "The Woodpaw Alphas are northeast of your last stop.", targets = { enemy = { 5258 } },
           lines = {
             { kind = "objective", quest = 2863, index = 1, npc = 5258, skipIfMissing = true },
+          } },
+        { id = "tDRUID-44", at = { zone = 357, x = 75.99, y = 42.28, r = 10 }, when = { class = "DRUID" }, minLevel = 44,
+          lines = {
+            { kind = "train", level = 44, class = "DRUID", npc = 8142 },
           } },
         { id = "t7734.t2863.a2902", at = { zone = 357, x = 74.43, y = 42.91, r = 10 }, minLevel = 39, targets = { friend = { 7854, 7875 } },
           lines = {
@@ -4126,9 +4107,11 @@ Noir.Route("horde-tauren", {
             { kind = "turnin", quest = 82, npc = 5594, skipIfMissing = true },
             { kind = "accept", quest = 10, at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, npc = 7724, ifDone = 82, requires = { 82 } },
           } },
-        { id = "o1707", at = { zone = 440, x = 62.67, y = 29.34, r = 40 }, text = "Wastewander Water Pouch is east of Alchemist Pestlezugg.", targets = { enemy = { 5616, 5618, 5615, 5617, 5623, 7805 } },
+        { id = "o1707.o1690", at = { zone = 440, x = 62.67, y = 29.34, r = 40 }, text = "Wastewander Water Pouch is east of Alchemist Pestlezugg.", targets = { enemy = { 5616, 5618, 5615, 5617, 5623, 7805 } },
           lines = {
             { kind = "objective", quest = 1707, index = 1, item = 8483 },
+            { kind = "objective", quest = 1690, index = 1, npc = 5618 },
+            { kind = "objective", quest = 1690, index = 2, npc = 5616 },
           } },
         { id = "t2872.a2873.a8366", at = { zone = 440, x = 67.11, y = 23.98, r = 10 }, minLevel = 40, targets = { friend = { 7881, 7882 } },
           lines = {
@@ -4142,12 +4125,7 @@ Noir.Route("horde-tauren", {
             { kind = "accept", quest = 2875, object = 142122 },
             { kind = "accept", quest = 8365, npc = 15165 },
           } },
-        { id = "o1690", at = { zone = 440, x = 62.77, y = 29.18, r = 40 }, text = "The Wastewander Bandits are southwest of Haughty Modiste.", targets = { enemy = { 5616, 5618 } },
-          lines = {
-            { kind = "objective", quest = 1690, index = 1, npc = 5618 },
-            { kind = "objective", quest = 1690, index = 2, npc = 5616 },
-          } },
-        { id = "o2781", at = { zone = 440, x = 61.77, y = 38.17, r = 40 }, text = "Caliph Scorpidsting's Head is south of your last stop.", targets = { enemy = { 7847 } },
+        { id = "o2781", at = { zone = 440, x = 61.77, y = 38.17, r = 40 }, text = "Caliph Scorpidsting's Head is southwest of Haughty Modiste.", targets = { enemy = { 7847 } },
           lines = {
             { kind = "objective", quest = 2781, index = 1, item = 8723, skipIfMissing = true },
           } },
@@ -4311,27 +4289,27 @@ Noir.Route("horde-tauren", {
             { kind = "accept", quest = 7728, at = { zone = 51, x = 37.65, y = 26.47, r = 10 }, object = 179827 },
             { kind = "accept", quest = 7729, at = { zone = 51, x = 37.65, y = 26.47, r = 10 }, object = 179827 },
           } },
-        { id = "o7722.o7701.o3441.t3441.a3442", at = { zone = 51, x = 40.45, y = 35.74, r = 40 }, minLevel = 40, targets = { enemy = { 14621, 8479 }, friend = { 8479 } },
+        { id = "o7722.o7701.o3441.t3441.a3442.o7729", at = { zone = 51, x = 40.45, y = 35.74, r = 40 }, minLevel = 40, targets = { enemy = { 14621, 5844, 5846, 8479 }, friend = { 8479 } },
           lines = {
             { kind = "objective", quest = 7722, index = 1, item = 18922, skipIfMissing = true },
             { kind = "objective", quest = 7701, index = 1, item = 18946, skipIfMissing = true },
             { kind = "objective", quest = 3441, index = 1, at = { zone = 51, x = 39.06, y = 38.99, r = 40 }, npc = 8479, skipIfMissing = true },
             { kind = "turnin", quest = 3441, at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, npc = 8479, skipIfMissing = true },
             { kind = "accept", quest = 3442, at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, npc = 8479, ifDone = 3441, requires = { 3441 } },
+            { kind = "objective", quest = 7729, index = 1, at = { zone = 51, x = 42.48, y = 39.78, r = 40 }, npc = 5846, skipIfMissing = true },
+            { kind = "objective", quest = 7729, index = 2, at = { zone = 51, x = 42.48, y = 39.78, r = 40 }, npc = 5844, skipIfMissing = true },
           } },
-        { id = "o7728", at = { zone = 51, x = 39.88, y = 50.1, r = 40 }, text = "Smithing Tuyere is south of Kalaran Windblade.", targets = { enemy = { 5840, 8566 } },
+        { id = "o7728.o3442.o7723", at = { zone = 51, x = 39.88, y = 50.1, r = 40 }, text = "Smithing Tuyere is south of Kalaran Windblade.", targets = { enemy = { 5840, 5854, 5852, 5855, 5850, 8566 } },
           lines = {
             { kind = "objective", quest = 7728, index = 1, item = 18959, skipIfMissing = true },
             { kind = "objective", quest = 7728, index = 2, item = 18960, skipIfMissing = true },
+            { kind = "objective", quest = 3442, index = 1, item = 10509, at = { zone = 51, x = 45.56, y = 55.14, r = 40 }, skipIfMissing = true },
+            { kind = "objective", quest = 3442, index = 2, item = 10511, at = { zone = 51, x = 45.56, y = 55.14, r = 40 }, skipIfMissing = true },
+            { kind = "objective", quest = 7723, index = 1, npc = 5854, skipIfMissing = true },
           } },
         { id = "o7724", at = { zone = 51, x = 29.52, y = 59.19, r = 40 }, text = "The Greater Lava Spiders are southwest of your last stop.", targets = { enemy = { 5858 } },
           lines = {
             { kind = "objective", quest = 7724, index = 1, npc = 5858, skipIfMissing = true },
-          } },
-        { id = "o3442", at = { zone = 51, x = 45.56, y = 55.14, r = 40 }, text = "Heart of Flame is east of your last stop.", targets = { enemy = { 5854, 5855, 5850, 5852, 5853 } },
-          lines = {
-            { kind = "objective", quest = 3442, index = 1, item = 10509, skipIfMissing = true },
-            { kind = "objective", quest = 3442, index = 2, item = 10511, skipIfMissing = true },
           } },
         { id = "t3442.a3443.o3443.t3443.a3452", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 40, targets = { enemy = { 5843, 5844, 5846, 8504, 5840, 8566 }, friend = { 8479 } },
           lines = {
@@ -4370,13 +4348,7 @@ Noir.Route("horde-tauren", {
             { kind = "accept", quest = 3481, object = 149502, ifDone = 3463, requires = { 3463 } },
             { kind = "turnin", quest = 3481, object = 149502, skipIfMissing = true },
           } },
-        { id = "o7723.o7729", at = { zone = 51, x = 40.83, y = 49.21, r = 40 }, targets = { enemy = { 5844, 5846, 5854 } },
-          lines = {
-            { kind = "objective", quest = 7723, index = 1, npc = 5854, skipIfMissing = true },
-            { kind = "objective", quest = 7729, index = 1, at = { zone = 51, x = 42.48, y = 39.78, r = 40 }, npc = 5846, skipIfMissing = true },
-            { kind = "objective", quest = 7729, index = 2, at = { zone = 51, x = 42.48, y = 39.78, r = 40 }, npc = 5844, skipIfMissing = true },
-          } },
-        { id = "o7727", at = { zone = 51, x = 48.43, y = 28.01, r = 40 }, text = "The Incendosaurs are northeast of your last stop.", targets = { enemy = { 9318 } },
+        { id = "o7727", at = { zone = 51, x = 48.43, y = 28.01, r = 40 }, text = "The Incendosaurs are northeast of Squire Maltrake.", targets = { enemy = { 9318 } },
           lines = {
             { kind = "objective", quest = 7727, index = 1, npc = 9318, skipIfMissing = true },
           } },
@@ -4441,9 +4413,13 @@ Noir.Route("horde-tauren", {
             { kind = "accept", quest = 7816, at = { zone = 47, x = 80.33, y = 81.54, r = 10 }, npc = 14740 },
             { kind = "sethearth", at = { zone = 47, x = 78.14, y = 81.38, r = 10 }, npc = 14731 },
           } },
-        { id = "o7850", at = { zone = 47, x = 63.65, y = 73.17, r = 40 }, text = "Vessel of Tainted Blood is west of Otho Moji'ko.",
+        { id = "o7850.o7862", at = { zone = 47, x = 63.65, y = 73.17, r = 40 }, text = "Vessel of Tainted Blood is west of Otho Moji'ko.", targets = { enemy = { 2645, 2643, 2646, 2647 } },
           lines = {
             { kind = "objective", quest = 7850, index = 1, item = 19071, skipIfMissing = true },
+            { kind = "objective", quest = 7862, index = 1, at = { zone = 47, x = 65.31, y = 70.7, r = 40 }, npc = 2643, skipIfMissing = true },
+            { kind = "objective", quest = 7862, index = 2, at = { zone = 47, x = 65.31, y = 70.7, r = 40 }, npc = 2645, skipIfMissing = true },
+            { kind = "objective", quest = 7862, index = 3, at = { zone = 47, x = 65.31, y = 70.7, r = 40 }, npc = 2646, skipIfMissing = true },
+            { kind = "objective", quest = 7862, index = 4, at = { zone = 47, x = 65.31, y = 70.7, r = 40 }, npc = 2647, skipIfMissing = true },
           } },
         { id = "t7845.a7846.o7861", at = { zone = 47, x = 59.69, y = 77.84, r = 10 }, minLevel = 46, targets = { enemy = { 7995, 2648 }, friend = { 14757 } },
           lines = {
@@ -4461,14 +4437,7 @@ Noir.Route("horde-tauren", {
             { kind = "turnin", quest = 7846, npc = 14757, skipIfMissing = true },
             { kind = "accept", quest = 7847, npc = 14757, ifDone = 7846, requires = { 7846 } },
           } },
-        { id = "o7862", at = { zone = 47, x = 65.31, y = 70.7, r = 40 }, text = "The Vilebranch Berserkers are northeast of Elder Torntusk.", targets = { enemy = { 2643, 2645, 2646, 2647 } },
-          lines = {
-            { kind = "objective", quest = 7862, index = 1, npc = 2643, skipIfMissing = true },
-            { kind = "objective", quest = 7862, index = 2, npc = 2645, skipIfMissing = true },
-            { kind = "objective", quest = 7862, index = 3, npc = 2646, skipIfMissing = true },
-            { kind = "objective", quest = 7862, index = 4, npc = 2647, skipIfMissing = true },
-          } },
-        { id = "o7849", at = { zone = 47, x = 58.56, y = 64.76, r = 40 }, text = "Huntsman Malkhor's Skull is northwest of your last stop.",
+        { id = "o7849", at = { zone = 47, x = 58.56, y = 64.76, r = 40 }, text = "Huntsman Malkhor's Skull is north of Elder Torntusk.",
           lines = {
             { kind = "objective", quest = 7849, index = 1, item = 19069, skipIfMissing = true },
             { kind = "objective", quest = 7849, index = 2, item = 19070, skipIfMissing = true },
@@ -4515,17 +4484,14 @@ Noir.Route("horde-tauren", {
             { kind = "accept", quest = 7842, at = { zone = 47, x = 79.38, y = 79.08, r = 10 }, npc = 14738, requires = { 7841 } },
             { kind = "turnin", quest = 7844, at = { zone = 47, x = 78.8, y = 78.25, r = 10 }, npc = 14739, skipIfMissing = true },
           } },
-        { id = "o7816", at = { zone = 47, x = 80.4, y = 58.23, r = 40 }, text = "Katoom's Best Lure is north of Primal Torntusk.", targets = { enemy = { 7977 } },
+        { id = "o7816.o7815", at = { zone = 47, x = 80.4, y = 58.23, r = 40 }, text = "Katoom's Best Lure is north of Primal Torntusk.", targets = { enemy = { 7977, 2505 } },
           lines = {
             { kind = "objective", quest = 7816, index = 1, item = 19023 },
+            { kind = "objective", quest = 7815, index = 1, npc = 2505 },
           } },
         { id = "t2742", at = { zone = 47, x = 86.3, y = 59.01, r = 10 },
           lines = {
             { kind = "turnin", quest = 2742, object = 142127, skipIfMissing = true },
-          } },
-        { id = "o7815", at = { zone = 47, x = 80.82, y = 58.98, r = 40 }, text = "The Saltwater Snapjaws are west of your last stop.", targets = { enemy = { 2505 } },
-          lines = {
-            { kind = "objective", quest = 7815, index = 1, npc = 2505 },
           } },
         { id = "o7840", at = { zone = 47, x = 84.47, y = 41.22, r = 40 }, text = "Lard's Lunch is north of your last stop.", targets = { enemy = { 14748 } },
           lines = {
@@ -4568,10 +4534,6 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "goto", at = { zone = 85, x = 60.6, y = 58.9, r = 20 } },
           } },
-        { id = "tWARRIOR-50", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 50,
-          lines = {
-            { kind = "train", level = 50, class = "WARRIOR", npc = 2131 },
-          } },
         { id = "x14#7", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Durotar.",
           lines = {
             { kind = "transport", to = { zone = 14, x = 51, y = 13.9 }, mode = "zeppelin", at = { zone = 85, x = 60.6, y = 58.9, r = 15 } },
@@ -4579,10 +4541,6 @@ Noir.Route("horde-tauren", {
         { id = "g1637@1637#7", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 }, text = "Head into Orgrimmar.",
           lines = {
             { kind = "goto", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 } },
-          } },
-        { id = "tSHAMAN-50", at = { zone = 1637, x = 38.8, y = 36.37, r = 10 }, when = { class = "SHAMAN" }, minLevel = 50,
-          lines = {
-            { kind = "train", level = 50, class = "SHAMAN", npc = 3344 },
           } },
         { id = "y23-61", at = { zone = 1637, x = 45.12, y = 63.89, r = 10 }, text = "Fly from Orgrimmar, Durotar to Splintertree Post, Ashenvale.",
           lines = {
@@ -4681,9 +4639,9 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "transport", to = { zone = 33, x = 31.2, y = 30.4 }, mode = "zeppelin", at = { zone = 14, x = 50.5, y = 12.7, r = 15 } },
           } },
-        { id = "tHUNTER-50", at = { zone = 33, x = 31.23, y = 28.68, r = 10 }, when = { class = "HUNTER" }, minLevel = 50,
+        { id = "tHUNTER-48", at = { zone = 33, x = 31.23, y = 28.68, r = 10 }, when = { class = "HUNTER" }, minLevel = 48,
           lines = {
-            { kind = "train", level = 50, class = "HUNTER", npc = 1404 },
+            { kind = "train", level = 48, class = "HUNTER", npc = 1404 },
           } },
         { id = "t2932", at = { zone = 33, x = 32.16, y = 27.72, r = 10 }, items = { 15002, 9320 }, targets = { friend = { 2497 } },
           lines = {
@@ -4711,6 +4669,10 @@ Noir.Route("horde-tauren", {
             { kind = "accept", quest = 1424, at = { zone = 8, x = 47.93, y = 54.78, r = 10 }, npc = 1443 },
             { kind = "sethearth", at = { zone = 8, x = 45.16, y = 56.66, r = 10 }, npc = 6930 },
           } },
+        { id = "tWARRIOR-48", at = { zone = 8, x = 44.89, y = 57.62, r = 10 }, when = { class = "WARRIOR" }, minLevel = 48,
+          lines = {
+            { kind = "train", level = 48, class = "WARRIOR", npc = 985 },
+          } },
         { id = "o2784.t2784.a2621", at = { zone = 8, x = 34.29, y = 66.14, r = 40 }, minLevel = 45, targets = { enemy = { 7572 }, friend = { 7572 } },
           lines = {
             { kind = "objective", quest = 2784, index = 1, npc = 7572, skipIfMissing = true },
@@ -4728,6 +4690,10 @@ Noir.Route("horde-tauren", {
         { id = "h#33", text = "Use your hearthstone to return to Swamp of Sorrows.",
           lines = {
             { kind = "hearth", to = { zone = 8, x = 45.16, y = 56.66 } },
+          } },
+        { id = "tSHAMAN-48", at = { zone = 8, x = 48.19, y = 57.94, r = 10 }, when = { class = "SHAMAN" }, minLevel = 48,
+          lines = {
+            { kind = "train", level = 48, class = "SHAMAN", npc = 986 },
           } },
         { id = "t1430.t2621.a2622", at = { zone = 8, x = 44.7, y = 57.21, r = 10 }, minLevel = 45, targets = { friend = { 5591, 7623 } },
           lines = {
@@ -4789,6 +4755,18 @@ Noir.Route("horde-tauren", {
       id = "tauren-51-52-un-goro-crater", name = "51-52 Un'Goro Crater", group = "Horde", subgroup = "50-60", minLevel = 51, maxLevel = 55, zone = 490,
       next = { { section = "tauren-52-53-blasted-lands" } },
       steps = {
+        { id = "tHUNTER-50", at = { zone = 8, x = 47.26, y = 53.43, r = 10 }, when = { class = "HUNTER" }, minLevel = 50,
+          lines = {
+            { kind = "train", level = 50, class = "HUNTER", npc = 987 },
+          } },
+        { id = "tSHAMAN-50", at = { zone = 8, x = 48.19, y = 57.94, r = 10 }, when = { class = "SHAMAN" }, minLevel = 50,
+          lines = {
+            { kind = "train", level = 50, class = "SHAMAN", npc = 986 },
+          } },
+        { id = "tWARRIOR-50", at = { zone = 8, x = 44.89, y = 57.62, r = 10 }, when = { class = "WARRIOR" }, minLevel = 50,
+          lines = {
+            { kind = "train", level = 50, class = "WARRIOR", npc = 985 },
+          } },
         { id = "y56-20", at = { zone = 8, x = 46.07, y = 54.83, r = 10 }, text = "Fly from Stonard, Swamp of Sorrows to Grom'gol, Stranglethorn.",
           lines = {
             { kind = "fly", from = 56, to = 20 },
@@ -5029,10 +5007,6 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "fly", from = 40, to = 22 },
           } },
-        { id = "tWARRIOR-52", at = { zone = 1638, x = 57.24, y = 87.37, r = 10 }, when = { class = "WARRIOR" }, minLevel = 52,
-          lines = {
-            { kind = "train", level = 52, class = "WARRIOR", npc = 3041 },
-          } },
         { id = "a8417", at = { zone = 1638, x = 57.24, y = 87.37, r = 10 }, when = { class = "WARRIOR" }, minLevel = 50, maxLevel = 58, targets = { friend = { 3041 } },
           lines = {
             { kind = "accept", quest = 8417, npc = 3041 },
@@ -5118,6 +5092,10 @@ Noir.Route("horde-tauren", {
         { id = "tSHAMAN-52", at = { zone = 8, x = 48.19, y = 57.94, r = 10 }, when = { class = "SHAMAN" }, minLevel = 52,
           lines = {
             { kind = "train", level = 52, class = "SHAMAN", npc = 986 },
+          } },
+        { id = "tWARRIOR-52", at = { zone = 8, x = 44.89, y = 57.62, r = 10 }, when = { class = "WARRIOR" }, minLevel = 52,
+          lines = {
+            { kind = "train", level = 52, class = "WARRIOR", npc = 985 },
           } },
         { id = "y56-20#2", at = { zone = 8, x = 46.07, y = 54.83, r = 10 }, text = "Fly from Stonard, Swamp of Sorrows to Grom'gol, Stranglethorn.",
           lines = {
@@ -5236,19 +5214,19 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "turnin", quest = 8465, npc = 11556 },
           } },
-        { id = "tDRUID-53:go1", text = "Head north into Moonglade.", when = { class = "DRUID" },
+        { id = "tDRUID-52:go1", text = "Head north into Moonglade.", when = { class = "DRUID" },
           lines = {
             { kind = "goto", at = { zone = 493, x = 52.53, y = 40.57, r = 20 } },
           } },
-        { id = "tDRUID-53", at = { zone = 493, x = 52.53, y = 40.57, r = 10 }, text = "Fly to Moonglade for class training, then return.", when = { class = "DRUID" }, minLevel = 53,
+        { id = "tDRUID-52", at = { zone = 493, x = 52.53, y = 40.57, r = 10 }, text = "Fly to Moonglade for class training, then return.", when = { class = "DRUID" }, minLevel = 52,
           lines = {
-            { kind = "train", level = 53, class = "DRUID", npc = 12042 },
+            { kind = "train", level = 52, class = "DRUID", npc = 12042 },
           } },
-        { id = "tDRUID-53:back1", at = { zone = 493, x = 32.09, y = 66.61, r = 10 }, when = { class = "DRUID" },
+        { id = "tDRUID-52:back1", at = { zone = 493, x = 32.09, y = 66.61, r = 10 }, when = { class = "DRUID" },
           lines = {
             { kind = "getflight", node = 69, npc = 12740 },
           } },
-        { id = "tDRUID-53:back2", at = { zone = 493, x = 32.09, y = 66.61, r = 10 }, text = "Fly from Moonglade to Bloodvenom Post, Felwood.", when = { class = "DRUID" },
+        { id = "tDRUID-52:back2", at = { zone = 493, x = 32.09, y = 66.61, r = 10 }, text = "Fly from Moonglade to Bloodvenom Post, Felwood.", when = { class = "DRUID" },
           lines = {
             { kind = "fly", from = 69, to = 48 },
           } },
@@ -5268,14 +5246,6 @@ Noir.Route("horde-tauren", {
         { id = "h#35", text = "Use your hearthstone to return to Swamp of Sorrows.",
           lines = {
             { kind = "hearth", to = { zone = 8, x = 45.16, y = 56.66 } },
-          } },
-        { id = "tSHAMAN-54", at = { zone = 8, x = 48.19, y = 57.94, r = 10 }, when = { class = "SHAMAN" }, minLevel = 54,
-          lines = {
-            { kind = "train", level = 54, class = "SHAMAN", npc = 986 },
-          } },
-        { id = "tWARRIOR-54", at = { zone = 8, x = 44.89, y = 57.62, r = 10 }, when = { class = "WARRIOR" }, minLevel = 54,
-          lines = {
-            { kind = "train", level = 54, class = "WARRIOR", npc = 985 },
           } },
         { id = "y56-20#3", at = { zone = 8, x = 46.07, y = 54.83, r = 10 }, text = "Fly from Stonard, Swamp of Sorrows to Grom'gol, Stranglethorn.",
           lines = {
@@ -5540,6 +5510,10 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "train", level = 54, class = "HUNTER", npc = 987 },
           } },
+        { id = "tSHAMAN-54", at = { zone = 8, x = 48.19, y = 57.94, r = 10 }, when = { class = "SHAMAN" }, minLevel = 54,
+          lines = {
+            { kind = "train", level = 54, class = "SHAMAN", npc = 986 },
+          } },
         { id = "a2623", at = { zone = 8, x = 44.97, y = 57.37, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 7643 } },
           lines = {
             { kind = "accept", quest = 2623, npc = 7643, ifDone = 2622, requires = { 2622 } },
@@ -5547,6 +5521,10 @@ Noir.Route("horde-tauren", {
         { id = "o2623", at = { zone = 8, x = 63.97, y = 83.66, r = 40 }, text = "Warchief's Orders are southeast of Bengor.", targets = { enemy = { 950 } },
           lines = {
             { kind = "objective", quest = 2623, index = 1, item = 8463, skipIfMissing = true },
+          } },
+        { id = "tWARRIOR-54", at = { zone = 8, x = 44.89, y = 57.62, r = 10 }, when = { class = "WARRIOR" }, minLevel = 54,
+          lines = {
+            { kind = "train", level = 54, class = "WARRIOR", npc = 985 },
           } },
         { id = "t8417", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, when = { class = "WARRIOR" }, targets = { friend = { 7572 } },
           lines = {
@@ -5634,10 +5612,6 @@ Noir.Route("horde-tauren", {
         { id = "h#37", text = "Use your hearthstone to return to Swamp of Sorrows.",
           lines = {
             { kind = "hearth", to = { zone = 8, x = 45.16, y = 56.66 } },
-          } },
-        { id = "tWARRIOR-56", at = { zone = 8, x = 44.89, y = 57.62, r = 10 }, when = { class = "WARRIOR" }, minLevel = 56,
-          lines = {
-            { kind = "train", level = 56, class = "WARRIOR", npc = 985 },
           } },
         { id = "y56-20#4", at = { zone = 8, x = 46.07, y = 54.83, r = 10 }, text = "Fly from Stonard, Swamp of Sorrows to Grom'gol, Stranglethorn.",
           lines = {
@@ -5914,15 +5888,15 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "turnin", quest = 8323, npc = 15194, skipIfMissing = true },
           } },
-        { id = "tDRUID-57:go1", at = { zone = 1377, x = 48.68, y = 36.67, r = 10 }, text = "Fly from Cenarion Hold, Silithus to Camp Mojache, Feralas.", when = { class = "DRUID" },
+        { id = "tDRUID-56:go1", at = { zone = 1377, x = 48.68, y = 36.67, r = 10 }, text = "Fly from Cenarion Hold, Silithus to Camp Mojache, Feralas.", when = { class = "DRUID" },
           lines = {
             { kind = "fly", from = 72, to = 42 },
           } },
-        { id = "tDRUID-57", at = { zone = 357, x = 75.99, y = 42.28, r = 10 }, text = "Fly to Feralas for class training, then return.", when = { class = "DRUID" }, minLevel = 57,
+        { id = "tDRUID-56", at = { zone = 357, x = 75.99, y = 42.28, r = 10 }, text = "Fly to Feralas for class training, then return.", when = { class = "DRUID" }, minLevel = 56,
           lines = {
-            { kind = "train", level = 57, class = "DRUID", npc = 8142 },
+            { kind = "train", level = 56, class = "DRUID", npc = 8142 },
           } },
-        { id = "tDRUID-57:back1", at = { zone = 357, x = 75.45, y = 44.36, r = 10 }, text = "Fly from Camp Mojache, Feralas to Cenarion Hold, Silithus.", when = { class = "DRUID" },
+        { id = "tDRUID-56:back1", at = { zone = 357, x = 75.45, y = 44.36, r = 10 }, text = "Fly from Camp Mojache, Feralas to Cenarion Hold, Silithus.", when = { class = "DRUID" },
           lines = {
             { kind = "fly", from = 42, to = 72 },
           } },
@@ -6009,6 +5983,10 @@ Noir.Route("horde-tauren", {
         { id = "a7813", at = { zone = 1497, x = 71.66, y = 29.23, r = 10 }, minLevel = 12, maxLevel = 60, targets = { friend = { 14729 } },
           lines = {
             { kind = "accept", quest = 7813, npc = 14729 },
+          } },
+        { id = "tWARRIOR-56", at = { zone = 1497, x = 48.32, y = 15.96, r = 10 }, when = { class = "WARRIOR" }, minLevel = 56,
+          lines = {
+            { kind = "train", level = 56, class = "WARRIOR", npc = 4594 },
           } },
         { id = "t5023.a5049.t5049.a5050.a5094.b@1497", at = { zone = 1497, x = 69.79, y = 43.16, r = 10 }, minLevel = 50, items = { 12724, 12721 }, targets = { friend = { 10781, 8403, 10879 } },
           lines = {
@@ -6191,17 +6169,9 @@ Noir.Route("horde-tauren", {
             { kind = "accept", quest = 838, npc = 10837, ifDone = 5098, requires = { 5098 } },
             { kind = "turnin", quest = 838, npc = 11057, skipIfMissing = true },
           } },
-        { id = "tWARRIOR-58", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "WARRIOR", npc = 2131 },
-          } },
         { id = "x14#11", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Durotar.",
           lines = {
             { kind = "transport", to = { zone = 14, x = 51, y = 13.9 }, mode = "zeppelin", at = { zone = 85, x = 60.6, y = 58.9, r = 15 } },
-          } },
-        { id = "tSHAMAN-58", at = { zone = 1637, x = 38.66, y = 35.92, r = 10 }, when = { class = "SHAMAN" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "SHAMAN", npc = 13417 },
           } },
         { id = "a7667", at = { zone = 1637, x = 38.66, y = 35.92, r = 10 }, when = { class = "SHAMAN" }, minLevel = 58, maxLevel = 60, targets = { friend = { 13417 } },
           lines = {
@@ -6220,6 +6190,10 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "fly", from = 44, to = 23 },
           } },
+        { id = "tSHAMAN-56", at = { zone = 1637, x = 38.66, y = 35.92, r = 10 }, when = { class = "SHAMAN" }, minLevel = 56,
+          lines = {
+            { kind = "train", level = 56, class = "SHAMAN", npc = 13417 },
+          } },
         { id = "t7667", at = { zone = 1637, x = 38.66, y = 35.92, r = 10 }, when = { class = "SHAMAN" }, targets = { friend = { 13417 } },
           lines = {
             { kind = "turnin", quest = 7667, npc = 13417, skipIfMissing = true },
@@ -6231,10 +6205,6 @@ Noir.Route("horde-tauren", {
         { id = "y23-22", at = { zone = 1637, x = 45.12, y = 63.89, r = 10 }, text = "Fly from Orgrimmar, Durotar to Thunder Bluff, Mulgore.",
           lines = {
             { kind = "fly", from = 23, to = 22 },
-          } },
-        { id = "tHUNTER-58", at = { zone = 1638, x = 59.13, y = 86.87, r = 10 }, when = { class = "HUNTER" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "HUNTER", npc = 3040 },
           } },
         { id = "a1000.a3762", at = { zone = 1638, x = 44.33, y = 58.76, r = 10 }, minLevel = 54, maxLevel = 58, targets = { friend = { 10881, 6746 } },
           lines = {
@@ -6365,6 +6335,10 @@ Noir.Route("horde-tauren", {
         { id = "h#43", text = "Use your hearthstone to return to Feralas.",
           lines = {
             { kind = "hearth", to = { zone = 357, x = 74.8, y = 45.18 } },
+          } },
+        { id = "tDRUID-58", at = { zone = 357, x = 75.99, y = 42.28, r = 10 }, when = { class = "DRUID" }, minLevel = 58,
+          lines = {
+            { kind = "train", level = 58, class = "DRUID", npc = 8142 },
           } },
         { id = "t3062.t3063", at = { zone = 357, x = 76.18, y = 43.83, r = 10 }, items = { 9530 }, targets = { friend = { 7776 } },
           lines = {

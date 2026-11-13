@@ -6,7 +6,7 @@ const assert = require("node:assert");
 const { testWorld } = require("./world");
 const { checkRoute3 } = require("../planner/format3");
 const { applies } = require("../planner/validate3");
-const { addClassTraining, classTrainers, merchants, SELL_JUNK_LEVEL, TRAINER_YARDS, MAX_DETOUR_SECONDS, VISIT_EVERY, FORCE_AFTER, TRIP_AFTER, MAX_TRIP_SECONDS } = require("../planner/training");
+const { addClassTraining, classTrainers, merchants, SELL_JUNK_LEVEL, TRAINER_YARDS, VISIT_MARGIN, MAX_DETOUR_SECONDS, VISIT_EVERY, FORCE_AFTER, TRIP_AFTER, MAX_TRIP_SECONDS } = require("../planner/training");
 
 const P = (zone, x, y, r) => (r === undefined ? { zone, x, y } : { zone, x, y, r });
 function world() {
@@ -59,7 +59,7 @@ test("a warrior's route visits a warrior trainer at even levels when one stands 
   const sections = chain(a, b);
   const levels = [1, 2, 2.5, 3, 3.9, 4.2, 5, 5.5, 6, 7, 7.5, 8];
   const before = JSON.stringify(sections);
-  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), classes: ["WARRIOR"], levelOf: levelsOf(sections, levels) });
+  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), margin: 0, townStop: false, classes: ["WARRIOR"], levelOf: levelsOf(sections, levels) });
   assert.strictEqual(JSON.stringify(sections), before, "the input is not changed");
   assert.deepStrictEqual(visits(out).map((s) => s.id), ["tWARRIOR-2", "tWARRIOR-4", "tWARRIOR-6", "tWARRIOR-8"]);
   // each visit stands right before the first step at its level, in that step's section
@@ -72,12 +72,40 @@ test("a warrior's route visits a warrior trainer at even levels when one stands 
   assert.strictEqual(checkRoute3(route3(out)), null);
 });
 
+test("a visit falls due only where the estimate is VISIT_MARGIN above its level", () => {
+  const w = world();
+  const a = Array.from({ length: 6 }, () => obj(100, 30, 50));
+  const sections = chain(a);
+  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), townStop: false, classes: ["WARRIOR"], levelOf: levelsOf(sections, [1, 2, 2.2, 2.3, 4.1, 4.5]) });
+  assert.strictEqual(VISIT_MARGIN, 0.3);
+  const all = ids(out);
+  // 2 and 2.2 are short of 2.3; 4.1 is short of 4.3
+  assert.strictEqual(all[all.indexOf("tWARRIOR-2") + 1], a[3].id);
+  assert.strictEqual(all[all.indexOf("tWARRIOR-4") + 1], a[5].id);
+});
+test("a visit that falls due before field work waits for the next stop that hands quests in near a trainer", () => {
+  const w = world();
+  const turnin = (q) => ({ id: `t${q}`, at: P(100, 30, 50, 10), lines: [{ kind: "turnin", quest: q }] });
+  // due at the first objective; the turn-in back in town comes two objectives later
+  const steps = [obj(100, 30, 50), obj(100, 31, 50), obj(100, 30, 51), turnin(7001), obj(100, 30, 50)];
+  const sections = chain(steps);
+  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), classes: ["WARRIOR"], levelOf: levelsOf(sections, [2.5, 2.6, 2.7, 2.9, 3.2]) });
+  const all = ids(out);
+  assert.strictEqual(all[all.indexOf("tWARRIOR-2") + 1], "t7001");
+  assert.strictEqual(checkRoute3(route3(out)), null);
+  // without a town stop before the class is VISIT_EVERY levels further, the visit stays where it fell due
+  const fields = [obj(100, 30, 50), obj(100, 31, 50), obj(100, 30, 51), obj(100, 31, 51)];
+  const field = chain(fields);
+  const late = addClassTraining(w.db, field, "Alliance", { graph: w.graph(), classes: ["WARRIOR"], levelOf: levelsOf(field, [2.5, 3, 4.3, 4.5]) });
+  const order = ids(late);
+  assert.strictEqual(order[order.indexOf("tWARRIOR-2") + 1], fields[0].id);
+});
 test("a visit carries its level as its minLevel, so a character under it is shown a grind instead of a stalled visit", () => {
   // Found by the simulator (task X1): a character a level under the estimate stood before "visit the trainer for
   // your level 4 spells" with nothing it could do. Spec 3.7: a step that needs a level has it as its minimum.
   const w = world();
   const a = Array.from({ length: 6 }, () => obj(100, 30, 50));
-  const out = addClassTraining(w.db, chain(a), "Alliance", { graph: w.graph(), classes: ["WARRIOR"], levelOf: levelsOf(chain(a), [1, 2, 3, 4, 5, 6]) });
+  const out = addClassTraining(w.db, chain(a), "Alliance", { graph: w.graph(), margin: 0, townStop: false, classes: ["WARRIOR"], levelOf: levelsOf(chain(a), [1, 2, 3, 4, 5, 6]) });
   const found = visits(out);
   assert.ok(found.length > 0);
   for (const v of found) assert.strictEqual(v.minLevel, v.lines[0].level, v.id);
@@ -96,7 +124,7 @@ test("a visit up to level 20 carries a sell-grey-items line at the nearest frien
   assert.deepStrictEqual(merchants(w.db, "Alliance").map((m) => m.npc), [650, 653, 654]);
   const steps = Array.from({ length: 4 }, () => obj(100, 30, 50));
   const sections = chain(steps);
-  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), classes: ["WARRIOR"], levelOf: levelsOf(sections, [18, 20, 22, 24]) });
+  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), margin: 0, townStop: false, classes: ["WARRIOR"], levelOf: levelsOf(sections, [18, 20, 22, 24]) });
   const byId = new Map(visits(out).map((v) => [v.id, v]));
   assert.deepStrictEqual([...byId.keys()], ["tWARRIOR-18", "tWARRIOR-20", "tWARRIOR-22", "tWARRIOR-24"]);
   assert.deepStrictEqual(byId.get("tWARRIOR-18").lines, [{ kind: "train", class: "WARRIOR", level: 18, npc: 600 },
@@ -111,7 +139,7 @@ test("a visit with no friendly merchant within 300 yards of the trainer has no s
   const w = world();
   w.db.npcs.set(660, { id: 660, name: "Far Merchant", friendly: "A", subName: "", vendor: true, spawns: { 100: [[70, 50]] } }); // 380 yards away
   const sections = chain(Array.from({ length: 2 }, () => obj(100, 30, 50)));
-  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), classes: ["WARRIOR"], levelOf: levelsOf(sections, [2, 3]) });
+  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), margin: 0, townStop: false, classes: ["WARRIOR"], levelOf: levelsOf(sections, [2, 3]) });
   assert.deepStrictEqual(visits(out).map((v) => v.lines.map((l) => l.kind)), [["train"]]);
 });
 
@@ -123,7 +151,7 @@ test("a visit near the end of a walk into town comes after the walk, not before 
   const walk = { id: "g100@100", at: P(100, 30, 50, 20), lines: [{ kind: "goto", at: P(100, 30, 50, 20) }] };
   const here = obj(100, 30, 50);
   const sections = chain([far, walk, here]);
-  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), classes: ["WARRIOR"], levelOf: levelsOf(sections, [2, 2, 2]) });
+  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), margin: 0, townStop: false, classes: ["WARRIOR"], levelOf: levelsOf(sections, [2, 2, 2]) });
   assert.deepStrictEqual(ids(out), [far.id, walk.id, "tWARRIOR-2", here.id]);
 });
 
@@ -133,12 +161,12 @@ test("a visit is forced after 6 levels without one when the route passes a train
   const steps = Array.from({ length: 9 }, () => obj(100, 10, 50));
   const sections = chain(steps);
   const levels = [40, 41, 42, 43, 44, 45, 46, 47, 48];
-  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), classes: ["ROGUE"], levelOf: levelsOf(sections, levels) });
+  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), margin: 0, townStop: false, classes: ["ROGUE"], levelOf: levelsOf(sections, levels) });
   assert.deepStrictEqual(visits(out).map((s) => s.id), ["tROGUE-40", "tROGUE-46"]);
   assert.strictEqual(visits(out)[0].lines[0].npc, 603);
   // a route that never enters a zone with a trainer gets no visit, however long it runs
   const east = chain(Array.from({ length: 9 }, () => obj(200, 50, 50)));
-  assert.deepStrictEqual(visits(addClassTraining(w.db, east, "Alliance", { graph: w.graph(), classes: ["ROGUE"], levelOf: levelsOf(east, levels) })), []);
+  assert.deepStrictEqual(visits(addClassTraining(w.db, east, "Alliance", { graph: w.graph(), margin: 0, townStop: false, classes: ["ROGUE"], levelOf: levelsOf(east, levels) })), []);
 });
 
 test("a visit never adds a detour over 120 seconds", () => {
@@ -147,7 +175,7 @@ test("a visit never adds a detour over 120 seconds", () => {
   const steps = Array.from({ length: 12 }, () => obj(100, 10, 50));
   const sections = chain(steps);
   const levels = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
-  assert.deepStrictEqual(visits(addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), classes: ["ROGUE"], levelOf: levelsOf(sections, levels) })), []);
+  assert.deepStrictEqual(visits(addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), margin: 0, townStop: false, classes: ["ROGUE"], levelOf: levelsOf(sections, levels) })), []);
 });
 
 test("other classes do not see the step", () => {
@@ -156,7 +184,7 @@ test("other classes do not see the step", () => {
   const steps = [obj(100, 30, 50), rogueOnly, obj(100, 30, 50), obj(100, 30, 50)];
   const sections = chain(steps);
   const levels = [1, 2, 2, 2];
-  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), classes: ["MAGE", "WARRIOR"], levelOf: levelsOf(sections, levels) });
+  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), margin: 0, townStop: false, classes: ["MAGE", "WARRIOR"], levelOf: levelsOf(sections, levels) });
   assert.deepStrictEqual(ids(out), [steps[0].id, rogueOnly.id, "tMAGE-2", "tWARRIOR-2", steps[2].id, steps[3].id],
     "a step for another class is never where a visit is written");
   for (const v of visits(out)) {
@@ -171,9 +199,9 @@ test("no visit uses a trainer of the other faction", () => {
   const w = world();
   const sections = chain([obj(100, 30, 50), obj(100, 30, 50)]);
   const levelOf = levelsOf(sections, [2, 2]);
-  const alliance = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), classes: ["WARRIOR"], levelOf });
+  const alliance = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), margin: 0, townStop: false, classes: ["WARRIOR"], levelOf });
   assert.deepStrictEqual(visits(alliance).map((v) => v.lines[0].npc), [600]);
-  const horde = addClassTraining(w.db, sections, "Horde", { graph: w.graph(), classes: ["WARRIOR", "MAGE"], levelOf });
+  const horde = addClassTraining(w.db, sections, "Horde", { graph: w.graph(), margin: 0, townStop: false, classes: ["WARRIOR", "MAGE"], levelOf });
   assert.deepStrictEqual(visits(horde).map((v) => v.lines[0].npc), [601], "no Horde mage trainer stands in the world");
 });
 
@@ -184,7 +212,7 @@ const flightStep = (node, zone, x, y) => ({ id: `f${node}`, at: P(zone, x, y, 10
 const flyStep = (from, to, zone, x, y) => ({ id: `y${from}-${to}`, at: P(zone, x, y, 10), lines: [{ kind: "fly", from, to }] });
 const tripRoute = (x, first = flightStep(1, 100, 20, 50)) => [first, flightStep(3, 200, 30, 50), ...Array.from({ length: 10 }, () => obj(200, x, 50))];
 const levelsOfSteps = (steps, list) => { const m = new Map(steps.map((s, i) => [s, list[i]])); return (cls, step) => (m.has(step) ? { start: m.get(step), end: m.get(step) } : undefined); };
-const trip = (w, steps, levels, notes) => addClassTraining(w.db, chain(steps), "Alliance", { graph: w.graph(), classes: ["WARRIOR"], levelOf: levelsOfSteps(steps, levels), notes });
+const trip = (w, steps, levels, notes) => addClassTraining(w.db, chain(steps), "Alliance", { graph: w.graph(), margin: 0, townStop: false, classes: ["WARRIOR"], levelOf: levelsOfSteps(steps, levels), notes });
 const TRIP_LEVELS = [2, 3, 4, 5, 6, 6.5, 7, 8, 9, 10, 11, 12];
 // The index of the first step after a visit and the steps of its way back.
 const afterTrip = (all, id) => { let k = all.indexOf(id) + 1; while (k < all.length && all[k].startsWith(`${id}:back`)) k++; return k; };

@@ -145,54 +145,54 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,021, 1,272 (63%) |
-| Steps in the route file | 1,476 |
+| Actions before bundling, steps after | 2,021, 1,266 (63%) |
+| Steps in the route file | 1,463 |
 | Sections | 36 |
 | Profession steps written | p164-2, p165-2, p171-2, p182-2, p197-2, p333-2, p186-2, p202-2, p393-2, p186-3, p165-3, p171-3, p164-3, p182-3, p197-3, p202-3, p333-3, p393-3, p164-4, p186-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-36-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-36-stranglethorn-vale; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-36-stranglethorn-vale; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-36-stranglethorn-vale; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-36-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-36-stranglethorn-vale; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-36-stranglethorn-vale |
-| Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 12, 22, 30, 40, 46, 48, 50, 52, 54, 56, 60; MAGE: 2, 4, 6, 8, 10, 12, 14, 16, 23, 26, 32, 34, 40, 46, 53, 56, 60; PALADIN: 2, 4, 6, 8, 10, 12, 23, 40, 44, 48, 52, 56, 58; PRIEST: 2, 4, 6, 8, 10, 23, 41, 46, 53, 56, 60; ROGUE: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 24, 26, 34, 36, 41, 44, 48, 53, 56, 58, 60; WARLOCK: 2, 4, 6, 8, 10, 12, 22, 30, 32, 40, 46, 53, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 22, 26, 30, 36, 40, 42, 46, 48, 52, 56, 58 |
-| Class trainer gaps | HUNTER 12 to 22: the cheapest trip to a trainer adds 592 seconds (at most 300); HUNTER 22 to 30: the cheapest trip to a trainer adds 302 seconds (at most 300); HUNTER 30 to 40: the cheapest trip to a trainer adds 315 seconds (at most 300); MAGE 16 to 23: the cheapest trip to a trainer adds 794 seconds (at most 300); MAGE 46 to 53: the cheapest trip to a trainer adds 399 seconds (at most 300); PALADIN 12 to 23: the cheapest trip to a trainer adds 1406 seconds (at most 300); PALADIN 23 to 40: the cheapest trip to a trainer adds 344 seconds (at most 300); PRIEST 10 to 23: the cheapest trip to a trainer adds 787 seconds (at most 300); PRIEST 23 to 41: the cheapest trip to a trainer adds 335 seconds (at most 300); PRIEST 46 to 53: the cheapest trip to a trainer adds 406 seconds (at most 300); ROGUE 26 to 34: the cheapest trip to a trainer adds 303 seconds (at most 300); WARLOCK 12 to 22: the cheapest trip to a trainer adds 1450 seconds (at most 300); WARLOCK 22 to 30: the cheapest trip to a trainer adds 302 seconds (at most 300); WARLOCK 32 to 40: the cheapest trip to a trainer adds 412 seconds (at most 300); WARLOCK 46 to 53: the cheapest trip to a trainer adds 424 seconds (at most 300); WARRIOR 14 to 22: the cheapest trip to a trainer adds 757 seconds (at most 300) |
+| Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 20, 22, 29, 39, 45, 48, 50, 52, 54, 56; MAGE: 2, 4, 6, 8, 10, 14, 22, 26, 32, 34, 38, 42, 46, 52, 54, 56; PALADIN: 2, 4, 6, 8, 10, 22, 40, 42, 46, 48, 52, 56, 58; PRIEST: 2, 4, 6, 8, 10, 22, 40, 45, 52, 56; ROGUE: 2, 4, 6, 8, 10, 14, 16, 18, 20, 22, 24, 28, 32, 34, 40, 42, 46, 52, 54, 56, 58; WARLOCK: 2, 4, 6, 8, 10, 22, 30, 38, 40, 45, 52, 56; WARRIOR: 2, 4, 6, 8, 10, 14, 22, 26, 30, 35, 40, 45, 48, 50, 52, 54, 56, 58 |
+| Class trainer gaps | HUNTER 10 to 20: the cheapest trip to a trainer adds 592 seconds (at most 300); HUNTER 22 to 29: the cheapest trip to a trainer adds 313 seconds (at most 300); HUNTER 29 to 39: the cheapest trip to a trainer adds 315 seconds (at most 300); MAGE 14 to 22: the cheapest trip to a trainer adds 794 seconds (at most 300); PALADIN 10 to 22: the cheapest trip to a trainer adds 1406 seconds (at most 300); PALADIN 22 to 40: the cheapest trip to a trainer adds 344 seconds (at most 300); PRIEST 10 to 22: the cheapest trip to a trainer adds 787 seconds (at most 300); PRIEST 22 to 40: the cheapest trip to a trainer adds 335 seconds (at most 300); PRIEST 45 to 52: the cheapest trip to a trainer adds 406 seconds (at most 300); WARLOCK 10 to 22: the cheapest trip to a trainer adds 1450 seconds (at most 300); WARLOCK 22 to 30: the cheapest trip to a trainer adds 302 seconds (at most 300); WARLOCK 30 to 38: the cheapest trip to a trainer adds 412 seconds (at most 300); WARLOCK 45 to 52: the cheapest trip to a trainer adds 424 seconds (at most 300); WARRIOR 14 to 22: the cheapest trip to a trainer adds 806 seconds (at most 300) |
 | Planner notes | Human step a717: quest 717 gives XP only up to level 58, but the estimated level there is 59; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| human-01-12-elwynn-forest | 1-12 Elwynn Forest | 157 | 1-15 |
-| human-12-20-darkshore | 12-20 Darkshore | 126 | 12-23 |
-| human-20-23-ashenvale | 20-23 Ashenvale | 78 | 20-26 |
+| human-01-12-elwynn-forest | 1-12 Elwynn Forest | 150 | 1-15 |
+| human-12-20-darkshore | 12-20 Darkshore | 124 | 12-23 |
+| human-20-23-ashenvale | 20-23 Ashenvale | 79 | 20-26 |
 | human-23-25-duskwood | 23-25 Duskwood | 28 | 23-28 |
 | human-25-25-stormwind-city | 25 Stormwind City | 9 | 25-28 |
 | human-25-27-duskwood | 25-27 Duskwood | 41 | 25-30 |
-| human-27-29-wetlands | 27-29 Wetlands | 39 | 27-32 |
+| human-27-29-wetlands | 27-29 Wetlands | 42 | 27-32 |
 | human-29-30-ashenvale | 29-30 Ashenvale | 14 | 29-33 |
 | human-30-31-ashenvale | 30-31 Ashenvale | 38 | 30-34 |
-| human-31-32-hillsbrad-foothills | 31-32 Hillsbrad Foothills | 35 | 31-35 |
+| human-31-32-hillsbrad-foothills | 31-32 Hillsbrad Foothills | 34 | 31-35 |
 | human-32-36-stranglethorn-vale | 32-36 Stranglethorn Vale | 63 | 32-39 |
 | human-36-37-desolace | 36-37 Desolace | 52 | 36-40 |
-| human-37-39-arathi-highlands | 37-39 Arathi Highlands | 48 | 37-42 |
+| human-37-39-arathi-highlands | 37-39 Arathi Highlands | 44 | 37-42 |
 | human-39-40-badlands | 39-40 Badlands | 9 | 39-43 |
-| human-40-40-badlands | 40 Badlands | 41 | 40-43 |
-| human-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 23 | 40-44 |
-| human-41-42-tanaris | 41-42 Tanaris | 16 | 41-45 |
-| human-42-44-stranglethorn-vale | 42-44 Stranglethorn Vale | 50 | 42-47 |
+| human-40-40-badlands | 40 Badlands | 45 | 40-43 |
+| human-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 22 | 40-44 |
+| human-41-42-tanaris | 41-42 Tanaris | 15 | 41-45 |
+| human-42-44-stranglethorn-vale | 42-44 Stranglethorn Vale | 53 | 42-47 |
 | human-44-46-feralas | 44-46 Feralas | 53 | 44-49 |
-| human-46-47-searing-gorge | 46-47 Searing Gorge | 41 | 46-50 |
+| human-46-47-searing-gorge | 46-47 Searing Gorge | 46 | 46-50 |
 | human-47-48-tanaris | 47-48 Tanaris | 27 | 47-51 |
-| human-48-48-the-hinterlands | 48 The Hinterlands | 22 | 48-51 |
-| human-48-49-blasted-lands | 48-49 Blasted Lands | 9 | 48-52 |
-| human-49-50-un-goro-crater | 49-50 Un'Goro Crater | 15 | 49-53 |
+| human-48-48-the-hinterlands | 48 The Hinterlands | 15 | 48-51 |
+| human-48-49-blasted-lands | 48-49 Blasted Lands | 8 | 48-52 |
+| human-49-50-un-goro-crater | 49-50 Un'Goro Crater | 17 | 49-53 |
 | human-50-50-un-goro-crater | 50 Un'Goro Crater | 20 | 50-53 |
 | human-50-51-felwood | 50-51 Felwood | 21 | 50-54 |
 | human-51-51-azshara | 51 Azshara | 11 | 51-54 |
-| human-51-52-burning-steppes | 51-52 Burning Steppes | 27 | 51-55 |
+| human-51-52-burning-steppes | 51-52 Burning Steppes | 26 | 51-55 |
 | human-52-53-western-plaguelands | 52-53 Western Plaguelands | 32 | 52-56 |
-| human-53-53-un-goro-crater | 53 Un'Goro Crater | 29 | 53-56 |
-| human-53-54-silithus | 53-54 Silithus | 24 | 53-57 |
+| human-53-53-un-goro-crater | 53 Un'Goro Crater | 31 | 53-56 |
+| human-53-54-silithus | 53-54 Silithus | 23 | 53-57 |
 | human-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 33 | 54-58 |
 | human-55-56-winterspring | 55-56 Winterspring | 47 | 55-59 |
-| human-56-57-western-plaguelands | 56-57 Western Plaguelands | 64 | 56-60 |
-| human-57-58-azshara | 57-58 Azshara | 37 | 57-60 |
-| human-58-60-silithus | 58-60 Silithus | 97 | 58-60 |
+| human-56-57-western-plaguelands | 56-57 Western Plaguelands | 66 | 56-60 |
+| human-57-58-azshara | 57-58 Azshara | 36 | 57-60 |
+| human-58-60-silithus | 58-60 Silithus | 89 | 58-60 |
 
 ### Level curve
 
@@ -232,54 +232,54 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,076, 1,300 (63%) |
-| Steps in the route file | 1,486 |
+| Actions before bundling, steps after | 2,076, 1,295 (62%) |
+| Steps in the route file | 1,481 |
 | Sections | 36 |
 | Profession steps written | p164-2, p171-2, p202-2, p333-2, p165-2, p197-2, p182-2, p186-2, p393-2, p164-3, p165-3, p197-3, p333-3, p393-4, p171-4, p182-4, p186-4, p197-4, p164-4, p202-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section orc-34-36-desolace; Alchemy Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section orc-20-20-the-barrens; Herbalism Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section orc-20-20-the-barrens; Mining Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section orc-20-20-the-barrens; Engineering Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section orc-20-20-the-barrens; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section orc-34-36-desolace; Skinning Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section orc-20-20-the-barrens |
-| Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 12, 27, 32, 34, 40, 42, 44, 48, 52, 54, 58; MAGE: 2, 4, 8, 10, 12, 14, 16, 26, 32, 34, 36, 38, 44, 50, 54, 56, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 18, 20, 26, 32, 34, 36, 38, 40, 42, 44, 48, 50, 54, 56, 58; SHAMAN: 2, 4, 6, 8, 10, 12, 22, 26, 28, 30, 34, 38, 44, 48, 50, 54, 58; WARLOCK: 2, 4, 6, 8, 10, 12, 14, 18, 20, 24, 28, 30, 32, 34, 36, 40, 44, 48, 50, 54, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 14, 16, 24, 28, 32, 34, 36, 40, 48, 50, 54, 56, 58 |
-| Class trainer gaps | HUNTER 12 to 27: the cheapest trip to a trainer adds 377 seconds (at most 300); MAGE 16 to 26: the cheapest trip to a trainer adds 317 seconds (at most 300); SHAMAN 12 to 22: the cheapest trip to a trainer adds 327 seconds (at most 300); WARRIOR 16 to 24: the cheapest trip to a trainer adds 305 seconds (at most 300); WARRIOR 40 to 48: the cheapest trip to a trainer adds 486 seconds (at most 300) |
+| Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 12, 26, 30, 32, 40, 42, 48, 52, 54, 56, 58; MAGE: 2, 4, 6, 10, 14, 25, 30, 32, 34, 38, 42, 48, 50, 52, 54, 56, 58; ROGUE: 2, 4, 6, 8, 10, 12, 16, 18, 22, 26, 30, 32, 34, 36, 38, 40, 42, 48, 54, 56, 58; SHAMAN: 2, 4, 6, 8, 10, 20, 25, 28, 32, 34, 38, 42, 48, 54, 56, 58; WARLOCK: 2, 4, 6, 8, 10, 12, 17, 21, 24, 28, 30, 34, 36, 38, 40, 42, 48, 50, 54, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 22, 27, 30, 34, 36, 38, 48, 50, 52, 54, 56, 58 |
+| Class trainer gaps | HUNTER 12 to 26: the cheapest trip to a trainer adds 377 seconds (at most 300); HUNTER 32 to 40: the cheapest trip to a trainer adds 552 seconds (at most 300); MAGE 14 to 25: the cheapest trip to a trainer adds 317 seconds (at most 300); SHAMAN 10 to 20: the cheapest trip to a trainer adds 327 seconds (at most 300); WARRIOR 14 to 22: the cheapest trip to a trainer adds 305 seconds (at most 300); WARRIOR 38 to 48: the cheapest trip to a trainer adds 486 seconds (at most 300) |
 | Planner notes | Orc step a3062.a3063: quest 3062 gives XP only up to level 58, but the estimated level there is 59; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| orc-01-12-durotar | 1-12 Durotar | 163 | 1-15 |
+| orc-01-12-durotar | 1-12 Durotar | 159 | 1-15 |
 | orc-12-20-the-barrens | 12-20 The Barrens | 130 | 12-23 |
 | orc-20-20-the-barrens | 20 The Barrens | 16 | 20-23 |
-| orc-20-20-orgrimmar | 20 Orgrimmar | 11 | 20-23 |
-| orc-20-24-the-barrens | 20-24 The Barrens | 66 | 20-27 |
-| orc-24-26-stonetalon-mountains | 24-26 Stonetalon Mountains | 49 | 24-29 |
-| orc-26-29-ashenvale | 26-29 Ashenvale | 92 | 26-32 |
+| orc-20-20-orgrimmar | 20 Orgrimmar | 9 | 20-23 |
+| orc-20-24-the-barrens | 20-24 The Barrens | 74 | 20-27 |
+| orc-24-26-stonetalon-mountains | 24-26 Stonetalon Mountains | 45 | 24-29 |
+| orc-26-29-ashenvale | 26-29 Ashenvale | 91 | 26-32 |
 | orc-29-30-thousand-needles | 29-30 Thousand Needles | 16 | 29-33 |
-| orc-30-30-thousand-needles | 30 Thousand Needles | 17 | 30-33 |
+| orc-30-30-thousand-needles | 30 Thousand Needles | 16 | 30-33 |
 | orc-30-32-hillsbrad-foothills | 30-32 Hillsbrad Foothills | 36 | 30-35 |
-| orc-32-34-stranglethorn-vale | 32-34 Stranglethorn Vale | 81 | 32-37 |
+| orc-32-34-stranglethorn-vale | 32-34 Stranglethorn Vale | 83 | 32-37 |
 | orc-34-36-desolace | 34-36 Desolace | 59 | 34-39 |
 | orc-36-39-arathi-highlands | 36-39 Arathi Highlands | 54 | 36-42 |
 | orc-39-40-dustwallow-marsh | 39-40 Dustwallow Marsh | 23 | 39-43 |
-| orc-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 28 | 40-44 |
-| orc-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 74 | 41-47 |
+| orc-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 29 | 40-44 |
+| orc-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 72 | 41-47 |
 | orc-44-45-feralas | 44-45 Feralas | 41 | 44-48 |
-| orc-45-47-tanaris | 45-47 Tanaris | 37 | 45-50 |
+| orc-45-47-tanaris | 45-47 Tanaris | 36 | 45-50 |
 | orc-47-47-blasted-lands | 47 Blasted Lands | 8 | 47-50 |
-| orc-47-49-searing-gorge | 47-49 Searing Gorge | 21 | 47-52 |
+| orc-47-49-searing-gorge | 47-49 Searing Gorge | 19 | 47-52 |
 | orc-49-49-swamp-of-sorrows | 49 Swamp of Sorrows | 22 | 49-52 |
 | orc-49-50-the-hinterlands | 49-50 The Hinterlands | 21 | 49-53 |
-| orc-50-50-the-hinterlands | 50 The Hinterlands | 22 | 50-53 |
-| orc-50-51-azshara | 50-51 Azshara | 21 | 50-54 |
+| orc-50-50-the-hinterlands | 50 The Hinterlands | 20 | 50-53 |
+| orc-50-51-azshara | 50-51 Azshara | 20 | 50-54 |
 | orc-51-52-felwood | 51-52 Felwood | 24 | 51-55 |
 | orc-52-53-un-goro-crater | 52-53 Un'Goro Crater | 54 | 52-56 |
 | orc-53-54-western-plaguelands | 53-54 Western Plaguelands | 22 | 53-57 |
-| orc-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 48 | 54-58 |
-| orc-55-55-burning-steppes | 55 Burning Steppes | 19 | 55-58 |
+| orc-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 47 | 54-58 |
+| orc-55-55-burning-steppes | 55 Burning Steppes | 20 | 55-58 |
 | orc-55-56-winterspring | 55-56 Winterspring | 15 | 55-59 |
 | orc-56-56-azshara | 56 Azshara | 17 | 56-59 |
 | orc-56-56-winterspring | 56 Winterspring | 8 | 56-59 |
 | orc-56-57-silithus | 56-57 Silithus | 30 | 56-60 |
-| orc-57-57-undercity | 57 Undercity | 23 | 57-60 |
-| orc-57-58-eastern-plaguelands | 57-58 Eastern Plaguelands | 40 | 57-60 |
-| orc-58-60-silithus | 58-60 Silithus | 78 | 58-60 |
+| orc-57-57-undercity | 57 Undercity | 24 | 57-60 |
+| orc-57-58-eastern-plaguelands | 57-58 Eastern Plaguelands | 37 | 57-60 |
+| orc-58-60-silithus | 58-60 Silithus | 84 | 58-60 |
 
 ### Level curve
 
@@ -319,21 +319,21 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 1,923, 1,224 (64%) |
+| Actions before bundling, steps after | 1,923, 1,219 (63%) |
 | Steps in the route file | 1,393 |
 | Sections | 38 |
 | Profession steps written | p164-2, p186-2, p202-2, p182-2, p197-2, p186-3, p165-2, p165-3, p171-2, p171-3, p164-3, p182-3, p197-3, p202-3, p333-2, p333-3, p393-2, p393-3, p164-4, p186-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-36-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-36-stranglethorn-vale; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-36-stranglethorn-vale; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-36-stranglethorn-vale; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-36-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-36-stranglethorn-vale; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-36-stranglethorn-vale |
-| Class trainer visits | HUNTER: 2, 6, 8, 10, 22, 30, 41, 46, 48, 52, 56, 58; PALADIN: 2, 6, 8, 10, 12, 23, 40, 42, 46, 51, 57; PRIEST: 2, 6, 8, 10, 22, 41, 46, 51, 57; ROGUE: 2, 6, 8, 10, 12, 16, 20, 24, 26, 34, 36, 40, 42, 44, 48, 52, 57, 60; SHAMAN: 2, 6, 8, 10, 22, 26, 40, 46, 51, 57; WARRIOR: 2, 6, 8, 10, 12, 14, 22, 26, 30, 36, 40, 42, 46, 51, 57, 60 |
-| Class trainer gaps | HUNTER 10 to 22: the cheapest trip to a trainer adds 446 seconds (at most 300); HUNTER 22 to 30: the cheapest trip to a trainer adds 302 seconds (at most 300); HUNTER 30 to 41: the cheapest trip to a trainer adds 315 seconds (at most 300); PALADIN 12 to 23: the cheapest trip to a trainer adds 1406 seconds (at most 300); PALADIN 23 to 40: the cheapest trip to a trainer adds 355 seconds (at most 300); PRIEST 10 to 22: the cheapest trip to a trainer adds 462 seconds (at most 300); PRIEST 22 to 41: the cheapest trip to a trainer adds 325 seconds (at most 300); ROGUE 26 to 34: the cheapest trip to a trainer adds 303 seconds (at most 300); SHAMAN 10 to 22: the cheapest trip to a trainer adds 992 seconds (at most 300); SHAMAN 26 to 40: the cheapest trip to a trainer adds 316 seconds (at most 300); WARRIOR 14 to 22: the cheapest trip to a trainer adds 603 seconds (at most 300) |
+| Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 22, 29, 40, 45, 48, 50, 54, 56, 58; PALADIN: 2, 4, 6, 8, 12, 22, 38, 40, 42, 46, 50, 56; PRIEST: 2, 4, 6, 8, 22, 40, 45, 50, 56; ROGUE: 2, 4, 6, 8, 10, 12, 16, 18, 20, 22, 24, 28, 32, 34, 40, 42, 46, 50, 56, 58; SHAMAN: 2, 4, 6, 8, 22, 39, 45, 50, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 22, 26, 30, 35, 40, 45, 50, 56, 58 |
+| Class trainer gaps | HUNTER 10 to 22: the cheapest trip to a trainer adds 446 seconds (at most 300); HUNTER 22 to 29: the cheapest trip to a trainer adds 302 seconds (at most 300); HUNTER 29 to 40: the cheapest trip to a trainer adds 315 seconds (at most 300); PALADIN 12 to 22: the cheapest trip to a trainer adds 1406 seconds (at most 300); PALADIN 22 to 38: the cheapest trip to a trainer adds 344 seconds (at most 300); PRIEST 8 to 22: the cheapest trip to a trainer adds 462 seconds (at most 300); PRIEST 22 to 40: the cheapest trip to a trainer adds 335 seconds (at most 300); SHAMAN 8 to 22: the cheapest trip to a trainer adds 992 seconds (at most 300); SHAMAN 22 to 39: the cheapest trip to a trainer adds 303 seconds (at most 300); WARRIOR 14 to 22: the cheapest trip to a trainer adds 603 seconds (at most 300) |
 | Planner notes | Dwarf step a717: quest 717 gives XP only up to level 58, but the estimated level there is 59; with "skip content you outlevel" the step and its quest's later lines are skipped; Dwarf step a2877: quest 2877 gives XP only up to level 56, but the estimated level there is 59; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| dwarf-01-11-dun-morogh | 1-11 Dun Morogh | 131 | 1-14 |
+| dwarf-01-11-dun-morogh | 1-11 Dun Morogh | 133 | 1-14 |
 | dwarf-11-20-darkshore | 11-20 Darkshore | 135 | 11-23 |
-| dwarf-20-23-ashenvale | 20-23 Ashenvale | 81 | 20-26 |
+| dwarf-20-23-ashenvale | 20-23 Ashenvale | 82 | 20-26 |
 | dwarf-23-25-duskwood | 23-25 Duskwood | 30 | 23-28 |
 | dwarf-25-25-stormwind-city | 25 Stormwind City | 5 | 25-28 |
 | dwarf-25-26-duskwood | 25-26 Duskwood | 30 | 25-29 |
@@ -343,23 +343,23 @@ what its class steps add to the shared route's numbers, which the race's section
 | dwarf-31-32-hillsbrad-foothills | 31-32 Hillsbrad Foothills | 22 | 31-35 |
 | dwarf-32-36-stranglethorn-vale | 32-36 Stranglethorn Vale | 57 | 32-39 |
 | dwarf-36-37-desolace | 36-37 Desolace | 52 | 36-40 |
-| dwarf-37-39-arathi-highlands | 37-39 Arathi Highlands | 43 | 37-42 |
+| dwarf-37-39-arathi-highlands | 37-39 Arathi Highlands | 39 | 37-42 |
 | dwarf-39-40-badlands | 39-40 Badlands | 10 | 39-43 |
 | dwarf-40-40-badlands | 40 Badlands | 19 | 40-43 |
-| dwarf-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 32 | 40-44 |
+| dwarf-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 33 | 40-44 |
 | dwarf-41-43-stranglethorn-vale | 41-43 Stranglethorn Vale | 49 | 41-46 |
-| dwarf-43-44-tanaris | 43-44 Tanaris | 23 | 43-47 |
+| dwarf-43-44-tanaris | 43-44 Tanaris | 21 | 43-47 |
 | dwarf-44-46-feralas | 44-46 Feralas | 42 | 44-49 |
-| dwarf-46-47-searing-gorge | 46-47 Searing Gorge | 40 | 46-50 |
+| dwarf-46-47-searing-gorge | 46-47 Searing Gorge | 41 | 46-50 |
 | dwarf-47-48-tanaris | 47-48 Tanaris | 20 | 47-51 |
-| dwarf-48-49-blasted-lands | 48-49 Blasted Lands | 10 | 48-52 |
+| dwarf-48-49-blasted-lands | 48-49 Blasted Lands | 9 | 48-52 |
 | dwarf-49-49-felwood | 49 Felwood | 15 | 49-52 |
 | dwarf-49-50-un-goro-crater | 49-50 Un'Goro Crater | 12 | 49-53 |
 | dwarf-50-50-un-goro-crater | 50 Un'Goro Crater | 20 | 50-53 |
 | dwarf-50-51-azshara | 50-51 Azshara | 11 | 50-54 |
-| dwarf-51-51-burning-steppes | 51 Burning Steppes | 30 | 51-54 |
+| dwarf-51-51-burning-steppes | 51 Burning Steppes | 33 | 51-54 |
 | dwarf-51-52-felwood | 51-52 Felwood | 19 | 51-55 |
-| dwarf-52-53-western-plaguelands | 52-53 Western Plaguelands | 39 | 52-56 |
+| dwarf-52-53-western-plaguelands | 52-53 Western Plaguelands | 36 | 52-56 |
 | dwarf-53-53-un-goro-crater | 53 Un'Goro Crater | 14 | 53-56 |
 | dwarf-53-54-winterspring | 53-54 Winterspring | 22 | 53-57 |
 | dwarf-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 25 | 54-58 |
@@ -368,7 +368,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | dwarf-56-57-silithus | 56-57 Silithus | 30 | 56-60 |
 | dwarf-57-58-stormwind-city | 57-58 Stormwind City | 100 | 57-60 |
 | dwarf-58-58-eastern-plaguelands | 58 Eastern Plaguelands | 12 | 58-60 |
-| dwarf-58-60-silithus | 58-60 Silithus | 73 | 58-60 |
+| dwarf-58-60-silithus | 58-60 Silithus | 75 | 58-60 |
 
 ### Level curve
 
@@ -408,24 +408,24 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 1,955, 1,247 (64%) |
-| Steps in the route file | 1,421 |
+| Actions before bundling, steps after | 1,955, 1,239 (63%) |
+| Steps in the route file | 1,416 |
 | Sections | 35 |
 | Profession steps written | p165-2, p171-2, p333-2, p164-2, p186-2, p197-2, p202-2, p186-3, p165-3, p171-3, p182-2, p182-3, p164-3, p197-3, p202-3, p333-3, p393-2, p393-3, p164-4, p186-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale |
-| Class trainer visits | DRUID: 2, 4, 6, 8, 10, 12, 14, 18, 20, 22, 41, 52, 56; HUNTER: 2, 4, 6, 8, 10, 12, 22, 28, 32, 40, 46, 48, 52, 56, 58; PRIEST: 2, 4, 6, 8, 10, 12, 20, 25, 40, 46, 51, 55, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 24, 28, 33, 36, 40, 42, 46, 51, 55, 58, 60; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 24, 28, 30, 36, 40, 46, 48, 50, 54, 56, 58 |
-| Class trainer gaps | DRUID 22 to 41: the cheapest trip to a trainer adds 304 seconds (at most 300); DRUID 41 to 52: the cheapest trip to a trainer adds 447 seconds (at most 300); HUNTER 12 to 22: the cheapest trip to a trainer adds 525 seconds (at most 300); HUNTER 32 to 40: the cheapest trip to a trainer adds 322 seconds (at most 300); PRIEST 12 to 20: the cheapest trip to a trainer adds 638 seconds (at most 300); PRIEST 25 to 40: the cheapest trip to a trainer adds 335 seconds (at most 300); WARRIOR 14 to 24: the cheapest trip to a trainer adds 480 seconds (at most 300) |
+| Class trainer visits | DRUID: 2, 4, 6, 8, 10, 12, 18, 20, 40, 50, 54, 56; HUNTER: 2, 4, 6, 8, 10, 12, 22, 27, 30, 40, 45, 50, 54, 56, 58; PRIEST: 2, 4, 6, 8, 10, 20, 24, 40, 45, 50, 54, 56; ROGUE: 2, 4, 6, 8, 10, 12, 16, 18, 20, 22, 26, 32, 34, 39, 42, 46, 50, 54, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 22, 26, 28, 35, 40, 45, 48, 50, 54, 56, 58 |
+| Class trainer gaps | DRUID 20 to 40: the cheapest trip to a trainer adds 304 seconds (at most 300); DRUID 40 to 50: the cheapest trip to a trainer adds 447 seconds (at most 300); HUNTER 12 to 22: the cheapest trip to a trainer adds 525 seconds (at most 300); HUNTER 30 to 40: the cheapest trip to a trainer adds 302 seconds (at most 300); PRIEST 10 to 20: the cheapest trip to a trainer adds 547 seconds (at most 300); PRIEST 24 to 40: the cheapest trip to a trainer adds 335 seconds (at most 300); WARRIOR 14 to 22: the cheapest trip to a trainer adds 480 seconds (at most 300); WARRIOR 28 to 35: the cheapest trip to a trainer adds 363 seconds (at most 300) |
 | Planner notes | none |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| nightelf-01-12-teldrassil | 1-12 Teldrassil | 143 | 1-15 |
-| nightelf-12-20-darkshore | 12-20 Darkshore | 183 | 12-23 |
-| nightelf-20-23-ashenvale | 20-23 Ashenvale | 88 | 20-26 |
-| nightelf-23-28-duskwood | 23-28 Duskwood | 66 | 23-31 |
-| nightelf-28-28-stormwind-city | 28 Stormwind City | 17 | 28-31 |
-| nightelf-28-30-wetlands | 28-30 Wetlands | 31 | 28-33 |
+| nightelf-01-12-teldrassil | 1-12 Teldrassil | 137 | 1-15 |
+| nightelf-12-20-darkshore | 12-20 Darkshore | 180 | 12-23 |
+| nightelf-20-23-ashenvale | 20-23 Ashenvale | 89 | 20-26 |
+| nightelf-23-28-duskwood | 23-28 Duskwood | 72 | 23-31 |
+| nightelf-28-28-stormwind-city | 28 Stormwind City | 14 | 28-31 |
+| nightelf-28-30-wetlands | 28-30 Wetlands | 28 | 28-33 |
 | nightelf-30-30-wetlands | 30 Wetlands | 17 | 30-33 |
 | nightelf-30-32-ashenvale | 30-32 Ashenvale | 38 | 30-35 |
 | nightelf-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 71 | 32-38 |
@@ -433,28 +433,28 @@ what its class steps add to the shared route's numbers, which the race's section
 | nightelf-37-39-arathi-highlands | 37-39 Arathi Highlands | 37 | 37-42 |
 | nightelf-39-40-badlands | 39-40 Badlands | 15 | 39-43 |
 | nightelf-40-40-badlands | 40 Badlands | 14 | 40-43 |
-| nightelf-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 31 | 40-44 |
-| nightelf-41-43-stranglethorn-vale | 41-43 Stranglethorn Vale | 44 | 41-46 |
-| nightelf-43-44-tanaris | 43-44 Tanaris | 23 | 43-47 |
+| nightelf-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 25 | 40-44 |
+| nightelf-41-43-stranglethorn-vale | 41-43 Stranglethorn Vale | 50 | 41-46 |
+| nightelf-43-44-tanaris | 43-44 Tanaris | 22 | 43-47 |
 | nightelf-44-46-feralas | 44-46 Feralas | 41 | 44-49 |
-| nightelf-46-46-the-hinterlands | 46 The Hinterlands | 24 | 46-49 |
-| nightelf-46-47-searing-gorge | 46-47 Searing Gorge | 23 | 46-50 |
-| nightelf-47-48-blasted-lands | 47-48 Blasted Lands | 19 | 47-51 |
-| nightelf-48-49-tanaris | 48-49 Tanaris | 24 | 48-52 |
+| nightelf-46-46-the-hinterlands | 46 The Hinterlands | 23 | 46-49 |
+| nightelf-46-47-searing-gorge | 46-47 Searing Gorge | 24 | 46-50 |
+| nightelf-47-48-blasted-lands | 47-48 Blasted Lands | 16 | 47-51 |
+| nightelf-48-49-tanaris | 48-49 Tanaris | 25 | 48-52 |
 | nightelf-49-50-un-goro-crater | 49-50 Un'Goro Crater | 12 | 49-53 |
 | nightelf-50-50-un-goro-crater | 50 Un'Goro Crater | 21 | 50-53 |
 | nightelf-50-51-azshara | 50-51 Azshara | 11 | 50-54 |
-| nightelf-51-51-burning-steppes | 51 Burning Steppes | 28 | 51-54 |
-| nightelf-51-52-felwood | 51-52 Felwood | 32 | 51-55 |
+| nightelf-51-51-burning-steppes | 51 Burning Steppes | 31 | 51-54 |
+| nightelf-51-52-felwood | 51-52 Felwood | 31 | 51-55 |
 | nightelf-52-53-western-plaguelands | 52-53 Western Plaguelands | 31 | 52-56 |
 | nightelf-53-54-un-goro-crater | 53-54 Un'Goro Crater | 17 | 53-57 |
 | nightelf-54-54-silithus | 54 Silithus | 11 | 54-57 |
-| nightelf-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 34 | 54-58 |
-| nightelf-55-56-winterspring | 55-56 Winterspring | 62 | 55-59 |
-| nightelf-56-57-western-plaguelands | 56-57 Western Plaguelands | 33 | 56-60 |
-| nightelf-57-58-azshara | 57-58 Azshara | 50 | 57-60 |
+| nightelf-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 31 | 54-58 |
+| nightelf-55-56-winterspring | 55-56 Winterspring | 66 | 55-59 |
+| nightelf-56-57-western-plaguelands | 56-57 Western Plaguelands | 37 | 56-60 |
+| nightelf-57-58-azshara | 57-58 Azshara | 47 | 57-60 |
 | nightelf-58-58-eastern-plaguelands | 58 Eastern Plaguelands | 13 | 58-60 |
-| nightelf-58-60-silithus | 58-60 Silithus | 80 | 58-60 |
+| nightelf-58-60-silithus | 58-60 Silithus | 82 | 58-60 |
 
 ### Level curve
 
@@ -494,56 +494,56 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,075, 1,279 (62%) |
-| Steps in the route file | 1,466 |
+| Actions before bundling, steps after | 2,075, 1,273 (61%) |
+| Steps in the route file | 1,447 |
 | Sections | 38 |
 | Profession steps written | p165-2, p171-2, p197-2, p333-2, p164-2, p202-2, p164-3, p165-3, p197-3, p333-3, p393-4, p171-4, p182-4, p186-4, p197-4, p164-4, p202-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section undead-34-36-desolace; Alchemy Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section undead-20-24-the-barrens; Herbalism Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within three sections of section undead-08-13-tirisfal-glades; Herbalism Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section undead-20-24-the-barrens; Mining Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within three sections of section undead-08-13-tirisfal-glades; Mining Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section undead-20-24-the-barrens; Engineering Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section undead-20-24-the-barrens; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section undead-34-36-desolace; Skinning Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within three sections of section undead-08-13-tirisfal-glades; Skinning Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section undead-20-24-the-barrens |
-| Class trainer visits | MAGE: 2, 4, 6, 8, 10, 12, 14, 16, 28, 30, 34, 36, 38, 44, 50, 54, 56, 58, 60; PALADIN: 2, 4, 6, 8, 10, 12, 30, 34, 36, 38, 48, 50, 54, 56, 58, 60; PRIEST: 2, 4, 6, 8, 10, 12, 14, 20, 30, 34, 36, 38, 44, 48, 50, 52, 54, 56, 58, 60; ROGUE: 2, 4, 6, 8, 10, 12, 14, 18, 20, 27, 30, 32, 34, 36, 38, 40, 42, 44, 48, 50, 54, 56, 58, 60; WARLOCK: 2, 4, 6, 8, 10, 12, 14, 20, 22, 24, 28, 30, 32, 34, 36, 40, 44, 48, 50, 54, 56, 58, 60; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 22, 30, 34, 36, 40, 48, 50, 54, 56, 58, 60 |
-| Class trainer gaps | MAGE 16 to 28: the cheapest trip to a trainer adds 407 seconds (at most 300); PALADIN 12 to 30: the cheapest trip to a trainer adds 554 seconds (at most 300); PALADIN 38 to 48: the cheapest trip to a trainer adds 436 seconds (at most 300); PRIEST 20 to 30: the cheapest trip to a trainer adds 567 seconds (at most 300); ROGUE 20 to 27: the cheapest trip to a trainer adds 323 seconds (at most 300); WARRIOR 14 to 22: the cheapest trip to a trainer adds 571 seconds (at most 300); WARRIOR 22 to 30: the cheapest trip to a trainer adds 518 seconds (at most 300); WARRIOR 40 to 48: the cheapest trip to a trainer adds 486 seconds (at most 300) |
+| Class trainer visits | MAGE: 2, 4, 6, 10, 12, 14, 26, 28, 33, 38, 42, 48, 50, 52, 54, 56, 58; PALADIN: 2, 4, 6, 10, 12, 28, 33, 38, 48, 54, 56, 58; PRIEST: 2, 4, 6, 8, 10, 12, 18, 28, 32, 34, 38, 42, 48, 52, 54, 56, 58; ROGUE: 2, 4, 6, 10, 12, 16, 18, 20, 26, 28, 32, 34, 36, 38, 40, 42, 48, 54, 56, 58; WARLOCK: 2, 4, 6, 10, 12, 16, 20, 24, 28, 30, 32, 34, 36, 38, 40, 42, 48, 50, 54, 56, 58; WARRIOR: 2, 4, 6, 10, 12, 22, 28, 33, 36, 38, 48, 50, 52, 54, 56, 58 |
+| Class trainer gaps | MAGE 14 to 26: the cheapest trip to a trainer adds 407 seconds (at most 300); PALADIN 12 to 28: the cheapest trip to a trainer adds 554 seconds (at most 300); PALADIN 38 to 48: the cheapest trip to a trainer adds 676 seconds (at most 300); PRIEST 18 to 28: the cheapest trip to a trainer adds 418 seconds (at most 300); WARRIOR 12 to 22: the cheapest trip to a trainer adds 495 seconds (at most 300); WARRIOR 38 to 48: the cheapest trip to a trainer adds 486 seconds (at most 300) |
 | Planner notes | none |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
 | undead-01-08-tirisfal-glades | 1-8 Tirisfal Glades | 55 | 1-11 |
-| undead-08-08-durotar | 8 Durotar | 28 | 8-11 |
-| undead-08-13-tirisfal-glades | 8-13 Tirisfal Glades | 89 | 8-16 |
-| undead-13-20-the-barrens | 13-20 The Barrens | 94 | 13-23 |
-| undead-20-24-the-barrens | 20-24 The Barrens | 99 | 20-27 |
+| undead-08-08-durotar | 8 Durotar | 22 | 8-11 |
+| undead-08-13-tirisfal-glades | 8-13 Tirisfal Glades | 85 | 8-16 |
+| undead-13-20-the-barrens | 13-20 The Barrens | 102 | 13-23 |
+| undead-20-24-the-barrens | 20-24 The Barrens | 98 | 20-27 |
 | undead-24-26-stonetalon-mountains | 24-26 Stonetalon Mountains | 46 | 24-29 |
-| undead-26-28-ashenvale | 26-28 Ashenvale | 38 | 26-31 |
+| undead-26-28-ashenvale | 26-28 Ashenvale | 34 | 26-31 |
 | undead-28-30-hillsbrad-foothills | 28-30 Hillsbrad Foothills | 26 | 28-33 |
 | undead-30-30-hillsbrad-foothills | 30 Hillsbrad Foothills | 31 | 30-33 |
-| undead-30-32-thousand-needles | 30-32 Thousand Needles | 63 | 30-35 |
+| undead-30-32-thousand-needles | 30-32 Thousand Needles | 64 | 30-35 |
 | undead-32-34-stranglethorn-vale | 32-34 Stranglethorn Vale | 73 | 32-37 |
-| undead-34-36-desolace | 34-36 Desolace | 59 | 34-39 |
-| undead-36-39-arathi-highlands | 36-39 Arathi Highlands | 56 | 36-42 |
+| undead-34-36-desolace | 34-36 Desolace | 58 | 34-39 |
+| undead-36-39-arathi-highlands | 36-39 Arathi Highlands | 55 | 36-42 |
 | undead-39-40-dustwallow-marsh | 39-40 Dustwallow Marsh | 24 | 39-43 |
-| undead-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 31 | 40-44 |
-| undead-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 71 | 41-47 |
+| undead-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 32 | 40-44 |
+| undead-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 70 | 41-47 |
 | undead-44-45-feralas | 44-45 Feralas | 41 | 44-48 |
-| undead-45-47-tanaris | 45-47 Tanaris | 37 | 45-50 |
+| undead-45-47-tanaris | 45-47 Tanaris | 36 | 45-50 |
 | undead-47-47-blasted-lands | 47 Blasted Lands | 8 | 47-50 |
-| undead-47-49-searing-gorge | 47-49 Searing Gorge | 21 | 47-52 |
+| undead-47-49-searing-gorge | 47-49 Searing Gorge | 19 | 47-52 |
 | undead-49-49-swamp-of-sorrows | 49 Swamp of Sorrows | 20 | 49-52 |
 | undead-49-50-the-hinterlands | 49-50 The Hinterlands | 24 | 49-53 |
-| undead-50-50-the-hinterlands | 50 The Hinterlands | 23 | 50-53 |
+| undead-50-50-the-hinterlands | 50 The Hinterlands | 19 | 50-53 |
 | undead-50-51-azshara | 50-51 Azshara | 20 | 50-54 |
 | undead-51-52-felwood | 51-52 Felwood | 24 | 51-55 |
 | undead-52-53-un-goro-crater | 52-53 Un'Goro Crater | 51 | 52-56 |
 | undead-53-54-western-plaguelands | 53-54 Western Plaguelands | 22 | 53-57 |
-| undead-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 48 | 54-58 |
-| undead-55-55-burning-steppes | 55 Burning Steppes | 20 | 55-58 |
+| undead-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 45 | 54-58 |
+| undead-55-55-burning-steppes | 55 Burning Steppes | 22 | 55-58 |
 | undead-55-56-winterspring | 55-56 Winterspring | 15 | 55-59 |
 | undead-56-56-azshara | 56 Azshara | 15 | 56-59 |
 | undead-56-56-winterspring | 56 Winterspring | 8 | 56-59 |
 | undead-56-57-silithus | 56-57 Silithus | 30 | 56-60 |
-| undead-57-57-undercity | 57 Undercity | 21 | 57-60 |
-| undead-57-58-eastern-plaguelands | 57-58 Eastern Plaguelands | 56 | 57-60 |
-| undead-58-58-winterspring | 58 Winterspring | 14 | 58-60 |
+| undead-57-57-undercity | 57 Undercity | 24 | 57-60 |
+| undead-57-58-eastern-plaguelands | 57-58 Eastern Plaguelands | 50 | 57-60 |
+| undead-58-58-winterspring | 58 Winterspring | 18 | 58-60 |
 | undead-58-59-azshara | 58-59 Azshara | 15 | 58-60 |
-| undead-59-60-silithus | 59-60 Silithus | 50 | 59-60 |
+| undead-59-60-silithus | 59-60 Silithus | 46 | 59-60 |
 
 ### Level curve
 
@@ -583,50 +583,50 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 1,929, 1,212 (63%) |
-| Steps in the route file | 1,340 |
+| Actions before bundling, steps after | 1,929, 1,205 (62%) |
+| Steps in the route file | 1,332 |
 | Sections | 33 |
 | Profession steps written | p165-2, p202-2, p164-2, p171-2, p182-2, p186-2, p197-2, p333-2, p393-2, p164-3, p165-3, p197-3, p333-3, p164-4, p182-4, p186-4, p202-4, p393-4, p171-4, p197-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section tauren-32-35-stranglethorn-vale; Alchemy Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section tauren-20-23-the-barrens; Herbalism Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section tauren-20-23-the-barrens; Mining Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section tauren-20-23-the-barrens; Engineering Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section tauren-20-23-the-barrens; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section tauren-32-35-stranglethorn-vale; Skinning Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section tauren-20-23-the-barrens |
-| Class trainer visits | DRUID: 2, 4, 6, 8, 10, 12, 14, 20, 22, 26, 44, 53, 57; HUNTER: 2, 4, 6, 8, 10, 12, 26, 32, 34, 40, 42, 44, 46, 50, 52, 54, 56, 58; SHAMAN: 2, 4, 6, 8, 10, 12, 22, 26, 28, 32, 36, 44, 50, 52, 54, 58; WARRIOR: 2, 4, 6, 8, 10, 14, 26, 32, 34, 36, 44, 50, 52, 54, 56, 58 |
-| Class trainer gaps | DRUID 26 to 44: the cheapest trip to a trainer adds 458 seconds (at most 300); DRUID 44 to 53: the cheapest trip to a trainer adds 418 seconds (at most 300); HUNTER 12 to 26: the cheapest trip to a trainer adds 311 seconds (at most 300); SHAMAN 12 to 22: the cheapest trip to a trainer adds 323 seconds (at most 300); SHAMAN 36 to 44: the cheapest trip to a trainer adds 306 seconds (at most 300); WARRIOR 14 to 26: the cheapest trip to a trainer adds 305 seconds (at most 300); WARRIOR 36 to 44: the cheapest trip to a trainer adds 303 seconds (at most 300) |
+| Class trainer visits | DRUID: 2, 4, 6, 8, 10, 12, 14, 18, 20, 25, 42, 44, 52, 56, 58; HUNTER: 2, 4, 6, 8, 10, 25, 30, 32, 34, 40, 42, 46, 48, 50, 52, 54, 56; SHAMAN: 2, 4, 6, 8, 10, 22, 26, 28, 30, 34, 42, 48, 50, 52, 54, 56; WARRIOR: 2, 4, 6, 8, 10, 12, 24, 30, 34, 36, 43, 48, 50, 52, 54, 56 |
+| Class trainer gaps | DRUID 25 to 42: the cheapest trip to a trainer adds 458 seconds (at most 300); DRUID 44 to 52: the cheapest trip to a trainer adds 418 seconds (at most 300); HUNTER 10 to 25: the cheapest trip to a trainer adds 311 seconds (at most 300); SHAMAN 10 to 22: the cheapest trip to a trainer adds 323 seconds (at most 300); SHAMAN 34 to 42: the cheapest trip to a trainer adds 306 seconds (at most 300); WARRIOR 12 to 24: the cheapest trip to a trainer adds 305 seconds (at most 300); WARRIOR 36 to 43: the cheapest trip to a trainer adds 384 seconds (at most 300) |
 | Planner notes | Tauren step a3062.a3063: quest 3062 gives XP only up to level 58, but the estimated level there is 59; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
 | tauren-01-08-mulgore | 1-8 Mulgore | 32 | 1-11 |
-| tauren-08-08-durotar | 8 Durotar | 19 | 8-11 |
-| tauren-08-12-mulgore | 8-12 Mulgore | 85 | 8-15 |
-| tauren-12-20-the-barrens | 12-20 The Barrens | 104 | 12-23 |
+| tauren-08-08-durotar | 8 Durotar | 17 | 8-11 |
+| tauren-08-12-mulgore | 8-12 Mulgore | 84 | 8-15 |
+| tauren-12-20-the-barrens | 12-20 The Barrens | 105 | 12-23 |
 | tauren-20-23-the-barrens | 20-23 The Barrens | 86 | 20-26 |
-| tauren-23-26-stonetalon-mountains | 23-26 Stonetalon Mountains | 55 | 23-29 |
-| tauren-26-29-ashenvale | 26-29 Ashenvale | 76 | 26-32 |
+| tauren-23-26-stonetalon-mountains | 23-26 Stonetalon Mountains | 52 | 23-29 |
+| tauren-26-29-ashenvale | 26-29 Ashenvale | 77 | 26-32 |
 | tauren-29-30-thousand-needles | 29-30 Thousand Needles | 18 | 29-33 |
 | tauren-30-32-hillsbrad-foothills | 30-32 Hillsbrad Foothills | 46 | 30-35 |
 | tauren-32-32-dustwallow-marsh | 32 Dustwallow Marsh | 10 | 32-35 |
-| tauren-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 87 | 32-38 |
+| tauren-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 88 | 32-38 |
 | tauren-35-37-desolace | 35-37 Desolace | 58 | 35-40 |
 | tauren-37-40-arathi-highlands | 37-40 Arathi Highlands | 42 | 37-43 |
 | tauren-40-41-badlands | 40-41 Badlands | 27 | 40-44 |
-| tauren-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 69 | 41-47 |
-| tauren-44-45-feralas | 44-45 Feralas | 33 | 44-48 |
-| tauren-45-47-tanaris | 45-47 Tanaris | 36 | 45-50 |
-| tauren-47-48-searing-gorge | 47-48 Searing Gorge | 25 | 47-51 |
-| tauren-48-49-the-hinterlands | 48-49 The Hinterlands | 29 | 48-52 |
-| tauren-49-50-azshara | 49-50 Azshara | 13 | 49-53 |
+| tauren-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 66 | 41-47 |
+| tauren-44-45-feralas | 44-45 Feralas | 34 | 44-48 |
+| tauren-45-47-tanaris | 45-47 Tanaris | 35 | 45-50 |
+| tauren-47-48-searing-gorge | 47-48 Searing Gorge | 23 | 47-51 |
+| tauren-48-49-the-hinterlands | 48-49 The Hinterlands | 27 | 48-52 |
+| tauren-49-50-azshara | 49-50 Azshara | 11 | 49-53 |
 | tauren-50-50-azshara | 50 Azshara | 14 | 50-53 |
-| tauren-50-51-swamp-of-sorrows | 50-51 Swamp of Sorrows | 17 | 50-54 |
-| tauren-51-52-un-goro-crater | 51-52 Un'Goro Crater | 54 | 51-55 |
+| tauren-50-51-swamp-of-sorrows | 50-51 Swamp of Sorrows | 19 | 50-54 |
+| tauren-51-52-un-goro-crater | 51-52 Un'Goro Crater | 56 | 51-55 |
 | tauren-52-53-blasted-lands | 52-53 Blasted Lands | 9 | 52-56 |
-| tauren-53-54-felwood | 53-54 Felwood | 46 | 53-57 |
+| tauren-53-54-felwood | 53-54 Felwood | 45 | 53-57 |
 | tauren-54-54-western-plaguelands | 54 Western Plaguelands | 18 | 54-57 |
-| tauren-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 44 | 54-58 |
-| tauren-55-56-winterspring | 55-56 Winterspring | 29 | 55-59 |
+| tauren-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 46 | 54-58 |
+| tauren-55-56-winterspring | 55-56 Winterspring | 28 | 55-59 |
 | tauren-56-57-silithus | 56-57 Silithus | 45 | 56-60 |
-| tauren-57-57-undercity | 57 Undercity | 20 | 57-60 |
-| tauren-57-58-eastern-plaguelands | 57-58 Eastern Plaguelands | 35 | 57-60 |
-| tauren-58-59-silithus | 58-59 Silithus | 25 | 58-60 |
+| tauren-57-57-undercity | 57 Undercity | 21 | 57-60 |
+| tauren-57-58-eastern-plaguelands | 57-58 Eastern Plaguelands | 33 | 57-60 |
+| tauren-58-59-silithus | 58-59 Silithus | 26 | 58-60 |
 | tauren-59-60-winterspring | 59-60 Winterspring | 34 | 59-60 |
 
 ### Level curve
@@ -667,47 +667,47 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,014, 1,292 (64%) |
-| Steps in the route file | 1,451 |
+| Actions before bundling, steps after | 2,014, 1,287 (64%) |
+| Steps in the route file | 1,453 |
 | Sections | 38 |
 | Profession steps written | p164-2, p186-2, p202-2, p182-2, p197-2, p186-3, p165-2, p165-3, p171-2, p171-3, p164-3, p182-3, p197-3, p202-3, p333-2, p333-3, p393-2, p393-3, p164-4, p186-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-36-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-36-stranglethorn-vale; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-36-stranglethorn-vale; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-36-stranglethorn-vale; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-36-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-36-stranglethorn-vale; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-36-stranglethorn-vale |
-| Class trainer visits | MAGE: 2, 6, 8, 10, 18, 20, 24, 26, 32, 34, 40, 46, 51, 57; PRIEST: 2, 6, 8, 10, 23, 40, 46, 51, 57; ROGUE: 2, 6, 8, 10, 12, 16, 20, 24, 26, 34, 36, 41, 44, 48, 52, 57, 60; WARLOCK: 2, 6, 8, 10, 22, 30, 32, 40, 46, 51, 57, 60; WARRIOR: 2, 6, 8, 10, 12, 14, 22, 26, 30, 36, 40, 42, 46, 51, 57, 60 |
-| Class trainer gaps | MAGE 10 to 18: the cheapest trip to a trainer adds 993 seconds (at most 300); PRIEST 10 to 23: the cheapest trip to a trainer adds 462 seconds (at most 300); PRIEST 23 to 40: the cheapest trip to a trainer adds 345 seconds (at most 300); ROGUE 26 to 34: the cheapest trip to a trainer adds 303 seconds (at most 300); WARLOCK 10 to 22: the cheapest trip to a trainer adds 998 seconds (at most 300); WARLOCK 22 to 30: the cheapest trip to a trainer adds 302 seconds (at most 300); WARLOCK 32 to 40: the cheapest trip to a trainer adds 412 seconds (at most 300); WARRIOR 14 to 22: the cheapest trip to a trainer adds 603 seconds (at most 300) |
+| Class trainer visits | MAGE: 2, 4, 6, 8, 18, 23, 26, 32, 34, 38, 45, 50, 56, 58; PRIEST: 2, 4, 6, 8, 22, 40, 45, 50, 56; ROGUE: 2, 4, 6, 8, 10, 12, 16, 18, 20, 22, 24, 28, 32, 34, 40, 42, 46, 50, 56, 58; WARLOCK: 2, 4, 6, 8, 22, 30, 38, 40, 45, 50, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 22, 26, 30, 35, 40, 45, 50, 56, 58 |
+| Class trainer gaps | MAGE 8 to 18: the cheapest trip to a trainer adds 993 seconds (at most 300); MAGE 38 to 45: the cheapest trip to a trainer adds 443 seconds (at most 300); PRIEST 8 to 22: the cheapest trip to a trainer adds 462 seconds (at most 300); PRIEST 22 to 40: the cheapest trip to a trainer adds 328 seconds (at most 300); WARLOCK 8 to 22: the cheapest trip to a trainer adds 998 seconds (at most 300); WARLOCK 22 to 30: the cheapest trip to a trainer adds 302 seconds (at most 300); WARLOCK 30 to 38: the cheapest trip to a trainer adds 412 seconds (at most 300); WARRIOR 14 to 22: the cheapest trip to a trainer adds 603 seconds (at most 300) |
 | Planner notes | Gnome step a717: quest 717 gives XP only up to level 58, but the estimated level there is 59; with "skip content you outlevel" the step and its quest's later lines are skipped; Gnome step a2877: quest 2877 gives XP only up to level 56, but the estimated level there is 59; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| gnome-01-11-dun-morogh | 1-11 Dun Morogh | 128 | 1-14 |
-| gnome-11-20-darkshore | 11-20 Darkshore | 141 | 11-23 |
-| gnome-20-23-ashenvale | 20-23 Ashenvale | 80 | 20-26 |
+| gnome-01-11-dun-morogh | 1-11 Dun Morogh | 129 | 1-14 |
+| gnome-11-20-darkshore | 11-20 Darkshore | 140 | 11-23 |
+| gnome-20-23-ashenvale | 20-23 Ashenvale | 81 | 20-26 |
 | gnome-23-25-duskwood | 23-25 Duskwood | 33 | 23-28 |
 | gnome-25-25-stormwind-city | 25 Stormwind City | 5 | 25-28 |
 | gnome-25-26-duskwood | 25-26 Duskwood | 43 | 25-29 |
-| gnome-26-29-wetlands | 26-29 Wetlands | 39 | 26-32 |
+| gnome-26-29-wetlands | 26-29 Wetlands | 42 | 26-32 |
 | gnome-29-30-ashenvale | 29-30 Ashenvale | 14 | 29-33 |
 | gnome-30-31-ashenvale | 30-31 Ashenvale | 37 | 30-34 |
-| gnome-31-32-hillsbrad-foothills | 31-32 Hillsbrad Foothills | 35 | 31-35 |
+| gnome-31-32-hillsbrad-foothills | 31-32 Hillsbrad Foothills | 34 | 31-35 |
 | gnome-32-36-stranglethorn-vale | 32-36 Stranglethorn Vale | 63 | 32-39 |
 | gnome-36-37-desolace | 36-37 Desolace | 52 | 36-40 |
-| gnome-37-39-arathi-highlands | 37-39 Arathi Highlands | 48 | 37-42 |
+| gnome-37-39-arathi-highlands | 37-39 Arathi Highlands | 44 | 37-42 |
 | gnome-39-40-badlands | 39-40 Badlands | 9 | 39-43 |
-| gnome-40-40-badlands | 40 Badlands | 35 | 40-43 |
-| gnome-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 22 | 40-44 |
-| gnome-41-43-stranglethorn-vale | 41-43 Stranglethorn Vale | 49 | 41-46 |
-| gnome-43-44-tanaris | 43-44 Tanaris | 20 | 43-47 |
+| gnome-40-40-badlands | 40 Badlands | 36 | 40-43 |
+| gnome-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 21 | 40-44 |
+| gnome-41-43-stranglethorn-vale | 41-43 Stranglethorn Vale | 52 | 41-46 |
+| gnome-43-44-tanaris | 43-44 Tanaris | 19 | 43-47 |
 | gnome-44-46-feralas | 44-46 Feralas | 51 | 44-49 |
-| gnome-46-47-searing-gorge | 46-47 Searing Gorge | 37 | 46-50 |
+| gnome-46-47-searing-gorge | 46-47 Searing Gorge | 38 | 46-50 |
 | gnome-47-48-tanaris | 47-48 Tanaris | 20 | 47-51 |
-| gnome-48-49-blasted-lands | 48-49 Blasted Lands | 10 | 48-52 |
+| gnome-48-49-blasted-lands | 48-49 Blasted Lands | 9 | 48-52 |
 | gnome-49-49-felwood | 49 Felwood | 14 | 49-52 |
 | gnome-49-50-un-goro-crater | 49-50 Un'Goro Crater | 12 | 49-53 |
 | gnome-50-50-un-goro-crater | 50 Un'Goro Crater | 20 | 50-53 |
 | gnome-50-51-azshara | 50-51 Azshara | 16 | 50-54 |
-| gnome-51-51-burning-steppes | 51 Burning Steppes | 30 | 51-54 |
+| gnome-51-51-burning-steppes | 51 Burning Steppes | 33 | 51-54 |
 | gnome-51-52-felwood | 51-52 Felwood | 23 | 51-55 |
-| gnome-52-53-western-plaguelands | 52-53 Western Plaguelands | 37 | 52-56 |
+| gnome-52-53-western-plaguelands | 52-53 Western Plaguelands | 34 | 52-56 |
 | gnome-53-53-un-goro-crater | 53 Un'Goro Crater | 14 | 53-56 |
 | gnome-53-54-winterspring | 53-54 Winterspring | 22 | 53-57 |
 | gnome-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 25 | 54-58 |
@@ -716,7 +716,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | gnome-56-57-silithus | 56-57 Silithus | 30 | 56-60 |
 | gnome-57-58-azshara | 57-58 Azshara | 109 | 57-60 |
 | gnome-58-58-eastern-plaguelands | 58 Eastern Plaguelands | 12 | 58-60 |
-| gnome-58-60-silithus | 58-60 Silithus | 78 | 58-60 |
+| gnome-58-60-silithus | 58-60 Silithus | 79 | 58-60 |
 
 ### Level curve
 
@@ -756,54 +756,54 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,121, 1,335 (63%) |
-| Steps in the route file | 1,539 |
+| Actions before bundling, steps after | 2,121, 1,330 (63%) |
+| Steps in the route file | 1,537 |
 | Sections | 36 |
 | Profession steps written | p164-2, p171-2, p202-2, p333-2, p165-2, p197-2, p182-2, p186-2, p393-2, p164-3, p165-3, p197-3, p333-3, p393-4, p171-4, p182-4, p186-4, p197-4, p164-4, p202-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section troll-34-36-desolace; Alchemy Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section troll-20-20-the-barrens; Herbalism Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section troll-20-20-the-barrens; Mining Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section troll-20-20-the-barrens; Engineering Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section troll-20-20-the-barrens; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section troll-34-36-desolace; Skinning Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section troll-20-20-the-barrens |
-| Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 12, 27, 32, 34, 40, 42, 44, 48, 52, 54, 58; MAGE: 2, 4, 8, 10, 12, 14, 16, 26, 30, 32, 34, 36, 38, 44, 50, 54, 56, 58; PRIEST: 2, 4, 6, 8, 10, 12, 22, 26, 32, 34, 36, 38, 44, 48, 50, 52, 54, 56, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 18, 20, 26, 32, 34, 36, 38, 40, 42, 44, 48, 50, 54, 56, 58; SHAMAN: 2, 4, 6, 8, 10, 12, 22, 26, 28, 30, 34, 38, 44, 48, 50, 54, 58; WARLOCK: 2, 4, 6, 8, 10, 12, 14, 18, 20, 24, 30, 32, 34, 36, 40, 44, 48, 50, 54, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 14, 16, 24, 28, 32, 34, 36, 40, 48, 50, 54, 56, 58 |
-| Class trainer gaps | HUNTER 12 to 27: the cheapest trip to a trainer adds 377 seconds (at most 300); MAGE 16 to 26: the cheapest trip to a trainer adds 317 seconds (at most 300); PRIEST 12 to 22: the cheapest trip to a trainer adds 348 seconds (at most 300); SHAMAN 12 to 22: the cheapest trip to a trainer adds 327 seconds (at most 300); WARRIOR 16 to 24: the cheapest trip to a trainer adds 305 seconds (at most 300); WARRIOR 40 to 48: the cheapest trip to a trainer adds 486 seconds (at most 300) |
+| Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 12, 26, 30, 32, 40, 42, 48, 52, 54, 56, 58; MAGE: 2, 4, 6, 10, 14, 16, 25, 28, 30, 34, 38, 42, 48, 50, 52, 54, 56, 58; PRIEST: 2, 4, 6, 8, 10, 20, 25, 30, 32, 34, 38, 42, 48, 52, 54, 56, 58; ROGUE: 2, 4, 6, 8, 10, 12, 16, 18, 22, 26, 30, 32, 34, 36, 38, 40, 42, 48, 54, 56, 58; SHAMAN: 2, 4, 6, 8, 10, 20, 25, 28, 32, 34, 38, 42, 48, 54, 56, 58; WARLOCK: 2, 4, 6, 8, 10, 12, 16, 18, 22, 24, 28, 30, 34, 36, 38, 40, 42, 48, 50, 54, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 22, 27, 30, 34, 36, 38, 48, 50, 52, 54, 56, 58 |
+| Class trainer gaps | HUNTER 12 to 26: the cheapest trip to a trainer adds 377 seconds (at most 300); HUNTER 32 to 40: the cheapest trip to a trainer adds 552 seconds (at most 300); MAGE 16 to 25: the cheapest trip to a trainer adds 317 seconds (at most 300); PRIEST 10 to 20: the cheapest trip to a trainer adds 348 seconds (at most 300); SHAMAN 10 to 20: the cheapest trip to a trainer adds 327 seconds (at most 300); WARRIOR 14 to 22: the cheapest trip to a trainer adds 305 seconds (at most 300); WARRIOR 38 to 48: the cheapest trip to a trainer adds 486 seconds (at most 300) |
 | Planner notes | Troll step a3062.a3063: quest 3062 gives XP only up to level 58, but the estimated level there is 59; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| troll-01-12-durotar | 1-12 Durotar | 179 | 1-15 |
-| troll-12-20-the-barrens | 12-20 The Barrens | 132 | 12-23 |
+| troll-01-12-durotar | 1-12 Durotar | 174 | 1-15 |
+| troll-12-20-the-barrens | 12-20 The Barrens | 133 | 12-23 |
 | troll-20-20-the-barrens | 20 The Barrens | 13 | 20-23 |
-| troll-20-20-orgrimmar | 20 Orgrimmar | 11 | 20-23 |
-| troll-20-23-the-barrens | 20-23 The Barrens | 69 | 20-26 |
-| troll-23-26-stonetalon-mountains | 23-26 Stonetalon Mountains | 49 | 23-29 |
-| troll-26-29-ashenvale | 26-29 Ashenvale | 91 | 26-32 |
+| troll-20-20-orgrimmar | 20 Orgrimmar | 10 | 20-23 |
+| troll-20-23-the-barrens | 20-23 The Barrens | 77 | 20-26 |
+| troll-23-26-stonetalon-mountains | 23-26 Stonetalon Mountains | 45 | 23-29 |
+| troll-26-29-ashenvale | 26-29 Ashenvale | 94 | 26-32 |
 | troll-29-30-thousand-needles | 29-30 Thousand Needles | 16 | 29-33 |
-| troll-30-30-orgrimmar | 30 Orgrimmar | 33 | 30-33 |
+| troll-30-30-orgrimmar | 30 Orgrimmar | 32 | 30-33 |
 | troll-30-32-hillsbrad-foothills | 30-32 Hillsbrad Foothills | 36 | 30-35 |
-| troll-32-34-stranglethorn-vale | 32-34 Stranglethorn Vale | 83 | 32-37 |
-| troll-34-36-desolace | 34-36 Desolace | 59 | 34-39 |
+| troll-32-34-stranglethorn-vale | 32-34 Stranglethorn Vale | 85 | 32-37 |
+| troll-34-36-desolace | 34-36 Desolace | 58 | 34-39 |
 | troll-36-39-arathi-highlands | 36-39 Arathi Highlands | 55 | 36-42 |
 | troll-39-40-dustwallow-marsh | 39-40 Dustwallow Marsh | 24 | 39-43 |
-| troll-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 28 | 40-44 |
-| troll-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 74 | 41-47 |
+| troll-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 29 | 40-44 |
+| troll-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 72 | 41-47 |
 | troll-44-45-feralas | 44-45 Feralas | 42 | 44-48 |
-| troll-45-47-tanaris | 45-47 Tanaris | 37 | 45-50 |
+| troll-45-47-tanaris | 45-47 Tanaris | 36 | 45-50 |
 | troll-47-47-blasted-lands | 47 Blasted Lands | 8 | 47-50 |
-| troll-47-49-searing-gorge | 47-49 Searing Gorge | 21 | 47-52 |
+| troll-47-49-searing-gorge | 47-49 Searing Gorge | 19 | 47-52 |
 | troll-49-49-swamp-of-sorrows | 49 Swamp of Sorrows | 22 | 49-52 |
 | troll-49-50-the-hinterlands | 49-50 The Hinterlands | 23 | 49-53 |
-| troll-50-50-the-hinterlands | 50 The Hinterlands | 22 | 50-53 |
-| troll-50-51-azshara | 50-51 Azshara | 21 | 50-54 |
+| troll-50-50-the-hinterlands | 50 The Hinterlands | 19 | 50-53 |
+| troll-50-51-azshara | 50-51 Azshara | 20 | 50-54 |
 | troll-51-52-felwood | 51-52 Felwood | 24 | 51-55 |
 | troll-52-53-un-goro-crater | 52-53 Un'Goro Crater | 57 | 52-56 |
 | troll-53-54-western-plaguelands | 53-54 Western Plaguelands | 22 | 53-57 |
-| troll-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 49 | 54-58 |
-| troll-55-55-burning-steppes | 55 Burning Steppes | 20 | 55-58 |
+| troll-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 47 | 54-58 |
+| troll-55-55-burning-steppes | 55 Burning Steppes | 21 | 55-58 |
 | troll-55-56-winterspring | 55-56 Winterspring | 15 | 55-59 |
 | troll-56-56-azshara | 56 Azshara | 23 | 56-59 |
 | troll-56-56-winterspring | 56 Winterspring | 8 | 56-59 |
 | troll-56-57-silithus | 56-57 Silithus | 30 | 56-60 |
-| troll-57-57-undercity | 57 Undercity | 23 | 57-60 |
-| troll-57-58-eastern-plaguelands | 57-58 Eastern Plaguelands | 41 | 57-60 |
-| troll-58-60-silithus | 58-60 Silithus | 79 | 58-60 |
+| troll-57-57-undercity | 57 Undercity | 25 | 57-60 |
+| troll-57-58-eastern-plaguelands | 57-58 Eastern Plaguelands | 37 | 57-60 |
+| troll-58-60-silithus | 58-60 Silithus | 86 | 58-60 |
 
 ### Level curve
 
@@ -843,51 +843,51 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,163, 1,307 (60%) |
-| Steps in the route file | 1,482 |
+| Actions before bundling, steps after | 2,163, 1,299 (60%) |
+| Steps in the route file | 1,471 |
 | Sections | 33 |
 | Profession steps written | p186-2, p197-2, p333-2, p164-2, p165-2, p171-2, p182-2, p202-2, p393-2, p186-3, p165-3, p171-3, p182-3, p197-3, p333-3, p164-4, p186-4 |
 | Profession ranks without a step | Blacksmithing Expert (rank 3, level 20): no Alliance trainer in a zone of the route within three sections of section highorder-20-23-darkshore; Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale; Engineering Expert (rank 3, level 20): no Alliance trainer in a zone of the route within three sections of section highorder-20-23-darkshore; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale; Skinning Expert (rank 3, level 20): no Alliance trainer in a zone of the route within three sections of section highorder-20-23-darkshore; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale |
-| Class trainer visits | DRUID: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 30, 34, 43, 48, 50, 54, 56, 58; HUNTER: 2, 4, 6, 8, 10, 12, 14, 16, 18, 24, 26, 31, 40, 47, 50, 52, 54, 56, 58; MAGE: 2, 4, 6, 8, 10, 12, 14, 16, 18, 30, 34, 40, 47, 51, 56, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 28, 30, 32, 34, 36, 40, 42, 44, 48, 53, 57, 60; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 30, 32, 34, 36, 40, 42, 46, 48, 50, 52, 54, 56, 58 |
-| Class trainer gaps | DRUID 20 to 30: the cheapest trip to a trainer adds 446 seconds (at most 300); DRUID 34 to 43: the cheapest trip to a trainer adds 304 seconds (at most 300); HUNTER 31 to 40: the cheapest trip to a trainer adds 315 seconds (at most 300); HUNTER 40 to 47: the cheapest trip to a trainer adds 333 seconds (at most 300); MAGE 18 to 30: the cheapest trip to a trainer adds 512 seconds (at most 300); MAGE 40 to 47: the cheapest trip to a trainer adds 330 seconds (at most 300); WARRIOR 20 to 30: the cheapest trip to a trainer adds 494 seconds (at most 300) |
+| Class trainer visits | DRUID: 2, 4, 6, 8, 12, 14, 16, 18, 28, 32, 42, 46, 50, 52, 56; HUNTER: 2, 4, 6, 8, 12, 14, 16, 18, 24, 26, 30, 32, 41, 46, 48, 50, 52, 56, 58; MAGE: 2, 4, 6, 8, 12, 14, 16, 18, 28, 32, 38, 42, 46, 48, 52, 56, 58; ROGUE: 2, 4, 6, 8, 12, 14, 16, 18, 20, 27, 31, 34, 36, 40, 42, 46, 52, 54, 56, 58; WARRIOR: 2, 4, 6, 8, 12, 14, 16, 18, 20, 28, 32, 34, 40, 45, 48, 50, 52, 56, 58 |
+| Class trainer gaps | DRUID 18 to 28: the cheapest trip to a trainer adds 446 seconds (at most 300); DRUID 32 to 42: the cheapest trip to a trainer adds 304 seconds (at most 300); HUNTER 32 to 41: the cheapest trip to a trainer adds 315 seconds (at most 300); MAGE 18 to 28: the cheapest trip to a trainer adds 512 seconds (at most 300); ROGUE 20 to 27: the cheapest trip to a trainer adds 307 seconds (at most 300); WARRIOR 20 to 28: the cheapest trip to a trainer adds 494 seconds (at most 300) |
 | Planner notes | HighOrder step a2218: quest 2218 gives XP only up to level 18, but the estimated level there is 19; with "skip content you outlevel" the step and its quest's later lines are skipped; HighOrder step a2241: quest 2241 gives XP only up to level 18, but the estimated level there is 20; with "skip content you outlevel" the step and its quest's later lines are skipped; HighOrder step a1686: quest 1686 gives XP only up to level 18, but the estimated level there is 20; with "skip content you outlevel" the step and its quest's later lines are skipped; HighOrder step a717: quest 717 gives XP only up to level 58, but the estimated level there is 59; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| highorder-01-17-zephras-isle | 1-17 Zephras Isle | 195 | 1-20 |
+| highorder-01-17-zephras-isle | 1-17 Zephras Isle | 188 | 1-20 |
 | highorder-17-19-westfall | 17-19 Westfall | 48 | 17-22 |
-| highorder-19-20-darkshore | 19-20 Darkshore | 34 | 19-23 |
-| highorder-20-23-darkshore | 20-23 Darkshore | 110 | 20-26 |
+| highorder-19-20-darkshore | 19-20 Darkshore | 32 | 19-23 |
+| highorder-20-23-darkshore | 20-23 Darkshore | 109 | 20-26 |
 | highorder-23-27-ashenvale | 23-27 Ashenvale | 65 | 23-30 |
-| highorder-27-30-wetlands | 27-30 Wetlands | 64 | 27-33 |
-| highorder-30-33-duskwood | 30-33 Duskwood | 69 | 30-36 |
-| highorder-33-34-hillsbrad-foothills | 33-34 Hillsbrad Foothills | 24 | 33-37 |
-| highorder-34-37-stranglethorn-vale | 34-37 Stranglethorn Vale | 75 | 34-40 |
-| highorder-37-40-arathi-highlands | 37-40 Arathi Highlands | 50 | 37-43 |
+| highorder-27-30-wetlands | 27-30 Wetlands | 63 | 27-33 |
+| highorder-30-33-duskwood | 30-33 Duskwood | 75 | 30-36 |
+| highorder-33-34-hillsbrad-foothills | 33-34 Hillsbrad Foothills | 23 | 33-37 |
+| highorder-34-37-stranglethorn-vale | 34-37 Stranglethorn Vale | 74 | 34-40 |
+| highorder-37-40-arathi-highlands | 37-40 Arathi Highlands | 40 | 37-43 |
 | highorder-40-41-badlands | 40-41 Badlands | 33 | 40-44 |
 | highorder-41-42-desolace | 41-42 Desolace | 42 | 41-45 |
 | highorder-42-42-dustwallow-marsh | 42 Dustwallow Marsh | 28 | 42-45 |
-| highorder-42-44-stranglethorn-vale | 42-44 Stranglethorn Vale | 52 | 42-47 |
+| highorder-42-44-stranglethorn-vale | 42-44 Stranglethorn Vale | 57 | 42-47 |
 | highorder-44-45-feralas | 44-45 Feralas | 31 | 44-48 |
-| highorder-45-47-tanaris | 45-47 Tanaris | 39 | 45-50 |
-| highorder-47-48-searing-gorge | 47-48 Searing Gorge | 30 | 47-51 |
-| highorder-48-48-the-hinterlands | 48 The Hinterlands | 18 | 48-51 |
+| highorder-45-47-tanaris | 45-47 Tanaris | 38 | 45-50 |
+| highorder-47-48-searing-gorge | 47-48 Searing Gorge | 32 | 47-51 |
+| highorder-48-48-the-hinterlands | 48 The Hinterlands | 14 | 48-51 |
 | highorder-48-49-blasted-lands | 48-49 Blasted Lands | 13 | 48-52 |
-| highorder-49-50-un-goro-crater | 49-50 Un'Goro Crater | 16 | 49-53 |
+| highorder-49-50-un-goro-crater | 49-50 Un'Goro Crater | 17 | 49-53 |
 | highorder-50-50-un-goro-crater | 50 Un'Goro Crater | 21 | 50-53 |
-| highorder-50-51-felwood | 50-51 Felwood | 26 | 50-54 |
+| highorder-50-51-felwood | 50-51 Felwood | 22 | 50-54 |
 | highorder-51-51-azshara | 51 Azshara | 16 | 51-54 |
-| highorder-51-52-burning-steppes | 51-52 Burning Steppes | 24 | 51-55 |
+| highorder-51-52-burning-steppes | 51-52 Burning Steppes | 23 | 51-55 |
 | highorder-52-53-western-plaguelands | 52-53 Western Plaguelands | 30 | 52-56 |
-| highorder-53-53-un-goro-crater | 53 Un'Goro Crater | 22 | 53-56 |
-| highorder-53-54-eastern-plaguelands | 53-54 Eastern Plaguelands | 46 | 53-57 |
-| highorder-54-55-silithus | 54-55 Silithus | 25 | 54-58 |
+| highorder-53-53-un-goro-crater | 53 Un'Goro Crater | 27 | 53-56 |
+| highorder-53-54-eastern-plaguelands | 53-54 Eastern Plaguelands | 44 | 53-57 |
+| highorder-54-55-silithus | 54-55 Silithus | 26 | 54-58 |
 | highorder-55-56-western-plaguelands | 55-56 Western Plaguelands | 13 | 55-59 |
-| highorder-56-57-winterspring | 56-57 Winterspring | 35 | 56-60 |
-| highorder-57-57-eastern-plaguelands | 57 Eastern Plaguelands | 33 | 57-60 |
-| highorder-57-58-stormwind-city | 57-58 Stormwind City | 75 | 57-60 |
-| highorder-58-60-silithus | 58-60 Silithus | 80 | 58-60 |
+| highorder-56-57-winterspring | 56-57 Winterspring | 32 | 56-60 |
+| highorder-57-57-eastern-plaguelands | 57 Eastern Plaguelands | 41 | 57-60 |
+| highorder-57-58-stormwind-city | 57-58 Stormwind City | 71 | 57-60 |
+| highorder-58-60-silithus | 58-60 Silithus | 83 | 58-60 |
 
 ### Level curve
 
@@ -927,47 +927,47 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,078, 1,253 (60%) |
+| Actions before bundling, steps after | 2,078, 1,249 (60%) |
 | Steps in the route file | 1,401 |
 | Sections | 29 |
 | Profession steps written | p186-2, p165-2, p202-2, p164-2, p171-2, p182-2, p197-2, p333-2, p393-2, p164-3, p165-3, p197-3, p333-3, p164-4, p182-4, p186-4, p202-4, p393-4, p171-4, p197-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section windshaper-32-35-stranglethorn-vale; Alchemy Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section windshaper-20-25-the-barrens; Herbalism Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section windshaper-20-25-the-barrens; Mining Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section windshaper-20-25-the-barrens; Engineering Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section windshaper-20-25-the-barrens; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section windshaper-32-35-stranglethorn-vale; Skinning Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section windshaper-20-25-the-barrens |
-| Class trainer visits | DRUID: 2, 4, 6, 10, 12, 14, 16, 29, 44, 50, 54, 58; HUNTER: 2, 4, 6, 10, 12, 14, 16, 32, 34, 40, 42, 44, 48, 50, 54, 58; ROGUE: 2, 4, 6, 10, 12, 14, 16, 20, 22, 30, 32, 34, 36, 41, 44, 48, 50, 54, 56, 58, 60; SHAMAN: 2, 4, 6, 8, 10, 12, 14, 16, 22, 28, 32, 34, 44, 48, 54, 56, 58, 60; WARRIOR: 2, 4, 6, 10, 12, 14, 16, 18, 24, 32, 34, 36, 48, 50, 54, 56, 58 |
-| Class trainer gaps | DRUID 16 to 29: the cheapest trip to a trainer adds 405 seconds (at most 300); DRUID 29 to 44: the cheapest trip to a trainer adds 601 seconds (at most 300); HUNTER 16 to 32: the cheapest trip to a trainer adds 409 seconds (at most 300); ROGUE 22 to 30: the cheapest trip to a trainer adds 321 seconds (at most 300); SHAMAN 34 to 44: the cheapest trip to a trainer adds 420 seconds (at most 300); WARRIOR 24 to 32: the cheapest trip to a trainer adds 594 seconds (at most 300); WARRIOR 36 to 48: the cheapest trip to a trainer adds 303 seconds (at most 300) |
+| Class trainer visits | DRUID: 2, 4, 6, 10, 12, 14, 28, 42, 44, 48, 53, 57; HUNTER: 2, 4, 6, 10, 12, 14, 16, 30, 32, 34, 40, 42, 46, 48, 52, 56, 58; ROGUE: 2, 4, 6, 10, 12, 14, 16, 21, 28, 30, 32, 34, 36, 40, 42, 48, 52, 54, 56, 58; SHAMAN: 2, 4, 6, 10, 12, 14, 16, 22, 28, 30, 34, 42, 46, 48, 52, 54, 56, 58; WARRIOR: 2, 4, 6, 10, 12, 14, 16, 18, 22, 30, 34, 36, 46, 48, 50, 52, 54, 56, 58 |
+| Class trainer gaps | DRUID 14 to 28: the cheapest trip to a trainer adds 405 seconds (at most 300); DRUID 28 to 42: the cheapest trip to a trainer adds 601 seconds (at most 300); HUNTER 16 to 30: the cheapest trip to a trainer adds 409 seconds (at most 300); ROGUE 21 to 28: the cheapest trip to a trainer adds 321 seconds (at most 300); SHAMAN 34 to 42: the cheapest trip to a trainer adds 420 seconds (at most 300); WARRIOR 22 to 30: the cheapest trip to a trainer adds 421 seconds (at most 300); WARRIOR 36 to 46: the cheapest trip to a trainer adds 339 seconds (at most 300) |
 | Planner notes | Windshaper step a792: quest 792 gives XP only up to level 12, but the estimated level there is 17; with "skip content you outlevel" the step and its quest's later lines are skipped; Windshaper step a792#2: quest 792 gives XP only up to level 12, but the estimated level there is 17; with "skip content you outlevel" the step and its quest's later lines are skipped; Windshaper step a792#3: quest 792 gives XP only up to level 12, but the estimated level there is 17; with "skip content you outlevel" the step and its quest's later lines are skipped; Windshaper step a792#4: quest 792 gives XP only up to level 12, but the estimated level there is 17; with "skip content you outlevel" the step and its quest's later lines are skipped; Windshaper step a792#5: quest 792 gives XP only up to level 12, but the estimated level there is 17; with "skip content you outlevel" the step and its quest's later lines are skipped; Windshaper step a1000.a5095.a3762: quest 5095 gives XP only up to level 58, but the estimated level there is 59; with "skip content you outlevel" the step and its quest's later lines are skipped; Windshaper step a3062.a3063: quest 3062 gives XP only up to level 58, but the estimated level there is 59; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| windshaper-01-16-zephras-isle | 1-16 Zephras Isle | 192 | 1-19 |
-| windshaper-16-20-the-barrens | 16-20 The Barrens | 91 | 16-23 |
+| windshaper-01-16-zephras-isle | 1-16 Zephras Isle | 187 | 1-19 |
+| windshaper-16-20-the-barrens | 16-20 The Barrens | 94 | 16-23 |
 | windshaper-20-25-the-barrens | 20-25 The Barrens | 96 | 20-28 |
 | windshaper-25-27-stonetalon-mountains | 25-27 Stonetalon Mountains | 38 | 25-30 |
 | windshaper-27-29-thousand-needles | 27-29 Thousand Needles | 68 | 27-32 |
 | windshaper-29-30-hillsbrad-foothills | 29-30 Hillsbrad Foothills | 10 | 29-33 |
 | windshaper-30-31-hillsbrad-foothills | 30-31 Hillsbrad Foothills | 36 | 30-34 |
 | windshaper-31-32-dustwallow-marsh | 31-32 Dustwallow Marsh | 10 | 31-35 |
-| windshaper-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 88 | 32-38 |
+| windshaper-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 90 | 32-38 |
 | windshaper-35-37-desolace | 35-37 Desolace | 46 | 35-40 |
 | windshaper-37-40-arathi-highlands | 37-40 Arathi Highlands | 55 | 37-43 |
 | windshaper-40-41-badlands | 40-41 Badlands | 27 | 40-44 |
-| windshaper-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 72 | 41-47 |
-| windshaper-44-45-feralas | 44-45 Feralas | 34 | 44-48 |
-| windshaper-45-47-tanaris | 45-47 Tanaris | 38 | 45-50 |
+| windshaper-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 71 | 41-47 |
+| windshaper-44-45-feralas | 44-45 Feralas | 35 | 44-48 |
+| windshaper-45-47-tanaris | 45-47 Tanaris | 37 | 45-50 |
 | windshaper-47-48-blasted-lands | 47-48 Blasted Lands | 8 | 47-51 |
-| windshaper-48-49-searing-gorge | 48-49 Searing Gorge | 24 | 48-52 |
-| windshaper-49-49-swamp-of-sorrows | 49 Swamp of Sorrows | 17 | 49-52 |
+| windshaper-48-49-searing-gorge | 48-49 Searing Gorge | 22 | 48-52 |
+| windshaper-49-49-swamp-of-sorrows | 49 Swamp of Sorrows | 20 | 49-52 |
 | windshaper-49-50-the-hinterlands | 49-50 The Hinterlands | 20 | 49-53 |
-| windshaper-50-50-the-hinterlands | 50 The Hinterlands | 45 | 50-53 |
+| windshaper-50-50-the-hinterlands | 50 The Hinterlands | 43 | 50-53 |
 | windshaper-50-51-azshara | 50-51 Azshara | 19 | 50-54 |
 | windshaper-51-52-felwood | 51-52 Felwood | 24 | 51-55 |
 | windshaper-52-53-un-goro-crater | 52-53 Un'Goro Crater | 49 | 52-56 |
-| windshaper-53-54-western-plaguelands | 53-54 Western Plaguelands | 39 | 53-57 |
+| windshaper-53-54-western-plaguelands | 53-54 Western Plaguelands | 41 | 53-57 |
 | windshaper-54-55-silithus | 54-55 Silithus | 35 | 54-58 |
-| windshaper-55-56-winterspring | 55-56 Winterspring | 38 | 55-59 |
+| windshaper-55-56-winterspring | 55-56 Winterspring | 37 | 55-59 |
 | windshaper-56-57-eastern-plaguelands | 56-57 Eastern Plaguelands | 45 | 56-60 |
-| windshaper-57-57-winterspring | 57 Winterspring | 12 | 57-60 |
-| windshaper-57-60-silithus | 57-60 Silithus | 125 | 57-60 |
+| windshaper-57-57-winterspring | 57 Winterspring | 14 | 57-60 |
+| windshaper-57-60-silithus | 57-60 Silithus | 124 | 57-60 |
 
 ### Level curve
 

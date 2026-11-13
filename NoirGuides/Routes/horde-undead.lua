@@ -28,36 +28,6 @@ Noir.Route("horde-undead", {
             { kind = "objective", quest = 364, index = 1, npc = 1501, skipIfMissing = true },
             { kind = "objective", quest = 364, index = 2, npc = 1502, skipIfMissing = true },
           } },
-        { id = "tMAGE-2", at = { zone = 85, x = 30.93, y = 66.06, r = 10 }, when = { class = "MAGE" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "MAGE", npc = 2124 },
-            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
-          } },
-        { id = "tPALADIN-2", at = { zone = 85, x = 31.1, y = 66.41, r = 10 }, when = { class = "PALADIN" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "PALADIN", npc = 244808 },
-            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
-          } },
-        { id = "tPRIEST-2", at = { zone = 85, x = 31.11, y = 66.03, r = 10 }, when = { class = "PRIEST" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "PRIEST", npc = 2123 },
-            { kind = "selljunk", at = { zone = 85, x = 31.4, y = 66.4, r = 10 }, npc = 233428 },
-          } },
-        { id = "tROGUE-2", at = { zone = 85, x = 32.53, y = 65.65, r = 10 }, when = { class = "ROGUE" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "ROGUE", npc = 2122 },
-            { kind = "selljunk", at = { zone = 85, x = 32.41, y = 65.66, r = 10 }, npc = 2113 },
-          } },
-        { id = "tWARLOCK-2", at = { zone = 85, x = 30.91, y = 66.34, r = 10 }, when = { class = "WARLOCK" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "WARLOCK", npc = 2126 },
-            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
-          } },
-        { id = "tWARRIOR-2", at = { zone = 85, x = 32.69, y = 65.56, r = 10 }, when = { class = "WARRIOR" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "WARRIOR", npc = 2119 },
-            { kind = "selljunk", at = { zone = 85, x = 32.6, y = 65.81, r = 10 }, npc = 267324 },
-          } },
         { id = "a376.t363.t364.a3901", at = { zone = 85, x = 30.86, y = 66.05, r = 10 }, minLevel = 2, targets = { friend = { 1661, 1569 } },
           lines = {
             { kind = "accept", quest = 376, npc = 1661 },
@@ -90,36 +60,6 @@ Noir.Route("horde-undead", {
             { kind = "objective", quest = 376, index = 1, item = 3265 },
             { kind = "objective", quest = 376, index = 2, item = 3264 },
           } },
-        { id = "tMAGE-4", at = { zone = 85, x = 30.93, y = 66.06, r = 10 }, when = { class = "MAGE" }, minLevel = 4,
-          lines = {
-            { kind = "train", level = 4, class = "MAGE", npc = 2124 },
-            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
-          } },
-        { id = "tPALADIN-4", at = { zone = 85, x = 31.1, y = 66.41, r = 10 }, when = { class = "PALADIN" }, minLevel = 4,
-          lines = {
-            { kind = "train", level = 4, class = "PALADIN", npc = 244808 },
-            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
-          } },
-        { id = "tPRIEST-4", at = { zone = 85, x = 31.11, y = 66.03, r = 10 }, when = { class = "PRIEST" }, minLevel = 4,
-          lines = {
-            { kind = "train", level = 4, class = "PRIEST", npc = 2123 },
-            { kind = "selljunk", at = { zone = 85, x = 31.4, y = 66.4, r = 10 }, npc = 233428 },
-          } },
-        { id = "tROGUE-4", at = { zone = 85, x = 32.53, y = 65.65, r = 10 }, when = { class = "ROGUE" }, minLevel = 4,
-          lines = {
-            { kind = "train", level = 4, class = "ROGUE", npc = 2122 },
-            { kind = "selljunk", at = { zone = 85, x = 32.41, y = 65.66, r = 10 }, npc = 2113 },
-          } },
-        { id = "tWARLOCK-4", at = { zone = 85, x = 30.91, y = 66.34, r = 10 }, when = { class = "WARLOCK" }, minLevel = 4,
-          lines = {
-            { kind = "train", level = 4, class = "WARLOCK", npc = 2126 },
-            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
-          } },
-        { id = "tWARRIOR-4", at = { zone = 85, x = 32.69, y = 65.56, r = 10 }, when = { class = "WARRIOR" }, minLevel = 4,
-          lines = {
-            { kind = "train", level = 4, class = "WARRIOR", npc = 2119 },
-            { kind = "selljunk", at = { zone = 85, x = 32.6, y = 65.81, r = 10 }, npc = 267324 },
-          } },
         { id = "r3901", at = { zone = 85, x = 33, y = 61.68, r = 40 }, reminder = { ends = "turnin376" }, targets = { enemy = { 1890 } },
           lines = {
             { kind = "objective", quest = 3901, index = 1, npc = 1890, skipIfMissing = true },
@@ -127,6 +67,36 @@ Noir.Route("horde-undead", {
         { id = "r1470", at = { zone = 85, x = 33, y = 61.68, r = 40 }, when = { class = "WARLOCK" }, reminder = { ends = "turnin1470" }, targets = { enemy = { 1890 } },
           lines = {
             { kind = "objective", quest = 1470, index = 1, item = 6281, skipIfMissing = true },
+          } },
+        { id = "tMAGE-2", at = { zone = 85, x = 30.93, y = 66.06, r = 10 }, when = { class = "MAGE" }, minLevel = 2,
+          lines = {
+            { kind = "train", level = 2, class = "MAGE", npc = 2124 },
+            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
+          } },
+        { id = "tPALADIN-2", at = { zone = 85, x = 31.1, y = 66.41, r = 10 }, when = { class = "PALADIN" }, minLevel = 2,
+          lines = {
+            { kind = "train", level = 2, class = "PALADIN", npc = 244808 },
+            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
+          } },
+        { id = "tPRIEST-2", at = { zone = 85, x = 31.11, y = 66.03, r = 10 }, when = { class = "PRIEST" }, minLevel = 2,
+          lines = {
+            { kind = "train", level = 2, class = "PRIEST", npc = 2123 },
+            { kind = "selljunk", at = { zone = 85, x = 31.4, y = 66.4, r = 10 }, npc = 233428 },
+          } },
+        { id = "tROGUE-2", at = { zone = 85, x = 32.53, y = 65.65, r = 10 }, when = { class = "ROGUE" }, minLevel = 2,
+          lines = {
+            { kind = "train", level = 2, class = "ROGUE", npc = 2122 },
+            { kind = "selljunk", at = { zone = 85, x = 32.41, y = 65.66, r = 10 }, npc = 2113 },
+          } },
+        { id = "tWARLOCK-2", at = { zone = 85, x = 30.91, y = 66.34, r = 10 }, when = { class = "WARLOCK" }, minLevel = 2,
+          lines = {
+            { kind = "train", level = 2, class = "WARLOCK", npc = 2126 },
+            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
+          } },
+        { id = "tWARRIOR-2", at = { zone = 85, x = 32.69, y = 65.56, r = 10 }, when = { class = "WARRIOR" }, minLevel = 2,
+          lines = {
+            { kind = "train", level = 2, class = "WARRIOR", npc = 2119 },
+            { kind = "selljunk", at = { zone = 85, x = 32.6, y = 65.81, r = 10 }, npc = 267324 },
           } },
         { id = "t376.a6395.t3901.a3902.a380.o6395", label = "turnin376", at = { zone = 85, x = 30.86, y = 66.05, r = 10 }, minLevel = 3, items = { 16333 }, targets = { friend = { 1661, 1569, 1740, 1570 } },
           lines = {
@@ -163,6 +133,36 @@ Noir.Route("horde-undead", {
             { kind = "objective", quest = 380, index = 1, npc = 1504 },
             { kind = "objective", quest = 380, index = 2, npc = 1505 },
           } },
+        { id = "tMAGE-4", at = { zone = 85, x = 30.93, y = 66.06, r = 10 }, when = { class = "MAGE" }, minLevel = 4,
+          lines = {
+            { kind = "train", level = 4, class = "MAGE", npc = 2124 },
+            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
+          } },
+        { id = "tPALADIN-4", at = { zone = 85, x = 31.1, y = 66.41, r = 10 }, when = { class = "PALADIN" }, minLevel = 4,
+          lines = {
+            { kind = "train", level = 4, class = "PALADIN", npc = 244808 },
+            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
+          } },
+        { id = "tPRIEST-4", at = { zone = 85, x = 31.11, y = 66.03, r = 10 }, when = { class = "PRIEST" }, minLevel = 4,
+          lines = {
+            { kind = "train", level = 4, class = "PRIEST", npc = 2123 },
+            { kind = "selljunk", at = { zone = 85, x = 31.4, y = 66.4, r = 10 }, npc = 233428 },
+          } },
+        { id = "tROGUE-4", at = { zone = 85, x = 32.53, y = 65.65, r = 10 }, when = { class = "ROGUE" }, minLevel = 4,
+          lines = {
+            { kind = "train", level = 4, class = "ROGUE", npc = 2122 },
+            { kind = "selljunk", at = { zone = 85, x = 32.41, y = 65.66, r = 10 }, npc = 2113 },
+          } },
+        { id = "tWARLOCK-4", at = { zone = 85, x = 30.91, y = 66.34, r = 10 }, when = { class = "WARLOCK" }, minLevel = 4,
+          lines = {
+            { kind = "train", level = 4, class = "WARLOCK", npc = 2126 },
+            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
+          } },
+        { id = "tWARRIOR-4", at = { zone = 85, x = 32.69, y = 65.56, r = 10 }, when = { class = "WARRIOR" }, minLevel = 4,
+          lines = {
+            { kind = "train", level = 4, class = "WARRIOR", npc = 2119 },
+            { kind = "selljunk", at = { zone = 85, x = 32.6, y = 65.81, r = 10 }, npc = 267324 },
+          } },
         { id = "t6395.t3902.t380.a381", at = { zone = 85, x = 30.86, y = 66.05, r = 10 }, minLevel = 2, items = { 16333 }, targets = { friend = { 1661, 1740, 1570 } },
           lines = {
             { kind = "turnin", quest = 6395, npc = 1661 },
@@ -181,36 +181,6 @@ Noir.Route("horde-undead", {
         { id = "o381", at = { zone = 85, x = 37.51, y = 67.79, r = 40 }, text = "Scarlet Armband is east of Novice Elreth.", targets = { enemy = { 1506, 1507, 1667 } },
           lines = {
             { kind = "objective", quest = 381, index = 1, item = 3266 },
-          } },
-        { id = "tMAGE-6", at = { zone = 85, x = 30.93, y = 66.06, r = 10 }, when = { class = "MAGE" }, minLevel = 6,
-          lines = {
-            { kind = "train", level = 6, class = "MAGE", npc = 2124 },
-            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
-          } },
-        { id = "tPALADIN-6", at = { zone = 85, x = 31.1, y = 66.41, r = 10 }, when = { class = "PALADIN" }, minLevel = 6,
-          lines = {
-            { kind = "train", level = 6, class = "PALADIN", npc = 244808 },
-            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
-          } },
-        { id = "tPRIEST-6", at = { zone = 85, x = 31.11, y = 66.03, r = 10 }, when = { class = "PRIEST" }, minLevel = 6,
-          lines = {
-            { kind = "train", level = 6, class = "PRIEST", npc = 2123 },
-            { kind = "selljunk", at = { zone = 85, x = 31.4, y = 66.4, r = 10 }, npc = 233428 },
-          } },
-        { id = "tROGUE-6", at = { zone = 85, x = 32.53, y = 65.65, r = 10 }, when = { class = "ROGUE" }, minLevel = 6,
-          lines = {
-            { kind = "train", level = 6, class = "ROGUE", npc = 2122 },
-            { kind = "selljunk", at = { zone = 85, x = 32.41, y = 65.66, r = 10 }, npc = 2113 },
-          } },
-        { id = "tWARLOCK-6", at = { zone = 85, x = 30.91, y = 66.34, r = 10 }, when = { class = "WARLOCK" }, minLevel = 6,
-          lines = {
-            { kind = "train", level = 6, class = "WARLOCK", npc = 2126 },
-            { kind = "selljunk", at = { zone = 85, x = 30.81, y = 66.41, r = 10 }, npc = 5749 },
-          } },
-        { id = "tWARRIOR-6", at = { zone = 85, x = 32.69, y = 65.56, r = 10 }, when = { class = "WARRIOR" }, minLevel = 6,
-          lines = {
-            { kind = "train", level = 6, class = "WARRIOR", npc = 2119 },
-            { kind = "selljunk", at = { zone = 85, x = 32.6, y = 65.81, r = 10 }, npc = 267324 },
           } },
         { id = "t381.a382", at = { zone = 85, x = 32.15, y = 66.01, r = 10 }, minLevel = 2, targets = { friend = { 1570 } },
           lines = {
@@ -241,6 +211,36 @@ Noir.Route("horde-undead", {
         { id = "o5481", at = { zone = 85, x = 47.87, y = 55.37, r = 40 }, text = "Gloom Weed is east of Gordo.",
           lines = {
             { kind = "objective", quest = 5481, index = 1, item = 12737, skipIfMissing = true },
+          } },
+        { id = "tMAGE-6", at = { zone = 85, x = 61.97, y = 52.47, r = 10 }, when = { class = "MAGE" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "MAGE", npc = 2128 },
+            { kind = "selljunk", at = { zone = 85, x = 61.8, y = 52, r = 10 }, npc = 208920 },
+          } },
+        { id = "tPALADIN-6", at = { zone = 85, x = 60.22, y = 52.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "PALADIN", npc = 246152 },
+            { kind = "selljunk", at = { zone = 85, x = 60.31, y = 52.82, r = 10 }, npc = 2137 },
+          } },
+        { id = "tPRIEST-6", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "PRIEST", npc = 2129 },
+            { kind = "selljunk", at = { zone = 85, x = 61.72, y = 52.05, r = 10 }, npc = 5688 },
+          } },
+        { id = "tROGUE-6", at = { zone = 85, x = 61.75, y = 52, r = 10 }, when = { class = "ROGUE" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "ROGUE", npc = 2130 },
+            { kind = "selljunk", at = { zone = 85, x = 61.72, y = 52.05, r = 10 }, npc = 5688 },
+          } },
+        { id = "tWARLOCK-6", at = { zone = 85, x = 61.59, y = 52.4, r = 10 }, when = { class = "WARLOCK" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "WARLOCK", npc = 2127 },
+            { kind = "selljunk", at = { zone = 85, x = 61.55, y = 52.61, r = 10 }, npc = 5750 },
+          } },
+        { id = "tWARRIOR-6", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "WARRIOR", npc = 2131 },
+            { kind = "selljunk", at = { zone = 85, x = 61.55, y = 52.61, r = 10 }, npc = 5750 },
           } },
         { id = "t5481.a5482", at = { zone = 85, x = 57.44, y = 48.85, r = 10 }, minLevel = 5, targets = { friend = { 10665 } },
           lines = {
@@ -280,11 +280,6 @@ Noir.Route("horde-undead", {
       id = "undead-08-08-durotar", name = "8 Durotar", group = "Horde", subgroup = "1-20", minLevel = 8, maxLevel = 11, zone = 14,
       next = { { section = "undead-08-13-tirisfal-glades" } },
       steps = {
-        { id = "tMAGE-8", at = { zone = 85, x = 61.97, y = 52.47, r = 10 }, when = { class = "MAGE" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "MAGE", npc = 2128 },
-            { kind = "selljunk", at = { zone = 85, x = 61.8, y = 52, r = 10 }, npc = 208920 },
-          } },
         { id = "x14", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Durotar.", when = { class = "MAGE" },
           lines = {
             { kind = "transport", to = { zone = 14, x = 51, y = 13.9 }, mode = "zeppelin", at = { zone = 85, x = 60.6, y = 58.9, r = 15 } },
@@ -300,11 +295,6 @@ Noir.Route("horde-undead", {
         { id = "t792", at = { zone = 14, x = 42.85, y = 69.15, r = 10 }, when = { class = "MAGE" }, targets = { friend = { 3145 } },
           lines = {
             { kind = "turnin", quest = 792, npc = 3145, skipIfMissing = true },
-          } },
-        { id = "tPALADIN-8", at = { zone = 85, x = 60.22, y = 52.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "PALADIN", npc = 246152 },
-            { kind = "selljunk", at = { zone = 85, x = 60.31, y = 52.82, r = 10 }, npc = 2137 },
           } },
         { id = "x14#2", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Durotar.", when = { class = "PALADIN" },
           lines = {
@@ -322,11 +312,6 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "turnin", quest = 792, npc = 3145, skipIfMissing = true },
           } },
-        { id = "tPRIEST-8", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "PRIEST", npc = 2129 },
-            { kind = "selljunk", at = { zone = 85, x = 61.72, y = 52.05, r = 10 }, npc = 5688 },
-          } },
         { id = "x14#3", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Durotar.", when = { class = "PRIEST" },
           lines = {
             { kind = "transport", to = { zone = 14, x = 51, y = 13.9 }, mode = "zeppelin", at = { zone = 85, x = 60.6, y = 58.9, r = 15 } },
@@ -342,11 +327,6 @@ Noir.Route("horde-undead", {
         { id = "t792#3", at = { zone = 14, x = 42.85, y = 69.15, r = 10 }, when = { class = "PRIEST" }, targets = { friend = { 3145 } },
           lines = {
             { kind = "turnin", quest = 792, npc = 3145, skipIfMissing = true },
-          } },
-        { id = "tROGUE-8", at = { zone = 85, x = 61.75, y = 52, r = 10 }, when = { class = "ROGUE" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "ROGUE", npc = 2130 },
-            { kind = "selljunk", at = { zone = 85, x = 61.72, y = 52.05, r = 10 }, npc = 5688 },
           } },
         { id = "x14#4", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Durotar.", when = { class = "ROGUE" },
           lines = {
@@ -364,11 +344,6 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "turnin", quest = 792, npc = 3145, skipIfMissing = true },
           } },
-        { id = "tWARLOCK-8", at = { zone = 85, x = 61.59, y = 52.4, r = 10 }, when = { class = "WARLOCK" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "WARLOCK", npc = 2127 },
-            { kind = "selljunk", at = { zone = 85, x = 61.55, y = 52.61, r = 10 }, npc = 5750 },
-          } },
         { id = "x14#5", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Durotar.", when = { class = "WARLOCK" },
           lines = {
             { kind = "transport", to = { zone = 14, x = 51, y = 13.9 }, mode = "zeppelin", at = { zone = 85, x = 60.6, y = 58.9, r = 15 } },
@@ -377,11 +352,6 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "accept", quest = 1499, npc = 5765, ifDone = 1470, requires = { 1470 } },
             { kind = "turnin", quest = 1499, npc = 3145, skipIfMissing = true },
-          } },
-        { id = "tWARRIOR-8", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "WARRIOR", npc = 2131 },
-            { kind = "selljunk", at = { zone = 85, x = 61.55, y = 52.61, r = 10 }, npc = 5750 },
           } },
         { id = "x14#6", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Durotar.", when = { class = "WARRIOR" },
           lines = {
@@ -499,14 +469,14 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "hearth", to = { zone = 85, x = 61.72, y = 52.05 } },
           } },
-        { id = "tPRIEST-10", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 10,
-          lines = {
-            { kind = "train", level = 10, class = "PRIEST", npc = 2129 },
-            { kind = "selljunk", at = { zone = 85, x = 61.72, y = 52.05, r = 10 }, npc = 5688 },
-          } },
         { id = "o5650", at = { zone = 85, x = 59.18, y = 46.5, r = 40 }, when = { class = "PRIEST" }, targets = { enemy = { 12428 } },
           lines = {
             { kind = "objective", quest = 5650, index = 1, npc = 12428 },
+          } },
+        { id = "tPRIEST-8", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 8,
+          lines = {
+            { kind = "train", level = 8, class = "PRIEST", npc = 2129 },
+            { kind = "selljunk", at = { zone = 85, x = 61.72, y = 52.05, r = 10 }, npc = 5688 },
           } },
         { id = "t5650", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, targets = { friend = { 2129 } },
           lines = {
@@ -532,6 +502,11 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "train", level = 10, class = "PALADIN", npc = 246152 },
             { kind = "selljunk", at = { zone = 85, x = 60.31, y = 52.82, r = 10 }, npc = 2137 },
+          } },
+        { id = "tPRIEST-10", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 10,
+          lines = {
+            { kind = "train", level = 10, class = "PRIEST", npc = 2129 },
+            { kind = "selljunk", at = { zone = 85, x = 61.72, y = 52.05, r = 10 }, npc = 5688 },
           } },
         { id = "tROGUE-10", at = { zone = 85, x = 61.75, y = 52, r = 10 }, when = { class = "ROGUE" }, minLevel = 10,
           lines = {
@@ -592,24 +567,9 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "objective", quest = 374, index = 1, item = 2875, skipIfMissing = true },
           } },
-        { id = "tWARLOCK-12", at = { zone = 1497, x = 86.21, y = 15.93, r = 10 }, when = { class = "WARLOCK" }, minLevel = 12,
-          lines = {
-            { kind = "train", level = 12, class = "WARLOCK", npc = 4563 },
-            { kind = "selljunk", at = { zone = 1497, x = 85.7, y = 16.08, r = 10 }, npc = 5753 },
-          } },
         { id = "a1473", at = { zone = 1497, x = 85.06, y = 25.99, r = 10 }, when = { class = "WARLOCK" }, minLevel = 10, maxLevel = 18, targets = { friend = { 5675 } },
           lines = {
             { kind = "accept", quest = 1473, npc = 5675 },
-          } },
-        { id = "tMAGE-12", at = { zone = 1497, x = 85.14, y = 10.03, r = 10 }, when = { class = "MAGE" }, minLevel = 12,
-          lines = {
-            { kind = "train", level = 12, class = "MAGE", npc = 4568 },
-            { kind = "selljunk", at = { zone = 1497, x = 85.7, y = 16.08, r = 10 }, npc = 5753 },
-          } },
-        { id = "tWARRIOR-12", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 12,
-          lines = {
-            { kind = "train", level = 12, class = "WARRIOR", npc = 2131 },
-            { kind = "selljunk", at = { zone = 85, x = 61.55, y = 52.61, r = 10 }, npc = 5750 },
           } },
         { id = "t359.a360", at = { zone = 85, x = 65.49, y = 60.25, r = 10 }, minLevel = 6, targets = { friend = { 1495 } },
           lines = {
@@ -635,11 +595,6 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "objective", quest = 1473, index = 1, item = 6285, skipIfMissing = true },
           } },
-        { id = "tPALADIN-12", at = { zone = 1497, x = 45.97, y = 19.79, r = 10 }, when = { class = "PALADIN" }, minLevel = 12,
-          lines = {
-            { kind = "train", level = 12, class = "PALADIN", npc = 260093 },
-            { kind = "selljunk", at = { zone = 1497, x = 54.7, y = 38.76, r = 10 }, npc = 4604 },
-          } },
         { id = "o370", at = { zone = 85, x = 51.14, y = 67.8, r = 40 }, text = "Captain Perrine is south of your last stop.", targets = { enemy = { 1662, 1537, 1536 } },
           lines = {
             { kind = "objective", quest = 370, index = 1, npc = 1662, skipIfMissing = true },
@@ -656,6 +611,11 @@ Noir.Route("horde-undead", {
             { kind = "accept", quest = 5658, npc = 4606 },
             { kind = "turnin", quest = 5658, npc = 4606 },
           } },
+        { id = "tWARLOCK-12", at = { zone = 1497, x = 86.21, y = 15.93, r = 10 }, when = { class = "WARLOCK" }, minLevel = 12,
+          lines = {
+            { kind = "train", level = 12, class = "WARLOCK", npc = 4563 },
+            { kind = "selljunk", at = { zone = 1497, x = 85.7, y = 16.08, r = 10 }, npc = 5753 },
+          } },
         { id = "t1473", at = { zone = 1497, x = 85.06, y = 25.99, r = 10 }, when = { class = "WARLOCK" }, targets = { friend = { 5675 } },
           lines = {
             { kind = "turnin", quest = 1473, npc = 5675, skipIfMissing = true },
@@ -664,10 +624,25 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "hearth", to = { zone = 85, x = 61.72, y = 52.05 } },
           } },
+        { id = "tMAGE-12", at = { zone = 85, x = 61.97, y = 52.47, r = 10 }, when = { class = "MAGE" }, minLevel = 12,
+          lines = {
+            { kind = "train", level = 12, class = "MAGE", npc = 2128 },
+            { kind = "selljunk", at = { zone = 85, x = 61.8, y = 52, r = 10 }, npc = 208920 },
+          } },
+        { id = "tPALADIN-12", at = { zone = 85, x = 60.22, y = 52.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 12,
+          lines = {
+            { kind = "train", level = 12, class = "PALADIN", npc = 246152 },
+            { kind = "selljunk", at = { zone = 85, x = 60.31, y = 52.82, r = 10 }, npc = 2137 },
+          } },
         { id = "tROGUE-12", at = { zone = 85, x = 61.75, y = 52, r = 10 }, when = { class = "ROGUE" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "ROGUE", npc = 2130 },
             { kind = "selljunk", at = { zone = 85, x = 61.72, y = 52.05, r = 10 }, npc = 5688 },
+          } },
+        { id = "tWARRIOR-12", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 12,
+          lines = {
+            { kind = "train", level = 12, class = "WARRIOR", npc = 2131 },
+            { kind = "selljunk", at = { zone = 85, x = 61.55, y = 52.61, r = 10 }, npc = 5750 },
           } },
         { id = "t360.t408.t374.t370.a371", at = { zone = 85, x = 61.26, y = 50.84, r = 10 }, minLevel = 5, targets = { friend = { 1499, 1652, 1515 } },
           lines = {
@@ -735,11 +710,6 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "objective", quest = 1882, index = 1, item = 7227 },
           } },
-        { id = "tMAGE-14", at = { zone = 1497, x = 85.14, y = 10.03, r = 10 }, when = { class = "MAGE" }, minLevel = 14,
-          lines = {
-            { kind = "train", level = 14, class = "MAGE", npc = 4568 },
-            { kind = "selljunk", at = { zone = 1497, x = 85.7, y = 16.08, r = 10 }, npc = 5753 },
-          } },
         { id = "t1882", at = { zone = 1497, x = 85.14, y = 10.03, r = 10 }, when = { class = "MAGE" }, targets = { friend = { 4568 } },
           lines = {
             { kind = "turnin", quest = 1882, npc = 4568 },
@@ -752,11 +722,6 @@ Noir.Route("horde-undead", {
         { id = "o1886", at = { zone = 130, x = 49.71, y = 32.22, r = 40 }, text = "Astor's Letter of Introduction is southwest of Executor Zygand.", when = { class = "ROGUE" }, targets = { enemy = { 6497 } },
           lines = {
             { kind = "objective", quest = 1886, index = 1, item = 7231 },
-          } },
-        { id = "tROGUE-14", at = { zone = 1497, x = 83.86, y = 72.07, r = 10 }, when = { class = "ROGUE" }, minLevel = 14,
-          lines = {
-            { kind = "train", level = 14, class = "ROGUE", npc = 4582 },
-            { kind = "selljunk", at = { zone = 1497, x = 75.48, y = 74.34, r = 10 }, npc = 4587 },
           } },
         { id = "t1886.a1898", at = { zone = 1497, x = 83.51, y = 69.11, r = 10 }, when = { class = "ROGUE" }, minLevel = 10, items = { 7231 }, targets = { friend = { 6467 } },
           lines = {
@@ -778,19 +743,9 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "turnin", quest = 1978, npc = 2425 },
           } },
-        { id = "tWARLOCK-14", at = { zone = 1497, x = 86.21, y = 15.93, r = 10 }, when = { class = "WARLOCK" }, minLevel = 14,
-          lines = {
-            { kind = "train", level = 14, class = "WARLOCK", npc = 4563 },
-            { kind = "selljunk", at = { zone = 1497, x = 85.7, y = 16.08, r = 10 }, npc = 5753 },
-          } },
         { id = "t1478", at = { zone = 1497, x = 85.06, y = 25.99, r = 10 }, when = { class = "WARLOCK" }, targets = { friend = { 5675 } },
           lines = {
             { kind = "turnin", quest = 1478, npc = 5675, skipIfMissing = true },
-          } },
-        { id = "tWARRIOR-14", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 14,
-          lines = {
-            { kind = "train", level = 14, class = "WARRIOR", npc = 2131 },
-            { kind = "selljunk", at = { zone = 85, x = 61.55, y = 52.61, r = 10 }, npc = 5750 },
           } },
         { id = "t1819.a1820", at = { zone = 85, x = 58.2, y = 51.45, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, targets = { friend = { 1496 } },
           lines = {
@@ -814,11 +769,6 @@ Noir.Route("horde-undead", {
             { kind = "turnin", quest = 1821, npc = 1500, skipIfMissing = true },
             { kind = "accept", quest = 1822, npc = 1500, ifDone = 1821, requires = { 1821 } },
             { kind = "turnin", quest = 1822, npc = 1500, skipIfMissing = true },
-          } },
-        { id = "tPRIEST-14", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 14,
-          lines = {
-            { kind = "train", level = 14, class = "PRIEST", npc = 2129 },
-            { kind = "selljunk", at = { zone = 85, x = 61.72, y = 52.05, r = 10 }, npc = 5688 },
           } },
         { id = "x14#7", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Durotar.",
           lines = {
@@ -986,6 +936,11 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "accept", quest = 1959, npc = 2128 },
           } },
+        { id = "tMAGE-14", at = { zone = 1497, x = 85.14, y = 10.03, r = 10 }, when = { class = "MAGE" }, minLevel = 14,
+          lines = {
+            { kind = "train", level = 14, class = "MAGE", npc = 4568 },
+            { kind = "selljunk", at = { zone = 1497, x = 85.7, y = 16.08, r = 10 }, npc = 5753 },
+          } },
         { id = "t1959.a1960.o1960.t1960.a1961", at = { zone = 1497, x = 85.14, y = 10.03, r = 10 }, when = { class = "MAGE" }, minLevel = 15, targets = { friend = { 4568 } },
           lines = {
             { kind = "turnin", quest = 1959, npc = 4568, skipIfMissing = true },
@@ -1000,11 +955,6 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "objective", quest = 1961, index = 1, item = 2589 },
             { kind = "objective", quest = 1961, index = 2, item = 7293 },
-          } },
-        { id = "tMAGE-16", at = { zone = 1497, x = 85.02, y = 14.02, r = 10 }, when = { class = "MAGE" }, minLevel = 16,
-          lines = {
-            { kind = "train", level = 16, class = "MAGE", npc = 4566 },
-            { kind = "selljunk", at = { zone = 1497, x = 85.7, y = 16.08, r = 10 }, npc = 5753 },
           } },
         { id = "t1961.a1962.t1962", at = { zone = 1497, x = 70.76, y = 30.69, r = 10 }, when = { class = "MAGE" }, minLevel = 15, targets = { friend = { 4576 } },
           lines = {
@@ -1077,6 +1027,23 @@ Noir.Route("horde-undead", {
             { kind = "turnin", quest = 845, npc = 3338, skipIfMissing = true },
             { kind = "accept", quest = 903, npc = 3338, ifDone = 845, requires = { 845 } },
           } },
+        { id = "tROGUE-16:go1", at = { zone = 17, x = 51.5, y = 30.34, r = 10 }, text = "Fly from Crossroads, The Barrens to Ratchet, The Barrens.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 25, to = 80 },
+          } },
+        { id = "tROGUE-16:go2", text = "Head east into Durotar.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "goto", at = { zone = 14, x = 41.28, y = 68, r = 20 } },
+          } },
+        { id = "tROGUE-16", at = { zone = 14, x = 41.28, y = 68, r = 10 }, text = "Fly to Durotar for class training, then return.", when = { class = "ROGUE" }, minLevel = 16,
+          lines = {
+            { kind = "train", level = 16, class = "ROGUE", npc = 3155 },
+            { kind = "selljunk", at = { zone = 14, x = 40.78, y = 67.86, r = 10 }, npc = 267327 },
+          } },
+        { id = "tROGUE-16:back1", when = { class = "ROGUE" },
+          lines = {
+            { kind = "goto", at = { zone = 17, x = 63.08, y = 37.16, r = 20 } },
+          } },
         { id = "o872", at = { zone = 17, x = 58.01, y = 24.72, r = 40 }, text = "The Razormane Geomancers are northeast of Sergra Darkthorn.", targets = { enemy = { 3266, 3269, 3438 } },
           lines = {
             { kind = "objective", quest = 872, index = 1, npc = 3269 },
@@ -1089,6 +1056,27 @@ Noir.Route("horde-undead", {
             { kind = "accept", quest = 4921, npc = 3432 },
             { kind = "turnin", quest = 872, at = { zone = 17, x = 51.5, y = 30.87, r = 10 }, npc = 3429 },
             { kind = "accept", quest = 6541, at = { zone = 17, x = 51.5, y = 30.87, r = 10 }, npc = 3429 },
+          } },
+        { id = "tWARLOCK-16:go1", at = { zone = 17, x = 51.5, y = 30.34, r = 10 }, text = "Fly from Crossroads, The Barrens to Ratchet, The Barrens.", when = { class = "WARLOCK" },
+          lines = {
+            { kind = "fly", from = 25, to = 80 },
+          } },
+        { id = "tWARLOCK-16:go2", text = "Head east into Durotar.", when = { class = "WARLOCK" },
+          lines = {
+            { kind = "goto", at = { zone = 14, x = 40.65, y = 68.52, r = 20 } },
+          } },
+        { id = "tWARLOCK-16", at = { zone = 14, x = 40.65, y = 68.52, r = 10 }, text = "Fly to Durotar for class training, then return.", when = { class = "WARLOCK" }, minLevel = 16,
+          lines = {
+            { kind = "train", level = 16, class = "WARLOCK", npc = 3156 },
+            { kind = "selljunk", at = { zone = 14, x = 40.56, y = 68.44, r = 10 }, npc = 12776 },
+          } },
+        { id = "tWARLOCK-16:back1", when = { class = "WARLOCK" },
+          lines = {
+            { kind = "goto", at = { zone = 17, x = 63.08, y = 37.16, r = 20 } },
+          } },
+        { id = "tWARLOCK-16:back2", at = { zone = 17, x = 63.08, y = 37.16, r = 10 }, text = "Fly from Ratchet, The Barrens to Crossroads, The Barrens.", when = { class = "WARLOCK" },
+          lines = {
+            { kind = "fly", from = 80, to = 25 },
           } },
         { id = "y25-80#2", at = { zone = 17, x = 51.5, y = 30.34, r = 10 }, text = "Fly from Crossroads, The Barrens to Ratchet, The Barrens.",
           lines = {
@@ -1199,11 +1187,6 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "transport", to = { zone = 85, x = 60.6, y = 58.9 }, mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 } },
           } },
-        { id = "tROGUE-18", at = { zone = 1497, x = 83.86, y = 72.07, r = 10 }, when = { class = "ROGUE" }, minLevel = 18,
-          lines = {
-            { kind = "train", level = 18, class = "ROGUE", npc = 4582 },
-            { kind = "selljunk", at = { zone = 1497, x = 75.48, y = 74.34, r = 10 }, npc = 4587 },
-          } },
         { id = "a1998", at = { zone = 1497, x = 83.51, y = 69.11, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, maxLevel = 24, targets = { friend = { 6467 } },
           lines = {
             { kind = "accept", quest = 1998, npc = 6467 },
@@ -1211,6 +1194,11 @@ Noir.Route("horde-undead", {
         { id = "o1998", at = { zone = 130, x = 59.58, y = 33.94, r = 40 }, when = { class = "ROGUE" }, targets = { enemy = { 6570 } },
           lines = {
             { kind = "objective", quest = 1998, index = 1, item = 7306, skipIfMissing = true },
+          } },
+        { id = "tROGUE-18", at = { zone = 1497, x = 83.86, y = 72.07, r = 10 }, when = { class = "ROGUE" }, minLevel = 18,
+          lines = {
+            { kind = "train", level = 18, class = "ROGUE", npc = 4582 },
+            { kind = "selljunk", at = { zone = 1497, x = 75.48, y = 74.34, r = 10 }, npc = 4587 },
           } },
         { id = "t1998.a1999", at = { zone = 1497, x = 83.51, y = 69.11, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, items = { 5060 }, targets = { friend = { 6467 } },
           lines = {
@@ -1240,9 +1228,10 @@ Noir.Route("horde-undead", {
             { kind = "turnin", quest = 902, npc = 3442 },
             { kind = "accept", quest = 3921, npc = 3442, requires = { 902 } },
           } },
-        { id = "o899", at = { zone = 17, x = 49.81, y = 51.4, r = 40 }, text = "Bristleback Quilboar Tusk is southwest of Sputtervalve.", targets = { enemy = { 268624, 3258, 3260, 3261, 3263, 3259 } },
+        { id = "o899.o4921", at = { zone = 17, x = 49.81, y = 51.4, r = 40 }, text = "Bristleback Quilboar Tusk is southwest of Sputtervalve.", targets = { enemy = { 268624, 10668, 3258, 3260, 3261, 3263 } },
           lines = {
             { kind = "objective", quest = 899, index = 1, item = 5085 },
+            { kind = "objective", quest = 4921, index = 1, at = { zone = 17, x = 49.33, y = 50.32, r = 40 }, npc = 10668 },
           } },
         { id = "f77.a878", at = { zone = 17, x = 44.45, y = 59.15, r = 10 }, minLevel = 14, targets = { friend = { 3430 } },
           lines = {
@@ -1268,11 +1257,7 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "turnin", quest = 5052, npc = 3430 },
           } },
-        { id = "o4921", at = { zone = 17, x = 49.33, y = 50.32, r = 40 }, text = "Beaten Corpse is northeast of Mangletooth.", targets = { enemy = { 10668 } },
-          lines = {
-            { kind = "objective", quest = 4921, index = 1, npc = 10668 },
-          } },
-        { id = "o851", at = { zone = 17, x = 53.06, y = 41.74, r = 40 }, text = "Verog's Head is northeast of your last stop.", targets = { enemy = { 3395 } },
+        { id = "o851", at = { zone = 17, x = 53.06, y = 41.74, r = 40 }, text = "Verog's Head is northeast of Mangletooth.", targets = { enemy = { 3395 } },
           lines = {
             { kind = "objective", quest = 851, index = 1, item = 5023, skipIfMissing = true },
           } },
@@ -1326,27 +1311,6 @@ Noir.Route("horde-undead", {
             { kind = "accept", quest = 875, at = { zone = 17, x = 51.62, y = 30.9, r = 10 }, npc = 3449, ifDone = 867, requires = { 867 } },
             { kind = "sethearth", npc = 3934 },
           } },
-        { id = "tWARLOCK-20:go1", at = { zone = 17, x = 51.5, y = 30.34, r = 10 }, text = "Fly from Crossroads, The Barrens to Ratchet, The Barrens.", when = { class = "WARLOCK" },
-          lines = {
-            { kind = "fly", from = 25, to = 80 },
-          } },
-        { id = "tWARLOCK-20:go2", text = "Head east into Durotar.", when = { class = "WARLOCK" },
-          lines = {
-            { kind = "goto", at = { zone = 14, x = 40.65, y = 68.52, r = 20 } },
-          } },
-        { id = "tWARLOCK-20", at = { zone = 14, x = 40.65, y = 68.52, r = 10 }, text = "Fly to Durotar for class training, then return.", when = { class = "WARLOCK" }, minLevel = 20,
-          lines = {
-            { kind = "train", level = 20, class = "WARLOCK", npc = 3156 },
-            { kind = "selljunk", at = { zone = 14, x = 40.56, y = 68.44, r = 10 }, npc = 12776 },
-          } },
-        { id = "tWARLOCK-20:back1", when = { class = "WARLOCK" },
-          lines = {
-            { kind = "goto", at = { zone = 17, x = 63.08, y = 37.16, r = 20 } },
-          } },
-        { id = "tWARLOCK-20:back2", at = { zone = 17, x = 63.08, y = 37.16, r = 10 }, text = "Fly from Ratchet, The Barrens to Crossroads, The Barrens.", when = { class = "WARLOCK" },
-          lines = {
-            { kind = "fly", from = 80, to = 25 },
-          } },
         { id = "a868", at = { zone = 17, x = 51.07, y = 29.63, r = 10 }, minLevel = 17, maxLevel = 30, items = { 5059 }, targets = { friend = { 3428 } },
           lines = {
             { kind = "accept", quest = 868, npc = 3428 },
@@ -1368,9 +1332,9 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "transport", to = { zone = 85, x = 60.6, y = 58.9 }, mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 } },
           } },
-        { id = "tPRIEST-20", at = { zone = 1497, x = 49.26, y = 17.12, r = 10 }, when = { class = "PRIEST" }, minLevel = 20,
+        { id = "tPRIEST-18", at = { zone = 1497, x = 49.26, y = 17.12, r = 10 }, when = { class = "PRIEST" }, minLevel = 18,
           lines = {
-            { kind = "train", level = 20, class = "PRIEST", npc = 4606 },
+            { kind = "train", level = 18, class = "PRIEST", npc = 4606 },
             { kind = "selljunk", at = { zone = 1497, x = 58.82, y = 32.82, r = 10 }, npc = 4602 },
           } },
         { id = "a5679.t5679", at = { zone = 1497, x = 49.26, y = 17.12, r = 10 }, when = { class = "PRIEST" }, minLevel = 20, targets = { friend = { 4606 } },
@@ -1432,6 +1396,27 @@ Noir.Route("horde-undead", {
         { id = "t852", at = { zone = 17, x = 45.34, y = 28.41, r = 10 }, targets = { friend = { 3389 } },
           lines = {
             { kind = "turnin", quest = 852, npc = 3389, skipIfMissing = true },
+          } },
+        { id = "tWARLOCK-20:go1", at = { zone = 17, x = 51.5, y = 30.34, r = 10 }, text = "Fly from Crossroads, The Barrens to Ratchet, The Barrens.", when = { class = "WARLOCK" },
+          lines = {
+            { kind = "fly", from = 25, to = 80 },
+          } },
+        { id = "tWARLOCK-20:go2", text = "Head east into Durotar.", when = { class = "WARLOCK" },
+          lines = {
+            { kind = "goto", at = { zone = 14, x = 40.65, y = 68.52, r = 20 } },
+          } },
+        { id = "tWARLOCK-20", at = { zone = 14, x = 40.65, y = 68.52, r = 10 }, text = "Fly to Durotar for class training, then return.", when = { class = "WARLOCK" }, minLevel = 20,
+          lines = {
+            { kind = "train", level = 20, class = "WARLOCK", npc = 3156 },
+            { kind = "selljunk", at = { zone = 14, x = 40.56, y = 68.44, r = 10 }, npc = 12776 },
+          } },
+        { id = "tWARLOCK-20:back1", when = { class = "WARLOCK" },
+          lines = {
+            { kind = "goto", at = { zone = 17, x = 63.08, y = 37.16, r = 20 } },
+          } },
+        { id = "tWARLOCK-20:back2", at = { zone = 17, x = 63.08, y = 37.16, r = 10 }, text = "Fly from Ratchet, The Barrens to Crossroads, The Barrens.", when = { class = "WARLOCK" },
+          lines = {
+            { kind = "fly", from = 80, to = 25 },
           } },
         { id = "y25-77", at = { zone = 17, x = 51.5, y = 30.34, r = 10 }, text = "Fly from Crossroads, The Barrens to Camp Taurajo, The Barrens.",
           lines = {
@@ -1533,10 +1518,6 @@ Noir.Route("horde-undead", {
         { id = "o877", at = { zone = 17, x = 55.61, y = 42.75, r = 40 }, text = "Bubbling Fissure is northeast of your last stop.", items = { 5068 },
           lines = {
             { kind = "objective", quest = 877, index = 1, object = 3737, skipIfMissing = true },
-          } },
-        { id = "tWARLOCK-22", at = { zone = 1637, x = 48.47, y = 45.43, r = 10 }, when = { class = "WARLOCK" }, minLevel = 22,
-          lines = {
-            { kind = "train", level = 22, class = "WARLOCK", npc = 3326 },
           } },
         { id = "a1507.t1507.a1508", at = { zone = 1637, x = 48.25, y = 45.28, r = 10 }, when = { class = "WARLOCK" }, minLevel = 20, targets = { friend = { 5875, 5909 } },
           lines = {
@@ -1939,19 +1920,19 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "fly", from = 29, to = 25 },
           } },
-        { id = "tROGUE-27:go1", at = { zone = 17, x = 51.5, y = 30.34, r = 10 }, text = "Fly from Crossroads, The Barrens to Ratchet, The Barrens.", when = { class = "ROGUE" },
+        { id = "tROGUE-26:go1", at = { zone = 17, x = 51.5, y = 30.34, r = 10 }, text = "Fly from Crossroads, The Barrens to Ratchet, The Barrens.", when = { class = "ROGUE" },
           lines = {
             { kind = "fly", from = 25, to = 80 },
           } },
-        { id = "tROGUE-27:go2", text = "Head east into Durotar.", when = { class = "ROGUE" },
+        { id = "tROGUE-26:go2", text = "Head east into Durotar.", when = { class = "ROGUE" },
           lines = {
             { kind = "goto", at = { zone = 14, x = 41.28, y = 68, r = 20 } },
           } },
-        { id = "tROGUE-27", at = { zone = 14, x = 41.28, y = 68, r = 10 }, text = "Fly to Durotar for class training, then return.", when = { class = "ROGUE" }, minLevel = 27,
+        { id = "tROGUE-26", at = { zone = 14, x = 41.28, y = 68, r = 10 }, text = "Fly to Durotar for class training, then return.", when = { class = "ROGUE" }, minLevel = 26,
           lines = {
-            { kind = "train", level = 27, class = "ROGUE", npc = 3155 },
+            { kind = "train", level = 26, class = "ROGUE", npc = 3155 },
           } },
-        { id = "tROGUE-27:back1", text = "Head east into The Barrens.", when = { class = "ROGUE" },
+        { id = "tROGUE-26:back1", text = "Head east into The Barrens.", when = { class = "ROGUE" },
           lines = {
             { kind = "goto", at = { zone = 17, x = 54.71, y = 5.73, r = 20 } },
           } },
@@ -2092,22 +2073,6 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "objective", quest = 6621, index = 1, item = 16976 },
           } },
-        { id = "tWARLOCK-28:go1", text = "Use your hearthstone to return to Ashenvale.", when = { class = "WARLOCK" },
-          lines = {
-            { kind = "hearth", to = { zone = 331, x = 73.99, y = 60.65 } },
-          } },
-        { id = "tWARLOCK-28:go2", at = { zone = 331, x = 73.18, y = 61.59, r = 10 }, text = "Fly from Splintertree Post, Ashenvale to Orgrimmar, Durotar.", when = { class = "WARLOCK" },
-          lines = {
-            { kind = "fly", from = 61, to = 23 },
-          } },
-        { id = "tWARLOCK-28", at = { zone = 1637, x = 48.62, y = 46.95, r = 10 }, text = "Use your hearthstone to reach Orgrimmar for class training, then return.", when = { class = "WARLOCK" }, minLevel = 28,
-          lines = {
-            { kind = "train", level = 28, class = "WARLOCK", npc = 3325 },
-          } },
-        { id = "tWARLOCK-28:back1", at = { zone = 1637, x = 45.12, y = 63.89, r = 10 }, text = "Fly from Orgrimmar, Durotar to Splintertree Post, Ashenvale.", when = { class = "WARLOCK" },
-          lines = {
-            { kind = "fly", from = 23, to = 61 },
-          } },
         { id = "y61-58", at = { zone = 331, x = 73.18, y = 61.59, r = 10 }, text = "Fly from Splintertree Post, Ashenvale to Zoram'gar Outpost, Ashenvale.",
           lines = {
             { kind = "fly", from = 61, to = 58 },
@@ -2137,9 +2102,9 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "transport", to = { zone = 85, x = 60.6, y = 58.9 }, mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 } },
           } },
-        { id = "tMAGE-28", at = { zone = 1497, x = 85.14, y = 10.03, r = 10 }, when = { class = "MAGE" }, minLevel = 28,
+        { id = "tMAGE-26", at = { zone = 1497, x = 85.14, y = 10.03, r = 10 }, when = { class = "MAGE" }, minLevel = 26,
           lines = {
-            { kind = "train", level = 28, class = "MAGE", npc = 4568 },
+            { kind = "train", level = 26, class = "MAGE", npc = 4568 },
           } },
         { id = "a1943", at = { zone = 1497, x = 85.14, y = 10.03, r = 10 }, when = { class = "MAGE" }, minLevel = 26, maxLevel = 34, targets = { friend = { 4568 } },
           lines = {
@@ -2334,10 +2299,6 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "turnin", quest = 553, object = 1767 },
           } },
-        { id = "tWARLOCK-30", at = { zone = 1497, x = 86.21, y = 15.93, r = 10 }, when = { class = "WARLOCK" }, minLevel = 30,
-          lines = {
-            { kind = "train", level = 30, class = "WARLOCK", npc = 4563 },
-          } },
         { id = "a3001", at = { zone = 1497, x = 85.06, y = 25.99, r = 10 }, when = { class = "WARLOCK" }, minLevel = 30, maxLevel = 38, targets = { friend = { 5675 } },
           lines = {
             { kind = "accept", quest = 3001, npc = 5675 },
@@ -2346,34 +2307,38 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "goto", at = { zone = 85, x = 60.6, y = 58.9, r = 20 } },
           } },
-        { id = "tMAGE-30", at = { zone = 85, x = 61.97, y = 52.47, r = 10 }, when = { class = "MAGE" }, minLevel = 30,
+        { id = "tPALADIN-28", at = { zone = 85, x = 60.22, y = 52.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 28,
           lines = {
-            { kind = "train", level = 30, class = "MAGE", npc = 2128 },
+            { kind = "train", level = 28, class = "PALADIN", npc = 246152 },
           } },
-        { id = "tPALADIN-30", at = { zone = 85, x = 60.22, y = 52.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 30,
+        { id = "tPRIEST-28", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 28,
           lines = {
-            { kind = "train", level = 30, class = "PALADIN", npc = 246152 },
+            { kind = "train", level = 28, class = "PRIEST", npc = 2129 },
           } },
-        { id = "tPRIEST-30", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 30,
+        { id = "tROGUE-28", at = { zone = 85, x = 61.75, y = 52, r = 10 }, when = { class = "ROGUE" }, minLevel = 28,
           lines = {
-            { kind = "train", level = 30, class = "PRIEST", npc = 2129 },
+            { kind = "train", level = 28, class = "ROGUE", npc = 2130 },
           } },
-        { id = "tROGUE-30", at = { zone = 85, x = 61.75, y = 52, r = 10 }, when = { class = "ROGUE" }, minLevel = 30,
+        { id = "tWARRIOR-28", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 28,
           lines = {
-            { kind = "train", level = 30, class = "ROGUE", npc = 2130 },
-          } },
-        { id = "tWARRIOR-30", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30,
-          lines = {
-            { kind = "train", level = 30, class = "WARRIOR", npc = 2131 },
+            { kind = "train", level = 28, class = "WARRIOR", npc = 2131 },
           } },
         { id = "x14#8", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Durotar.",
           lines = {
             { kind = "transport", to = { zone = 14, x = 51, y = 13.9 }, mode = "zeppelin", at = { zone = 85, x = 60.6, y = 58.9, r = 15 } },
           } },
+        { id = "tMAGE-28", at = { zone = 1637, x = 38.45, y = 86.13, r = 10 }, when = { class = "MAGE" }, minLevel = 28,
+          lines = {
+            { kind = "train", level = 28, class = "MAGE", npc = 5885 },
+          } },
         { id = "t1943.a1944", at = { zone = 1637, x = 38.45, y = 86.13, r = 10 }, when = { class = "MAGE" }, minLevel = 26, items = { 7269 }, targets = { friend = { 5885 } },
           lines = {
             { kind = "turnin", quest = 1943, npc = 5885, skipIfMissing = true },
             { kind = "accept", quest = 1944, npc = 5885 },
+          } },
+        { id = "tWARLOCK-28", at = { zone = 1637, x = 48.47, y = 45.43, r = 10 }, when = { class = "WARLOCK" }, minLevel = 28,
+          lines = {
+            { kind = "train", level = 28, class = "WARLOCK", npc = 3326 },
           } },
         { id = "t65610.a2996.a65604.o65604.t65604", at = { zone = 1637, x = 48.25, y = 45.28, r = 10 }, when = { class = "WARLOCK" }, minLevel = 30, items = { 190187 }, targets = { enemy = { 185335 }, friend = { 5875 } },
           lines = {
@@ -2617,9 +2582,9 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "transport", to = { zone = 85, x = 60.6, y = 58.9 }, mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 } },
           } },
-        { id = "tWARLOCK-32", at = { zone = 1497, x = 86.21, y = 15.93, r = 10 }, when = { class = "WARLOCK" }, minLevel = 32,
+        { id = "tWARLOCK-30", at = { zone = 1497, x = 86.21, y = 15.93, r = 10 }, when = { class = "WARLOCK" }, minLevel = 30,
           lines = {
-            { kind = "train", level = 32, class = "WARLOCK", npc = 4563 },
+            { kind = "train", level = 30, class = "WARLOCK", npc = 4563 },
           } },
         { id = "t1801.a1803", at = { zone = 1497, x = 75.92, y = 37.89, r = 10 }, when = { class = "WARLOCK" }, minLevel = 30, targets = { friend = { 6293 } },
           lines = {
@@ -2712,6 +2677,10 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "getflight", node = 40, npc = 7824 },
             { kind = "fly", from = 40, to = 23 },
+          } },
+        { id = "tWARLOCK-32", at = { zone = 1637, x = 48.62, y = 46.95, r = 10 }, when = { class = "WARLOCK" }, minLevel = 32,
+          lines = {
+            { kind = "train", level = 32, class = "WARLOCK", npc = 3325 },
           } },
         { id = "y23-80", at = { zone = 1637, x = 45.12, y = 63.89, r = 10 }, text = "Fly from Orgrimmar, Durotar to Ratchet, The Barrens.", when = { class = "WARLOCK" },
           lines = {
@@ -2835,10 +2804,6 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "turnin", quest = 568, npc = 2464 },
           } },
-        { id = "tROGUE-32", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 32,
-          lines = {
-            { kind = "train", level = 32, class = "ROGUE", npc = 1411 },
-          } },
         { id = "f18.a189.a213.a201.a605", at = { zone = 33, x = 26.87, y = 77.1, r = 10 }, minLevel = 31, targets = { friend = { 737, 773, 2498 } },
           lines = {
             { kind = "getflight", node = 18, npc = 2858 },
@@ -2880,9 +2845,9 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
           } },
-        { id = "tROGUE-34", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 34,
+        { id = "tROGUE-32", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 32,
           lines = {
-            { kind = "train", level = 34, class = "ROGUE", npc = 1411 },
+            { kind = "train", level = 32, class = "ROGUE", npc = 1411 },
           } },
         { id = "t201.t189.t213.t605", at = { zone = 33, x = 26.95, y = 77.21, r = 10 }, targets = { friend = { 773, 737, 2498 } },
           lines = {
@@ -2953,27 +2918,27 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "objective", quest = 629, index = 1, item = 4094 },
           } },
-        { id = "tMAGE-34:go1", at = { zone = 33, x = 31.5, y = 29.1, r = 15 }, text = "Take the zeppelin from Stranglethorn Vale to Tirisfal Glades.", when = { class = "MAGE" },
+        { id = "tMAGE-33:go1", at = { zone = 33, x = 31.5, y = 29.1, r = 15 }, text = "Take the zeppelin from Stranglethorn Vale to Tirisfal Glades.", when = { class = "MAGE" },
           lines = {
             { kind = "transport", to = { zone = 85, x = 61.9, y = 58.9 }, mode = "zeppelin", at = { zone = 33, x = 31.5, y = 29.1, r = 15 } },
           } },
-        { id = "tMAGE-34", at = { zone = 85, x = 61.97, y = 52.47, r = 10 }, text = "Fly to Tirisfal Glades for class training, then use your hearthstone to return.", when = { class = "MAGE" }, minLevel = 34,
+        { id = "tMAGE-33", at = { zone = 85, x = 61.97, y = 52.47, r = 10 }, text = "Fly to Tirisfal Glades for class training, then use your hearthstone to return.", when = { class = "MAGE" }, minLevel = 33,
           lines = {
-            { kind = "train", level = 34, class = "MAGE", npc = 2128 },
+            { kind = "train", level = 33, class = "MAGE", npc = 2128 },
           } },
-        { id = "tMAGE-34:back1", text = "Use your hearthstone to return to Stranglethorn Vale.", when = { class = "MAGE" },
+        { id = "tMAGE-33:back1", text = "Use your hearthstone to return to Stranglethorn Vale.", when = { class = "MAGE" },
           lines = {
             { kind = "hearth", to = { zone = 33, x = 31.49, y = 29.75 } },
           } },
-        { id = "tWARRIOR-34:go1", at = { zone = 33, x = 31.5, y = 29.1, r = 15 }, text = "Take the zeppelin from Stranglethorn Vale to Tirisfal Glades.", when = { class = "WARRIOR" },
+        { id = "tWARRIOR-33:go1", at = { zone = 33, x = 31.5, y = 29.1, r = 15 }, text = "Take the zeppelin from Stranglethorn Vale to Tirisfal Glades.", when = { class = "WARRIOR" },
           lines = {
             { kind = "transport", to = { zone = 85, x = 61.9, y = 58.9 }, mode = "zeppelin", at = { zone = 33, x = 31.5, y = 29.1, r = 15 } },
           } },
-        { id = "tWARRIOR-34", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, text = "Fly to Tirisfal Glades for class training, then use your hearthstone to return.", when = { class = "WARRIOR" }, minLevel = 34,
+        { id = "tWARRIOR-33", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, text = "Fly to Tirisfal Glades for class training, then use your hearthstone to return.", when = { class = "WARRIOR" }, minLevel = 33,
           lines = {
-            { kind = "train", level = 34, class = "WARRIOR", npc = 2131 },
+            { kind = "train", level = 33, class = "WARRIOR", npc = 2131 },
           } },
-        { id = "tWARRIOR-34:back1", text = "Use your hearthstone to return to Stranglethorn Vale.", when = { class = "WARRIOR" },
+        { id = "tWARRIOR-33:back1", text = "Use your hearthstone to return to Stranglethorn Vale.", when = { class = "WARRIOR" },
           lines = {
             { kind = "hearth", to = { zone = 33, x = 31.49, y = 29.75 } },
           } },
@@ -2984,15 +2949,15 @@ Noir.Route("horde-undead", {
             { kind = "turnin", quest = 629, npc = 2519 },
             { kind = "turnin", quest = 569, at = { zone = 33, x = 32.17, y = 28.9, r = 10 }, npc = 2464 },
           } },
-        { id = "tPALADIN-34:go1", at = { zone = 33, x = 31.5, y = 29.1, r = 15 }, text = "Take the zeppelin from Stranglethorn Vale to Tirisfal Glades.", when = { class = "PALADIN" },
+        { id = "tPALADIN-33:go1", at = { zone = 33, x = 31.5, y = 29.1, r = 15 }, text = "Take the zeppelin from Stranglethorn Vale to Tirisfal Glades.", when = { class = "PALADIN" },
           lines = {
             { kind = "transport", to = { zone = 85, x = 61.9, y = 58.9 }, mode = "zeppelin", at = { zone = 33, x = 31.5, y = 29.1, r = 15 } },
           } },
-        { id = "tPALADIN-34", at = { zone = 85, x = 60.22, y = 52.66, r = 10 }, text = "Fly to Tirisfal Glades for class training, then use your hearthstone to return.", when = { class = "PALADIN" }, minLevel = 34,
+        { id = "tPALADIN-33", at = { zone = 85, x = 60.22, y = 52.66, r = 10 }, text = "Fly to Tirisfal Glades for class training, then use your hearthstone to return.", when = { class = "PALADIN" }, minLevel = 33,
           lines = {
-            { kind = "train", level = 34, class = "PALADIN", npc = 246152 },
+            { kind = "train", level = 33, class = "PALADIN", npc = 246152 },
           } },
-        { id = "tPALADIN-34:back1", text = "Use your hearthstone to return to Stranglethorn Vale.", when = { class = "PALADIN" },
+        { id = "tPALADIN-33:back1", text = "Use your hearthstone to return to Stranglethorn Vale.", when = { class = "PALADIN" },
           lines = {
             { kind = "hearth", to = { zone = 33, x = 31.49, y = 29.75 } },
           } },
@@ -3004,9 +2969,13 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "goto", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 } },
           } },
-        { id = "tPRIEST-34", at = { zone = 1637, x = 36.01, y = 87.73, r = 10 }, when = { class = "PRIEST" }, minLevel = 34,
+        { id = "tPRIEST-32", at = { zone = 1637, x = 36.01, y = 87.73, r = 10 }, when = { class = "PRIEST" }, minLevel = 32,
           lines = {
-            { kind = "train", level = 34, class = "PRIEST", npc = 6014 },
+            { kind = "train", level = 32, class = "PRIEST", npc = 6014 },
+          } },
+        { id = "tROGUE-34", at = { zone = 1637, x = 43.9, y = 54.63, r = 10 }, when = { class = "ROGUE" }, minLevel = 34,
+          lines = {
+            { kind = "train", level = 34, class = "ROGUE", npc = 3328 },
           } },
         { id = "tWARLOCK-34", at = { zone = 1637, x = 48.62, y = 46.95, r = 10 }, when = { class = "WARLOCK" }, minLevel = 34,
           lines = {
@@ -3242,10 +3211,6 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "fly", from = 29, to = 77 },
           } },
-        { id = "tMAGE-36", at = { zone = 1638, x = 25.7, y = 14.19, r = 10 }, when = { class = "MAGE" }, minLevel = 36,
-          lines = {
-            { kind = "train", level = 36, class = "MAGE", npc = 3048 },
-          } },
         { id = "a1947.a1953", at = { zone = 1638, x = 25.7, y = 14.19, r = 10 }, when = { class = "MAGE" }, minLevel = 35, maxLevel = 46, targets = { friend = { 3048 } },
           lines = {
             { kind = "accept", quest = 1947, npc = 3048 },
@@ -3377,13 +3342,9 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "goto", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 } },
           } },
-        { id = "tPALADIN-36", at = { zone = 1497, x = 54.94, y = 22.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 36,
+        { id = "tPRIEST-34", at = { zone = 1497, x = 49.26, y = 17.12, r = 10 }, when = { class = "PRIEST" }, minLevel = 34,
           lines = {
-            { kind = "train", level = 36, class = "PALADIN", npc = 260093 },
-          } },
-        { id = "tPRIEST-36", at = { zone = 1497, x = 49.26, y = 17.12, r = 10 }, when = { class = "PRIEST" }, minLevel = 36,
-          lines = {
-            { kind = "train", level = 36, class = "PRIEST", npc = 4606 },
+            { kind = "train", level = 34, class = "PRIEST", npc = 4606 },
           } },
         { id = "tROGUE-36", at = { zone = 1497, x = 83.86, y = 72.07, r = 10 }, when = { class = "ROGUE" }, minLevel = 36,
           lines = {
@@ -3672,13 +3633,13 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "train", level = 38, class = "ROGUE", npc = 2130 },
           } },
-        { id = "tWARLOCK-40", at = { zone = 85, x = 61.59, y = 52.4, r = 10 }, when = { class = "WARLOCK" }, minLevel = 40,
+        { id = "tWARLOCK-38", at = { zone = 85, x = 61.59, y = 52.4, r = 10 }, when = { class = "WARLOCK" }, minLevel = 38,
           lines = {
-            { kind = "train", level = 40, class = "WARLOCK", npc = 2127 },
+            { kind = "train", level = 38, class = "WARLOCK", npc = 2127 },
           } },
-        { id = "tWARRIOR-40", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 40,
+        { id = "tWARRIOR-38", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 38,
           lines = {
-            { kind = "train", level = 40, class = "WARRIOR", npc = 2131 },
+            { kind = "train", level = 38, class = "WARRIOR", npc = 2131 },
           } },
         { id = "x14#11", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Durotar.",
           lines = {
@@ -3890,6 +3851,10 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "fly", from = 55, to = 23 },
           } },
+        { id = "tWARLOCK-40", at = { zone = 1637, x = 48.62, y = 46.95, r = 10 }, when = { class = "WARLOCK" }, minLevel = 40,
+          lines = {
+            { kind = "train", level = 40, class = "WARLOCK", npc = 3325 },
+          } },
         { id = "y23-80#3", at = { zone = 1637, x = 45.12, y = 63.89, r = 10 }, text = "Fly from Orgrimmar, Durotar to Ratchet, The Barrens.", when = { class = "WARLOCK" },
           lines = {
             { kind = "fly", from = 23, to = 80 },
@@ -4041,10 +4006,6 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
           } },
-        { id = "tROGUE-42", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 42,
-          lines = {
-            { kind = "train", level = 42, class = "ROGUE", npc = 1411 },
-          } },
         { id = "a608.t600.t621.a348.t609.a613", at = { zone = 33, x = 27.17, y = 77.01, r = 10 }, minLevel = 40, targets = { friend = { 2487, 2498, 2486, 2501 } },
           lines = {
             { kind = "accept", quest = 608, npc = 2487, ifDone = 604, requires = { 604 } },
@@ -4121,6 +4082,10 @@ Noir.Route("horde-undead", {
         { id = "o196", at = { zone = 33, x = 28.94, y = 44.94, r = 40 }, text = "The Jungle Stalkers are southwest of your last stop.", targets = { enemy = { 687 } },
           lines = {
             { kind = "objective", quest = 196, index = 1, npc = 687, skipIfMissing = true },
+          } },
+        { id = "tROGUE-42", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 42,
+          lines = {
+            { kind = "train", level = 42, class = "ROGUE", npc = 1411 },
           } },
         { id = "t209.t608.t348.t613", at = { zone = 33, x = 27, y = 77.13, r = 10 }, targets = { friend = { 737, 2487, 2486, 2501 } },
           lines = {
@@ -4225,10 +4190,6 @@ Noir.Route("horde-undead", {
             { kind = "objective", quest = 573, index = 1, npc = 1907 },
             { kind = "objective", quest = 573, index = 2, item = 737 },
           } },
-        { id = "tROGUE-44", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 44,
-          lines = {
-            { kind = "train", level = 44, class = "ROGUE", npc = 1411 },
-          } },
         { id = "a8551", at = { zone = 33, x = 26.69, y = 73.61, r = 10 }, minLevel = 35, maxLevel = 55, targets = { friend = { 2500 } },
           lines = {
             { kind = "accept", quest = 8551, npc = 2500 },
@@ -4273,17 +4234,17 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "goto", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 } },
           } },
-        { id = "tMAGE-44", at = { zone = 1637, x = 38.78, y = 85.67, r = 10 }, when = { class = "MAGE" }, minLevel = 44,
+        { id = "tMAGE-42", at = { zone = 1637, x = 38.78, y = 85.67, r = 10 }, when = { class = "MAGE" }, minLevel = 42,
           lines = {
-            { kind = "train", level = 44, class = "MAGE", npc = 5883 },
+            { kind = "train", level = 42, class = "MAGE", npc = 5883 },
           } },
-        { id = "tPRIEST-44", at = { zone = 1637, x = 36.01, y = 87.73, r = 10 }, when = { class = "PRIEST" }, minLevel = 44,
+        { id = "tPRIEST-42", at = { zone = 1637, x = 36.01, y = 87.73, r = 10 }, when = { class = "PRIEST" }, minLevel = 42,
           lines = {
-            { kind = "train", level = 44, class = "PRIEST", npc = 6014 },
+            { kind = "train", level = 42, class = "PRIEST", npc = 6014 },
           } },
-        { id = "tWARLOCK-44", at = { zone = 1637, x = 48.62, y = 46.95, r = 10 }, when = { class = "WARLOCK" }, minLevel = 44,
+        { id = "tWARLOCK-42", at = { zone = 1637, x = 48.62, y = 46.95, r = 10 }, when = { class = "WARLOCK" }, minLevel = 42,
           lines = {
-            { kind = "train", level = 44, class = "WARLOCK", npc = 3325 },
+            { kind = "train", level = 42, class = "WARLOCK", npc = 3325 },
           } },
         { id = "y23-30", at = { zone = 1637, x = 45.12, y = 63.89, r = 10 }, text = "Fly from Orgrimmar, Durotar to Freewind Post, Thousand Needles.",
           lines = {
@@ -4509,9 +4470,11 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "turnin", quest = 3161, npc = 7771, skipIfMissing = true },
           } },
-        { id = "o1707", at = { zone = 440, x = 62.67, y = 29.34, r = 40 }, text = "Wastewander Water Pouch is northeast of Marvon Rivetseeker.", targets = { enemy = { 5616, 5618, 5615, 5617, 5623, 7805 } },
+        { id = "o1707.o1690", at = { zone = 440, x = 62.67, y = 29.34, r = 40 }, text = "Wastewander Water Pouch is northeast of Marvon Rivetseeker.", targets = { enemy = { 5616, 5618, 5615, 5617, 5623, 7805 } },
           lines = {
             { kind = "objective", quest = 1707, index = 1, item = 8483 },
+            { kind = "objective", quest = 1690, index = 1, npc = 5618 },
+            { kind = "objective", quest = 1690, index = 2, npc = 5616 },
           } },
         { id = "t2872.a2873.a8366", at = { zone = 440, x = 67.11, y = 23.98, r = 10 }, minLevel = 40, targets = { friend = { 7881, 7882 } },
           lines = {
@@ -4525,12 +4488,7 @@ Noir.Route("horde-undead", {
             { kind = "accept", quest = 2875, object = 142122 },
             { kind = "accept", quest = 8365, npc = 15165 },
           } },
-        { id = "o1690", at = { zone = 440, x = 62.77, y = 29.18, r = 40 }, text = "The Wastewander Bandits are southwest of Haughty Modiste.", targets = { enemy = { 5616, 5618 } },
-          lines = {
-            { kind = "objective", quest = 1690, index = 1, npc = 5618 },
-            { kind = "objective", quest = 1690, index = 2, npc = 5616 },
-          } },
-        { id = "o8365", at = { zone = 440, x = 72.41, y = 46, r = 40 }, text = "Southsea Pirate Hat is southeast of your last stop.", targets = { enemy = { 7858, 7855, 7856, 7883, 7857, 8203 } },
+        { id = "o8365", at = { zone = 440, x = 72.41, y = 46, r = 40 }, text = "Southsea Pirate Hat is south of Haughty Modiste.", targets = { enemy = { 7858, 7855, 7856, 7883, 7857, 8203 } },
           lines = {
             { kind = "objective", quest = 8365, index = 1, item = 20519, skipIfMissing = true },
           } },
@@ -4752,27 +4710,27 @@ Noir.Route("horde-undead", {
             { kind = "accept", quest = 7728, at = { zone = 51, x = 37.65, y = 26.47, r = 10 }, object = 179827 },
             { kind = "accept", quest = 7729, at = { zone = 51, x = 37.65, y = 26.47, r = 10 }, object = 179827 },
           } },
-        { id = "o7722.o7701.o3441.t3441.a3442", at = { zone = 51, x = 40.45, y = 35.74, r = 40 }, minLevel = 40, targets = { enemy = { 14621, 8479 }, friend = { 8479 } },
+        { id = "o7722.o7701.o3441.t3441.a3442.o7729", at = { zone = 51, x = 40.45, y = 35.74, r = 40 }, minLevel = 40, targets = { enemy = { 14621, 5844, 5846, 8479 }, friend = { 8479 } },
           lines = {
             { kind = "objective", quest = 7722, index = 1, item = 18922, skipIfMissing = true },
             { kind = "objective", quest = 7701, index = 1, item = 18946, skipIfMissing = true },
             { kind = "objective", quest = 3441, index = 1, at = { zone = 51, x = 39.06, y = 38.99, r = 40 }, npc = 8479, skipIfMissing = true },
             { kind = "turnin", quest = 3441, at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, npc = 8479, skipIfMissing = true },
             { kind = "accept", quest = 3442, at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, npc = 8479, ifDone = 3441, requires = { 3441 } },
+            { kind = "objective", quest = 7729, index = 1, at = { zone = 51, x = 42.48, y = 39.78, r = 40 }, npc = 5846, skipIfMissing = true },
+            { kind = "objective", quest = 7729, index = 2, at = { zone = 51, x = 42.48, y = 39.78, r = 40 }, npc = 5844, skipIfMissing = true },
           } },
-        { id = "o7728", at = { zone = 51, x = 39.88, y = 50.1, r = 40 }, text = "Smithing Tuyere is south of Kalaran Windblade.", targets = { enemy = { 5840, 8566 } },
+        { id = "o7728.o3442.o7723", at = { zone = 51, x = 39.88, y = 50.1, r = 40 }, text = "Smithing Tuyere is south of Kalaran Windblade.", targets = { enemy = { 5840, 5854, 5852, 5855, 5850, 8566 } },
           lines = {
             { kind = "objective", quest = 7728, index = 1, item = 18959, skipIfMissing = true },
             { kind = "objective", quest = 7728, index = 2, item = 18960, skipIfMissing = true },
+            { kind = "objective", quest = 3442, index = 1, item = 10509, at = { zone = 51, x = 45.56, y = 55.14, r = 40 }, skipIfMissing = true },
+            { kind = "objective", quest = 3442, index = 2, item = 10511, at = { zone = 51, x = 45.56, y = 55.14, r = 40 }, skipIfMissing = true },
+            { kind = "objective", quest = 7723, index = 1, npc = 5854, skipIfMissing = true },
           } },
         { id = "o7724", at = { zone = 51, x = 29.52, y = 59.19, r = 40 }, text = "The Greater Lava Spiders are southwest of your last stop.", targets = { enemy = { 5858 } },
           lines = {
             { kind = "objective", quest = 7724, index = 1, npc = 5858, skipIfMissing = true },
-          } },
-        { id = "o3442", at = { zone = 51, x = 45.56, y = 55.14, r = 40 }, text = "Heart of Flame is east of your last stop.", targets = { enemy = { 5854, 5855, 5850, 5852, 5853 } },
-          lines = {
-            { kind = "objective", quest = 3442, index = 1, item = 10509, skipIfMissing = true },
-            { kind = "objective", quest = 3442, index = 2, item = 10511, skipIfMissing = true },
           } },
         { id = "t3442.a3443.o3443.t3443.a3452", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 40, targets = { enemy = { 5843, 5844, 5846, 8504, 5840, 8566 }, friend = { 8479 } },
           lines = {
@@ -4811,13 +4769,7 @@ Noir.Route("horde-undead", {
             { kind = "accept", quest = 3481, object = 149502, ifDone = 3463, requires = { 3463 } },
             { kind = "turnin", quest = 3481, object = 149502, skipIfMissing = true },
           } },
-        { id = "o7723.o7729", at = { zone = 51, x = 40.83, y = 49.21, r = 40 }, targets = { enemy = { 5844, 5846, 5854 } },
-          lines = {
-            { kind = "objective", quest = 7723, index = 1, npc = 5854, skipIfMissing = true },
-            { kind = "objective", quest = 7729, index = 1, at = { zone = 51, x = 42.48, y = 39.78, r = 40 }, npc = 5846, skipIfMissing = true },
-            { kind = "objective", quest = 7729, index = 2, at = { zone = 51, x = 42.48, y = 39.78, r = 40 }, npc = 5844, skipIfMissing = true },
-          } },
-        { id = "o7727", at = { zone = 51, x = 48.43, y = 28.01, r = 40 }, text = "The Incendosaurs are northeast of your last stop.", targets = { enemy = { 9318 } },
+        { id = "o7727", at = { zone = 51, x = 48.43, y = 28.01, r = 40 }, text = "The Incendosaurs are northeast of Squire Maltrake.", targets = { enemy = { 9318 } },
           lines = {
             { kind = "objective", quest = 7727, index = 1, npc = 9318, skipIfMissing = true },
           } },
@@ -4845,17 +4797,13 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "goto", at = { zone = 8, x = 34.29, y = 66.14, r = 20 } },
           } },
-        { id = "tWARRIOR-48", at = { zone = 8, x = 44.89, y = 57.62, r = 10 }, when = { class = "WARRIOR" }, minLevel = 48,
+        { id = "tWARLOCK-48", at = { zone = 8, x = 48.65, y = 55.64, r = 10 }, when = { class = "WARLOCK" }, minLevel = 48,
           lines = {
-            { kind = "train", level = 48, class = "WARRIOR", npc = 985 },
+            { kind = "train", level = 48, class = "WARLOCK", npc = 988 },
           } },
         { id = "a2784", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, maxLevel = 58, targets = { friend = { 7572 } },
           lines = {
             { kind = "accept", quest = 2784, npc = 7572 },
-          } },
-        { id = "tWARLOCK-48", at = { zone = 8, x = 48.65, y = 55.64, r = 10 }, when = { class = "WARLOCK" }, minLevel = 48,
-          lines = {
-            { kind = "train", level = 48, class = "WARLOCK", npc = 988 },
           } },
         { id = "f56.a698.a1430.a1424.b@8", at = { zone = 8, x = 46.07, y = 54.83, r = 10 }, minLevel = 38, targets = { friend = { 5591, 1443 } },
           lines = {
@@ -4864,6 +4812,10 @@ Noir.Route("horde-undead", {
             { kind = "accept", quest = 1430, at = { zone = 8, x = 44.7, y = 57.21, r = 10 }, npc = 5591 },
             { kind = "accept", quest = 1424, at = { zone = 8, x = 47.93, y = 54.78, r = 10 }, npc = 1443 },
             { kind = "sethearth", at = { zone = 8, x = 45.16, y = 56.66, r = 10 }, npc = 6930 },
+          } },
+        { id = "tWARRIOR-48", at = { zone = 8, x = 44.89, y = 57.62, r = 10 }, when = { class = "WARRIOR" }, minLevel = 48,
+          lines = {
+            { kind = "train", level = 48, class = "WARRIOR", npc = 985 },
           } },
         { id = "o2784.t2784.a2621", at = { zone = 8, x = 34.29, y = 66.14, r = 40 }, minLevel = 45, targets = { enemy = { 7572 }, friend = { 7572 } },
           lines = {
@@ -4956,6 +4908,10 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "goto", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 } },
           } },
+        { id = "tMAGE-48", at = { zone = 1497, x = 85.02, y = 14.02, r = 10 }, when = { class = "MAGE" }, minLevel = 48,
+          lines = {
+            { kind = "train", level = 48, class = "MAGE", npc = 4566 },
+          } },
         { id = "tPALADIN-48", at = { zone = 1497, x = 54.94, y = 22.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 48,
           lines = {
             { kind = "train", level = 48, class = "PALADIN", npc = 260093 },
@@ -5017,9 +4973,13 @@ Noir.Route("horde-undead", {
             { kind = "accept", quest = 7816, at = { zone = 47, x = 80.33, y = 81.54, r = 10 }, npc = 14740 },
             { kind = "sethearth", at = { zone = 47, x = 78.14, y = 81.38, r = 10 }, npc = 14731 },
           } },
-        { id = "o7850", at = { zone = 47, x = 63.65, y = 73.17, r = 40 }, text = "Vessel of Tainted Blood is west of Otho Moji'ko.",
+        { id = "o7850.o7862", at = { zone = 47, x = 63.65, y = 73.17, r = 40 }, text = "Vessel of Tainted Blood is west of Otho Moji'ko.", targets = { enemy = { 2645, 2643, 2646, 2647 } },
           lines = {
             { kind = "objective", quest = 7850, index = 1, item = 19071, skipIfMissing = true },
+            { kind = "objective", quest = 7862, index = 1, at = { zone = 47, x = 65.31, y = 70.7, r = 40 }, npc = 2643, skipIfMissing = true },
+            { kind = "objective", quest = 7862, index = 2, at = { zone = 47, x = 65.31, y = 70.7, r = 40 }, npc = 2645, skipIfMissing = true },
+            { kind = "objective", quest = 7862, index = 3, at = { zone = 47, x = 65.31, y = 70.7, r = 40 }, npc = 2646, skipIfMissing = true },
+            { kind = "objective", quest = 7862, index = 4, at = { zone = 47, x = 65.31, y = 70.7, r = 40 }, npc = 2647, skipIfMissing = true },
           } },
         { id = "t7845.a7846.o7861", at = { zone = 47, x = 59.69, y = 77.84, r = 10 }, minLevel = 46, targets = { enemy = { 7995, 2648 }, friend = { 14757 } },
           lines = {
@@ -5037,14 +4997,7 @@ Noir.Route("horde-undead", {
             { kind = "turnin", quest = 7846, npc = 14757, skipIfMissing = true },
             { kind = "accept", quest = 7847, npc = 14757, ifDone = 7846, requires = { 7846 } },
           } },
-        { id = "o7862", at = { zone = 47, x = 65.31, y = 70.7, r = 40 }, text = "The Vilebranch Berserkers are northeast of Elder Torntusk.", targets = { enemy = { 2643, 2645, 2646, 2647 } },
-          lines = {
-            { kind = "objective", quest = 7862, index = 1, npc = 2643, skipIfMissing = true },
-            { kind = "objective", quest = 7862, index = 2, npc = 2645, skipIfMissing = true },
-            { kind = "objective", quest = 7862, index = 3, npc = 2646, skipIfMissing = true },
-            { kind = "objective", quest = 7862, index = 4, npc = 2647, skipIfMissing = true },
-          } },
-        { id = "o7849", at = { zone = 47, x = 58.56, y = 64.76, r = 40 }, text = "Huntsman Malkhor's Skull is northwest of your last stop.",
+        { id = "o7849", at = { zone = 47, x = 58.56, y = 64.76, r = 40 }, text = "Huntsman Malkhor's Skull is north of Elder Torntusk.",
           lines = {
             { kind = "objective", quest = 7849, index = 1, item = 19069, skipIfMissing = true },
             { kind = "objective", quest = 7849, index = 2, item = 19070, skipIfMissing = true },
@@ -5097,17 +5050,14 @@ Noir.Route("horde-undead", {
             { kind = "accept", quest = 7842, at = { zone = 47, x = 79.38, y = 79.08, r = 10 }, npc = 14738, ifDone = 7841, requires = { 7841 } },
             { kind = "turnin", quest = 7844, at = { zone = 47, x = 78.8, y = 78.25, r = 10 }, npc = 14739, skipIfMissing = true },
           } },
-        { id = "o7816", at = { zone = 47, x = 80.4, y = 58.23, r = 40 }, text = "Katoom's Best Lure is north of Primal Torntusk.", targets = { enemy = { 7977 } },
+        { id = "o7816.o7815", at = { zone = 47, x = 80.4, y = 58.23, r = 40 }, text = "Katoom's Best Lure is north of Primal Torntusk.", targets = { enemy = { 7977, 2505 } },
           lines = {
             { kind = "objective", quest = 7816, index = 1, item = 19023, skipIfMissing = true },
+            { kind = "objective", quest = 7815, index = 1, npc = 2505, skipIfMissing = true },
           } },
         { id = "t2742", at = { zone = 47, x = 86.3, y = 59.01, r = 10 },
           lines = {
             { kind = "turnin", quest = 2742, object = 142127, skipIfMissing = true },
-          } },
-        { id = "o7815", at = { zone = 47, x = 80.82, y = 58.98, r = 40 }, text = "The Saltwater Snapjaws are west of your last stop.", targets = { enemy = { 2505 } },
-          lines = {
-            { kind = "objective", quest = 7815, index = 1, npc = 2505, skipIfMissing = true },
           } },
         { id = "o7840", at = { zone = 47, x = 84.47, y = 41.22, r = 40 }, text = "Lard's Lunch is north of your last stop.", targets = { enemy = { 14748 } },
           lines = {
@@ -5147,18 +5097,6 @@ Noir.Route("horde-undead", {
         { id = "tMAGE-50", at = { zone = 85, x = 61.97, y = 52.47, r = 10 }, when = { class = "MAGE" }, minLevel = 50,
           lines = {
             { kind = "train", level = 50, class = "MAGE", npc = 2128 },
-          } },
-        { id = "tPALADIN-50", at = { zone = 85, x = 60.22, y = 52.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 50,
-          lines = {
-            { kind = "train", level = 50, class = "PALADIN", npc = 246152 },
-          } },
-        { id = "tPRIEST-50", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 50,
-          lines = {
-            { kind = "train", level = 50, class = "PRIEST", npc = 2129 },
-          } },
-        { id = "tROGUE-50", at = { zone = 85, x = 61.75, y = 52, r = 10 }, when = { class = "ROGUE" }, minLevel = 50,
-          lines = {
-            { kind = "train", level = 50, class = "ROGUE", npc = 2130 },
           } },
         { id = "tWARLOCK-50", at = { zone = 85, x = 61.59, y = 52.4, r = 10 }, when = { class = "WARLOCK" }, minLevel = 50,
           lines = {
@@ -5608,9 +5546,9 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "fly", from = 79, to = 77 },
           } },
-        { id = "tMAGE-54", at = { zone = 1638, x = 22.76, y = 14.53, r = 10 }, when = { class = "MAGE" }, minLevel = 54,
+        { id = "tMAGE-52", at = { zone = 1638, x = 22.76, y = 14.53, r = 10 }, when = { class = "MAGE" }, minLevel = 52,
           lines = {
-            { kind = "train", level = 54, class = "MAGE", npc = 3047 },
+            { kind = "train", level = 52, class = "MAGE", npc = 3047 },
           } },
         { id = "a8250", at = { zone = 1638, x = 22.76, y = 14.53, r = 10 }, when = { class = "MAGE" }, minLevel = 50, maxLevel = 60, targets = { friend = { 3047 } },
           lines = {
@@ -5632,9 +5570,9 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "fly", from = 79, to = 22 },
           } },
-        { id = "tWARRIOR-54", at = { zone = 1638, x = 57.24, y = 87.37, r = 10 }, when = { class = "WARRIOR" }, minLevel = 54,
+        { id = "tWARRIOR-52", at = { zone = 1638, x = 57.24, y = 87.37, r = 10 }, when = { class = "WARRIOR" }, minLevel = 52,
           lines = {
-            { kind = "train", level = 54, class = "WARRIOR", npc = 3041 },
+            { kind = "train", level = 52, class = "WARRIOR", npc = 3041 },
           } },
         { id = "a8417", at = { zone = 1638, x = 57.24, y = 87.37, r = 10 }, when = { class = "WARRIOR" }, minLevel = 50, maxLevel = 58, targets = { friend = { 3041 } },
           lines = {
@@ -5899,22 +5837,6 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "goto", at = { zone = 85, x = 61.9, y = 58.9, r = 20 } },
           } },
-        { id = "tPALADIN-54", at = { zone = 85, x = 60.22, y = 52.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 54,
-          lines = {
-            { kind = "train", level = 54, class = "PALADIN", npc = 246152 },
-          } },
-        { id = "tPRIEST-54", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 54,
-          lines = {
-            { kind = "train", level = 54, class = "PRIEST", npc = 2129 },
-          } },
-        { id = "tROGUE-54", at = { zone = 85, x = 61.75, y = 52, r = 10 }, when = { class = "ROGUE" }, minLevel = 54,
-          lines = {
-            { kind = "train", level = 54, class = "ROGUE", npc = 2130 },
-          } },
-        { id = "tWARLOCK-54", at = { zone = 85, x = 61.59, y = 52.4, r = 10 }, when = { class = "WARLOCK" }, minLevel = 54,
-          lines = {
-            { kind = "train", level = 54, class = "WARLOCK", npc = 2127 },
-          } },
         { id = "x33#4", at = { zone = 85, x = 61.9, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Stranglethorn Vale.",
           lines = {
             { kind = "transport", to = { zone = 33, x = 31.5, y = 29.1 }, mode = "zeppelin", at = { zone = 85, x = 61.9, y = 58.9, r = 15 } },
@@ -5934,6 +5856,10 @@ Noir.Route("horde-undead", {
         { id = "o2623", at = { zone = 8, x = 63.97, y = 83.66, r = 40 }, text = "Warchief's Orders are southeast of Bengor.", targets = { enemy = { 950 } },
           lines = {
             { kind = "objective", quest = 2623, index = 1, item = 8463, skipIfMissing = true },
+          } },
+        { id = "tWARRIOR-54", at = { zone = 8, x = 44.89, y = 57.62, r = 10 }, when = { class = "WARRIOR" }, minLevel = 54,
+          lines = {
+            { kind = "train", level = 54, class = "WARRIOR", npc = 985 },
           } },
         { id = "t8417.a8423", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, when = { class = "WARRIOR" }, minLevel = 50, targets = { friend = { 7572 } },
           lines = {
@@ -6034,17 +5960,25 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "fly", from = 76, to = 11 },
           } },
-        { id = "tMAGE-56", at = { zone = 1497, x = 85.02, y = 14.02, r = 10 }, when = { class = "MAGE" }, minLevel = 56,
+        { id = "tMAGE-54", at = { zone = 1497, x = 85.02, y = 14.02, r = 10 }, when = { class = "MAGE" }, minLevel = 54,
           lines = {
-            { kind = "train", level = 56, class = "MAGE", npc = 4566 },
+            { kind = "train", level = 54, class = "MAGE", npc = 4566 },
           } },
-        { id = "tWARLOCK-56", at = { zone = 1497, x = 86.21, y = 15.93, r = 10 }, when = { class = "WARLOCK" }, minLevel = 56,
+        { id = "tPALADIN-54", at = { zone = 1497, x = 54.94, y = 22.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 54,
           lines = {
-            { kind = "train", level = 56, class = "WARLOCK", npc = 4563 },
+            { kind = "train", level = 54, class = "PALADIN", npc = 260093 },
           } },
-        { id = "tWARRIOR-56", at = { zone = 1497, x = 48.32, y = 15.96, r = 10 }, when = { class = "WARRIOR" }, minLevel = 56,
+        { id = "tPRIEST-54", at = { zone = 1497, x = 49.26, y = 17.12, r = 10 }, when = { class = "PRIEST" }, minLevel = 54,
           lines = {
-            { kind = "train", level = 56, class = "WARRIOR", npc = 4594 },
+            { kind = "train", level = 54, class = "PRIEST", npc = 4606 },
+          } },
+        { id = "tROGUE-54", at = { zone = 1497, x = 83.86, y = 72.07, r = 10 }, when = { class = "ROGUE" }, minLevel = 54,
+          lines = {
+            { kind = "train", level = 54, class = "ROGUE", npc = 4582 },
+          } },
+        { id = "tWARLOCK-54", at = { zone = 1497, x = 86.21, y = 15.93, r = 10 }, when = { class = "WARLOCK" }, minLevel = 54,
+          lines = {
+            { kind = "train", level = 54, class = "WARLOCK", npc = 4563 },
           } },
         { id = "t5023", at = { zone = 1497, x = 69.79, y = 43.16, r = 10 }, items = { 12724 }, targets = { friend = { 10781 } },
           lines = {
@@ -6452,6 +6386,14 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "goto", at = { zone = 1497, x = 71.66, y = 29.23, r = 20 } },
           } },
+        { id = "a7813", at = { zone = 1497, x = 71.66, y = 29.23, r = 10 }, minLevel = 12, maxLevel = 60, targets = { friend = { 14729 } },
+          lines = {
+            { kind = "accept", quest = 7813, npc = 14729 },
+          } },
+        { id = "tMAGE-56", at = { zone = 1497, x = 85.02, y = 14.02, r = 10 }, when = { class = "MAGE" }, minLevel = 56,
+          lines = {
+            { kind = "train", level = 56, class = "MAGE", npc = 4566 },
+          } },
         { id = "tPALADIN-56", at = { zone = 1497, x = 54.94, y = 22.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 56,
           lines = {
             { kind = "train", level = 56, class = "PALADIN", npc = 260093 },
@@ -6464,9 +6406,13 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "train", level = 56, class = "ROGUE", npc = 4582 },
           } },
-        { id = "a7813", at = { zone = 1497, x = 71.66, y = 29.23, r = 10 }, minLevel = 12, maxLevel = 60, targets = { friend = { 14729 } },
+        { id = "tWARLOCK-56", at = { zone = 1497, x = 86.21, y = 15.93, r = 10 }, when = { class = "WARLOCK" }, minLevel = 56,
           lines = {
-            { kind = "accept", quest = 7813, npc = 14729 },
+            { kind = "train", level = 56, class = "WARLOCK", npc = 4563 },
+          } },
+        { id = "tWARRIOR-56", at = { zone = 1497, x = 48.32, y = 15.96, r = 10 }, when = { class = "WARRIOR" }, minLevel = 56,
+          lines = {
+            { kind = "train", level = 56, class = "WARRIOR", npc = 4594 },
           } },
         { id = "a5049.t5049.a5050.a5094.b@1497", at = { zone = 1497, x = 69.79, y = 43.16, r = 10 }, minLevel = 50, items = { 12724, 12721 }, targets = { friend = { 10781, 8403, 10879 } },
           lines = {
@@ -6598,30 +6544,6 @@ Noir.Route("horde-undead", {
         { id = "g85@85#8", at = { zone = 85, x = 61.9, y = 58.9, r = 20 }, text = "Head west into Tirisfal Glades.",
           lines = {
             { kind = "goto", at = { zone = 85, x = 61.9, y = 58.9, r = 20 } },
-          } },
-        { id = "tMAGE-58", at = { zone = 85, x = 61.97, y = 52.47, r = 10 }, when = { class = "MAGE" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "MAGE", npc = 2128 },
-          } },
-        { id = "tPALADIN-58", at = { zone = 85, x = 60.22, y = 52.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "PALADIN", npc = 246152 },
-          } },
-        { id = "tPRIEST-58", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "PRIEST", npc = 2129 },
-          } },
-        { id = "tROGUE-58", at = { zone = 85, x = 61.75, y = 52, r = 10 }, when = { class = "ROGUE" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "ROGUE", npc = 2130 },
-          } },
-        { id = "tWARLOCK-58", at = { zone = 85, x = 61.59, y = 52.4, r = 10 }, when = { class = "WARLOCK" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "WARLOCK", npc = 2127 },
-          } },
-        { id = "tWARRIOR-58", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "WARRIOR", npc = 2131 },
           } },
         { id = "x33#5", at = { zone = 85, x = 61.9, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Stranglethorn Vale.",
           lines = {
@@ -6850,6 +6772,18 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "goto", at = { zone = 85, x = 61.9, y = 58.9, r = 20 } },
           } },
+        { id = "tMAGE-58", at = { zone = 85, x = 61.97, y = 52.47, r = 10 }, when = { class = "MAGE" }, minLevel = 58,
+          lines = {
+            { kind = "train", level = 58, class = "MAGE", npc = 2128 },
+          } },
+        { id = "tPRIEST-58", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 58,
+          lines = {
+            { kind = "train", level = 58, class = "PRIEST", npc = 2129 },
+          } },
+        { id = "tWARLOCK-58", at = { zone = 85, x = 61.59, y = 52.4, r = 10 }, when = { class = "WARLOCK" }, minLevel = 58,
+          lines = {
+            { kind = "train", level = 58, class = "WARLOCK", npc = 2127 },
+          } },
         { id = "x33#6", at = { zone = 85, x = 61.9, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Stranglethorn Vale.",
           lines = {
             { kind = "transport", to = { zone = 33, x = 31.5, y = 29.1 }, mode = "zeppelin", at = { zone = 85, x = 61.9, y = 58.9, r = 15 } },
@@ -6857,6 +6791,10 @@ Noir.Route("horde-undead", {
         { id = "y20-56#3", at = { zone = 33, x = 32.54, y = 29.35, r = 10 }, text = "Fly from Grom'gol, Stranglethorn to Stonard, Swamp of Sorrows.",
           lines = {
             { kind = "fly", from = 20, to = 56 },
+          } },
+        { id = "tWARRIOR-58", at = { zone = 8, x = 44.89, y = 57.62, r = 10 }, when = { class = "WARRIOR" }, minLevel = 58,
+          lines = {
+            { kind = "train", level = 58, class = "WARRIOR", npc = 985 },
           } },
         { id = "t2743.a2744", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, targets = { friend = { 7572 } },
           lines = {
@@ -7072,9 +7010,9 @@ Noir.Route("horde-undead", {
           lines = {
             { kind = "fly", from = 72, to = 23 },
           } },
-        { id = "tROGUE-60", at = { zone = 1637, x = 42.69, y = 51.48, r = 10 }, when = { class = "ROGUE" }, minLevel = 60,
+        { id = "tROGUE-58", at = { zone = 1637, x = 42.69, y = 51.48, r = 10 }, when = { class = "ROGUE" }, minLevel = 58,
           lines = {
-            { kind = "train", level = 60, class = "ROGUE", npc = 3327 },
+            { kind = "train", level = 58, class = "ROGUE", npc = 3327 },
           } },
         { id = "t8917.a8923", at = { zone = 1637, x = 34.95, y = 38.29, r = 10 }, when = { class = "ROGUE" }, minLevel = 58, items = { 22382 }, targets = { friend = { 16012 } },
           lines = {
@@ -7120,25 +7058,9 @@ Noir.Route("horde-undead", {
             { kind = "turnin", quest = 964, npc = 11057, skipIfMissing = true },
             { kind = "turnin", quest = 105, npc = 10837, skipIfMissing = true },
           } },
-        { id = "tMAGE-60", at = { zone = 85, x = 61.97, y = 52.47, r = 10 }, when = { class = "MAGE" }, minLevel = 60,
+        { id = "tPALADIN-58", at = { zone = 85, x = 60.22, y = 52.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 58,
           lines = {
-            { kind = "train", level = 60, class = "MAGE", npc = 2128 },
-          } },
-        { id = "tPALADIN-60", at = { zone = 85, x = 60.22, y = 52.66, r = 10 }, when = { class = "PALADIN" }, minLevel = 60,
-          lines = {
-            { kind = "train", level = 60, class = "PALADIN", npc = 246152 },
-          } },
-        { id = "tPRIEST-60", at = { zone = 85, x = 61.57, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 60,
-          lines = {
-            { kind = "train", level = 60, class = "PRIEST", npc = 2129 },
-          } },
-        { id = "tWARLOCK-60", at = { zone = 85, x = 61.59, y = 52.4, r = 10 }, when = { class = "WARLOCK" }, minLevel = 60,
-          lines = {
-            { kind = "train", level = 60, class = "WARLOCK", npc = 2127 },
-          } },
-        { id = "tWARRIOR-60", at = { zone = 85, x = 61.85, y = 52.54, r = 10 }, when = { class = "WARRIOR" }, minLevel = 60,
-          lines = {
-            { kind = "train", level = 60, class = "WARRIOR", npc = 2131 },
+            { kind = "train", level = 58, class = "PALADIN", npc = 246152 },
           } },
         { id = "x33#7", at = { zone = 85, x = 61.9, y = 58.9, r = 15 }, text = "Take the zeppelin from Tirisfal Glades to Stranglethorn Vale.",
           lines = {

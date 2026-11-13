@@ -86,6 +86,25 @@ test("the planner's order is kept where something other than a hub action stands
   assert.deepStrictEqual(bundle(w, steps).origin, [[0], [1], [2], [3], [4]]);
 });
 
+test("the objectives of one area become one step and the hand-in trip comes after; an objective never passes its own accept", () => {
+  const w = testWorld();
+  w.npc(10, 100, 30, 50); w.npc(11, 100, 80, 50); w.npc(20, 100, 60, 30, ""); w.npc(21, 100, 61, 31, ""); w.npc(22, 100, 62, 30, "");
+  w.kill(1, 10, 20, 100); w.kill(2, 10, 21, 100); w.kill(3, 11, 22, 100); w.kill(4, 10, 22, 100);
+  const steps = [
+    { action: "objective", quest: 1, at: M(100, 60, 30), npc: 20 },
+    { action: "turnin", quest: 1, at: M(100, 30, 50), npc: 10 },     // 360 yards back to town
+    { action: "accept", quest: 3, at: M(100, 80, 50), npc: 11 },
+    { action: "objective", quest: 2, at: M(100, 61, 31), npc: 21 },   // 14 yards from the first: joins it
+    { action: "objective", quest: 3, at: M(100, 62, 30), npc: 22 },   // its accept is in between: stays
+    { action: "objective", quest: 4, at: M(100, 62, 30), npc: 22, when: { class: "ROGUE" } }, // another condition: stays
+  ];
+  assert.deepStrictEqual(hubOrder(w.db, steps, steps.map(() => 1)), [0, 3, 1, 2, 4, 5]);
+  assert.deepStrictEqual(bundle(w, steps).origin, [[0, 3], [1], [2], [4], [5]]);
+  // a step of the way ends the area
+  const travel = [steps[0], { action: "travel", at: M(100, 40, 50) }, steps[3]];
+  assert.deepStrictEqual(hubOrder(w.db, travel, [1, 1, 1]), [0, 1, 2]);
+});
+
 test("a hub action is never moved before its prerequisite", () => {
   const w = testWorld();
   w.npc(10, 100, 30, 50); w.npc(20, 100, 60, 30, "");

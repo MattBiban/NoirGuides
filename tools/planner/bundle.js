@@ -26,6 +26,10 @@
 //     there yet, the log would go over 20 quests, or it is a getflight its fly follows. The first action outside
 //     the run ends it. So an action never moves before its prerequisite, and an accept never after an objective
 //     that needs it; every action outside a hub keeps the planner's order.
+//   - the area's objectives: after an objective head, a later objective within OBJECTIVE_YARDS of it (same `when`) is
+//     moved up to it past the actions in between, by the same rules (never past its own quest's accept or a related
+//     quest), as long as every action in between is a hub action in the head's zone. So the objectives of one area
+//     are one step, and the hand-ins come after the area is done.
 //   - a getflight followed by a fly from that node is one step; every other fly, transport, travel, hearth and grind
 //     is a step of its own
 //   - actions with different `when` never share a step; the step carries the `when`
@@ -127,6 +131,19 @@ function hubOrder(db, actions, levels) {
         if (b.action === "accept") for (const s of passed) logBefore[s]++;
         else if (b.action === "turnin") for (const s of passed) logBefore[s]--;
       } else passed.push(k);
+    }
+    if (head.action !== "objective") continue;
+    // the area's objectives: a later objective of the same zone session within OBJECTIVE_YARDS of the head joins it,
+    // past the actions in between, by the same rules; a step that leaves the zone (or is no hub action) ends the run
+    const between = [];
+    for (let k = i + 1; k < n; k++) {
+      if (used[k]) continue;
+      const b = actions[k];
+      if (!HUB.has(b.action) || !b.at || zoneOnly(b.at) || b.at.zone !== head.at.zone) break;
+      if (b.action === "objective" && sharesStep(near, head, b) && movable(b, k, between)) {
+        used[k] = true;
+        order.push(k);
+      } else between.push(k);
     }
   }
   return order;

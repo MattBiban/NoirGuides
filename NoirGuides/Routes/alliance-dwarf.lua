@@ -31,36 +31,6 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "objective", quest = 179, index = 1, item = 750, skipIfMissing = true },
           } },
-        { id = "tHUNTER-2", at = { zone = 1, x = 29.18, y = 67.45, r = 10 }, when = { class = "HUNTER" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "HUNTER", npc = 895 },
-            { kind = "selljunk", at = { zone = 1, x = 29.19, y = 67.73, r = 10 }, npc = 267336 },
-          } },
-        { id = "tPALADIN-2", at = { zone = 1, x = 28.83, y = 68.33, r = 10 }, when = { class = "PALADIN" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "PALADIN", npc = 926 },
-            { kind = "selljunk", at = { zone = 1, x = 28.79, y = 67.84, r = 10 }, npc = 1104 },
-          } },
-        { id = "tPRIEST-2", at = { zone = 1, x = 28.6, y = 66.39, r = 10 }, when = { class = "PRIEST" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "PRIEST", npc = 837 },
-            { kind = "selljunk", at = { zone = 1, x = 28.77, y = 66.37, r = 10 }, npc = 836 },
-          } },
-        { id = "tROGUE-2", at = { zone = 1, x = 28.37, y = 67.51, r = 10 }, when = { class = "ROGUE" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "ROGUE", npc = 916 },
-            { kind = "selljunk", at = { zone = 1, x = 28.66, y = 67.74, r = 10 }, npc = 945 },
-          } },
-        { id = "tSHAMAN-2", at = { zone = 1, x = 28.79, y = 66.18, r = 10 }, when = { class = "SHAMAN" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "SHAMAN", npc = 257446 },
-            { kind = "selljunk", at = { zone = 1, x = 28.8, y = 66.16, r = 10 }, npc = 6376 },
-          } },
-        { id = "tWARRIOR-2", at = { zone = 1, x = 28.83, y = 67.24, r = 10 }, when = { class = "WARRIOR" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "WARRIOR", npc = 912 },
-            { kind = "selljunk", at = { zone = 1, x = 28.93, y = 67.72, r = 10 }, npc = 267337 },
-          } },
         { id = "t179.a233.a170", at = { zone = 1, x = 29.93, y = 71.2, r = 10 }, items = { 2187 }, targets = { friend = { 658, 713 } },
           lines = {
             { kind = "turnin", quest = 179, npc = 658, skipIfMissing = true },
@@ -97,6 +67,36 @@ Noir.Route("alliance-dwarf", {
             { kind = "accept", quest = 183, npc = 714 },
             { kind = "accept", quest = 234, npc = 714, ifDone = 233, requires = { 233 } },
           } },
+        { id = "tHUNTER-2", at = { zone = 1, x = 29.18, y = 67.45, r = 10 }, when = { class = "HUNTER" }, minLevel = 2,
+          lines = {
+            { kind = "train", level = 2, class = "HUNTER", npc = 895 },
+            { kind = "selljunk", at = { zone = 1, x = 29.19, y = 67.73, r = 10 }, npc = 267336 },
+          } },
+        { id = "tPALADIN-2", at = { zone = 1, x = 28.83, y = 68.33, r = 10 }, when = { class = "PALADIN" }, minLevel = 2,
+          lines = {
+            { kind = "train", level = 2, class = "PALADIN", npc = 926 },
+            { kind = "selljunk", at = { zone = 1, x = 28.79, y = 67.84, r = 10 }, npc = 1104 },
+          } },
+        { id = "tPRIEST-2", at = { zone = 1, x = 28.6, y = 66.39, r = 10 }, when = { class = "PRIEST" }, minLevel = 2,
+          lines = {
+            { kind = "train", level = 2, class = "PRIEST", npc = 837 },
+            { kind = "selljunk", at = { zone = 1, x = 28.77, y = 66.37, r = 10 }, npc = 836 },
+          } },
+        { id = "tROGUE-2", at = { zone = 1, x = 28.37, y = 67.51, r = 10 }, when = { class = "ROGUE" }, minLevel = 2,
+          lines = {
+            { kind = "train", level = 2, class = "ROGUE", npc = 916 },
+            { kind = "selljunk", at = { zone = 1, x = 28.66, y = 67.74, r = 10 }, npc = 945 },
+          } },
+        { id = "tSHAMAN-2", at = { zone = 1, x = 28.79, y = 66.18, r = 10 }, when = { class = "SHAMAN" }, minLevel = 2,
+          lines = {
+            { kind = "train", level = 2, class = "SHAMAN", npc = 257446 },
+            { kind = "selljunk", at = { zone = 1, x = 28.8, y = 66.16, r = 10 }, npc = 6376 },
+          } },
+        { id = "tWARRIOR-2", at = { zone = 1, x = 28.83, y = 67.24, r = 10 }, when = { class = "WARRIOR" }, minLevel = 2,
+          lines = {
+            { kind = "train", level = 2, class = "WARRIOR", npc = 912 },
+            { kind = "selljunk", at = { zone = 1, x = 28.93, y = 67.72, r = 10 }, npc = 267337 },
+          } },
         { id = "a3361", at = { zone = 1, x = 28.55, y = 67.64, r = 10 }, minLevel = 3, maxLevel = 11, targets = { friend = { 8416 } },
           lines = {
             { kind = "accept", quest = 3361, npc = 8416 },
@@ -132,34 +132,34 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "objective", quest = 218, index = 1, item = 2004, skipIfMissing = true },
           } },
-        { id = "tHUNTER-6", at = { zone = 1, x = 29.18, y = 67.45, r = 10 }, when = { class = "HUNTER" }, minLevel = 6,
+        { id = "tHUNTER-4", at = { zone = 1, x = 29.18, y = 67.45, r = 10 }, when = { class = "HUNTER" }, minLevel = 4,
           lines = {
-            { kind = "train", level = 6, class = "HUNTER", npc = 895 },
+            { kind = "train", level = 4, class = "HUNTER", npc = 895 },
             { kind = "selljunk", at = { zone = 1, x = 29.19, y = 67.73, r = 10 }, npc = 267336 },
           } },
-        { id = "tPALADIN-6", at = { zone = 1, x = 28.83, y = 68.33, r = 10 }, when = { class = "PALADIN" }, minLevel = 6,
+        { id = "tPALADIN-4", at = { zone = 1, x = 28.83, y = 68.33, r = 10 }, when = { class = "PALADIN" }, minLevel = 4,
           lines = {
-            { kind = "train", level = 6, class = "PALADIN", npc = 926 },
+            { kind = "train", level = 4, class = "PALADIN", npc = 926 },
             { kind = "selljunk", at = { zone = 1, x = 28.79, y = 67.84, r = 10 }, npc = 1104 },
           } },
-        { id = "tPRIEST-6", at = { zone = 1, x = 28.6, y = 66.39, r = 10 }, when = { class = "PRIEST" }, minLevel = 6,
+        { id = "tPRIEST-4", at = { zone = 1, x = 28.6, y = 66.39, r = 10 }, when = { class = "PRIEST" }, minLevel = 4,
           lines = {
-            { kind = "train", level = 6, class = "PRIEST", npc = 837 },
+            { kind = "train", level = 4, class = "PRIEST", npc = 837 },
             { kind = "selljunk", at = { zone = 1, x = 28.77, y = 66.37, r = 10 }, npc = 836 },
           } },
-        { id = "tROGUE-6", at = { zone = 1, x = 28.37, y = 67.51, r = 10 }, when = { class = "ROGUE" }, minLevel = 6,
+        { id = "tROGUE-4", at = { zone = 1, x = 28.37, y = 67.51, r = 10 }, when = { class = "ROGUE" }, minLevel = 4,
           lines = {
-            { kind = "train", level = 6, class = "ROGUE", npc = 916 },
+            { kind = "train", level = 4, class = "ROGUE", npc = 916 },
             { kind = "selljunk", at = { zone = 1, x = 28.66, y = 67.74, r = 10 }, npc = 945 },
           } },
-        { id = "tSHAMAN-6", at = { zone = 1, x = 28.79, y = 66.18, r = 10 }, when = { class = "SHAMAN" }, minLevel = 6,
+        { id = "tSHAMAN-4", at = { zone = 1, x = 28.79, y = 66.18, r = 10 }, when = { class = "SHAMAN" }, minLevel = 4,
           lines = {
-            { kind = "train", level = 6, class = "SHAMAN", npc = 257446 },
+            { kind = "train", level = 4, class = "SHAMAN", npc = 257446 },
             { kind = "selljunk", at = { zone = 1, x = 28.8, y = 66.16, r = 10 }, npc = 6376 },
           } },
-        { id = "tWARRIOR-6", at = { zone = 1, x = 28.83, y = 67.24, r = 10 }, when = { class = "WARRIOR" }, minLevel = 6,
+        { id = "tWARRIOR-4", at = { zone = 1, x = 28.83, y = 67.24, r = 10 }, when = { class = "WARRIOR" }, minLevel = 4,
           lines = {
-            { kind = "train", level = 6, class = "WARRIOR", npc = 912 },
+            { kind = "train", level = 4, class = "WARRIOR", npc = 912 },
             { kind = "selljunk", at = { zone = 1, x = 28.93, y = 67.72, r = 10 }, npc = 267337 },
           } },
         { id = "t170", at = { zone = 1, x = 29.71, y = 71.25, r = 10 }, targets = { friend = { 713 } },
@@ -218,6 +218,36 @@ Noir.Route("alliance-dwarf", {
             { kind = "accept", quest = 412, npc = 1269 },
             { kind = "accept", quest = 400, at = { zone = 1, x = 46.02, y = 51.68, r = 10 }, npc = 1872 },
           } },
+        { id = "tHUNTER-6", at = { zone = 1, x = 45.81, y = 53.04, r = 10 }, when = { class = "HUNTER" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "HUNTER", npc = 1231 },
+            { kind = "selljunk", at = { zone = 1, x = 45.29, y = 52.19, r = 10 }, npc = 1273 },
+          } },
+        { id = "tPALADIN-6", at = { zone = 1, x = 47.6, y = 52.07, r = 10 }, when = { class = "PALADIN" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "PALADIN", npc = 1232 },
+            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
+          } },
+        { id = "tPRIEST-6", at = { zone = 1, x = 47.34, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "PRIEST", npc = 1226 },
+            { kind = "selljunk", at = { zone = 1, x = 47.19, y = 52.4, r = 10 }, npc = 1691 },
+          } },
+        { id = "tROGUE-6", at = { zone = 1, x = 47.56, y = 52.61, r = 10 }, when = { class = "ROGUE" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "ROGUE", npc = 1234 },
+            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
+          } },
+        { id = "tSHAMAN-6", at = { zone = 1, x = 47.58, y = 51.95, r = 10 }, when = { class = "SHAMAN" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "SHAMAN", npc = 258113 },
+            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
+          } },
+        { id = "tWARRIOR-6", at = { zone = 1, x = 47.36, y = 52.65, r = 10 }, when = { class = "WARRIOR" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "WARRIOR", npc = 1229 },
+            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
+          } },
         { id = "t2160.t310.a311.b.t420.a287.b@1", at = { zone = 1, x = 47.22, y = 52.19, r = 10 }, minLevel = 7, items = { 7646, 2548, 2666, 2619 }, targets = { friend = { 6806, 1252 } },
           lines = {
             { kind = "turnin", quest = 2160, npc = 6806, skipIfMissing = true },
@@ -242,11 +272,6 @@ Noir.Route("alliance-dwarf", {
             { kind = "objective", quest = 317, index = 1, item = 769 },
             { kind = "objective", quest = 317, index = 2, item = 6952 },
           } },
-        { id = "tPRIEST-8", at = { zone = 1, x = 47.34, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "PRIEST", npc = 1226 },
-            { kind = "selljunk", at = { zone = 1, x = 47.19, y = 52.4, r = 10 }, npc = 1691 },
-          } },
         { id = "o5625", at = { zone = 1, x = 45.81, y = 54.57, r = 40 }, text = "Mountaineer Dolf is southwest of Pilot Bellowfiz.", when = { class = "PRIEST" }, targets = { enemy = { 12427 } },
           lines = {
             { kind = "objective", quest = 5625, index = 1, npc = 12427 },
@@ -259,34 +284,9 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "turnin", quest = 5541, npc = 1243 },
           } },
-        { id = "tHUNTER-8", at = { zone = 1, x = 45.81, y = 53.04, r = 10 }, when = { class = "HUNTER" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "HUNTER", npc = 1231 },
-            { kind = "selljunk", at = { zone = 1, x = 45.29, y = 52.19, r = 10 }, npc = 1273 },
-          } },
         { id = "o313", at = { zone = 1, x = 41.63, y = 48.96, r = 40 }, text = "Wendigo Mane is north of Hegnar Rumbleshot.", targets = { enemy = { 1135, 271530, 271486, 1137, 271587, 1134 } },
           lines = {
             { kind = "objective", quest = 313, index = 1, item = 2671 },
-          } },
-        { id = "tPALADIN-8", at = { zone = 1, x = 47.6, y = 52.07, r = 10 }, when = { class = "PALADIN" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "PALADIN", npc = 1232 },
-            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
-          } },
-        { id = "tROGUE-8", at = { zone = 1, x = 47.56, y = 52.61, r = 10 }, when = { class = "ROGUE" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "ROGUE", npc = 1234 },
-            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
-          } },
-        { id = "tSHAMAN-8", at = { zone = 1, x = 47.58, y = 51.95, r = 10 }, when = { class = "SHAMAN" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "SHAMAN", npc = 258113 },
-            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
-          } },
-        { id = "tWARRIOR-8", at = { zone = 1, x = 47.36, y = 52.65, r = 10 }, when = { class = "WARRIOR" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "WARRIOR", npc = 1229 },
-            { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
           } },
         { id = "t317.a318.t313", at = { zone = 1, x = 49.43, y = 48.41, r = 10 }, minLevel = 2, targets = { friend = { 1378, 1377 } },
           lines = {
@@ -305,6 +305,11 @@ Noir.Route("alliance-dwarf", {
         { id = "h", text = "Use your hearthstone to return to Dun Morogh.",
           lines = {
             { kind = "hearth", to = { zone = 1, x = 47.38, y = 52.52 } },
+          } },
+        { id = "tPRIEST-8", at = { zone = 1, x = 47.34, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 8,
+          lines = {
+            { kind = "train", level = 8, class = "PRIEST", npc = 1226 },
+            { kind = "selljunk", at = { zone = 1, x = 47.19, y = 52.4, r = 10 }, npc = 1691 },
           } },
         { id = "t5625", at = { zone = 1, x = 47.34, y = 52.19, r = 10 }, when = { class = "PRIEST" }, targets = { friend = { 1226 } },
           lines = {
@@ -364,9 +369,9 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "turnin", quest = 312, npc = 1266, skipIfMissing = true },
           } },
-        { id = "tHUNTER-10", at = { zone = 1, x = 45.81, y = 53.04, r = 10 }, when = { class = "HUNTER" }, minLevel = 10,
+        { id = "tHUNTER-8", at = { zone = 1, x = 45.81, y = 53.04, r = 10 }, when = { class = "HUNTER" }, minLevel = 8,
           lines = {
-            { kind = "train", level = 10, class = "HUNTER", npc = 1231 },
+            { kind = "train", level = 8, class = "HUNTER", npc = 1231 },
             { kind = "selljunk", at = { zone = 1, x = 45.29, y = 52.19, r = 10 }, npc = 1273 },
           } },
         { id = "a6064.t6075", at = { zone = 1, x = 45.81, y = 53.04, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, items = { 15911 }, targets = { friend = { 1231 } },
@@ -374,29 +379,24 @@ Noir.Route("alliance-dwarf", {
             { kind = "accept", quest = 6064, npc = 1231 },
             { kind = "turnin", quest = 6075, npc = 1231, skipIfMissing = true },
           } },
-        { id = "tPALADIN-10", at = { zone = 1, x = 47.6, y = 52.07, r = 10 }, when = { class = "PALADIN" }, minLevel = 10,
+        { id = "tPALADIN-8", at = { zone = 1, x = 47.6, y = 52.07, r = 10 }, when = { class = "PALADIN" }, minLevel = 8,
           lines = {
-            { kind = "train", level = 10, class = "PALADIN", npc = 1232 },
+            { kind = "train", level = 8, class = "PALADIN", npc = 1232 },
             { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
           } },
-        { id = "tPRIEST-10", at = { zone = 1, x = 47.34, y = 52.19, r = 10 }, when = { class = "PRIEST" }, minLevel = 10,
+        { id = "tROGUE-8", at = { zone = 1, x = 47.56, y = 52.61, r = 10 }, when = { class = "ROGUE" }, minLevel = 8,
           lines = {
-            { kind = "train", level = 10, class = "PRIEST", npc = 1226 },
-            { kind = "selljunk", at = { zone = 1, x = 47.19, y = 52.4, r = 10 }, npc = 1691 },
-          } },
-        { id = "tROGUE-10", at = { zone = 1, x = 47.56, y = 52.61, r = 10 }, when = { class = "ROGUE" }, minLevel = 10,
-          lines = {
-            { kind = "train", level = 10, class = "ROGUE", npc = 1234 },
+            { kind = "train", level = 8, class = "ROGUE", npc = 1234 },
             { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
           } },
-        { id = "tSHAMAN-10", at = { zone = 1, x = 47.58, y = 51.95, r = 10 }, when = { class = "SHAMAN" }, minLevel = 10,
+        { id = "tSHAMAN-8", at = { zone = 1, x = 47.58, y = 51.95, r = 10 }, when = { class = "SHAMAN" }, minLevel = 8,
           lines = {
-            { kind = "train", level = 10, class = "SHAMAN", npc = 258113 },
+            { kind = "train", level = 8, class = "SHAMAN", npc = 258113 },
             { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
           } },
-        { id = "tWARRIOR-10", at = { zone = 1, x = 47.36, y = 52.65, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10,
+        { id = "tWARRIOR-8", at = { zone = 1, x = 47.36, y = 52.65, r = 10 }, when = { class = "WARRIOR" }, minLevel = 8,
           lines = {
-            { kind = "train", level = 10, class = "WARRIOR", npc = 1229 },
+            { kind = "train", level = 8, class = "WARRIOR", npc = 1229 },
             { kind = "selljunk", at = { zone = 1, x = 47.38, y = 52.52, r = 10 }, npc = 1247 },
           } },
         { id = "t287", at = { zone = 1, x = 46.73, y = 53.83, r = 10 }, targets = { friend = { 1252 } },
@@ -423,6 +423,11 @@ Noir.Route("alliance-dwarf", {
         { id = "o6084", at = { zone = 1, x = 47.2, y = 49.09, r = 40 }, when = { class = "HUNTER" }, items = { 15913 }, targets = { enemy = { 1201 } },
           lines = {
             { kind = "objective", quest = 6084, index = 1, npc = 1201 },
+          } },
+        { id = "tHUNTER-10", at = { zone = 1, x = 45.81, y = 53.04, r = 10 }, when = { class = "HUNTER" }, minLevel = 10,
+          lines = {
+            { kind = "train", level = 10, class = "HUNTER", npc = 1231 },
+            { kind = "selljunk", at = { zone = 1, x = 45.29, y = 52.19, r = 10 }, npc = 1273 },
           } },
         { id = "t6084.a6085", at = { zone = 1, x = 45.81, y = 53.04, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, items = { 15913, 15908 }, targets = { friend = { 1231 } },
           lines = {
@@ -479,6 +484,11 @@ Noir.Route("alliance-dwarf", {
         { id = "o2206", at = { zone = 12, x = 48.06, y = 86.96, r = 40 }, text = "Defias Shipping Schedule is south of Pilot Bellowfiz.", when = { class = "ROGUE" }, targets = { enemy = { 6846 } },
           lines = {
             { kind = "objective", quest = 2206, index = 1, item = 7675, skipIfMissing = true },
+          } },
+        { id = "tROGUE-10", at = { zone = 1519, x = 80.28, y = 68.58, r = 10 }, when = { class = "ROGUE" }, minLevel = 10,
+          lines = {
+            { kind = "train", level = 10, class = "ROGUE", npc = 13283 },
+            { kind = "selljunk", at = { zone = 1519, x = 80.28, y = 70.07, r = 10 }, npc = 1325 },
           } },
         { id = "t2206", at = { zone = 1519, x = 78.31, y = 70.74, r = 10 }, when = { class = "ROGUE" }, targets = { friend = { 332 } },
           lines = {
@@ -546,6 +556,11 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "accept", quest = 1680, npc = 6114, requires = { 1639 } },
           } },
+        { id = "tWARRIOR-10", at = { zone = 1537, x = 65.9, y = 88.41, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10,
+          lines = {
+            { kind = "train", level = 10, class = "WARRIOR", npc = 5114 },
+            { kind = "selljunk", at = { zone = 1537, x = 62.55, y = 88.71, r = 10 }, npc = 5121 },
+          } },
         { id = "t1680.a1681", at = { zone = 1537, x = 48.64, y = 42.48, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, targets = { friend = { 6031 } },
           lines = {
             { kind = "turnin", quest = 1680, npc = 6031, skipIfMissing = true },
@@ -601,11 +616,6 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "turnin", quest = 419, object = 2059, skipIfMissing = true },
             { kind = "accept", quest = 417, object = 2059, ifDone = 419, requires = { 419 } },
-          } },
-        { id = "tWARRIOR-12", at = { zone = 1537, x = 65.9, y = 88.41, r = 10 }, when = { class = "WARRIOR" }, minLevel = 12,
-          lines = {
-            { kind = "train", level = 12, class = "WARRIOR", npc = 5114 },
-            { kind = "selljunk", at = { zone = 1537, x = 62.55, y = 88.71, r = 10 }, npc = 5121 },
           } },
         { id = "t1681.a1682.t1682", at = { zone = 1537, x = 48.64, y = 42.48, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, targets = { friend = { 6031 } },
           lines = {
@@ -704,18 +714,15 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "accept", quest = 953, npc = 3639 },
           } },
-        { id = "o953", at = { zone = 148, x = 43.3, y = 58.68, r = 40 }, text = "The Lay of Ameth'Aran is east of Sentinel Tysha Moonblade.",
+        { id = "o953.o958", at = { zone = 148, x = 43.3, y = 58.68, r = 40 }, text = "The Lay of Ameth'Aran is east of Sentinel Tysha Moonblade.", targets = { enemy = { 2178, 2176, 2177, 210528 } },
           lines = {
             { kind = "objective", quest = 953, index = 1, object = 17188, skipIfMissing = true },
             { kind = "objective", quest = 953, index = 2, object = 17189, skipIfMissing = true },
+            { kind = "objective", quest = 958, index = 1, item = 5360, at = { zone = 148, x = 42.44, y = 58.25, r = 40 }, skipIfMissing = true },
           } },
         { id = "t953", at = { zone = 148, x = 40.3, y = 59.73, r = 10 }, targets = { friend = { 3639 } },
           lines = {
             { kind = "turnin", quest = 953, npc = 3639, skipIfMissing = true },
-          } },
-        { id = "o958", at = { zone = 148, x = 42.44, y = 58.25, r = 40 }, targets = { enemy = { 2177, 2176, 2178, 210528 } },
-          lines = {
-            { kind = "objective", quest = 958, index = 1, item = 5360, skipIfMissing = true },
           } },
         { id = "o984", at = { zone = 148, x = 39.86, y = 53.89, r = 40 },
           lines = {
@@ -750,14 +757,14 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "transport", to = { zone = 141, x = 54.8, y = 97.2 }, mode = "boat", at = { zone = 148, x = 33.3, y = 39.8, r = 15 } },
           } },
-        { id = "tROGUE-12", at = { zone = 141, x = 56.38, y = 60.14, r = 10 }, when = { class = "ROGUE" }, minLevel = 12,
-          lines = {
-            { kind = "train", level = 12, class = "ROGUE", npc = 3599 },
-            { kind = "selljunk", at = { zone = 141, x = 56.12, y = 60.25, r = 10 }, npc = 3611 },
-          } },
         { id = "a2241", at = { zone = 141, x = 56.38, y = 60.14, r = 10 }, when = { class = "ROGUE" }, minLevel = 10, maxLevel = 18, items = { 7735 }, targets = { friend = { 3599 } },
           lines = {
             { kind = "accept", quest = 2241, npc = 3599 },
+          } },
+        { id = "tROGUE-12", at = { zone = 1657, x = 36.99, y = 21.91, r = 10 }, when = { class = "ROGUE" }, minLevel = 12,
+          lines = {
+            { kind = "train", level = 12, class = "ROGUE", npc = 4163 },
+            { kind = "selljunk", at = { zone = 1657, x = 38.28, y = 15.36, r = 10 }, npc = 4730 },
           } },
         { id = "t2241.a2242", at = { zone = 1657, x = 36.99, y = 21.91, r = 10 }, when = { class = "ROGUE" }, minLevel = 10, items = { 7735 }, targets = { friend = { 4163 } },
           lines = {
@@ -775,6 +782,11 @@ Noir.Route("alliance-dwarf", {
         { id = "x141#2", at = { zone = 148, x = 33.3, y = 39.8, r = 15 }, text = "Take the boat from Darkshore to Teldrassil.", when = { class = "WARRIOR" },
           lines = {
             { kind = "transport", to = { zone = 141, x = 54.8, y = 97.2 }, mode = "boat", at = { zone = 148, x = 33.3, y = 39.8, r = 15 } },
+          } },
+        { id = "tWARRIOR-12", at = { zone = 1657, x = 58.71, y = 34.9, r = 10 }, when = { class = "WARRIOR" }, minLevel = 12,
+          lines = {
+            { kind = "train", level = 12, class = "WARRIOR", npc = 4087 },
+            { kind = "selljunk", at = { zone = 1657, x = 58.02, y = 34.52, r = 10 }, npc = 15351 },
           } },
         { id = "a1686", at = { zone = 1657, x = 57.3, y = 34.61, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, maxLevel = 18, targets = { friend = { 4088 } },
           lines = {
@@ -997,11 +1009,6 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "transport", to = { zone = 11, x = 4.5, y = 56.6 }, mode = "boat", at = { zone = 148, x = 32.3, y = 44.1, r = 15 } },
           } },
-        { id = "tROGUE-16", at = { zone = 1537, x = 51.96, y = 14.84, r = 10 }, when = { class = "ROGUE" }, minLevel = 16,
-          lines = {
-            { kind = "train", level = 16, class = "ROGUE", npc = 5165 },
-            { kind = "selljunk", at = { zone = 1537, x = 52.95, y = 13.71, r = 10 }, npc = 5169 },
-          } },
         { id = "a2298", at = { zone = 1537, x = 51.96, y = 14.84, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, maxLevel = 24, targets = { friend = { 5165 } },
           lines = {
             { kind = "accept", quest = 2298, npc = 5165 },
@@ -1009,6 +1016,11 @@ Noir.Route("alliance-dwarf", {
         { id = "x1519#4", at = { zone = 1537, x = 78, y = 51.4, r = 15 }, text = "Take the tram from Ironforge to Stormwind City.", when = { class = "ROGUE" },
           lines = {
             { kind = "transport", to = { zone = 1519, x = 69.6, y = 30.3 }, mode = "tram", at = { zone = 1537, x = 78, y = 51.4, r = 15 } },
+          } },
+        { id = "tROGUE-16", at = { zone = 1519, x = 80.28, y = 68.58, r = 10 }, when = { class = "ROGUE" }, minLevel = 16,
+          lines = {
+            { kind = "train", level = 16, class = "ROGUE", npc = 13283 },
+            { kind = "selljunk", at = { zone = 1519, x = 80.28, y = 70.07, r = 10 }, npc = 1325 },
           } },
         { id = "t2298", at = { zone = 1519, x = 78.29, y = 71.14, r = 10 }, when = { class = "ROGUE" }, targets = { friend = { 6946 } },
           lines = {
@@ -1180,14 +1192,14 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "transport", to = { zone = 141, x = 54.8, y = 97.2 }, mode = "boat", at = { zone = 148, x = 33.3, y = 39.8, r = 15 } },
           } },
-        { id = "tROGUE-20", at = { zone = 141, x = 56.38, y = 60.14, r = 10 }, when = { class = "ROGUE" }, minLevel = 20,
-          lines = {
-            { kind = "train", level = 20, class = "ROGUE", npc = 3599 },
-            { kind = "selljunk", at = { zone = 141, x = 56.12, y = 60.25, r = 10 }, npc = 3611 },
-          } },
         { id = "a2259", at = { zone = 141, x = 56.38, y = 60.14, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, maxLevel = 24, targets = { friend = { 3599 } },
           lines = {
             { kind = "accept", quest = 2259, npc = 3599 },
+          } },
+        { id = "tROGUE-18", at = { zone = 1657, x = 34.52, y = 25.93, r = 10 }, when = { class = "ROGUE" }, minLevel = 18,
+          lines = {
+            { kind = "train", level = 18, class = "ROGUE", npc = 4214 },
+            { kind = "selljunk", at = { zone = 1657, x = 32.54, y = 19.73, r = 10 }, npc = 3561 },
           } },
         { id = "t2259.a2260", at = { zone = 1657, x = 34.52, y = 25.93, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, targets = { friend = { 4214 } },
           lines = {
@@ -1373,6 +1385,11 @@ Noir.Route("alliance-dwarf", {
         { id = "x1519#6", at = { zone = 1537, x = 78, y = 51.4, r = 15 }, text = "Take the tram from Ironforge to Stormwind City.", when = { class = "ROGUE" },
           lines = {
             { kind = "transport", to = { zone = 1519, x = 69.6, y = 30.3 }, mode = "tram", at = { zone = 1537, x = 78, y = 51.4, r = 15 } },
+          } },
+        { id = "tROGUE-20", at = { zone = 1519, x = 80.28, y = 68.58, r = 10 }, when = { class = "ROGUE" }, minLevel = 20,
+          lines = {
+            { kind = "train", level = 20, class = "ROGUE", npc = 13283 },
+            { kind = "selljunk", at = { zone = 1519, x = 80.28, y = 70.07, r = 10 }, npc = 1325 },
           } },
         { id = "t2260.a2281", at = { zone = 1519, x = 78.29, y = 71.14, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, targets = { friend = { 6946 } },
           lines = {
@@ -1571,13 +1588,13 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "goto", at = { zone = 1537, x = 55.5, y = 47.74, r = 20 } },
           } },
-        { id = "tPALADIN-23", at = { zone = 1537, x = 24.55, y = 4.47, r = 10 }, when = { class = "PALADIN" }, minLevel = 23,
+        { id = "tPALADIN-22", at = { zone = 1537, x = 24.55, y = 4.47, r = 10 }, when = { class = "PALADIN" }, minLevel = 22,
           lines = {
-            { kind = "train", level = 23, class = "PALADIN", npc = 5148 },
+            { kind = "train", level = 22, class = "PALADIN", npc = 5148 },
           } },
-        { id = "tROGUE-24", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, when = { class = "ROGUE" }, minLevel = 24,
+        { id = "tROGUE-22", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, when = { class = "ROGUE" }, minLevel = 22,
           lines = {
-            { kind = "train", level = 24, class = "ROGUE", npc = 5167 },
+            { kind = "train", level = 22, class = "ROGUE", npc = 5167 },
           } },
         { id = "tSHAMAN-22", at = { zone = 1537, x = 47.1, y = 13.79, r = 10 }, when = { class = "SHAMAN" }, minLevel = 22,
           lines = {
@@ -1771,9 +1788,9 @@ Noir.Route("alliance-dwarf", {
             { kind = "getflight", node = 4, npc = 523 },
             { kind = "fly", from = 4, to = 2 },
           } },
-        { id = "tROGUE-26", at = { zone = 1519, x = 80.28, y = 68.58, r = 10 }, when = { class = "ROGUE" }, minLevel = 26,
+        { id = "tROGUE-24", at = { zone = 1519, x = 80.28, y = 68.58, r = 10 }, when = { class = "ROGUE" }, minLevel = 24,
           lines = {
-            { kind = "train", level = 26, class = "ROGUE", npc = 13283 },
+            { kind = "train", level = 24, class = "ROGUE", npc = 13283 },
           } },
         { id = "t2359.a2607.t2607.a2608.o2608.t2608.a2609", at = { zone = 1519, x = 78.31, y = 70.74, r = 10 }, when = { class = "ROGUE" }, minLevel = 20, items = { 8046 }, targets = { friend = { 332, 7207 } },
           lines = {
@@ -1892,6 +1909,10 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "getflight", node = 4, npc = 523 },
           } },
+        { id = "o174", at = { zone = 40, x = 35.94, y = 46.84, r = 40 }, text = "Bronze Tube is west of Thor.",
+          lines = {
+            { kind = "objective", quest = 174, index = 1, item = 4371, skipIfMissing = true },
+          } },
         { id = "tWARRIOR-26:go1", at = { zone = 40, x = 56.55, y = 52.64, r = 10 }, text = "Fly from Sentinel Hill, Westfall to Stormwind, Elwynn.", when = { class = "WARRIOR" },
           lines = {
             { kind = "fly", from = 4, to = 2 },
@@ -1903,10 +1924,6 @@ Noir.Route("alliance-dwarf", {
         { id = "tWARRIOR-26:back1", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Sentinel Hill, Westfall.", when = { class = "WARRIOR" },
           lines = {
             { kind = "fly", from = 2, to = 4 },
-          } },
-        { id = "o174", at = { zone = 40, x = 35.94, y = 46.84, r = 40 }, text = "Bronze Tube is west of Thor.",
-          lines = {
-            { kind = "objective", quest = 174, index = 1, item = 4371, skipIfMissing = true },
           } },
         { id = "y4-2", at = { zone = 40, x = 56.55, y = 52.64, r = 10 }, text = "Fly from Sentinel Hill, Westfall to Stormwind, Elwynn.", when = { class = "WARRIOR" },
           lines = {
@@ -1951,18 +1968,6 @@ Noir.Route("alliance-dwarf", {
         { id = "y12-7", at = { zone = 10, x = 77.49, y = 44.29, r = 10 }, text = "Fly from Darkshire, Duskwood to Menethil Harbor, Wetlands.",
           lines = {
             { kind = "fly", from = 12, to = 7 },
-          } },
-        { id = "tSHAMAN-26:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "SHAMAN" },
-          lines = {
-            { kind = "fly", from = 7, to = 6 },
-          } },
-        { id = "tSHAMAN-26", at = { zone = 1537, x = 47.1, y = 13.79, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "SHAMAN" }, minLevel = 26,
-          lines = {
-            { kind = "train", level = 26, class = "SHAMAN", npc = 258098 },
-          } },
-        { id = "tSHAMAN-26:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "SHAMAN" },
-          lines = {
-            { kind = "fly", from = 6, to = 7 },
           } },
         { id = "a279.a464", at = { zone = 11, x = 8.32, y = 58.57, r = 10 }, minLevel = 23, maxLevel = 30, targets = { friend = { 1242, 2104 } },
           lines = {
@@ -2119,6 +2124,18 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "hearth", to = { zone = 11, x = 10.7, y = 60.95 } },
           } },
+        { id = "tROGUE-28:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 7, to = 6 },
+          } },
+        { id = "tROGUE-28", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "ROGUE" }, minLevel = 28,
+          lines = {
+            { kind = "train", level = 28, class = "ROGUE", npc = 5167 },
+          } },
+        { id = "tROGUE-28:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 6, to = 7 },
+          } },
         { id = "t470", at = { zone = 11, x = 11.8, y = 57.99, r = 10 }, targets = { friend = { 2111 } },
           lines = {
             { kind = "turnin", quest = 470, npc = 2111, skipIfMissing = true },
@@ -2267,9 +2284,9 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "turnin", quest = 1035, npc = 3894, skipIfMissing = true },
           } },
-        { id = "tHUNTER-30", at = { zone = 331, x = 18.01, y = 59.83, r = 10 }, when = { class = "HUNTER" }, minLevel = 30,
+        { id = "tHUNTER-29", at = { zone = 331, x = 18.01, y = 59.83, r = 10 }, when = { class = "HUNTER" }, minLevel = 29,
           lines = {
-            { kind = "train", level = 30, class = "HUNTER", npc = 8308 },
+            { kind = "train", level = 29, class = "HUNTER", npc = 8308 },
           } },
         { id = "t1031.a1032", at = { zone = 331, x = 21.73, y = 53.34, r = 10 }, minLevel = 26, targets = { friend = { 3901 } },
           lines = {
@@ -2597,9 +2614,9 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "turnin", quest = 188, npc = 717 },
           } },
-        { id = "tROGUE-34", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 34,
+        { id = "tROGUE-32", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 32,
           lines = {
-            { kind = "train", level = 34, class = "ROGUE", npc = 1411 },
+            { kind = "train", level = 32, class = "ROGUE", npc = 1411 },
           } },
         { id = "f19.a605.a189.a213.t210.a198.a201.a616.a627.t616.a578.a575.b@33", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, minLevel = 32, items = { 4085, 2252, 3898 }, targets = { friend = { 2498, 737, 773, 2496, 2495 } },
           lines = {
@@ -2645,6 +2662,10 @@ Noir.Route("alliance-dwarf", {
         { id = "h#14", text = "Use your hearthstone to return to Stranglethorn Vale.",
           lines = {
             { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
+          } },
+        { id = "tROGUE-34", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 34,
+          lines = {
+            { kind = "train", level = 34, class = "ROGUE", npc = 1411 },
           } },
         { id = "t201.t189.t213.t605.t578.a601", at = { zone = 33, x = 26.95, y = 77.21, r = 10 }, minLevel = 32, items = { 3898 }, targets = { friend = { 773, 737, 2498, 2496 } },
           lines = {
@@ -2746,10 +2767,6 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
           } },
-        { id = "tROGUE-36", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 36,
-          lines = {
-            { kind = "train", level = 36, class = "ROGUE", npc = 1411 },
-          } },
         { id = "t628", at = { zone = 33, x = 28.29, y = 77.59, r = 10 }, targets = { friend = { 2495 } },
           lines = {
             { kind = "turnin", quest = 628, npc = 2495 },
@@ -2788,15 +2805,15 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "goto", at = { zone = 10, x = 77.49, y = 44.29, r = 20 } },
           } },
-        { id = "tWARRIOR-36:go1", at = { zone = 10, x = 77.49, y = 44.29, r = 10 }, text = "Fly from Darkshire, Duskwood to Stormwind, Elwynn.", when = { class = "WARRIOR" },
+        { id = "tWARRIOR-35:go1", at = { zone = 10, x = 77.49, y = 44.29, r = 10 }, text = "Fly from Darkshire, Duskwood to Stormwind, Elwynn.", when = { class = "WARRIOR" },
           lines = {
             { kind = "fly", from = 12, to = 2 },
           } },
-        { id = "tWARRIOR-36", at = { zone = 1519, x = 80.19, y = 61.26, r = 10 }, text = "Fly to Stormwind City for class training, then return.", when = { class = "WARRIOR" }, minLevel = 36,
+        { id = "tWARRIOR-35", at = { zone = 1519, x = 80.19, y = 61.26, r = 10 }, text = "Fly to Stormwind City for class training, then return.", when = { class = "WARRIOR" }, minLevel = 35,
           lines = {
-            { kind = "train", level = 36, class = "WARRIOR", npc = 914 },
+            { kind = "train", level = 35, class = "WARRIOR", npc = 914 },
           } },
-        { id = "tWARRIOR-36:back1", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Darkshire, Duskwood.", when = { class = "WARRIOR" },
+        { id = "tWARRIOR-35:back1", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Darkshire, Duskwood.", when = { class = "WARRIOR" },
           lines = {
             { kind = "fly", from = 2, to = 12 },
           } },
@@ -2931,19 +2948,19 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "turnin", quest = 6027, npc = 11863, skipIfMissing = true },
           } },
-        { id = "o5561", at = { zone = 405, x = 51.39, y = 55.11, r = 40 }, text = "The Aged Kodo is southeast of Azore Aldamort.", items = { 13892 }, targets = { enemy = { 4700, 4702, 4701 } },
+        { id = "o5561.o5501", at = { zone = 405, x = 51.39, y = 55.11, r = 40 }, text = "The Aged Kodo is southeast of Azore Aldamort.", items = { 13892 }, targets = { enemy = { 4700, 4702, 4701 } },
           lines = {
             { kind = "objective", quest = 5561, index = 1, npc = 4700 },
+          } },
+        { id = "r5501", at = { zone = 405, x = 51.62, y = 59.9, r = 40 }, reminder = { ends = "turnin5501" },
+          lines = {
+            { kind = "objective", quest = 5501, index = 1, item = 13703, skipIfMissing = true },
           } },
         { id = "a6134", at = { zone = 405, x = 47.83, y = 61.83, r = 10 }, minLevel = 34, maxLevel = 47, items = { 15848 }, targets = { friend = { 6019 } },
           lines = {
             { kind = "accept", quest = 6134, npc = 6019 },
           } },
-        { id = "o5501", at = { zone = 405, x = 51.62, y = 59.9, r = 40 },
-          lines = {
-            { kind = "objective", quest = 5501, index = 1, item = 13703, skipIfMissing = true },
-          } },
-        { id = "t5501", at = { zone = 405, x = 62.33, y = 38.99, r = 10 }, targets = { friend = { 11438 } },
+        { id = "t5501", label = "turnin5501", at = { zone = 405, x = 62.33, y = 38.99, r = 10 }, targets = { friend = { 11438 } },
           lines = {
             { kind = "turnin", quest = 5501, npc = 11438, skipIfMissing = true },
           } },
@@ -3194,22 +3211,6 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "objective", quest = 694, index = 1, item = 4527 },
           } },
-        { id = "tWARRIOR-40:go1", text = "Head north into The Hinterlands.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "goto", at = { zone = 47, x = 14.4, y = 43, r = 20 } },
-          } },
-        { id = "tWARRIOR-40", at = { zone = 47, x = 14.4, y = 43, r = 10 }, text = "Fly to The Hinterlands for class training, then return.", when = { class = "WARRIOR" }, minLevel = 40,
-          lines = {
-            { kind = "train", level = 40, class = "WARRIOR", npc = 270278 },
-          } },
-        { id = "tWARRIOR-40:back1", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, when = { class = "WARRIOR" },
-          lines = {
-            { kind = "getflight", node = 43, npc = 8018 },
-          } },
-        { id = "tWARRIOR-40:back2", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, text = "Fly from Aerie Peak, The Hinterlands to Refuge Pointe, Arathi.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "fly", from = 43, to = 16 },
-          } },
         { id = "t694.a695.t695.a696", at = { zone = 45, x = 46.2, y = 47.75, r = 10 }, minLevel = 30, items = { 4529 }, targets = { friend = { 2788, 2789 } },
           lines = {
             { kind = "turnin", quest = 694, npc = 2788 },
@@ -3383,49 +3384,45 @@ Noir.Route("alliance-dwarf", {
             { kind = "getflight", node = 8, npc = 1572 },
             { kind = "fly", from = 8, to = 7 },
           } },
-        { id = "tHUNTER-41:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "HUNTER" },
+        { id = "tHUNTER-40:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "HUNTER" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tHUNTER-41", at = { zone = 1537, x = 69.87, y = 82.9, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "HUNTER" }, minLevel = 41,
+        { id = "tHUNTER-40", at = { zone = 1537, x = 69.87, y = 82.9, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "HUNTER" }, minLevel = 40,
           lines = {
-            { kind = "train", level = 41, class = "HUNTER", npc = 5117 },
+            { kind = "train", level = 40, class = "HUNTER", npc = 5117 },
           } },
-        { id = "tHUNTER-41:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "HUNTER" },
+        { id = "tHUNTER-40:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "HUNTER" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
-        { id = "tPRIEST-41:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "PRIEST" },
+        { id = "tPRIEST-40:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "PRIEST" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tPRIEST-41", at = { zone = 1537, x = 25.21, y = 10.76, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "PRIEST" }, minLevel = 41,
+        { id = "tPRIEST-40", at = { zone = 1537, x = 25.21, y = 10.76, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "PRIEST" }, minLevel = 40,
           lines = {
-            { kind = "train", level = 41, class = "PRIEST", npc = 5143 },
+            { kind = "train", level = 40, class = "PRIEST", npc = 5143 },
           } },
-        { id = "tPRIEST-41:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "PRIEST" },
+        { id = "tPRIEST-40:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "PRIEST" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
-        { id = "tSHAMAN-40:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "SHAMAN" },
+        { id = "tSHAMAN-39:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "SHAMAN" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tSHAMAN-40", at = { zone = 1537, x = 47.1, y = 13.79, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "SHAMAN" }, minLevel = 40,
+        { id = "tSHAMAN-39", at = { zone = 1537, x = 47.1, y = 13.79, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "SHAMAN" }, minLevel = 39,
           lines = {
-            { kind = "train", level = 40, class = "SHAMAN", npc = 258098 },
+            { kind = "train", level = 39, class = "SHAMAN", npc = 258098 },
           } },
-        { id = "tSHAMAN-40:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "SHAMAN" },
+        { id = "tSHAMAN-39:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "SHAMAN" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
         { id = "x15", at = { zone = 11, x = 4.7, y = 63.7, r = 15 }, text = "Take the boat from Wetlands to Dustwallow Marsh.",
           lines = {
             { kind = "transport", to = { zone = 15, x = 71.7, y = 56.6 }, mode = "boat", at = { zone = 11, x = 4.7, y = 63.7, r = 15 } },
-          } },
-        { id = "tPALADIN-40", at = { zone = 15, x = 67.4, y = 47.41, r = 10 }, when = { class = "PALADIN" }, minLevel = 40,
-          lines = {
-            { kind = "train", level = 40, class = "PALADIN", npc = 8140 },
           } },
         { id = "f32", at = { zone = 15, x = 67.48, y = 51.3, r = 10 },
           lines = {
@@ -3436,6 +3433,14 @@ Noir.Route("alliance-dwarf", {
             { kind = "accept", quest = 1282, npc = 4921 },
             { kind = "accept", quest = 1204, npc = 4794 },
           } },
+        { id = "tPALADIN-38", at = { zone = 15, x = 67.4, y = 47.41, r = 10 }, when = { class = "PALADIN" }, minLevel = 38,
+          lines = {
+            { kind = "train", level = 38, class = "PALADIN", npc = 8140 },
+          } },
+        { id = "tWARRIOR-40", at = { zone = 15, x = 67.88, y = 48.41, r = 10 }, when = { class = "WARRIOR" }, minLevel = 40,
+          lines = {
+            { kind = "train", level = 40, class = "WARRIOR", npc = 8141 },
+          } },
         { id = "t1282", at = { zone = 15, x = 68.21, y = 48.62, r = 10 }, targets = { friend = { 4944 } },
           lines = {
             { kind = "turnin", quest = 1282, npc = 4944, skipIfMissing = true },
@@ -3443,6 +3448,10 @@ Noir.Route("alliance-dwarf", {
         { id = "o1204", at = { zone = 15, x = 59.62, y = 57.3, r = 40 }, text = "Forked Mudrock Tongue is southwest of Captain Garran Vimes.", targets = { enemy = { 4400, 4399, 4398, 4396, 4397 } },
           lines = {
             { kind = "objective", quest = 1204, index = 1, item = 5883, skipIfMissing = true },
+          } },
+        { id = "tPALADIN-40", at = { zone = 15, x = 67.4, y = 47.41, r = 10 }, when = { class = "PALADIN" }, minLevel = 40,
+          lines = {
+            { kind = "train", level = 40, class = "PALADIN", npc = 8140 },
           } },
         { id = "t1204", at = { zone = 15, x = 66.34, y = 45.47, r = 10 }, targets = { friend = { 4794 } },
           lines = {
@@ -3511,10 +3520,6 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "turnin", quest = 1177, npc = 4503, skipIfMissing = true },
           } },
-        { id = "tWARRIOR-42", at = { zone = 15, x = 67.88, y = 48.41, r = 10 }, when = { class = "WARRIOR" }, minLevel = 42,
-          lines = {
-            { kind = "train", level = 42, class = "WARRIOR", npc = 8141 },
-          } },
         { id = "t1287", at = { zone = 15, x = 68.21, y = 48.62, r = 10 }, targets = { friend = { 4944 } },
           lines = {
             { kind = "turnin", quest = 1287, npc = 4944, skipIfMissing = true },
@@ -3549,10 +3554,6 @@ Noir.Route("alliance-dwarf", {
             { kind = "turnin", quest = 669, at = { zone = 33, x = 27.17, y = 77.01, r = 10 }, npc = 2487, skipIfMissing = true },
             { kind = "accept", quest = 606, at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, npc = 2501 },
             { kind = "accept", quest = 2872, at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, npc = 2501 },
-          } },
-        { id = "tROGUE-42", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 42,
-          lines = {
-            { kind = "train", level = 42, class = "ROGUE", npc = 1411 },
           } },
         { id = "a595", at = { zone = 33, x = 28.1, y = 76.22, r = 10 }, minLevel = 37, maxLevel = 49, targets = { friend = { 2490 } },
           lines = {
@@ -3654,6 +3655,10 @@ Noir.Route("alliance-dwarf", {
         { id = "h#18", text = "Use your hearthstone to return to Stranglethorn Vale.",
           lines = {
             { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
+          } },
+        { id = "tROGUE-42", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 42,
+          lines = {
+            { kind = "train", level = 42, class = "ROGUE", npc = 1411 },
           } },
         { id = "t209.t600.t621.t608.t348.t609.a613", at = { zone = 33, x = 27, y = 77.13, r = 10 }, minLevel = 30, targets = { friend = { 737, 2498, 2487, 2486, 2501 } },
           lines = {
@@ -3772,10 +3777,6 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
           } },
-        { id = "tROGUE-44", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 44,
-          lines = {
-            { kind = "train", level = 44, class = "ROGUE", npc = 1411 },
-          } },
         { id = "x17#3", at = { zone = 33, x = 25.7, y = 73.1, r = 15 }, text = "Take the boat from Stranglethorn Vale to The Barrens.",
           lines = {
             { kind = "transport", to = { zone = 17, x = 63.8, y = 38.8 }, mode = "boat", at = { zone = 33, x = 25.7, y = 73.1, r = 15 } },
@@ -3810,9 +3811,11 @@ Noir.Route("alliance-dwarf", {
             { kind = "turnin", quest = 992, npc = 7724, skipIfMissing = true },
             { kind = "accept", quest = 82, npc = 7724, ifDone = 992, requires = { 992 } },
           } },
-        { id = "o1707", at = { zone = 440, x = 62.67, y = 29.34, r = 40 }, text = "Wastewander Water Pouch is east of Senior Surveyor Fizzledowser.", targets = { enemy = { 5616, 5618, 5615, 5617, 5623, 7805 } },
+        { id = "o1707.o1690", at = { zone = 440, x = 62.67, y = 29.34, r = 40 }, text = "Wastewander Water Pouch is east of Senior Surveyor Fizzledowser.", targets = { enemy = { 5616, 5618, 5615, 5617, 5623, 7805 } },
           lines = {
             { kind = "objective", quest = 1707, index = 1, item = 8483, skipIfMissing = true },
+            { kind = "objective", quest = 1690, index = 1, npc = 5618, skipIfMissing = true },
+            { kind = "objective", quest = 1690, index = 2, npc = 5616, skipIfMissing = true },
           } },
         { id = "t2872.a2873.a8366.a3520", at = { zone = 440, x = 67.11, y = 23.98, r = 10 }, minLevel = 40, items = { 10699 }, targets = { friend = { 7881, 7882, 8579 } },
           lines = {
@@ -3827,12 +3830,7 @@ Noir.Route("alliance-dwarf", {
             { kind = "accept", quest = 2875, object = 142122 },
             { kind = "accept", quest = 8365, npc = 15165 },
           } },
-        { id = "o1690", at = { zone = 440, x = 62.77, y = 29.18, r = 40 }, text = "The Wastewander Bandits are southwest of Haughty Modiste.", targets = { enemy = { 5616, 5618 } },
-          lines = {
-            { kind = "objective", quest = 1690, index = 1, npc = 5618, skipIfMissing = true },
-            { kind = "objective", quest = 1690, index = 2, npc = 5616, skipIfMissing = true },
-          } },
-        { id = "o2781", at = { zone = 440, x = 61.77, y = 38.17, r = 40 }, text = "Caliph Scorpidsting's Head is south of your last stop.", targets = { enemy = { 7847 } },
+        { id = "o2781", at = { zone = 440, x = 61.77, y = 38.17, r = 40 }, text = "Caliph Scorpidsting's Head is southwest of Haughty Modiste.", targets = { enemy = { 7847 } },
           lines = {
             { kind = "objective", quest = 2781, index = 1, item = 8723, skipIfMissing = true },
           } },
@@ -4100,63 +4098,51 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "transport", to = { zone = 11, x = 4.7, y = 63.7 }, mode = "boat", at = { zone = 15, x = 71.7, y = 56.6, r = 15 } },
           } },
-        { id = "tHUNTER-46:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "HUNTER" },
+        { id = "tHUNTER-45:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "HUNTER" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tHUNTER-46", at = { zone = 1537, x = 69.87, y = 82.9, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "HUNTER" }, minLevel = 46,
+        { id = "tHUNTER-45", at = { zone = 1537, x = 69.87, y = 82.9, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "HUNTER" }, minLevel = 45,
           lines = {
-            { kind = "train", level = 46, class = "HUNTER", npc = 5117 },
+            { kind = "train", level = 45, class = "HUNTER", npc = 5117 },
           } },
-        { id = "tHUNTER-46:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "HUNTER" },
+        { id = "tHUNTER-45:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "HUNTER" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
-        { id = "tPALADIN-46:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "PALADIN" },
+        { id = "tPRIEST-45:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "PRIEST" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tPALADIN-46", at = { zone = 1537, x = 24.55, y = 4.47, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "PALADIN" }, minLevel = 46,
+        { id = "tPRIEST-45", at = { zone = 1537, x = 25.21, y = 10.76, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "PRIEST" }, minLevel = 45,
           lines = {
-            { kind = "train", level = 46, class = "PALADIN", npc = 5148 },
+            { kind = "train", level = 45, class = "PRIEST", npc = 5143 },
           } },
-        { id = "tPALADIN-46:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "PALADIN" },
+        { id = "tPRIEST-45:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "PRIEST" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
-        { id = "tPRIEST-46:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "PRIEST" },
+        { id = "tSHAMAN-45:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "SHAMAN" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tPRIEST-46", at = { zone = 1537, x = 25.21, y = 10.76, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "PRIEST" }, minLevel = 46,
+        { id = "tSHAMAN-45", at = { zone = 1537, x = 47.1, y = 13.79, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "SHAMAN" }, minLevel = 45,
           lines = {
-            { kind = "train", level = 46, class = "PRIEST", npc = 5143 },
+            { kind = "train", level = 45, class = "SHAMAN", npc = 258098 },
           } },
-        { id = "tPRIEST-46:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "PRIEST" },
+        { id = "tSHAMAN-45:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "SHAMAN" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
-        { id = "tSHAMAN-46:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "SHAMAN" },
+        { id = "tWARRIOR-45:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "WARRIOR" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tSHAMAN-46", at = { zone = 1537, x = 47.1, y = 13.79, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "SHAMAN" }, minLevel = 46,
+        { id = "tWARRIOR-45", at = { zone = 1537, x = 65.9, y = 88.41, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "WARRIOR" }, minLevel = 45,
           lines = {
-            { kind = "train", level = 46, class = "SHAMAN", npc = 258098 },
+            { kind = "train", level = 45, class = "WARRIOR", npc = 5114 },
           } },
-        { id = "tSHAMAN-46:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "SHAMAN" },
-          lines = {
-            { kind = "fly", from = 6, to = 7 },
-          } },
-        { id = "tWARRIOR-46:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "fly", from = 7, to = 6 },
-          } },
-        { id = "tWARRIOR-46", at = { zone = 1537, x = 65.9, y = 88.41, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "WARRIOR" }, minLevel = 46,
-          lines = {
-            { kind = "train", level = 46, class = "WARRIOR", npc = 5114 },
-          } },
-        { id = "tWARRIOR-46:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "WARRIOR" },
+        { id = "tWARRIOR-45:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "WARRIOR" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
@@ -4208,19 +4194,29 @@ Noir.Route("alliance-dwarf", {
             { kind = "turnin", quest = 3441, npc = 8479 },
             { kind = "accept", quest = 3442, npc = 8479, requires = { 3441 } },
           } },
-        { id = "o7728", at = { zone = 51, x = 39.88, y = 50.1, r = 40 }, targets = { enemy = { 5840, 8566 } },
+        { id = "o7728.o3442.o7723", at = { zone = 51, x = 39.88, y = 50.1, r = 40 }, targets = { enemy = { 5840, 5854, 5852, 5855, 5850, 8566 } },
           lines = {
             { kind = "objective", quest = 7728, index = 1, item = 18959 },
             { kind = "objective", quest = 7728, index = 2, item = 18960 },
+            { kind = "objective", quest = 3442, index = 1, item = 10509, at = { zone = 51, x = 45.56, y = 55.14, r = 40 } },
+            { kind = "objective", quest = 3442, index = 2, item = 10511, at = { zone = 51, x = 45.56, y = 55.14, r = 40 } },
+            { kind = "objective", quest = 7723, index = 1, npc = 5854 },
+          } },
+        { id = "tROGUE-46:go1", at = { zone = 51, x = 37.94, y = 30.86, r = 10 }, text = "Fly from Thorium Point, Searing Gorge to Ironforge, Dun Morogh.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 74, to = 6 },
+          } },
+        { id = "tROGUE-46", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "ROGUE" }, minLevel = 46,
+          lines = {
+            { kind = "train", level = 46, class = "ROGUE", npc = 5167 },
+          } },
+        { id = "tROGUE-46:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Thorium Point, Searing Gorge.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 6, to = 74 },
           } },
         { id = "o7724", at = { zone = 51, x = 29.52, y = 59.19, r = 40 }, text = "The Greater Lava Spiders are southwest of your last stop.", targets = { enemy = { 5858 } },
           lines = {
             { kind = "objective", quest = 7724, index = 1, npc = 5858 },
-          } },
-        { id = "o3442", at = { zone = 51, x = 45.56, y = 55.14, r = 40 }, text = "Heart of Flame is east of your last stop.", targets = { enemy = { 5854, 5855, 5850, 5852, 5853 } },
-          lines = {
-            { kind = "objective", quest = 3442, index = 1, item = 10509 },
-            { kind = "objective", quest = 3442, index = 2, item = 10511 },
           } },
         { id = "t3442.a3443.o3443.t3443.a3452", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 40, targets = { enemy = { 5843, 5844, 5846, 8504, 5840, 8566 }, friend = { 8479 } },
           lines = {
@@ -4229,6 +4225,18 @@ Noir.Route("alliance-dwarf", {
             { kind = "objective", quest = 3443, index = 1, item = 10551 },
             { kind = "turnin", quest = 3443, npc = 8479 },
             { kind = "accept", quest = 3452, npc = 8479, requires = { 3443 } },
+          } },
+        { id = "tPALADIN-46:go1", at = { zone = 51, x = 37.94, y = 30.86, r = 10 }, text = "Fly from Thorium Point, Searing Gorge to Ironforge, Dun Morogh.", when = { class = "PALADIN" },
+          lines = {
+            { kind = "fly", from = 74, to = 6 },
+          } },
+        { id = "tPALADIN-46", at = { zone = 1537, x = 24.55, y = 4.47, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "PALADIN" }, minLevel = 46,
+          lines = {
+            { kind = "train", level = 46, class = "PALADIN", npc = 5148 },
+          } },
+        { id = "tPALADIN-46:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Thorium Point, Searing Gorge.", when = { class = "PALADIN" },
+          lines = {
+            { kind = "fly", from = 6, to = 74 },
           } },
         { id = "a3377", at = { zone = 51, x = 29.57, y = 26.29, r = 10 }, minLevel = 40, maxLevel = 58, targets = { friend = { 8436 } },
           lines = {
@@ -4262,11 +4270,7 @@ Noir.Route("alliance-dwarf", {
             { kind = "turnin", quest = 3462, npc = 8509 },
             { kind = "accept", quest = 3463, npc = 8509, requires = { 3462 } },
           } },
-        { id = "o7723", at = { zone = 51, x = 40.83, y = 49.21, r = 40 }, targets = { enemy = { 5854 } },
-          lines = {
-            { kind = "objective", quest = 7723, index = 1, npc = 5854 },
-          } },
-        { id = "o3463", at = { zone = 51, x = 35.67, y = 60.68, r = 40 }, text = "Sentry Brazier is southwest of your last stop.", items = { 10515 },
+        { id = "o3463", at = { zone = 51, x = 35.67, y = 60.68, r = 40 }, text = "Sentry Brazier is south of Kalaran Windblade.", items = { 10515 },
           lines = {
             { kind = "objective", quest = 3463, index = 1, object = 149025 },
             { kind = "objective", quest = 3463, index = 2, object = 149030 },
@@ -4414,10 +4418,6 @@ Noir.Route("alliance-dwarf", {
         { id = "x33#2", at = { zone = 17, x = 63.8, y = 38.8, r = 15 }, text = "Take the boat from The Barrens to Stranglethorn Vale.",
           lines = {
             { kind = "transport", to = { zone = 33, x = 25.7, y = 73.1 }, mode = "boat", at = { zone = 17, x = 63.8, y = 38.8, r = 15 } },
-          } },
-        { id = "tROGUE-48", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 48,
-          lines = {
-            { kind = "train", level = 48, class = "ROGUE", npc = 1411 },
           } },
         { id = "y19-12#2", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Darkshire, Duskwood.",
           lines = {
@@ -4770,51 +4770,63 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "transport", to = { zone = 11, x = 4.7, y = 63.7 }, mode = "boat", at = { zone = 15, x = 71.7, y = 56.6, r = 15 } },
           } },
-        { id = "tPALADIN-51:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "PALADIN" },
+        { id = "tPALADIN-50:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "PALADIN" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tPALADIN-51", at = { zone = 1537, x = 24.55, y = 4.47, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "PALADIN" }, minLevel = 51,
+        { id = "tPALADIN-50", at = { zone = 1537, x = 24.55, y = 4.47, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "PALADIN" }, minLevel = 50,
           lines = {
-            { kind = "train", level = 51, class = "PALADIN", npc = 5148 },
+            { kind = "train", level = 50, class = "PALADIN", npc = 5148 },
           } },
-        { id = "tPALADIN-51:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "PALADIN" },
+        { id = "tPALADIN-50:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "PALADIN" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
-        { id = "tPRIEST-51:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "PRIEST" },
+        { id = "tPRIEST-50:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "PRIEST" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tPRIEST-51", at = { zone = 1537, x = 25.21, y = 10.76, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "PRIEST" }, minLevel = 51,
+        { id = "tPRIEST-50", at = { zone = 1537, x = 25.21, y = 10.76, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "PRIEST" }, minLevel = 50,
           lines = {
-            { kind = "train", level = 51, class = "PRIEST", npc = 5143 },
+            { kind = "train", level = 50, class = "PRIEST", npc = 5143 },
           } },
-        { id = "tPRIEST-51:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "PRIEST" },
+        { id = "tPRIEST-50:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "PRIEST" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
-        { id = "tSHAMAN-51:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "SHAMAN" },
+        { id = "tROGUE-50:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "ROGUE" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tSHAMAN-51", at = { zone = 1537, x = 47.1, y = 13.79, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "SHAMAN" }, minLevel = 51,
+        { id = "tROGUE-50", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "ROGUE" }, minLevel = 50,
           lines = {
-            { kind = "train", level = 51, class = "SHAMAN", npc = 258098 },
+            { kind = "train", level = 50, class = "ROGUE", npc = 5167 },
           } },
-        { id = "tSHAMAN-51:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "SHAMAN" },
+        { id = "tROGUE-50:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "ROGUE" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
-        { id = "tWARRIOR-51:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "WARRIOR" },
+        { id = "tSHAMAN-50:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "SHAMAN" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tWARRIOR-51", at = { zone = 1537, x = 65.9, y = 88.41, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "WARRIOR" }, minLevel = 51,
+        { id = "tSHAMAN-50", at = { zone = 1537, x = 47.1, y = 13.79, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "SHAMAN" }, minLevel = 50,
           lines = {
-            { kind = "train", level = 51, class = "WARRIOR", npc = 5114 },
+            { kind = "train", level = 50, class = "SHAMAN", npc = 258098 },
           } },
-        { id = "tWARRIOR-51:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "WARRIOR" },
+        { id = "tSHAMAN-50:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "SHAMAN" },
+          lines = {
+            { kind = "fly", from = 6, to = 7 },
+          } },
+        { id = "tWARRIOR-50:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "WARRIOR" },
+          lines = {
+            { kind = "fly", from = 7, to = 6 },
+          } },
+        { id = "tWARRIOR-50", at = { zone = 1537, x = 65.9, y = 88.41, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "WARRIOR" }, minLevel = 50,
+          lines = {
+            { kind = "train", level = 50, class = "WARRIOR", npc = 5114 },
+          } },
+        { id = "tWARRIOR-50:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "WARRIOR" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
@@ -4971,9 +4983,9 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "accept", quest = 4101, npc = 9528 },
           } },
-        { id = "tHUNTER-52", at = { zone = 361, x = 61.89, y = 23.58, r = 10 }, when = { class = "HUNTER" }, minLevel = 52,
+        { id = "tHUNTER-50", at = { zone = 361, x = 61.89, y = 23.58, r = 10 }, when = { class = "HUNTER" }, minLevel = 50,
           lines = {
-            { kind = "train", level = 52, class = "HUNTER", npc = 5501 },
+            { kind = "train", level = 50, class = "HUNTER", npc = 5501 },
           } },
         { id = "o4101", at = { zone = 361, x = 58.32, y = 20.01, r = 40 }, text = "Blood Amber is north of Arathandris Silversky.", targets = { enemy = { 7100, 7101, 7104 } },
           lines = {
@@ -5009,18 +5021,6 @@ Noir.Route("alliance-dwarf", {
         { id = "x11#10", at = { zone = 15, x = 71.7, y = 56.6, r = 15 }, text = "Take the boat from Dustwallow Marsh to Wetlands.",
           lines = {
             { kind = "transport", to = { zone = 11, x = 4.7, y = 63.7 }, mode = "boat", at = { zone = 15, x = 71.7, y = 56.6, r = 15 } },
-          } },
-        { id = "tROGUE-52:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "fly", from = 7, to = 6 },
-          } },
-        { id = "tROGUE-52", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "ROGUE" }, minLevel = 52,
-          lines = {
-            { kind = "train", level = 52, class = "ROGUE", npc = 5167 },
-          } },
-        { id = "tROGUE-52:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "fly", from = 6, to = 7 },
           } },
         { id = "y7-14#2", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Southshore, Hillsbrad.",
           lines = {
@@ -5660,9 +5660,9 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "goto", at = { zone = 361, x = 62.49, y = 24.24, r = 20 } },
           } },
-        { id = "tHUNTER-56", at = { zone = 361, x = 61.89, y = 23.58, r = 10 }, when = { class = "HUNTER" }, minLevel = 56,
+        { id = "tHUNTER-54", at = { zone = 361, x = 61.89, y = 23.58, r = 10 }, when = { class = "HUNTER" }, minLevel = 54,
           lines = {
-            { kind = "train", level = 56, class = "HUNTER", npc = 5501 },
+            { kind = "train", level = 54, class = "HUNTER", npc = 5501 },
           } },
         { id = "y65-52", at = { zone = 361, x = 62.49, y = 24.24, r = 10 }, text = "Fly from Talonbranch Glade, Felwood to Everlook, Winterspring.",
           lines = {
@@ -5895,51 +5895,51 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "fly", from = 73, to = 32 },
           } },
-        { id = "tPALADIN-57", at = { zone = 15, x = 67.4, y = 47.41, r = 10 }, when = { class = "PALADIN" }, minLevel = 57,
+        { id = "tPALADIN-56", at = { zone = 15, x = 67.4, y = 47.41, r = 10 }, when = { class = "PALADIN" }, minLevel = 56,
           lines = {
-            { kind = "train", level = 57, class = "PALADIN", npc = 8140 },
+            { kind = "train", level = 56, class = "PALADIN", npc = 8140 },
           } },
-        { id = "tWARRIOR-57", at = { zone = 15, x = 67.88, y = 48.41, r = 10 }, when = { class = "WARRIOR" }, minLevel = 57,
+        { id = "tWARRIOR-56", at = { zone = 15, x = 67.88, y = 48.41, r = 10 }, when = { class = "WARRIOR" }, minLevel = 56,
           lines = {
-            { kind = "train", level = 57, class = "WARRIOR", npc = 8141 },
+            { kind = "train", level = 56, class = "WARRIOR", npc = 8141 },
           } },
         { id = "x11#12", at = { zone = 15, x = 71.7, y = 56.6, r = 15 }, text = "Take the boat from Dustwallow Marsh to Wetlands.",
           lines = {
             { kind = "transport", to = { zone = 11, x = 4.7, y = 63.7 }, mode = "boat", at = { zone = 15, x = 71.7, y = 56.6, r = 15 } },
           } },
-        { id = "tPRIEST-57:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "PRIEST" },
+        { id = "tPRIEST-56:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "PRIEST" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tPRIEST-57", at = { zone = 1537, x = 25.21, y = 10.76, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "PRIEST" }, minLevel = 57,
+        { id = "tPRIEST-56", at = { zone = 1537, x = 25.21, y = 10.76, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "PRIEST" }, minLevel = 56,
           lines = {
-            { kind = "train", level = 57, class = "PRIEST", npc = 5143 },
+            { kind = "train", level = 56, class = "PRIEST", npc = 5143 },
           } },
-        { id = "tPRIEST-57:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "PRIEST" },
+        { id = "tPRIEST-56:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "PRIEST" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
-        { id = "tROGUE-57:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "ROGUE" },
+        { id = "tROGUE-56:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "ROGUE" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tROGUE-57", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "ROGUE" }, minLevel = 57,
+        { id = "tROGUE-56", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "ROGUE" }, minLevel = 56,
           lines = {
-            { kind = "train", level = 57, class = "ROGUE", npc = 5167 },
+            { kind = "train", level = 56, class = "ROGUE", npc = 5167 },
           } },
-        { id = "tROGUE-57:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "ROGUE" },
+        { id = "tROGUE-56:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "ROGUE" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
-        { id = "tSHAMAN-57:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "SHAMAN" },
+        { id = "tSHAMAN-56:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "SHAMAN" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tSHAMAN-57", at = { zone = 1537, x = 47.1, y = 13.79, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "SHAMAN" }, minLevel = 57,
+        { id = "tSHAMAN-56", at = { zone = 1537, x = 47.1, y = 13.79, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "SHAMAN" }, minLevel = 56,
           lines = {
-            { kind = "train", level = 57, class = "SHAMAN", npc = 258098 },
+            { kind = "train", level = 56, class = "SHAMAN", npc = 258098 },
           } },
-        { id = "tSHAMAN-57:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "SHAMAN" },
+        { id = "tSHAMAN-56:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "SHAMAN" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
@@ -5984,6 +5984,10 @@ Noir.Route("alliance-dwarf", {
         { id = "a8254", at = { zone = 1519, x = 49.5, y = 45.21, r = 10 }, when = { class = "PRIEST" }, minLevel = 50, maxLevel = 60, targets = { friend = { 5489 } },
           lines = {
             { kind = "accept", quest = 8254, npc = 5489 },
+          } },
+        { id = "tHUNTER-56", at = { zone = 1519, x = 67.35, y = 36.25, r = 10 }, when = { class = "HUNTER" }, minLevel = 56,
+          lines = {
+            { kind = "train", level = 56, class = "HUNTER", npc = 5515 },
           } },
         { id = "t5022.a5048", at = { zone = 1519, x = 57.17, y = 48.07, r = 10 }, minLevel = 50, items = { 12724 }, targets = { friend = { 10782 } },
           lines = {
@@ -6225,10 +6229,6 @@ Noir.Route("alliance-dwarf", {
         { id = "a8910", at = { zone = 1537, x = 43.53, y = 52.64, r = 10 }, when = { class = "ROGUE" }, minLevel = 58, maxLevel = 60, targets = { friend = { 16013 } },
           lines = {
             { kind = "accept", quest = 8910, npc = 16013 },
-          } },
-        { id = "tHUNTER-58", at = { zone = 1537, x = 69.87, y = 82.9, r = 10 }, when = { class = "HUNTER" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "HUNTER", npc = 5117 },
           } },
         { id = "a3702", at = { zone = 1537, x = 38.37, y = 55.31, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 8879 } },
           lines = {
@@ -6563,6 +6563,10 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "transport", to = { zone = 33, x = 25.7, y = 73.1 }, mode = "boat", at = { zone = 17, x = 63.8, y = 38.8, r = 15 } },
           } },
+        { id = "tROGUE-58", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 58,
+          lines = {
+            { kind = "train", level = 58, class = "ROGUE", npc = 1411 },
+          } },
         { id = "t8857", at = { zone = 33, x = 28.36, y = 76.35, r = 10 }, items = { 21534 }, targets = { friend = { 7406 } },
           lines = {
             { kind = "turnin", quest = 8857, npc = 7406, skipIfMissing = true },
@@ -6586,6 +6590,14 @@ Noir.Route("alliance-dwarf", {
         { id = "t7791", at = { zone = 1519, x = 53.93, y = 81.69, r = 10 }, targets = { friend = { 14722 } },
           lines = {
             { kind = "turnin", quest = 7791, npc = 14722, skipIfMissing = true },
+          } },
+        { id = "tHUNTER-58", at = { zone = 1519, x = 68, y = 35.99, r = 10 }, when = { class = "HUNTER" }, minLevel = 58,
+          lines = {
+            { kind = "train", level = 58, class = "HUNTER", npc = 5517 },
+          } },
+        { id = "tWARRIOR-58", at = { zone = 1519, x = 80.41, y = 59.8, r = 10 }, when = { class = "WARRIOR" }, minLevel = 58,
+          lines = {
+            { kind = "train", level = 58, class = "WARRIOR", npc = 5480 },
           } },
         { id = "t6187", at = { zone = 1519, x = 80.21, y = 38.35, r = 10 }, targets = { friend = { 1748 } },
           lines = {
@@ -6674,6 +6686,10 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "hearth", to = { zone = 47, x = 14.15, y = 41.57 } },
           } },
+        { id = "tSHAMAN-58", at = { zone = 47, x = 14.4, y = 42.6, r = 10 }, when = { class = "SHAMAN" }, minLevel = 58,
+          lines = {
+            { kind = "train", level = 58, class = "SHAMAN", npc = 270263 },
+          } },
         { id = "t2877", at = { zone = 47, x = 14.83, y = 44.57, r = 10 }, targets = { friend = { 7884 } },
           lines = {
             { kind = "turnin", quest = 2877, npc = 7884, skipIfMissing = true },
@@ -6702,17 +6718,9 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "goto", at = { zone = 1657, x = 64.02, y = 23, r = 20 } },
           } },
-        { id = "tROGUE-60", at = { zone = 1657, x = 37.92, y = 20.92, r = 10 }, when = { class = "ROGUE" }, minLevel = 60,
-          lines = {
-            { kind = "train", level = 60, class = "ROGUE", npc = 4215 },
-          } },
         { id = "t7799", at = { zone = 1657, x = 64.02, y = 23, r = 10 }, targets = { friend = { 14725 } },
           lines = {
             { kind = "turnin", quest = 7799, npc = 14725, skipIfMissing = true },
-          } },
-        { id = "tWARRIOR-60", at = { zone = 1657, x = 58.71, y = 34.9, r = 10 }, when = { class = "WARRIOR" }, minLevel = 60,
-          lines = {
-            { kind = "train", level = 60, class = "WARRIOR", npc = 4087 },
           } },
         { id = "l60@1657", at = { zone = 1657, x = 64.02, y = 23 }, text = "Kill creatures around Darnassus until you reach level 60.",
           lines = {
