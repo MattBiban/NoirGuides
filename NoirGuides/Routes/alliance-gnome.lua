@@ -2636,6 +2636,10 @@ Noir.Route("alliance-gnome", {
           lines = {
             { kind = "skill", skill = 164, value = 200 },
           } },
+        { id = "p186-4-skill-lead", when = { profession = 186 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 186, value = 200 },
+          } },
         { id = "g33@33", at = { zone = 33, x = 37.74, y = 3.3, r = 20 }, text = "Head south into Stranglethorn Vale.",
           lines = {
             { kind = "goto", at = { zone = 33, x = 37.74, y = 3.3, r = 20 } },
@@ -2938,7 +2942,7 @@ Noir.Route("alliance-gnome", {
             { kind = "objective", quest = 207, index = 3, item = 2007, skipIfMissing = true },
             { kind = "objective", quest = 207, index = 4, item = 2008, skipIfMissing = true },
           } },
-        { id = "t192", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, targets = { friend = { 718 } },
+        { id = "t192", label = "leadend", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, targets = { friend = { 718 } },
           lines = {
             { kind = "turnin", quest = 192, npc = 718, skipIfMissing = true },
           } },

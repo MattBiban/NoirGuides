@@ -3047,6 +3047,10 @@ Noir.Route("alliance-nightelf", {
       id = "nightelf-35-37-desolace", name = "35-37 Desolace", names = { DRUID = "36-37 Desolace", HUNTER = "36-37 Desolace", ROGUE = "36-37 Desolace", WARRIOR = "36-37 Desolace" }, group = "Alliance", subgroup = "30-40", minLevel = 35, maxLevel = 40, zone = 405,
       next = { { section = "nightelf-37-39-arathi-highlands" } },
       steps = {
+        { id = "p186-4-skill-lead", when = { profession = 186 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 186, value = 200 },
+          } },
         { id = "h#17", text = "Use your hearthstone to return to Desolace.",
           lines = {
             { kind = "hearth", to = { zone = 405, x = 66.27, y = 6.55 } },
@@ -3195,7 +3199,7 @@ Noir.Route("alliance-nightelf", {
             { kind = "turnin", quest = 5561, npc = 11596 },
             { kind = "turnin", quest = 5943, npc = 11596, skipIfMissing = true },
           } },
-        { id = "o6134", at = { zone = 405, x = 64.18, y = 91.63, r = 40 }, text = "Ghost-o-plasm is south of Smeed Scrabblescrew.", items = { 15848 }, targets = { enemy = { 11560 } },
+        { id = "o6134", label = "leadend", at = { zone = 405, x = 64.18, y = 91.63, r = 40 }, text = "Ghost-o-plasm is south of Smeed Scrabblescrew.", items = { 15848 }, targets = { enemy = { 11560 } },
           lines = {
             { kind = "objective", quest = 6134, index = 1, item = 15849, skipIfMissing = true },
           } },

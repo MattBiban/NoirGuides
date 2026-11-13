@@ -61,7 +61,9 @@ test("a trainer step is written late in the first section at or after the rank's
     "p164-2", "p164-3", sections[1].steps[5].id]);
   assert.deepStrictEqual(out[1].steps[7], { id: "p164-2", label: "train164_2", when: { profession: 164 }, at: P(200, 78, 52, 10),
     lines: [{ kind: "train", skill: 164, rank: 2, npc: 700 }] });
-  assert.strictEqual(out[0].steps.length, 6);
+  // 5 shared steps of lead: Journeyman's reminder reaches back into Westland (Expert's not: Journeyman is trained
+  // in Eastland, so the skill cannot reach Expert's gate in Westland)
+  assert.deepStrictEqual(out[0].steps.map((s) => s.id), ["p164-2-skill-lead", ...sections[0].steps.map((s) => s.id)]);
   assert.deepStrictEqual(notes.map((n) => [n.skill, n.rank]), [[164, 4]], "Artisan's level is never reached");
   assert.strictEqual(checkRoute3({ format: 3, race: "Human", faction: "Alliance", sections: out }), null);
 });
@@ -144,7 +146,8 @@ test("a trainer zone visited only at the start of a section moves the trainer st
   const out = addProfessionSteps(w.db, sections, "Alliance", { professions: SMITH, levelOf: levelsOf(sections, levels), notes: [] });
   assert.deepStrictEqual(trainIndex(out, "p164-2"), [1, 1 + 5], "before the last step of section 1 (after its reminder)");
   assert.deepStrictEqual(trainIndex(out, "p164-2-skill"), [1, 0]);
-  assert.strictEqual(out[0].steps.length, 6, "nothing in section 0");
+  assert.deepStrictEqual(out[0].steps.map((s) => s.id), ["p164-2-skill-lead", ...sections[0].steps.map((s) => s.id)],
+    "only the reminder's leg in section 0 (5 steps of lead in section 1)");
   assert.strictEqual(checkRoute3({ format: 3, race: "Human", faction: "Alliance", sections: out }), null);
 });
 
@@ -173,20 +176,93 @@ test("a trainer step is never the last step of its section, so its reminder neve
   }
 });
 
-test("in the shipped routes the profession characters' reminders cover most of their section, and no trainer step ends one", () => {
+test("a trainer step with a short lead also gets a reminder leg in the section before, ending one shared step before its end", () => {
+  const { w } = world();
+  // the smith's zone (200) is only the first step of section 1: no lead there
+  const sections = zoned([Array(12).fill(100), [200, ...Array(11).fill(100)]]);
+  const out = addProfessionSteps(w.db, sections, "Alliance", { professions: SMITH, levelOf: levelsOf(sections, Array(24).fill(12)), notes: [] });
+  assert.deepStrictEqual(trainIndex(out, "p164-2"), [1, 1]);
+  assert.deepStrictEqual(out[0].steps[0], { id: "p164-2-skill-lead", when: { profession: 164 }, reminder: { ends: "leadend" },
+    lines: [{ kind: "skill", skill: 164, value: 50 }] });
+  // the second-to-last step every character has gets the label: the last one is after it, so the leg (with work left)
+  // never holds the place at the end of section 0 (spec 2.4)
+  assert.deepStrictEqual(out[0].steps.map((s) => s.label).filter(Boolean), ["leadend"]);
+  assert.strictEqual(out[0].steps[11].label, "leadend");
+  assert.strictEqual(out[0].steps[11].id, sections[0].steps[10].id);
+  assert.strictEqual(out[0].steps[12].id, sections[0].steps[11].id);
+  assert.strictEqual(sections[0].steps[10].label, undefined, "the input is not changed");
+  // the reminder in the train step's own section is still there
+  assert.deepStrictEqual(trainIndex(out, "p164-2-skill"), [1, 0]);
+  assert.strictEqual(checkRoute3({ format: 3, race: "Human", faction: "Alliance", sections: out }), null);
+  // a label the step already has is the one the leg ends at
+  sections[0].steps[10].label = "turnin7";
+  const again = addProfessionSteps(w.db, sections, "Alliance", { professions: SMITH, levelOf: levelsOf(sections, Array(24).fill(12)), notes: [] });
+  assert.deepStrictEqual(again[0].steps[0].reminder, { ends: "turnin7" });
+  assert.deepStrictEqual(again[0].steps.map((s) => s.label).filter(Boolean), ["turnin7"]);
+  assert.strictEqual(checkRoute3({ format: 3, race: "Human", faction: "Alliance", sections: again }), null);
+});
+
+test("no leg with ten shared steps of lead, and none before the first section", () => {
+  const { w } = world();
+  const sections = zoned([Array(12).fill(100), [...Array(10).fill(100), 200, 100]]);
+  const out = addProfessionSteps(w.db, sections, "Alliance", { professions: SMITH, levelOf: levelsOf(sections, Array(24).fill(12)), notes: [] });
+  assert.deepStrictEqual(trainIndex(out, "p164-2"), [1, 1 + 10]);
+  assert.strictEqual(out[0].steps.length, 12);
+  const first = zoned([[200, 100, 100, 100]]);
+  const alone = addProfessionSteps(w.db, first, "Alliance", { professions: SMITH, levelOf: levelsOf(first, Array(4).fill(12)), notes: [] });
+  assert.deepStrictEqual(alone[0].steps.map((s) => s.id).filter((id) => id.startsWith("p")), ["p164-2-skill", "p164-2"]);
+});
+
+test("a leg starts right after the previous rank's trainer step when that is in the section before", () => {
+  const { w } = world();
+  // Journeyman in section 0 (before its sixth step), Expert at the first step of section 1
+  const sections = zoned([[...Array(6).fill(200), ...Array(6).fill(100)], [200, ...Array(11).fill(100)]]);
+  const levels = [...Array(12).fill(10), ...Array(12).fill(20)];
+  const out = addProfessionSteps(w.db, sections, "Alliance", { professions: SMITH, levelOf: levelsOf(sections, levels), notes: [] });
+  const ids = out[0].steps.map((s) => s.id);
+  assert.strictEqual(ids.indexOf("p164-3-skill-lead"), ids.indexOf("p164-2") + 1, "right after the Journeyman trainer step");
+  assert.ok(ids.indexOf("p164-2") > 0);
+  assert.ok(!ids.includes("p164-2-skill-lead"), "nothing before the first section");
+  assert.deepStrictEqual(out[0].steps[ids.indexOf("p164-3-skill-lead")].lines, [{ kind: "skill", skill: 164, value: 125 }]);
+  assert.strictEqual(checkRoute3({ format: 3, race: "Human", faction: "Alliance", sections: out }), null);
+});
+
+test("in the shipped routes the profession characters' reminders cover most of their section or reach back a section, and neither a trainer step nor a leg ends one", () => {
   const fs = require("fs");
   const path = require("path");
   const { parseRoute } = require("../sim_all");
   const routes = path.join(__dirname, "..", "..", "NoirGuides", "Routes");
   const shared = (s) => !s.when && !s.reminder;
-  const lead = {};
+  const lead = {}, combined = {};
+  let legs = 0;
   for (const file of fs.readdirSync(routes).filter((f) => f.endsWith(".lua"))) {
     const route = parseRoute(fs.readFileSync(path.join(routes, file), "utf8"));
     for (const section of route.sections) {
+      const sharedSteps = section.steps.filter(shared);
       section.steps.forEach((step, i) => {
+        if (/^p\d+-\d-skill-lead$/.test(step.id)) {
+          // a leg ends at a later shared step that is not the section's last one: with work left it never holds the
+          // place at the end of the section (spec 2.4); its line and condition are its trainer step's reminder's
+          legs++;
+          const end = section.steps.findIndex((s) => s.label === step.reminder.ends);
+          assert.ok(end > i && shared(section.steps[end]), `${route.race} ${step.id} ends at a later shared step`);
+          assert.ok(section.steps.slice(end + 1).some(shared), `${route.race} ${step.id} does not end at the section's last shared step`);
+          const next = route.sections.find((s) => (section.next || []).some((n) => n.section === s.id));
+          const main = next && next.steps.find((s) => s.id === step.id.replace(/-lead$/, ""));
+          assert.ok(main, `${route.race} ${step.id}: its trainer step's reminder is in the next section`);
+          assert.deepStrictEqual([step.lines, step.when], [main.lines, main.when]);
+          return;
+        }
         if (!/^p\d+-\d$/.test(step.id)) return;
         assert.ok(section.steps.slice(i + 1).some(shared), `${route.race} ${step.id} has a shared step after it`);
-        lead[`${route.race} ${step.id}`] = section.steps.slice(0, i).filter(shared).length / section.steps.filter(shared).length;
+        const own = section.steps.slice(0, i).filter(shared).length;
+        lead[`${route.race} ${step.id}`] = own / sharedSteps.length;
+        // shared steps the reminder is on screen for: from its own section's start, and from its leg in the section
+        // before (if any) to the leg's end
+        const before = route.sections.find((s) => (s.next || []).some((n) => n.section === section.id));
+        const k = before ? before.steps.findIndex((s) => s.id === `${step.id}-skill-lead`) : -1;
+        const end = k >= 0 ? before.steps.findIndex((s) => s.label === before.steps[k].reminder.ends) : -1;
+        combined[`${route.race} ${step.id}`] = own + (k >= 0 ? before.steps.slice(k + 1, end + 1).filter(shared).length : 0);
       });
     }
   }
@@ -196,8 +272,11 @@ test("in the shipped routes the profession characters' reminders cover most of t
     assert.ok(lead[key] >= 0.5, `${key}: ${lead[key]}`);
   }
   for (const key of ["Human p186-4", "Undead p197-4"]) assert.ok(lead[key] !== undefined, key);
-  // Artisan (rank 4) trainers sit in cities the routes pass at a section start (levels 36-40), so their reminder
-  // starts late; no more of those than now (24 of 194 after the 0.4 route order), until reminders reach back a section.
-  const short = Object.values(lead).filter((v, i, all) => v * 1 < 0.05).length;
-  assert.ok(short <= 24, `trainer steps with almost no reminder lead: ${short}`);
+  // Artisan (rank 4) trainers sit in cities the routes pass at a section start (levels 36-40): 24 of 194 trainer
+  // steps had almost no reminder lead in their own section after the 0.4 route order; a leg in the section before
+  // gives every trainer step at least ten shared steps of reminder (both legs counted)
+  const short = Object.values(lead).filter((v) => v < 0.05).length;
+  assert.ok(short <= 24, `trainer steps with almost no reminder lead in their section: ${short}`);
+  assert.deepStrictEqual(Object.entries(combined).filter(([, n]) => n < 10).map(([k, n]) => `${k}: ${n}`), []);
+  assert.ok(legs >= 24, `reminder legs: ${legs}`);
 });

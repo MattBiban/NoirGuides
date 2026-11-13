@@ -737,6 +737,18 @@ Noir.Route("horde-orc", {
       id = "orc-12-20-the-barrens", name = "12-20 The Barrens", names = { HUNTER = "13-20 The Barrens", WARLOCK = "13-20 The Barrens" }, group = "Horde", subgroup = "1-20", minLevel = 12, maxLevel = 23, zone = 17,
       next = { { section = "orc-20-20-the-barrens" } },
       steps = {
+        { id = "p164-3-skill-lead", when = { profession = 164 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 164, value = 125 },
+          } },
+        { id = "p165-3-skill-lead", when = { profession = 165 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 165, value = 125 },
+          } },
+        { id = "p197-3-skill-lead", when = { profession = 197 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 197, value = 125 },
+          } },
         { id = "t1498.a1502", at = { zone = 17, x = 61.38, y = 21.12, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, targets = { friend = { 5810 } },
           lines = {
             { kind = "turnin", quest = 1498, npc = 5810, skipIfMissing = true },
@@ -1342,7 +1354,7 @@ Noir.Route("horde-orc", {
           lines = {
             { kind = "objective", quest = 901, index = 1, item = 5089 },
           } },
-        { id = "t901.a902", at = { zone = 17, x = 52.4, y = 11.65, r = 10 }, minLevel = 10, items = { 5054 },
+        { id = "t901.a902", label = "leadend", at = { zone = 17, x = 52.4, y = 11.65, r = 10 }, minLevel = 10, items = { 5054 },
           lines = {
             { kind = "turnin", quest = 901, object = 4141 },
             { kind = "accept", quest = 902, object = 4141, requires = { 901 } },
@@ -3209,6 +3221,14 @@ Noir.Route("horde-orc", {
           lines = {
             { kind = "skill", skill = 393, value = 200 },
           } },
+        { id = "p171-4-skill-lead", when = { profession = 171 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 171, value = 200 },
+          } },
+        { id = "p197-4-skill-lead", when = { profession = 197 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 197, value = 200 },
+          } },
         { id = "g85@85#5", at = { zone = 85, x = 60.6, y = 58.9, r = 20 }, text = "Head into Tirisfal Glades.", when = { class = "WARRIOR" },
           lines = {
             { kind = "goto", at = { zone = 85, x = 60.6, y = 58.9, r = 20 } },
@@ -3438,7 +3458,7 @@ Noir.Route("horde-orc", {
           lines = {
             { kind = "fly", from = 38, to = 23 },
           } },
-        { id = "g14@14#8", at = { zone = 14, x = 51, y = 13.9, r = 20 }, text = "Head east into Durotar.",
+        { id = "g14@14#8", label = "leadend", at = { zone = 14, x = 51, y = 13.9, r = 20 }, text = "Head east into Durotar.",
           lines = {
             { kind = "goto", at = { zone = 14, x = 51, y = 13.9, r = 20 } },
           } },
@@ -3467,6 +3487,22 @@ Noir.Route("horde-orc", {
         { id = "p197-4-skill", when = { profession = 197 }, reminder = { ends = "train197_4" },
           lines = {
             { kind = "skill", skill = 197, value = 200 },
+          } },
+        { id = "p164-4-skill-lead", when = { profession = 164 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 164, value = 200 },
+          } },
+        { id = "p182-4-skill-lead", when = { profession = 182 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 182, value = 200 },
+          } },
+        { id = "p186-4-skill-lead", when = { profession = 186 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 186, value = 200 },
+          } },
+        { id = "p202-4-skill-lead", when = { profession = 202 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 202, value = 200 },
           } },
         { id = "g1497@1497#2", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 }, text = "Head into Undercity.",
           lines = {
@@ -3695,7 +3731,7 @@ Noir.Route("horde-orc", {
             { kind = "turnin", quest = 688, at = { zone = 45, x = 74.54, y = 35.64, r = 10 }, npc = 2787, skipIfMissing = true },
             { kind = "accept", quest = 687, at = { zone = 45, x = 74.54, y = 35.64, r = 10 }, npc = 2787, ifDone = 688, requires = { 688 } },
           } },
-        { id = "t645.a646", at = { zone = 45, x = 28.86, y = 59.62, r = 10 }, minLevel = 32, items = { 4467, 4468 },
+        { id = "t645.a646", label = "leadend", at = { zone = 45, x = 28.86, y = 59.62, r = 10 }, minLevel = 32, items = { 4467, 4468 },
           lines = {
             { kind = "turnin", quest = 645, object = 2703 },
             { kind = "accept", quest = 646, object = 2703, requires = { 645 } },

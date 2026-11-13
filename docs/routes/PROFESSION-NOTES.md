@@ -8,7 +8,9 @@ where the level is reached and the two after it: at the last such step of the fi
 in the second half of the section, else where the most of its section comes before it. The ranks listed below got
 no step; the profession plan in chat still covers them. Each rank that has a step also gets a reminder to raise the
 skill to the rank's gate, from the start of the trainer step's section to the trainer step (the trainer step is
-passed while the skill is below the gate, so it stands late in its section). Not verified in game
+passed while the skill is below the gate, so it stands late in its section). When fewer than ten steps of its
+section come before the trainer step, the reminder also opens in the section before (at its start, or after the
+previous rank's trainer step there) and stays to that section's second-to-last step. Not verified in game
 (`verified = false`):
 
 - the levels 10, 20 and 35: Forever gates the ranks by skill (50, 125, 200); the levels only place the steps;

@@ -2503,6 +2503,10 @@ Noir.Route("alliance-dwarf", {
           lines = {
             { kind = "skill", skill = 164, value = 200 },
           } },
+        { id = "p186-4-skill-lead", when = { profession = 186 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 186, value = 200 },
+          } },
         { id = "y14-12", at = { zone = 267, x = 49.34, y = 52.27, r = 10 }, text = "Fly from Southshore, Hillsbrad to Darkshire, Duskwood.",
           lines = {
             { kind = "fly", from = 14, to = 12 },
@@ -2774,7 +2778,7 @@ Noir.Route("alliance-dwarf", {
             { kind = "objective", quest = 207, index = 3, item = 2007, skipIfMissing = true },
             { kind = "objective", quest = 207, index = 4, item = 2008, skipIfMissing = true },
           } },
-        { id = "t192", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, targets = { friend = { 718 } },
+        { id = "t192", label = "leadend", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, targets = { friend = { 718 } },
           lines = {
             { kind = "turnin", quest = 192, npc = 718, skipIfMissing = true },
           } },

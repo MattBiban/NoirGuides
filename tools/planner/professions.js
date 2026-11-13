@@ -30,6 +30,15 @@
 // shared steps of its section before it, the earliest on ties. Its trainer is the nearest of that zone's to that
 // step. A rank with no candidate, or whose level the route never reaches, gets no step and a note
 // (docs/routes/PROFESSION-NOTES.md).
+// When the train step has fewer than LEAD_STEPS (10) shared steps of its section before it, the reminder also gets a
+// leg in the section played just before (the one whose next names it; with none, the one before it in the list):
+//   { id = "p<skill>-<rank>-skill-lead", when = { profession = <skill> }, reminder = { ends = <label> },
+//     lines = { the same skill line } }
+// at that section's start, or right after the previous rank's train step when that is in it (none when the previous
+// rank's step is in the train step's own section or later: the skill cannot reach the gate before it). It ends at the
+// second-to-last shared step of that section, which keeps its label or gets LEAD_END ("leadend"): never at the last,
+// since an open reminder with work left holds the place at the end of its section (spec 2.4). Both legs check the same
+// skill, so the one in the train step's section is finished as soon as it opens once the skill is reached.
 // Who trains a rank (QuestieDB sub names; not verified in game, see PROFESSION-NOTES.md): "<Profession> Trainer" or
 // "<Crafter> Trainer" ("Blacksmithing Trainer", "Tailor Trainer") teaches every rank; "<Title> <Crafter>" teaches up
 // to its title's rank: Journeyman 2, Expert 3, Artisan and Master 4 ("Expert Blacksmith" teaches 2 and 3).
@@ -45,6 +54,8 @@ const RANKS = Object.freeze([
 ]);
 const SEARCH_SECTIONS = 3;
 const LEAD_SHARE = 0.5;
+// a trainer step with fewer shared steps of its section before it than LEAD_STEPS also gets a reminder leg in the section before (LEAD_END: the label that leg ends at, when its step has none)
+const LEAD_STEPS = 10, LEAD_END = "leadend";
 const NPC_RADIUS = 10; // planner/bundle.js RADIUS.npc
 const CRAFTER = { Alchemy: "Alchemist", Blacksmithing: "Blacksmith", Enchanting: "Enchanter", Engineering: "Engineer", Herbalism: "Herbalist",
   Leatherworking: "Leatherworker", Mining: "Miner", Skinning: "Skinner", Tailoring: "Tailor" };
@@ -107,6 +118,15 @@ function addProfessionSteps(db, sections, faction, options = {}) {
   };
   const inserts = new Map();
   const reminders = new Map(); // section index -> reminder steps for its start
+  const placed = new Map(); // trainer step id -> { si, step: the shared step it stands before }
+  const legs = []; // { si, after: trainer step id or null, step }: reminder legs in the section before
+  const endLabel = new Map(); // shared step -> the label a leg ends at
+  // the section played just before section si: the one whose next names it, else the one before it in the list
+  const previousSection = (si) => {
+    const id = sections[si].id;
+    const k = sections.findIndex((x) => (x.next || []).some((n) => n.section === id));
+    return k >= 0 ? k : si - 1;
+  };
   for (const profession of professions) {
     for (const r of RANKS) {
       const label = `${profession.name} ${r.name} (rank ${r.rank}, level ${r.level})`;
@@ -138,13 +158,38 @@ function addProfessionSteps(db, sections, faction, options = {}) {
       if (!inserts.has(found.step)) inserts.set(found.step, []);
       inserts.get(found.step).push({ id, label: ends, when: { profession: profession.skill },
         at: { zone: point.zone, x: round2(point.x), y: round2(point.y), r: NPC_RADIUS }, lines: [{ kind: "train", skill: profession.skill, rank: r.rank, npc }] });
-      const si = sections.findIndex((s) => s.steps.includes(found.step));
+      const si = found.si;
+      placed.set(id, { si, step: found.step });
       if (!reminders.has(si)) reminders.set(si, []);
-      reminders.get(si).push({ id: `${id}-skill`, when: { profession: profession.skill }, reminder: { ends },
-        lines: [{ kind: "skill", skill: profession.skill, value: r.gate }] });
+      const line = { kind: "skill", skill: profession.skill, value: r.gate };
+      reminders.get(si).push({ id: `${id}-skill`, when: { profession: profession.skill }, reminder: { ends }, lines: [line] });
+      // a short lead: the reminder reaches back into the section played just before
+      if (found.lead >= LEAD_STEPS) continue;
+      const pi = previousSection(si);
+      if (pi < 0) continue;
+      const own = shared.filter((x) => x.si === pi);
+      if (own.length < 2) continue;
+      const endStep = own[own.length - 2].step; // never the section's last shared step: it would hold the section end
+      const before = placed.get(`p${profession.skill}-${r.rank - 1}`);
+      let after = null; // the previous rank's trainer step, when it is in that section (the leg starts after it)
+      if (before) {
+        if (before.si >= si) continue; // the skill cannot pass the previous rank's cap there yet
+        if (before.si === pi) {
+          if (leadOf.get(before.step) >= own.length - 2) continue; // no room between it and the leg's end
+          after = `p${profession.skill}-${r.rank - 1}`;
+        } else if (before.si > pi) continue;
+      }
+      endLabel.set(endStep, endStep.label || endLabel.get(endStep) || LEAD_END);
+      legs.push({ si: pi, after, step: { id: `${id}-skill-lead`, when: { profession: profession.skill }, reminder: { ends: endLabel.get(endStep) }, lines: [{ ...line }] } });
     }
   }
-  return sections.map((s, si) => ({ ...s, steps: [...(reminders.get(si) || []), ...s.steps.flatMap((step) => [...(inserts.get(step) || []), step])] }));
+  const labeled = (step) => (endLabel.has(step) && !step.label ? { ...step, label: endLabel.get(step) } : step);
+  return sections.map((s, si) => {
+    const mine = legs.filter((l) => l.si === si);
+    const start = [...(reminders.get(si) || []), ...mine.filter((l) => !l.after).map((l) => l.step)];
+    const legsAfter = (step) => mine.filter((l) => l.after === step.id).map((l) => l.step);
+    return { ...s, steps: [...start, ...s.steps.flatMap((step) => [...(inserts.get(step) || []).flatMap((t) => [t, ...legsAfter(t)]), labeled(step)])] };
+  });
 }
 
 module.exports = { addProfessionSteps, primaryProfessions, professionTrainers, RANKS };

@@ -3091,6 +3091,14 @@ Noir.Route("horde-windshaper", {
       id = "windshaper-35-37-desolace", name = "35-37 Desolace", group = "Horde", subgroup = "30-40", minLevel = 35, maxLevel = 40, zone = 405,
       next = { { section = "windshaper-37-40-arathi-highlands" } },
       steps = {
+        { id = "p171-4-skill-lead", when = { profession = 171 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 171, value = 200 },
+          } },
+        { id = "p197-4-skill-lead", when = { profession = 197 }, reminder = { ends = "leadend" },
+          lines = {
+            { kind = "skill", skill = 197, value = 200 },
+          } },
         { id = "g85@85#3", at = { zone = 85, x = 60.6, y = 58.9, r = 20 }, text = "Head into Tirisfal Glades.", when = { class = "WARRIOR" },
           lines = {
             { kind = "goto", at = { zone = 85, x = 60.6, y = 58.9, r = 20 } },
@@ -3279,7 +3287,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 6143, index = 2, npc = 4711 },
             { kind = "objective", quest = 6143, index = 3, npc = 4712 },
           } },
-        { id = "t6161", at = { zone = 405, x = 30, y = 8.71, r = 10 },
+        { id = "t6161", label = "leadend", at = { zone = 405, x = 30, y = 8.71, r = 10 },
           lines = {
             { kind = "turnin", quest = 6161, object = 177786, skipIfMissing = true },
           } },

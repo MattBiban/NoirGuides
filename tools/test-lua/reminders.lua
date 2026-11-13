@@ -190,3 +190,84 @@ test("a skill reminder raised to its gate finishes, and the trainer step then wa
   eq(place(P), "p186-3", "at the gate the trainer step is current")
   eq(kinds(P), { "current p186-3" })
 end)
+
+-- A trainer step with a short lead in its section also gets a leg of its "raise the skill" reminder in the section
+-- before (tools/planner/professions.js): the same line, ending at that section's second-to-last step every character
+-- has, never at its last. Here Deathknell holds the leg (ending at l3@85, before g.road) and Tirisfal opens with the
+-- reminder of its Mining Expert trainer step. Mining 60/150 learned; the Expert gate is 125.
+local TIRISFAL = "undead-03-05-tirisfal-glades"
+local function withSkillLeg(endsOnLast)
+  return function(client)
+    client.G.Noir.Data.professions = { [186] = { name = "Mining", kind = "primary" } }
+    local sections = client.G.Noir.Routes.Get("horde-undead").sections
+    local first, second = sections[1].steps, sections[2].steps
+    first[4] = { id = "p186-3-skill-lead", when = { profession = 186 }, reminder = { ends = "leadend" },
+      lines = { { kind = "skill", skill = 186, value = 125 } } }
+    -- l3@85 is the second-to-last step every character has; g.road (no label) is the last
+    first[endsOnLast and 11 or 10].label = "leadend"
+    for _, step in ipairs(second) do
+      if step.id == "train.mining" then
+        step.label = "train186_3"
+        step.lines = { { kind = "train", skill = 186, rank = 3, npc = 3175 } }
+      end
+    end
+    table.insert(second, 1, { id = "p186-3-skill", when = { profession = 186 }, reminder = { ends = "train186_3" },
+      lines = { { kind = "skill", skill = 186, value = 125 } } })
+    client:setProfession(186, "Mining", 60, 150)
+  end
+end
+
+local function atGrind(endsOnLast)
+  local c = sample3({ class = "MAGE", level = 2, saved = savedAt(DEATHKNELL, "l3@85"), afterLoad = withSkillLeg(endsOnLast) })
+  c:login()
+  c:advance(0.5)
+  return c, c.G.Noir, c.G.Noir.Progress
+end
+
+test("a skill reminder's leg with work left ends before the section's last step and never holds the place", function()
+  local c, Noir, P = atGrind()
+  eq(place(P), "l3@85")
+  eq(kinds(P), { "reminder p186-3-skill-lead", "current l3@85" }, "the leg is on screen in the section before")
+  c:setLevel(4)
+  c:advance(1)
+  eq(place(P), "g.road")
+  eq(kinds(P), { "current g.road" }, "on the last step the leg has ended, its skill still below the gate")
+  c:moveTo({ zone = 85, x = 38.2, y = 56.8 })
+  c:advance(1)
+  eq(Noir.Guide.Current(), TIRISFAL, "the end of the section is not held")
+  c:advance(0.5)
+  eq(kinds(P)[1], "reminder p186-3-skill", "the trainer step's own reminder takes over in its section")
+end)
+
+test("a leg ending on the section's last step would hold the place there (why the generator never ends one there)", function()
+  local c, Noir, P = atGrind(true)
+  c:setLevel(4)
+  c:advance(1)
+  eq(place(P), "g.road")
+  eq(kinds(P), { "reminder p186-3-skill-lead", "current g.road" })
+  c:moveTo({ zone = 85, x = 38.2, y = 56.8 })
+  c:advance(5)
+  eq(Noir.Guide.Current(), DEATHKNELL, "held at the end of the section while the skill is below the gate")
+  eq(place(P), "g.road")
+end)
+
+test("a skill raised to the gate during the leg finishes both legs: the next section's reminder does not show", function()
+  local c, Noir, P = atGrind()
+  eq(kinds(P), { "reminder p186-3-skill-lead", "current l3@85" })
+  c:setProfession(186, "Mining", 125, 150)
+  c:advance(0.2)
+  eq(kinds(P), { "current l3@85" }, "finished: gone")
+  eq(Noir.char.guide.places[DEATHKNELL].reminders["p186-3-skill-lead"], true)
+  c:setLevel(4)
+  c:advance(1)
+  c:moveTo({ zone = 85, x = 38.2, y = 56.8 })
+  c:advance(1)
+  eq(Noir.Guide.Current(), TIRISFAL)
+  for _ = 1, 4 do
+    c:advance(0.5)
+    for _, k in ipairs(kinds(P)) do ok(k ~= "reminder p186-3-skill", "the reminder does not re-appear: " .. k) end
+  end
+  eq(Noir.char.guide.places[TIRISFAL].reminders["p186-3-skill"], true, "taken as finished as soon as it opened")
+  local again = c:relog()
+  for _, k in ipairs(kinds(again.G.Noir.Progress)) do ok(k ~= "reminder p186-3-skill", "nor after a relog: " .. k) end
+end)
