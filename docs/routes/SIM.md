@@ -17,63 +17,63 @@ evidence and wrote to the why-log. Every other way past a step is unexplained.
 | Character | Result | Level | Steps shown | Stuck | Cannot | Unexplained | Errors | Passed (done) | Passed (moot) | Passed (condition) | Passed (outleveled) | Picked by hand |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Dwarf HUNTER | pass | 60 | 1076 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | 0 | 13 |
-| Dwarf PALADIN | pass | 60 | 1068 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 13 |
-| Dwarf PRIEST | pass | 60 | 1071 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 13 |
-| Dwarf ROGUE | pass | 60 | 1128 | 0 | 0 | 0 | 0 | 2 | 5 | 1 | 1 | 13 |
-| Dwarf SHAMAN | pass | 60 | 1055 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 13 |
-| Dwarf WARRIOR | pass | 60 | 1110 | 0 | 0 | 0 | 0 | 3 | 4 | 0 | 0 | 14 |
-| Gnome MAGE | pass | 60 | 1092 | 0 | 0 | 0 | 0 | 3 | 5 | 0 | 0 | 13 |
-| Gnome PRIEST | pass | 60 | 1066 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 13 |
-| Gnome ROGUE | pass | 60 | 1128 | 0 | 0 | 0 | 0 | 2 | 5 | 1 | 1 | 13 |
+| Dwarf PALADIN | pass | 60 | 1067 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 13 |
+| Dwarf PRIEST | pass | 60 | 1070 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 13 |
+| Dwarf ROGUE | pass | 60 | 1127 | 0 | 0 | 0 | 0 | 2 | 5 | 1 | 1 | 13 |
+| Dwarf SHAMAN | pass | 60 | 1054 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 13 |
+| Dwarf WARRIOR | pass | 60 | 1109 | 0 | 0 | 0 | 0 | 3 | 4 | 0 | 0 | 14 |
+| Gnome MAGE | pass | 60 | 1091 | 0 | 0 | 0 | 0 | 3 | 5 | 0 | 0 | 13 |
+| Gnome PRIEST | pass | 60 | 1064 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 13 |
+| Gnome ROGUE | pass | 60 | 1127 | 0 | 0 | 0 | 0 | 2 | 5 | 1 | 1 | 13 |
 | Gnome WARLOCK | pass | 60 | 1110 | 0 | 0 | 0 | 0 | 3 | 5 | 0 | 0 | 13 |
-| Gnome WARRIOR | pass | 60 | 1110 | 0 | 0 | 0 | 0 | 3 | 4 | 0 | 0 | 14 |
+| Gnome WARRIOR | pass | 60 | 1109 | 0 | 0 | 0 | 0 | 3 | 4 | 0 | 0 | 14 |
 | HighOrder DRUID | pass | 60 | 1146 | 0 | 0 | 0 | 0 | 5 | 6 | 3 | 1 | 10 |
 | HighOrder HUNTER | pass | 60 | 1146 | 0 | 0 | 0 | 0 | 5 | 5 | 5 | 2 | 10 |
 | HighOrder MAGE | pass | 60 | 1151 | 0 | 0 | 0 | 0 | 6 | 7 | 5 | 2 | 10 |
 | HighOrder ROGUE | pass | 60 | 1181 | 0 | 0 | 0 | 0 | 12 | 7 | 15 | 5 | 9 |
 | HighOrder WARRIOR | pass | 60 | 1174 | 0 | 0 | 0 | 0 | 9 | 6 | 12 | 3 | 10 |
 | Human HUNTER | pass | 60 | 1064 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 11 |
-| Human MAGE | pass | 60 | 1090 | 0 | 0 | 0 | 0 | 3 | 5 | 0 | 0 | 11 |
+| Human MAGE | pass | 60 | 1089 | 0 | 0 | 0 | 0 | 3 | 5 | 0 | 0 | 11 |
 | Human PALADIN | pass | 60 | 1068 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 11 |
 | Human PRIEST | pass | 60 | 1067 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 11 |
 | Human ROGUE | pass | 60 | 1127 | 0 | 0 | 0 | 0 | 3 | 5 | 1 | 1 | 11 |
 | Human WARLOCK | pass | 60 | 1111 | 0 | 0 | 0 | 0 | 3 | 5 | 0 | 0 | 11 |
 | Human WARRIOR | pass | 60 | 1106 | 0 | 0 | 0 | 0 | 4 | 4 | 0 | 0 | 12 |
-| NightElf DRUID | pass | 60 | 1109 | 0 | 0 | 0 | 0 | 4 | 3 | 3 | 1 | 6 |
+| NightElf DRUID | pass | 60 | 1108 | 0 | 0 | 0 | 0 | 4 | 3 | 3 | 1 | 6 |
 | NightElf HUNTER | pass | 60 | 1102 | 0 | 0 | 0 | 0 | 2 | 2 | 3 | 1 | 6 |
 | NightElf PRIEST | pass | 60 | 1104 | 0 | 0 | 0 | 0 | 2 | 3 | 3 | 1 | 6 |
 | NightElf ROGUE | pass | 60 | 1151 | 0 | 0 | 0 | 0 | 3 | 4 | 4 | 2 | 6 |
-| NightElf WARRIOR | pass | 60 | 1138 | 0 | 0 | 0 | 0 | 3 | 3 | 3 | 1 | 6 |
+| NightElf WARRIOR | pass | 60 | 1136 | 0 | 0 | 0 | 0 | 3 | 3 | 3 | 1 | 6 |
 | Orc HUNTER | pass | 60 | 1131 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 7 |
-| Orc MAGE | pass | 60 | 1154 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 7 |
+| Orc MAGE | pass | 60 | 1153 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 7 |
 | Orc ROGUE | pass | 60 | 1156 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | 0 | 7 |
-| Orc SHAMAN | pass | 60 | 1182 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 8 |
-| Orc WARLOCK | pass | 60 | 1195 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | 8 |
-| Orc WARRIOR | pass | 60 | 1165 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 8 |
+| Orc SHAMAN | pass | 60 | 1181 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 8 |
+| Orc WARLOCK | pass | 60 | 1194 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | 8 |
+| Orc WARRIOR | pass | 60 | 1164 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 8 |
 | Tauren DRUID | pass | 60 | 1093 | 0 | 0 | 0 | 0 | 6 | 0 | 7 | 1 | 7 |
 | Tauren HUNTER | pass | 60 | 1079 | 0 | 0 | 0 | 0 | 4 | 0 | 7 | 1 | 7 |
-| Tauren SHAMAN | pass | 60 | 1120 | 0 | 0 | 0 | 0 | 4 | 0 | 7 | 1 | 7 |
+| Tauren SHAMAN | pass | 60 | 1118 | 0 | 0 | 0 | 0 | 4 | 0 | 7 | 1 | 7 |
 | Tauren WARRIOR | pass | 60 | 1109 | 0 | 0 | 0 | 0 | 5 | 0 | 7 | 1 | 8 |
 | Troll HUNTER | pass | 60 | 1131 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 7 |
-| Troll MAGE | pass | 60 | 1173 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | 7 |
-| Troll PRIEST | pass | 60 | 1130 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 7 |
+| Troll MAGE | pass | 60 | 1171 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | 7 |
+| Troll PRIEST | pass | 60 | 1129 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 7 |
 | Troll ROGUE | pass | 60 | 1155 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | 0 | 7 |
-| Troll SHAMAN | pass | 60 | 1183 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 8 |
-| Troll WARLOCK | pass | 60 | 1190 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | 8 |
-| Troll WARRIOR | pass | 60 | 1165 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 8 |
-| Undead MAGE | pass | 60 | 1141 | 0 | 0 | 0 | 0 | 4 | 0 | 2 | 1 | 6 |
+| Troll SHAMAN | pass | 60 | 1181 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 8 |
+| Troll WARLOCK | pass | 60 | 1189 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | 8 |
+| Troll WARRIOR | pass | 60 | 1164 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 8 |
+| Undead MAGE | pass | 60 | 1140 | 0 | 0 | 0 | 0 | 4 | 0 | 2 | 1 | 6 |
 | Undead PALADIN | pass | 60 | 1092 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | 1 | 6 |
 | Undead PRIEST | pass | 60 | 1114 | 0 | 0 | 0 | 0 | 2 | 0 | 2 | 1 | 6 |
 | Undead ROGUE | pass | 60 | 1151 | 0 | 0 | 0 | 0 | 3 | 0 | 2 | 1 | 6 |
-| Undead WARLOCK | pass | 60 | 1159 | 0 | 0 | 0 | 0 | 11 | 1 | 9 | 3 | 7 |
+| Undead WARLOCK | pass | 60 | 1157 | 0 | 0 | 0 | 0 | 11 | 1 | 9 | 3 | 7 |
 | Undead WARRIOR | pass | 60 | 1138 | 0 | 0 | 0 | 0 | 3 | 0 | 2 | 1 | 7 |
-| Windshaper DRUID | pass | 60 | 1127 | 0 | 0 | 0 | 0 | 8 | 1 | 9 | 2 | 5 |
-| Windshaper HUNTER | pass | 60 | 1131 | 0 | 0 | 0 | 0 | 6 | 1 | 9 | 2 | 5 |
-| Windshaper ROGUE | pass | 60 | 1153 | 0 | 0 | 0 | 0 | 7 | 1 | 9 | 2 | 5 |
-| Windshaper SHAMAN | pass | 60 | 1174 | 0 | 0 | 0 | 0 | 6 | 1 | 9 | 2 | 4 |
+| Windshaper DRUID | pass | 60 | 1126 | 0 | 0 | 0 | 0 | 8 | 1 | 9 | 2 | 5 |
+| Windshaper HUNTER | pass | 60 | 1130 | 0 | 0 | 0 | 0 | 6 | 1 | 9 | 2 | 5 |
+| Windshaper ROGUE | pass | 60 | 1151 | 0 | 0 | 0 | 0 | 7 | 1 | 9 | 2 | 5 |
+| Windshaper SHAMAN | pass | 60 | 1173 | 0 | 0 | 0 | 0 | 6 | 1 | 9 | 2 | 4 |
 | Windshaper WARRIOR | pass | 60 | 1170 | 0 | 0 | 0 | 0 | 9 | 2 | 10 | 3 | 6 |
 | Human WARRIOR (profession 186) | pass | 60 | 1109 | 0 | 0 | 0 | 0 | 4 | 4 | 0 | 0 | 12 |
-| Undead MAGE (profession 197) | pass | 60 | 1142 | 0 | 0 | 0 | 0 | 6 | 0 | 4 | 1 | 6 |
+| Undead MAGE (profession 197) | pass | 60 | 1143 | 0 | 0 | 0 | 0 | 4 | 0 | 2 | 1 | 6 |
 
 ## Joiners (a character that played without the addon, then installs it)
 
