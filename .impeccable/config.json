@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/window-preview.html"
+        ],
+        "createdAt": "2026-11-13T12:19:05.609Z",
+        "reason": "Claude: the radial gradient is the labeled stand-in sunset scene behind the mock window, not UI chrome"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          ".impeccable/mocks/window-preview.html"
+        ],
+        "createdAt": "2026-11-13T12:19:05.792Z",
+        "reason": "Claude: the mock reproduces the in-game window's measured paddings (DESIGN.md Measures, 2x scale); the preview is a reference fixture, not shipped UI"
+      }
+    ]
+  }
+}
