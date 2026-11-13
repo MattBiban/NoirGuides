@@ -41,6 +41,8 @@
 --       by the place tables); of the places marked nearest only the one closest to the player stays. ctx as for
 --       Check; ctx.done = { [line index] = true } marks lines Progress has latched as done.
 --   Lines.Yards(place) -> yards from the player, or nil when the client gives no position or no map size
+--   Lines.Between(a, b) -> yards between two places, math.huge on two continents, nil when unknown (a zone-only
+--                          place, or no map size)
 --   Lines.Arrived(place) -> true | false | nil          within place.r yards (in the zone when x = y = 0); false
 --                                                       without a positive radius; nil without a position
 --   Lines.GrindCounter(line) -> xp, needed or nil       the XP a grind line counts at the current level: at `level`
@@ -208,6 +210,24 @@ end
 function Lines.Yards(place)
   if type(place) ~= "table" or not place.zone or zoneOnly(place) then return nil end
   return yardsTo(place.zone, place.x, place.y)
+end
+
+function Lines.Between(a, b)
+  if type(a) ~= "table" or type(b) ~= "table" or not a.zone or not b.zone or zoneOnly(a) or zoneOnly(b) then
+    return nil
+  end
+  if a.zone == b.zone then
+    local w, h = mapSize(mapOf(a.zone))
+    if not w then return nil end
+    local dx, dy = (a.x - b.x) / 100 * w, (a.y - b.y) / 100 * h
+    return math.sqrt(dx * dx + dy * dy)
+  end
+  local ai, ax, ay = worldOf(mapOf(a.zone), a.x, a.y)
+  local bi, bx, by = worldOf(mapOf(b.zone), b.x, b.y)
+  if not (ai and bi) then return nil end
+  if ai ~= bi then return math.huge end
+  local dx, dy = ax - bx, ay - by
+  return math.sqrt(dx * dx + dy * dy)
 end
 
 -- In the place's zone: true, false, or nil when the client gives no position.

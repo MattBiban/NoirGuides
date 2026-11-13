@@ -72,9 +72,10 @@ test("the checklist covers the Skyborne start, the passes and the owner's open p
   }
 });
 
-test("the changelog's newest entry is the toc's version", () => {
+test("the changelog's newest released entry is the toc's version (an \"Unreleased\" entry may sit above it)", () => {
   const version = tocVersion(read("NoirGuides", "NoirGuides.toc"));
-  const first = /^## (\S+)/m.exec(read("CHANGELOG.md"));
+  // An "## Unreleased" entry for work not yet released may sit above it.
+  const first = /^## (?!Unreleased\b)(\S+)/m.exec(read("CHANGELOG.md"));
   assert.ok(first, "the changelog has an entry");
   assert.strictEqual(first[1], version);
 });

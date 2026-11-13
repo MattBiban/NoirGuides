@@ -144,6 +144,9 @@ test("a loop resets after the last point and restarts when far off", function()
   -- The objectives of Deathknell's step 5 are walked as a loop of three points; the step's place has no radius, so
   -- each point counts as reached within 20 yards.
   local c, Noir, Arrow = at("o364.o376", { done = { 363 }, log = { 364, 376 }, x = 30, y = 66 })
+  -- The collect step beside it done, so no nearby card joins the loop (that case: workahead.lua).
+  c:giveItem(2834, 4)
+  c:advance(0.5)
   eq(placeId(Noir), "o364.o376")
   local function point()
     local t = Arrow.Target()

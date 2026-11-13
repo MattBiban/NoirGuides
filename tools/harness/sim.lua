@@ -36,8 +36,14 @@
 --
 -- Sim.play(facts, opts) -> { race, class, join, stuck, cannot, unexplained, errors, slash, offScreen,
 --                            placement = { expectedFrom, landed, from, to, inside, passedSteps, landedAt }, level,
---                            finished, shown, passed, manual, ticked, wizardClosed }
---   opts: join = level (the character joins there: Sim.prepareJoin), api ("classic"), register = true (facts.route
+--                            finished, shown, passed, manual, ticked, wizardClosed, grindCards, gatedAims,
+--                            gatedAimSteps }
+--   grindCards: times a grind card (a gated current card) appeared; gatedAims: rounds in which the arrow aimed at a
+--   step whose minLevel is above the character's level (not at a grind place), with the first such in gatedAimSteps;
+--   passed.deferred: steps deferred until a level (work ahead).
+--   opts: join = level (the character joins there: Sim.prepareJoin), api ("classic"), xpScale (every XP the world
+--   gives, quests, objectives and the fights on the way, times this: 0.7 plays a slower pace so steps under their
+--   level come up; grinds still fight to their level), register = true (facts.route
 --   is registered as the race's route and the engine's data is filled from the facts), swap / afterLoad (Client.new
 --   options, for tests), beforeAction = function(client, n) (tests), maxActions.
 -- Sim.prepareJoin(facts, level) -> { server, expectedFrom, leftOut, to }
@@ -49,7 +55,8 @@
 --
 -- What fails a run: any stuck step, a step shown that the character cannot do (a walk to another continent), a why
 -- entry of a kind outside EXPLAINED, a Lua error or forbidden call, a slash command, a frame off the screen at the
--- end, an end level below 60, and for a joiner a placement outside [expectedFrom - JOIN_BACK, to].
+-- end, an end level below 60, the arrow aimed at a step under its level, and for a joiner a placement outside
+-- [expectedFrom - JOIN_BACK, to].
 local Client = HARNESS.Client
 local Sim = {}
 
@@ -60,7 +67,8 @@ Sim.SETTLE = 1.5     -- seconds after each round of the player's actions
 Sim.FRAME = 0.25     -- the frame length inside SETTLE
 Sim.END_LEVEL = 60
 -- Why-log kinds that carry the game's evidence or describe placement.
-Sim.EXPLAINED = { done = true, moot = true, condition = true, outleveled = true, place = true, section = true, route = true }
+Sim.EXPLAINED = { done = true, moot = true, condition = true, outleveled = true, place = true, section = true, route = true,
+  deferred = true }
 
 local HEARTHSTONE, HEARTH_SPELL, ASTRAL_RECALL = 6948, 8690, 556
 local OPTIONAL_EVERY = 7
@@ -334,7 +342,8 @@ local function actionDone(c, a, leftOut)
   return false
 end
 
-function Sim.prepareJoin(facts, level)
+function Sim.prepareJoin(facts, level, xpScale)
+  local function sx(n) return round(n * (xpScale or 1)) end
   local world = Sim.world(facts)
   local flat = facts.flat or {}
   local start = startOf(facts)
@@ -353,7 +362,7 @@ function Sim.prepareJoin(facts, level)
   local function moveTo(point)
     local zone = point and facts.zones[point.zone]
     if not zone then return end
-    if pos and pos.zone == point.zone then c:gainXP(Sim.walkXp(yards(zone, pos, point), zone.band, c.s.level, facts.pace)) end
+    if pos and pos.zone == point.zone then c:gainXP(sx(Sim.walkXp(yards(zone, pos, point), zone.band, c.s.level, facts.pace))) end
     pos = { zone = point.zone, x = point.x, y = point.y }
     c.s.pos = { uiMap = zone.uiMap, x = point.x, y = point.y }
   end
@@ -388,13 +397,13 @@ function Sim.prepareJoin(facts, level)
     if objectivesDone[a.quest] or not c:findQuest(a.quest) then return end
     objectivesDone[a.quest] = true
     finishObjectives(a.quest)
-    c:gainXP(Sim.objectiveXp(facts.quests[a.quest] or {}, c.s.level, facts.pace))
+    c:gainXP(sx(Sim.objectiveXp(facts.quests[a.quest] or {}, c.s.level, facts.pace)))
   end
   function DO.turnin(a)
     if not c:findQuest(a.quest) then return end
     finishObjectives(a.quest)
     local quest = facts.quests[a.quest] or {}
-    c:turnInQuest(a.quest, Sim.questXp(quest.level or 1, c.s.level))
+    c:turnInQuest(a.quest, sx(Sim.questXp(quest.level or 1, c.s.level)))
     c.s.money = c.s.money + Sim.TURNIN_COPPER
   end
   function DO.getflight(a) c.s.flights[a.node] = true end
@@ -462,6 +471,7 @@ function Sim.problems(r, endLevel)
   if n(r.unexplained) > 0 then out[#out + 1] = plural(n(r.unexplained), "unexplained skip", "unexplained skips") end
   if n(r.errors) > 0 then out[#out + 1] = plural(n(r.errors), "Lua error", "Lua errors") end
   if (r.slash or 0) > 0 then out[#out + 1] = plural(r.slash, "slash command", "slash commands") end
+  if (r.gatedAims or 0) > 0 then out[#out + 1] = plural(r.gatedAims, "arrow aimed at a step under its level", "arrows aimed at steps under their level") end
   if n(r.offScreen) > 0 then out[#out + 1] = plural(n(r.offScreen), "frame off the screen", "frames off the screen") end
   if not (type(r.level) == "number" and r.level >= endLevel) then out[#out + 1] = "ends at level " .. tostring(r.level) end
   if r.join then
@@ -479,12 +489,13 @@ function Sim.play(facts, opts)
   local info = Client.RACES[facts.race]
   local flat = facts.flat or {}
   local result = { race = facts.race, class = facts.class, join = opts.join, stuck = {}, cannot = {}, unexplained = {},
-    errors = {}, manual = {}, shown = 0, passed = {}, ticked = 0 }
+    errors = {}, manual = {}, shown = 0, passed = {}, ticked = 0, grindCards = 0, gatedAims = 0, gatedAimSteps = {} }
   local tickAllowance = 0
   local whyLog = {}
   local capturing, landed = true, nil
 
-  local prepared = opts.join and Sim.prepareJoin(facts, opts.join) or nil
+  local prepared = opts.join and Sim.prepareJoin(facts, opts.join, opts.xpScale) or nil
+  local function sx(n) return round(n * (opts.xpScale or 1)) end
   local start = startOf(facts)
   local startZone = start and facts.zones[start.zone]
   local clientOpts = {
@@ -602,7 +613,7 @@ function Sim.play(facts, opts)
       cannot(step, string.format("%s is in %s, on another continent than the character (in %s), who cannot walk there",
         label(step), zone.name, here.name))
     elseif here and pos.zone == point.zone then
-      c:gainXP(Sim.walkXp(yards(zone, pos, point), zone.band, c.s.level, facts.pace))
+      c:gainXP(sx(Sim.walkXp(yards(zone, pos, point), zone.band, c.s.level, facts.pace)))
     end
     c:moveTo({ uiMap = zone.uiMap, x = point.x, y = point.y })
     pos = { zone = point.zone, x = point.x, y = point.y }
@@ -656,6 +667,23 @@ function Sim.play(facts, opts)
     if not c:findQuest(line.quest) then pickByHand(step, line.quest, "available") end
     c:closeNpc()
     if c:findQuest(line.quest) then return nil end
+    -- A quest the guide leaves to the player (the line's "manual", the section's noAuto): the player opens it and
+    -- clicks Accept, as a person would.
+    local section = Noir.Guide.Section(P.Place() or "")
+    local noAuto = false
+    for _, q in ipairs(section and section.noAuto or {}) do if q == line.quest then noAuto = true end end
+    if (line.manual or noAuto) and offers and good then
+      talk(id, def)
+      if c.npc and not c:findQuest(line.quest) then
+        c:showDetail(line.quest)
+        c.G.AcceptQuest()
+      end
+      c:closeNpc()
+      if c:findQuest(line.quest) then
+        result.manual[#result.manual + 1] = { n = step.n, label = label(step), reason = "the guide leaves this accept to the player" }
+        return nil
+      end
+    end
     if not offers then return string.format("%s %d does not offer quest %d", kind, id, line.quest) end
     if not good then return "quest " .. line.quest .. " is not offered: " .. why end
     if #c.s.quests >= 20 then return "the quest log is full" end
@@ -669,7 +697,7 @@ function Sim.play(facts, opts)
     if not objectivesDone[line.quest] then
       objectivesDone[line.quest] = true
       c:completeObjectives(line.quest)
-      c:gainXP(Sim.objectiveXp(facts.quests[line.quest] or {}, c.s.level, facts.pace))
+      c:gainXP(sx(Sim.objectiveXp(facts.quests[line.quest] or {}, c.s.level, facts.pace)))
       dropGrey(c)
     end
     return nil
@@ -682,7 +710,7 @@ function Sim.play(facts, opts)
     local q = c:findQuest(line.quest)
     if not q then return "quest " .. line.quest .. " is not in the quest log" end
     local quest = facts.quests[line.quest] or {}
-    if world.quests[line.quest] then world.quests[line.quest].xp = Sim.questXp(quest.level or 1, c.s.level) end
+    if world.quests[line.quest] then world.quests[line.quest].xp = sx(Sim.questXp(quest.level or 1, c.s.level)) end
     local calls = #c.calls
     talk(id, def)
     if opts.trace and not c.s.completed[line.quest] then
@@ -873,6 +901,15 @@ function Sim.play(facts, opts)
   end
 
   local function clickTick(k, i, card, l)
+    -- The stack may have changed since the cards were read (a card above this one finished): find this card and
+    -- line where the window shows them now.
+    for kk, now in ipairs(P.Cards()) do
+      if now.step.id == card.step.id and now.kind == card.kind then
+        for ii, nl in ipairs(now.lines) do
+          if nl.index == l.index then k, i = kk, ii end
+        end
+      end
+    end
     local box = tickBox(k, i)
     if box and c:click(box) then return true end
     result.errors[#result.errors + 1] = string.format("the tick box of line %d of card %d (step %s) could not be clicked", i, k, tostring(card.step.id))
@@ -927,6 +964,7 @@ function Sim.play(facts, opts)
   local trace = opts.trace and {} or nil
   result.trace = trace
   local lastSig, tries = nil, 0
+  local lastGrind = nil
   local reasons = {}
   local idle = 0
   local actions, maxActions = 0, opts.maxActions or 30000
@@ -946,6 +984,21 @@ function Sim.play(facts, opts)
       if currentCard.kind == "current" and not seen[currentCard.step.id] then
         seen[currentCard.step.id] = true
         result.shown = result.shown + 1
+      end
+      -- Grind cards (a current card that asks for a grind), counted once each time one appears.
+      local grindKey = nil
+      if currentCard.gated then
+        grindKey = tostring(P.Place()) .. "/" .. tostring(currentCard.step.id) .. "/" .. tostring(currentCard.lines[1] and currentCard.lines[1].line.level)
+        if grindKey ~= lastGrind then result.grindCards = result.grindCards + 1 end
+      end
+      lastGrind = grindKey
+      -- The arrow must never aim at a step the character's level does not allow yet.
+      local aim = Noir.Arrow and Noir.Arrow.Target and Noir.Arrow.Target()
+      if aim and aim.step and not aim.grind and type(aim.step.minLevel) == "number" and c.s.level < aim.step.minLevel then
+        result.gatedAims = result.gatedAims + 1
+        if #result.gatedAimSteps < 10 then
+          result.gatedAimSteps[#result.gatedAimSteps + 1] = string.format("%s at level %d (step for %d)", tostring(aim.step.id), c.s.level, aim.step.minLevel)
+        end
       end
       local sig = signature(cards)
       if sig == lastSig then tries = tries + 1 else tries, lastSig = 0, sig end

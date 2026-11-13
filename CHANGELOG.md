@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- **Work ahead while under level.** When the next step needs a higher level (a trainer visit, a quest you cannot take yet), the guide no longer stalls on it or sends you to an NPC you cannot use. It saves that step for later and moves on to the quests and objectives right around you that you can do now. The saved step stays out of the way until you reach its level, then comes back at the top of the window and the arrow takes you to it. The guide only works ahead within the same area (a few steps, a few hundred yards) and never into the next section; anything that depends on the saved step waits with it.
+- **Grind where it makes sense.** When there is nothing nearby to do first, the window says "Grind to level N" and the arrow now points at the last place you fought in, never at the trainer or quest giver that needs the level. Switch working ahead off in Settings, Route, "Work ahead while under level" to always wait on the step, with this grind place.
+- **Nearby objectives together.** When the next objectives (kill this, collect that) lie close to the one you are on and their quests are in your log, they show as cards together with it, each with its counter, so you can do them all in one sweep. The arrow points at the nearest one you have not finished and does not flicker between two that are about as far. What you finish early counts when the guide gets to it. Turn-ins in town are never pulled forward: they come after the area is done.
+
 ## 0.4.0
 
 - **Sell your greys before training.** On class trainer visits up to level 20, a line "Sell your grey items at <vendor>" points you to the nearest vendor by the trainer, but only when you carry grey items and may be short of money. Once your class has visited a trainer at that level on any character of the account, the line says what the training cost then and what you have ("training costs about 1s 20c, you have 85c"); until then it shows only while you carry less than 10 silver. If the trainer lists a spell you cannot afford while its window is open, the line shows too.

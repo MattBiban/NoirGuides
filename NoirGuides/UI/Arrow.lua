@@ -2,15 +2,20 @@
 -- Arrow v2 (spec 4.4, gap #23): which way and how far it is to the next place of the steps on the cards. It follows
 -- the game by itself: no command is needed for anything here.
 --
---   Arrow.Target() -> { at, title, index, line [, loop] [, corpse] [, elsewhere] } or nil
+--   Arrow.Target() -> { at, title, index, line, step [, loop] [, corpse] [, elsewhere] [, grind] } or nil
 --       while a ghost, the corpse (State.Corpse); else the first place of Lines.Places over the cards, in card order
 --       then line order (Lines.Places leaves out hidden lines, done and ticked lines, reached places, and all but the
---       closest of a "nearest" group). Places with r = 0 (a pin, no arrow) and zone-only places (x = y = 0) are not
---       pointed at. Places on another continent are skipped for choosing; when no other place is left, the first of
---       them is returned with elsewhere = true. A step place with a looping path gives the loop's current point
---       (loop = its index).
+--       closest of a "nearest" group): deferred cards first, then reminders and detours. When nearby cards are shown
+--       (Progress: objective steps worked together with the current one), the places of the current and nearby cards
+--       are one group and the arrow points at the nearest of them; it keeps its place until another is nearer by more
+--       than SWITCH_YARDS and SWITCH_SHARE of the distance (so two near-equal places do not flip it back and forth).
+--       Places with r = 0 (a pin, no arrow) and zone-only places (x = y = 0) are not pointed at. Places on another
+--       continent are skipped for choosing; when no other place is left, the first of them is returned with
+--       elsewhere = true. A step place with a looping path gives the loop's current point (loop = its index). A gated
+--       card (one that asks for a grind) gives only its grind place (grind = true), so the arrow never points at a step
+--       the character's level does not allow yet.
 --   Arrow.CardPlaces(card) -> Lines.Places of a card from Progress.Cards, with the card's done and ticked lines and the
---       places Progress marked reached (shared with UI/Map.lua)
+--       places Progress marked reached (shared with UI/Map.lua); for a gated card only the grind line's place
 --   Arrow.Solve(point) -> bearing, yards, method: the direction from the player as an angle from north turning left
 --       (west is +pi/2), the distance in yards (nil when only the direction is known) and "world" or "map"; nil when
 --       the direction is unknown or the place is on another continent. World position first, map projection second.
@@ -49,6 +54,8 @@ Arrow.LOOP_YARDS = 20         -- a loop's point is reached this near when the st
 Arrow.STRAY_LEGS = 1.3
 Arrow.STRAY_YARDS = 1000
 Arrow.ARRIVE_YARDS = 8        -- this near, the arrow shows in the "ok" color
+Arrow.SWITCH_YARDS = 15       -- among nearby objectives the arrow moves to another place only when it is this much
+Arrow.SWITCH_SHARE = 0.2      -- nearer, and at least this share of the distance to the place it points at nearer
 Arrow.ELSEWHERE_TEXT = "On another continent"
 Arrow.CORPSE_TITLE = "Your corpse"
 Arrow.PREVIEW_TEXT = "Arrow"
@@ -65,6 +72,7 @@ local draws = 0
 local previewing = false
 local loops = {}      -- step id -> { i, places = { [k] = place } }
 local reported = {}   -- target key -> true once the chat line about another continent was printed
+local lastPick = nil  -- step id and line of the place last chosen among the current and nearby cards
 
 local function isNumber(value)
   return type(value) == "number" and value == value and value ~= math.huge and value ~= -math.huge
@@ -302,6 +310,16 @@ end
 
 function Arrow.CardPlaces(card)
   local step = card.step
+  -- A card that asks for a grind points only at the place to grind at: never at the gated step's NPC.
+  if card.gated then
+    for _, l in ipairs(card.lines or {}) do
+      if l.index == 0 and l.line and l.line.kind == "grind" then
+        if l.line.at and l.state ~= "done" then return { { at = l.line.at, line = 0, grind = true } } end
+        return {}
+      end
+    end
+    return {}
+  end
   local done = {}
   -- Passive lines (notes, markers) count as done but keep their places while the step is shown (Lines.Places).
   for _, l in ipairs(card.lines or {}) do
@@ -376,6 +394,27 @@ local function loopTarget(card, base)
   return base
 end
 
+local function pickKey(t)
+  return tostring(t.step and t.step.id) .. ":" .. tostring(t.line)
+end
+
+-- The nearest of the current and nearby cards' places, keeping the last pick unless another is clearly nearer
+-- (SWITCH_YARDS and SWITCH_SHARE); without distances, the first (the current card's first place).
+local function nearest(group)
+  local best, bestYards, kept, keptYards = nil, nil, nil, nil
+  for _, t in ipairs(group) do
+    local yards = yardsTo(t.at)
+    if yards and (not bestYards or yards < bestYards) then best, bestYards = t, yards end
+    if lastPick and pickKey(t) == lastPick then kept, keptYards = t, yards end
+  end
+  if not best then best = group[1] end
+  if kept and kept ~= best and keptYards and bestYards
+    and keptYards - bestYards <= math.max(Arrow.SWITCH_YARDS, Arrow.SWITCH_SHARE * keptYards) then
+    best = kept
+  end
+  return best
+end
+
 function Arrow.Target()
   if State.IsGhost and State.IsGhost() then
     local zone, x, y = State.Corpse()
@@ -383,22 +422,40 @@ function Arrow.Target()
   end
   local cards = (Progress.Cards and Progress.Cards()) or {}
   local elsewhere = nil
+  local hasNearby = false
+  for _, card in ipairs(cards) do
+    if card.kind == "nearby" then hasNearby = true end
+  end
+  local first, others = {}, {}
   for _, card in ipairs(cards) do
     local places = Arrow.CardPlaces(card)
     for _, p in ipairs(places) do
       if pointable(p.at) then
-        local t = { at = p.at, title = stepTitle(card.step), index = card.index, line = p.line, step = card.step }
+        local t = { at = p.at, title = stepTitle(card.step), index = card.index, line = p.line, step = card.step,
+          grind = p.grind or nil }
         local path = card.step.path
-        if p.line == 0 and type(path) == "table" and path.loop then t = loopTarget(card, t) end
+        if p.line == 0 and not p.grind and type(path) == "table" and path.loop then t = loopTarget(card, t) end
         if Arrow.Elsewhere(t.at) then
           t.elsewhere = true
           elsewhere = elsewhere or t
+        elseif hasNearby and card.kind == "current" then
+          first[#first + 1] = t
+        elseif hasNearby and card.kind == "nearby" then
+          others[#others + 1] = t
         else
+          lastPick = nil
           return t
         end
       end
     end
   end
+  if #first + #others > 0 then
+    for _, t in ipairs(others) do first[#first + 1] = t end
+    local t = nearest(first)
+    lastPick = pickKey(t)
+    return t
+  end
+  lastPick = nil
   return elsewhere
 end
 

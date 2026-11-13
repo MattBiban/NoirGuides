@@ -183,7 +183,7 @@ local function targetList()
     if #list < Buttons.MAX_TARGETS then list[#list + 1] = { name = name, npc = npc } end
   end
   -- Low priority last: the current step's targets, then a detour's, then the reminders'.
-  local list, rank = {}, { current = 1, detour = 2, reminder = 3 }
+  local list, rank = {}, { current = 1, nearby = 2, deferred = 2, detour = 2, reminder = 3 }
   for i, card in ipairs(cards()) do list[i] = { card = card, i = i } end
   table.sort(list, function(a, b)
     local x, y = rank[a.card.kind] or 4, rank[b.card.kind] or 4

@@ -10,7 +10,8 @@
 --   Window.Read() -> { shown, title, subtitle, range, side, preview, cards = { { badge, kind, text, mark, slide,
 --       hidden, lines = { { text, icon, ticked, done, counter } } } }, list = { { n, text, dim, current, lit } },
 --       footer = { version, level, share, rail = { fill, ticks } } }
---                                    kind: "current", "reminder", "detour" (Progress.Cards), "info" (route complete);
+--                                    kind: "current", "deferred", "reminder", "detour", "nearby" (Progress.Cards; all
+--                                    but "current" drawn as companions with the plain frame), "info" (route complete);
 --                                    mark: the step's kind on a new current card's side bar for Theme.metrics.mark
 --                                    seconds ("turnin", "accept", "train", "objective", "travel"); slide: how far the
 --                                    new card still has to slide; hidden: left out because the screen has no room;
