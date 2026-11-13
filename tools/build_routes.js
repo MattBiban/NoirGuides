@@ -7,7 +7,7 @@ const path = require("path");
 const { loadDb } = require("./lib/db");
 const { loadTravel } = require("./lib/travel");
 const { combos, RACES } = require("./lib/characters");
-const { loadInns } = require("./planner/context");
+const { loadInns, plannerGraph } = require("./planner/context");
 const { planRoute } = require("./planner/plan");
 const { layerClasses } = require("./planner/classes");
 const { validateRoute } = require("./planner/validate");
@@ -54,7 +54,8 @@ function toFormat3(db, graph, inns, route, classes, validations) {
   const professionNotes = [];
   sections = addProfessionSteps(db, sections, route.faction, { levelOf: sharedLevel, notes: professionNotes });
   const trainingNotes = [];
-  sections = addClassTraining(db, sections, route.faction, { graph, classes: classes.map((c) => c.cls), levelOf: (cls, step) => estimate[cls].get(step), notes: trainingNotes });
+  // a trainer trip is planned like the route: without the links whose users are an assumption (planner/context.js)
+  sections = addClassTraining(db, sections, route.faction, { graph: plannerGraph(graph), classes: classes.map((c) => c.cls), levelOf: (cls, step) => estimate[cls].get(step), notes: trainingNotes });
   // a trainer trip's way there and back changes its class's estimate: grinds again where a step's minLevel is missed
   const trained = { ...draft, sections };
   const after = {};

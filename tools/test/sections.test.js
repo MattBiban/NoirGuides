@@ -546,18 +546,25 @@ test("a split gated step keeps load on its first part only, and a reminder step 
 const ROUTES = require("node:path").join(__dirname, "..", "..", "NoirGuides", "Routes");
 const DATA_DIR = require("node:path").join(__dirname, "..", "data");
 const haveReal = fs.existsSync(require("node:path").join(DATA_DIR, "forever_db.json")) && fs.existsSync(require("node:path").join(ROUTES, "horde-orc.lua"));
-test("real route: March of the Silithid (4494), which either 32 or 7732 unlocks, has one accept line per prerequisite on horde-orc", { skip: !haveReal }, () => {
+test("real route: March of the Silithid (4494), which either 32 or 7732 unlocks, has one accept line per prerequisite wherever a route takes it", { skip: !haveReal }, (t) => {
   // Review 2 of task X1: the route emitted ifDone = 7732 and a "notturnedin 32" skip, so a character who had handed in
-  // only one of them had 4494 passed while the game offered it, and its chain (4496 ifDone 4494) was lost.
+  // only one of them had 4494 passed while the game offered it, and its chain (4496 ifDone 4494) was lost. The routes
+  // of 0.4.0 took it on horde-orc; a route that reaches 60 without the chain leaves the check to the tests above.
   const { loadDb } = require("../lib/db");
   const { parseRoute } = require("../sim_all");
   const q = loadDb(DATA_DIR).quests.get(4494);
   assert.deepStrictEqual(q.preAll, []);
   assert.deepStrictEqual([...q.preAny].sort((a, b) => a - b), [32, 7732]);
-  const route = parseRoute(fs.readFileSync(require("node:path").join(ROUTES, "horde-orc.lua"), "utf8"));
-  const hits = [];
-  for (const sec of route.sections) for (const st of sec.steps) for (const l of st.lines) if (l.kind === "accept" && l.quest === 4494) hits.push({ st, l });
-  assert.deepStrictEqual(hits.map((h) => h.l.ifDone).sort((a, b) => a - b), [32, 7732]);
-  assert.ok(hits.every((h) => h.st === hits[0].st), "in one step");
-  assert.ok(!(hits[0].st.skip || []).some((c) => c.kind === "notturnedin"), "no any-of member gates the step");
+  let routes = 0;
+  for (const file of fs.readdirSync(ROUTES).filter((f) => f.endsWith(".lua")).sort()) {
+    const route = parseRoute(fs.readFileSync(require("node:path").join(ROUTES, file), "utf8"));
+    const hits = [];
+    for (const sec of route.sections) for (const st of sec.steps) for (const l of st.lines) if (l.kind === "accept" && l.quest === 4494) hits.push({ st, l });
+    if (!hits.length) continue;
+    routes++;
+    assert.deepStrictEqual(hits.map((h) => h.l.ifDone).sort((a, b) => a - b), [32, 7732], file);
+    assert.ok(hits.every((h) => h.st === hits[0].st), `${file}: in one step`);
+    assert.ok(!(hits[0].st.skip || []).some((c) => c.kind === "notturnedin"), `${file}: no any-of member gates the step`);
+  }
+  if (!routes) t.skip("no route takes 4494 today");
 });

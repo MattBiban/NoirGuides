@@ -54,34 +54,13 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 92461, index = 1, npc = 250873 },
           } },
-        { id = "tHUNTER-2", at = { zone = 16593, x = 42.49, y = 23.79, r = 10 }, when = { class = "HUNTER" }, minLevel = 2,
+        { id = "o92461.o92462", at = { zone = 16593, x = 45.2, y = 25.27, r = 40 }, targets = { enemy = { 251169 } },
           lines = {
-            { kind = "train", level = 2, class = "HUNTER", npc = 251376 },
-            { kind = "selljunk", at = { zone = 16593, x = 42.75, y = 24.49, r = 10 }, npc = 251537 },
-          } },
-        { id = "tROGUE-2", at = { zone = 16593, x = 43.74, y = 24.36, r = 10 }, when = { class = "ROGUE" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "ROGUE", npc = 251389 },
-            { kind = "selljunk", at = { zone = 16593, x = 43.52, y = 23.6, r = 10 }, npc = 251365 },
-          } },
-        { id = "tWARRIOR-2", at = { zone = 16593, x = 43.65, y = 24.11, r = 10 }, when = { class = "WARRIOR" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "WARRIOR", npc = 251964 },
-            { kind = "selljunk", at = { zone = 16593, x = 43.52, y = 23.6, r = 10 }, npc = 251365 },
+            { kind = "objective", quest = 92462, index = 1, at = { zone = 16593, x = 45.86, y = 26.8, r = 40 }, npc = 251169 },
           } },
         { id = "a92465", at = { zone = 16593, x = 47.25, y = 21.98, r = 10 }, minLevel = 2, maxLevel = 11, targets = { friend = { 249363 } },
           lines = {
             { kind = "accept", quest = 92465, npc = 249363 },
-          } },
-        { id = "tDRUID-2", at = { zone = 16593, x = 41.66, y = 23.33, r = 10 }, when = { class = "DRUID" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "DRUID", npc = 251373 },
-            { kind = "selljunk", at = { zone = 16593, x = 42.75, y = 24.49, r = 10 }, npc = 251537 },
-          } },
-        { id = "tMAGE-2", at = { zone = 16593, x = 41.55, y = 23.68, r = 10 }, when = { class = "MAGE" }, minLevel = 2,
-          lines = {
-            { kind = "train", level = 2, class = "MAGE", npc = 251379 },
-            { kind = "selljunk", at = { zone = 16593, x = 42.75, y = 24.49, r = 10 }, npc = 251537 },
           } },
         { id = "a94414.a92474", at = { zone = 16593, x = 43.76, y = 24.06, r = 10 }, minLevel = 2, maxLevel = 10, targets = { friend = { 257554, 263113 } },
           lines = {
@@ -98,6 +77,11 @@ Noir.Route("alliance-highorder", {
         { id = "a92485", at = { zone = 16593, x = 42.05, y = 23.49, r = 10 }, when = { class = "DRUID" }, minLevel = 2, maxLevel = 10, items = { 282420 }, targets = { friend = { 251361 } },
           lines = {
             { kind = "accept", quest = 92485, npc = 251361, requires = { 92461 } },
+          } },
+        { id = "tHUNTER-2", at = { zone = 16593, x = 42.49, y = 23.79, r = 10 }, when = { class = "HUNTER" }, minLevel = 2,
+          lines = {
+            { kind = "train", level = 2, class = "HUNTER", npc = 251376 },
+            { kind = "selljunk", at = { zone = 16593, x = 42.75, y = 24.49, r = 10 }, npc = 251537 },
           } },
         { id = "a92482.t92482", at = { zone = 16593, x = 42.05, y = 23.49, r = 10 }, when = { class = "HUNTER" }, minLevel = 2, items = { 282421 }, targets = { friend = { 251361, 251376 } },
           lines = {
@@ -121,10 +105,6 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 92597, npc = 251371, requires = { 92461 } },
             { kind = "objective", quest = 94414, index = 1, at = { zone = 16593, x = 43.76, y = 24.06, r = 40 }, npc = 257554, skipIfMissing = true },
           } },
-        { id = "t92483", at = { zone = 16593, x = 43.74, y = 24.36, r = 10 }, when = { class = "ROGUE" }, items = { 282422 }, targets = { friend = { 251389 } },
-          lines = {
-            { kind = "turnin", quest = 92483, npc = 251389, skipIfMissing = true },
-          } },
         { id = "a92544", at = { zone = 16593, x = 38.31, y = 30.18, r = 10 }, minLevel = 2, maxLevel = 13, targets = { friend = { 252095 } },
           lines = {
             { kind = "accept", quest = 92544, npc = 252095 },
@@ -139,37 +119,32 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 92544, npc = 252095, skipIfMissing = true },
           } },
-        { id = "tDRUID-4", at = { zone = 16593, x = 41.66, y = 23.33, r = 10 }, when = { class = "DRUID" }, minLevel = 4,
+        { id = "tDRUID-2", at = { zone = 16593, x = 41.66, y = 23.33, r = 10 }, when = { class = "DRUID" }, minLevel = 2,
           lines = {
-            { kind = "train", level = 4, class = "DRUID", npc = 251373 },
+            { kind = "train", level = 2, class = "DRUID", npc = 251373 },
             { kind = "selljunk", at = { zone = 16593, x = 42.75, y = 24.49, r = 10 }, npc = 251537 },
           } },
         { id = "t92485", at = { zone = 16593, x = 41.66, y = 23.33, r = 10 }, when = { class = "DRUID" }, items = { 282420 }, targets = { friend = { 251373 } },
           lines = {
             { kind = "turnin", quest = 92485, npc = 251373, skipIfMissing = true },
           } },
-        { id = "tMAGE-4", at = { zone = 16593, x = 41.55, y = 23.68, r = 10 }, when = { class = "MAGE" }, minLevel = 4,
+        { id = "tMAGE-2", at = { zone = 16593, x = 41.55, y = 23.68, r = 10 }, when = { class = "MAGE" }, minLevel = 2,
           lines = {
-            { kind = "train", level = 4, class = "MAGE", npc = 251379 },
+            { kind = "train", level = 2, class = "MAGE", npc = 251379 },
             { kind = "selljunk", at = { zone = 16593, x = 42.75, y = 24.49, r = 10 }, npc = 251537 },
           } },
         { id = "t92481", at = { zone = 16593, x = 41.55, y = 23.68, r = 10 }, when = { class = "MAGE" }, items = { 282416 }, targets = { friend = { 251379 } },
           lines = {
             { kind = "turnin", quest = 92481, npc = 251379, skipIfMissing = true },
           } },
-        { id = "tHUNTER-4", at = { zone = 16593, x = 42.49, y = 23.79, r = 10 }, when = { class = "HUNTER" }, minLevel = 4,
+        { id = "tROGUE-2", at = { zone = 16593, x = 43.74, y = 24.36, r = 10 }, when = { class = "ROGUE" }, minLevel = 2,
           lines = {
-            { kind = "train", level = 4, class = "HUNTER", npc = 251376 },
-            { kind = "selljunk", at = { zone = 16593, x = 42.75, y = 24.49, r = 10 }, npc = 251537 },
-          } },
-        { id = "tROGUE-4", at = { zone = 16593, x = 43.74, y = 24.36, r = 10 }, when = { class = "ROGUE" }, minLevel = 4,
-          lines = {
-            { kind = "train", level = 4, class = "ROGUE", npc = 251389 },
+            { kind = "train", level = 2, class = "ROGUE", npc = 251389 },
             { kind = "selljunk", at = { zone = 16593, x = 43.52, y = 23.6, r = 10 }, npc = 251365 },
           } },
-        { id = "tWARRIOR-4", at = { zone = 16593, x = 43.65, y = 24.11, r = 10 }, when = { class = "WARRIOR" }, minLevel = 4,
+        { id = "tWARRIOR-2", at = { zone = 16593, x = 43.65, y = 24.11, r = 10 }, when = { class = "WARRIOR" }, minLevel = 2,
           lines = {
-            { kind = "train", level = 4, class = "WARRIOR", npc = 251964 },
+            { kind = "train", level = 2, class = "WARRIOR", npc = 251964 },
             { kind = "selljunk", at = { zone = 16593, x = 43.52, y = 23.6, r = 10 }, npc = 251365 },
           } },
         { id = "a92471.t92471.a92470", at = { zone = 16593, x = 42.05, y = 23.49, r = 10 }, minLevel = 4, targets = { friend = { 251361, 251366 } },
@@ -196,8 +171,101 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 92470, index = 2, item = 252665 },
             { kind = "objective", quest = 92473, index = 1, item = 251918, at = { zone = 16593, x = 39.78, y = 27.96, r = 40 }, skipIfMissing = true },
           } },
-        { id = "a93461.a92596.o92596.o93461.t92596.a94413.t93461.a92517.a93951.a92515.a92516.a93319", at = { zone = 16593, x = 45.67, y = 45.5, r = 10 }, minLevel = 4, targets = { enemy = { 251903, 254089 }, friend = { 251523, 251903, 251991, 251993, 251906 } },
+        { id = "o93552", at = { zone = 16593, x = 44.24, y = 25.87, r = 40 }, text = "Windstone Cluster is east of your last stop.",
           lines = {
+            { kind = "objective", quest = 93552, index = 1, item = 258772 },
+          } },
+        { id = "o92597.o92465", at = { zone = 16593, x = 46.29, y = 17.87, r = 40 }, text = "Ley Line is north of your last stop.", targets = { enemy = { 251143, 251160 } },
+          lines = {
+            { kind = "objective", quest = 92597, index = 1, object = 460002 },
+            { kind = "objective", quest = 92465, index = 1, at = { zone = 16593, x = 47.17, y = 20.1, r = 40 }, npc = 251160, skipIfMissing = true },
+            { kind = "objective", quest = 92465, index = 2, at = { zone = 16593, x = 47.17, y = 20.1, r = 40 }, npc = 251143, skipIfMissing = true },
+          } },
+        { id = "tDRUID-4", at = { zone = 16593, x = 41.66, y = 23.33, r = 10 }, when = { class = "DRUID" }, minLevel = 4,
+          lines = {
+            { kind = "train", level = 4, class = "DRUID", npc = 251373 },
+            { kind = "selljunk", at = { zone = 16593, x = 42.75, y = 24.49, r = 10 }, npc = 251537 },
+          } },
+        { id = "tHUNTER-4", at = { zone = 16593, x = 42.49, y = 23.79, r = 10 }, when = { class = "HUNTER" }, minLevel = 4,
+          lines = {
+            { kind = "train", level = 4, class = "HUNTER", npc = 251376 },
+            { kind = "selljunk", at = { zone = 16593, x = 42.75, y = 24.49, r = 10 }, npc = 251537 },
+          } },
+        { id = "tMAGE-4", at = { zone = 16593, x = 41.55, y = 23.68, r = 10 }, when = { class = "MAGE" }, minLevel = 4,
+          lines = {
+            { kind = "train", level = 4, class = "MAGE", npc = 251379 },
+            { kind = "selljunk", at = { zone = 16593, x = 42.75, y = 24.49, r = 10 }, npc = 251537 },
+          } },
+        { id = "tROGUE-4", at = { zone = 16593, x = 43.74, y = 24.36, r = 10 }, when = { class = "ROGUE" }, minLevel = 4,
+          lines = {
+            { kind = "train", level = 4, class = "ROGUE", npc = 251389 },
+            { kind = "selljunk", at = { zone = 16593, x = 43.52, y = 23.6, r = 10 }, npc = 251365 },
+          } },
+        { id = "tWARRIOR-4", at = { zone = 16593, x = 43.65, y = 24.11, r = 10 }, when = { class = "WARRIOR" }, minLevel = 4,
+          lines = {
+            { kind = "train", level = 4, class = "WARRIOR", npc = 251964 },
+            { kind = "selljunk", at = { zone = 16593, x = 43.52, y = 23.6, r = 10 }, npc = 251365 },
+          } },
+        { id = "t92470.a92472.t93552.t92462.a92463.t92597.t92473", at = { zone = 16593, x = 42.76, y = 23.66, r = 10 }, minLevel = 3, targets = { friend = { 251366, 251363, 251368, 251371, 257551 } },
+          lines = {
+            { kind = "turnin", quest = 92470, npc = 251366 },
+            { kind = "accept", quest = 92472, npc = 251366, requires = { 92470 } },
+            { kind = "turnin", quest = 93552, at = { zone = 16593, x = 43.37, y = 23.98, r = 10 }, npc = 251363 },
+            { kind = "turnin", quest = 92462, at = { zone = 16593, x = 43.44, y = 24.79, r = 10 }, npc = 251368 },
+            { kind = "accept", quest = 92463, at = { zone = 16593, x = 43.44, y = 24.79, r = 10 }, npc = 251368, requires = { 92462 } },
+            { kind = "turnin", quest = 92597, at = { zone = 16593, x = 43.33, y = 24.92, r = 10 }, npc = 251371 },
+            { kind = "turnin", quest = 92473, at = { zone = 16593, x = 42.41, y = 25.17, r = 10 }, npc = 257551, skipIfMissing = true },
+          } },
+        { id = "o92463", at = { zone = 16593, x = 48.41, y = 28.53, r = 40 }, text = "The Cirrusfly Queen is southeast of Aetheen of the Gales.", targets = { enemy = { 251404 } },
+          lines = {
+            { kind = "objective", quest = 92463, index = 1, npc = 251404 },
+          } },
+        { id = "t92463", at = { zone = 16593, x = 43.44, y = 24.79, r = 10 }, targets = { friend = { 251368 } },
+          lines = {
+            { kind = "turnin", quest = 92463, npc = 251368 },
+          } },
+        { id = "t92483", at = { zone = 16593, x = 43.74, y = 24.36, r = 10 }, when = { class = "ROGUE" }, items = { 282422 }, targets = { friend = { 251389 } },
+          lines = {
+            { kind = "turnin", quest = 92483, npc = 251389, skipIfMissing = true },
+          } },
+        { id = "t92464.t92465.a92469", at = { zone = 16593, x = 47.25, y = 21.98, r = 10 }, minLevel = 3, targets = { friend = { 249363 } },
+          lines = {
+            { kind = "turnin", quest = 92464, npc = 249363 },
+            { kind = "turnin", quest = 92465, npc = 249363, skipIfMissing = true },
+            { kind = "accept", quest = 92469, npc = 249363, ifDone = 92465, requires = { 92465 } },
+          } },
+        { id = "tDRUID-6", at = { zone = 16593, x = 41.66, y = 23.33, r = 10 }, when = { class = "DRUID" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "DRUID", npc = 251373 },
+            { kind = "selljunk", at = { zone = 16593, x = 42.75, y = 24.49, r = 10 }, npc = 251537 },
+          } },
+        { id = "tHUNTER-6", at = { zone = 16593, x = 42.49, y = 23.79, r = 10 }, when = { class = "HUNTER" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "HUNTER", npc = 251376 },
+            { kind = "selljunk", at = { zone = 16593, x = 42.75, y = 24.49, r = 10 }, npc = 251537 },
+          } },
+        { id = "tMAGE-6", at = { zone = 16593, x = 41.55, y = 23.68, r = 10 }, when = { class = "MAGE" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "MAGE", npc = 251379 },
+            { kind = "selljunk", at = { zone = 16593, x = 42.75, y = 24.49, r = 10 }, npc = 251537 },
+          } },
+        { id = "tROGUE-6", at = { zone = 16593, x = 43.74, y = 24.36, r = 10 }, when = { class = "ROGUE" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "ROGUE", npc = 251389 },
+            { kind = "selljunk", at = { zone = 16593, x = 43.52, y = 23.6, r = 10 }, npc = 251365 },
+          } },
+        { id = "tWARRIOR-6", at = { zone = 16593, x = 43.65, y = 24.11, r = 10 }, when = { class = "WARRIOR" }, minLevel = 6,
+          lines = {
+            { kind = "train", level = 6, class = "WARRIOR", npc = 251964 },
+            { kind = "selljunk", at = { zone = 16593, x = 43.52, y = 23.6, r = 10 }, npc = 251365 },
+          } },
+        { id = "t92469", at = { zone = 16593, x = 42.05, y = 23.49, r = 10 }, targets = { friend = { 251361 } },
+          lines = {
+            { kind = "turnin", quest = 92469, npc = 251361, skipIfMissing = true },
+          } },
+        { id = "t92472.a93461.a92596.o92596.o93461.t92596.a94413.t93461.a92517.a93951.a92515.a92516.a93319", at = { zone = 16593, x = 45.67, y = 45.5, r = 10 }, minLevel = 4, targets = { enemy = { 251903, 254089 }, friend = { 251523, 251903, 251991, 251993, 251906 } },
+          lines = {
+            { kind = "turnin", quest = 92472, npc = 251523 },
             { kind = "accept", quest = 93461, npc = 251523 },
             { kind = "accept", quest = 92596, at = { zone = 16593, x = 44.98, y = 46.36, r = 10 }, npc = 251903 },
             { kind = "objective", quest = 92596, index = 1, at = { zone = 16593, x = 44.98, y = 46.36, r = 40 }, npc = 251903 },
@@ -211,31 +279,6 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 92515, at = { zone = 16593, x = 44.68, y = 44.52, r = 10 }, npc = 251993, requires = { 93461 } },
             { kind = "accept", quest = 92516, at = { zone = 16593, x = 44.46, y = 44.96, r = 10 }, npc = 251906, requires = { 93461 } },
             { kind = "accept", quest = 93319, at = { zone = 16593, x = 44.46, y = 44.96, r = 10 }, npc = 251906, requires = { 93461 } },
-          } },
-        { id = "tDRUID-6", at = { zone = 16593, x = 45.16, y = 44.22, r = 10 }, when = { class = "DRUID" }, minLevel = 6,
-          lines = {
-            { kind = "train", level = 6, class = "DRUID", npc = 254081 },
-            { kind = "selljunk", at = { zone = 16593, x = 44.88, y = 44.18, r = 10 }, npc = 251991 },
-          } },
-        { id = "tHUNTER-6", at = { zone = 16593, x = 45.26, y = 44.24, r = 10 }, when = { class = "HUNTER" }, minLevel = 6,
-          lines = {
-            { kind = "train", level = 6, class = "HUNTER", npc = 254084 },
-            { kind = "selljunk", at = { zone = 16593, x = 44.88, y = 44.18, r = 10 }, npc = 251991 },
-          } },
-        { id = "tMAGE-6", at = { zone = 16593, x = 45.1, y = 45.87, r = 10 }, when = { class = "MAGE" }, minLevel = 6,
-          lines = {
-            { kind = "train", level = 6, class = "MAGE", npc = 254086 },
-            { kind = "selljunk", at = { zone = 16593, x = 44.71, y = 45.48, r = 10 }, npc = 254358 },
-          } },
-        { id = "tROGUE-6", at = { zone = 16593, x = 43.15, y = 43.26, r = 10 }, when = { class = "ROGUE" }, minLevel = 6,
-          lines = {
-            { kind = "train", level = 6, class = "ROGUE", npc = 254087 },
-            { kind = "selljunk", at = { zone = 16593, x = 43.24, y = 43.15, r = 10 }, npc = 257020 },
-          } },
-        { id = "tWARRIOR-6", at = { zone = 16593, x = 44.95, y = 45.1, r = 10 }, when = { class = "WARRIOR" }, minLevel = 6,
-          lines = {
-            { kind = "train", level = 6, class = "WARRIOR", npc = 254088 },
-            { kind = "selljunk", at = { zone = 16593, x = 44.77, y = 45.05, r = 10 }, npc = 254360 },
           } },
         { id = "a92553.a93318", at = { zone = 16593, x = 43.85, y = 43.84, r = 10 }, minLevel = 4, maxLevel = 14, targets = { friend = { 251905 } },
           lines = {
@@ -260,319 +303,56 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 92553, index = 2, item = 5469, at = { zone = 16593, x = 44.58, y = 52.53, r = 40 }, skipIfMissing = true },
             { kind = "objective", quest = 92515, index = 1, item = 252670, at = { zone = 16593, x = 44.97, y = 52.79, r = 40 } },
           } },
-        { id = "a98512.o98512.t98512", at = { zone = 16593, x = 56.81, y = 61.11, r = 10 }, minLevel = 6, targets = { enemy = { 254626 }, friend = { 273017 } },
+        { id = "tDRUID-8", at = { zone = 16593, x = 45.16, y = 44.22, r = 10 }, when = { class = "DRUID" }, minLevel = 8,
           lines = {
-            { kind = "accept", quest = 98512, npc = 273017 },
-            { kind = "objective", quest = 98512, index = 1, at = { zone = 16593, x = 56.08, y = 60.41, r = 40 }, npc = 254626 },
-            { kind = "turnin", quest = 98512, npc = 273017 },
-          } },
-        { id = "tDRUID-8", at = { zone = 16593, x = 63.99, y = 75.08, r = 10 }, when = { class = "DRUID" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "DRUID", npc = 252359 },
-            { kind = "selljunk", at = { zone = 16593, x = 63.27, y = 75.72, r = 10 }, npc = 257008 },
-          } },
-        { id = "tHUNTER-8", at = { zone = 16593, x = 59.56, y = 72.63, r = 10 }, when = { class = "HUNTER" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "HUNTER", npc = 252389 },
-            { kind = "selljunk", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, npc = 257006 },
-          } },
-        { id = "tROGUE-8", at = { zone = 16593, x = 59.9, y = 72.48, r = 10 }, when = { class = "ROGUE" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "ROGUE", npc = 252379 },
-            { kind = "selljunk", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, npc = 257006 },
-          } },
-        { id = "tWARRIOR-8", at = { zone = 16593, x = 59.89, y = 72.87, r = 10 }, when = { class = "WARRIOR" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "WARRIOR", npc = 252377 },
-            { kind = "selljunk", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, npc = 257006 },
-          } },
-        { id = "a93317", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, minLevel = 4, maxLevel = 17, targets = { friend = { 257006 } },
-          lines = {
-            { kind = "accept", quest = 93317, npc = 257006 },
-          } },
-        { id = "a92679.b@16593", at = { zone = 16593, x = 62.08, y = 73.17, r = 10 }, minLevel = 5, targets = { friend = { 252448 } },
-          lines = {
-            { kind = "accept", quest = 92679, npc = 252448 },
-            { kind = "sethearth", npc = 255940 },
-          } },
-        { id = "tMAGE-8", at = { zone = 16593, x = 65.91, y = 80.57, r = 10 }, when = { class = "MAGE" }, minLevel = 8,
-          lines = {
-            { kind = "train", level = 8, class = "MAGE", npc = 252373 },
-            { kind = "selljunk", at = { zone = 16593, x = 65.44, y = 80.47, r = 10 }, npc = 252388 },
-          } },
-        { id = "a94484", at = { zone = 16593, x = 63.99, y = 75.08, r = 10 }, minLevel = 8, maxLevel = 19, targets = { friend = { 252359 } },
-          lines = {
-            { kind = "accept", quest = 94484, npc = 252359 },
-          } },
-        { id = "a94896.a94897", at = { zone = 16593, x = 66.04, y = 74.41, r = 10 }, minLevel = 8, maxLevel = 19, targets = { friend = { 259012 } },
-          lines = {
-            { kind = "accept", quest = 94896, npc = 259012 },
-            { kind = "accept", quest = 94897, npc = 259012 },
-          } },
-        { id = "h", text = "Use your hearthstone to return to Zephras Isle.",
-          lines = {
-            { kind = "hearth", to = { zone = 16593, x = 62.19, y = 72.61 } },
-          } },
-        { id = "o92679.t92679.a92682.o92682.t92682.a92683", at = { zone = 16593, x = 46.7, y = 81.95, r = 40 }, minLevel = 5, items = { 253666 }, targets = { enemy = { 252800, 252802, 252448 }, friend = { 252800 } },
-          lines = {
-            { kind = "objective", quest = 92679, index = 1, npc = 252800 },
-            { kind = "objective", quest = 92679, index = 2, npc = 252448 },
-            { kind = "turnin", quest = 92679, npc = 252800 },
-            { kind = "accept", quest = 92682, npc = 252800, requires = { 92679 } },
-            { kind = "objective", quest = 92682, index = 1, at = { zone = 16593, x = 48.09, y = 80.78, r = 40 }, npc = 252802 },
-            { kind = "objective", quest = 92682, index = 2, item = 253591, at = { zone = 16593, x = 48.09, y = 80.78, r = 40 } },
-            { kind = "turnin", quest = 92682, npc = 252800 },
-            { kind = "accept", quest = 92683, npc = 252800, requires = { 92679 } },
-          } },
-        { id = "o92683", at = { zone = 16593, x = 50.29, y = 78.67, r = 40 }, text = "Flutterfly Dust is northeast of Aamelia Windfield.", items = { 253666 },
-          lines = {
-            { kind = "objective", quest = 92683, index = 1, item = 253595 },
-          } },
-        { id = "t92683.a92684", at = { zone = 16593, x = 46.7, y = 81.95, r = 10 }, minLevel = 5, items = { 253666 }, targets = { friend = { 252800 } },
-          lines = {
-            { kind = "turnin", quest = 92683, npc = 252800 },
-            { kind = "accept", quest = 92684, npc = 252800, requires = { 92679 } },
-          } },
-        { id = "o92684", at = { zone = 16593, x = 55.48, y = 73.26, r = 40 }, text = "Lowlands Galestrider Tenderloin is northeast of Aamelia Windfield.", targets = { enemy = { 251707 } },
-          lines = {
-            { kind = "objective", quest = 92684, index = 1, item = 253597 },
-          } },
-        { id = "t92684.a92685", at = { zone = 16593, x = 46.7, y = 81.95, r = 10 }, minLevel = 5, targets = { friend = { 252800 } },
-          lines = {
-            { kind = "turnin", quest = 92684, npc = 252800 },
-            { kind = "accept", quest = 92685, npc = 252800, requires = { 92682, 92683, 92684 } },
-          } },
-        { id = "o92685", at = { zone = 16593, x = 49.16, y = 74.95, r = 40 }, text = "Blood-Stained Bandit Mask is northeast of Aamelia Windfield.", targets = { enemy = { 252820 } },
-          lines = {
-            { kind = "objective", quest = 92685, index = 1, item = 253596 },
-          } },
-        { id = "t92685.a92693.o92693.t92693.a92703", at = { zone = 16593, x = 46.7, y = 81.95, r = 10 }, minLevel = 5, targets = { enemy = { 252800, 252863 }, friend = { 252800 } },
-          lines = {
-            { kind = "turnin", quest = 92685, npc = 252800 },
-            { kind = "accept", quest = 92693, npc = 252800, requires = { 92685 } },
-            { kind = "objective", quest = 92693, index = 1, npc = 252800 },
-            { kind = "objective", quest = 92693, index = 2, npc = 252863 },
-            { kind = "turnin", quest = 92693, npc = 252800 },
-            { kind = "accept", quest = 92703, npc = 252800, requires = { 92693 } },
-          } },
-        { id = "o93317", at = { zone = 16593, x = 53.65, y = 58.85, r = 40 }, text = "Windsong Crawler Meat is northeast of Aamelia Windfield.", targets = { enemy = { 254588 } },
-          lines = {
-            { kind = "objective", quest = 93317, index = 1, item = 257941, skipIfMissing = true },
-          } },
-        { id = "h#2", text = "Use your hearthstone to return to Zephras Isle.",
-          lines = {
-            { kind = "hearth", to = { zone = 16593, x = 62.19, y = 72.61 } },
-          } },
-        { id = "tDRUID-10", at = { zone = 16593, x = 63.99, y = 75.08, r = 10 }, when = { class = "DRUID" }, minLevel = 10,
-          lines = {
-            { kind = "train", level = 10, class = "DRUID", npc = 252359 },
-            { kind = "selljunk", at = { zone = 16593, x = 63.27, y = 75.72, r = 10 }, npc = 257008 },
-          } },
-        { id = "tHUNTER-10", at = { zone = 16593, x = 59.56, y = 72.63, r = 10 }, when = { class = "HUNTER" }, minLevel = 10,
-          lines = {
-            { kind = "train", level = 10, class = "HUNTER", npc = 252389 },
-            { kind = "selljunk", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, npc = 257006 },
-          } },
-        { id = "tROGUE-10", at = { zone = 16593, x = 59.9, y = 72.48, r = 10 }, when = { class = "ROGUE" }, minLevel = 10,
-          lines = {
-            { kind = "train", level = 10, class = "ROGUE", npc = 252379 },
-            { kind = "selljunk", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, npc = 257006 },
-          } },
-        { id = "tWARRIOR-10", at = { zone = 16593, x = 59.89, y = 72.87, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10,
-          lines = {
-            { kind = "train", level = 10, class = "WARRIOR", npc = 252377 },
-            { kind = "selljunk", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, npc = 257006 },
-          } },
-        { id = "t92703", at = { zone = 16593, x = 62.08, y = 73.17, r = 10 }, targets = { friend = { 252448 } },
-          lines = {
-            { kind = "turnin", quest = 92703, npc = 252448 },
-          } },
-        { id = "t93317", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, targets = { friend = { 257006 } },
-          lines = {
-            { kind = "turnin", quest = 93317, npc = 257006, skipIfMissing = true },
-          } },
-        { id = "a94003", at = { zone = 16593, x = 59.89, y = 72.87, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, maxLevel = 18, targets = { friend = { 252377 } },
-          lines = {
-            { kind = "accept", quest = 94003, npc = 252377 },
-          } },
-        { id = "a92698", at = { zone = 16593, x = 48.87, y = 78.25, r = 10 }, minLevel = 5, maxLevel = 17, targets = { friend = { 250929 } },
-          lines = {
-            { kind = "accept", quest = 92698, npc = 250929, requires = { 92679 } },
-          } },
-        { id = "t92698", at = { zone = 16593, x = 46.7, y = 81.95, r = 10 }, targets = { friend = { 252800 } },
-          lines = {
-            { kind = "turnin", quest = 92698, npc = 252800, skipIfMissing = true },
-          } },
-        { id = "o94003", at = { zone = 16593, x = 56.63, y = 50.37, r = 40 }, text = "Skybreaker Bulwark is northeast of Aamelia Windfield.", when = { class = "WARRIOR" }, targets = { enemy = { 257196 } },
-          lines = {
-            { kind = "objective", quest = 94003, index = 1, item = 263993, skipIfMissing = true },
-          } },
-        { id = "t94003", at = { zone = 16593, x = 59.89, y = 72.87, r = 10 }, when = { class = "WARRIOR" }, targets = { friend = { 252377 } },
-          lines = {
-            { kind = "turnin", quest = 94003, npc = 252377, skipIfMissing = true },
-          } },
-        { id = "o92517", at = { zone = 16593, x = 48.78, y = 37.51, r = 40 }, text = "The Highlands Bandits are north of Aamelia Windfield.", targets = { enemy = { 251918, 255534 } },
-          lines = {
-            { kind = "objective", quest = 92517, index = 1, npc = 251918 },
-            { kind = "objective", quest = 92517, index = 2, npc = 255534 },
-          } },
-        { id = "a93159.o93159.t93159.a93160.a93172", at = { zone = 16593, x = 53.96, y = 38.9, r = 10 }, minLevel = 8, targets = { enemy = { 251684 }, friend = { 251684 } },
-          lines = {
-            { kind = "accept", quest = 93159, npc = 251684 },
-            { kind = "objective", quest = 93159, index = 1, npc = 251684 },
-            { kind = "turnin", quest = 93159, npc = 251684 },
-            { kind = "accept", quest = 93160, npc = 251684, requires = { 93159 } },
-            { kind = "accept", quest = 93172, npc = 251684, requires = { 93159 } },
-          } },
-        { id = "o93160", at = { zone = 16593, x = 58.64, y = 38.81, r = 40 }, text = "Zephyrseed is east of Strange Hermit.",
-          lines = {
-            { kind = "objective", quest = 93160, index = 1, item = 257128 },
-          } },
-        { id = "t94484.a94485.o94485.t94485.a94486", at = { zone = 16593, x = 61.7, y = 39.22, r = 10 }, minLevel = 8, targets = { friend = { 257944 } },
-          lines = {
-            { kind = "turnin", quest = 94484, npc = 257944, skipIfMissing = true },
-            { kind = "accept", quest = 94485, npc = 257944, ifDone = 94484, requires = { 94484 } },
-            { kind = "objective", quest = 94485, index = 1, item = 265105, at = { zone = 16593, x = 60.93, y = 38.38, r = 40 }, skipIfMissing = true },
-            { kind = "turnin", quest = 94485, npc = 257944, skipIfMissing = true },
-            { kind = "accept", quest = 94486, npc = 257944, ifDone = 94484, requires = { 94484 } },
-          } },
-        { id = "o94486", at = { zone = 16593, x = 58.76, y = 39.62, r = 40 }, targets = { enemy = { 256092 } },
-          lines = {
-            { kind = "objective", quest = 94486, index = 1, item = 265140, skipIfMissing = true },
-          } },
-        { id = "t94486.a94487", at = { zone = 16593, x = 61.7, y = 39.22, r = 10 }, minLevel = 8, targets = { friend = { 257944 } },
-          lines = {
-            { kind = "turnin", quest = 94486, npc = 257944, skipIfMissing = true },
-            { kind = "accept", quest = 94487, npc = 257944, ifDone = 94484, requires = { 94484 } },
-          } },
-        { id = "o94487", at = { zone = 16593, x = 63.41, y = 37.19, r = 40 }, targets = { enemy = { 252664, 252665 } },
-          lines = {
-            { kind = "objective", quest = 94487, index = 1, item = 265141, skipIfMissing = true },
-          } },
-        { id = "t94487", at = { zone = 16593, x = 61.7, y = 39.22, r = 10 }, targets = { friend = { 257944 } },
-          lines = {
-            { kind = "turnin", quest = 94487, npc = 257944, skipIfMissing = true },
-          } },
-        { id = "a94488", at = { zone = 16593, x = 61.7, y = 39.22, r = 10 }, minLevel = 8, skip = { { kind = "notturnedin", quest = 94486 }, { kind = "notturnedin", quest = 94487 } }, targets = { friend = { 257944 } },
-          lines = {
-            { kind = "accept", quest = 94488, npc = 257944, ifDone = 94485, requires = { 94485, 94486, 94487 } },
-          } },
-        { id = "o94488", at = { zone = 16593, x = 65.53, y = 36.32, r = 40 }, text = "Commander Haalien's Severed Head is northeast of Elegael Thornpaw.", targets = { enemy = { 253622 } },
-          lines = {
-            { kind = "objective", quest = 94488, index = 1, item = 265475, skipIfMissing = true },
-          } },
-        { id = "t94488", at = { zone = 16593, x = 61.7, y = 39.22, r = 10 }, targets = { friend = { 257944 } },
-          lines = {
-            { kind = "turnin", quest = 94488, npc = 257944, skipIfMissing = true },
-          } },
-        { id = "a94489", at = { zone = 16593, x = 61.7, y = 39.22, r = 10 }, minLevel = 8, skip = { { kind = "notturnedin", quest = 94486 }, { kind = "notturnedin", quest = 94487 } }, targets = { friend = { 257944 } },
-          lines = {
-            { kind = "accept", quest = 94489, npc = 257944, ifDone = 94485, requires = { 94485, 94486, 94487 } },
-          } },
-        { id = "o94489", at = { zone = 16593, x = 64.48, y = 34.74, r = 40 }, text = "The Jorel Windsingers are northeast of Elegael Thornpaw.", targets = { enemy = { 258130, 258138, 258137, 258134, 258289, 258288 } },
-          lines = {
-            { kind = "objective", quest = 94489, index = 1, npc = 258130, skipIfMissing = true },
-            { kind = "objective", quest = 94489, index = 2, npc = 258134, skipIfMissing = true },
-          } },
-        { id = "t94489", at = { zone = 16593, x = 61.7, y = 39.22, r = 10 }, targets = { friend = { 257944 } },
-          lines = {
-            { kind = "turnin", quest = 94489, npc = 257944, skipIfMissing = true },
-          } },
-        { id = "a93165.o93165.t93165", at = { zone = 16593, x = 63.81, y = 36.01, r = 10 }, minLevel = 8, targets = { enemy = { 252665, 252664, 253622, 252762, 252763, 252765 }, friend = { 254151 } },
-          lines = {
-            { kind = "accept", quest = 93165, npc = 254151, ifDone = 94484, requires = { 94484 } },
-            { kind = "objective", quest = 93165, index = 1, item = 258771, at = { zone = 16593, x = 63.81, y = 37.31, r = 40 }, skipIfMissing = true },
-            { kind = "turnin", quest = 93165, npc = 254151, skipIfMissing = true },
-          } },
-        { id = "o93172.o94896.o94897", at = { zone = 16593, x = 58.29, y = 32.19, r = 40 }, text = "The Wind Hollows are northwest of Vayn Moongaze.", targets = { enemy = { 251676, 259013 } },
-          lines = {
-            { kind = "objective", quest = 93172, index = 1, npc = 251676 },
-            { kind = "objective", quest = 94896, index = 1, item = 266433, skipIfMissing = true },
-            { kind = "objective", quest = 94897, index = 1, item = 266434, at = { zone = 16593, x = 57.05, y = 29.35, r = 40 }, skipIfMissing = true },
-          } },
-        { id = "h#3", text = "Use your hearthstone to return to Zephras Isle.",
-          lines = {
-            { kind = "hearth", to = { zone = 16593, x = 62.19, y = 72.61 } },
-          } },
-        { id = "tDRUID-12", at = { zone = 16593, x = 63.99, y = 75.08, r = 10 }, when = { class = "DRUID" }, minLevel = 12,
-          lines = {
-            { kind = "train", level = 12, class = "DRUID", npc = 252359 },
-            { kind = "selljunk", at = { zone = 16593, x = 63.27, y = 75.72, r = 10 }, npc = 257008 },
-          } },
-        { id = "tMAGE-12", at = { zone = 16593, x = 65.91, y = 80.57, r = 10 }, when = { class = "MAGE" }, minLevel = 12,
-          lines = {
-            { kind = "train", level = 12, class = "MAGE", npc = 252373 },
-            { kind = "selljunk", at = { zone = 16593, x = 65.44, y = 80.47, r = 10 }, npc = 252388 },
-          } },
-        { id = "t94896.t94897", at = { zone = 16593, x = 66.04, y = 74.41, r = 10 }, targets = { friend = { 259012 } },
-          lines = {
-            { kind = "turnin", quest = 94896, npc = 259012, skipIfMissing = true },
-            { kind = "turnin", quest = 94897, npc = 259012, skipIfMissing = true },
-          } },
-        { id = "t93160.t93172", at = { zone = 16593, x = 53.96, y = 38.9, r = 10 }, targets = { friend = { 251684 } },
-          lines = {
-            { kind = "turnin", quest = 93160, npc = 251684 },
-            { kind = "turnin", quest = 93172, npc = 251684 },
-          } },
-        { id = "o93319", at = { zone = 16593, x = 48.78, y = 37.51, r = 40 }, text = "Pilfered Windstone is west of Strange Hermit.", targets = { enemy = { 251918, 255534 } },
-          lines = {
-            { kind = "objective", quest = 93319, index = 1, item = 257945 },
-          } },
-        { id = "tHUNTER-12", at = { zone = 16593, x = 45.26, y = 44.24, r = 10 }, when = { class = "HUNTER" }, minLevel = 12,
-          lines = {
-            { kind = "train", level = 12, class = "HUNTER", npc = 254084 },
+            { kind = "train", level = 8, class = "DRUID", npc = 254081 },
             { kind = "selljunk", at = { zone = 16593, x = 44.88, y = 44.18, r = 10 }, npc = 251991 },
           } },
-        { id = "a94007", at = { zone = 16593, x = 45.26, y = 44.24, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, maxLevel = 18, targets = { friend = { 254084 } },
+        { id = "tHUNTER-8", at = { zone = 16593, x = 45.26, y = 44.24, r = 10 }, when = { class = "HUNTER" }, minLevel = 8,
           lines = {
-            { kind = "accept", quest = 94007, npc = 254084 },
+            { kind = "train", level = 8, class = "HUNTER", npc = 254084 },
+            { kind = "selljunk", at = { zone = 16593, x = 44.88, y = 44.18, r = 10 }, npc = 251991 },
           } },
-        { id = "tROGUE-12", at = { zone = 16593, x = 43.15, y = 43.26, r = 10 }, when = { class = "ROGUE" }, minLevel = 12,
+        { id = "tMAGE-8", at = { zone = 16593, x = 45.1, y = 45.87, r = 10 }, when = { class = "MAGE" }, minLevel = 8,
           lines = {
-            { kind = "train", level = 12, class = "ROGUE", npc = 254087 },
+            { kind = "train", level = 8, class = "MAGE", npc = 254086 },
+            { kind = "selljunk", at = { zone = 16593, x = 44.71, y = 45.48, r = 10 }, npc = 254358 },
+          } },
+        { id = "tROGUE-8", at = { zone = 16593, x = 43.15, y = 43.26, r = 10 }, when = { class = "ROGUE" }, minLevel = 8,
+          lines = {
+            { kind = "train", level = 8, class = "ROGUE", npc = 254087 },
             { kind = "selljunk", at = { zone = 16593, x = 43.24, y = 43.15, r = 10 }, npc = 257020 },
           } },
-        { id = "tWARRIOR-14", at = { zone = 16593, x = 44.95, y = 45.1, r = 10 }, when = { class = "WARRIOR" }, minLevel = 14,
+        { id = "tWARRIOR-8", at = { zone = 16593, x = 44.95, y = 45.1, r = 10 }, when = { class = "WARRIOR" }, minLevel = 8,
           lines = {
-            { kind = "train", level = 14, class = "WARRIOR", npc = 254088 },
+            { kind = "train", level = 8, class = "WARRIOR", npc = 254088 },
             { kind = "selljunk", at = { zone = 16593, x = 44.77, y = 45.05, r = 10 }, npc = 254360 },
           } },
-        { id = "t93951.t92515.t92553.t92516.t93319.t93318.t92517.a93036.t93036.a92529", at = { zone = 16593, x = 44.88, y = 44.18, r = 10 }, minLevel = 5, targets = { friend = { 251991, 251993, 251905, 251906, 252172, 251523, 251904 } },
+        { id = "t94413.t93318", at = { zone = 16593, x = 44.98, y = 46.36, r = 10 }, targets = { friend = { 251903, 252172 } },
+          lines = {
+            { kind = "turnin", quest = 94413, npc = 251903 },
+            { kind = "turnin", quest = 93318, at = { zone = 16593, x = 45.24, y = 45.18, r = 10 }, npc = 252172, skipIfMissing = true },
+          } },
+        { id = "t93951.t92515.t92516.t92553", at = { zone = 16593, x = 44.88, y = 44.18, r = 10 }, targets = { friend = { 251991, 251993, 251906, 251905 } },
           lines = {
             { kind = "turnin", quest = 93951, npc = 251991 },
             { kind = "turnin", quest = 92515, npc = 251993 },
-            { kind = "turnin", quest = 92553, at = { zone = 16593, x = 43.85, y = 43.84, r = 10 }, npc = 251905, skipIfMissing = true },
             { kind = "turnin", quest = 92516, at = { zone = 16593, x = 44.46, y = 44.96, r = 10 }, npc = 251906 },
-            { kind = "turnin", quest = 93319, at = { zone = 16593, x = 44.46, y = 44.96, r = 10 }, npc = 251906 },
-            { kind = "turnin", quest = 93318, at = { zone = 16593, x = 45.24, y = 45.18, r = 10 }, npc = 252172, skipIfMissing = true },
+            { kind = "turnin", quest = 92553, at = { zone = 16593, x = 43.85, y = 43.84, r = 10 }, npc = 251905, skipIfMissing = true },
+          } },
+        { id = "o92517.o93319", at = { zone = 16593, x = 48.78, y = 37.51, r = 40 }, text = "The Highlands Bandits are northeast of Taleen Shimmerthread.", targets = { enemy = { 251918, 255534 } },
+          lines = {
+            { kind = "objective", quest = 92517, index = 1, npc = 251918 },
+            { kind = "objective", quest = 92517, index = 2, npc = 255534 },
+            { kind = "objective", quest = 93319, index = 1, item = 257945 },
+          } },
+        { id = "t93319.t92517.a93036.t93036.a92529", at = { zone = 16593, x = 44.46, y = 44.96, r = 10 }, minLevel = 5, targets = { friend = { 251906, 251523, 251904 } },
+          lines = {
+            { kind = "turnin", quest = 93319, npc = 251906 },
             { kind = "turnin", quest = 92517, at = { zone = 16593, x = 45.67, y = 45.5, r = 10 }, npc = 251523 },
             { kind = "accept", quest = 93036, at = { zone = 16593, x = 45.67, y = 45.5, r = 10 }, npc = 251523, requires = { 92517 } },
             { kind = "turnin", quest = 93036, at = { zone = 16593, x = 44.88, y = 45.53, r = 10 }, npc = 251904 },
             { kind = "accept", quest = 92529, at = { zone = 16593, x = 44.88, y = 45.53, r = 10 }, npc = 251904, requires = { 93036 } },
-          } },
-        { id = "tDRUID-14", at = { zone = 16593, x = 45.16, y = 44.22, r = 10 }, when = { class = "DRUID" }, minLevel = 14,
-          lines = {
-            { kind = "train", level = 14, class = "DRUID", npc = 254081 },
-            { kind = "selljunk", at = { zone = 16593, x = 44.88, y = 44.18, r = 10 }, npc = 251991 },
-          } },
-        { id = "tHUNTER-14", at = { zone = 16593, x = 45.26, y = 44.24, r = 10 }, when = { class = "HUNTER" }, minLevel = 14,
-          lines = {
-            { kind = "train", level = 14, class = "HUNTER", npc = 254084 },
-            { kind = "selljunk", at = { zone = 16593, x = 44.88, y = 44.18, r = 10 }, npc = 251991 },
-          } },
-        { id = "tMAGE-14", at = { zone = 16593, x = 45.1, y = 45.87, r = 10 }, when = { class = "MAGE" }, minLevel = 14,
-          lines = {
-            { kind = "train", level = 14, class = "MAGE", npc = 254086 },
-            { kind = "selljunk", at = { zone = 16593, x = 44.71, y = 45.48, r = 10 }, npc = 254358 },
-          } },
-        { id = "tROGUE-14", at = { zone = 16593, x = 43.15, y = 43.26, r = 10 }, when = { class = "ROGUE" }, minLevel = 14,
-          lines = {
-            { kind = "train", level = 14, class = "ROGUE", npc = 254087 },
-            { kind = "selljunk", at = { zone = 16593, x = 43.24, y = 43.15, r = 10 }, npc = 257020 },
-          } },
-        { id = "t94413", at = { zone = 16593, x = 44.98, y = 46.36, r = 10 }, targets = { friend = { 251903 } },
-          lines = {
-            { kind = "turnin", quest = 94413, npc = 251903 },
           } },
         { id = "t92529.a92528", at = { zone = 16593, x = 46.89, y = 56.23, r = 10 }, minLevel = 5, targets = { friend = { 257065 } },
           lines = {
@@ -590,6 +370,104 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 93926, npc = 251523, requires = { 92528 } },
             { kind = "accept", quest = 92551, npc = 252172, requires = { 92528 } },
           } },
+        { id = "a94007", at = { zone = 16593, x = 45.26, y = 44.24, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, maxLevel = 18, targets = { friend = { 254084 } },
+          lines = {
+            { kind = "accept", quest = 94007, npc = 254084 },
+          } },
+        { id = "a93159.o93159.t93159.a93160.a93172", at = { zone = 16593, x = 53.96, y = 38.9, r = 10 }, minLevel = 8, targets = { enemy = { 251684 }, friend = { 251684 } },
+          lines = {
+            { kind = "accept", quest = 93159, npc = 251684 },
+            { kind = "objective", quest = 93159, index = 1, npc = 251684 },
+            { kind = "turnin", quest = 93159, npc = 251684 },
+            { kind = "accept", quest = 93160, npc = 251684, requires = { 93159 } },
+            { kind = "accept", quest = 93172, npc = 251684, requires = { 93159 } },
+          } },
+        { id = "o93172", at = { zone = 16593, x = 58.29, y = 32.19, r = 40 }, text = "The Wind Hollows are northeast of Strange Hermit.", targets = { enemy = { 251676 } },
+          lines = {
+            { kind = "objective", quest = 93172, index = 1, npc = 251676 },
+          } },
+        { id = "a94493.t94493.a94485.a94486.a94487", at = { zone = 16593, x = 61.7, y = 39.22, r = 10 }, minLevel = 8, targets = { friend = { 257944 } },
+          lines = {
+            { kind = "accept", quest = 94493, npc = 257944 },
+            { kind = "turnin", quest = 94493, npc = 257944 },
+            { kind = "accept", quest = 94485, npc = 257944, requires = { 94493 } },
+            { kind = "accept", quest = 94486, npc = 257944, requires = { 94493 } },
+            { kind = "accept", quest = 94487, npc = 257944, requires = { 94493 } },
+          } },
+        { id = "a93165.o93165.t93165.o94487", at = { zone = 16593, x = 63.81, y = 36.01, r = 10 }, minLevel = 8, targets = { enemy = { 252665, 252664, 253622, 252762, 252763, 252765 }, friend = { 254151 } },
+          lines = {
+            { kind = "accept", quest = 93165, npc = 254151, requires = { 94493 } },
+            { kind = "objective", quest = 93165, index = 1, item = 258771, at = { zone = 16593, x = 63.81, y = 37.31, r = 40 } },
+            { kind = "turnin", quest = 93165, npc = 254151 },
+            { kind = "objective", quest = 94487, index = 1, item = 265141, at = { zone = 16593, x = 63.41, y = 37.19, r = 40 } },
+          } },
+        { id = "o94485.o93160.o94486", at = { zone = 16593, x = 60.93, y = 38.38, r = 40 }, targets = { enemy = { 256092 } },
+          lines = {
+            { kind = "objective", quest = 94485, index = 1, item = 265105 },
+            { kind = "objective", quest = 93160, index = 1, item = 257128, at = { zone = 16593, x = 58.64, y = 38.81, r = 40 } },
+            { kind = "objective", quest = 94486, index = 1, item = 265140, at = { zone = 16593, x = 58.76, y = 39.62, r = 40 } },
+          } },
+        { id = "t93160.t93172", at = { zone = 16593, x = 53.96, y = 38.9, r = 10 }, targets = { friend = { 251684 } },
+          lines = {
+            { kind = "turnin", quest = 93160, npc = 251684 },
+            { kind = "turnin", quest = 93172, npc = 251684 },
+          } },
+        { id = "t94485.t94486.t94487.a94488.a94489", at = { zone = 16593, x = 61.7, y = 39.22, r = 10 }, minLevel = 8, targets = { friend = { 257944 } },
+          lines = {
+            { kind = "turnin", quest = 94485, npc = 257944 },
+            { kind = "turnin", quest = 94486, npc = 257944 },
+            { kind = "turnin", quest = 94487, npc = 257944 },
+            { kind = "accept", quest = 94488, npc = 257944, requires = { 94485, 94486, 94487 } },
+            { kind = "accept", quest = 94489, npc = 257944, requires = { 94485, 94486, 94487 } },
+          } },
+        { id = "o94489.o94488", at = { zone = 16593, x = 64.48, y = 34.74, r = 40 }, text = "The Jorel Windsingers are northeast of Elegael Thornpaw.", targets = { enemy = { 258130, 258138, 258137, 258134, 253622, 258289 } },
+          lines = {
+            { kind = "objective", quest = 94489, index = 1, npc = 258130 },
+            { kind = "objective", quest = 94489, index = 2, npc = 258134 },
+            { kind = "objective", quest = 94488, index = 1, item = 265475, at = { zone = 16593, x = 65.53, y = 36.32, r = 40 } },
+          } },
+        { id = "t94488.t94489", at = { zone = 16593, x = 61.7, y = 39.22, r = 10 }, targets = { friend = { 257944 } },
+          lines = {
+            { kind = "turnin", quest = 94488, npc = 257944 },
+            { kind = "turnin", quest = 94489, npc = 257944 },
+          } },
+        { id = "o92550.o92551", at = { zone = 16593, x = 49.21, y = 56, r = 40 }, text = "The Al'Aketh Stormcallers are southwest of Elegael Thornpaw.", targets = { enemy = { 252068, 251662, 251966, 259398, 259385, 254596 } },
+          lines = {
+            { kind = "objective", quest = 92550, index = 1, npc = 252068 },
+            { kind = "objective", quest = 92550, index = 2, npc = 251662 },
+            { kind = "objective", quest = 92550, index = 3, item = 252661 },
+            { kind = "objective", quest = 92551, index = 1, item = 252760 },
+          } },
+        { id = "tDRUID-12", at = { zone = 16593, x = 45.16, y = 44.22, r = 10 }, when = { class = "DRUID" }, minLevel = 12,
+          lines = {
+            { kind = "train", level = 12, class = "DRUID", npc = 254081 },
+            { kind = "selljunk", at = { zone = 16593, x = 44.88, y = 44.18, r = 10 }, npc = 251991 },
+          } },
+        { id = "tHUNTER-12", at = { zone = 16593, x = 45.26, y = 44.24, r = 10 }, when = { class = "HUNTER" }, minLevel = 12,
+          lines = {
+            { kind = "train", level = 12, class = "HUNTER", npc = 254084 },
+            { kind = "selljunk", at = { zone = 16593, x = 44.88, y = 44.18, r = 10 }, npc = 251991 },
+          } },
+        { id = "tMAGE-12", at = { zone = 16593, x = 45.1, y = 45.87, r = 10 }, when = { class = "MAGE" }, minLevel = 12,
+          lines = {
+            { kind = "train", level = 12, class = "MAGE", npc = 254086 },
+            { kind = "selljunk", at = { zone = 16593, x = 44.71, y = 45.48, r = 10 }, npc = 254358 },
+          } },
+        { id = "tROGUE-12", at = { zone = 16593, x = 43.15, y = 43.26, r = 10 }, when = { class = "ROGUE" }, minLevel = 12,
+          lines = {
+            { kind = "train", level = 12, class = "ROGUE", npc = 254087 },
+            { kind = "selljunk", at = { zone = 16593, x = 43.24, y = 43.15, r = 10 }, npc = 257020 },
+          } },
+        { id = "tWARRIOR-12", at = { zone = 16593, x = 44.95, y = 45.1, r = 10 }, when = { class = "WARRIOR" }, minLevel = 12,
+          lines = {
+            { kind = "train", level = 12, class = "WARRIOR", npc = 254088 },
+            { kind = "selljunk", at = { zone = 16593, x = 44.77, y = 45.05, r = 10 }, npc = 254360 },
+          } },
+        { id = "t92550.t92551", at = { zone = 16593, x = 45.67, y = 45.5, r = 10 }, targets = { friend = { 251523, 252172 } },
+          lines = {
+            { kind = "turnin", quest = 92550, npc = 251523 },
+            { kind = "turnin", quest = 92551, npc = 252172 },
+          } },
         { id = "o93926.t93926.a93927.o93927", at = { zone = 16593, x = 42.34, y = 62.02, r = 40 }, minLevel = 5, targets = { enemy = { 252155, 256966 }, friend = { 252155 } },
           lines = {
             { kind = "objective", quest = 93926, index = 1, npc = 252155 },
@@ -600,50 +478,96 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 93927, index = 3, item = 263415, at = { zone = 16593, x = 41.3, y = 63.54, r = 40 } },
             { kind = "objective", quest = 93927, index = 4, item = 263418, at = { zone = 16593, x = 41.3, y = 63.54, r = 40 } },
           } },
-        { id = "o92550.o92551", at = { zone = 16593, x = 49.21, y = 56, r = 40 }, text = "The Al'Aketh Stormcallers are northeast of Peacekeeper Vaaniel.", targets = { enemy = { 252068, 251662, 251966, 259398, 259385, 254596 } },
+        { id = "t93927.a92701.a93948", at = { zone = 16593, x = 45.67, y = 45.5, r = 10 }, minLevel = 6, items = { 253152, 263491 }, targets = { friend = { 251523 } },
           lines = {
-            { kind = "objective", quest = 92550, index = 1, npc = 252068 },
-            { kind = "objective", quest = 92550, index = 2, npc = 251662 },
-            { kind = "objective", quest = 92550, index = 3, item = 252661 },
-            { kind = "objective", quest = 92551, index = 1, item = 252760 },
-          } },
-        { id = "t92550.t93927.a92701.a93948.t92551", at = { zone = 16593, x = 45.67, y = 45.5, r = 10 }, minLevel = 6, items = { 253152, 263491 }, targets = { friend = { 251523, 252172 } },
-          lines = {
-            { kind = "turnin", quest = 92550, npc = 251523 },
             { kind = "turnin", quest = 93927, npc = 251523 },
             { kind = "accept", quest = 92701, npc = 251523, requires = { 92550, 93927 } },
             { kind = "accept", quest = 93948, npc = 251523, requires = { 92550, 93927 } },
-            { kind = "turnin", quest = 92551, npc = 252172 },
           } },
-        { id = "h#4", text = "Use your hearthstone to return to Zephras Isle.",
+        { id = "a98512.o98512.t98512", at = { zone = 16593, x = 56.81, y = 61.11, r = 10 }, minLevel = 6, targets = { enemy = { 254626 }, friend = { 273017 } },
           lines = {
-            { kind = "hearth", to = { zone = 16593, x = 62.19, y = 72.61 } },
+            { kind = "accept", quest = 98512, npc = 273017 },
+            { kind = "objective", quest = 98512, index = 1, at = { zone = 16593, x = 56.08, y = 60.41, r = 40 }, npc = 254626 },
+            { kind = "turnin", quest = 98512, npc = 273017 },
           } },
-        { id = "t92701.a92699.t93948.a93949", at = { zone = 16593, x = 66.14, y = 76.67, r = 10 }, minLevel = 6, items = { 253152, 263491 }, targets = { friend = { 252383, 252476 } },
+        { id = "a93317", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, minLevel = 4, maxLevel = 17, targets = { friend = { 257006 } },
+          lines = {
+            { kind = "accept", quest = 93317, npc = 257006 },
+          } },
+        { id = "a92679.b@16593", at = { zone = 16593, x = 62.08, y = 73.17, r = 10 }, minLevel = 5, targets = { friend = { 252448 } },
+          lines = {
+            { kind = "accept", quest = 92679, npc = 252448 },
+            { kind = "sethearth", npc = 255940 },
+          } },
+        { id = "a94896.a94897.t93948", at = { zone = 16593, x = 66.04, y = 74.41, r = 10 }, minLevel = 8, items = { 263491 }, targets = { friend = { 259012, 252476 } },
+          lines = {
+            { kind = "accept", quest = 94896, npc = 259012 },
+            { kind = "accept", quest = 94897, npc = 259012 },
+            { kind = "turnin", quest = 93948, at = { zone = 16593, x = 66.17, y = 76.51, r = 10 }, npc = 252476 },
+          } },
+        { id = "t92701.a92699.a93949", at = { zone = 16593, x = 66.14, y = 76.67, r = 10 }, minLevel = 6, items = { 253152 }, targets = { friend = { 252383 } },
           lines = {
             { kind = "turnin", quest = 92701, npc = 252383 },
             { kind = "accept", quest = 92699, npc = 252383, requires = { 92701 } },
-            { kind = "turnin", quest = 93948, npc = 252476 },
             { kind = "accept", quest = 93949, npc = 252383, requires = { 93948 } },
           } },
-        { id = "t92699.a92709.a92727.a92741.o92709", at = { zone = 16593, x = 66.63, y = 79.94, r = 10 }, minLevel = 8, targets = { enemy = { 252475 }, friend = { 252475, 253204, 253004 } },
+        { id = "a94006", at = { zone = 16593, x = 63.99, y = 75.08, r = 10 }, when = { class = "DRUID" }, minLevel = 10, maxLevel = 18, targets = { friend = { 252359 } },
+          lines = {
+            { kind = "accept", quest = 94006, npc = 252359 },
+          } },
+        { id = "o93949", at = { zone = 16593, x = 61.92, y = 75.88, r = 40 }, text = "The Skyhoppers are west of Valennia Stormfist.", targets = { enemy = { 251727 } },
+          lines = {
+            { kind = "objective", quest = 93949, index = 1, npc = 251727 },
+          } },
+        { id = "t92699.a92709.a92727.a92741", at = { zone = 16593, x = 66.63, y = 79.94, r = 10 }, minLevel = 8, targets = { friend = { 252475, 253204, 253004 } },
           lines = {
             { kind = "turnin", quest = 92699, npc = 252475 },
             { kind = "accept", quest = 92709, npc = 252475, requires = { 92699 } },
             { kind = "accept", quest = 92727, npc = 253204, requires = { 92699 } },
             { kind = "accept", quest = 92741, npc = 253004, requires = { 92699 } },
-            { kind = "objective", quest = 92709, index = 1, npc = 252475 },
           } },
-        { id = "o93949", at = { zone = 16593, x = 61.92, y = 75.88, r = 40 }, text = "The Skyhoppers are northwest of Elaadrin Evengale.", targets = { enemy = { 251727 } },
+        { id = "t93949", at = { zone = 16593, x = 66.14, y = 76.67, r = 10 }, targets = { friend = { 252383 } },
           lines = {
-            { kind = "objective", quest = 93949, index = 1, npc = 251727 },
+            { kind = "turnin", quest = 93949, npc = 252383 },
+          } },
+        { id = "o92709.t92709", at = { zone = 16593, x = 66.63, y = 79.94, r = 40 }, targets = { enemy = { 252475 }, friend = { 252475 } },
+          lines = {
+            { kind = "objective", quest = 92709, index = 1, npc = 252475 },
+            { kind = "turnin", quest = 92709, npc = 252475 },
+          } },
+        { id = "a93791", at = { zone = 16593, x = 65.91, y = 80.57, r = 10 }, when = { class = "MAGE" }, minLevel = 10, maxLevel = 18, targets = { friend = { 252373 } },
+          lines = {
+            { kind = "accept", quest = 93791, npc = 252373 },
+          } },
+        { id = "o92679.t92679.a92682.a92683.a92684.o92682", at = { zone = 16593, x = 46.7, y = 81.95, r = 40 }, minLevel = 5, items = { 253666 }, targets = { enemy = { 252800, 252802, 252448 }, friend = { 252800 } },
+          lines = {
+            { kind = "objective", quest = 92679, index = 1, npc = 252800 },
+            { kind = "objective", quest = 92679, index = 2, npc = 252448 },
+            { kind = "turnin", quest = 92679, npc = 252800 },
+            { kind = "accept", quest = 92682, npc = 252800, requires = { 92679 } },
+            { kind = "accept", quest = 92683, npc = 252800, requires = { 92679 } },
+            { kind = "accept", quest = 92684, npc = 252800, requires = { 92679 } },
+            { kind = "objective", quest = 92682, index = 1, at = { zone = 16593, x = 48.09, y = 80.78, r = 40 }, npc = 252802 },
+            { kind = "objective", quest = 92682, index = 2, item = 253591, at = { zone = 16593, x = 48.09, y = 80.78, r = 40 } },
+          } },
+        { id = "a92698", at = { zone = 16593, x = 48.87, y = 78.25, r = 10 }, minLevel = 5, maxLevel = 17, targets = { friend = { 250929 } },
+          lines = {
+            { kind = "accept", quest = 92698, npc = 250929, requires = { 92679 } },
           } },
         { id = "t92727.a92849", at = { zone = 16593, x = 53.33, y = 72.14, r = 10 }, minLevel = 4,
           lines = {
             { kind = "turnin", quest = 92727, object = 581822 },
             { kind = "accept", quest = 92849, object = 581822, requires = { 92727 } },
           } },
-        { id = "o92849", at = { zone = 16593, x = 50.65, y = 65.81, r = 40 }, text = "Fillion Flamebreeze is northwest of your last stop.", targets = { enemy = { 253002 } },
+        { id = "o92684", at = { zone = 16593, x = 55.48, y = 73.26, r = 40 }, targets = { enemy = { 251707 } },
+          lines = {
+            { kind = "objective", quest = 92684, index = 1, item = 253597 },
+          } },
+        { id = "o92683", at = { zone = 16593, x = 50.29, y = 78.67, r = 40 }, text = "Flutterfly Dust is southwest of your last stop.", items = { 253666 },
+          lines = {
+            { kind = "objective", quest = 92683, index = 1, item = 253595 },
+          } },
+        { id = "o92849", at = { zone = 16593, x = 50.65, y = 65.81, r = 40 }, text = "Fillion Flamebreeze is north of your last stop.", targets = { enemy = { 253002 } },
           lines = {
             { kind = "objective", quest = 92849, index = 1, npc = 253002 },
             { kind = "objective", quest = 92849, index = 2, object = 581820 },
@@ -653,70 +577,164 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 92849, npc = 253284 },
             { kind = "accept", quest = 92850, npc = 253284, requires = { 92849 } },
           } },
-        { id = "o92850", at = { zone = 16593, x = 52.18, y = 66.16, r = 40 }, targets = { enemy = { 253283 } },
+        { id = "t92682.t92683.t92684.t92698.a92685", at = { zone = 16593, x = 46.7, y = 81.95, r = 10 }, minLevel = 5, items = { 253666 }, targets = { friend = { 252800 } },
+          lines = {
+            { kind = "turnin", quest = 92682, npc = 252800 },
+            { kind = "turnin", quest = 92683, npc = 252800 },
+            { kind = "turnin", quest = 92684, npc = 252800 },
+            { kind = "turnin", quest = 92698, npc = 252800, skipIfMissing = true },
+            { kind = "accept", quest = 92685, npc = 252800, requires = { 92682, 92683, 92684 } },
+          } },
+        { id = "o92685", at = { zone = 16593, x = 49.16, y = 74.95, r = 40 }, text = "Blood-Stained Bandit Mask is northeast of Aamelia Windfield.", targets = { enemy = { 252820 } },
+          lines = {
+            { kind = "objective", quest = 92685, index = 1, item = 253596 },
+          } },
+        { id = "t92685.a92693.o92693.t92693.a92703", at = { zone = 16593, x = 46.7, y = 81.95, r = 10 }, minLevel = 5, targets = { enemy = { 252800, 252863 }, friend = { 252800 } },
+          lines = {
+            { kind = "turnin", quest = 92685, npc = 252800 },
+            { kind = "accept", quest = 92693, npc = 252800, requires = { 92685 } },
+            { kind = "objective", quest = 92693, index = 1, npc = 252800 },
+            { kind = "objective", quest = 92693, index = 2, npc = 252863 },
+            { kind = "turnin", quest = 92693, npc = 252800 },
+            { kind = "accept", quest = 92703, npc = 252800, requires = { 92693 } },
+          } },
+        { id = "o92850", at = { zone = 16593, x = 52.18, y = 66.16, r = 40 }, text = "Shriekling Matriarch's Head is northeast of Aamelia Windfield.", targets = { enemy = { 253283 } },
           lines = {
             { kind = "objective", quest = 92850, index = 1, item = 257107 },
           } },
-        { id = "o92741", at = { zone = 16593, x = 58.76, y = 39.62, r = 40 }, text = "Shriekling Talons are north of your last stop.", targets = { enemy = { 256092, 251247 } },
+        { id = "o93317", at = { zone = 16593, x = 53.65, y = 58.85, r = 40 }, text = "Windsong Crawler Meat is north of your last stop.", targets = { enemy = { 254588 } },
+          lines = {
+            { kind = "objective", quest = 93317, index = 1, item = 257941, skipIfMissing = true },
+          } },
+        { id = "h", text = "Use your hearthstone to return to Zephras Isle.",
+          lines = {
+            { kind = "hearth", to = { zone = 16593, x = 62.19, y = 72.61 } },
+          } },
+        { id = "tDRUID-14", at = { zone = 16593, x = 63.99, y = 75.08, r = 10 }, when = { class = "DRUID" }, minLevel = 14,
+          lines = {
+            { kind = "train", level = 14, class = "DRUID", npc = 252359 },
+            { kind = "selljunk", at = { zone = 16593, x = 63.27, y = 75.72, r = 10 }, npc = 257008 },
+          } },
+        { id = "tHUNTER-14", at = { zone = 16593, x = 59.56, y = 72.63, r = 10 }, when = { class = "HUNTER" }, minLevel = 14,
+          lines = {
+            { kind = "train", level = 14, class = "HUNTER", npc = 252389 },
+            { kind = "selljunk", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, npc = 257006 },
+          } },
+        { id = "tROGUE-14", at = { zone = 16593, x = 59.9, y = 72.48, r = 10 }, when = { class = "ROGUE" }, minLevel = 14,
+          lines = {
+            { kind = "train", level = 14, class = "ROGUE", npc = 252379 },
+            { kind = "selljunk", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, npc = 257006 },
+          } },
+        { id = "tWARRIOR-14", at = { zone = 16593, x = 59.89, y = 72.87, r = 10 }, when = { class = "WARRIOR" }, minLevel = 14,
+          lines = {
+            { kind = "train", level = 14, class = "WARRIOR", npc = 252377 },
+            { kind = "selljunk", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, npc = 257006 },
+          } },
+        { id = "t93317", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, targets = { friend = { 257006 } },
+          lines = {
+            { kind = "turnin", quest = 93317, npc = 257006, skipIfMissing = true },
+          } },
+        { id = "t92703", at = { zone = 16593, x = 62.08, y = 73.17, r = 10 }, targets = { friend = { 252448 } },
+          lines = {
+            { kind = "turnin", quest = 92703, npc = 252448 },
+          } },
+        { id = "o92741", at = { zone = 16593, x = 58.76, y = 39.62, r = 40 }, text = "Shriekling Talons are north of Alvarion Windfield.", targets = { enemy = { 256092, 251247 } },
           lines = {
             { kind = "objective", quest = 92741, index = 1, item = 254378 },
           } },
-        { id = "o92465", at = { zone = 16593, x = 47.17, y = 20.1, r = 40 }, text = "The Al'Aketh Converts are northwest of your last stop.", targets = { enemy = { 251143, 251160 } },
+        { id = "o94897.o94896", at = { zone = 16593, x = 57.05, y = 29.35, r = 40 }, text = "Resaan's Heirloom is north of your last stop.", targets = { enemy = { 259013 } },
           lines = {
-            { kind = "objective", quest = 92465, index = 1, npc = 251160, skipIfMissing = true },
-            { kind = "objective", quest = 92465, index = 2, npc = 251143, skipIfMissing = true },
+            { kind = "objective", quest = 94897, index = 1, item = 266434 },
+            { kind = "objective", quest = 94896, index = 1, item = 266433, at = { zone = 16593, x = 58.05, y = 31.91, r = 40 } },
           } },
-        { id = "t92464.t92465", at = { zone = 16593, x = 47.25, y = 21.98, r = 10 }, targets = { friend = { 249363 } },
+        { id = "t94006.a94638", at = { zone = 16593, x = 69.81, y = 61.71, r = 10 }, when = { class = "DRUID" }, minLevel = 10, targets = { friend = { 255853 } },
           lines = {
-            { kind = "turnin", quest = 92464, npc = 249363 },
-            { kind = "turnin", quest = 92465, npc = 249363, skipIfMissing = true },
+            { kind = "turnin", quest = 94006, npc = 255853, skipIfMissing = true },
+            { kind = "accept", quest = 94638, npc = 255853, ifDone = 94006, requires = { 94006 } },
           } },
-        { id = "o92597", at = { zone = 16593, x = 46.29, y = 17.87, r = 40 },
+        { id = "tMAGE-14", at = { zone = 16593, x = 65.91, y = 80.57, r = 10 }, when = { class = "MAGE" }, minLevel = 14,
           lines = {
-            { kind = "objective", quest = 92597, index = 1, object = 460002 },
+            { kind = "train", level = 14, class = "MAGE", npc = 252373 },
+            { kind = "selljunk", at = { zone = 16593, x = 65.44, y = 80.47, r = 10 }, npc = 252388 },
           } },
-        { id = "o93552.o92462", at = { zone = 16593, x = 44.24, y = 25.87, r = 40 }, text = "Windstone Cluster is south of your last stop.", targets = { enemy = { 251169 } },
+        { id = "t94896.t94897", at = { zone = 16593, x = 66.04, y = 74.41, r = 10 }, targets = { friend = { 259012 } },
           lines = {
-            { kind = "objective", quest = 93552, index = 1, item = 258772 },
-            { kind = "objective", quest = 92462, index = 1, at = { zone = 16593, x = 45.86, y = 26.8, r = 40 }, npc = 251169 },
+            { kind = "turnin", quest = 94896, npc = 259012 },
+            { kind = "turnin", quest = 94897, npc = 259012 },
           } },
-        { id = "t92597.t92462.t93552.t92470.t92473", at = { zone = 16593, x = 43.33, y = 24.92, r = 10 }, targets = { friend = { 251371, 251368, 251363, 251366, 257551 } },
-          lines = {
-            { kind = "turnin", quest = 92597, npc = 251371 },
-            { kind = "turnin", quest = 92462, npc = 251368 },
-            { kind = "turnin", quest = 93552, at = { zone = 16593, x = 43.37, y = 23.98, r = 10 }, npc = 251363 },
-            { kind = "turnin", quest = 92470, at = { zone = 16593, x = 42.76, y = 23.66, r = 10 }, npc = 251366 },
-            { kind = "turnin", quest = 92473, at = { zone = 16593, x = 42.41, y = 25.17, r = 10 }, npc = 257551, skipIfMissing = true },
-          } },
-        { id = "t93949", at = { zone = 16593, x = 66.14, y = 76.67, r = 10 }, targets = { friend = { 252383 } },
-          lines = {
-            { kind = "turnin", quest = 93949, npc = 252383 },
-          } },
-        { id = "t92741.t92850.a99260.t92709.t99260.a92840", at = { zone = 16593, x = 66.34, y = 79.5, r = 10 }, minLevel = 5, items = { 254584 }, targets = { friend = { 253004, 253285, 252475 } },
+        { id = "t92741.t92850.a99260.t99260.a92840", at = { zone = 16593, x = 66.34, y = 79.5, r = 10 }, minLevel = 5, items = { 254584 }, targets = { friend = { 253004, 253285, 252475 } },
           lines = {
             { kind = "turnin", quest = 92741, npc = 253004 },
             { kind = "turnin", quest = 92850, npc = 253285 },
             { kind = "accept", quest = 99260, npc = 253285, requires = { 92850 } },
-            { kind = "turnin", quest = 92709, npc = 252475 },
             { kind = "turnin", quest = 99260, npc = 252475 },
             { kind = "accept", quest = 92840, npc = 252475, requires = { 99260 } },
           } },
-        { id = "h#5", text = "Use your hearthstone to return to Zephras Isle.",
+        { id = "o94638", at = { zone = 16593, x = 54.35, y = 65.53, r = 40 }, text = "Ur'endra is northwest of Iaadaria Bitterwind.", when = { class = "DRUID" }, targets = { enemy = { 258443 } },
           lines = {
-            { kind = "hearth", to = { zone = 16593, x = 62.19, y = 72.61 } },
+            { kind = "objective", quest = 94638, index = 1, npc = 258443, skipIfMissing = true },
           } },
         { id = "t94007.a94978", at = { zone = 16593, x = 59.56, y = 72.63, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, items = { 267272 }, targets = { friend = { 252389 } },
           lines = {
             { kind = "turnin", quest = 94007, npc = 252389, skipIfMissing = true },
             { kind = "accept", quest = 94978, npc = 252389 },
           } },
-        { id = "o92840", at = { zone = 16593, x = 47.61, y = 68.8, r = 40 }, items = { 254584 },
+        { id = "o94978", at = { zone = 16593, x = 53.65, y = 58.85, r = 40 }, text = "The Windsong Crawler is northwest of Iaadaria Bitterwind.", when = { class = "HUNTER" }, items = { 267272 }, targets = { enemy = { 254588 } },
+          lines = {
+            { kind = "objective", quest = 94978, index = 1, npc = 254588 },
+          } },
+        { id = "t93791.a93797", at = { zone = 16593, x = 62.89, y = 77.44, r = 10 }, when = { class = "MAGE" }, minLevel = 10, targets = { friend = { 256507 } },
+          lines = {
+            { kind = "turnin", quest = 93791, npc = 256507, skipIfMissing = true },
+            { kind = "accept", quest = 93797, npc = 256507, ifDone = 93791, requires = { 93791 } },
+          } },
+        { id = "o93797", at = { zone = 16593, x = 48.6, y = 67.77, r = 40 }, text = "Wind-Infused Bough is northwest of Iaadaria Bitterwind.", when = { class = "MAGE" },
+          lines = {
+            { kind = "objective", quest = 93797, index = 1, item = 262668, skipIfMissing = true },
+          } },
+        { id = "a94003", at = { zone = 16593, x = 59.89, y = 72.87, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, maxLevel = 18, targets = { friend = { 252377 } },
+          lines = {
+            { kind = "accept", quest = 94003, npc = 252377 },
+          } },
+        { id = "o92840", at = { zone = 16593, x = 47.61, y = 68.8, r = 40 }, text = "Windstone Formation is west of Iaadaria Bitterwind.", items = { 254584 },
           lines = {
             { kind = "objective", quest = 92840, index = 1, object = 697118 },
           } },
-        { id = "a93791", at = { zone = 16593, x = 65.91, y = 80.57, r = 10 }, when = { class = "MAGE" }, minLevel = 10, maxLevel = 18, targets = { friend = { 252373 } },
+        { id = "t94978.a94979", at = { zone = 16593, x = 59.56, y = 72.63, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, items = { 267272, 267298 }, targets = { friend = { 252389 } },
           lines = {
-            { kind = "accept", quest = 93791, npc = 252373 },
+            { kind = "turnin", quest = 94978, npc = 252389 },
+            { kind = "accept", quest = 94979, npc = 252389, requires = { 94978 } },
+          } },
+        { id = "o94979", at = { zone = 16593, x = 55.48, y = 73.26, r = 40 }, text = "The Ornery Galestrider is east of your last stop.", when = { class = "HUNTER" }, items = { 267298 }, targets = { enemy = { 251707 } },
+          lines = {
+            { kind = "objective", quest = 94979, index = 1, npc = 251707 },
+          } },
+        { id = "t94979.a94013", at = { zone = 16593, x = 59.56, y = 72.63, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, items = { 267298, 264163 }, targets = { friend = { 252389 } },
+          lines = {
+            { kind = "turnin", quest = 94979, npc = 252389 },
+            { kind = "accept", quest = 94013, npc = 252389, requires = { 94979 } },
+          } },
+        { id = "o94013", at = { zone = 16593, x = 54.99, y = 73.27, r = 40 }, text = "The Vuldren Alpha is east of your last stop.", when = { class = "HUNTER" }, items = { 264163 }, targets = { enemy = { 250874 } },
+          lines = {
+            { kind = "objective", quest = 94013, index = 1, npc = 250874 },
+          } },
+        { id = "t94013.a94050.t94050", at = { zone = 16593, x = 59.56, y = 72.63, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, items = { 264163 }, targets = { friend = { 252389, 254411 } },
+          lines = {
+            { kind = "turnin", quest = 94013, npc = 252389 },
+            { kind = "accept", quest = 94050, npc = 252389, requires = { 94013 } },
+            { kind = "turnin", quest = 94050, npc = 254411 },
+          } },
+        { id = "t93797", at = { zone = 16593, x = 62.89, y = 77.44, r = 10 }, when = { class = "MAGE" }, targets = { friend = { 256507 } },
+          lines = {
+            { kind = "turnin", quest = 93797, npc = 256507, skipIfMissing = true },
+          } },
+        { id = "o94003", at = { zone = 16593, x = 56.63, y = 50.37, r = 40 }, text = "Skybreaker Bulwark is northeast of your last stop.", when = { class = "WARRIOR" }, targets = { enemy = { 257196 } },
+          lines = {
+            { kind = "objective", quest = 94003, index = 1, item = 263993, skipIfMissing = true },
+          } },
+        { id = "t94003", at = { zone = 16593, x = 59.89, y = 72.87, r = 10 }, when = { class = "WARRIOR" }, targets = { friend = { 252377 } },
+          lines = {
+            { kind = "turnin", quest = 94003, npc = 252377, skipIfMissing = true },
           } },
         { id = "t92840.a92834.a92860", at = { zone = 16593, x = 66.63, y = 79.94, r = 10 }, minLevel = 6, items = { 254584 }, targets = { friend = { 252475 } },
           lines = {
@@ -738,6 +756,10 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 93320, npc = 252378 },
             { kind = "accept", quest = 92642, npc = 252378, requires = { 93320 } },
             { kind = "accept", quest = 92645, npc = 252378, requires = { 93320 } },
+          } },
+        { id = "t94638", at = { zone = 16593, x = 69.81, y = 61.71, r = 10 }, when = { class = "DRUID" }, targets = { friend = { 255853 } },
+          lines = {
+            { kind = "turnin", quest = 94638, npc = 255853, skipIfMissing = true },
           } },
         { id = "o92645.o92642", at = { zone = 16593, x = 65.58, y = 65.62, r = 40 }, text = "Commander Belguilos is west of Yorana Windyreed.", targets = { enemy = { 252666, 270201, 254596 } },
           lines = {
@@ -762,74 +784,6 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 92834, npc = 252475 },
           } },
-        { id = "a94006", at = { zone = 16593, x = 63.99, y = 75.08, r = 10 }, when = { class = "DRUID" }, minLevel = 10, maxLevel = 18, targets = { friend = { 252359 } },
-          lines = {
-            { kind = "accept", quest = 94006, npc = 252359 },
-          } },
-        { id = "t94006.a94638", at = { zone = 16593, x = 69.81, y = 61.71, r = 10 }, when = { class = "DRUID" }, minLevel = 10, targets = { friend = { 255853 } },
-          lines = {
-            { kind = "turnin", quest = 94006, npc = 255853, skipIfMissing = true },
-            { kind = "accept", quest = 94638, npc = 255853, ifDone = 94006, requires = { 94006 } },
-          } },
-        { id = "o94638", at = { zone = 16593, x = 54.35, y = 65.53, r = 40 }, text = "Ur'endra is northwest of Elaadrin Evengale.", when = { class = "DRUID" }, targets = { enemy = { 258443 } },
-          lines = {
-            { kind = "objective", quest = 94638, index = 1, npc = 258443, skipIfMissing = true },
-          } },
-        { id = "t94638", at = { zone = 16593, x = 69.81, y = 61.71, r = 10 }, when = { class = "DRUID" }, targets = { friend = { 255853 } },
-          lines = {
-            { kind = "turnin", quest = 94638, npc = 255853, skipIfMissing = true },
-          } },
-        { id = "o94978", at = { zone = 16593, x = 53.65, y = 58.85, r = 40 }, text = "The Windsong Crawler is northwest of Elaadrin Evengale.", when = { class = "HUNTER" }, items = { 267272 }, targets = { enemy = { 254588 } },
-          lines = {
-            { kind = "objective", quest = 94978, index = 1, npc = 254588 },
-          } },
-        { id = "tHUNTER-16", at = { zone = 16593, x = 59.56, y = 72.63, r = 10 }, when = { class = "HUNTER" }, minLevel = 16,
-          lines = {
-            { kind = "train", level = 16, class = "HUNTER", npc = 252389 },
-            { kind = "selljunk", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, npc = 257006 },
-          } },
-        { id = "t94978.a94979", at = { zone = 16593, x = 59.56, y = 72.63, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, items = { 267272, 267298 }, targets = { friend = { 252389 } },
-          lines = {
-            { kind = "turnin", quest = 94978, npc = 252389 },
-            { kind = "accept", quest = 94979, npc = 252389, requires = { 94978 } },
-          } },
-        { id = "o94979", at = { zone = 16593, x = 55.48, y = 73.26, r = 40 }, text = "The Ornery Galestrider is west of Elaadrin Evengale.", when = { class = "HUNTER" }, items = { 267298 }, targets = { enemy = { 251707 } },
-          lines = {
-            { kind = "objective", quest = 94979, index = 1, npc = 251707 },
-          } },
-        { id = "t94979.a94013", at = { zone = 16593, x = 59.56, y = 72.63, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, items = { 267298, 264163 }, targets = { friend = { 252389 } },
-          lines = {
-            { kind = "turnin", quest = 94979, npc = 252389 },
-            { kind = "accept", quest = 94013, npc = 252389, requires = { 94979 } },
-          } },
-        { id = "o94013", at = { zone = 16593, x = 54.99, y = 73.27, r = 40 }, text = "The Vuldren Alpha is west of Elaadrin Evengale.", when = { class = "HUNTER" }, items = { 264163 }, targets = { enemy = { 250874 } },
-          lines = {
-            { kind = "objective", quest = 94013, index = 1, npc = 250874 },
-          } },
-        { id = "t94013.a94050.t94050", at = { zone = 16593, x = 59.56, y = 72.63, r = 10 }, when = { class = "HUNTER" }, minLevel = 10, items = { 264163 }, targets = { friend = { 252389, 254411 } },
-          lines = {
-            { kind = "turnin", quest = 94013, npc = 252389 },
-            { kind = "accept", quest = 94050, npc = 252389, requires = { 94013 } },
-            { kind = "turnin", quest = 94050, npc = 254411 },
-          } },
-        { id = "t93791.a93797", at = { zone = 16593, x = 62.89, y = 77.44, r = 10 }, when = { class = "MAGE" }, minLevel = 10, targets = { friend = { 256507 } },
-          lines = {
-            { kind = "turnin", quest = 93791, npc = 256507, skipIfMissing = true },
-            { kind = "accept", quest = 93797, npc = 256507, ifDone = 93791, requires = { 93791 } },
-          } },
-        { id = "o93797", at = { zone = 16593, x = 48.6, y = 67.77, r = 40 }, text = "Wind-Infused Bough is northwest of Elaadrin Evengale.", when = { class = "MAGE" },
-          lines = {
-            { kind = "objective", quest = 93797, index = 1, item = 262668, skipIfMissing = true },
-          } },
-        { id = "tMAGE-16", at = { zone = 16593, x = 65.91, y = 80.57, r = 10 }, when = { class = "MAGE" }, minLevel = 16,
-          lines = {
-            { kind = "train", level = 16, class = "MAGE", npc = 252373 },
-            { kind = "selljunk", at = { zone = 16593, x = 65.44, y = 80.47, r = 10 }, npc = 252388 },
-          } },
-        { id = "t93797", at = { zone = 16593, x = 62.89, y = 77.44, r = 10 }, when = { class = "MAGE" }, targets = { friend = { 256507 } },
-          lines = {
-            { kind = "turnin", quest = 93797, npc = 256507, skipIfMissing = true },
-          } },
         { id = "o92643", at = { zone = 16593, x = 56.16, y = 60.59, r = 40 }, text = "DNT KILL CREDIT is northwest of Elaadrin Evengale.", targets = { enemy = { 255013, 253372 } },
           lines = {
             { kind = "objective", quest = 92643, index = 1, npc = 255013 },
@@ -840,10 +794,9 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 92643, npc = 253372 },
             { kind = "accept", quest = 92644, npc = 253372, requires = { 92643 } },
           } },
-        { id = "tDRUID-16", at = { zone = 16593, x = 63.99, y = 75.08, r = 10 }, when = { class = "DRUID" }, minLevel = 16,
+        { id = "h#2", text = "Use your hearthstone to return to Zephras Isle.",
           lines = {
-            { kind = "train", level = 16, class = "DRUID", npc = 252359 },
-            { kind = "selljunk", at = { zone = 16593, x = 63.27, y = 75.72, r = 10 }, npc = 257008 },
+            { kind = "hearth", to = { zone = 16593, x = 62.19, y = 72.61 } },
           } },
         { id = "t92644.a94568.o94568.t94568.a92640.o92640.t92640.a93065", at = { zone = 16593, x = 66.17, y = 76.51, r = 10 }, minLevel = 7, items = { 273852 }, targets = { enemy = { 252476, 252383, 252475, 251968 }, friend = { 252476, 252383 } },
           lines = {
@@ -857,16 +810,6 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 92640, index = 3, npc = 252475 },
             { kind = "turnin", quest = 92640, npc = 252383 },
             { kind = "accept", quest = 93065, npc = 252383, requires = { 92640 } },
-          } },
-        { id = "tROGUE-16", at = { zone = 16593, x = 59.9, y = 72.48, r = 10 }, when = { class = "ROGUE" }, minLevel = 16,
-          lines = {
-            { kind = "train", level = 16, class = "ROGUE", npc = 252379 },
-            { kind = "selljunk", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, npc = 257006 },
-          } },
-        { id = "tWARRIOR-16", at = { zone = 16593, x = 59.89, y = 72.87, r = 10 }, when = { class = "WARRIOR" }, minLevel = 16,
-          lines = {
-            { kind = "train", level = 16, class = "WARRIOR", npc = 252377 },
-            { kind = "selljunk", at = { zone = 16593, x = 60.64, y = 72.66, r = 10 }, npc = 257006 },
           } },
         { id = "o93065.t93065.a92947", at = { zone = 16593, x = 61.15, y = 70.93, r = 40 }, minLevel = 7, targets = { enemy = { 253844 }, friend = { 253844 } },
           lines = {
@@ -892,9 +835,15 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 93835, index = 1 },
           } },
-        { id = "h#6", text = "Use your hearthstone to return to Zephras Isle.",
+        { id = "tDRUID-16", at = { zone = 16593, x = 63.99, y = 75.08, r = 10 }, when = { class = "DRUID" }, minLevel = 16,
           lines = {
-            { kind = "hearth", to = { zone = 16593, x = 62.19, y = 72.61 } },
+            { kind = "train", level = 16, class = "DRUID", npc = 252359 },
+            { kind = "selljunk", at = { zone = 16593, x = 63.27, y = 75.72, r = 10 }, npc = 257008 },
+          } },
+        { id = "tMAGE-16", at = { zone = 16593, x = 65.91, y = 80.57, r = 10 }, when = { class = "MAGE" }, minLevel = 16,
+          lines = {
+            { kind = "train", level = 16, class = "MAGE", npc = 252373 },
+            { kind = "selljunk", at = { zone = 16593, x = 65.44, y = 80.47, r = 10 }, npc = 252388 },
           } },
         { id = "t93835.a94369", at = { zone = 16593, x = 66.63, y = 79.94, r = 10 }, minLevel = 7, targets = { friend = { 252475 } },
           lines = {
@@ -926,9 +875,19 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "transport", to = { zone = 1519, x = 70.5, y = 73.5 }, mode = "portal", at = { zone = 36, x = 12, y = 56.2, r = 15 } },
           } },
+        { id = "tROGUE-16", at = { zone = 1519, x = 77.43, y = 65.31, r = 10 }, when = { class = "ROGUE" }, minLevel = 16,
+          lines = {
+            { kind = "train", level = 16, class = "ROGUE", npc = 918 },
+            { kind = "selljunk", at = { zone = 1519, x = 76.8, y = 65.96, r = 10 }, npc = 12805 },
+          } },
         { id = "f2", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 },
           lines = {
             { kind = "getflight", node = 2, npc = 352 },
+          } },
+        { id = "tWARRIOR-16", at = { zone = 1519, x = 80.41, y = 59.8, r = 10 }, when = { class = "WARRIOR" }, minLevel = 16,
+          lines = {
+            { kind = "train", level = 16, class = "WARRIOR", npc = 5480 },
+            { kind = "selljunk", at = { zone = 1519, x = 77.51, y = 61.3, r = 10 }, npc = 1341 },
           } },
         { id = "a1639.t1639.a1640.o1640.t1640.a1665", at = { zone = 1519, x = 77.13, y = 53.26, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, items = { 6781 }, targets = { enemy = { 6090 }, friend = { 6089, 6090 } },
           lines = {
@@ -938,33 +897,6 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 1640, index = 1, npc = 6090 },
             { kind = "turnin", quest = 1640, npc = 6090 },
             { kind = "accept", quest = 1665, npc = 6090, requires = { 1640 } },
-          } },
-        { id = "x1537", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 }, text = "Take the tram from Stormwind City to Ironforge.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "transport", to = { zone = 1537, x = 78, y = 51.4 }, mode = "tram", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 } },
-          } },
-        { id = "a1680", at = { zone = 1537, x = 70.77, y = 90.27, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, maxLevel = 19, targets = { friend = { 6114 } },
-          lines = {
-            { kind = "accept", quest = 1680, npc = 6114, requires = { 1639 } },
-          } },
-        { id = "t1680.a1681", at = { zone = 1537, x = 48.64, y = 42.48, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, targets = { friend = { 6031 } },
-          lines = {
-            { kind = "turnin", quest = 1680, npc = 6031, skipIfMissing = true },
-            { kind = "accept", quest = 1681, npc = 6031, requires = { 1639 } },
-          } },
-        { id = "o1681", at = { zone = 1, x = 77.96, y = 62.16, r = 40 }, text = "Umbral Ore is northeast of Dungar Longdrink.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "objective", quest = 1681, index = 1, item = 6800 },
-          } },
-        { id = "t1681.a1682.t1682", at = { zone = 1537, x = 48.64, y = 42.48, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, targets = { friend = { 6031 } },
-          lines = {
-            { kind = "turnin", quest = 1681, npc = 6031 },
-            { kind = "accept", quest = 1682, npc = 6031, requires = { 1681 } },
-            { kind = "turnin", quest = 1682, npc = 6031 },
-          } },
-        { id = "x1519#2", at = { zone = 1537, x = 78, y = 51.4, r = 15 }, text = "Take the tram from Ironforge to Stormwind City.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "transport", to = { zone = 1519, x = 69.6, y = 30.3 }, mode = "tram", at = { zone = 1537, x = 78, y = 51.4, r = 15 } },
           } },
         { id = "p164-2", label = "train164_2", at = { zone = 1519, x = 64.12, y = 37.02, r = 10 }, when = { profession = 164 },
           lines = {
@@ -1002,6 +934,11 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "train", skill = 393, rank = 2, npc = 1292 },
           } },
+        { id = "tHUNTER-16", at = { zone = 1519, x = 68, y = 35.99, r = 10 }, when = { class = "HUNTER" }, minLevel = 16,
+          lines = {
+            { kind = "train", level = 16, class = "HUNTER", npc = 5517 },
+            { kind = "selljunk", at = { zone = 1519, x = 63.26, y = 37.74, r = 10 }, npc = 5512 },
+          } },
         { id = "t94947.a98021", at = { zone = 1519, x = 80.21, y = 38.35, r = 10 }, minLevel = 7, targets = { friend = { 1748 } },
           lines = {
             { kind = "turnin", quest = 94947, npc = 1748 },
@@ -1019,15 +956,6 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 2205, npc = 917 },
             { kind = "accept", quest = 2300, npc = 917 },
-          } },
-        { id = "a2358", at = { zone = 44, x = 22.97, y = 52.32, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, maxLevel = 30, targets = { friend = { 7009 } },
-          lines = {
-            { kind = "accept", quest = 2358, npc = 7009 },
-          } },
-        { id = "f5.y5-2", at = { zone = 44, x = 25.5, y = 59.41, r = 10 }, text = "Fly from Lakeshire, Redridge to Stormwind, Elwynn.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "getflight", node = 5, npc = 931 },
-            { kind = "fly", from = 5, to = 2 },
           } },
         { id = "t1665.a1666", at = { zone = 1519, x = 77.13, y = 53.26, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, items = { 6781 }, targets = { friend = { 6089 } },
           lines = {
@@ -1050,7 +978,7 @@ Noir.Route("alliance-highorder", {
       },
     },
     {
-      id = "highorder-17-19-westfall", name = "17-19 Westfall", group = "Alliance", subgroup = "1-20", minLevel = 17, maxLevel = 22, zone = 40,
+      id = "highorder-17-19-westfall", name = "17-19 Westfall", names = { MAGE = "17-20 Westfall" }, group = "Alliance", subgroup = "1-20", minLevel = 17, maxLevel = 22, zone = 40,
       next = { { section = "highorder-19-20-darkshore" } },
       steps = {
         { id = "g40@40", at = { zone = 40, x = 56.55, y = 52.64, r = 20 }, text = "Head south into Westfall.",
@@ -1159,21 +1087,25 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 104, index = 1, item = 3636, skipIfMissing = true },
           } },
-        { id = "o152", at = { zone = 40, x = 48.28, y = 9.49, r = 40 }, text = "The Murloc Coastrunner is northeast of your last stop.", targets = { enemy = { 126, 171, 517, 127 } },
+        { id = "t104", at = { zone = 40, x = 30.01, y = 86.02, r = 10 }, targets = { friend = { 392 } },
           lines = {
-            { kind = "objective", quest = 152, index = 1, npc = 126, skipIfMissing = true },
-            { kind = "objective", quest = 152, index = 2, npc = 171, skipIfMissing = true },
-            { kind = "objective", quest = 152, index = 3, npc = 127, skipIfMissing = true },
-            { kind = "objective", quest = 152, index = 4, npc = 517, skipIfMissing = true },
+            { kind = "turnin", quest = 104, npc = 392, skipIfMissing = true },
+          } },
+        { id = "o103", at = { zone = 40, x = 48.54, y = 46.76, r = 40 }, text = "Flask of Oil is northeast of Captain Grayson.", targets = { enemy = { 573, 114, 36, 480, 115, 14433 } },
+          lines = {
+            { kind = "objective", quest = 103, index = 1, item = 814, skipIfMissing = true },
           } },
         { id = "t13.a14", at = { zone = 40, x = 56.33, y = 47.52, r = 10 }, minLevel = 9, targets = { friend = { 234 } },
           lines = {
             { kind = "turnin", quest = 13, npc = 234 },
             { kind = "accept", quest = 14, npc = 234, requires = { 13 } },
           } },
-        { id = "o103", at = { zone = 40, x = 48.54, y = 46.76, r = 40 }, text = "Flask of Oil is west of Gryan Stoutmantle.", targets = { enemy = { 573, 114, 36, 480, 115, 14433 } },
+        { id = "o152", at = { zone = 40, x = 48.28, y = 9.49, r = 40 }, text = "The Murloc Coastrunner is north of Gryan Stoutmantle.", targets = { enemy = { 126, 171, 517, 127 } },
           lines = {
-            { kind = "objective", quest = 103, index = 1, item = 814, skipIfMissing = true },
+            { kind = "objective", quest = 152, index = 1, npc = 126, skipIfMissing = true },
+            { kind = "objective", quest = 152, index = 2, npc = 171, skipIfMissing = true },
+            { kind = "objective", quest = 152, index = 3, npc = 127, skipIfMissing = true },
+            { kind = "objective", quest = 152, index = 4, npc = 517, skipIfMissing = true },
           } },
         { id = "o14", at = { zone = 40, x = 46.56, y = 77.23, r = 40 }, text = "The Defias Highwaymen are south of your last stop.", targets = { enemy = { 122, 121, 449 } },
           lines = {
@@ -1181,10 +1113,9 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 14, index = 2, npc = 121 },
             { kind = "objective", quest = 14, index = 3, npc = 449 },
           } },
-        { id = "t103.t104.t152", at = { zone = 40, x = 30.01, y = 86.02, r = 10 }, targets = { friend = { 392 } },
+        { id = "t103.t152", at = { zone = 40, x = 30.01, y = 86.02, r = 10 }, targets = { friend = { 392 } },
           lines = {
             { kind = "turnin", quest = 103, npc = 392, skipIfMissing = true },
-            { kind = "turnin", quest = 104, npc = 392, skipIfMissing = true },
             { kind = "turnin", quest = 152, npc = 392, skipIfMissing = true },
           } },
         { id = "t14", at = { zone = 40, x = 56.33, y = 47.52, r = 10 }, targets = { friend = { 234 } },
@@ -1228,28 +1159,12 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 2206, npc = 332, skipIfMissing = true },
             { kind = "turnin", quest = 2300, npc = 6946, skipIfMissing = true },
           } },
-        { id = "y2-5", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Lakeshire, Redridge.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "fly", from = 2, to = 5 },
-          } },
-        { id = "o2358", at = { zone = 44, x = 35.48, y = 21.23, r = 40 }, text = "Horns of Nez'ra are northeast of your last stop.", when = { class = "ROGUE" }, targets = { enemy = { 437, 485, 4463, 615, 436, 435 } },
-          lines = {
-            { kind = "objective", quest = 2358, index = 1, item = 7906, skipIfMissing = true },
-          } },
-        { id = "t2358", at = { zone = 44, x = 22.97, y = 52.32, r = 10 }, when = { class = "ROGUE" }, targets = { friend = { 7009 } },
-          lines = {
-            { kind = "turnin", quest = 2358, npc = 7009, skipIfMissing = true },
-          } },
-        { id = "y5-2", at = { zone = 44, x = 25.5, y = 59.41, r = 10 }, text = "Fly from Lakeshire, Redridge to Stormwind, Elwynn.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "fly", from = 5, to = 2 },
-          } },
         { id = "tHUNTER-18", at = { zone = 1519, x = 68, y = 35.99, r = 10 }, when = { class = "HUNTER" }, minLevel = 18,
           lines = {
             { kind = "train", level = 18, class = "HUNTER", npc = 5517 },
             { kind = "selljunk", at = { zone = 1519, x = 63.26, y = 37.74, r = 10 }, npc = 5512 },
           } },
-        { id = "x1537#2", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 }, text = "Take the tram from Stormwind City to Ironforge.",
+        { id = "x1537", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 }, text = "Take the tram from Stormwind City to Ironforge.",
           lines = {
             { kind = "transport", to = { zone = 1537, x = 78, y = 51.4 }, mode = "tram", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 } },
           } },
@@ -1272,19 +1187,6 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 2239, npc = 5165, skipIfMissing = true },
             { kind = "accept", quest = 2298, npc = 5165 },
           } },
-        { id = "f6.y6-2", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Stormwind, Elwynn.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "getflight", node = 6, npc = 1573 },
-            { kind = "fly", from = 6, to = 2 },
-          } },
-        { id = "t2298", at = { zone = 1519, x = 78.29, y = 71.14, r = 10 }, when = { class = "ROGUE" }, targets = { friend = { 6946 } },
-          lines = {
-            { kind = "turnin", quest = 2298, npc = 6946 },
-          } },
-        { id = "x1537#3", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 }, text = "Take the tram from Stormwind City to Ironforge.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "transport", to = { zone = 1537, x = 78, y = 51.4 }, mode = "tram", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 } },
-          } },
         { id = "a2299", at = { zone = 1, x = 47.56, y = 52.61, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, maxLevel = 24, targets = { friend = { 1234 } },
           lines = {
             { kind = "accept", quest = 2299, npc = 1234 },
@@ -1293,16 +1195,36 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 2299, npc = 5165, skipIfMissing = true },
           } },
+        { id = "a1680", at = { zone = 1537, x = 70.77, y = 90.27, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, maxLevel = 19, targets = { friend = { 6114 } },
+          lines = {
+            { kind = "accept", quest = 1680, npc = 6114, ifDone = 1639, requires = { 1639 } },
+          } },
+        { id = "tWARRIOR-18", at = { zone = 1537, x = 65.9, y = 88.41, r = 10 }, when = { class = "WARRIOR" }, minLevel = 18,
+          lines = {
+            { kind = "train", level = 18, class = "WARRIOR", npc = 5114 },
+            { kind = "selljunk", at = { zone = 1537, x = 62.55, y = 88.71, r = 10 }, npc = 5121 },
+          } },
+        { id = "t1680.a1681", at = { zone = 1537, x = 48.64, y = 42.48, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, targets = { friend = { 6031 } },
+          lines = {
+            { kind = "turnin", quest = 1680, npc = 6031, skipIfMissing = true },
+            { kind = "accept", quest = 1681, npc = 6031, ifDone = 1639, requires = { 1639 } },
+          } },
+        { id = "o1681", at = { zone = 1, x = 77.96, y = 62.16, r = 40 }, text = "Umbral Ore is northeast of your last stop.", when = { class = "WARRIOR" },
+          lines = {
+            { kind = "objective", quest = 1681, index = 1, item = 6800, skipIfMissing = true },
+          } },
+        { id = "t1681.a1682.t1682", at = { zone = 1537, x = 48.64, y = 42.48, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, targets = { friend = { 6031 } },
+          lines = {
+            { kind = "turnin", quest = 1681, npc = 6031, skipIfMissing = true },
+            { kind = "accept", quest = 1682, npc = 6031, ifDone = 1681, requires = { 1681 } },
+            { kind = "turnin", quest = 1682, npc = 6031, skipIfMissing = true },
+          } },
       },
     },
     {
-      id = "highorder-19-20-darkshore", name = "19-20 Darkshore", group = "Alliance", subgroup = "1-20", minLevel = 19, maxLevel = 23, zone = 148,
+      id = "highorder-19-20-darkshore", name = "19-20 Darkshore", names = { MAGE = "20 Darkshore" }, group = "Alliance", subgroup = "1-20", minLevel = 19, maxLevel = 23, zone = 148,
       next = { { section = "highorder-20-23-darkshore" } },
       steps = {
-        { id = "p186-3-skill", when = { profession = 186 }, reminder = { ends = "train186_3" },
-          lines = {
-            { kind = "skill", skill = 186, value = 125 },
-          } },
         { id = "g11@11", at = { zone = 11, x = 9.49, y = 59.69, r = 20 }, text = "Head north into Wetlands.",
           lines = {
             { kind = "goto", at = { zone = 11, x = 9.49, y = 59.69, r = 20 } },
@@ -1352,14 +1274,166 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "transport", to = { zone = 141, x = 54.8, y = 97.2 }, mode = "boat", at = { zone = 148, x = 33.3, y = 39.8, r = 15 } },
           } },
-        { id = "tDRUID-18", at = { zone = 1657, x = 35.37, y = 8.4, r = 10 }, when = { class = "DRUID" }, minLevel = 18,
-          lines = {
-            { kind = "train", level = 18, class = "DRUID", npc = 4217 },
-            { kind = "selljunk", at = { zone = 1657, x = 35.37, y = 8.4, r = 10 }, npc = 4217 },
-          } },
         { id = "a6121", at = { zone = 1657, x = 35.37, y = 8.4, r = 10 }, when = { class = "DRUID" }, minLevel = 14, maxLevel = 22, targets = { friend = { 4217 } },
           lines = {
             { kind = "accept", quest = 6121, npc = 4217 },
+          } },
+        { id = "g141@141", at = { zone = 141, x = 58.4, y = 94.02, r = 20 }, text = "Head north into Teldrassil.", when = { class = "DRUID" },
+          lines = {
+            { kind = "goto", at = { zone = 141, x = 58.4, y = 94.02, r = 20 } },
+          } },
+        { id = "f27.y27-26", at = { zone = 141, x = 58.4, y = 94.02, r = 10 }, text = "Fly from Rut'theran Village, Teldrassil to Auberdine, Darkshore.", when = { class = "DRUID" },
+          lines = {
+            { kind = "getflight", node = 27, npc = 3838 },
+            { kind = "fly", from = 27, to = 26 },
+          } },
+        { id = "o3524", at = { zone = 148, x = 36.37, y = 50.92, r = 40 }, text = "Sea Creature Bones are south of Gorbold Steelhand.",
+          lines = {
+            { kind = "objective", quest = 3524, index = 1, item = 12242, skipIfMissing = true },
+          } },
+        { id = "a953", at = { zone = 148, x = 40.3, y = 59.73, r = 10 }, minLevel = 9, maxLevel = 20, targets = { friend = { 3639 } },
+          lines = {
+            { kind = "accept", quest = 953, npc = 3639 },
+          } },
+        { id = "o963.o953.o958", at = { zone = 148, x = 41.81, y = 60.73, r = 40 }, targets = { enemy = { 3667, 2177, 2178, 2176, 210528 } },
+          lines = {
+            { kind = "objective", quest = 963, index = 1, item = 5382, skipIfMissing = true },
+            { kind = "objective", quest = 953, index = 1, at = { zone = 148, x = 43.3, y = 58.68, r = 40 }, object = 17188, skipIfMissing = true },
+            { kind = "objective", quest = 953, index = 2, at = { zone = 148, x = 43.3, y = 58.68, r = 40 }, object = 17189, skipIfMissing = true },
+            { kind = "objective", quest = 958, index = 1, item = 5360, at = { zone = 148, x = 42.44, y = 58.25, r = 40 }, skipIfMissing = true },
+          } },
+        { id = "t953", at = { zone = 148, x = 40.3, y = 59.73, r = 10 }, targets = { friend = { 3639 } },
+          lines = {
+            { kind = "turnin", quest = 953, npc = 3639, skipIfMissing = true },
+          } },
+        { id = "o984", at = { zone = 148, x = 39.86, y = 53.89, r = 40 },
+          lines = {
+            { kind = "objective", quest = 984, index = 1, skipIfMissing = true },
+          } },
+        { id = "o2118", at = { zone = 148, x = 44.07, y = 49.16, r = 40 }, text = "Rabid Thistle Bear is northeast of your last stop.", items = { 7586 }, targets = { enemy = { 2164 } },
+          lines = {
+            { kind = "objective", quest = 2118, index = 1, npc = 2164, skipIfMissing = true },
+          } },
+        { id = "o4811", at = { zone = 148, x = 47.32, y = 48.68, r = 40 }, text = "Mysterious Red Crystal is east of your last stop.",
+          lines = {
+            { kind = "objective", quest = 4811, index = 1, object = 175524 },
+            { kind = "objective", quest = 4811, index = 2 },
+          } },
+        { id = "tDRUID-18", at = { zone = 493, x = 52.53, y = 40.57, r = 10 }, when = { class = "DRUID" }, minLevel = 18,
+          lines = {
+            { kind = "train", level = 18, class = "DRUID", npc = 12042 },
+            { kind = "selljunk", at = { zone = 493, x = 53.34, y = 42.7, r = 10 }, npc = 12029 },
+          } },
+        { id = "t6121.a6122", at = { zone = 493, x = 56.21, y = 30.64, r = 10 }, when = { class = "DRUID" }, minLevel = 14, items = { 15844 }, targets = { friend = { 11802 } },
+          lines = {
+            { kind = "turnin", quest = 6121, npc = 11802, skipIfMissing = true },
+            { kind = "accept", quest = 6122, npc = 11802, ifDone = 6121, requires = { 6121 } },
+          } },
+        { id = "f49.y49-26", at = { zone = 493, x = 48.1, y = 67.34, r = 10 }, text = "Fly from Moonglade to Auberdine, Darkshore.", when = { class = "DRUID" },
+          lines = {
+            { kind = "getflight", node = 49, npc = 10897 },
+            { kind = "fly", from = 49, to = 26 },
+          } },
+        { id = "o6122", at = { zone = 148, x = 54.92, y = 33.31, r = 40 }, text = "Filled Cliffspring Falls Sampler is northeast of your last stop.", when = { class = "DRUID" }, items = { 15844 },
+          lines = {
+            { kind = "objective", quest = 6122, index = 1, item = 15845, skipIfMissing = true },
+          } },
+        { id = "t6122.a6123", at = { zone = 148, x = 37.69, y = 40.66, r = 10 }, when = { class = "DRUID" }, minLevel = 14, items = { 15844 }, targets = { friend = { 3702 } },
+          lines = {
+            { kind = "turnin", quest = 6122, npc = 3702, skipIfMissing = true },
+            { kind = "accept", quest = 6123, npc = 3702, ifDone = 6122, requires = { 6122 } },
+          } },
+        { id = "o6123", at = { zone = 148, x = 42.64, y = 66.85, r = 40 }, text = "Earthroot is south of your last stop.", when = { class = "DRUID" }, targets = { enemy = { 275703, 276099 } },
+          lines = {
+            { kind = "objective", quest = 6123, index = 1, item = 2449, skipIfMissing = true },
+            { kind = "objective", quest = 6123, index = 2, item = 15851, skipIfMissing = true },
+          } },
+        { id = "t6123.a6124", at = { zone = 148, x = 37.69, y = 40.66, r = 10 }, when = { class = "DRUID" }, minLevel = 14, items = { 15826 }, targets = { friend = { 3702 } },
+          lines = {
+            { kind = "turnin", quest = 6123, npc = 3702, skipIfMissing = true },
+            { kind = "accept", quest = 6124, npc = 3702, ifDone = 6123, requires = { 6123 } },
+          } },
+        { id = "o6124", at = { zone = 148, x = 43.3, y = 53.35, r = 40 }, text = "The Sickly Deer are southwest of your last stop.", when = { class = "DRUID" }, items = { 15826 }, targets = { enemy = { 12298 } },
+          lines = {
+            { kind = "objective", quest = 6124, index = 1, npc = 12298, skipIfMissing = true },
+          } },
+        { id = "y26-49", at = { zone = 148, x = 36.34, y = 45.58, r = 10 }, text = "Fly from Auberdine, Darkshore to Moonglade.", when = { class = "DRUID" },
+          lines = {
+            { kind = "fly", from = 26, to = 49 },
+          } },
+        { id = "t6124", at = { zone = 493, x = 56.21, y = 30.64, r = 10 }, when = { class = "DRUID" }, items = { 15826 }, targets = { friend = { 11802 } },
+          lines = {
+            { kind = "turnin", quest = 6124, npc = 11802, skipIfMissing = true },
+          } },
+        { id = "y49-26", at = { zone = 493, x = 48.1, y = 67.34, r = 10 }, text = "Fly from Moonglade to Auberdine, Darkshore.", when = { class = "DRUID" },
+          lines = {
+            { kind = "fly", from = 49, to = 26 },
+          } },
+        { id = "o982", at = { zone = 148, x = 38.24, y = 28.8, r = 40 }, text = "Silver Dawning's Lockbox is northwest of your last stop.",
+          lines = {
+            { kind = "objective", quest = 982, index = 1, item = 12191, skipIfMissing = true },
+            { kind = "objective", quest = 982, index = 2, item = 12192, skipIfMissing = true },
+          } },
+      },
+    },
+    {
+      id = "highorder-20-23-darkshore", name = "20-23 Darkshore", group = "Alliance", subgroup = "20-30", minLevel = 20, maxLevel = 26, zone = 148,
+      next = { { section = "highorder-23-27-ashenvale" } },
+      steps = {
+        { id = "p186-3-skill", when = { profession = 186 }, reminder = { ends = "train186_3" },
+          lines = {
+            { kind = "skill", skill = 186, value = 125 },
+          } },
+        { id = "o1138.o954", at = { zone = 148, x = 43.46, y = 38.69, r = 40 }, text = "Fine Crab Chunks are southeast of your last stop.", targets = { enemy = { 2235, 2233 } },
+          lines = {
+            { kind = "objective", quest = 1138, index = 1, item = 12237, skipIfMissing = true },
+            { kind = "objective", quest = 954, index = 1, at = { zone = 148, x = 44.28, y = 36.37, r = 40 }, skipIfMissing = true },
+          } },
+        { id = "t954.a955", at = { zone = 148, x = 44.17, y = 36.29, r = 10 }, minLevel = 7, targets = { friend = { 3650 } },
+          lines = {
+            { kind = "turnin", quest = 954, npc = 3650, skipIfMissing = true },
+            { kind = "accept", quest = 955, npc = 3650, ifDone = 954, requires = { 954 } },
+          } },
+        { id = "o955", at = { zone = 148, x = 45.21, y = 37.54, r = 40 }, targets = { enemy = { 2189, 2190 } },
+          lines = {
+            { kind = "objective", quest = 955, index = 1, item = 5336, skipIfMissing = true },
+          } },
+        { id = "t955.a956", at = { zone = 148, x = 44.17, y = 36.29, r = 10 }, minLevel = 7, targets = { friend = { 3650 } },
+          lines = {
+            { kind = "turnin", quest = 955, npc = 3650, skipIfMissing = true },
+            { kind = "accept", quest = 956, npc = 3650, ifDone = 955, requires = { 955 } },
+          } },
+        { id = "o956", at = { zone = 148, x = 46.7, y = 37.81, r = 40 }, targets = { enemy = { 2212 } },
+          lines = {
+            { kind = "objective", quest = 956, index = 1, item = 5338, skipIfMissing = true },
+          } },
+        { id = "t956.a957", at = { zone = 148, x = 44.17, y = 36.29, r = 10 }, minLevel = 7, items = { 5338 }, targets = { friend = { 3650 } },
+          lines = {
+            { kind = "turnin", quest = 956, npc = 3650, skipIfMissing = true },
+            { kind = "accept", quest = 957, npc = 3650, ifDone = 956, requires = { 956 } },
+          } },
+        { id = "a2098", at = { zone = 148, x = 56.66, y = 13.48, r = 10 }, minLevel = 14, maxLevel = 28, targets = { friend = { 6667 } },
+          lines = {
+            { kind = "accept", quest = 2098, npc = 6667 },
+          } },
+        { id = "t965.a966", at = { zone = 148, x = 54.97, y = 24.89, r = 10 }, minLevel = 13, targets = { friend = { 3661 } },
+          lines = {
+            { kind = "turnin", quest = 965, npc = 3661, skipIfMissing = true },
+            { kind = "accept", quest = 966, npc = 3661, ifDone = 965, requires = { 965 } },
+          } },
+        { id = "o966", at = { zone = 148, x = 56.32, y = 26.66, r = 40 }, targets = { enemy = { 2336 } },
+          lines = {
+            { kind = "objective", quest = 966, index = 1, item = 5348, skipIfMissing = true },
+          } },
+        { id = "t966.a967", at = { zone = 148, x = 54.97, y = 24.89, r = 10 }, minLevel = 13, items = { 5354 }, targets = { friend = { 3661 } },
+          lines = {
+            { kind = "turnin", quest = 966, npc = 3661, skipIfMissing = true },
+            { kind = "accept", quest = 967, npc = 3661, ifDone = 966, requires = { 966 } },
+          } },
+        { id = "o947", at = { zone = 148, x = 55.67, y = 34.89, r = 40 }, text = "Scaber Stalk is south of Balthule Shadowstrike.",
+          lines = {
+            { kind = "objective", quest = 947, index = 1, item = 5271, skipIfMissing = true },
+            { kind = "objective", quest = 947, index = 2, item = 5270, skipIfMissing = true },
           } },
         { id = "x141#2", at = { zone = 148, x = 33.3, y = 39.8, r = 15 }, text = "Take the boat from Darkshore to Teldrassil.", when = { class = "ROGUE" },
           lines = {
@@ -1374,7 +1448,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 2241, npc = 4163, skipIfMissing = true },
             { kind = "accept", quest = 2242, npc = 4163, ifDone = 2241, requires = { 2241 } },
           } },
-        { id = "o2242", at = { zone = 141, x = 37.11, y = 22.83, r = 40 }, text = "Sethir's Journal is north of Gorbold Steelhand.", when = { class = "ROGUE" }, targets = { enemy = { 6909 } },
+        { id = "o2242", at = { zone = 141, x = 37.11, y = 22.83, r = 40 }, text = "Sethir's Journal is northwest of your last stop.", when = { class = "ROGUE" }, targets = { enemy = { 6909 } },
           lines = {
             { kind = "objective", quest = 2242, index = 1, item = 7737, skipIfMissing = true },
           } },
@@ -1395,214 +1469,47 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "transport", to = { zone = 141, x = 54.8, y = 97.2 }, mode = "boat", at = { zone = 148, x = 33.3, y = 39.8, r = 15 } },
           } },
-        { id = "tWARRIOR-18", at = { zone = 1657, x = 58.71, y = 34.9, r = 10 }, when = { class = "WARRIOR" }, minLevel = 18,
-          lines = {
-            { kind = "train", level = 18, class = "WARRIOR", npc = 4087 },
-            { kind = "selljunk", at = { zone = 1657, x = 58.02, y = 34.52, r = 10 }, npc = 15351 },
-          } },
         { id = "a1686", at = { zone = 1657, x = 57.3, y = 34.61, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, maxLevel = 18, targets = { friend = { 4088 } },
           lines = {
             { kind = "accept", quest = 1686, npc = 4088, ifDone = 1639, requires = { 1639 } },
           } },
-        { id = "h#7", text = "Use your hearthstone to return to Darkshore.",
+        { id = "h#3", text = "Use your hearthstone to return to Darkshore.",
           lines = {
             { kind = "hearth", to = { zone = 148, x = 37.04, y = 44.13 } },
           } },
-        { id = "o1686", at = { zone = 148, x = 32.51, y = 44.57, r = 40 }, when = { class = "WARRIOR" }, targets = { enemy = { 6133 } },
+        { id = "t947.a948.t4811.a4812", at = { zone = 148, x = 37.32, y = 43.64, r = 10 }, minLevel = 12, items = { 14338 }, targets = { friend = { 3583, 2930 } },
+          lines = {
+            { kind = "turnin", quest = 947, npc = 3583, skipIfMissing = true },
+            { kind = "accept", quest = 948, npc = 3583, ifDone = 947, requires = { 947 } },
+            { kind = "turnin", quest = 4811, npc = 2930, skipIfMissing = true },
+            { kind = "accept", quest = 4812, npc = 2930, ifDone = 4811, requires = { 4811 } },
+          } },
+        { id = "t982", at = { zone = 148, x = 38.11, y = 41.17, r = 10 }, targets = { friend = { 6301 } },
+          lines = {
+            { kind = "turnin", quest = 982, npc = 6301, skipIfMissing = true },
+          } },
+        { id = "t984.a985.a4761.t2118.a2138", at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, minLevel = 11, items = { 7586 }, targets = { friend = { 3693, 3701 } },
+          lines = {
+            { kind = "turnin", quest = 984, npc = 3693, skipIfMissing = true },
+            { kind = "accept", quest = 985, npc = 3693, ifDone = 984, requires = { 984 } },
+            { kind = "accept", quest = 4761, npc = 3693, ifDone = 984, requires = { 984 } },
+            { kind = "turnin", quest = 2118, at = { zone = 148, x = 38.84, y = 43.42, r = 10 }, npc = 3701, skipIfMissing = true },
+            { kind = "accept", quest = 2138, at = { zone = 148, x = 38.84, y = 43.42, r = 10 }, npc = 3701, ifDone = 2118, requires = { 2118 } },
+          } },
+        { id = "t3524.a4681.t1138", at = { zone = 148, x = 36.62, y = 45.59, r = 10 }, minLevel = 11, targets = { friend = { 10219, 10216 } },
+          lines = {
+            { kind = "turnin", quest = 3524, npc = 10219, skipIfMissing = true },
+            { kind = "accept", quest = 4681, npc = 10219, ifDone = 3524, requires = { 3524 } },
+            { kind = "turnin", quest = 1138, at = { zone = 148, x = 36.1, y = 44.93, r = 10 }, npc = 10216, skipIfMissing = true },
+          } },
+        { id = "t963", at = { zone = 148, x = 35.74, y = 43.71, r = 10 }, targets = { friend = { 3644 } },
+          lines = {
+            { kind = "turnin", quest = 963, npc = 3644, skipIfMissing = true },
+          } },
+        { id = "o1686", at = { zone = 148, x = 32.51, y = 44.57, r = 40 }, text = "Elunite Ore is west of Cerellean Whiteclaw.", when = { class = "WARRIOR" }, targets = { enemy = { 6133 } },
           lines = {
             { kind = "objective", quest = 1686, index = 1, item = 6808, skipIfMissing = true },
             { kind = "objective", quest = 1686, index = 2, item = 6809, skipIfMissing = true },
-          } },
-        { id = "o3524", at = { zone = 148, x = 36.37, y = 50.92, r = 40 },
-          lines = {
-            { kind = "objective", quest = 3524, index = 1, item = 12242, skipIfMissing = true },
-          } },
-        { id = "o984", at = { zone = 148, x = 39.86, y = 53.89, r = 40 },
-          lines = {
-            { kind = "objective", quest = 984, index = 1, skipIfMissing = true },
-          } },
-        { id = "a953", at = { zone = 148, x = 40.3, y = 59.73, r = 10 }, minLevel = 9, maxLevel = 20, targets = { friend = { 3639 } },
-          lines = {
-            { kind = "accept", quest = 953, npc = 3639 },
-          } },
-        { id = "o963.o958", at = { zone = 148, x = 41.81, y = 60.73, r = 40 }, targets = { enemy = { 3667, 2177, 2178, 2176, 210528 } },
-          lines = {
-            { kind = "objective", quest = 963, index = 1, item = 5382, skipIfMissing = true },
-            { kind = "objective", quest = 958, index = 1, item = 5360, at = { zone = 148, x = 42.44, y = 58.25, r = 40 }, skipIfMissing = true },
-          } },
-        { id = "o2118", at = { zone = 148, x = 44.07, y = 49.16, r = 40 }, text = "Rabid Thistle Bear is north of your last stop.", items = { 7586 }, targets = { enemy = { 2164 } },
-          lines = {
-            { kind = "objective", quest = 2118, index = 1, npc = 2164, skipIfMissing = true },
-          } },
-        { id = "o953", at = { zone = 148, x = 43.3, y = 58.68, r = 40 }, text = "The Lay of Ameth'Aran is south of your last stop.",
-          lines = {
-            { kind = "objective", quest = 953, index = 1, object = 17188, skipIfMissing = true },
-            { kind = "objective", quest = 953, index = 2, object = 17189, skipIfMissing = true },
-          } },
-        { id = "t953", at = { zone = 148, x = 40.3, y = 59.73, r = 10 }, targets = { friend = { 3639 } },
-          lines = {
-            { kind = "turnin", quest = 953, npc = 3639, skipIfMissing = true },
-          } },
-        { id = "o4740", at = { zone = 148, x = 36.44, y = 76.51, r = 40 }, text = "Murkdeep is south of Sentinel Tysha Moonblade.", targets = { enemy = { 10323 } },
-          lines = {
-            { kind = "objective", quest = 4740, index = 1, npc = 10323, skipIfMissing = true },
-          } },
-        { id = "t729.a731", at = { zone = 148, x = 35.73, y = 83.7, r = 10 }, minLevel = 15, targets = { friend = { 2917 } },
-          lines = {
-            { kind = "turnin", quest = 729, npc = 2917 },
-            { kind = "accept", quest = 731, npc = 2917, requires = { 729 } },
-          } },
-        { id = "a945", at = { zone = 148, x = 38.64, y = 87.33, r = 10 }, minLevel = 10, maxLevel = 26, targets = { friend = { 3584 } },
-          lines = {
-            { kind = "accept", quest = 945, npc = 3584 },
-          } },
-        { id = "o731", at = { zone = 148, x = 35.67, y = 84.03, r = 40 },
-          lines = {
-            { kind = "objective", quest = 731, index = 1 },
-          } },
-        { id = "o945", at = { zone = 148, x = 40.51, y = 87.08, r = 40 },
-          lines = {
-            { kind = "objective", quest = 945, index = 1, skipIfMissing = true },
-          } },
-        { id = "a5713.o5713", at = { zone = 148, x = 45.94, y = 90.29, r = 10 }, minLevel = 10, targets = { friend = { 11711 } },
-          lines = {
-            { kind = "accept", quest = 5713, npc = 11711 },
-            { kind = "objective", quest = 5713, index = 1 },
-          } },
-        { id = "a5321", at = { zone = 148, x = 44.4, y = 76.43, r = 10 }, minLevel = 17, maxLevel = 28, targets = { friend = { 11218 } },
-          lines = {
-            { kind = "accept", quest = 5321, npc = 11218 },
-          } },
-        { id = "o5321", at = { zone = 148, x = 42, y = 90.5, r = 40 },
-          lines = {
-            { kind = "objective", quest = 5321, index = 1, skipIfMissing = true },
-          } },
-        { id = "t6121.a6122", at = { zone = 493, x = 56.21, y = 30.64, r = 10 }, when = { class = "DRUID" }, minLevel = 14, items = { 15844 }, targets = { friend = { 11802 } },
-          lines = {
-            { kind = "turnin", quest = 6121, npc = 11802, skipIfMissing = true },
-            { kind = "accept", quest = 6122, npc = 11802, ifDone = 6121, requires = { 6121 } },
-          } },
-        { id = "f49.y49-26", at = { zone = 493, x = 48.1, y = 67.34, r = 10 }, text = "Fly from Moonglade to Auberdine, Darkshore.", when = { class = "DRUID" },
-          lines = {
-            { kind = "getflight", node = 49, npc = 10897 },
-            { kind = "fly", from = 49, to = 26 },
-          } },
-        { id = "o4811", at = { zone = 148, x = 47.32, y = 48.68, r = 40 }, text = "Mysterious Red Crystal is north of your last stop.",
-          lines = {
-            { kind = "objective", quest = 4811, index = 1, object = 175524 },
-            { kind = "objective", quest = 4811, index = 2 },
-          } },
-        { id = "o6122", at = { zone = 148, x = 54.92, y = 33.31, r = 40 }, text = "Filled Cliffspring Falls Sampler is northeast of your last stop.", when = { class = "DRUID" }, items = { 15844 },
-          lines = {
-            { kind = "objective", quest = 6122, index = 1, item = 15845, skipIfMissing = true },
-          } },
-        { id = "p186-3", label = "train186_3", at = { zone = 148, x = 38.25, y = 41.01, r = 10 }, when = { profession = 186 },
-          lines = {
-            { kind = "train", skill = 186, rank = 3, npc = 6297 },
-          } },
-        { id = "o1138", at = { zone = 148, x = 43.46, y = 38.69, r = 40 }, text = "Fine Crab Chunks are northwest of your last stop.", targets = { enemy = { 2235, 2233 } },
-          lines = {
-            { kind = "objective", quest = 1138, index = 1, item = 12237, skipIfMissing = true },
-          } },
-      },
-    },
-    {
-      id = "highorder-20-23-darkshore", name = "20-23 Darkshore", group = "Alliance", subgroup = "20-30", minLevel = 20, maxLevel = 26, zone = 148,
-      next = { { section = "highorder-23-25-ashenvale" } },
-      steps = {
-        { id = "t6122.a6123", at = { zone = 148, x = 37.69, y = 40.66, r = 10 }, when = { class = "DRUID" }, minLevel = 14, items = { 15844 }, targets = { friend = { 3702 } },
-          lines = {
-            { kind = "turnin", quest = 6122, npc = 3702, skipIfMissing = true },
-            { kind = "accept", quest = 6123, npc = 3702, ifDone = 6122, requires = { 6122 } },
-          } },
-        { id = "o6123", at = { zone = 148, x = 42.64, y = 66.85, r = 40 }, text = "Earthroot is south of your last stop.", when = { class = "DRUID" }, targets = { enemy = { 275703, 276099 } },
-          lines = {
-            { kind = "objective", quest = 6123, index = 1, item = 2449, skipIfMissing = true },
-            { kind = "objective", quest = 6123, index = 2, item = 15851, skipIfMissing = true },
-          } },
-        { id = "t6123.a6124", at = { zone = 148, x = 37.69, y = 40.66, r = 10 }, when = { class = "DRUID" }, minLevel = 14, items = { 15826 }, targets = { friend = { 3702 } },
-          lines = {
-            { kind = "turnin", quest = 6123, npc = 3702, skipIfMissing = true },
-            { kind = "accept", quest = 6124, npc = 3702, ifDone = 6123, requires = { 6123 } },
-          } },
-        { id = "o6124", at = { zone = 148, x = 43.3, y = 53.35, r = 40 }, text = "The Sickly Deer are south of your last stop.", when = { class = "DRUID" }, items = { 15826 }, targets = { enemy = { 12298 } },
-          lines = {
-            { kind = "objective", quest = 6124, index = 1, npc = 12298, skipIfMissing = true },
-          } },
-        { id = "y26-49", at = { zone = 148, x = 36.34, y = 45.58, r = 10 }, text = "Fly from Auberdine, Darkshore to Moonglade.", when = { class = "DRUID" },
-          lines = {
-            { kind = "fly", from = 26, to = 49 },
-          } },
-        { id = "tDRUID-20", at = { zone = 493, x = 52.53, y = 40.57, r = 10 }, when = { class = "DRUID" }, minLevel = 20,
-          lines = {
-            { kind = "train", level = 20, class = "DRUID", npc = 12042 },
-            { kind = "selljunk", at = { zone = 493, x = 53.34, y = 42.7, r = 10 }, npc = 12029 },
-          } },
-        { id = "t6124", at = { zone = 493, x = 56.21, y = 30.64, r = 10 }, when = { class = "DRUID" }, items = { 15826 }, targets = { friend = { 11802 } },
-          lines = {
-            { kind = "turnin", quest = 6124, npc = 11802, skipIfMissing = true },
-          } },
-        { id = "y49-26", at = { zone = 493, x = 48.1, y = 67.34, r = 10 }, text = "Fly from Moonglade to Auberdine, Darkshore.", when = { class = "DRUID" },
-          lines = {
-            { kind = "fly", from = 49, to = 26 },
-          } },
-        { id = "o954.t954.a955.o955.t955.a956", at = { zone = 148, x = 44.28, y = 36.37, r = 40 }, minLevel = 7, targets = { enemy = { 2189, 2190 }, friend = { 3650 } },
-          lines = {
-            { kind = "objective", quest = 954, index = 1, skipIfMissing = true },
-            { kind = "turnin", quest = 954, npc = 3650, skipIfMissing = true },
-            { kind = "accept", quest = 955, npc = 3650, ifDone = 954, requires = { 954 } },
-            { kind = "objective", quest = 955, index = 1, item = 5336, at = { zone = 148, x = 45.21, y = 37.54, r = 40 }, skipIfMissing = true },
-            { kind = "turnin", quest = 955, npc = 3650, skipIfMissing = true },
-            { kind = "accept", quest = 956, npc = 3650, ifDone = 955, requires = { 955 } },
-          } },
-        { id = "o956", at = { zone = 148, x = 46.7, y = 37.81, r = 40 }, targets = { enemy = { 2212 } },
-          lines = {
-            { kind = "objective", quest = 956, index = 1, item = 5338, skipIfMissing = true },
-          } },
-        { id = "t956.a957", at = { zone = 148, x = 44.17, y = 36.29, r = 10 }, minLevel = 7, items = { 5338 }, targets = { friend = { 3650 } },
-          lines = {
-            { kind = "turnin", quest = 956, npc = 3650, skipIfMissing = true },
-            { kind = "accept", quest = 957, npc = 3650, ifDone = 956, requires = { 956 } },
-          } },
-        { id = "o982", at = { zone = 148, x = 38.24, y = 28.8, r = 40 }, text = "Silver Dawning's Lockbox is northwest of Asterion.",
-          lines = {
-            { kind = "objective", quest = 982, index = 1, item = 12191, skipIfMissing = true },
-            { kind = "objective", quest = 982, index = 2, item = 12192, skipIfMissing = true },
-          } },
-        { id = "x11", at = { zone = 148, x = 32.3, y = 44.1, r = 15 }, text = "Take the boat from Darkshore to Wetlands.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "transport", to = { zone = 11, x = 4.5, y = 56.6 }, mode = "boat", at = { zone = 148, x = 32.3, y = 44.1, r = 15 } },
-          } },
-        { id = "y7-2", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Stormwind, Elwynn.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "fly", from = 7, to = 2 },
-          } },
-        { id = "tROGUE-20", at = { zone = 1519, x = 80.28, y = 68.58, r = 10 }, when = { class = "ROGUE" }, minLevel = 20,
-          lines = {
-            { kind = "train", level = 20, class = "ROGUE", npc = 13283 },
-            { kind = "selljunk", at = { zone = 1519, x = 80.28, y = 70.07, r = 10 }, npc = 1325 },
-          } },
-        { id = "t2260.a2281", at = { zone = 1519, x = 78.29, y = 71.14, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, targets = { friend = { 6946 } },
-          lines = {
-            { kind = "turnin", quest = 2260, npc = 6946, skipIfMissing = true },
-            { kind = "accept", quest = 2281, npc = 6946 },
-          } },
-        { id = "y2-5#2", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Lakeshire, Redridge.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "fly", from = 2, to = 5 },
-          } },
-        { id = "t2281.a2282", at = { zone = 44, x = 22.97, y = 52.04, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, items = { 5060 }, targets = { friend = { 6966 } },
-          lines = {
-            { kind = "turnin", quest = 2281, npc = 6966 },
-            { kind = "accept", quest = 2282, npc = 6966, requires = { 2281 } },
-          } },
-        { id = "o2282", at = { zone = 44, x = 46.95, y = 44.69, r = 40 }, when = { class = "ROGUE" }, items = { 5060 },
-          lines = {
-            { kind = "objective", quest = 2282, index = 1, item = 7871 },
-          } },
-        { id = "t2282", at = { zone = 44, x = 22.97, y = 52.04, r = 10 }, when = { class = "ROGUE" }, items = { 5060 }, targets = { friend = { 6966 } },
-          lines = {
-            { kind = "turnin", quest = 2282, npc = 6966 },
           } },
         { id = "x141#4", at = { zone = 148, x = 33.3, y = 39.8, r = 15 }, text = "Take the boat from Darkshore to Teldrassil.", when = { class = "WARRIOR" },
           lines = {
@@ -1621,185 +1528,143 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 1693, at = { zone = 1657, x = 59.51, y = 45.38, r = 10 }, npc = 6142, ifDone = 1692, requires = { 1692 } },
             { kind = "turnin", quest = 1693, at = { zone = 1657, x = 59.51, y = 45.38, r = 10 }, npc = 6142, skipIfMissing = true },
           } },
-        { id = "h#8", text = "Use your hearthstone to return to Darkshore.",
+        { id = "g141@141#2", at = { zone = 141, x = 58.4, y = 94.02, r = 20 }, text = "Head north into Teldrassil.", when = { class = "WARRIOR" },
           lines = {
-            { kind = "hearth", to = { zone = 148, x = 37.04, y = 44.13 } },
+            { kind = "goto", at = { zone = 141, x = 58.4, y = 94.02, r = 20 } },
           } },
-        { id = "t958.t982.t731", at = { zone = 148, x = 37.4, y = 40.13, r = 10 }, targets = { friend = { 3649, 6301, 2913 } },
+        { id = "f27.y27-26#2", at = { zone = 141, x = 58.4, y = 94.02, r = 10 }, text = "Fly from Rut'theran Village, Teldrassil to Auberdine, Darkshore.", when = { class = "WARRIOR" },
           lines = {
-            { kind = "turnin", quest = 958, npc = 3649, skipIfMissing = true },
-            { kind = "turnin", quest = 982, at = { zone = 148, x = 38.11, y = 41.17, r = 10 }, npc = 6301, skipIfMissing = true },
-            { kind = "turnin", quest = 731, at = { zone = 148, x = 37.44, y = 41.84, r = 10 }, npc = 2913, skipIfMissing = true },
+            { kind = "getflight", node = 27, npc = 3838 },
+            { kind = "fly", from = 27, to = 26 },
           } },
-        { id = "t4740.t4811.a4812.o4812", at = { zone = 148, x = 37.7, y = 43.41, r = 10 }, minLevel = 12, items = { 14338 }, targets = { friend = { 2930 } },
+        { id = "o4681", at = { zone = 148, x = 31.82, y = 46.31, r = 40 }, text = "Sea Turtle Remains are southwest of Cerellean Whiteclaw.",
           lines = {
-            { kind = "turnin", quest = 4740, npc = 2930, skipIfMissing = true },
-            { kind = "turnin", quest = 4811, npc = 2930, skipIfMissing = true },
-            { kind = "accept", quest = 4812, npc = 2930, ifDone = 4811, requires = { 4811 } },
+            { kind = "objective", quest = 4681, index = 1, item = 12289, skipIfMissing = true },
+          } },
+        { id = "o4812", at = { zone = 148, x = 37.78, y = 44.03, r = 40 }, text = "Moonwell Water Tube is east of your last stop.", items = { 14338 },
+          lines = {
             { kind = "objective", quest = 4812, index = 1, item = 14339, skipIfMissing = true },
           } },
-        { id = "o957", at = { zone = 148, x = 42.37, y = 61.82, r = 40 }, text = "Ancient Flame is south of Sentinel Glynda Nal'Shea.", items = { 5338 },
+        { id = "o2138", at = { zone = 148, x = 44.07, y = 49.16, r = 40 }, text = "The Rabid Thistle Bears are southeast of your last stop.", targets = { enemy = { 2164 } },
           lines = {
-            { kind = "objective", quest = 957, index = 1, object = 16393, skipIfMissing = true },
+            { kind = "objective", quest = 2138, index = 1, npc = 2164, skipIfMissing = true },
           } },
         { id = "t4812.a4813", at = { zone = 148, x = 47.32, y = 48.68, r = 10 }, minLevel = 12, items = { 14338 },
           lines = {
             { kind = "turnin", quest = 4812, object = 175524, skipIfMissing = true },
             { kind = "accept", quest = 4813, object = 175524, ifDone = 4812, requires = { 4812 } },
           } },
-        { id = "o947", at = { zone = 148, x = 55.67, y = 34.89, r = 40 }, text = "Scaber Stalk is northeast of your last stop.",
-          lines = {
-            { kind = "objective", quest = 947, index = 1, item = 5271, skipIfMissing = true },
-            { kind = "objective", quest = 947, index = 2, item = 5270, skipIfMissing = true },
-          } },
-        { id = "t965.a966", at = { zone = 148, x = 54.97, y = 24.89, r = 10 }, minLevel = 13, targets = { friend = { 3661 } },
-          lines = {
-            { kind = "turnin", quest = 965, npc = 3661, skipIfMissing = true },
-            { kind = "accept", quest = 966, npc = 3661, ifDone = 965, requires = { 965 } },
-          } },
-        { id = "o966", at = { zone = 148, x = 56.32, y = 26.66, r = 40 }, targets = { enemy = { 2336 } },
-          lines = {
-            { kind = "objective", quest = 966, index = 1, item = 5348, skipIfMissing = true },
-          } },
-        { id = "t966.a967", at = { zone = 148, x = 54.97, y = 24.89, r = 10 }, minLevel = 13, items = { 5354 }, targets = { friend = { 3661 } },
-          lines = {
-            { kind = "turnin", quest = 966, npc = 3661, skipIfMissing = true },
-            { kind = "accept", quest = 967, npc = 3661, ifDone = 966, requires = { 966 } },
-          } },
-        { id = "a2098", at = { zone = 148, x = 56.66, y = 13.48, r = 10 }, minLevel = 14, maxLevel = 28, targets = { friend = { 6667 } },
-          lines = {
-            { kind = "accept", quest = 2098, npc = 6667 },
-          } },
-        { id = "t957", at = { zone = 148, x = 44.17, y = 36.29, r = 10 }, items = { 5338 }, targets = { friend = { 3650 } },
-          lines = {
-            { kind = "turnin", quest = 957, npc = 3650, skipIfMissing = true },
-          } },
-        { id = "t984.a985.a4761.t2118.a2138", at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, minLevel = 11, items = { 7586 }, targets = { friend = { 3693, 3701 } },
-          lines = {
-            { kind = "turnin", quest = 984, npc = 3693, skipIfMissing = true },
-            { kind = "accept", quest = 985, npc = 3693, ifDone = 984, requires = { 984 } },
-            { kind = "accept", quest = 4761, npc = 3693, ifDone = 984, requires = { 984 } },
-            { kind = "turnin", quest = 2118, at = { zone = 148, x = 38.84, y = 43.42, r = 10 }, npc = 3701, skipIfMissing = true },
-            { kind = "accept", quest = 2138, at = { zone = 148, x = 38.84, y = 43.42, r = 10 }, npc = 3701, ifDone = 2118, requires = { 2118 } },
-          } },
-        { id = "t4813.t947.a948", at = { zone = 148, x = 37.7, y = 43.41, r = 10 }, minLevel = 12, targets = { friend = { 2930, 3583 } },
-          lines = {
-            { kind = "turnin", quest = 4813, npc = 2930, skipIfMissing = true },
-            { kind = "turnin", quest = 947, npc = 3583, skipIfMissing = true },
-            { kind = "accept", quest = 948, npc = 3583, ifDone = 947, requires = { 947 } },
-          } },
-        { id = "t3524.a4681.t1138", at = { zone = 148, x = 36.62, y = 45.59, r = 10 }, minLevel = 11, targets = { friend = { 10219, 10216 } },
-          lines = {
-            { kind = "turnin", quest = 3524, npc = 10219, skipIfMissing = true },
-            { kind = "accept", quest = 4681, npc = 10219, ifDone = 3524, requires = { 3524 } },
-            { kind = "turnin", quest = 1138, at = { zone = 148, x = 36.1, y = 44.93, r = 10 }, npc = 10216, skipIfMissing = true },
-          } },
-        { id = "t963", at = { zone = 148, x = 35.74, y = 43.71, r = 10 }, targets = { friend = { 3644 } },
-          lines = {
-            { kind = "turnin", quest = 963, npc = 3644, skipIfMissing = true },
-          } },
-        { id = "t4761.a4762", at = { zone = 148, x = 37.4, y = 40.13, r = 10 }, minLevel = 11, items = { 12350 }, targets = { friend = { 3649 } },
-          lines = {
-            { kind = "turnin", quest = 4761, npc = 3649, skipIfMissing = true },
-            { kind = "accept", quest = 4762, npc = 3649, ifDone = 4761, requires = { 4761 } },
-          } },
-        { id = "o4681", at = { zone = 148, x = 31.82, y = 46.31, r = 40 }, text = "Sea Turtle Remains are southwest of Thundris Windweaver.",
-          lines = {
-            { kind = "objective", quest = 4681, index = 1, item = 12289, skipIfMissing = true },
-          } },
-        { id = "t4681", at = { zone = 148, x = 36.62, y = 45.59, r = 10 }, targets = { friend = { 10219 } },
-          lines = {
-            { kind = "turnin", quest = 4681, npc = 10219, skipIfMissing = true },
-          } },
-        { id = "a4723", at = { zone = 148, x = 41.93, y = 31.53, r = 10 }, minLevel = 11, maxLevel = 21, items = { 12242 },
-          lines = {
-            { kind = "accept", quest = 4723, object = 175233, ifDone = 4681, requires = { 4681 } },
-          } },
-        { id = "a4725", at = { zone = 148, x = 44.19, y = 20.6, r = 10 }, minLevel = 12, maxLevel = 23, items = { 12292 },
-          lines = {
-            { kind = "accept", quest = 4725, object = 176197, ifDone = 4681, requires = { 4681 } },
-          } },
-        { id = "a4727", at = { zone = 148, x = 53.11, y = 18.08, r = 10 }, minLevel = 12, maxLevel = 23, items = { 12289 },
-          lines = {
-            { kind = "accept", quest = 4727, object = 176196, ifDone = 4681, requires = { 4681 } },
-          } },
-        { id = "h#9", text = "Use your hearthstone to return to Darkshore.",
-          lines = {
-            { kind = "hearth", to = { zone = 148, x = 37.04, y = 44.13 } },
-          } },
-        { id = "t4723.t4725.t4727", at = { zone = 148, x = 36.62, y = 45.59, r = 10 }, items = { 12242, 12292, 12289 }, targets = { friend = { 10219 } },
-          lines = {
-            { kind = "turnin", quest = 4723, npc = 10219, skipIfMissing = true },
-            { kind = "turnin", quest = 4725, npc = 10219, skipIfMissing = true },
-            { kind = "turnin", quest = 4727, npc = 10219, skipIfMissing = true },
-          } },
-        { id = "a4728", at = { zone = 148, x = 36.01, y = 70.88, r = 10 }, minLevel = 12, maxLevel = 22, items = { 12242 },
-          lines = {
-            { kind = "accept", quest = 4728, object = 175226, ifDone = 4681, requires = { 4681 } },
-          } },
-        { id = "a4722", at = { zone = 148, x = 37.09, y = 62.18, r = 10 }, minLevel = 11, maxLevel = 21, items = { 12289 },
-          lines = {
-            { kind = "accept", quest = 4722, object = 176190, ifDone = 4681, requires = { 4681 } },
-          } },
-        { id = "o985", at = { zone = 148, x = 39.56, y = 54.37, r = 40 }, text = "The Blackwood Pathfinders are northeast of your last stop.", targets = { enemy = { 2167, 2324 } },
+        { id = "o985", at = { zone = 148, x = 39.56, y = 54.37, r = 40 }, text = "The Blackwood Pathfinders are southwest of your last stop.", targets = { enemy = { 2167, 2324 } },
           lines = {
             { kind = "objective", quest = 985, index = 1, npc = 2167, skipIfMissing = true },
             { kind = "objective", quest = 985, index = 2, npc = 2324, skipIfMissing = true },
           } },
-        { id = "t4722.t4728", at = { zone = 148, x = 36.62, y = 45.59, r = 10 }, items = { 12289, 12242 }, targets = { friend = { 10219 } },
+        { id = "o957", at = { zone = 148, x = 42.37, y = 61.82, r = 40 }, text = "Ancient Flame is southeast of your last stop.", items = { 5338 },
           lines = {
-            { kind = "turnin", quest = 4722, npc = 10219, skipIfMissing = true },
-            { kind = "turnin", quest = 4728, npc = 10219, skipIfMissing = true },
+            { kind = "objective", quest = 957, index = 1, object = 16393, skipIfMissing = true },
           } },
-        { id = "o4762", at = { zone = 148, x = 50.84, y = 25.63, r = 40 }, text = "Cliffspring River Sample is northeast of Gwennyth Bly'Leggonde.", items = { 12350 },
+        { id = "a5321.t948.a944", at = { zone = 148, x = 44.4, y = 76.43, r = 10 }, minLevel = 17, items = { 5251 }, targets = { friend = { 11218, 3616 } },
           lines = {
-            { kind = "objective", quest = 4762, index = 1, item = 12349, skipIfMissing = true },
+            { kind = "accept", quest = 5321, npc = 11218 },
+            { kind = "turnin", quest = 948, at = { zone = 148, x = 43.55, y = 76.29, r = 10 }, npc = 3616, skipIfMissing = true },
+            { kind = "accept", quest = 944, at = { zone = 148, x = 43.55, y = 76.29, r = 10 }, npc = 3616, ifDone = 948, requires = { 948 } },
           } },
-        { id = "t4762.a4763", at = { zone = 148, x = 37.4, y = 40.13, r = 10 }, minLevel = 15, items = { 12350, 12346, 12341, 12342, 12343, 12347 }, targets = { friend = { 3649 } },
+        { id = "o2098", at = { zone = 148, x = 42.51, y = 75.92, r = 40 }, targets = { enemy = { 2323, 2205, 2206, 10323, 2204, 2203 } },
           lines = {
-            { kind = "turnin", quest = 4762, npc = 3649, skipIfMissing = true },
-            { kind = "accept", quest = 4763, npc = 3649, ifDone = 4762, requires = { 4762 } },
+            { kind = "objective", quest = 2098, index = 1, item = 7498, skipIfMissing = true },
+            { kind = "objective", quest = 2098, index = 2, item = 7499, skipIfMissing = true },
+            { kind = "objective", quest = 2098, index = 3, item = 7500, skipIfMissing = true },
           } },
-        { id = "o4763", at = { zone = 148, x = 52.48, y = 33.39, r = 40 }, text = "Talisman of Corruption is east of Thundris Windweaver.", items = { 12346, 12341, 12342, 12343, 12347 },
+        { id = "o4740", at = { zone = 148, x = 36.44, y = 76.51, r = 40 }, text = "Murkdeep is west of your last stop.", targets = { enemy = { 10323 } },
           lines = {
-            { kind = "objective", quest = 4763, index = 1, item = 12355, skipIfMissing = true },
+            { kind = "objective", quest = 4740, index = 1, npc = 10323, skipIfMissing = true },
           } },
-        { id = "t4763", at = { zone = 148, x = 37.4, y = 40.13, r = 10 }, items = { 12346, 12341, 12342, 12343, 12347 }, targets = { friend = { 3649 } },
+        { id = "x11", at = { zone = 148, x = 32.3, y = 44.1, r = 15 }, text = "Take the boat from Darkshore to Wetlands.", when = { class = "ROGUE" },
           lines = {
-            { kind = "turnin", quest = 4763, npc = 3649, skipIfMissing = true },
+            { kind = "transport", to = { zone = 11, x = 4.5, y = 56.6 }, mode = "boat", at = { zone = 148, x = 32.3, y = 44.1, r = 15 } },
           } },
-        { id = "o2138", at = { zone = 148, x = 44.07, y = 49.16, r = 40 }, text = "The Rabid Thistle Bears are southeast of Thundris Windweaver.", targets = { enemy = { 2164 } },
+        { id = "g1537@1537", at = { zone = 1537, x = 55.5, y = 47.74, r = 20 }, text = "Head into Ironforge.", when = { class = "ROGUE" },
           lines = {
-            { kind = "objective", quest = 2138, index = 1, npc = 2164, skipIfMissing = true },
+            { kind = "goto", at = { zone = 1537, x = 55.5, y = 47.74, r = 20 } },
           } },
-        { id = "t985.a986.t2138.a2139", at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, minLevel = 10, targets = { friend = { 3693, 3701 } },
+        { id = "f6.y6-2", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Stormwind, Elwynn.", when = { class = "ROGUE" },
           lines = {
-            { kind = "turnin", quest = 985, npc = 3693, skipIfMissing = true },
-            { kind = "accept", quest = 986, npc = 3693, ifDone = 985, requires = { 985 } },
-            { kind = "turnin", quest = 2138, at = { zone = 148, x = 38.84, y = 43.42, r = 10 }, npc = 3701, skipIfMissing = true },
-            { kind = "accept", quest = 2139, at = { zone = 148, x = 38.84, y = 43.42, r = 10 }, npc = 3701, ifDone = 2138, requires = { 2138 } },
+            { kind = "getflight", node = 6, npc = 1573 },
+            { kind = "fly", from = 6, to = 2 },
           } },
-        { id = "o2139", at = { zone = 148, x = 51.48, y = 38.26, r = 40 }, text = "The Den Mother is east of Terenthis.", targets = { enemy = { 6788 } },
+        { id = "tROGUE-20", at = { zone = 1519, x = 80.28, y = 68.58, r = 10 }, when = { class = "ROGUE" }, minLevel = 20,
           lines = {
-            { kind = "objective", quest = 2139, index = 1, npc = 6788, skipIfMissing = true },
+            { kind = "train", level = 20, class = "ROGUE", npc = 13283 },
+            { kind = "selljunk", at = { zone = 1519, x = 80.28, y = 70.07, r = 10 }, npc = 1325 },
           } },
-        { id = "o986", at = { zone = 148, x = 47.92, y = 57.19, r = 40 }, text = "Fine Moonstalker Pelt is south of your last stop.", targets = { enemy = { 2237, 2071 } },
+        { id = "t2260.a2281", at = { zone = 1519, x = 78.29, y = 71.14, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, targets = { friend = { 6946 } },
           lines = {
-            { kind = "objective", quest = 986, index = 1, item = 5386, skipIfMissing = true },
+            { kind = "turnin", quest = 2260, npc = 6946 },
+            { kind = "accept", quest = 2281, npc = 6946 },
+          } },
+        { id = "t2281.a2282", at = { zone = 44, x = 22.97, y = 52.04, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, items = { 5060 }, targets = { friend = { 6966 } },
+          lines = {
+            { kind = "turnin", quest = 2281, npc = 6966 },
+            { kind = "accept", quest = 2282, npc = 6966, requires = { 2281 } },
+          } },
+        { id = "o2282", at = { zone = 44, x = 46.95, y = 44.69, r = 40 }, when = { class = "ROGUE" }, items = { 5060 },
+          lines = {
+            { kind = "objective", quest = 2282, index = 1, item = 7871 },
+          } },
+        { id = "t2282", at = { zone = 44, x = 22.97, y = 52.04, r = 10 }, when = { class = "ROGUE" }, items = { 5060 }, targets = { friend = { 6966 } },
+          lines = {
+            { kind = "turnin", quest = 2282, npc = 6966 },
+          } },
+        { id = "f5.y5-2", at = { zone = 44, x = 25.5, y = 59.41, r = 10 }, text = "Fly from Lakeshire, Redridge to Stormwind, Elwynn.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "getflight", node = 5, npc = 931 },
+            { kind = "fly", from = 5, to = 2 },
+          } },
+        { id = "t2298", at = { zone = 1519, x = 78.29, y = 71.14, r = 10 }, when = { class = "ROGUE" }, targets = { friend = { 6946 } },
+          lines = {
+            { kind = "turnin", quest = 2298, npc = 6946, skipIfMissing = true },
+          } },
+        { id = "y2-5", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Lakeshire, Redridge.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 2, to = 5 },
+          } },
+        { id = "a2358", at = { zone = 44, x = 22.97, y = 52.32, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, maxLevel = 30, targets = { friend = { 7009 } },
+          lines = {
+            { kind = "accept", quest = 2358, npc = 7009 },
+          } },
+        { id = "o2358", at = { zone = 44, x = 35.48, y = 21.23, r = 40 }, when = { class = "ROGUE" }, targets = { enemy = { 437, 485, 4463, 615, 436, 435 } },
+          lines = {
+            { kind = "objective", quest = 2358, index = 1, item = 7906, skipIfMissing = true },
+          } },
+        { id = "t2358", at = { zone = 44, x = 22.97, y = 52.32, r = 10 }, when = { class = "ROGUE" }, targets = { friend = { 7009 } },
+          lines = {
+            { kind = "turnin", quest = 2358, npc = 7009, skipIfMissing = true },
+          } },
+        { id = "y5-2", at = { zone = 44, x = 25.5, y = 59.41, r = 10 }, text = "Fly from Lakeshire, Redridge to Stormwind, Elwynn.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 5, to = 2 },
+          } },
+        { id = "a2360", at = { zone = 1519, x = 78.31, y = 70.74, r = 10 }, when = { class = "ROGUE" }, minLevel = 20, maxLevel = 28, targets = { friend = { 332 } },
+          lines = {
+            { kind = "accept", quest = 2360, npc = 332 },
+          } },
+        { id = "y2-4", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Sentinel Hill, Westfall.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 2, to = 4 },
+          } },
+        { id = "t2360", at = { zone = 40, x = 68.49, y = 70.08, r = 10 }, when = { class = "ROGUE" }, targets = { friend = { 7024 } },
+          lines = {
+            { kind = "turnin", quest = 2360, npc = 7024, skipIfMissing = true },
           } },
         { id = "x11#2", at = { zone = 148, x = 32.3, y = 44.1, r = 15 }, text = "Take the boat from Darkshore to Wetlands.", when = { class = "WARRIOR" },
           lines = {
             { kind = "transport", to = { zone = 11, x = 4.5, y = 56.6 }, mode = "boat", at = { zone = 148, x = 32.3, y = 44.1, r = 15 } },
           } },
-        { id = "tWARRIOR-22", at = { zone = 1537, x = 70.34, y = 90.65, r = 10 }, when = { class = "WARRIOR" }, minLevel = 22,
-          lines = {
-            { kind = "train", level = 22, class = "WARRIOR", npc = 5113 },
-          } },
         { id = "a1698", at = { zone = 1537, x = 70.34, y = 90.65, r = 10 }, when = { class = "WARRIOR" }, minLevel = 20, maxLevel = 28, targets = { friend = { 5113 } },
           lines = {
             { kind = "accept", quest = 1698, npc = 5113 },
           } },
-        { id = "x1519#3", at = { zone = 1537, x = 78, y = 51.4, r = 15 }, text = "Take the tram from Ironforge to Stormwind City.", when = { class = "WARRIOR" },
+        { id = "x1519#2", at = { zone = 1537, x = 78, y = 51.4, r = 15 }, text = "Take the tram from Ironforge to Stormwind City.", when = { class = "WARRIOR" },
           lines = {
             { kind = "transport", to = { zone = 1519, x = 69.6, y = 30.3 }, mode = "tram", at = { zone = 1537, x = 78, y = 51.4, r = 15 } },
           } },
@@ -1826,93 +1691,191 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 1702, npc = 5413 },
           } },
-        { id = "h#10", text = "Use your hearthstone to return to Darkshore.",
+        { id = "h#4", text = "Use your hearthstone to return to Darkshore.",
           lines = {
             { kind = "hearth", to = { zone = 148, x = 37.04, y = 44.13 } },
           } },
-        { id = "t2139.t986.a993", at = { zone = 148, x = 38.84, y = 43.42, r = 10 }, minLevel = 10, items = { 5387 }, targets = { friend = { 3701, 3693 } },
+        { id = "t4681", at = { zone = 148, x = 36.62, y = 45.59, r = 10 }, targets = { friend = { 10219 } },
           lines = {
-            { kind = "turnin", quest = 2139, npc = 3701, skipIfMissing = true },
-            { kind = "turnin", quest = 986, at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, npc = 3693, skipIfMissing = true },
-            { kind = "accept", quest = 993, at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, npc = 3693, ifDone = 986, requires = { 986 } },
+            { kind = "turnin", quest = 4681, npc = 10219, skipIfMissing = true },
           } },
-        { id = "o2098", at = { zone = 148, x = 42.51, y = 75.92, r = 40 }, text = "Top of Gelkak's Key is south of Tharnariun Treetender.", targets = { enemy = { 2323, 2205, 2206, 10323, 2204, 2203 } },
+        { id = "t4740.t4813.t2138.a2139", at = { zone = 148, x = 37.7, y = 43.41, r = 10 }, minLevel = 10, targets = { friend = { 2930, 3701 } },
           lines = {
-            { kind = "objective", quest = 2098, index = 1, item = 7498, skipIfMissing = true },
-            { kind = "objective", quest = 2098, index = 2, item = 7499, skipIfMissing = true },
-            { kind = "objective", quest = 2098, index = 3, item = 7500, skipIfMissing = true },
+            { kind = "turnin", quest = 4740, npc = 2930, skipIfMissing = true },
+            { kind = "turnin", quest = 4813, npc = 2930, skipIfMissing = true },
+            { kind = "turnin", quest = 2138, at = { zone = 148, x = 38.84, y = 43.42, r = 10 }, npc = 3701, skipIfMissing = true },
+            { kind = "accept", quest = 2139, at = { zone = 148, x = 38.84, y = 43.42, r = 10 }, npc = 3701, ifDone = 2138, requires = { 2138 } },
           } },
-        { id = "t948.a944", at = { zone = 148, x = 43.55, y = 76.29, r = 10 }, minLevel = 12, items = { 5251 }, targets = { friend = { 3616 } },
+        { id = "t985.a986", at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, minLevel = 10, targets = { friend = { 3693 } },
           lines = {
-            { kind = "turnin", quest = 948, npc = 3616, skipIfMissing = true },
-            { kind = "accept", quest = 944, npc = 3616, ifDone = 948, requires = { 948 } },
+            { kind = "turnin", quest = 985, npc = 3693, skipIfMissing = true },
+            { kind = "accept", quest = 986, npc = 3693, ifDone = 985, requires = { 985 } },
           } },
-        { id = "t993.a994", at = { zone = 148, x = 45.01, y = 85.3, r = 10 }, minLevel = 10, items = { 5387 }, targets = { friend = { 3692 } },
+        { id = "t958.t4761.a4762", at = { zone = 148, x = 37.4, y = 40.13, r = 10 }, minLevel = 11, items = { 12350 }, targets = { friend = { 3649 } },
           lines = {
-            { kind = "turnin", quest = 993, npc = 3692, skipIfMissing = true },
-            { kind = "accept", quest = 994, npc = 3692, ifDone = 993, requires = { 993 } },
+            { kind = "turnin", quest = 958, npc = 3649, skipIfMissing = true },
+            { kind = "turnin", quest = 4761, npc = 3649, skipIfMissing = true },
+            { kind = "accept", quest = 4762, npc = 3649, ifDone = 4761, requires = { 4761 } },
           } },
-        { id = "o994", at = { zone = 148, x = 41.92, y = 81.76, r = 40 },
+        { id = "t957", at = { zone = 148, x = 44.17, y = 36.29, r = 10 }, items = { 5338 }, targets = { friend = { 3650 } },
           lines = {
-            { kind = "objective", quest = 994, index = 1, skipIfMissing = true },
+            { kind = "turnin", quest = 957, npc = 3650, skipIfMissing = true },
           } },
-        { id = "o944.t944.a949.t949.a950", at = { zone = 148, x = 38.48, y = 86.45, r = 40 }, minLevel = 12, items = { 5251, 5272 },
+        { id = "a4723", at = { zone = 148, x = 41.93, y = 31.53, r = 10 }, minLevel = 11, maxLevel = 21, items = { 12242 },
           lines = {
-            { kind = "objective", quest = 944, index = 1, skipIfMissing = true },
-            { kind = "turnin", quest = 944, object = 10076, skipIfMissing = true },
-            { kind = "accept", quest = 949, object = 10076, ifDone = 944, requires = { 944 } },
-            { kind = "turnin", quest = 949, object = 12666, skipIfMissing = true },
-            { kind = "accept", quest = 950, object = 12666, ifDone = 949, requires = { 949 } },
+            { kind = "accept", quest = 4723, object = 175233, ifDone = 4681, requires = { 4681 } },
           } },
-        { id = "a4733", at = { zone = 148, x = 31.26, y = 87.44, r = 10 }, minLevel = 13, maxLevel = 27, items = { 12242 },
+        { id = "a4725", at = { zone = 148, x = 44.19, y = 20.6, r = 10 }, minLevel = 12, maxLevel = 23, items = { 12292 },
           lines = {
-            { kind = "accept", quest = 4733, object = 175230, ifDone = 4681, requires = { 4681 } },
-          } },
-        { id = "a4732", at = { zone = 148, x = 31.23, y = 85.6, r = 10 }, minLevel = 13, maxLevel = 27, items = { 12289 },
-          lines = {
-            { kind = "accept", quest = 4732, object = 176191, ifDone = 4681, requires = { 4681 } },
-          } },
-        { id = "a4731", at = { zone = 148, x = 31.67, y = 83.68, r = 10 }, minLevel = 13, maxLevel = 27, items = { 12292 },
-          lines = {
-            { kind = "accept", quest = 4731, object = 176198, ifDone = 4681, requires = { 4681 } },
-          } },
-        { id = "a4730", at = { zone = 148, x = 32.69, y = 80.79, r = 10 }, minLevel = 12, maxLevel = 24, items = { 12242 },
-          lines = {
-            { kind = "accept", quest = 4730, object = 175227, ifDone = 4681, requires = { 4681 } },
-          } },
-        { id = "t950.a951", at = { zone = 148, x = 43.55, y = 76.29, r = 10 }, minLevel = 12, items = { 5272 }, targets = { friend = { 3616 } },
-          lines = {
-            { kind = "turnin", quest = 950, npc = 3616, skipIfMissing = true },
-            { kind = "accept", quest = 951, npc = 3616, ifDone = 950, requires = { 950 } },
-          } },
-        { id = "t4730.t4731.t4732.t4733", at = { zone = 148, x = 36.62, y = 45.59, r = 10 }, items = { 12242, 12292, 12289 }, targets = { friend = { 10219 } },
-          lines = {
-            { kind = "turnin", quest = 4730, npc = 10219, skipIfMissing = true },
-            { kind = "turnin", quest = 4731, npc = 10219, skipIfMissing = true },
-            { kind = "turnin", quest = 4732, npc = 10219, skipIfMissing = true },
-            { kind = "turnin", quest = 4733, npc = 10219, skipIfMissing = true },
-          } },
-        { id = "t994.a990", at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, minLevel = 15, targets = { friend = { 3693, 3694 } },
-          lines = {
-            { kind = "turnin", quest = 994, npc = 3693, skipIfMissing = true },
-            { kind = "accept", quest = 990, npc = 3694, ifDone = 994, requires = { 994 } },
-          } },
-        { id = "o951", at = { zone = 148, x = 59.77, y = 20.87, r = 40 }, text = "Mathystra Relic is northeast of Terenthis.",
-          lines = {
-            { kind = "objective", quest = 951, index = 1, item = 5273, skipIfMissing = true },
+            { kind = "accept", quest = 4725, object = 176197, ifDone = 4681, requires = { 4681 } },
           } },
         { id = "t2098.a2078", at = { zone = 148, x = 56.66, y = 13.48, r = 10 }, minLevel = 14, items = { 7442 }, targets = { friend = { 6667 } },
           lines = {
             { kind = "turnin", quest = 2098, npc = 6667, skipIfMissing = true },
             { kind = "accept", quest = 2078, npc = 6667, ifDone = 2098, requires = { 2098 } },
           } },
-        { id = "o2078", at = { zone = 148, x = 55.81, y = 18.29, r = 40 }, text = "The Threshwackonator 4100 is south of Gelkak Gyromast.", items = { 7442 }, targets = { enemy = { 6669 } },
+        { id = "a4727", at = { zone = 148, x = 53.11, y = 18.08, r = 10 }, minLevel = 12, maxLevel = 23, items = { 12289 },
+          lines = {
+            { kind = "accept", quest = 4727, object = 176196, ifDone = 4681, requires = { 4681 } },
+          } },
+        { id = "o2078", at = { zone = 148, x = 55.81, y = 18.29, r = 40 }, items = { 7442 }, targets = { enemy = { 6669 } },
           lines = {
             { kind = "objective", quest = 2078, index = 1, npc = 6669, skipIfMissing = true },
           } },
         { id = "t2078", at = { zone = 148, x = 56.66, y = 13.48, r = 10 }, items = { 7442 }, targets = { friend = { 6667 } },
           lines = {
             { kind = "turnin", quest = 2078, npc = 6667, skipIfMissing = true },
+          } },
+        { id = "o4762", at = { zone = 148, x = 50.84, y = 25.63, r = 40 }, text = "Cliffspring River Sample is southwest of Gelkak Gyromast.", items = { 12350 },
+          lines = {
+            { kind = "objective", quest = 4762, index = 1, item = 12349, skipIfMissing = true },
+          } },
+        { id = "o2139", at = { zone = 148, x = 51.48, y = 38.26, r = 40 }, text = "The Den Mother is south of your last stop.", targets = { enemy = { 6788 } },
+          lines = {
+            { kind = "objective", quest = 2139, index = 1, npc = 6788, skipIfMissing = true },
+          } },
+        { id = "o986", at = { zone = 148, x = 47.92, y = 57.19, r = 40 }, text = "Fine Moonstalker Pelt is south of your last stop.", targets = { enemy = { 2237, 2071 } },
+          lines = {
+            { kind = "objective", quest = 986, index = 1, item = 5386, skipIfMissing = true },
+          } },
+        { id = "t986.a993.t2139", at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, minLevel = 10, items = { 5387 }, targets = { friend = { 3693, 3701 } },
+          lines = {
+            { kind = "turnin", quest = 986, npc = 3693, skipIfMissing = true },
+            { kind = "accept", quest = 993, npc = 3693, ifDone = 986, requires = { 986 } },
+            { kind = "turnin", quest = 2139, at = { zone = 148, x = 38.84, y = 43.42, r = 10 }, npc = 3701, skipIfMissing = true },
+          } },
+        { id = "t4762.a4763", at = { zone = 148, x = 37.4, y = 40.13, r = 10 }, minLevel = 15, items = { 12350, 12346, 12341, 12342, 12343, 12347 }, targets = { friend = { 3649 } },
+          lines = {
+            { kind = "turnin", quest = 4762, npc = 3649, skipIfMissing = true },
+            { kind = "accept", quest = 4763, npc = 3649, ifDone = 4762, requires = { 4762 } },
+          } },
+        { id = "t4723.t4725.t4727", at = { zone = 148, x = 36.62, y = 45.59, r = 10 }, items = { 12242, 12292, 12289 }, targets = { friend = { 10219 } },
+          lines = {
+            { kind = "turnin", quest = 4723, npc = 10219, skipIfMissing = true },
+            { kind = "turnin", quest = 4725, npc = 10219, skipIfMissing = true },
+            { kind = "turnin", quest = 4727, npc = 10219, skipIfMissing = true },
+          } },
+        { id = "o4763", at = { zone = 148, x = 52.48, y = 33.39, r = 40 }, text = "Talisman of Corruption is northeast of Gwennyth Bly'Leggonde.", items = { 12346, 12341, 12342, 12343, 12347 },
+          lines = {
+            { kind = "objective", quest = 4763, index = 1, item = 12355, skipIfMissing = true },
+          } },
+        { id = "t4763", at = { zone = 148, x = 37.4, y = 40.13, r = 10 }, items = { 12346, 12341, 12342, 12343, 12347 }, targets = { friend = { 3649 } },
+          lines = {
+            { kind = "turnin", quest = 4763, npc = 3649, skipIfMissing = true },
+          } },
+        { id = "a4728", at = { zone = 148, x = 36.01, y = 70.88, r = 10 }, minLevel = 12, maxLevel = 22, items = { 12242 },
+          lines = {
+            { kind = "accept", quest = 4728, object = 175226, ifDone = 4681, requires = { 4681 } },
+          } },
+        { id = "a4730", at = { zone = 148, x = 32.69, y = 80.79, r = 10 }, minLevel = 12, maxLevel = 24, items = { 12242 },
+          lines = {
+            { kind = "accept", quest = 4730, object = 175227, ifDone = 4681, requires = { 4681 } },
+          } },
+        { id = "a4731", at = { zone = 148, x = 31.67, y = 83.68, r = 10 }, minLevel = 13, maxLevel = 27, items = { 12292 },
+          lines = {
+            { kind = "accept", quest = 4731, object = 176198, ifDone = 4681, requires = { 4681 } },
+          } },
+        { id = "a4732", at = { zone = 148, x = 31.23, y = 85.6, r = 10 }, minLevel = 13, maxLevel = 27, items = { 12289 },
+          lines = {
+            { kind = "accept", quest = 4732, object = 176191, ifDone = 4681, requires = { 4681 } },
+          } },
+        { id = "a4733", at = { zone = 148, x = 31.26, y = 87.44, r = 10 }, minLevel = 13, maxLevel = 27, items = { 12242 },
+          lines = {
+            { kind = "accept", quest = 4733, object = 175230, ifDone = 4681, requires = { 4681 } },
+          } },
+        { id = "t729.a731", at = { zone = 148, x = 35.73, y = 83.7, r = 10 }, minLevel = 15, targets = { friend = { 2917 } },
+          lines = {
+            { kind = "turnin", quest = 729, npc = 2917, skipIfMissing = true },
+            { kind = "accept", quest = 731, npc = 2917, ifDone = 729, requires = { 729 } },
+          } },
+        { id = "h#5", text = "Use your hearthstone to return to Darkshore.",
+          lines = {
+            { kind = "hearth", to = { zone = 148, x = 37.04, y = 44.13 } },
+          } },
+        { id = "t4728.t4730.t4731.t4732.t4733", at = { zone = 148, x = 36.62, y = 45.59, r = 10 }, items = { 12242, 12292, 12289 }, targets = { friend = { 10219 } },
+          lines = {
+            { kind = "turnin", quest = 4728, npc = 10219, skipIfMissing = true },
+            { kind = "turnin", quest = 4730, npc = 10219, skipIfMissing = true },
+            { kind = "turnin", quest = 4731, npc = 10219, skipIfMissing = true },
+            { kind = "turnin", quest = 4732, npc = 10219, skipIfMissing = true },
+            { kind = "turnin", quest = 4733, npc = 10219, skipIfMissing = true },
+          } },
+        { id = "o731", at = { zone = 148, x = 35.67, y = 84.03, r = 40 },
+          lines = {
+            { kind = "objective", quest = 731, index = 1, skipIfMissing = true },
+          } },
+        { id = "a945.o944.t944.a949.t949.a950", at = { zone = 148, x = 38.64, y = 87.33, r = 10 }, minLevel = 12, items = { 5251, 5272 }, targets = { friend = { 3584 } },
+          lines = {
+            { kind = "accept", quest = 945, npc = 3584 },
+            { kind = "objective", quest = 944, index = 1, at = { zone = 148, x = 38.48, y = 86.45, r = 40 }, skipIfMissing = true },
+            { kind = "turnin", quest = 944, at = { zone = 148, x = 38.6, y = 86.2, r = 10 }, object = 10076, skipIfMissing = true },
+            { kind = "accept", quest = 949, at = { zone = 148, x = 38.6, y = 86.2, r = 10 }, object = 10076, ifDone = 944, requires = { 944 } },
+            { kind = "turnin", quest = 949, at = { zone = 148, x = 38.54, y = 86.05, r = 10 }, object = 12666, skipIfMissing = true },
+            { kind = "accept", quest = 950, at = { zone = 148, x = 38.54, y = 86.05, r = 10 }, object = 12666, ifDone = 949, requires = { 949 } },
+          } },
+        { id = "o945", at = { zone = 148, x = 40.51, y = 87.08, r = 40 },
+          lines = {
+            { kind = "objective", quest = 945, index = 1 },
+          } },
+        { id = "t993.a994", at = { zone = 148, x = 45.01, y = 85.3, r = 10 }, minLevel = 10, items = { 5387 }, targets = { friend = { 3692 } },
+          lines = {
+            { kind = "turnin", quest = 993, npc = 3692, skipIfMissing = true },
+            { kind = "accept", quest = 994, npc = 3692, ifDone = 993, requires = { 993 } },
+          } },
+        { id = "a5713.o5713", at = { zone = 148, x = 45.94, y = 90.29, r = 10 }, minLevel = 10, targets = { friend = { 11711 } },
+          lines = {
+            { kind = "accept", quest = 5713, npc = 11711 },
+            { kind = "objective", quest = 5713, index = 1 },
+          } },
+        { id = "o5321", at = { zone = 148, x = 42, y = 90.5, r = 40 },
+          lines = {
+            { kind = "objective", quest = 5321, index = 1 },
+          } },
+        { id = "o994", at = { zone = 148, x = 41.92, y = 81.76, r = 40 },
+          lines = {
+            { kind = "objective", quest = 994, index = 1, skipIfMissing = true },
+          } },
+        { id = "t950.a951", at = { zone = 148, x = 43.55, y = 76.29, r = 10 }, minLevel = 12, items = { 5272 }, targets = { friend = { 3616 } },
+          lines = {
+            { kind = "turnin", quest = 950, npc = 3616, skipIfMissing = true },
+            { kind = "accept", quest = 951, npc = 3616, ifDone = 950, requires = { 950 } },
+          } },
+        { id = "t994.a990", at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, minLevel = 15, targets = { friend = { 3693, 3694 } },
+          lines = {
+            { kind = "turnin", quest = 994, npc = 3693, skipIfMissing = true },
+            { kind = "accept", quest = 990, npc = 3694, ifDone = 994, requires = { 994 } },
+          } },
+        { id = "t731", at = { zone = 148, x = 37.44, y = 41.84, r = 10 }, targets = { friend = { 2913 } },
+          lines = {
+            { kind = "turnin", quest = 731, npc = 2913, skipIfMissing = true },
+          } },
+        { id = "o951", at = { zone = 148, x = 59.77, y = 20.87, r = 40 }, text = "Mathystra Relic is northeast of Archaeologist Hollee.",
+          lines = {
+            { kind = "objective", quest = 951, index = 1, item = 5273, skipIfMissing = true },
+          } },
+        { id = "p186-3", label = "train186_3", at = { zone = 148, x = 38.25, y = 41.01, r = 10 }, when = { profession = 186 },
+          lines = {
+            { kind = "train", skill = 186, rank = 3, npc = 6297 },
           } },
         { id = "t951", at = { zone = 148, x = 43.55, y = 76.29, r = 10 }, targets = { friend = { 3616 } },
           lines = {
@@ -1921,8 +1884,8 @@ Noir.Route("alliance-highorder", {
       },
     },
     {
-      id = "highorder-23-25-ashenvale", name = "23-25 Ashenvale", names = { ROGUE = "23-26 Ashenvale" }, group = "Alliance", subgroup = "20-30", minLevel = 23, maxLevel = 28, zone = 331,
-      next = { { section = "highorder-25-25-stormwind-city" } },
+      id = "highorder-23-27-ashenvale", name = "23-27 Ashenvale", group = "Alliance", subgroup = "20-30", minLevel = 23, maxLevel = 30, zone = 331,
+      next = { { section = "highorder-27-30-wetlands" } },
       steps = {
         { id = "p165-3-skill", when = { profession = 165 }, reminder = { ends = "train165_3" },
           lines = {
@@ -1979,7 +1942,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 1008, index = 1, item = 5490 },
           } },
-        { id = "h#11", text = "Use your hearthstone to return to Ashenvale.",
+        { id = "h#6", text = "Use your hearthstone to return to Ashenvale.",
           lines = {
             { kind = "hearth", to = { zone = 331, x = 36.99, y = 49.22 } },
           } },
@@ -2074,134 +2037,54 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 4581, npc = 3848 },
           } },
-        { id = "p165-3", label = "train165_3", at = { zone = 331, x = 35.98, y = 52.1, r = 10 }, when = { profession = 165 },
-          lines = {
-            { kind = "train", skill = 165, rank = 3, npc = 3967 },
-          } },
-        { id = "p171-3", label = "train171_3", at = { zone = 331, x = 50.85, y = 67.11, r = 10 }, when = { profession = 171 },
-          lines = {
-            { kind = "train", skill = 171, rank = 3, npc = 3964 },
-          } },
         { id = "o1027", at = { zone = 331, x = 73.87, y = 74.53, r = 40 }, text = "Iron Pommel is southwest of Kayneth Stillwind.",
           lines = {
             { kind = "objective", quest = 1027, index = 1, item = 5519 },
           } },
-        { id = "g17@17", at = { zone = 17, x = 63.8, y = 38.8, r = 20 }, text = "Head southeast into The Barrens.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "goto", at = { zone = 17, x = 63.8, y = 38.8, r = 20 } },
-          } },
-        { id = "x33", at = { zone = 17, x = 63.8, y = 38.8, r = 15 }, text = "Take the boat from The Barrens to Stranglethorn Vale.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "transport", to = { zone = 33, x = 25.7, y = 73.1 }, mode = "boat", at = { zone = 17, x = 63.8, y = 38.8, r = 15 } },
-          } },
-        { id = "tROGUE-24", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 24,
-          lines = {
-            { kind = "train", level = 24, class = "ROGUE", npc = 1411 },
-          } },
-        { id = "f19.y19-2", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Stormwind, Elwynn.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "getflight", node = 19, npc = 2859 },
-            { kind = "fly", from = 19, to = 2 },
-          } },
-        { id = "a2360", at = { zone = 1519, x = 78.31, y = 70.74, r = 10 }, when = { class = "ROGUE" }, minLevel = 20, maxLevel = 28, targets = { friend = { 332 } },
-          lines = {
-            { kind = "accept", quest = 2360, npc = 332 },
-          } },
-        { id = "y2-4", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Sentinel Hill, Westfall.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "fly", from = 2, to = 4 },
-          } },
-        { id = "t2360.a2359", at = { zone = 40, x = 68.49, y = 70.08, r = 10 }, when = { class = "ROGUE" }, minLevel = 20, items = { 8046 }, targets = { friend = { 7024 } },
-          lines = {
-            { kind = "turnin", quest = 2360, npc = 7024, skipIfMissing = true },
-            { kind = "accept", quest = 2359, npc = 7024, ifDone = 2360, requires = { 2360 } },
-          } },
-        { id = "o2359", at = { zone = 40, x = 70.41, y = 73.93, r = 40 }, when = { class = "ROGUE" }, items = { 8046 }, targets = { enemy = { 7051 } },
-          lines = {
-            { kind = "objective", quest = 2359, index = 1, item = 7908, skipIfMissing = true },
-            { kind = "objective", quest = 2359, index = 2, item = 7923, skipIfMissing = true },
-          } },
-      },
-    },
-    {
-      id = "highorder-25-25-stormwind-city", name = "25 Stormwind City", names = { ROGUE = "26 Stormwind City" }, group = "Alliance", subgroup = "20-30", minLevel = 25, maxLevel = 28, zone = 1519,
-      next = { { section = "highorder-25-27-ashenvale" } },
-      steps = {
-        { id = "y4-2#2", at = { zone = 40, x = 56.55, y = 52.64, r = 10 }, text = "Fly from Sentinel Hill, Westfall to Stormwind, Elwynn.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "fly", from = 4, to = 2 },
-          } },
-        { id = "tROGUE-26", at = { zone = 1519, x = 80.28, y = 68.58, r = 10 }, when = { class = "ROGUE" }, minLevel = 26,
-          lines = {
-            { kind = "train", level = 26, class = "ROGUE", npc = 13283 },
-          } },
-        { id = "t2359.a2607.t2607.a2608.o2608.t2608.a2609", at = { zone = 1519, x = 78.31, y = 70.74, r = 10 }, when = { class = "ROGUE" }, minLevel = 20, items = { 8046 }, targets = { friend = { 332, 7207 } },
-          lines = {
-            { kind = "turnin", quest = 2359, npc = 332, skipIfMissing = true },
-            { kind = "accept", quest = 2607, npc = 332, ifDone = 2359, requires = { 2359 } },
-            { kind = "turnin", quest = 2607, at = { zone = 1519, x = 80.06, y = 69.9, r = 10 }, npc = 7207, skipIfMissing = true },
-            { kind = "accept", quest = 2608, at = { zone = 1519, x = 80.06, y = 69.9, r = 10 }, npc = 7207, ifDone = 2607, requires = { 2607 } },
-            { kind = "objective", quest = 2608, index = 1, at = { zone = 1519, x = 80.06, y = 70.09, r = 40 }, skipIfMissing = true },
-            { kind = "turnin", quest = 2608, at = { zone = 1519, x = 80.06, y = 69.9, r = 10 }, npc = 7207, skipIfMissing = true },
-            { kind = "accept", quest = 2609, at = { zone = 1519, x = 80.06, y = 69.9, r = 10 }, npc = 7207, ifDone = 2608, requires = { 2608 } },
-          } },
-        { id = "o2609", at = { zone = 1519, x = 69.34, y = 71.33, r = 40 }, when = { class = "ROGUE" }, targets = { enemy = { 1303, 1302, 1286, 1257, 1326, 1325 } },
-          lines = {
-            { kind = "objective", quest = 2609, index = 1, item = 3421, skipIfMissing = true },
-            { kind = "objective", quest = 2609, index = 2, item = 3372, skipIfMissing = true },
-            { kind = "objective", quest = 2609, index = 3, item = 4371, skipIfMissing = true },
-            { kind = "objective", quest = 2609, index = 4, item = 8431, skipIfMissing = true },
-          } },
-        { id = "t2609", at = { zone = 1519, x = 80.06, y = 69.9, r = 10 }, when = { class = "ROGUE" }, targets = { friend = { 7207 } },
-          lines = {
-            { kind = "turnin", quest = 2609, npc = 7207, skipIfMissing = true },
-          } },
-      },
-    },
-    {
-      id = "highorder-25-27-ashenvale", name = "25-27 Ashenvale", names = { ROGUE = "26-28 Ashenvale" }, group = "Alliance", subgroup = "20-30", minLevel = 25, maxLevel = 30, zone = 331,
-      next = { { section = "highorder-27-30-wetlands" } },
-      steps = {
-        { id = "h#12", text = "Use your hearthstone to return to Ashenvale.",
+        { id = "h#7", text = "Use your hearthstone to return to Ashenvale.",
           lines = {
             { kind = "hearth", to = { zone = 331, x = 36.99, y = 49.22 } },
           } },
+        { id = "t1033.a1034", at = { zone = 331, x = 37.37, y = 51.79, r = 10 }, minLevel = 20, targets = { friend = { 3894 } },
+          lines = {
+            { kind = "turnin", quest = 1033, npc = 3894 },
+            { kind = "accept", quest = 1034, npc = 3894, requires = { 1033 } },
+          } },
         { id = "t1027.a1028", at = { zone = 331, x = 53.54, y = 46.22, r = 10 }, minLevel = 18, items = { 5547 }, targets = { friend = { 3916 } },
           lines = {
-            { kind = "turnin", quest = 1027, npc = 3916, skipIfMissing = true },
-            { kind = "accept", quest = 1028, npc = 3916, ifDone = 1027, requires = { 1027 } },
+            { kind = "turnin", quest = 1027, npc = 3916 },
+            { kind = "accept", quest = 1028, npc = 3916, requires = { 1027 } },
           } },
         { id = "t1028.a1055", at = { zone = 331, x = 56.35, y = 49.2, r = 10 }, minLevel = 18, items = { 5547 },
           lines = {
-            { kind = "turnin", quest = 1028, object = 19024, skipIfMissing = true },
-            { kind = "accept", quest = 1055, object = 19024, ifDone = 1028, requires = { 1028 } },
+            { kind = "turnin", quest = 1028, object = 19024 },
+            { kind = "accept", quest = 1055, object = 19024, requires = { 1028 } },
           } },
         { id = "t1055.a1029", at = { zone = 331, x = 53.54, y = 46.22, r = 10 }, minLevel = 18, items = { 5462 }, targets = { friend = { 3916 } },
           lines = {
-            { kind = "turnin", quest = 1055, npc = 3916, skipIfMissing = true },
-            { kind = "accept", quest = 1029, npc = 3916, ifDone = 1055, requires = { 1055 } },
-          } },
-        { id = "tHUNTER-24", at = { zone = 331, x = 50.14, y = 67.95, r = 10 }, when = { class = "HUNTER" }, minLevel = 24,
-          lines = {
-            { kind = "train", level = 24, class = "HUNTER", npc = 3963 },
+            { kind = "turnin", quest = 1055, npc = 3916 },
+            { kind = "accept", quest = 1029, npc = 3916, requires = { 1055 } },
           } },
         { id = "o1025", at = { zone = 331, x = 52.27, y = 60.9, r = 40 }, text = "The Foulweald Den Watchers are south of Shael'dryn.", targets = { enemy = { 3743, 3750, 3749, 3746 } },
           lines = {
-            { kind = "objective", quest = 1025, index = 1, npc = 3746, skipIfMissing = true },
-            { kind = "objective", quest = 1025, index = 2, npc = 3749, skipIfMissing = true },
-            { kind = "objective", quest = 1025, index = 3, npc = 3750, skipIfMissing = true },
-            { kind = "objective", quest = 1025, index = 4, npc = 3743, skipIfMissing = true },
+            { kind = "objective", quest = 1025, index = 1, npc = 3746 },
+            { kind = "objective", quest = 1025, index = 2, npc = 3749 },
+            { kind = "objective", quest = 1025, index = 3, npc = 3750 },
+            { kind = "objective", quest = 1025, index = 4, npc = 3743 },
           } },
-        { id = "t1033.a1034", at = { zone = 331, x = 37.37, y = 51.79, r = 10 }, minLevel = 20, targets = { friend = { 3894 } },
+        { id = "o1034", at = { zone = 331, x = 33.3, y = 67.8, r = 40 }, text = "Handful of Stardust is west of your last stop.",
           lines = {
-            { kind = "turnin", quest = 1033, npc = 3894, skipIfMissing = true },
-            { kind = "accept", quest = 1034, npc = 3894, ifDone = 1033, requires = { 1033 } },
+            { kind = "objective", quest = 1034, index = 1, item = 5494 },
+          } },
+        { id = "t1034", at = { zone = 331, x = 37.37, y = 51.79, r = 10 }, targets = { friend = { 3894 } },
+          lines = {
+            { kind = "turnin", quest = 1034, npc = 3894 },
           } },
         { id = "t1025.t1029.a1030", at = { zone = 331, x = 36.62, y = 49.58, r = 10 }, minLevel = 18, items = { 5462 }, targets = { friend = { 3691 } },
           lines = {
-            { kind = "turnin", quest = 1025, npc = 3691, skipIfMissing = true },
-            { kind = "turnin", quest = 1029, npc = 3691, skipIfMissing = true },
-            { kind = "accept", quest = 1030, npc = 3691, ifDone = 1029, requires = { 1029 } },
+            { kind = "turnin", quest = 1025, npc = 3691 },
+            { kind = "turnin", quest = 1029, npc = 3691 },
+            { kind = "accept", quest = 1030, npc = 3691, requires = { 1029 } },
           } },
         { id = "a1011", at = { zone = 331, x = 85.24, y = 44.71, r = 10 }, minLevel = 24, maxLevel = 37, targets = { friend = { 3848 } },
           lines = {
@@ -2215,28 +2098,20 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 1011, npc = 3848, skipIfMissing = true },
           } },
-        { id = "tHUNTER-26", at = { zone = 331, x = 50.14, y = 67.95, r = 10 }, when = { class = "HUNTER" }, minLevel = 26,
+        { id = "tHUNTER-24", at = { zone = 331, x = 50.14, y = 67.95, r = 10 }, when = { class = "HUNTER" }, minLevel = 24,
           lines = {
-            { kind = "train", level = 26, class = "HUNTER", npc = 3963 },
+            { kind = "train", level = 24, class = "HUNTER", npc = 3963 },
           } },
         { id = "t1030", at = { zone = 331, x = 50.84, y = 75.08, r = 10 }, items = { 5462 }, targets = { friend = { 3897 } },
           lines = {
-            { kind = "turnin", quest = 1030, npc = 3897, skipIfMissing = true },
+            { kind = "turnin", quest = 1030, npc = 3897 },
           } },
-        { id = "o1034", at = { zone = 331, x = 33.3, y = 67.8, r = 40 }, text = "Handful of Stardust is west of Krolg.",
+        { id = "a1021.a1022", at = { zone = 331, x = 21.73, y = 53.34, r = 10 }, minLevel = 26, maxLevel = 38, targets = { friend = { 3901, 3880 } },
           lines = {
-            { kind = "objective", quest = 1034, index = 1, item = 5494, skipIfMissing = true },
+            { kind = "accept", quest = 1021, npc = 3901 },
+            { kind = "accept", quest = 1022, at = { zone = 331, x = 22.23, y = 52.98, r = 10 }, npc = 3880 },
           } },
-        { id = "t1034", at = { zone = 331, x = 37.37, y = 51.79, r = 10 }, targets = { friend = { 3894 } },
-          lines = {
-            { kind = "turnin", quest = 1034, npc = 3894, skipIfMissing = true },
-          } },
-        { id = "a1022.a1021", at = { zone = 331, x = 22.23, y = 52.98, r = 10 }, minLevel = 26, maxLevel = 38, targets = { friend = { 3880, 3901 } },
-          lines = {
-            { kind = "accept", quest = 1022, npc = 3880 },
-            { kind = "accept", quest = 1021, at = { zone = 331, x = 21.73, y = 53.34, r = 10 }, npc = 3901 },
-          } },
-        { id = "h#13", text = "Use your hearthstone to return to Ashenvale.",
+        { id = "h#8", text = "Use your hearthstone to return to Ashenvale.",
           lines = {
             { kind = "hearth", to = { zone = 331, x = 36.99, y = 49.22 } },
           } },
@@ -2263,16 +2138,20 @@ Noir.Route("alliance-highorder", {
           } },
         { id = "a1035", at = { zone = 331, x = 37.37, y = 51.79, r = 10 }, minLevel = 20, maxLevel = 38, targets = { friend = { 3894 } },
           lines = {
-            { kind = "accept", quest = 1035, npc = 3894, ifDone = 1034, requires = { 1034 } },
+            { kind = "accept", quest = 1035, npc = 3894, requires = { 1034 } },
           } },
         { id = "a1045", at = { zone = 331, x = 50.84, y = 75.08, r = 10 }, minLevel = 18, maxLevel = 38, items = { 5462 }, targets = { friend = { 3897 } },
           lines = {
-            { kind = "accept", quest = 1045, npc = 3897, ifDone = 1030, requires = { 1030 } },
+            { kind = "accept", quest = 1045, npc = 3897, requires = { 1030 } },
           } },
         { id = "o1045", at = { zone = 331, x = 54.75, y = 79.62, r = 40 }, text = "Ran Bloodtooth is southeast of Krolg.", items = { 5462 }, targets = { enemy = { 3696, 3932 } },
           lines = {
             { kind = "objective", quest = 1045, index = 1, npc = 3696, skipIfMissing = true },
             { kind = "objective", quest = 1045, index = 2, npc = 3932, skipIfMissing = true },
+          } },
+        { id = "tHUNTER-26", at = { zone = 331, x = 50.14, y = 67.95, r = 10 }, when = { class = "HUNTER" }, minLevel = 26,
+          lines = {
+            { kind = "train", level = 26, class = "HUNTER", npc = 3963 },
           } },
         { id = "t1045.a1046", at = { zone = 331, x = 50.84, y = 75.08, r = 10 }, minLevel = 18, items = { 5462 }, targets = { friend = { 3897 } },
           lines = {
@@ -2292,6 +2171,14 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 1035, npc = 3894, skipIfMissing = true },
           } },
+        { id = "p165-3", label = "train165_3", at = { zone = 331, x = 35.98, y = 52.1, r = 10 }, when = { profession = 165 },
+          lines = {
+            { kind = "train", skill = 165, rank = 3, npc = 3967 },
+          } },
+        { id = "p171-3", label = "train171_3", at = { zone = 331, x = 50.85, y = 67.11, r = 10 }, when = { profession = 171 },
+          lines = {
+            { kind = "train", skill = 171, rank = 3, npc = 3964 },
+          } },
         { id = "t1046", at = { zone = 331, x = 36.62, y = 49.58, r = 10 }, targets = { friend = { 3691 } },
           lines = {
             { kind = "turnin", quest = 1046, npc = 3691, skipIfMissing = true },
@@ -2299,9 +2186,21 @@ Noir.Route("alliance-highorder", {
       },
     },
     {
-      id = "highorder-27-30-wetlands", name = "27-30 Wetlands", names = { ROGUE = "28-30 Wetlands" }, group = "Alliance", subgroup = "20-30", minLevel = 27, maxLevel = 33, zone = 11,
+      id = "highorder-27-30-wetlands", name = "27-30 Wetlands", group = "Alliance", subgroup = "20-30", minLevel = 27, maxLevel = 33, zone = 11,
       next = { { section = "highorder-30-33-duskwood" } },
       steps = {
+        { id = "p182-3-skill", when = { profession = 182 }, reminder = { ends = "train182_3" },
+          lines = {
+            { kind = "skill", skill = 182, value = 125 },
+          } },
+        { id = "p197-3-skill", when = { profession = 197 }, reminder = { ends = "train197_3" },
+          lines = {
+            { kind = "skill", skill = 197, value = 125 },
+          } },
+        { id = "p333-3-skill", when = { profession = 333 }, reminder = { ends = "train333_3" },
+          lines = {
+            { kind = "skill", skill = 333, value = 125 },
+          } },
         { id = "y28-26", at = { zone = 331, x = 34.41, y = 47.99, r = 10 }, text = "Fly from Astranaar, Ashenvale to Auberdine, Darkshore.",
           lines = {
             { kind = "fly", from = 28, to = 26 },
@@ -2341,7 +2240,46 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 305, at = { zone = 11, x = 38.91, y = 52.34, r = 10 }, npc = 1076, skipIfMissing = true },
             { kind = "accept", quest = 306, at = { zone = 11, x = 38.91, y = 52.34, r = 10 }, npc = 1076, ifDone = 305, requires = { 305 } },
           } },
-        { id = "h#14", text = "Use your hearthstone to return to Wetlands.",
+        { id = "tROGUE-27:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 7, to = 6 },
+          } },
+        { id = "tROGUE-27", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "ROGUE" }, minLevel = 27,
+          lines = {
+            { kind = "train", level = 27, class = "ROGUE", npc = 5167 },
+          } },
+        { id = "tROGUE-27:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 6, to = 7 },
+          } },
+        { id = "y7-4", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Sentinel Hill, Westfall.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 7, to = 4 },
+          } },
+        { id = "a2359", at = { zone = 40, x = 68.49, y = 70.08, r = 10 }, when = { class = "ROGUE" }, minLevel = 20, maxLevel = 32, items = { 8046 }, targets = { friend = { 7024 } },
+          lines = {
+            { kind = "accept", quest = 2359, npc = 7024, ifDone = 2360, requires = { 2360 } },
+          } },
+        { id = "o2359", at = { zone = 40, x = 70.41, y = 73.93, r = 40 }, text = "Klaven Mortwake's Journal is south of Ormer Ironbraid.", when = { class = "ROGUE" }, items = { 8046 }, targets = { enemy = { 7051 } },
+          lines = {
+            { kind = "objective", quest = 2359, index = 1, item = 7908, skipIfMissing = true },
+            { kind = "objective", quest = 2359, index = 2, item = 7923, skipIfMissing = true },
+          } },
+        { id = "y4-2#2", at = { zone = 40, x = 56.55, y = 52.64, r = 10 }, text = "Fly from Sentinel Hill, Westfall to Stormwind, Elwynn.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 4, to = 2 },
+          } },
+        { id = "t2359.a2607.t2607.a2608.o2608.t2608.a2609", at = { zone = 1519, x = 78.31, y = 70.74, r = 10 }, when = { class = "ROGUE" }, minLevel = 20, items = { 8046 }, targets = { friend = { 332, 7207 } },
+          lines = {
+            { kind = "turnin", quest = 2359, npc = 332, skipIfMissing = true },
+            { kind = "accept", quest = 2607, npc = 332, ifDone = 2359, requires = { 2359 } },
+            { kind = "turnin", quest = 2607, at = { zone = 1519, x = 80.06, y = 69.9, r = 10 }, npc = 7207, skipIfMissing = true },
+            { kind = "accept", quest = 2608, at = { zone = 1519, x = 80.06, y = 69.9, r = 10 }, npc = 7207, ifDone = 2607, requires = { 2607 } },
+            { kind = "objective", quest = 2608, index = 1, at = { zone = 1519, x = 80.06, y = 70.09, r = 40 }, skipIfMissing = true },
+            { kind = "turnin", quest = 2608, at = { zone = 1519, x = 80.06, y = 69.9, r = 10 }, npc = 7207, skipIfMissing = true },
+            { kind = "accept", quest = 2609, at = { zone = 1519, x = 80.06, y = 69.9, r = 10 }, npc = 7207, ifDone = 2608, requires = { 2608 } },
+          } },
+        { id = "h#9", text = "Use your hearthstone to return to Wetlands.",
           lines = {
             { kind = "hearth", to = { zone = 11, x = 10.7, y = 60.95 } },
           } },
@@ -2349,7 +2287,27 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 306, npc = 2096, skipIfMissing = true },
           } },
-        { id = "o294", at = { zone = 11, x = 25.53, y = 48.81, r = 40 }, text = "The Mottled Raptors are east of Tarrel Rockweaver.", targets = { enemy = { 1021, 1020 } },
+        { id = "t279.a281", at = { zone = 11, x = 8.32, y = 58.57, r = 10 }, minLevel = 20, targets = { friend = { 1242 } },
+          lines = {
+            { kind = "turnin", quest = 279, npc = 1242, skipIfMissing = true },
+            { kind = "accept", quest = 281, npc = 1242, ifDone = 279, requires = { 279 } },
+          } },
+        { id = "t281.a284", at = { zone = 11, x = 13.52, y = 41.38, r = 10 }, minLevel = 20,
+          lines = {
+            { kind = "turnin", quest = 281, object = 261, skipIfMissing = true },
+            { kind = "accept", quest = 284, object = 261, ifDone = 281, requires = { 281 } },
+          } },
+        { id = "t284.a285", at = { zone = 11, x = 13.6, y = 38.22, r = 10 }, minLevel = 20,
+          lines = {
+            { kind = "turnin", quest = 284, object = 142151, skipIfMissing = true },
+            { kind = "accept", quest = 285, object = 142151, ifDone = 284, requires = { 284 } },
+          } },
+        { id = "t285.a286", at = { zone = 11, x = 13.94, y = 34.81, r = 10 }, minLevel = 20, items = { 2625 },
+          lines = {
+            { kind = "turnin", quest = 285, object = 259, skipIfMissing = true },
+            { kind = "accept", quest = 286, object = 259, ifDone = 285, requires = { 285 } },
+          } },
+        { id = "o294", at = { zone = 11, x = 25.53, y = 48.81, r = 40 }, text = "The Mottled Raptors are southeast of your last stop.", targets = { enemy = { 1021, 1020 } },
           lines = {
             { kind = "objective", quest = 294, index = 1, npc = 1020 },
             { kind = "objective", quest = 294, index = 2, npc = 1021 },
@@ -2445,7 +2403,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 470, index = 1, item = 3349, skipIfMissing = true },
           } },
-        { id = "h#15", text = "Use your hearthstone to return to Wetlands.",
+        { id = "h#10", text = "Use your hearthstone to return to Wetlands.",
           lines = {
             { kind = "hearth", to = { zone = 11, x = 10.7, y = 60.95 } },
           } },
@@ -2453,34 +2411,14 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 470, npc = 2111, skipIfMissing = true },
           } },
-        { id = "t464.a465.t279.a281.t469", at = { zone = 11, x = 9.86, y = 57.49, r = 10 }, minLevel = 23, items = { 3339, 3347 }, targets = { friend = { 2104, 1242, 2094 } },
+        { id = "t464.a465.t286.t469", at = { zone = 11, x = 9.86, y = 57.49, r = 10 }, minLevel = 23, items = { 3339, 2625, 3347 }, targets = { friend = { 2104, 1242, 2094 } },
           lines = {
             { kind = "turnin", quest = 464, npc = 2104, skipIfMissing = true },
             { kind = "accept", quest = 465, npc = 2104, ifDone = 464, requires = { 464 } },
-            { kind = "turnin", quest = 279, at = { zone = 11, x = 8.32, y = 58.57, r = 10 }, npc = 1242, skipIfMissing = true },
-            { kind = "accept", quest = 281, at = { zone = 11, x = 8.32, y = 58.57, r = 10 }, npc = 1242, ifDone = 279, requires = { 279 } },
+            { kind = "turnin", quest = 286, at = { zone = 11, x = 8.32, y = 58.57, r = 10 }, npc = 1242, skipIfMissing = true },
             { kind = "turnin", quest = 469, at = { zone = 11, x = 8.55, y = 55.74, r = 10 }, npc = 2094, skipIfMissing = true },
           } },
-        { id = "t281.a284", at = { zone = 11, x = 13.52, y = 41.38, r = 10 }, minLevel = 20,
-          lines = {
-            { kind = "turnin", quest = 281, object = 261, skipIfMissing = true },
-            { kind = "accept", quest = 284, object = 261, ifDone = 281, requires = { 281 } },
-          } },
-        { id = "t284.a285", at = { zone = 11, x = 13.6, y = 38.22, r = 10 }, minLevel = 20,
-          lines = {
-            { kind = "turnin", quest = 284, object = 142151, skipIfMissing = true },
-            { kind = "accept", quest = 285, object = 142151, ifDone = 284, requires = { 284 } },
-          } },
-        { id = "t285.a286", at = { zone = 11, x = 13.94, y = 34.81, r = 10 }, minLevel = 20, items = { 2625 },
-          lines = {
-            { kind = "turnin", quest = 285, object = 259, skipIfMissing = true },
-            { kind = "accept", quest = 286, object = 259, ifDone = 285, requires = { 285 } },
-          } },
-        { id = "t286", at = { zone = 11, x = 8.32, y = 58.57, r = 10 }, items = { 2625 }, targets = { friend = { 1242 } },
-          lines = {
-            { kind = "turnin", quest = 286, npc = 1242, skipIfMissing = true },
-          } },
-        { id = "o275", at = { zone = 11, x = 35.67, y = 33.21, r = 40 }, text = "The Fen Creepers are northeast of Karl Boran.", targets = { enemy = { 1040 } },
+        { id = "o275", at = { zone = 11, x = 35.67, y = 33.21, r = 40 }, text = "The Fen Creepers are northeast of Captain Stoutfist.", targets = { enemy = { 1040 } },
           lines = {
             { kind = "objective", quest = 275, index = 1, npc = 1040 },
           } },
@@ -2505,10 +2443,49 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 633, index = 1, object = 2704 },
           } },
+        { id = "p182-3", label = "train182_3", at = { zone = 11, x = 7.99, y = 55.84, r = 10 }, when = { profession = 182 },
+          lines = {
+            { kind = "train", skill = 182, rank = 3, npc = 1458 },
+          } },
         { id = "t633.a634", at = { zone = 11, x = 49.9, y = 18.24, r = 10 }, minLevel = 28, targets = { friend = { 1075 } },
           lines = {
             { kind = "turnin", quest = 633, npc = 1075 },
             { kind = "accept", quest = 634, npc = 1075, requires = { 633 } },
+          } },
+        { id = "g36@36", at = { zone = 36, x = 12, y = 56.2, r = 20 }, text = "Head northwest into Alterac Mountains.",
+          lines = {
+            { kind = "goto", at = { zone = 36, x = 12, y = 56.2, r = 20 } },
+          } },
+        { id = "p197-3", label = "train197_3", at = { zone = 36, x = 17.71, y = 60.28, r = 10 }, when = { profession = 197 },
+          lines = {
+            { kind = "train", skill = 197, rank = 3, npc = 251972 },
+          } },
+        { id = "p333-3", label = "train333_3", at = { zone = 36, x = 16.76, y = 62.3, r = 10 }, when = { profession = 333 },
+          lines = {
+            { kind = "train", skill = 333, rank = 3, npc = 251978 },
+          } },
+        { id = "tDRUID-28", at = { zone = 36, x = 11.79, y = 56.6, r = 10 }, when = { class = "DRUID" }, minLevel = 28,
+          lines = {
+            { kind = "train", level = 28, class = "DRUID", npc = 270459 },
+          } },
+        { id = "tMAGE-28", at = { zone = 36, x = 17.72, y = 69.55, r = 10 }, when = { class = "MAGE" }, minLevel = 28,
+          lines = {
+            { kind = "train", level = 28, class = "MAGE", npc = 246797 },
+          } },
+        { id = "x1519#3", at = { zone = 36, x = 12, y = 56.2, r = 15 }, text = "Take the portal from Alterac Mountains to Stormwind City.",
+          lines = {
+            { kind = "transport", to = { zone = 1519, x = 70.5, y = 73.5 }, mode = "portal", at = { zone = 36, x = 12, y = 56.2, r = 15 } },
+          } },
+        { id = "o2609", at = { zone = 1519, x = 69.34, y = 71.33, r = 40 }, text = "Simple Wildflowers are south of your last stop.", when = { class = "ROGUE" }, targets = { enemy = { 1303, 1302, 1286, 1257, 1326, 1325 } },
+          lines = {
+            { kind = "objective", quest = 2609, index = 1, item = 3421, skipIfMissing = true },
+            { kind = "objective", quest = 2609, index = 2, item = 3372, skipIfMissing = true },
+            { kind = "objective", quest = 2609, index = 3, item = 4371, skipIfMissing = true },
+            { kind = "objective", quest = 2609, index = 4, item = 8431, skipIfMissing = true },
+          } },
+        { id = "t2609", at = { zone = 1519, x = 80.06, y = 69.9, r = 10 }, when = { class = "ROGUE" }, targets = { friend = { 7207 } },
+          lines = {
+            { kind = "turnin", quest = 2609, npc = 7207, skipIfMissing = true },
           } },
       },
     },
@@ -2516,29 +2493,9 @@ Noir.Route("alliance-highorder", {
       id = "highorder-30-33-duskwood", name = "30-33 Duskwood", group = "Alliance", subgroup = "30-40", minLevel = 30, maxLevel = 36, zone = 10,
       next = { { section = "highorder-33-34-hillsbrad-foothills" } },
       steps = {
-        { id = "g36@36", at = { zone = 36, x = 12, y = 56.2, r = 20 }, text = "Head northwest into Alterac Mountains.",
+        { id = "tWARRIOR-28", at = { zone = 1519, x = 80.19, y = 61.26, r = 10 }, when = { class = "WARRIOR" }, minLevel = 28,
           lines = {
-            { kind = "goto", at = { zone = 36, x = 12, y = 56.2, r = 20 } },
-          } },
-        { id = "tDRUID-30", at = { zone = 36, x = 11.79, y = 56.6, r = 10 }, when = { class = "DRUID" }, minLevel = 30,
-          lines = {
-            { kind = "train", level = 30, class = "DRUID", npc = 270459 },
-          } },
-        { id = "tMAGE-30", at = { zone = 36, x = 17.72, y = 69.55, r = 10 }, when = { class = "MAGE" }, minLevel = 30,
-          lines = {
-            { kind = "train", level = 30, class = "MAGE", npc = 246797 },
-          } },
-        { id = "x1519#4", at = { zone = 36, x = 12, y = 56.2, r = 15 }, text = "Take the portal from Alterac Mountains to Stormwind City.",
-          lines = {
-            { kind = "transport", to = { zone = 1519, x = 70.5, y = 73.5 }, mode = "portal", at = { zone = 36, x = 12, y = 56.2, r = 15 } },
-          } },
-        { id = "tROGUE-30", at = { zone = 1519, x = 77.43, y = 65.31, r = 10 }, when = { class = "ROGUE" }, minLevel = 30,
-          lines = {
-            { kind = "train", level = 30, class = "ROGUE", npc = 918 },
-          } },
-        { id = "tWARRIOR-30", at = { zone = 1519, x = 80.19, y = 61.26, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30,
-          lines = {
-            { kind = "train", level = 30, class = "WARRIOR", npc = 914 },
+            { kind = "train", level = 28, class = "WARRIOR", npc = 914 },
           } },
         { id = "y2-4#2", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Sentinel Hill, Westfall.",
           lines = {
@@ -2606,6 +2563,11 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 149, npc = 302, skipIfMissing = true },
             { kind = "accept", quest = 154, npc = 302, ifDone = 149, requires = { 149 } },
           } },
+        { id = "o56", at = { zone = 10, x = 79.3, y = 70.53, r = 40 }, text = "The Skeletal Warriors are south of Blind Mary.", targets = { enemy = { 203, 48 } },
+          lines = {
+            { kind = "objective", quest = 56, index = 1, npc = 48 },
+            { kind = "objective", quest = 56, index = 2, npc = 203 },
+          } },
         { id = "y12-4", at = { zone = 10, x = 77.49, y = 44.29, r = 10 }, text = "Fly from Darkshire, Duskwood to Sentinel Hill, Westfall.",
           lines = {
             { kind = "fly", from = 12, to = 4 },
@@ -2627,11 +2589,6 @@ Noir.Route("alliance-highorder", {
         { id = "o173", at = { zone = 10, x = 63.18, y = 54.94, r = 40 }, text = "The Nightbane Shadow Weavers are southeast of Abercrombie.", targets = { enemy = { 533 } },
           lines = {
             { kind = "objective", quest = 173, index = 1, npc = 533 },
-          } },
-        { id = "o56", at = { zone = 10, x = 79.3, y = 70.53, r = 40 }, text = "The Skeletal Warriors are southeast of your last stop.", targets = { enemy = { 203, 48 } },
-          lines = {
-            { kind = "objective", quest = 56, index = 1, npc = 48 },
-            { kind = "objective", quest = 56, index = 2, npc = 203 },
           } },
         { id = "t56.a57.t173.a221.t101.t154.t262.a157.a265.t265.a266.t266.a453.b@10", at = { zone = 10, x = 73.54, y = 46.82, r = 10 }, minLevel = 23, items = { 1518, 2161, 1596 }, targets = { friend = { 264, 663, 265, 267, 273 } },
           lines = {
@@ -2669,7 +2626,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 157, npc = 289, skipIfMissing = true },
             { kind = "accept", quest = 158, npc = 289, ifDone = 157, requires = { 157 } },
           } },
-        { id = "h#16", text = "Use your hearthstone to return to Duskwood.",
+        { id = "h#11", text = "Use your hearthstone to return to Duskwood.",
           lines = {
             { kind = "hearth", to = { zone = 10, x = 73.87, y = 44.41 } },
           } },
@@ -2730,19 +2687,19 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 223, npc = 661 },
           } },
-        { id = "tHUNTER-31:go1", at = { zone = 10, x = 77.49, y = 44.29, r = 10 }, text = "Fly from Darkshire, Duskwood to Stormwind, Elwynn.", when = { class = "HUNTER" },
+        { id = "tHUNTER-30:go1", at = { zone = 10, x = 77.49, y = 44.29, r = 10 }, text = "Fly from Darkshire, Duskwood to Stormwind, Elwynn.", when = { class = "HUNTER" },
           lines = {
             { kind = "fly", from = 12, to = 2 },
           } },
-        { id = "tHUNTER-31", at = { zone = 1519, x = 67.35, y = 36.25, r = 10 }, text = "Fly to Stormwind City for class training, then return.", when = { class = "HUNTER" }, minLevel = 31,
+        { id = "tHUNTER-30", at = { zone = 1519, x = 67.35, y = 36.25, r = 10 }, text = "Fly to Stormwind City for class training, then return.", when = { class = "HUNTER" }, minLevel = 30,
           lines = {
-            { kind = "train", level = 31, class = "HUNTER", npc = 5515 },
+            { kind = "train", level = 30, class = "HUNTER", npc = 5515 },
           } },
-        { id = "tHUNTER-31:back1", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Sentinel Hill, Westfall.", when = { class = "HUNTER" },
+        { id = "tHUNTER-30:back1", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Sentinel Hill, Westfall.", when = { class = "HUNTER" },
           lines = {
             { kind = "fly", from = 2, to = 4 },
           } },
-        { id = "tHUNTER-31:back2", when = { class = "HUNTER" },
+        { id = "tHUNTER-30:back2", when = { class = "HUNTER" },
           lines = {
             { kind = "goto", at = { zone = 10, x = 28.11, y = 31.46, r = 20 } },
           } },
@@ -2764,7 +2721,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 134, index = 1, item = 1349, skipIfMissing = true },
           } },
-        { id = "h#17", text = "Use your hearthstone to return to Duskwood.",
+        { id = "h#12", text = "Use your hearthstone to return to Duskwood.",
           lines = {
             { kind = "hearth", to = { zone = 10, x = 73.87, y = 44.41 } },
           } },
@@ -2784,6 +2741,18 @@ Noir.Route("alliance-highorder", {
         { id = "g40@40#2", at = { zone = 40, x = 56.55, y = 52.64, r = 20 }, text = "Head west into Westfall.",
           lines = {
             { kind = "goto", at = { zone = 40, x = 56.55, y = 52.64, r = 20 } },
+          } },
+        { id = "tROGUE-31:go1", at = { zone = 40, x = 56.55, y = 52.64, r = 10 }, text = "Fly from Sentinel Hill, Westfall to Stormwind, Elwynn.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 4, to = 2 },
+          } },
+        { id = "tROGUE-31", at = { zone = 1519, x = 77.43, y = 65.31, r = 10 }, text = "Fly to Stormwind City for class training, then return.", when = { class = "ROGUE" }, minLevel = 31,
+          lines = {
+            { kind = "train", level = 31, class = "ROGUE", npc = 918 },
+          } },
+        { id = "tROGUE-31:back1", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Sentinel Hill, Westfall.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 2, to = 4 },
           } },
         { id = "y4-12", at = { zone = 40, x = 56.55, y = 52.64, r = 10 }, text = "Fly from Sentinel Hill, Westfall to Darkshire, Duskwood.",
           lines = {
@@ -2851,7 +2820,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 181, index = 1, item = 1968, skipIfMissing = true },
           } },
-        { id = "h#18", text = "Use your hearthstone to return to Duskwood.",
+        { id = "h#13", text = "Use your hearthstone to return to Duskwood.",
           lines = {
             { kind = "hearth", to = { zone = 10, x = 73.87, y = 44.41 } },
           } },
@@ -2859,17 +2828,29 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 181, npc = 276, skipIfMissing = true },
           } },
+        { id = "tWARRIOR-32:go1", at = { zone = 10, x = 77.49, y = 44.29, r = 10 }, text = "Fly from Darkshire, Duskwood to Stormwind, Elwynn.", when = { class = "WARRIOR" },
+          lines = {
+            { kind = "fly", from = 12, to = 2 },
+          } },
+        { id = "tWARRIOR-32", at = { zone = 1519, x = 80.19, y = 61.26, r = 10 }, text = "Fly to Stormwind City for class training, then return.", when = { class = "WARRIOR" }, minLevel = 32,
+          lines = {
+            { kind = "train", level = 32, class = "WARRIOR", npc = 914 },
+          } },
+        { id = "tWARRIOR-32:back1", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Darkshire, Duskwood.", when = { class = "WARRIOR" },
+          lines = {
+            { kind = "fly", from = 2, to = 12 },
+          } },
         { id = "y12-2", at = { zone = 10, x = 77.49, y = 44.29, r = 10 }, text = "Fly from Darkshire, Duskwood to Stormwind, Elwynn.",
           lines = {
             { kind = "fly", from = 12, to = 2 },
           } },
-        { id = "x1537#4", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 }, text = "Take the tram from Stormwind City to Ironforge.",
+        { id = "tHUNTER-32", at = { zone = 1519, x = 68, y = 35.99, r = 10 }, when = { class = "HUNTER" }, minLevel = 32,
+          lines = {
+            { kind = "train", level = 32, class = "HUNTER", npc = 5517 },
+          } },
+        { id = "x1537#2", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 }, text = "Take the tram from Stormwind City to Ironforge.",
           lines = {
             { kind = "transport", to = { zone = 1537, x = 78, y = 51.4 }, mode = "tram", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 } },
-          } },
-        { id = "tWARRIOR-32", at = { zone = 1537, x = 70.34, y = 90.65, r = 10 }, when = { class = "WARRIOR" }, minLevel = 32,
-          lines = {
-            { kind = "train", level = 32, class = "WARRIOR", npc = 5113 },
           } },
         { id = "a1718", at = { zone = 1537, x = 70.34, y = 90.65, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30, maxLevel = 38, targets = { friend = { 5113 } },
           lines = {
@@ -2881,10 +2862,6 @@ Noir.Route("alliance-highorder", {
       id = "highorder-33-34-hillsbrad-foothills", name = "33-34 Hillsbrad Foothills", group = "Alliance", subgroup = "30-40", minLevel = 33, maxLevel = 37, zone = 267,
       next = { { section = "highorder-34-37-stranglethorn-vale" } },
       steps = {
-        { id = "tROGUE-32", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, when = { class = "ROGUE" }, minLevel = 32,
-          lines = {
-            { kind = "train", level = 32, class = "ROGUE", npc = 5167 },
-          } },
         { id = "f6.y6-7", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.",
           lines = {
             { kind = "getflight", node = 6, npc = 1573 },
@@ -2904,18 +2881,18 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 555, at = { zone = 267, x = 51.89, y = 58.68, r = 10 }, npc = 2430 },
             { kind = "accept", quest = 536, at = { zone = 267, x = 51.46, y = 58.39, r = 10 }, npc = 2228 },
           } },
-        { id = "a659.a500", at = { zone = 267, x = 50.35, y = 59.05, r = 10 }, minLevel = 30, maxLevel = 41, targets = { friend = { 2711, 2263 } },
+        { id = "a659", at = { zone = 267, x = 50.35, y = 59.05, r = 10 }, minLevel = 30, maxLevel = 41, targets = { friend = { 2711 } },
           lines = {
             { kind = "accept", quest = 659, npc = 2711 },
-            { kind = "accept", quest = 500, npc = 2263 },
           } },
         { id = "a565", at = { zone = 267, x = 49.43, y = 55.53, r = 10 }, minLevel = 29, maxLevel = 42, targets = { friend = { 2438 } },
           lines = {
             { kind = "accept", quest = 565, npc = 2438 },
           } },
-        { id = "b@267", at = { zone = 267, x = 51.17, y = 58.93, r = 10 },
+        { id = "b.a500@267", at = { zone = 267, x = 51.17, y = 58.93, r = 10 }, minLevel = 30, targets = { friend = { 2263 } },
           lines = {
             { kind = "sethearth", npc = 2352 },
+            { kind = "accept", quest = 500, at = { zone = 267, x = 49.47, y = 58.73, r = 10 }, npc = 2263 },
           } },
         { id = "a505", at = { zone = 267, x = 48.14, y = 59.11, r = 10 }, minLevel = 26, maxLevel = 41, targets = { friend = { 2276 } },
           lines = {
@@ -2933,7 +2910,20 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 565, index = 3, item = 3719, skipIfMissing = true },
             { kind = "objective", quest = 565, index = 4, item = 3720, skipIfMissing = true },
           } },
-        { id = "o555", at = { zone = 267, x = 63.84, y = 35.58, r = 40 }, text = "Turtle Meat is east of your last stop.", targets = { enemy = { 2408, 14223, 2505, 7977, 8213, 4142 } },
+        { id = "t565", at = { zone = 267, x = 49.43, y = 55.53, r = 10 }, targets = { friend = { 2438 } },
+          lines = {
+            { kind = "turnin", quest = 565, npc = 2438, skipIfMissing = true },
+          } },
+        { id = "t536.a559", at = { zone = 267, x = 51.46, y = 58.39, r = 10 }, minLevel = 25, targets = { friend = { 2228 } },
+          lines = {
+            { kind = "turnin", quest = 536, npc = 2228, skipIfMissing = true },
+            { kind = "accept", quest = 559, npc = 2228, ifDone = 536, requires = { 536 } },
+          } },
+        { id = "o559", at = { zone = 267, x = 42.58, y = 68.58, r = 40 }, text = "Murloc Head is southwest of Lieutenant Farren Orinelle.", targets = { enemy = { 2376, 2377, 2375, 2374, 14276 } },
+          lines = {
+            { kind = "objective", quest = 559, index = 1, item = 3716, skipIfMissing = true },
+          } },
+        { id = "o555", at = { zone = 267, x = 63.84, y = 35.58, r = 40 }, text = "Turtle Meat is northeast of your last stop.", targets = { enemy = { 2408, 14223, 2505, 7977, 8213, 4142 } },
           lines = {
             { kind = "objective", quest = 555, index = 1, item = 3712, skipIfMissing = true },
             { kind = "objective", quest = 555, index = 2, item = 3713, skipIfMissing = true },
@@ -2945,86 +2935,28 @@ Noir.Route("alliance-highorder", {
           } },
         { id = "o500", at = { zone = 36, x = 36.65, y = 54.15, r = 40 }, text = "Dirty Knucklebones are north of your last stop.", targets = { enemy = { 2287, 2416, 2256, 2255, 2254, 2252 } },
           lines = {
-            { kind = "objective", quest = 500, index = 1, item = 2843, skipIfMissing = true },
+            { kind = "objective", quest = 500, index = 1, item = 2843 },
           } },
-        { id = "x1519#5", at = { zone = 36, x = 12, y = 56.2, r = 15 }, text = "Take the portal from Alterac Mountains to Stormwind City.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "transport", to = { zone = 1519, x = 70.5, y = 73.5 }, mode = "portal", at = { zone = 36, x = 12, y = 56.2, r = 15 } },
-          } },
-        { id = "y2-12", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Darkshire, Duskwood.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "fly", from = 2, to = 12 },
-          } },
-        { id = "g33@33", at = { zone = 33, x = 25.7, y = 73.1, r = 20 }, text = "Head south into Stranglethorn Vale.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "goto", at = { zone = 33, x = 25.7, y = 73.1, r = 20 } },
-          } },
-        { id = "x17", at = { zone = 33, x = 25.7, y = 73.1, r = 15 }, text = "Take the boat from Stranglethorn Vale to The Barrens.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "transport", to = { zone = 17, x = 63.8, y = 38.8 }, mode = "boat", at = { zone = 33, x = 25.7, y = 73.1, r = 15 } },
-          } },
-        { id = "t1718.a1719.o1719.t1719.a1791", at = { zone = 17, x = 68.62, y = 49.16, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30, targets = { enemy = { 6238 }, friend = { 6236 } },
-          lines = {
-            { kind = "turnin", quest = 1718, npc = 6236, skipIfMissing = true },
-            { kind = "accept", quest = 1719, npc = 6236, ifDone = 1718, requires = { 1718 } },
-            { kind = "objective", quest = 1719, index = 1, npc = 6238, skipIfMissing = true },
-            { kind = "objective", quest = 1719, index = 2, skipIfMissing = true },
-            { kind = "turnin", quest = 1719, npc = 6236, skipIfMissing = true },
-            { kind = "accept", quest = 1791, npc = 6236, ifDone = 1719, requires = { 1719 } },
-          } },
-        { id = "h#19", text = "Use your hearthstone to return to Hillsbrad Foothills.",
+        { id = "h#14", text = "Use your hearthstone to return to Hillsbrad Foothills.",
           lines = {
             { kind = "hearth", to = { zone = 267, x = 51.17, y = 58.93 } },
           } },
-        { id = "t564.t555.t536.a559", at = { zone = 267, x = 52.42, y = 55.96, r = 10 }, minLevel = 25, targets = { friend = { 2382, 2430, 2228 } },
+        { id = "t564.t555.t559.a560", at = { zone = 267, x = 52.42, y = 55.96, r = 10 }, minLevel = 25, items = { 3717 }, targets = { friend = { 2382, 2430, 2228 } },
           lines = {
             { kind = "turnin", quest = 564, npc = 2382, skipIfMissing = true },
             { kind = "turnin", quest = 555, at = { zone = 267, x = 51.89, y = 58.68, r = 10 }, npc = 2430, skipIfMissing = true },
-            { kind = "turnin", quest = 536, at = { zone = 267, x = 51.46, y = 58.39, r = 10 }, npc = 2228, skipIfMissing = true },
-            { kind = "accept", quest = 559, at = { zone = 267, x = 51.46, y = 58.39, r = 10 }, npc = 2228, ifDone = 536, requires = { 536 } },
+            { kind = "turnin", quest = 559, at = { zone = 267, x = 51.46, y = 58.39, r = 10 }, npc = 2228, skipIfMissing = true },
+            { kind = "accept", quest = 560, at = { zone = 267, x = 51.46, y = 58.39, r = 10 }, npc = 2228, ifDone = 559, requires = { 559 } },
           } },
-        { id = "t500.t565", at = { zone = 267, x = 49.47, y = 58.73, r = 10 }, targets = { friend = { 2263, 2438 } },
+        { id = "t500.t560.a561.t561.a562", at = { zone = 267, x = 49.47, y = 58.73, r = 10 }, minLevel = 25, items = { 3717 }, targets = { friend = { 2263, 2228 } },
           lines = {
-            { kind = "turnin", quest = 500, npc = 2263, skipIfMissing = true },
-            { kind = "turnin", quest = 565, at = { zone = 267, x = 49.43, y = 55.53, r = 10 }, npc = 2438, skipIfMissing = true },
+            { kind = "turnin", quest = 500, npc = 2263 },
+            { kind = "turnin", quest = 560, npc = 2263, skipIfMissing = true },
+            { kind = "accept", quest = 561, npc = 2263, ifDone = 560, requires = { 560 } },
+            { kind = "turnin", quest = 561, at = { zone = 267, x = 51.46, y = 58.39, r = 10 }, npc = 2228, skipIfMissing = true },
+            { kind = "accept", quest = 562, at = { zone = 267, x = 51.46, y = 58.39, r = 10 }, npc = 2228, ifDone = 561, requires = { 561 } },
           } },
-        { id = "o559", at = { zone = 267, x = 42.58, y = 68.58, r = 40 }, text = "Murloc Head is southwest of Marshal Redpath.", targets = { enemy = { 2376, 2377, 2375, 2374, 14276 } },
-          lines = {
-            { kind = "objective", quest = 559, index = 1, item = 3716, skipIfMissing = true },
-          } },
-        { id = "o505", at = { zone = 36, x = 54.46, y = 72.31, r = 40 }, text = "The Syndicate Footpads are north of your last stop.", targets = { enemy = { 2241, 2240 } },
-          lines = {
-            { kind = "objective", quest = 505, index = 1, npc = 2240, skipIfMissing = true },
-            { kind = "objective", quest = 505, index = 2, npc = 2241, skipIfMissing = true },
-          } },
-        { id = "t1791.a1712", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30, items = { 6929, 4480, 4479, 4481 }, targets = { friend = { 6176 } },
-          lines = {
-            { kind = "turnin", quest = 1791, npc = 6176, skipIfMissing = true },
-            { kind = "accept", quest = 1712, npc = 6176, ifDone = 1791, requires = { 1791 } },
-          } },
-        { id = "g28@28", at = { zone = 28, x = 42.92, y = 85.06, r = 20 }, text = "Head northeast into Western Plaguelands.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "goto", at = { zone = 28, x = 42.92, y = 85.06, r = 20 } },
-          } },
-        { id = "f66.y66-14", at = { zone = 28, x = 42.92, y = 85.06, r = 10 }, text = "Fly from Chillwind Camp, Western Plaguelands to Southshore, Hillsbrad.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "getflight", node = 66, npc = 12596 },
-            { kind = "fly", from = 66, to = 14 },
-          } },
-        { id = "t505", at = { zone = 267, x = 48.14, y = 59.11, r = 10 }, targets = { friend = { 2276 } },
-          lines = {
-            { kind = "turnin", quest = 505, npc = 2276, skipIfMissing = true },
-          } },
-        { id = "t559.a560.t560.a561.t561.a562", at = { zone = 267, x = 51.46, y = 58.39, r = 10 }, minLevel = 25, items = { 3717 }, targets = { friend = { 2228, 2263 } },
-          lines = {
-            { kind = "turnin", quest = 559, npc = 2228, skipIfMissing = true },
-            { kind = "accept", quest = 560, npc = 2228, ifDone = 559, requires = { 559 } },
-            { kind = "turnin", quest = 560, at = { zone = 267, x = 49.47, y = 58.73, r = 10 }, npc = 2263, skipIfMissing = true },
-            { kind = "accept", quest = 561, at = { zone = 267, x = 49.47, y = 58.73, r = 10 }, npc = 2263, ifDone = 560, requires = { 560 } },
-            { kind = "turnin", quest = 561, npc = 2228, skipIfMissing = true },
-            { kind = "accept", quest = 562, npc = 2228, ifDone = 561, requires = { 561 } },
-          } },
-        { id = "o562", at = { zone = 267, x = 56.5, y = 69.75, r = 40 }, text = "The Daggerspine Shorehunters are southeast of Lieutenant Farren Orinelle.", targets = { enemy = { 2371, 2369 } },
+        { id = "o562", at = { zone = 267, x = 56.5, y = 69.75, r = 40 }, text = "The Daggerspine Shorehunters are southeast of Marshal Redpath.", targets = { enemy = { 2371, 2369 } },
           lines = {
             { kind = "objective", quest = 562, index = 1, npc = 2369, skipIfMissing = true },
             { kind = "objective", quest = 562, index = 2, npc = 2371, skipIfMissing = true },
@@ -3032,6 +2964,15 @@ Noir.Route("alliance-highorder", {
         { id = "t562", at = { zone = 267, x = 51.46, y = 58.39, r = 10 }, targets = { friend = { 2228 } },
           lines = {
             { kind = "turnin", quest = 562, npc = 2228, skipIfMissing = true },
+          } },
+        { id = "o505", at = { zone = 36, x = 54.46, y = 72.31, r = 40 }, text = "The Syndicate Footpads are north of Lieutenant Farren Orinelle.", targets = { enemy = { 2241, 2240 } },
+          lines = {
+            { kind = "objective", quest = 505, index = 1, npc = 2240, skipIfMissing = true },
+            { kind = "objective", quest = 505, index = 2, npc = 2241, skipIfMissing = true },
+          } },
+        { id = "t505", at = { zone = 267, x = 48.14, y = 59.11, r = 10 }, targets = { friend = { 2276 } },
+          lines = {
+            { kind = "turnin", quest = 505, npc = 2276, skipIfMissing = true },
           } },
       },
     },
@@ -3043,35 +2984,31 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "skill", skill = 164, value = 200 },
           } },
+        { id = "p186-4-skill", when = { profession = 186 }, reminder = { ends = "train186_4" },
+          lines = {
+            { kind = "skill", skill = 186, value = 200 },
+          } },
         { id = "g36@36#2", at = { zone = 36, x = 12, y = 56.2, r = 20 }, text = "Head northwest into Alterac Mountains.",
           lines = {
             { kind = "goto", at = { zone = 36, x = 12, y = 56.2, r = 20 } },
           } },
-        { id = "tDRUID-34", at = { zone = 36, x = 11.79, y = 56.6, r = 10 }, when = { class = "DRUID" }, minLevel = 34,
+        { id = "tDRUID-32", at = { zone = 36, x = 11.79, y = 56.6, r = 10 }, when = { class = "DRUID" }, minLevel = 32,
           lines = {
-            { kind = "train", level = 34, class = "DRUID", npc = 270459 },
+            { kind = "train", level = 32, class = "DRUID", npc = 270459 },
           } },
-        { id = "tMAGE-34", at = { zone = 36, x = 17.72, y = 69.55, r = 10 }, when = { class = "MAGE" }, minLevel = 34,
+        { id = "tMAGE-32", at = { zone = 36, x = 17.72, y = 69.55, r = 10 }, when = { class = "MAGE" }, minLevel = 32,
           lines = {
-            { kind = "train", level = 34, class = "MAGE", npc = 246797 },
+            { kind = "train", level = 32, class = "MAGE", npc = 246797 },
           } },
-        { id = "x1519#6", at = { zone = 36, x = 12, y = 56.2, r = 15 }, text = "Take the portal from Alterac Mountains to Stormwind City.",
+        { id = "x1519#4", at = { zone = 36, x = 12, y = 56.2, r = 15 }, text = "Take the portal from Alterac Mountains to Stormwind City.",
           lines = {
             { kind = "transport", to = { zone = 1519, x = 70.5, y = 73.5 }, mode = "portal", at = { zone = 36, x = 12, y = 56.2, r = 15 } },
           } },
-        { id = "tROGUE-34", at = { zone = 1519, x = 77.43, y = 65.31, r = 10 }, when = { class = "ROGUE" }, minLevel = 34,
-          lines = {
-            { kind = "train", level = 34, class = "ROGUE", npc = 918 },
-          } },
-        { id = "tWARRIOR-34", at = { zone = 1519, x = 80.19, y = 61.26, r = 10 }, when = { class = "WARRIOR" }, minLevel = 34,
-          lines = {
-            { kind = "train", level = 34, class = "WARRIOR", npc = 914 },
-          } },
-        { id = "y2-12#2", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Darkshire, Duskwood.",
+        { id = "y2-12", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Darkshire, Duskwood.",
           lines = {
             { kind = "fly", from = 2, to = 12 },
           } },
-        { id = "g33@33#2", at = { zone = 33, x = 37.74, y = 3.3, r = 20 }, text = "Head south into Stranglethorn Vale.",
+        { id = "g33@33", at = { zone = 33, x = 37.74, y = 3.3, r = 20 }, text = "Head south into Stranglethorn Vale.",
           lines = {
             { kind = "goto", at = { zone = 33, x = 37.74, y = 3.3, r = 20 } },
           } },
@@ -3128,26 +3065,13 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 331, npc = 1422, ifDone = 330, requires = { 330 } },
             { kind = "turnin", quest = 331, npc = 469, skipIfMissing = true },
           } },
-        { id = "o185", at = { zone = 33, x = 35.7, y = 11.55, r = 40 }, text = "The Young Stranglethorn Tigers are south of Lieutenant Doren.", targets = { enemy = { 681 } },
+        { id = "o185.t185.a186.t190.a191", at = { zone = 33, x = 35.7, y = 11.55, r = 40 }, minLevel = 28, targets = { enemy = { 681 }, friend = { 717, 718 } },
           lines = {
             { kind = "objective", quest = 185, index = 1, npc = 681 },
-          } },
-        { id = "o194", at = { zone = 33, x = 25.77, y = 16.13, r = 40 }, text = "The Stranglethorn Raptors are west of your last stop.", targets = { enemy = { 685 } },
-          lines = {
-            { kind = "objective", quest = 194, index = 1, npc = 685 },
-          } },
-        { id = "t190.a191.t185.a186.t194.a195", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, minLevel = 28, targets = { friend = { 718, 717, 715 } },
-          lines = {
-            { kind = "turnin", quest = 190, npc = 718 },
-            { kind = "accept", quest = 191, npc = 718, requires = { 190 } },
-            { kind = "turnin", quest = 185, npc = 717 },
-            { kind = "accept", quest = 186, npc = 717, requires = { 185 } },
-            { kind = "turnin", quest = 194, npc = 715 },
-            { kind = "accept", quest = 195, npc = 715, requires = { 194 } },
-          } },
-        { id = "o191", at = { zone = 33, x = 30.85, y = 13.77, r = 40 }, text = "The Panthers are southwest of Sir S. J. Erlgadin.", targets = { enemy = { 736 } },
-          lines = {
-            { kind = "objective", quest = 191, index = 1, npc = 736 },
+            { kind = "turnin", quest = 185, at = { zone = 33, x = 35.62, y = 10.62, r = 10 }, npc = 717 },
+            { kind = "accept", quest = 186, at = { zone = 33, x = 35.62, y = 10.62, r = 10 }, npc = 717, requires = { 185 } },
+            { kind = "turnin", quest = 190, at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, npc = 718 },
+            { kind = "accept", quest = 191, at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, npc = 718, requires = { 190 } },
           } },
         { id = "a207", at = { zone = 33, x = 37.83, y = 3.56, r = 10 }, minLevel = 30, maxLevel = 46, skip = { { kind = "notturnedin", quest = 203 } }, targets = { friend = { 739, 733 } },
           lines = {
@@ -3166,45 +3090,94 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 186, index = 1, npc = 682 },
           } },
-        { id = "o195", at = { zone = 33, x = 35.05, y = 23.35, r = 40 }, text = "The Lashtail Raptors are southwest of your last stop.", targets = { enemy = { 686 } },
+        { id = "o191", at = { zone = 33, x = 30.85, y = 13.77, r = 40 }, text = "The Panthers are west of your last stop.", targets = { enemy = { 736 } },
           lines = {
-            { kind = "objective", quest = 195, index = 1, npc = 686 },
+            { kind = "objective", quest = 191, index = 1, npc = 736 },
           } },
-        { id = "t195.t186.a187.t191.a192", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 28, targets = { friend = { 715, 717, 718 } },
+        { id = "o194", at = { zone = 33, x = 25.77, y = 16.13, r = 40 }, text = "The Stranglethorn Raptors are west of your last stop.", targets = { enemy = { 685 } },
           lines = {
-            { kind = "turnin", quest = 195, npc = 715 },
-            { kind = "turnin", quest = 186, npc = 717 },
-            { kind = "accept", quest = 187, npc = 717, requires = { 186 } },
+            { kind = "objective", quest = 194, index = 1, npc = 685 },
+          } },
+        { id = "t191.a192.t186.a187.t194.a195", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, minLevel = 28, targets = { friend = { 718, 717, 715 } },
+          lines = {
             { kind = "turnin", quest = 191, npc = 718 },
             { kind = "accept", quest = 192, npc = 718, requires = { 191 } },
+            { kind = "turnin", quest = 186, npc = 717 },
+            { kind = "accept", quest = 187, npc = 717, requires = { 186 } },
+            { kind = "turnin", quest = 194, npc = 715 },
+            { kind = "accept", quest = 195, npc = 715, requires = { 194 } },
           } },
-        { id = "o207", at = { zone = 33, x = 29.48, y = 19.14, r = 40 }, text = "The First Troll Legend is southwest of Hemet Nesingwary.",
+        { id = "o187", at = { zone = 33, x = 33.36, y = 18.51, r = 40 }, text = "The Elder Stranglethorn Tigers are south of Sir S. J. Erlgadin.", targets = { enemy = { 1085 } },
+          lines = {
+            { kind = "objective", quest = 187, index = 1, npc = 1085 },
+          } },
+        { id = "o207", at = { zone = 33, x = 29.48, y = 19.14, r = 40 }, text = "The First Troll Legend is west of your last stop.",
           lines = {
             { kind = "objective", quest = 207, index = 1, item = 2005, skipIfMissing = true },
             { kind = "objective", quest = 207, index = 2, item = 2006, skipIfMissing = true },
             { kind = "objective", quest = 207, index = 3, item = 2007, skipIfMissing = true },
             { kind = "objective", quest = 207, index = 4, item = 2008, skipIfMissing = true },
           } },
-        { id = "o187", at = { zone = 33, x = 33.36, y = 18.51, r = 40 }, text = "The Elder Stranglethorn Tigers are east of your last stop.", targets = { enemy = { 1085 } },
-          lines = {
-            { kind = "objective", quest = 187, index = 1, npc = 1085 },
-          } },
         { id = "t207.t574", at = { zone = 33, x = 37.83, y = 3.56, r = 10 }, targets = { friend = { 739, 469 } },
           lines = {
             { kind = "turnin", quest = 207, npc = 739, skipIfMissing = true },
             { kind = "turnin", quest = 574, npc = 469, skipIfMissing = true },
           } },
-        { id = "o192", at = { zone = 33, x = 42.53, y = 32.37, r = 40 }, text = "The Shadowmaw Panthers are south of Brother Nimetz.", targets = { enemy = { 684 } },
+        { id = "o195", at = { zone = 33, x = 35.05, y = 23.35, r = 40 }, text = "The Lashtail Raptors are south of Brother Nimetz.", targets = { enemy = { 686 } },
+          lines = {
+            { kind = "objective", quest = 195, index = 1, npc = 686 },
+          } },
+        { id = "o192", at = { zone = 33, x = 42.53, y = 32.37, r = 40 }, text = "The Shadowmaw Panthers are southeast of your last stop.", targets = { enemy = { 684 } },
           lines = {
             { kind = "objective", quest = 192, index = 1, npc = 684 },
           } },
-        { id = "t187.a188.t192", at = { zone = 33, x = 35.62, y = 10.62, r = 10 }, minLevel = 28, targets = { friend = { 717, 718 } },
+        { id = "x17", at = { zone = 33, x = 25.7, y = 73.1, r = 15 }, text = "Take the boat from Stranglethorn Vale to The Barrens.", when = { class = "WARRIOR" },
           lines = {
+            { kind = "transport", to = { zone = 17, x = 63.8, y = 38.8 }, mode = "boat", at = { zone = 33, x = 25.7, y = 73.1, r = 15 } },
+          } },
+        { id = "t1718.a1719.o1719.t1719.a1791", at = { zone = 17, x = 68.62, y = 49.16, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30, targets = { enemy = { 6238 }, friend = { 6236 } },
+          lines = {
+            { kind = "turnin", quest = 1718, npc = 6236, skipIfMissing = true },
+            { kind = "accept", quest = 1719, npc = 6236, ifDone = 1718, requires = { 1718 } },
+            { kind = "objective", quest = 1719, index = 1, npc = 6238, skipIfMissing = true },
+            { kind = "objective", quest = 1719, index = 2, skipIfMissing = true },
+            { kind = "turnin", quest = 1719, npc = 6236, skipIfMissing = true },
+            { kind = "accept", quest = 1791, npc = 6236, ifDone = 1719, requires = { 1719 } },
+          } },
+        { id = "x33", at = { zone = 17, x = 63.8, y = 38.8, r = 15 }, text = "Take the boat from The Barrens to Stranglethorn Vale.", when = { class = "WARRIOR" },
+          lines = {
+            { kind = "transport", to = { zone = 33, x = 25.7, y = 73.1 }, mode = "boat", at = { zone = 17, x = 63.8, y = 38.8, r = 15 } },
+          } },
+        { id = "f19.y19-14", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Southshore, Hillsbrad.", when = { class = "WARRIOR" },
+          lines = {
+            { kind = "getflight", node = 19, npc = 2859 },
+            { kind = "fly", from = 19, to = 14 },
+          } },
+        { id = "t1791.a1712", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30, items = { 6929, 4480, 4479, 4481 }, targets = { friend = { 6176 } },
+          lines = {
+            { kind = "turnin", quest = 1791, npc = 6176, skipIfMissing = true },
+            { kind = "accept", quest = 1712, npc = 6176, ifDone = 1791, requires = { 1791 } },
+          } },
+        { id = "x1519#5", at = { zone = 36, x = 12, y = 56.2, r = 15 }, text = "Take the portal from Alterac Mountains to Stormwind City.", when = { class = "WARRIOR" },
+          lines = {
+            { kind = "transport", to = { zone = 1519, x = 70.5, y = 73.5 }, mode = "portal", at = { zone = 36, x = 12, y = 56.2, r = 15 } },
+          } },
+        { id = "tWARRIOR-34", at = { zone = 1519, x = 80.19, y = 61.26, r = 10 }, when = { class = "WARRIOR" }, minLevel = 34,
+          lines = {
+            { kind = "train", level = 34, class = "WARRIOR", npc = 914 },
+          } },
+        { id = "y2-12#2", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Darkshire, Duskwood.", when = { class = "WARRIOR" },
+          lines = {
+            { kind = "fly", from = 2, to = 12 },
+          } },
+        { id = "t195.t187.a188.t192", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 28, targets = { friend = { 715, 717, 718 } },
+          lines = {
+            { kind = "turnin", quest = 195, npc = 715 },
             { kind = "turnin", quest = 187, npc = 717 },
             { kind = "accept", quest = 188, npc = 717, requires = { 187 } },
             { kind = "turnin", quest = 192, npc = 718 },
           } },
-        { id = "o188", at = { zone = 33, x = 31.84, y = 16.45, r = 40 }, text = "Paw of Sin'Dall is southwest of Ajeck Rouack.", targets = { enemy = { 729 } },
+        { id = "o188", at = { zone = 33, x = 31.84, y = 16.45, r = 40 }, text = "Paw of Sin'Dall is southwest of Hemet Nesingwary.", targets = { enemy = { 729 } },
           lines = {
             { kind = "objective", quest = 188, index = 1, item = 3879 },
           } },
@@ -3212,9 +3185,9 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 188, npc = 717 },
           } },
-        { id = "tROGUE-36", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 36,
+        { id = "tROGUE-34", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 34,
           lines = {
-            { kind = "train", level = 36, class = "ROGUE", npc = 1411 },
+            { kind = "train", level = 34, class = "ROGUE", npc = 1411 },
           } },
         { id = "f19.a605.a189.a213.t210.a198.a201.a616.a627.t616.a578.a575.b@33", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, minLevel = 32, items = { 4085, 2252, 3898 }, targets = { friend = { 2498, 737, 773, 2496, 2495 } },
           lines = {
@@ -3257,7 +3230,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 578, index = 1 },
           } },
-        { id = "h#20", text = "Use your hearthstone to return to Stranglethorn Vale.",
+        { id = "h#15", text = "Use your hearthstone to return to Stranglethorn Vale.",
           lines = {
             { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
           } },
@@ -3287,6 +3260,10 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "grind", level = 37 },
           } },
+        { id = "tROGUE-36", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 36,
+          lines = {
+            { kind = "train", level = 36, class = "ROGUE", npc = 1411 },
+          } },
         { id = "t601.t577.a628.a595", label = "turnin577", at = { zone = 33, x = 27.23, y = 76.87, r = 10 }, minLevel = 37, targets = { friend = { 2496, 2495, 2490 } },
           lines = {
             { kind = "turnin", quest = 601, npc = 2496 },
@@ -3299,68 +3276,71 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 595, object = 2083 },
             { kind = "accept", quest = 597, object = 2083, requires = { 595 } },
           } },
-        { id = "y19-12", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Darkshire, Duskwood.",
+        { id = "t597.a599.t599", at = { zone = 33, x = 28.1, y = 76.22, r = 10 }, minLevel = 37, targets = { friend = { 2490, 2487 } },
           lines = {
-            { kind = "fly", from = 19, to = 12 },
+            { kind = "turnin", quest = 597, npc = 2490 },
+            { kind = "accept", quest = 599, npc = 2490, requires = { 597 } },
+            { kind = "turnin", quest = 599, at = { zone = 33, x = 27.17, y = 77.01, r = 10 }, npc = 2487 },
           } },
-        { id = "g33@33#3", at = { zone = 33, x = 38.04, y = 3.01, r = 20 },
+        { id = "o628", at = { zone = 33, x = 29.48, y = 24.88, r = 40 }, text = "Elder Crocolisk Skin is north of First Mate Crazz.", targets = { enemy = { 2635 } },
           lines = {
-            { kind = "goto", at = { zone = 33, x = 38.04, y = 3.01, r = 20 } },
-          } },
-        { id = "a202.a205", at = { zone = 33, x = 38.04, y = 3.01, r = 10 }, minLevel = 30, maxLevel = 48, targets = { friend = { 469, 739 } },
-          lines = {
-            { kind = "accept", quest = 202, npc = 469, ifDone = 574, requires = { 574 } },
-            { kind = "accept", quest = 205, npc = 739, ifDone = 207, requires = { 207 } },
+            { kind = "objective", quest = 628, index = 1, item = 4105 },
           } },
         { id = "a193", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, minLevel = 28, maxLevel = 48, targets = { friend = { 718 } },
           lines = {
             { kind = "accept", quest = 193, npc = 718, requires = { 192 } },
           } },
-        { id = "o202", at = { zone = 33, x = 48.21, y = 7.34, r = 40 }, text = "The Kurzen Elites are east of Sir S. J. Erlgadin.", targets = { enemy = { 939, 978, 813 } },
+        { id = "a205.a202", at = { zone = 33, x = 37.83, y = 3.56, r = 10 }, minLevel = 30, maxLevel = 48, targets = { friend = { 739, 469 } },
+          lines = {
+            { kind = "accept", quest = 205, npc = 739, ifDone = 207, requires = { 207 } },
+            { kind = "accept", quest = 202, npc = 469, ifDone = 574, requires = { 574 } },
+          } },
+        { id = "o202", at = { zone = 33, x = 48.21, y = 7.34, r = 40 }, text = "The Kurzen Elites are east of Brother Nimetz.", targets = { enemy = { 939, 978, 813 } },
           lines = {
             { kind = "objective", quest = 202, index = 1, npc = 939, skipIfMissing = true },
             { kind = "objective", quest = 202, index = 2, npc = 978, skipIfMissing = true },
             { kind = "objective", quest = 202, index = 3, item = 3615, skipIfMissing = true },
           } },
-        { id = "o193", at = { zone = 33, x = 48.67, y = 24.16, r = 40 }, text = "Fang of Bhag'thera is south of your last stop.", targets = { enemy = { 728 } },
+        { id = "h#16", text = "Use your hearthstone to return to Stranglethorn Vale.",
           lines = {
-            { kind = "objective", quest = 193, index = 1, item = 3876, skipIfMissing = true },
+            { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
           } },
-        { id = "o205", at = { zone = 33, x = 45.57, y = 36.64, r = 40 }, text = "Skullsplitter Fetish is south of your last stop.", targets = { enemy = { 780, 670 } },
+        { id = "t628", at = { zone = 33, x = 28.29, y = 77.59, r = 10 }, targets = { friend = { 2495 } },
+          lines = {
+            { kind = "turnin", quest = 628, npc = 2495 },
+          } },
+        { id = "o205", at = { zone = 33, x = 45.57, y = 36.64, r = 40 }, text = "Skullsplitter Fetish is northeast of Drizzlik.", targets = { enemy = { 780, 670 } },
           lines = {
             { kind = "objective", quest = 205, index = 1, item = 2466, skipIfMissing = true },
           } },
-        { id = "t202.t205", at = { zone = 33, x = 38.04, y = 3.01, r = 10 }, targets = { friend = { 469, 739 } },
+        { id = "o193", at = { zone = 33, x = 48.67, y = 24.16, r = 40 }, text = "Fang of Bhag'thera is north of your last stop.", targets = { enemy = { 728 } },
           lines = {
-            { kind = "turnin", quest = 202, npc = 469, skipIfMissing = true },
-            { kind = "turnin", quest = 205, npc = 739, skipIfMissing = true },
+            { kind = "objective", quest = 193, index = 1, item = 3876, skipIfMissing = true },
           } },
         { id = "t193", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, targets = { friend = { 718 } },
           lines = {
             { kind = "turnin", quest = 193, npc = 718, skipIfMissing = true },
           } },
-        { id = "o628", at = { zone = 33, x = 29.48, y = 24.88, r = 40 }, text = "Elder Crocolisk Skin is southwest of Sir S. J. Erlgadin.", targets = { enemy = { 2635 } },
-          lines = {
-            { kind = "objective", quest = 628, index = 1, item = 4105 },
-          } },
-        { id = "h#21", text = "Use your hearthstone to return to Stranglethorn Vale.",
-          lines = {
-            { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
-          } },
-        { id = "t628.t597.a599.t599", at = { zone = 33, x = 28.29, y = 77.59, r = 10 }, minLevel = 37, targets = { friend = { 2495, 2490, 2487 } },
-          lines = {
-            { kind = "turnin", quest = 628, npc = 2495 },
-            { kind = "turnin", quest = 597, at = { zone = 33, x = 28.1, y = 76.22, r = 10 }, npc = 2490 },
-            { kind = "accept", quest = 599, at = { zone = 33, x = 28.1, y = 76.22, r = 10 }, npc = 2490, requires = { 597 } },
-            { kind = "turnin", quest = 599, at = { zone = 33, x = 27.17, y = 77.01, r = 10 }, npc = 2487 },
-          } },
         { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
           lines = {
             { kind = "train", skill = 164, rank = 4, npc = 2836 },
           } },
-        { id = "y19-14", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Southshore, Hillsbrad.",
+        { id = "t205.t202", at = { zone = 33, x = 37.83, y = 3.56, r = 10 }, targets = { friend = { 739, 469 } },
           lines = {
-            { kind = "fly", from = 19, to = 14 },
+            { kind = "turnin", quest = 205, npc = 739, skipIfMissing = true },
+            { kind = "turnin", quest = 202, npc = 469, skipIfMissing = true },
+          } },
+        { id = "g10@10#4", at = { zone = 10, x = 77.49, y = 44.29, r = 20 }, text = "Head northeast into Duskwood.",
+          lines = {
+            { kind = "goto", at = { zone = 10, x = 77.49, y = 44.29, r = 20 } },
+          } },
+        { id = "p186-4", label = "train186_4", at = { zone = 10, x = 74.05, y = 49.62, r = 10 }, when = { profession = 186 },
+          lines = {
+            { kind = "train", skill = 186, rank = 4, npc = 3137 },
+          } },
+        { id = "y12-14", at = { zone = 10, x = 77.49, y = 44.29, r = 10 }, text = "Fly from Darkshire, Duskwood to Southshore, Hillsbrad.",
+          lines = {
+            { kind = "fly", from = 12, to = 14 },
           } },
         { id = "o1712", at = { zone = 267, x = 64.94, y = 34.92, r = 40 }, text = "Liferoot is north of your last stop.", when = { class = "WARRIOR" }, items = { 6929, 4480, 4479, 4481 }, targets = { enemy = { 701, 595, 660, 671, 588, 699 } },
           lines = {
@@ -3393,6 +3373,23 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 691, index = 2, item = 4522 },
             { kind = "objective", quest = 691, index = 3, item = 5040 },
           } },
+        { id = "a642", at = { zone = 45, x = 62.5, y = 33.73, r = 10 }, minLevel = 30, maxLevel = 45,
+          lines = {
+            { kind = "accept", quest = 642, object = 138492 },
+          } },
+        { id = "o627", at = { zone = 45, x = 84.58, y = 31.55, r = 40 }, text = "Lesser Bloodstone Ore is east of your last stop.",
+          lines = {
+            { kind = "objective", quest = 627, index = 1, item = 4278, skipIfMissing = true },
+          } },
+        { id = "o642", at = { zone = 45, x = 78.94, y = 38.32, r = 40 }, text = "Mote of Myzrael is southwest of your last stop.", targets = { enemy = { 2572, 2574, 2573 } },
+          lines = {
+            { kind = "objective", quest = 642, index = 1, item = 4435, skipIfMissing = true },
+          } },
+        { id = "t642.a651", at = { zone = 45, x = 84.31, y = 30.95, r = 10 }, minLevel = 30,
+          lines = {
+            { kind = "turnin", quest = 642, object = 2701, skipIfMissing = true },
+            { kind = "accept", quest = 651, object = 2701, ifDone = 642, requires = { 642 } },
+          } },
         { id = "t659.a658", at = { zone = 45, x = 60.18, y = 53.85, r = 10 }, minLevel = 30, targets = { friend = { 2712 } },
           lines = {
             { kind = "turnin", quest = 659, npc = 2712, skipIfMissing = true },
@@ -3410,47 +3407,6 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 660, npc = 2713, ifDone = 657, requires = { 657 } },
             { kind = "objective", quest = 660, index = 1, skipIfMissing = true },
             { kind = "turnin", quest = 660, npc = 2712, skipIfMissing = true },
-          } },
-        { id = "o627", at = { zone = 45, x = 84.58, y = 31.55, r = 40 }, text = "Lesser Bloodstone Ore is northeast of Quae.",
-          lines = {
-            { kind = "objective", quest = 627, index = 1, item = 4278, skipIfMissing = true },
-          } },
-        { id = "a642", at = { zone = 45, x = 62.5, y = 33.73, r = 10 }, minLevel = 30, maxLevel = 45,
-          lines = {
-            { kind = "accept", quest = 642, object = 138492 },
-          } },
-        { id = "o642", at = { zone = 45, x = 78.94, y = 38.32, r = 40 }, text = "Mote of Myzrael is east of your last stop.", targets = { enemy = { 2572, 2574, 2573 } },
-          lines = {
-            { kind = "objective", quest = 642, index = 1, item = 4435, skipIfMissing = true },
-          } },
-        { id = "t642.a651", at = { zone = 45, x = 84.31, y = 30.95, r = 10 }, minLevel = 30,
-          lines = {
-            { kind = "turnin", quest = 642, object = 2701, skipIfMissing = true },
-            { kind = "accept", quest = 651, object = 2701, ifDone = 642, requires = { 642 } },
-          } },
-        { id = "o681", at = { zone = 45, x = 32.38, y = 28.94, r = 40 }, text = "The Syndicate Highwaymen are west of your last stop.", targets = { enemy = { 2589, 2586 } },
-          lines = {
-            { kind = "objective", quest = 681, index = 1, npc = 2586 },
-            { kind = "objective", quest = 681, index = 2, npc = 2589 },
-          } },
-        { id = "o651", at = { zone = 45, x = 25.46, y = 30.11, r = 40 }, text = "Burning Key is west of your last stop.",
-          lines = {
-            { kind = "objective", quest = 651, index = 1, item = 4483, skipIfMissing = true },
-            { kind = "objective", quest = 651, index = 2, item = 4484, skipIfMissing = true },
-            { kind = "objective", quest = 651, index = 3, item = 4485, skipIfMissing = true },
-          } },
-        { id = "o684", at = { zone = 45, x = 29.55, y = 63.56, r = 40 }, text = "Marez's Head is south of your last stop.", targets = { enemy = { 2783 } },
-          lines = {
-            { kind = "objective", quest = 684, index = 1, item = 4515 },
-          } },
-        { id = "t651", at = { zone = 45, x = 36.23, y = 57.38, r = 10 },
-          lines = {
-            { kind = "turnin", quest = 651, object = 2702, skipIfMissing = true },
-          } },
-        { id = "o685", at = { zone = 45, x = 26.22, y = 65.55, r = 40 }, text = "Otto's Head is southwest of your last stop.", targets = { enemy = { 2599, 2597 } },
-          lines = {
-            { kind = "objective", quest = 685, index = 1, item = 4516 },
-            { kind = "objective", quest = 685, index = 2, item = 4517 },
           } },
         { id = "a663.t663.a662", at = { zone = 45, x = 31.78, y = 82.68, r = 10 }, minLevel = 35, targets = { friend = { 2766, 2610, 2767 } },
           lines = {
@@ -3491,9 +3447,22 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 668, at = { zone = 45, x = 32.28, y = 81.38, r = 10 }, npc = 2610 },
             { kind = "accept", quest = 669, at = { zone = 45, x = 32.28, y = 81.38, r = 10 }, npc = 2610, requires = { 668 } },
           } },
-        { id = "a652", at = { zone = 45, x = 36.23, y = 57.38, r = 10 }, minLevel = 30, maxLevel = 50,
+        { id = "o685.o684", at = { zone = 45, x = 26.22, y = 65.55, r = 40 }, text = "Otto's Head is northwest of Doctor Draxlegauge.", targets = { enemy = { 2599, 2597, 2783 } },
           lines = {
-            { kind = "accept", quest = 652, object = 2702, ifDone = 651, requires = { 651 } },
+            { kind = "objective", quest = 685, index = 1, item = 4516 },
+            { kind = "objective", quest = 685, index = 2, item = 4517 },
+            { kind = "objective", quest = 684, index = 1, item = 4515, at = { zone = 45, x = 29.55, y = 63.56, r = 40 } },
+          } },
+        { id = "o651", at = { zone = 45, x = 25.46, y = 30.11, r = 40 }, text = "Burning Key is north of your last stop.",
+          lines = {
+            { kind = "objective", quest = 651, index = 1, item = 4483, skipIfMissing = true },
+            { kind = "objective", quest = 651, index = 2, item = 4484, skipIfMissing = true },
+            { kind = "objective", quest = 651, index = 3, item = 4485, skipIfMissing = true },
+          } },
+        { id = "o681", at = { zone = 45, x = 32.38, y = 28.94, r = 40 }, text = "The Syndicate Highwaymen are east of your last stop.", targets = { enemy = { 2589, 2586 } },
+          lines = {
+            { kind = "objective", quest = 681, index = 1, npc = 2586 },
+            { kind = "objective", quest = 681, index = 2, npc = 2589 },
           } },
         { id = "t681.t684.t685.a682.t691.a693", at = { zone = 45, x = 45.83, y = 47.56, r = 10 }, minLevel = 30, targets = { friend = { 2700, 2788, 2789 } },
           lines = {
@@ -3504,21 +3473,18 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 691, npc = 2788 },
             { kind = "accept", quest = 693, at = { zone = 45, x = 46.65, y = 47.01, r = 10 }, npc = 2789, requires = { 691 } },
           } },
-        { id = "o652", at = { zone = 45, x = 63.9, y = 30, r = 40 }, text = "Rod of Order is northeast of Captain Nials.", targets = { enemy = { 2611 } },
+        { id = "t651.a652", at = { zone = 45, x = 36.23, y = 57.38, r = 10 }, minLevel = 30,
           lines = {
-            { kind = "objective", quest = 652, index = 1, item = 4469, skipIfMissing = true },
+            { kind = "turnin", quest = 651, object = 2702, skipIfMissing = true },
+            { kind = "accept", quest = 652, object = 2702, ifDone = 651, requires = { 651 } },
           } },
-        { id = "o693", at = { zone = 45, x = 54.75, y = 81.87, r = 40 }, text = "Trelane's Wand of Invocation is south of your last stop.", targets = { enemy = { 2793 } },
-          lines = {
-            { kind = "objective", quest = 693, index = 1, item = 4525 },
-          } },
-        { id = "o682", at = { zone = 45, x = 27.65, y = 63.79, r = 40 }, text = "Stromgarde Badge is northwest of your last stop.", targets = { enemy = { 2588, 2590, 2591 } },
+        { id = "o682", at = { zone = 45, x = 27.65, y = 63.79, r = 40 }, text = "Stromgarde Badge is southwest of your last stop.", targets = { enemy = { 2588, 2590, 2591 } },
           lines = {
             { kind = "objective", quest = 682, index = 1, item = 4506 },
           } },
-        { id = "t652", at = { zone = 45, x = 36.08, y = 58.09, r = 10 },
+        { id = "o693", at = { zone = 45, x = 54.75, y = 81.87, r = 40 }, text = "Trelane's Wand of Invocation is southeast of your last stop.", targets = { enemy = { 2793 } },
           lines = {
-            { kind = "turnin", quest = 652, object = 2688, skipIfMissing = true },
+            { kind = "objective", quest = 693, index = 1, item = 4525 },
           } },
         { id = "t682.t693.a694", at = { zone = 45, x = 45.83, y = 47.56, r = 10 }, minLevel = 30, targets = { friend = { 2700, 2789 } },
           lines = {
@@ -3526,7 +3492,15 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 693, at = { zone = 45, x = 46.65, y = 47.01, r = 10 }, npc = 2789 },
             { kind = "accept", quest = 694, at = { zone = 45, x = 46.65, y = 47.01, r = 10 }, npc = 2789, requires = { 693 } },
           } },
-        { id = "o694", at = { zone = 45, x = 19.96, y = 67.41, r = 40 }, text = "Azure Agate is southwest of Captain Nials.", targets = { enemy = { 2570 } },
+        { id = "o652", at = { zone = 45, x = 63.9, y = 30, r = 40 }, text = "Rod of Order is northeast of Captain Nials.", targets = { enemy = { 2611 } },
+          lines = {
+            { kind = "objective", quest = 652, index = 1, item = 4469, skipIfMissing = true },
+          } },
+        { id = "t652", at = { zone = 45, x = 36.08, y = 58.09, r = 10 },
+          lines = {
+            { kind = "turnin", quest = 652, object = 2688, skipIfMissing = true },
+          } },
+        { id = "o694", at = { zone = 45, x = 19.96, y = 67.41, r = 40 }, text = "Azure Agate is west of your last stop.", targets = { enemy = { 2570 } },
           lines = {
             { kind = "objective", quest = 694, index = 1, item = 4527 },
           } },
@@ -3543,32 +3517,20 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 696, index = 2, item = 4531 },
             { kind = "objective", quest = 696, index = 3, item = 4532 },
           } },
-        { id = "tWARRIOR-40:go1", text = "Head north into The Hinterlands.", when = { class = "WARRIOR" },
+        { id = "t696", at = { zone = 45, x = 46.65, y = 47.01, r = 10 }, items = { 4529 }, targets = { friend = { 2789 } },
           lines = {
-            { kind = "goto", at = { zone = 47, x = 14.4, y = 43, r = 20 } },
+            { kind = "turnin", quest = 696, npc = 2789 },
           } },
-        { id = "tWARRIOR-40", at = { zone = 47, x = 14.4, y = 43, r = 10 }, text = "Fly to The Hinterlands for class training, then return.", when = { class = "WARRIOR" }, minLevel = 40,
+        { id = "y16-14", at = { zone = 45, x = 45.73, y = 46.1, r = 10 }, text = "Fly from Refuge Pointe, Arathi to Southshore, Hillsbrad.", when = { class = "WARRIOR" },
           lines = {
-            { kind = "train", level = 40, class = "WARRIOR", npc = 270278 },
-          } },
-        { id = "tWARRIOR-40:back1", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, when = { class = "WARRIOR" },
-          lines = {
-            { kind = "getflight", node = 43, npc = 8018 },
-          } },
-        { id = "tWARRIOR-40:back2", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, text = "Fly from Aerie Peak, The Hinterlands to Refuge Pointe, Arathi.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "fly", from = 43, to = 16 },
-          } },
-        { id = "y16-66", at = { zone = 45, x = 45.73, y = 46.1, r = 10 }, text = "Fly from Refuge Pointe, Arathi to Chillwind Camp, Western Plaguelands.", when = { class = "WARRIOR" },
-          lines = {
-            { kind = "fly", from = 16, to = 66 },
+            { kind = "fly", from = 16, to = 14 },
           } },
         { id = "t1712.a1713", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30, items = { 6929, 4480, 4479, 4481 }, targets = { friend = { 6176 } },
           lines = {
             { kind = "turnin", quest = 1712, npc = 6176, skipIfMissing = true },
             { kind = "accept", quest = 1713, npc = 6176, ifDone = 1712, requires = { 1712 } },
           } },
-        { id = "o1713", at = { zone = 36, x = 80.32, y = 62.14, r = 40 }, text = "Whirlwind Heart is north of your last stop.", when = { class = "WARRIOR" }, targets = { enemy = { 6239 } },
+        { id = "o1713", at = { zone = 36, x = 80.32, y = 62.14, r = 40 }, text = "Whirlwind Heart is northwest of Skuerto.", when = { class = "WARRIOR" }, targets = { enemy = { 6239 } },
           lines = {
             { kind = "objective", quest = 1713, index = 1, item = 6894, skipIfMissing = true },
           } },
@@ -3578,53 +3540,26 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 1792, npc = 6176, ifDone = 1713, requires = { 1713 } },
             { kind = "turnin", quest = 1792, npc = 6176, skipIfMissing = true },
           } },
-        { id = "g28@28#2", at = { zone = 28, x = 42.92, y = 85.06, r = 20 }, text = "Head north into Western Plaguelands.", when = { class = "WARRIOR" },
+        { id = "g28@28", at = { zone = 28, x = 42.92, y = 85.06, r = 20 }, text = "Head northwest into Western Plaguelands.", when = { class = "WARRIOR" },
           lines = {
             { kind = "goto", at = { zone = 28, x = 42.92, y = 85.06, r = 20 } },
           } },
-        { id = "y66-16", at = { zone = 28, x = 42.92, y = 85.06, r = 10 }, text = "Fly from Chillwind Camp, Western Plaguelands to Refuge Pointe, Arathi.", when = { class = "WARRIOR" },
+        { id = "f66.y66-16", at = { zone = 28, x = 42.92, y = 85.06, r = 10 }, text = "Fly from Chillwind Camp, Western Plaguelands to Refuge Pointe, Arathi.", when = { class = "WARRIOR" },
           lines = {
+            { kind = "getflight", node = 66, npc = 12596 },
             { kind = "fly", from = 66, to = 16 },
-          } },
-        { id = "tHUNTER-40:go1", text = "Head north into The Hinterlands.", when = { class = "HUNTER" },
-          lines = {
-            { kind = "goto", at = { zone = 47, x = 14.6, y = 43, r = 20 } },
-          } },
-        { id = "tHUNTER-40", at = { zone = 47, x = 14.6, y = 43, r = 10 }, text = "Fly to The Hinterlands for class training, then return.", when = { class = "HUNTER" }, minLevel = 40,
-          lines = {
-            { kind = "train", level = 40, class = "HUNTER", npc = 270280 },
-          } },
-        { id = "tHUNTER-40:back1", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, when = { class = "HUNTER" },
-          lines = {
-            { kind = "getflight", node = 43, npc = 8018 },
-          } },
-        { id = "tHUNTER-40:back2", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, text = "Fly from Aerie Peak, The Hinterlands to Refuge Pointe, Arathi.", when = { class = "HUNTER" },
-          lines = {
-            { kind = "fly", from = 43, to = 16 },
-          } },
-        { id = "t696", at = { zone = 45, x = 46.65, y = 47.01, r = 10 }, items = { 4529 }, targets = { friend = { 2789 } },
-          lines = {
-            { kind = "turnin", quest = 696, npc = 2789 },
           } },
         { id = "y16-7", at = { zone = 45, x = 45.73, y = 46.1, r = 10 }, text = "Fly from Refuge Pointe, Arathi to Menethil Harbor, Wetlands.",
           lines = {
             { kind = "fly", from = 16, to = 7 },
           } },
-        { id = "tMAGE-40:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "MAGE" },
-          lines = {
-            { kind = "fly", from = 7, to = 6 },
-          } },
-        { id = "tMAGE-40", at = { zone = 1537, x = 27.16, y = 8.57, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "MAGE" }, minLevel = 40,
-          lines = {
-            { kind = "train", level = 40, class = "MAGE", npc = 7312 },
-          } },
-        { id = "tMAGE-40:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "MAGE" },
-          lines = {
-            { kind = "fly", from = 6, to = 7 },
-          } },
         { id = "y7-6", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "MAGE" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
+          } },
+        { id = "tMAGE-38", at = { zone = 1537, x = 27.25, y = 8.3, r = 10 }, when = { class = "MAGE" }, minLevel = 38,
+          lines = {
+            { kind = "train", level = 38, class = "MAGE", npc = 5144 },
           } },
         { id = "a1947.a1953", at = { zone = 1537, x = 27.25, y = 8.3, r = 10 }, when = { class = "MAGE" }, minLevel = 35, maxLevel = 46, targets = { friend = { 5144 } },
           lines = {
@@ -3637,17 +3572,9 @@ Noir.Route("alliance-highorder", {
       id = "highorder-40-41-badlands", name = "40-41 Badlands", group = "Alliance", subgroup = "40-50", minLevel = 40, maxLevel = 44, zone = 3,
       next = { { section = "highorder-41-42-desolace" } },
       steps = {
-        { id = "p186-4-skill", when = { profession = 186 }, reminder = { ends = "train186_4" },
-          lines = {
-            { kind = "skill", skill = 186, value = 200 },
-          } },
         { id = "g38@38", at = { zone = 38, x = 33.94, y = 50.95, r = 20 }, text = "Head south into Loch Modan.",
           lines = {
             { kind = "goto", at = { zone = 38, x = 33.94, y = 50.95, r = 20 } },
-          } },
-        { id = "p186-4", label = "train186_4", at = { zone = 38, x = 37.02, y = 47.81, r = 10 }, when = { profession = 186 },
-          lines = {
-            { kind = "train", skill = 186, rank = 4, npc = 1681 },
           } },
         { id = "f8", at = { zone = 38, x = 33.94, y = 50.95, r = 10 },
           lines = {
@@ -3778,13 +3705,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 732, npc = 2888, skipIfMissing = true },
           } },
-      },
-    },
-    {
-      id = "highorder-41-42-desolace", name = "41-42 Desolace", group = "Alliance", subgroup = "40-50", minLevel = 41, maxLevel = 45, zone = 405,
-      next = { { section = "highorder-42-42-dustwallow-marsh" } },
-      steps = {
-        { id = "h#22", text = "Use your hearthstone to return to Stranglethorn Vale.",
+        { id = "h#17", text = "Use your hearthstone to return to Stranglethorn Vale.",
           lines = {
             { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
           } },
@@ -3792,6 +3713,17 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "train", level = 40, class = "ROGUE", npc = 1411 },
           } },
+        { id = "t627.t669", at = { zone = 33, x = 26.95, y = 77.21, r = 10 }, items = { 4502 }, targets = { friend = { 773, 2487 } },
+          lines = {
+            { kind = "turnin", quest = 627, npc = 773, skipIfMissing = true },
+            { kind = "turnin", quest = 669, npc = 2487, skipIfMissing = true },
+          } },
+      },
+    },
+    {
+      id = "highorder-41-42-desolace", name = "41-42 Desolace", group = "Alliance", subgroup = "40-50", minLevel = 41, maxLevel = 45, zone = 405,
+      next = { { section = "highorder-42-42-dustwallow-marsh" } },
+      steps = {
         { id = "x17#2", at = { zone = 33, x = 25.7, y = 73.1, r = 15 }, text = "Take the boat from Stranglethorn Vale to The Barrens.",
           lines = {
             { kind = "transport", to = { zone = 17, x = 63.8, y = 38.8 }, mode = "boat", at = { zone = 33, x = 25.7, y = 73.1, r = 15 } },
@@ -3897,7 +3829,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 6134, index = 1, item = 15849, skipIfMissing = true },
           } },
-        { id = "h#23", text = "Use your hearthstone to return to Desolace.",
+        { id = "h#18", text = "Use your hearthstone to return to Desolace.",
           lines = {
             { kind = "hearth", to = { zone = 405, x = 66.27, y = 6.55 } },
           } },
@@ -4009,9 +3941,9 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 1177, index = 1, item = 5847, skipIfMissing = true },
           } },
-        { id = "tWARRIOR-42", at = { zone = 15, x = 67.88, y = 48.41, r = 10 }, when = { class = "WARRIOR" }, minLevel = 42,
+        { id = "tWARRIOR-40", at = { zone = 15, x = 67.88, y = 48.41, r = 10 }, when = { class = "WARRIOR" }, minLevel = 40,
           lines = {
-            { kind = "train", level = 42, class = "WARRIOR", npc = 8141 },
+            { kind = "train", level = 40, class = "WARRIOR", npc = 8141 },
           } },
         { id = "t1222.a1204", at = { zone = 15, x = 66.34, y = 45.47, r = 10 }, minLevel = 33, targets = { friend = { 4794 } },
           lines = {
@@ -4128,21 +4060,15 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "transport", to = { zone = 33, x = 25.7, y = 73.1 }, mode = "boat", at = { zone = 17, x = 63.8, y = 38.8, r = 15 } },
           } },
-        { id = "tROGUE-42", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 42,
-          lines = {
-            { kind = "train", level = 42, class = "ROGUE", npc = 1411 },
-          } },
-        { id = "a617.t627.a622.a2864.a587.a209.a600.a621.t669.a604.a348.a606.a2872", at = { zone = 33, x = 26.76, y = 76.38, r = 10 }, minLevel = 40, items = { 1987, 4502 }, targets = { friend = { 2494, 773, 2488, 737, 2498, 2487, 2486, 2501 } },
+        { id = "a617.a622.a2864.a587.a209.a600.a621.a604.a348.a606.a2872", at = { zone = 33, x = 26.76, y = 76.38, r = 10 }, minLevel = 40, maxLevel = 45, items = { 1987 }, targets = { friend = { 2494, 773, 2488, 737, 2498, 2487, 2486, 2501 } },
           lines = {
             { kind = "accept", quest = 617, npc = 2494 },
-            { kind = "turnin", quest = 627, at = { zone = 33, x = 26.95, y = 77.21, r = 10 }, npc = 773, skipIfMissing = true },
             { kind = "accept", quest = 622, at = { zone = 33, x = 26.95, y = 77.21, r = 10 }, npc = 773, ifDone = 627, requires = { 627 } },
             { kind = "accept", quest = 2864, at = { zone = 33, x = 26.95, y = 77.21, r = 10 }, npc = 773 },
             { kind = "accept", quest = 587, at = { zone = 33, x = 26.92, y = 77.35, r = 10 }, npc = 2488, ifDone = 597, requires = { 597 } },
             { kind = "accept", quest = 209, at = { zone = 33, x = 27, y = 77.13, r = 10 }, npc = 737, ifDone = 189, requires = { 189 } },
             { kind = "accept", quest = 600, at = { zone = 33, x = 27.12, y = 77.21, r = 10 }, npc = 2498, ifDone = 605, requires = { 605 } },
             { kind = "accept", quest = 621, at = { zone = 33, x = 27.12, y = 77.21, r = 10 }, npc = 2498 },
-            { kind = "turnin", quest = 669, at = { zone = 33, x = 27.17, y = 77.01, r = 10 }, npc = 2487, skipIfMissing = true },
             { kind = "accept", quest = 604, at = { zone = 33, x = 27.17, y = 77.01, r = 10 }, npc = 2487, ifDone = 599, requires = { 599 } },
             { kind = "accept", quest = 348, at = { zone = 33, x = 27.61, y = 76.74, r = 10 }, npc = 2486 },
             { kind = "accept", quest = 606, at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, npc = 2501 },
@@ -4156,6 +4082,18 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "sethearth", npc = 6807 },
           } },
+        { id = "tHUNTER-41:go1", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Stormwind, Elwynn.", when = { class = "HUNTER" },
+          lines = {
+            { kind = "fly", from = 19, to = 2 },
+          } },
+        { id = "tHUNTER-41", at = { zone = 1519, x = 67.35, y = 36.25, r = 10 }, text = "Fly to Stormwind City for class training, then use your hearthstone to return.", when = { class = "HUNTER" }, minLevel = 41,
+          lines = {
+            { kind = "train", level = 41, class = "HUNTER", npc = 5515 },
+          } },
+        { id = "tHUNTER-41:back1", text = "Use your hearthstone to return to Stranglethorn Vale.", when = { class = "HUNTER" },
+          lines = {
+            { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
+          } },
         { id = "o576.o587.o604", at = { zone = 33, x = 27.43, y = 73.21, r = 40 }, targets = { enemy = { 1561, 1562, 2545, 1564, 1563, 2548 } },
           lines = {
             { kind = "objective", quest = 576, index = 1, item = 3897, skipIfMissing = true },
@@ -4166,37 +4104,67 @@ Noir.Route("alliance-highorder", {
           } },
         { id = "o617", at = { zone = 33, x = 26.23, y = 62.02, r = 40 }, text = "Akiris Reed is north of your last stop.", targets = { enemy = { 1907, 262397 } },
           lines = {
-            { kind = "objective", quest = 617, index = 1, item = 4029 },
+            { kind = "objective", quest = 617, index = 1, item = 4029, skipIfMissing = true },
           } },
         { id = "o606", at = { zone = 33, x = 32.89, y = 64.63, r = 40 }, text = "Mistvale Giblets are east of your last stop.", targets = { enemy = { 1557 } },
           lines = {
-            { kind = "objective", quest = 606, index = 1, item = 3919 },
+            { kind = "objective", quest = 606, index = 1, item = 3919, skipIfMissing = true },
           } },
         { id = "o348", at = { zone = 33, x = 35.05, y = 60.88, r = 40 }, text = "Heart of Mokk is northeast of your last stop.", targets = { enemy = { 1514 } },
           lines = {
-            { kind = "objective", quest = 348, index = 1, item = 2797 },
+            { kind = "objective", quest = 348, index = 1, item = 2797, skipIfMissing = true },
           } },
-        { id = "h#24", text = "Use your hearthstone to return to Stranglethorn Vale.",
+        { id = "tROGUE-42", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 42,
           lines = {
-            { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
+            { kind = "train", level = 42, class = "ROGUE", npc = 1411 },
           } },
         { id = "t606.a607", at = { zone = 33, x = 26.9, y = 73.59, r = 10 }, minLevel = 30, items = { 3922 }, targets = { friend = { 2502 } },
           lines = {
-            { kind = "turnin", quest = 606, npc = 2502 },
-            { kind = "accept", quest = 607, npc = 2502, requires = { 606 } },
+            { kind = "turnin", quest = 606, npc = 2502, skipIfMissing = true },
+            { kind = "accept", quest = 607, npc = 2502, ifDone = 606, requires = { 606 } },
+          } },
+        { id = "tMAGE-42:go1", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Stormwind, Elwynn.", when = { class = "MAGE" },
+          lines = {
+            { kind = "fly", from = 19, to = 2 },
+          } },
+        { id = "tMAGE-42", at = { zone = 1519, x = 49.56, y = 85.8, r = 10 }, text = "Fly to Stormwind City for class training, then use your hearthstone to return.", when = { class = "MAGE" }, minLevel = 42,
+          lines = {
+            { kind = "train", level = 42, class = "MAGE", npc = 5497 },
+          } },
+        { id = "tMAGE-42:back1", text = "Use your hearthstone to return to Stranglethorn Vale.", when = { class = "MAGE" },
+          lines = {
+            { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
           } },
         { id = "t617.t604.a608.t348", at = { zone = 33, x = 26.76, y = 76.38, r = 10 }, minLevel = 37, targets = { friend = { 2494, 2487, 2486 } },
           lines = {
-            { kind = "turnin", quest = 617, npc = 2494 },
+            { kind = "turnin", quest = 617, npc = 2494, skipIfMissing = true },
             { kind = "turnin", quest = 604, at = { zone = 33, x = 27.17, y = 77.01, r = 10 }, npc = 2487, skipIfMissing = true },
             { kind = "accept", quest = 608, at = { zone = 33, x = 27.17, y = 77.01, r = 10 }, npc = 2487, ifDone = 604, requires = { 604 } },
-            { kind = "turnin", quest = 348, at = { zone = 33, x = 27.61, y = 76.74, r = 10 }, npc = 2486 },
+            { kind = "turnin", quest = 348, at = { zone = 33, x = 27.61, y = 76.74, r = 10 }, npc = 2486, skipIfMissing = true },
           } },
-        { id = "t576", at = { zone = 33, x = 28.59, y = 75.9, r = 10 }, targets = { friend = { 2493 } },
+        { id = "t576.t607.a609", at = { zone = 33, x = 28.59, y = 75.9, r = 10 }, minLevel = 30, items = { 3922 }, targets = { friend = { 2493, 2501 } },
           lines = {
             { kind = "turnin", quest = 576, npc = 2493, skipIfMissing = true },
+            { kind = "turnin", quest = 607, at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, npc = 2501, skipIfMissing = true },
+            { kind = "accept", quest = 609, at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, npc = 2501, ifDone = 607, requires = { 607 } },
           } },
-        { id = "o608", at = { zone = 33, x = 32.87, y = 88.2, r = 40 }, text = "Captain Stillwater is southeast of Dizzy One-Eye.", targets = { enemy = { 2550, 2546, 2548 } },
+        { id = "tDRUID-42:go1", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Stormwind, Elwynn.", when = { class = "DRUID" },
+          lines = {
+            { kind = "fly", from = 19, to = 2 },
+          } },
+        { id = "tDRUID-42", at = { zone = 1519, x = 36.11, y = 64.39, r = 10 }, text = "Fly to Stormwind City for class training, then use your hearthstone to return.", when = { class = "DRUID" }, minLevel = 42,
+          lines = {
+            { kind = "train", level = 42, class = "DRUID", npc = 5505 },
+          } },
+        { id = "tDRUID-42:back1", text = "Use your hearthstone to return to Stranglethorn Vale.", when = { class = "DRUID" },
+          lines = {
+            { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
+          } },
+        { id = "t587", at = { zone = 33, x = 26.92, y = 77.35, r = 10 }, targets = { friend = { 2488 } },
+          lines = {
+            { kind = "turnin", quest = 587, npc = 2488, skipIfMissing = true },
+          } },
+        { id = "o608", at = { zone = 33, x = 32.87, y = 88.2, r = 40 }, text = "Captain Stillwater is southeast of Deeg.", targets = { enemy = { 2550, 2546, 2548 } },
           lines = {
             { kind = "objective", quest = 608, index = 1, npc = 2550, skipIfMissing = true },
             { kind = "objective", quest = 608, index = 2, npc = 2548, skipIfMissing = true },
@@ -4204,7 +4172,13 @@ Noir.Route("alliance-highorder", {
           } },
         { id = "o621", at = { zone = 33, x = 37.7, y = 55.49, r = 40 }, text = "Zanzil's Mixture is north of your last stop.", targets = { enemy = { 1490, 1488, 2530, 1491, 1489, 2534 } },
           lines = {
-            { kind = "objective", quest = 621, index = 1, item = 4016 },
+            { kind = "objective", quest = 621, index = 1, item = 4016, skipIfMissing = true },
+          } },
+        { id = "o609", at = { zone = 33, x = 35.26, y = 51.27, r = 40 }, text = "Maury's Clubbed Foot is northwest of your last stop.", targets = { enemy = { 2535, 2536, 2537 } },
+          lines = {
+            { kind = "objective", quest = 609, index = 1, item = 3924, skipIfMissing = true },
+            { kind = "objective", quest = 609, index = 2, item = 3925, skipIfMissing = true },
+            { kind = "objective", quest = 609, index = 3, item = 3926, skipIfMissing = true },
           } },
         { id = "o600", at = { zone = 33, x = 41.62, y = 43.61, r = 40 }, text = "Singing Blue Crystal is northeast of your last stop.", targets = { enemy = { 674, 677, 676, 675 } },
           lines = {
@@ -4213,6 +4187,23 @@ Noir.Route("alliance-highorder", {
         { id = "o209", at = { zone = 33, x = 46.69, y = 44.26, r = 40 }, text = "Skullsplitter Tusk is east of your last stop.", targets = { enemy = { 783, 781, 672, 669, 782, 670 } },
           lines = {
             { kind = "objective", quest = 209, index = 1, item = 1524, skipIfMissing = true },
+          } },
+        { id = "h#19", text = "Use your hearthstone to return to Stranglethorn Vale.",
+          lines = {
+            { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
+          } },
+        { id = "t209.t600.t621.t608.t609.a613", at = { zone = 33, x = 27, y = 77.13, r = 10 }, minLevel = 30, targets = { friend = { 737, 2498, 2487, 2501 } },
+          lines = {
+            { kind = "turnin", quest = 209, npc = 737, skipIfMissing = true },
+            { kind = "turnin", quest = 600, npc = 2498, skipIfMissing = true },
+            { kind = "turnin", quest = 621, npc = 2498, skipIfMissing = true },
+            { kind = "turnin", quest = 608, npc = 2487, skipIfMissing = true },
+            { kind = "turnin", quest = 609, at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, npc = 2501, skipIfMissing = true },
+            { kind = "accept", quest = 613, at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, npc = 2501, ifDone = 609, requires = { 609 } },
+          } },
+        { id = "o613", at = { zone = 33, x = 48.82, y = 28.86, r = 40 }, text = "Maury's Key is northeast of Kebok.", targets = { enemy = { 709, 679, 678, 723, 710, 680 } },
+          lines = {
+            { kind = "objective", quest = 613, index = 1, item = 3930, skipIfMissing = true },
           } },
         { id = "a206", at = { zone = 33, x = 37.83, y = 3.56, r = 10 }, minLevel = 30, skip = { { kind = "notturnedin", quest = 205 } }, items = { 1987 }, targets = { friend = { 739, 770 } },
           lines = {
@@ -4238,38 +4229,21 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 196, index = 1, npc = 687, skipIfMissing = true },
           } },
-        { id = "t607.a609.t608.t600.t621.t209.t587", at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, minLevel = 30, items = { 3922 }, targets = { friend = { 2501, 2487, 2498, 737, 2488 } },
+        { id = "a8551", at = { zone = 33, x = 26.69, y = 73.61, r = 10 }, minLevel = 35, maxLevel = 55, targets = { friend = { 2500 } },
           lines = {
-            { kind = "turnin", quest = 607, npc = 2501 },
-            { kind = "accept", quest = 609, npc = 2501, requires = { 607 } },
-            { kind = "turnin", quest = 608, at = { zone = 33, x = 27.17, y = 77.01, r = 10 }, npc = 2487, skipIfMissing = true },
-            { kind = "turnin", quest = 600, at = { zone = 33, x = 27.12, y = 77.21, r = 10 }, npc = 2498, skipIfMissing = true },
-            { kind = "turnin", quest = 621, at = { zone = 33, x = 27.12, y = 77.21, r = 10 }, npc = 2498 },
-            { kind = "turnin", quest = 209, at = { zone = 33, x = 27, y = 77.13, r = 10 }, npc = 737, skipIfMissing = true },
-            { kind = "turnin", quest = 587, at = { zone = 33, x = 26.92, y = 77.35, r = 10 }, npc = 2488, skipIfMissing = true },
+            { kind = "accept", quest = 8551, npc = 2500 },
           } },
-        { id = "o609", at = { zone = 33, x = 35.26, y = 51.27, r = 40 }, text = "Maury's Clubbed Foot is northeast of \"Sea Wolf\" MacKinley.", targets = { enemy = { 2535, 2536, 2537 } },
+        { id = "t613", at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, targets = { friend = { 2501 } },
           lines = {
-            { kind = "objective", quest = 609, index = 1, item = 3924 },
-            { kind = "objective", quest = 609, index = 2, item = 3925 },
-            { kind = "objective", quest = 609, index = 3, item = 3926 },
+            { kind = "turnin", quest = 613, npc = 2501, skipIfMissing = true },
           } },
-        { id = "h#25", text = "Use your hearthstone to return to Stranglethorn Vale.",
+        { id = "o8551", at = { zone = 33, x = 36.95, y = 69.73, r = 40 }, text = "Smotts' Chest is northeast of \"Sea Wolf\" MacKinley.", targets = { enemy = { 1492 } },
           lines = {
-            { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
+            { kind = "objective", quest = 8551, index = 1, item = 3932, skipIfMissing = true },
           } },
-        { id = "tROGUE-44", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 44,
+        { id = "t8551", at = { zone = 33, x = 26.69, y = 73.61, r = 10 }, targets = { friend = { 2500 } },
           lines = {
-            { kind = "train", level = 44, class = "ROGUE", npc = 1411 },
-          } },
-        { id = "t609.a613", at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, minLevel = 30, targets = { friend = { 2501 } },
-          lines = {
-            { kind = "turnin", quest = 609, npc = 2501 },
-            { kind = "accept", quest = 613, npc = 2501, requires = { 609 } },
-          } },
-        { id = "o613", at = { zone = 33, x = 48.82, y = 28.86, r = 40 }, text = "Maury's Key is northeast of \"Sea Wolf\" MacKinley.", targets = { enemy = { 709, 679, 678, 723, 710, 680 } },
-          lines = {
-            { kind = "objective", quest = 613, index = 1, item = 3930 },
+            { kind = "turnin", quest = 8551, npc = 2500, skipIfMissing = true },
           } },
         { id = "t196.a197", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 28, targets = { friend = { 715 } },
           lines = {
@@ -4296,21 +4270,9 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 208, npc = 715, skipIfMissing = true },
           } },
-        { id = "a8551", at = { zone = 33, x = 26.69, y = 73.61, r = 10 }, minLevel = 35, maxLevel = 55, targets = { friend = { 2500 } },
+        { id = "h#20", text = "Use your hearthstone to return to Stranglethorn Vale.",
           lines = {
-            { kind = "accept", quest = 8551, npc = 2500 },
-          } },
-        { id = "t613", at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, targets = { friend = { 2501 } },
-          lines = {
-            { kind = "turnin", quest = 613, npc = 2501 },
-          } },
-        { id = "o8551", at = { zone = 33, x = 36.95, y = 69.73, r = 40 }, text = "Smotts' Chest is northeast of \"Sea Wolf\" MacKinley.", targets = { enemy = { 1492 } },
-          lines = {
-            { kind = "objective", quest = 8551, index = 1, item = 3932, skipIfMissing = true },
-          } },
-        { id = "t8551", at = { zone = 33, x = 26.69, y = 73.61, r = 10 }, targets = { friend = { 2500 } },
-          lines = {
-            { kind = "turnin", quest = 8551, npc = 2500, skipIfMissing = true },
+            { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
           } },
         { id = "x17#3", at = { zone = 33, x = 25.7, y = 73.1, r = 15 }, text = "Take the boat from Stranglethorn Vale to The Barrens.",
           lines = {
@@ -4397,9 +4359,19 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 2982, index = 2, npc = 5236, skipIfMissing = true },
             { kind = "objective", quest = 2982, index = 3, npc = 5232, skipIfMissing = true },
           } },
-        { id = "h#26", text = "Use your hearthstone to return to Feralas.",
+        { id = "o2821", at = { zone = 357, x = 51.93, y = 58.34, r = 40 }, text = "Thick Yeti Hide is northwest of your last stop.", targets = { enemy = { 5295, 5293, 5292, 5346, 7848 } },
           lines = {
-            { kind = "hearth", to = { zone = 357, x = 30.97, y = 43.49 } },
+            { kind = "objective", quest = 2821, index = 1, item = 8973 },
+          } },
+        { id = "t4127.a4129.t2982.t4129.a4130.t4130.a4131", at = { zone = 357, x = 31.86, y = 45.13, r = 10 }, minLevel = 40, items = { 11462 }, targets = { friend = { 7880, 7900, 7879 } },
+          lines = {
+            { kind = "turnin", quest = 4127, npc = 7880, skipIfMissing = true },
+            { kind = "accept", quest = 4129, npc = 7880, ifDone = 4127, requires = { 4127 } },
+            { kind = "turnin", quest = 2982, npc = 7900, skipIfMissing = true },
+            { kind = "turnin", quest = 4129, at = { zone = 357, x = 32.45, y = 43.79, r = 10 }, npc = 7879, skipIfMissing = true },
+            { kind = "accept", quest = 4130, at = { zone = 357, x = 32.45, y = 43.79, r = 10 }, npc = 7879, ifDone = 4129, requires = { 4129 } },
+            { kind = "turnin", quest = 4130, npc = 7880, skipIfMissing = true },
+            { kind = "accept", quest = 4131, npc = 7880, ifDone = 4130, requires = { 4130 } },
           } },
         { id = "t2867.a3130.t3130.a2869", at = { zone = 357, x = 30.28, y = 46.17, r = 10 }, minLevel = 40, targets = { friend = { 3936, 7877 } },
           lines = {
@@ -4408,13 +4380,12 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 3130, npc = 7877, skipIfMissing = true },
             { kind = "accept", quest = 2869, npc = 7877, ifDone = 3130, requires = { 3130 } },
           } },
-        { id = "t2982.t4127.a4129", at = { zone = 357, x = 31.83, y = 45.61, r = 10 }, minLevel = 40, items = { 11462 }, targets = { friend = { 7900, 7880 } },
+        { id = "t2821.a7733", at = { zone = 357, x = 30.63, y = 42.71, r = 10 }, minLevel = 40, targets = { friend = { 7852 } },
           lines = {
-            { kind = "turnin", quest = 2982, npc = 7900, skipIfMissing = true },
-            { kind = "turnin", quest = 4127, npc = 7880, skipIfMissing = true },
-            { kind = "accept", quest = 4129, npc = 7880, ifDone = 4127, requires = { 4127 } },
+            { kind = "turnin", quest = 2821, npc = 7852 },
+            { kind = "accept", quest = 7733, npc = 7852, requires = { 2821 } },
           } },
-        { id = "o2869", at = { zone = 357, x = 28.78, y = 53.47, r = 40 }, text = "Hatecrest Naga Scale is southwest of Angelas Moonbreeze.", targets = { enemy = { 5335, 5331, 5337, 5332, 5334, 5336 } },
+        { id = "o2869", at = { zone = 357, x = 28.78, y = 53.47, r = 40 }, text = "Hatecrest Naga Scale is south of Pratt McGrubben.", targets = { enemy = { 5335, 5331, 5337, 5332, 5334, 5336 } },
           lines = {
             { kind = "objective", quest = 2869, index = 1, item = 9247, skipIfMissing = true },
           } },
@@ -4427,39 +4398,9 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 2870, index = 1, item = 9248, skipIfMissing = true },
           } },
-        { id = "o2821", at = { zone = 357, x = 51.93, y = 58.34, r = 40 }, text = "Thick Yeti Hide is east of your last stop.", targets = { enemy = { 5295, 5293, 5292, 5346, 7848 } },
+        { id = "h#21", text = "Use your hearthstone to return to Feralas.",
           lines = {
-            { kind = "objective", quest = 2821, index = 1, item = 8973 },
-          } },
-        { id = "a7003.a7721", at = { zone = 357, x = 44.81, y = 43.42, r = 10 }, minLevel = 45, maxLevel = 56, items = { 18904 }, targets = { friend = { 14637 } },
-          lines = {
-            { kind = "accept", quest = 7003, npc = 14637 },
-            { kind = "accept", quest = 7721, npc = 14637 },
-          } },
-        { id = "r7721", at = { zone = 357, x = 43.2, y = 48.19, r = 40 }, text = "Water Elemental Core is southwest of Zorbin Fandazzle.", reminder = { ends = "turnin7721" }, targets = { enemy = { 5461, 5462 } },
-          lines = {
-            { kind = "objective", quest = 7721, index = 1, item = 18958, skipIfMissing = true },
-          } },
-        { id = "o7003", at = { zone = 357, x = 41.13, y = 46.44, r = 40 }, items = { 18904 }, targets = { enemy = { 5359, 14603, 5361, 14638, 5360, 14639 } },
-          lines = {
-            { kind = "objective", quest = 7003, index = 1, item = 18956, skipIfMissing = true },
-          } },
-        { id = "t7003.t7721", label = "turnin7721", at = { zone = 357, x = 44.81, y = 43.42, r = 10 }, items = { 18904 }, targets = { friend = { 14637 } },
-          lines = {
-            { kind = "turnin", quest = 7003, npc = 14637, skipIfMissing = true },
-            { kind = "turnin", quest = 7721, npc = 14637, skipIfMissing = true },
-          } },
-        { id = "t4129.a4130.t4130.a4131", at = { zone = 357, x = 32.45, y = 43.79, r = 10 }, minLevel = 40, items = { 11462 }, targets = { friend = { 7879, 7880 } },
-          lines = {
-            { kind = "turnin", quest = 4129, npc = 7879, skipIfMissing = true },
-            { kind = "accept", quest = 4130, npc = 7879, ifDone = 4129, requires = { 4129 } },
-            { kind = "turnin", quest = 4130, at = { zone = 357, x = 31.86, y = 45.13, r = 10 }, npc = 7880, skipIfMissing = true },
-            { kind = "accept", quest = 4131, at = { zone = 357, x = 31.86, y = 45.13, r = 10 }, npc = 7880, ifDone = 4130, requires = { 4130 } },
-          } },
-        { id = "t2821.a7733", at = { zone = 357, x = 30.63, y = 42.71, r = 10 }, minLevel = 40, targets = { friend = { 7852 } },
-          lines = {
-            { kind = "turnin", quest = 2821, npc = 7852 },
-            { kind = "accept", quest = 7733, npc = 7852, requires = { 2821 } },
+            { kind = "hearth", to = { zone = 357, x = 30.97, y = 43.49 } },
           } },
         { id = "t2870.a2871.t2871", at = { zone = 357, x = 30.38, y = 46.17, r = 10 }, minLevel = 40, items = { 9248 }, targets = { friend = { 7877, 7878 } },
           lines = {
@@ -4467,7 +4408,25 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 2871, npc = 7877, ifDone = 2870, requires = { 2870 } },
             { kind = "turnin", quest = 2871, at = { zone = 357, x = 30.08, y = 45.06, r = 10 }, npc = 7878, skipIfMissing = true },
           } },
-        { id = "o7733", at = { zone = 357, x = 53.4, y = 31.65, r = 40 }, text = "Rage Scar Yeti Hide is northeast of Latronicus Moonspear.", targets = { enemy = { 5296, 5299, 5297, 7848 } },
+        { id = "a7003.a7721", at = { zone = 357, x = 44.81, y = 43.42, r = 10 }, minLevel = 45, maxLevel = 56, items = { 18904 }, targets = { friend = { 14637 } },
+          lines = {
+            { kind = "accept", quest = 7003, npc = 14637 },
+            { kind = "accept", quest = 7721, npc = 14637 },
+          } },
+        { id = "r7003", at = { zone = 357, x = 41.13, y = 46.44, r = 40 }, text = "Miniaturization Residue is southwest of Zorbin Fandazzle.", reminder = { ends = "turnin7003" }, items = { 18904 }, targets = { enemy = { 5359, 14603, 5361, 14638, 5360, 14639 } },
+          lines = {
+            { kind = "objective", quest = 7003, index = 1, item = 18956, skipIfMissing = true },
+          } },
+        { id = "o7721", at = { zone = 357, x = 43.2, y = 48.19, r = 40 }, targets = { enemy = { 5461, 5462 } },
+          lines = {
+            { kind = "objective", quest = 7721, index = 1, item = 18958, skipIfMissing = true },
+          } },
+        { id = "t7003.t7721", label = "turnin7003", at = { zone = 357, x = 44.81, y = 43.42, r = 10 }, items = { 18904 }, targets = { friend = { 14637 } },
+          lines = {
+            { kind = "turnin", quest = 7003, npc = 14637, skipIfMissing = true },
+            { kind = "turnin", quest = 7721, npc = 14637, skipIfMissing = true },
+          } },
+        { id = "o7733", at = { zone = 357, x = 53.4, y = 31.65, r = 40 }, text = "Rage Scar Yeti Hide is northeast of Zorbin Fandazzle.", targets = { enemy = { 5296, 5299, 5297, 7848 } },
           lines = {
             { kind = "objective", quest = 7733, index = 1, item = 18947 },
           } },
@@ -4489,10 +4448,6 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 4135, object = 164954, skipIfMissing = true },
             { kind = "accept", quest = 4265, object = 164954, ifDone = 4135, requires = { 4135 } },
             { kind = "objective", quest = 4265, index = 1, skipIfMissing = true },
-          } },
-        { id = "h#27", text = "Use your hearthstone to return to Feralas.",
-          lines = {
-            { kind = "hearth", to = { zone = 357, x = 30.97, y = 43.49 } },
           } },
         { id = "t4265.a4266", at = { zone = 357, x = 31.86, y = 45.13, r = 10 }, minLevel = 40, targets = { friend = { 7880 } },
           lines = {
@@ -4571,9 +4526,11 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 3161, npc = 7771, skipIfMissing = true },
           } },
-        { id = "o1707", at = { zone = 440, x = 62.67, y = 29.34, r = 40 }, text = "Wastewander Water Pouch is northeast of Marvon Rivetseeker.", targets = { enemy = { 5616, 5618, 5615, 5617, 5623, 7805 } },
+        { id = "o1707.o1690", at = { zone = 440, x = 62.67, y = 29.34, r = 40 }, text = "Wastewander Water Pouch is northeast of Marvon Rivetseeker.", targets = { enemy = { 5616, 5618, 5615, 5617, 5623, 7805 } },
           lines = {
             { kind = "objective", quest = 1707, index = 1, item = 8483, skipIfMissing = true },
+            { kind = "objective", quest = 1690, index = 1, npc = 5618, skipIfMissing = true },
+            { kind = "objective", quest = 1690, index = 2, npc = 5616, skipIfMissing = true },
           } },
         { id = "t2872.a2873.a8366", at = { zone = 440, x = 67.11, y = 23.98, r = 10 }, minLevel = 40, targets = { friend = { 7881, 7882 } },
           lines = {
@@ -4587,11 +4544,6 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 2875, object = 142122 },
             { kind = "accept", quest = 8365, npc = 15165 },
           } },
-        { id = "o1690", at = { zone = 440, x = 62.77, y = 29.18, r = 40 }, text = "The Wastewander Bandits are southwest of Haughty Modiste.", targets = { enemy = { 5616, 5618 } },
-          lines = {
-            { kind = "objective", quest = 1690, index = 1, npc = 5618, skipIfMissing = true },
-            { kind = "objective", quest = 1690, index = 2, npc = 5616, skipIfMissing = true },
-          } },
         { id = "a5863.t1707.t1690.a1691", at = { zone = 440, x = 52.82, y = 27.4, r = 10 }, minLevel = 44, targets = { friend = { 11758, 7408, 7407 } },
           lines = {
             { kind = "accept", quest = 5863, npc = 11758 },
@@ -4603,6 +4555,18 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 2605, npc = 7564 },
             { kind = "sethearth", at = { zone = 440, x = 52.51, y = 27.91, r = 10 }, npc = 7733 },
+          } },
+        { id = "tWARRIOR-45:go1", at = { zone = 440, x = 51.01, y = 29.34, r = 10 }, text = "Fly from Gadgetzan, Tanaris to Theramore, Dustwallow Marsh.", when = { class = "WARRIOR" },
+          lines = {
+            { kind = "fly", from = 39, to = 32 },
+          } },
+        { id = "tWARRIOR-45", at = { zone = 15, x = 67.88, y = 48.41, r = 10 }, text = "Fly to Dustwallow Marsh for class training, then use your hearthstone to return.", when = { class = "WARRIOR" }, minLevel = 45,
+          lines = {
+            { kind = "train", level = 45, class = "WARRIOR", npc = 8141 },
+          } },
+        { id = "tWARRIOR-45:back1", text = "Use your hearthstone to return to Tanaris.", when = { class = "WARRIOR" },
+          lines = {
+            { kind = "hearth", to = { zone = 440, x = 52.51, y = 27.91 } },
           } },
         { id = "o2781.o1691", at = { zone = 440, x = 61.77, y = 38.17, r = 40 }, text = "Caliph Scorpidsting's Head is southeast of Marin Noggenfogger.", targets = { enemy = { 7847, 5615, 5617, 5623 } },
           lines = {
@@ -4631,11 +4595,16 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 8365, npc = 15165, skipIfMissing = true },
           } },
-        { id = "h#28", text = "Use your hearthstone to return to Tanaris.",
+        { id = "h#22", text = "Use your hearthstone to return to Tanaris.",
           lines = {
             { kind = "hearth", to = { zone = 440, x = 52.51, y = 27.91 } },
           } },
-        { id = "o82", at = { zone = 440, x = 33.72, y = 44.05, r = 40 }, targets = { enemy = { 5456, 5455, 5457, 5458, 5459, 5460 } },
+        { id = "t1691.t2781", at = { zone = 440, x = 52.46, y = 28.51, r = 10 }, targets = { friend = { 7407 } },
+          lines = {
+            { kind = "turnin", quest = 1691, npc = 7407, skipIfMissing = true },
+            { kind = "turnin", quest = 2781, npc = 7407, skipIfMissing = true },
+          } },
+        { id = "o82", at = { zone = 440, x = 33.72, y = 44.05, r = 40 }, text = "Centipaar Insect Parts are southwest of Chief Engineer Bilgewhizzle.", targets = { enemy = { 5456, 5455, 5457, 5458, 5459, 5460 } },
           lines = {
             { kind = "objective", quest = 82, index = 1, item = 8587, skipIfMissing = true },
           } },
@@ -4649,28 +4618,23 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 5863, index = 2, npc = 5472 },
             { kind = "objective", quest = 5863, index = 3, npc = 12046 },
           } },
-        { id = "t2605.a2606.t1691.t2781", at = { zone = 440, x = 51.81, y = 28.66, r = 10 }, minLevel = 44, items = { 8603 }, targets = { friend = { 7564, 7407 } },
+        { id = "t2605.a2606", at = { zone = 440, x = 51.81, y = 28.66, r = 10 }, minLevel = 44, items = { 8603 }, targets = { friend = { 7564 } },
           lines = {
             { kind = "turnin", quest = 2605, npc = 7564 },
             { kind = "accept", quest = 2606, npc = 7564, requires = { 2605 } },
-            { kind = "turnin", quest = 1691, at = { zone = 440, x = 52.46, y = 28.51, r = 10 }, npc = 7407, skipIfMissing = true },
-            { kind = "turnin", quest = 2781, at = { zone = 440, x = 52.46, y = 28.51, r = 10 }, npc = 7407, skipIfMissing = true },
           } },
         { id = "t5863", at = { zone = 440, x = 52.82, y = 27.4, r = 10 }, targets = { friend = { 11758 } },
           lines = {
             { kind = "turnin", quest = 5863, npc = 11758 },
           } },
-        { id = "a3362.t2606.t82", at = { zone = 440, x = 51.57, y = 26.76, r = 10 }, minLevel = 45, items = { 8603 }, targets = { friend = { 7876, 7583, 5594 } },
+        { id = "t2606.t82.a3362.a10", at = { zone = 440, x = 51.06, y = 26.87, r = 10 }, minLevel = 45, items = { 8603 }, targets = { friend = { 7583, 5594, 7876, 7724 } },
           lines = {
-            { kind = "accept", quest = 3362, npc = 7876 },
-            { kind = "turnin", quest = 2606, at = { zone = 440, x = 51.06, y = 26.87, r = 10 }, npc = 7583 },
-            { kind = "turnin", quest = 82, at = { zone = 440, x = 50.89, y = 26.96, r = 10 }, npc = 5594, skipIfMissing = true },
+            { kind = "turnin", quest = 2606, npc = 7583 },
+            { kind = "turnin", quest = 82, npc = 5594, skipIfMissing = true },
+            { kind = "accept", quest = 3362, at = { zone = 440, x = 51.57, y = 26.76, r = 10 }, npc = 7876 },
+            { kind = "accept", quest = 10, at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, npc = 7724, ifDone = 82, requires = { 82 } },
           } },
-        { id = "a10", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 39, maxLevel = 56, targets = { friend = { 7724 } },
-          lines = {
-            { kind = "accept", quest = 10, npc = 7724, ifDone = 82, requires = { 82 } },
-          } },
-        { id = "o10", at = { zone = 440, x = 55.96, y = 71.17, r = 40 }, text = "Scrimshank's Surveying Gear is south of Senior Surveyor Fizzledowser.",
+        { id = "o10", at = { zone = 440, x = 55.96, y = 71.17, r = 40 }, text = "Scrimshank's Surveying Gear is south of Sprinkle.",
           lines = {
             { kind = "objective", quest = 10, index = 1, item = 8593, skipIfMissing = true },
           } },
@@ -4709,7 +4673,7 @@ Noir.Route("alliance-highorder", {
       id = "highorder-47-48-searing-gorge", name = "47-48 Searing Gorge", group = "Alliance", subgroup = "40-50", minLevel = 47, maxLevel = 51, zone = 51,
       next = { { section = "highorder-48-48-the-hinterlands" } },
       steps = {
-        { id = "h#29", text = "Use your hearthstone to return to Tanaris.",
+        { id = "h#23", text = "Use your hearthstone to return to Tanaris.",
           lines = {
             { kind = "hearth", to = { zone = 440, x = 52.51, y = 27.91 } },
           } },
@@ -4721,39 +4685,39 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "transport", to = { zone = 11, x = 4.7, y = 63.7 }, mode = "boat", at = { zone = 15, x = 71.7, y = 56.6, r = 15 } },
           } },
-        { id = "tHUNTER-47:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "HUNTER" },
+        { id = "tHUNTER-46:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "HUNTER" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tHUNTER-47", at = { zone = 1537, x = 69.87, y = 82.9, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "HUNTER" }, minLevel = 47,
+        { id = "tHUNTER-46", at = { zone = 1537, x = 69.87, y = 82.9, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "HUNTER" }, minLevel = 46,
           lines = {
-            { kind = "train", level = 47, class = "HUNTER", npc = 5117 },
+            { kind = "train", level = 46, class = "HUNTER", npc = 5117 },
           } },
-        { id = "tHUNTER-47:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "HUNTER" },
+        { id = "tHUNTER-46:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "HUNTER" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
-        { id = "tMAGE-47:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "MAGE" },
+        { id = "tMAGE-46:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "MAGE" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tMAGE-47", at = { zone = 1537, x = 27.16, y = 8.57, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "MAGE" }, minLevel = 47,
+        { id = "tMAGE-46", at = { zone = 1537, x = 27.16, y = 8.57, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "MAGE" }, minLevel = 46,
           lines = {
-            { kind = "train", level = 47, class = "MAGE", npc = 7312 },
+            { kind = "train", level = 46, class = "MAGE", npc = 7312 },
           } },
-        { id = "tMAGE-47:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "MAGE" },
+        { id = "tMAGE-46:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "MAGE" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
-        { id = "tWARRIOR-47:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "WARRIOR" },
+        { id = "tROGUE-46:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "ROGUE" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tWARRIOR-47", at = { zone = 1537, x = 65.9, y = 88.41, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "WARRIOR" }, minLevel = 47,
+        { id = "tROGUE-46", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "ROGUE" }, minLevel = 46,
           lines = {
-            { kind = "train", level = 47, class = "WARRIOR", npc = 5114 },
+            { kind = "train", level = 46, class = "ROGUE", npc = 5167 },
           } },
-        { id = "tWARRIOR-47:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "WARRIOR" },
+        { id = "tROGUE-46:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "ROGUE" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
@@ -4812,15 +4776,18 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 7727, index = 1, npc = 9318 },
           } },
-        { id = "o7729", at = { zone = 51, x = 42.48, y = 39.78, r = 40 }, text = "The Dark Iron Taskmasters are southwest of your last stop.", targets = { enemy = { 5844, 5846 } },
+        { id = "o7729.o7723", at = { zone = 51, x = 42.48, y = 39.78, r = 40 }, text = "The Dark Iron Taskmasters are southwest of your last stop.", targets = { enemy = { 5844, 5846, 5854 } },
           lines = {
             { kind = "objective", quest = 7729, index = 1, npc = 5846 },
             { kind = "objective", quest = 7729, index = 2, npc = 5844 },
+            { kind = "objective", quest = 7723, index = 1, at = { zone = 51, x = 40.83, y = 49.21, r = 40 }, npc = 5854 },
           } },
-        { id = "o3442", at = { zone = 51, x = 45.56, y = 55.14, r = 40 }, text = "Heart of Flame is south of your last stop.", targets = { enemy = { 5854, 5855, 5850, 5852, 5853 } },
+        { id = "o3442.o7728", at = { zone = 51, x = 45.56, y = 55.14, r = 40 }, text = "Heart of Flame is south of your last stop.", targets = { enemy = { 5854, 5840, 8566, 5855, 5850, 5852 } },
           lines = {
             { kind = "objective", quest = 3442, index = 1, item = 10509 },
             { kind = "objective", quest = 3442, index = 2, item = 10511 },
+            { kind = "objective", quest = 7728, index = 1, item = 18959, at = { zone = 51, x = 39.88, y = 50.1, r = 40 } },
+            { kind = "objective", quest = 7728, index = 2, item = 18960, at = { zone = 51, x = 39.88, y = 50.1, r = 40 } },
           } },
         { id = "t3442.a3443.o3443.t3443.a3452", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 40, targets = { enemy = { 5843, 5844, 5846, 8504, 5840, 8566 }, friend = { 8479 } },
           lines = {
@@ -4830,13 +4797,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 3443, npc = 8479 },
             { kind = "accept", quest = 3452, npc = 8479, requires = { 3443 } },
           } },
-        { id = "o7723.o7728", at = { zone = 51, x = 40.83, y = 49.21, r = 40 }, targets = { enemy = { 5840, 5854, 8566 } },
-          lines = {
-            { kind = "objective", quest = 7723, index = 1, npc = 5854 },
-            { kind = "objective", quest = 7728, index = 1, item = 18959 },
-            { kind = "objective", quest = 7728, index = 2, item = 18960 },
-          } },
-        { id = "o7724", at = { zone = 51, x = 29.52, y = 59.19, r = 40 }, text = "The Greater Lava Spiders are southwest of your last stop.", targets = { enemy = { 5858 } },
+        { id = "o7724", at = { zone = 51, x = 29.52, y = 59.19, r = 40 }, text = "The Greater Lava Spiders are southwest of Kalaran Windblade.", targets = { enemy = { 5858 } },
           lines = {
             { kind = "objective", quest = 7724, index = 1, npc = 5858 },
           } },
@@ -4890,18 +4851,6 @@ Noir.Route("alliance-highorder", {
       id = "highorder-48-48-the-hinterlands", name = "48 The Hinterlands", names = { MAGE = "48-49 The Hinterlands", WARRIOR = "48-49 The Hinterlands" }, group = "Alliance", subgroup = "40-50", minLevel = 48, maxLevel = 51, zone = 47,
       next = { { section = "highorder-48-49-blasted-lands" } },
       steps = {
-        { id = "tROGUE-48:go1", at = { zone = 51, x = 37.94, y = 30.86, r = 10 }, text = "Fly from Thorium Point, Searing Gorge to Ironforge, Dun Morogh.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "fly", from = 74, to = 6 },
-          } },
-        { id = "tROGUE-48", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "ROGUE" }, minLevel = 48,
-          lines = {
-            { kind = "train", level = 48, class = "ROGUE", npc = 5167 },
-          } },
-        { id = "tROGUE-48:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Thorium Point, Searing Gorge.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "fly", from = 6, to = 74 },
-          } },
         { id = "y74-14", at = { zone = 51, x = 37.94, y = 30.86, r = 10 }, text = "Fly from Thorium Point, Searing Gorge to Southshore, Hillsbrad.",
           lines = {
             { kind = "fly", from = 74, to = 14 },
@@ -4924,43 +4873,47 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "sethearth", npc = 7744 },
           } },
-        { id = "o2988", at = { zone = 47, x = 23.28, y = 58.81, r = 40 }, text = "First Witherbark Cage is southeast of Innkeeper Thulfram.",
+        { id = "o2988.o2880", at = { zone = 47, x = 23.28, y = 58.81, r = 40 }, text = "First Witherbark Cage is southeast of Innkeeper Thulfram.", targets = { enemy = { 2649, 2650, 2651, 2653, 2652, 8219 } },
           lines = {
             { kind = "objective", quest = 2988, index = 1, object = 144066 },
             { kind = "objective", quest = 2988, index = 2, object = 144067 },
             { kind = "objective", quest = 2988, index = 3, object = 144068 },
-          } },
-        { id = "h#30", text = "Use your hearthstone to return to The Hinterlands.",
-          lines = {
-            { kind = "hearth", to = { zone = 47, x = 14.15, y = 41.57 } },
+            { kind = "objective", quest = 2880, index = 1, item = 9259, at = { zone = 47, x = 23.66, y = 57.4, r = 40 }, skipIfMissing = true },
           } },
         { id = "t2988.a2989", at = { zone = 47, x = 9.75, y = 44.47, r = 10 }, minLevel = 40, targets = { friend = { 5636 } },
           lines = {
             { kind = "turnin", quest = 2988, npc = 5636 },
             { kind = "accept", quest = 2989, npc = 5636, requires = { 2988 } },
           } },
-        { id = "o2880", at = { zone = 47, x = 23.66, y = 57.4, r = 40 }, text = "Troll Tribal Necklace is southeast of Gryphon Master Talonaxe.", targets = { enemy = { 2650, 2649, 2651, 2653, 2652, 8219 } },
-          lines = {
-            { kind = "objective", quest = 2880, index = 1, item = 9259, skipIfMissing = true },
-          } },
         { id = "o2989", at = { zone = 47, x = 48.98, y = 68.66, r = 40 },
           lines = {
             { kind = "objective", quest = 2989, index = 1 },
           } },
-        { id = "o2877", at = { zone = 47, x = 51.72, y = 44.52, r = 40 }, text = "The Green Sludges are north of your last stop.", targets = { enemy = { 2655, 2656 } },
+        { id = "h#24", text = "Use your hearthstone to return to The Hinterlands.",
           lines = {
-            { kind = "objective", quest = 2877, index = 1, npc = 2655, skipIfMissing = true },
-            { kind = "objective", quest = 2877, index = 2, npc = 2656, skipIfMissing = true },
-          } },
-        { id = "t2877.t2880", at = { zone = 47, x = 14.83, y = 44.57, r = 10 }, targets = { friend = { 7884 } },
-          lines = {
-            { kind = "turnin", quest = 2877, npc = 7884, skipIfMissing = true },
-            { kind = "turnin", quest = 2880, npc = 7884, skipIfMissing = true },
+            { kind = "hearth", to = { zone = 47, x = 14.15, y = 41.57 } },
           } },
         { id = "t2989.a2990", at = { zone = 47, x = 9.75, y = 44.47, r = 10 }, minLevel = 40, items = { 9468 }, targets = { friend = { 5636 } },
           lines = {
             { kind = "turnin", quest = 2989, npc = 5636 },
             { kind = "accept", quest = 2990, npc = 5636, requires = { 2989 } },
+          } },
+        { id = "t2880", at = { zone = 47, x = 14.83, y = 44.57, r = 10 }, targets = { friend = { 7884 } },
+          lines = {
+            { kind = "turnin", quest = 2880, npc = 7884, skipIfMissing = true },
+          } },
+        { id = "o2877", at = { zone = 47, x = 51.72, y = 44.52, r = 40 }, text = "The Green Sludges are east of Fraggar Thundermantle.", targets = { enemy = { 2655, 2656 } },
+          lines = {
+            { kind = "objective", quest = 2877, index = 1, npc = 2655, skipIfMissing = true },
+            { kind = "objective", quest = 2877, index = 2, npc = 2656, skipIfMissing = true },
+          } },
+        { id = "tWARRIOR-48", at = { zone = 47, x = 14.4, y = 43, r = 10 }, when = { class = "WARRIOR" }, minLevel = 48,
+          lines = {
+            { kind = "train", level = 48, class = "WARRIOR", npc = 270278 },
+          } },
+        { id = "t2877", at = { zone = 47, x = 14.83, y = 44.57, r = 10 }, targets = { friend = { 7884 } },
+          lines = {
+            { kind = "turnin", quest = 2877, npc = 7884, skipIfMissing = true },
           } },
       },
     },
@@ -4976,11 +4929,15 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 36, x = 12, y = 56.2, r = 20 } },
           } },
-        { id = "tDRUID-48", at = { zone = 36, x = 11.79, y = 56.6, r = 10 }, when = { class = "DRUID" }, minLevel = 48,
+        { id = "tDRUID-46", at = { zone = 36, x = 11.79, y = 56.6, r = 10 }, when = { class = "DRUID" }, minLevel = 46,
           lines = {
-            { kind = "train", level = 48, class = "DRUID", npc = 270459 },
+            { kind = "train", level = 46, class = "DRUID", npc = 270459 },
           } },
-        { id = "x1519#7", at = { zone = 36, x = 12, y = 56.2, r = 15 }, text = "Take the portal from Alterac Mountains to Stormwind City.",
+        { id = "tMAGE-48", at = { zone = 36, x = 17.72, y = 69.55, r = 10 }, when = { class = "MAGE" }, minLevel = 48,
+          lines = {
+            { kind = "train", level = 48, class = "MAGE", npc = 246797 },
+          } },
+        { id = "x1519#6", at = { zone = 36, x = 12, y = 56.2, r = 15 }, text = "Take the portal from Alterac Mountains to Stormwind City.",
           lines = {
             { kind = "transport", to = { zone = 1519, x = 70.5, y = 73.5 }, mode = "portal", at = { zone = 36, x = 12, y = 56.2, r = 15 } },
           } },
@@ -5011,10 +4968,13 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 2585, index = 2, item = 8396, at = { zone = 4, x = 48.72, y = 24.47, r = 40 }, skipIfMissing = true },
             { kind = "objective", quest = 2585, index = 3, item = 8392, at = { zone = 4, x = 48.72, y = 24.47, r = 40 }, skipIfMissing = true },
           } },
-        { id = "o2603", at = { zone = 4, x = 53.9, y = 29.71, r = 40 }, text = "Vulture Gizzard is southeast of your last stop.", targets = { enemy = { 5984, 5982, 5983, 5985, 8300 } },
+        { id = "o2603.o2583", at = { zone = 4, x = 53.9, y = 29.71, r = 40 }, text = "Vulture Gizzard is southeast of your last stop.", targets = { enemy = { 8301, 8303, 5990, 5988, 5984, 5993 } },
           lines = {
             { kind = "objective", quest = 2603, index = 1, item = 8396, skipIfMissing = true },
             { kind = "objective", quest = 2603, index = 2, item = 8391, skipIfMissing = true },
+            { kind = "objective", quest = 2583, index = 1, item = 8392, at = { zone = 4, x = 57.72, y = 29.01, r = 40 }, skipIfMissing = true },
+            { kind = "objective", quest = 2583, index = 2, item = 8393, at = { zone = 4, x = 57.72, y = 29.01, r = 40 }, skipIfMissing = true },
+            { kind = "objective", quest = 2583, index = 3, item = 8394, at = { zone = 4, x = 57.72, y = 29.01, r = 40 }, skipIfMissing = true },
           } },
         { id = "f45", at = { zone = 4, x = 65.54, y = 24.34, r = 10 },
           lines = {
@@ -5023,12 +4983,6 @@ Noir.Route("alliance-highorder", {
         { id = "t2990", at = { zone = 4, x = 66.9, y = 19.47, r = 10 }, items = { 9468 }, targets = { friend = { 8022 } },
           lines = {
             { kind = "turnin", quest = 2990, npc = 8022, skipIfMissing = true },
-          } },
-        { id = "o2583", at = { zone = 4, x = 57.72, y = 29.01, r = 40 }, text = "Blasted Boar Lung is southwest of Thadius Grimshade.", targets = { enemy = { 8303, 5992, 8301, 5990, 5988, 5993 } },
-          lines = {
-            { kind = "objective", quest = 2583, index = 1, item = 8392, skipIfMissing = true },
-            { kind = "objective", quest = 2583, index = 2, item = 8393, skipIfMissing = true },
-            { kind = "objective", quest = 2583, index = 3, item = 8394, skipIfMissing = true },
           } },
         { id = "t2601.t2603.t2581.t2583.t2585", at = { zone = 4, x = 50.64, y = 14.3, r = 10 }, targets = { friend = { 7506, 7505 } },
           lines = {
@@ -5044,9 +4998,13 @@ Noir.Route("alliance-highorder", {
       id = "highorder-49-50-un-goro-crater", name = "49-50 Un'Goro Crater", group = "Alliance", subgroup = "40-50", minLevel = 49, maxLevel = 53, zone = 490,
       next = { { section = "highorder-50-50-un-goro-crater" } },
       steps = {
-        { id = "h#31", text = "Use your hearthstone to return to The Hinterlands.",
+        { id = "h#25", text = "Use your hearthstone to return to The Hinterlands.",
           lines = {
             { kind = "hearth", to = { zone = 47, x = 14.15, y = 41.57 } },
+          } },
+        { id = "tHUNTER-48", at = { zone = 47, x = 14.6, y = 43, r = 10 }, when = { class = "HUNTER" }, minLevel = 48,
+          lines = {
+            { kind = "train", level = 48, class = "HUNTER", npc = 270280 },
           } },
         { id = "y43-7", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, text = "Fly from Aerie Peak, The Hinterlands to Menethil Harbor, Wetlands.",
           lines = {
@@ -5117,14 +5075,14 @@ Noir.Route("alliance-highorder", {
       },
     },
     {
-      id = "highorder-50-50-un-goro-crater", name = "50 Un'Goro Crater", names = { MAGE = "50-51 Un'Goro Crater" }, group = "Alliance", subgroup = "50-60", minLevel = 50, maxLevel = 53, zone = 490,
+      id = "highorder-50-50-un-goro-crater", name = "50 Un'Goro Crater", group = "Alliance", subgroup = "50-60", minLevel = 50, maxLevel = 53, zone = 490,
       next = { { section = "highorder-50-51-felwood" } },
       steps = {
-        { id = "t3882.a3881.t3883.a4492", at = { zone = 490, x = 43.5, y = 7.42, r = 10 }, minLevel = 50, items = { 11132, 15722 }, targets = { friend = { 9272, 9270, 9271, 9997 } },
+        { id = "t3882.t3883.a3881.a4492", at = { zone = 490, x = 43.5, y = 7.42, r = 10 }, minLevel = 50, items = { 11132, 15722 }, targets = { friend = { 9272, 9271, 9270, 9997 } },
           lines = {
             { kind = "turnin", quest = 3882, npc = 9272, skipIfMissing = true },
-            { kind = "accept", quest = 3881, npc = 9270 },
             { kind = "turnin", quest = 3883, npc = 9271, skipIfMissing = true },
+            { kind = "accept", quest = 3881, npc = 9270 },
             { kind = "accept", quest = 4492, npc = 9997 },
           } },
         { id = "a4284", at = { zone = 490, x = 41.92, y = 2.7, r = 10 }, minLevel = 47, maxLevel = 60, targets = { friend = { 9117 } },
@@ -5224,36 +5182,16 @@ Noir.Route("alliance-highorder", {
       },
     },
     {
-      id = "highorder-50-51-felwood", name = "50-51 Felwood", names = { MAGE = "51 Felwood" }, group = "Alliance", subgroup = "50-60", minLevel = 50, maxLevel = 54, zone = 361,
+      id = "highorder-50-51-felwood", name = "50-51 Felwood", group = "Alliance", subgroup = "50-60", minLevel = 50, maxLevel = 54, zone = 361,
       next = { { section = "highorder-51-51-azshara" } },
       steps = {
-        { id = "h#32", text = "Use your hearthstone to return to The Hinterlands.",
+        { id = "h#26", text = "Use your hearthstone to return to The Hinterlands.",
           lines = {
             { kind = "hearth", to = { zone = 47, x = 14.15, y = 41.57 } },
-          } },
-        { id = "tHUNTER-50", at = { zone = 47, x = 14.6, y = 43, r = 10 }, when = { class = "HUNTER" }, minLevel = 50,
-          lines = {
-            { kind = "train", level = 50, class = "HUNTER", npc = 270280 },
-          } },
-        { id = "tWARRIOR-50", at = { zone = 47, x = 14.4, y = 43, r = 10 }, when = { class = "WARRIOR" }, minLevel = 50,
-          lines = {
-            { kind = "train", level = 50, class = "WARRIOR", npc = 270278 },
           } },
         { id = "y43-7#2", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, text = "Fly from Aerie Peak, The Hinterlands to Menethil Harbor, Wetlands.",
           lines = {
             { kind = "fly", from = 43, to = 7 },
-          } },
-        { id = "tMAGE-51:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "MAGE" },
-          lines = {
-            { kind = "fly", from = 7, to = 6 },
-          } },
-        { id = "tMAGE-51", at = { zone = 1537, x = 27.16, y = 8.57, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "MAGE" }, minLevel = 51,
-          lines = {
-            { kind = "train", level = 51, class = "MAGE", npc = 7312 },
-          } },
-        { id = "tMAGE-51:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "MAGE" },
-          lines = {
-            { kind = "fly", from = 6, to = 7 },
           } },
         { id = "x148#2", at = { zone = 11, x = 4.5, y = 56.6, r = 15 }, text = "Take the boat from Wetlands to Darkshore.",
           lines = {
@@ -5281,17 +5219,17 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 8460, index = 2, npc = 7155, skipIfMissing = true },
             { kind = "objective", quest = 8460, index = 3, npc = 7154, skipIfMissing = true },
           } },
-        { id = "o5155", at = { zone = 361, x = 37.18, y = 60.76, r = 40 }, text = "The Jaedenar Hounds are northwest of your last stop.", targets = { enemy = { 7113, 7115, 7112, 7125 } },
+        { id = "t8460.a8462", at = { zone = 361, x = 50.93, y = 85.01, r = 10 }, minLevel = 45, targets = { friend = { 11554 } },
+          lines = {
+            { kind = "turnin", quest = 8460, npc = 11554, skipIfMissing = true },
+            { kind = "accept", quest = 8462, npc = 11554, ifDone = 8460, requires = { 8460 } },
+          } },
+        { id = "o5155", at = { zone = 361, x = 37.18, y = 60.76, r = 40 }, text = "The Jaedenar Hounds are northwest of Grazle.", targets = { enemy = { 7113, 7115, 7112, 7125 } },
           lines = {
             { kind = "objective", quest = 5155, index = 1, npc = 7125, skipIfMissing = true },
             { kind = "objective", quest = 5155, index = 2, npc = 7113, skipIfMissing = true },
             { kind = "objective", quest = 5155, index = 3, npc = 7115, skipIfMissing = true },
             { kind = "objective", quest = 5155, index = 4, npc = 7112, skipIfMissing = true },
-          } },
-        { id = "t8460.a8462", at = { zone = 361, x = 50.93, y = 85.01, r = 10 }, minLevel = 45, targets = { friend = { 11554 } },
-          lines = {
-            { kind = "turnin", quest = 8460, npc = 11554, skipIfMissing = true },
-            { kind = "accept", quest = 8462, npc = 11554, ifDone = 8460, requires = { 8460 } },
           } },
         { id = "t5155.a5157", at = { zone = 361, x = 51.21, y = 82.11, r = 10 }, minLevel = 48, items = { 12922 }, targets = { friend = { 10922 } },
           lines = {
@@ -5341,6 +5279,10 @@ Noir.Route("alliance-highorder", {
         { id = "tDRUID-50", at = { zone = 361, x = 61.93, y = 24.54, r = 10 }, when = { class = "DRUID" }, minLevel = 50,
           lines = {
             { kind = "train", level = 50, class = "DRUID", npc = 9465 },
+          } },
+        { id = "tHUNTER-50", at = { zone = 361, x = 61.89, y = 23.58, r = 10 }, when = { class = "HUNTER" }, minLevel = 50,
+          lines = {
+            { kind = "train", level = 50, class = "HUNTER", npc = 5501 },
           } },
         { id = "f65", at = { zone = 361, x = 62.49, y = 24.24, r = 10 },
           lines = {
@@ -5399,23 +5341,6 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 8251, npc = 8379 },
           } },
-        { id = "o8251", at = { zone = 16, x = 57.05, y = 28.38, r = 40 }, text = "Glittering Dust is southeast of Kim'jael.", when = { class = "MAGE" }, targets = { enemy = { 6198, 6199, 8581, 246920, 250448, 259620 } },
-          lines = {
-            { kind = "objective", quest = 8251, index = 1, item = 20028, skipIfMissing = true },
-          } },
-        { id = "t8251.a8252", at = { zone = 16, x = 29.25, y = 40.21, r = 10 }, when = { class = "MAGE" }, minLevel = 50, targets = { friend = { 8379 } },
-          lines = {
-            { kind = "turnin", quest = 8251, npc = 8379, skipIfMissing = true },
-            { kind = "accept", quest = 8252, npc = 8379, ifDone = 8251, requires = { 8251 } },
-          } },
-        { id = "o8252", at = { zone = 16, x = 43.33, y = 54.21, r = 40 }, text = "Enchanted Coral is southwest of Kim'jael.", when = { class = "MAGE" }, targets = { enemy = { 6195 } },
-          lines = {
-            { kind = "objective", quest = 8252, index = 1, item = 20029, skipIfMissing = true },
-          } },
-        { id = "t8252", at = { zone = 16, x = 29.25, y = 40.21, r = 10 }, when = { class = "MAGE" }, targets = { friend = { 8379 } },
-          lines = {
-            { kind = "turnin", quest = 8252, npc = 8379, skipIfMissing = true },
-          } },
         { id = "o5536", at = { zone = 16, x = 20.31, y = 61.77, r = 40 }, text = "The Haldarr Satyrs are southwest of Kim'jael.", targets = { enemy = { 6126, 6127, 6125 } },
           lines = {
             { kind = "objective", quest = 5536, index = 1, npc = 6125 },
@@ -5427,25 +5352,25 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 5535, npc = 11548 },
             { kind = "turnin", quest = 5536, npc = 11548 },
           } },
-        { id = "h#33", text = "Use your hearthstone to return to The Hinterlands.",
+        { id = "y64-27", at = { zone = 16, x = 11.9, y = 77.59, r = 10 }, text = "Fly from Talrendis Point, Azshara to Rut'theran Village, Teldrassil.", when = { class = "DRUID" },
           lines = {
-            { kind = "hearth", to = { zone = 47, x = 14.15, y = 41.57 } },
+            { kind = "fly", from = 64, to = 27 },
           } },
-        { id = "tWARRIOR-52", at = { zone = 47, x = 14.4, y = 43, r = 10 }, when = { class = "WARRIOR" }, minLevel = 52,
+        { id = "a9063", at = { zone = 1657, x = 35.37, y = 8.4, r = 10 }, when = { class = "DRUID" }, minLevel = 50, maxLevel = 60, targets = { friend = { 4217 } },
           lines = {
-            { kind = "train", level = 52, class = "WARRIOR", npc = 270278 },
+            { kind = "accept", quest = 9063, npc = 4217 },
           } },
-        { id = "y43-74", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, text = "Fly from Aerie Peak, The Hinterlands to Thorium Point, Searing Gorge.",
+        { id = "y64-26", at = { zone = 16, x = 11.9, y = 77.59, r = 10 }, text = "Fly from Talrendis Point, Azshara to Auberdine, Darkshore.", when = { class = "HUNTER" },
           lines = {
-            { kind = "fly", from = 43, to = 74 },
+            { kind = "fly", from = 64, to = 26 },
           } },
-        { id = "y74-6", at = { zone = 51, x = 37.94, y = 30.86, r = 10 }, text = "Fly from Thorium Point, Searing Gorge to Ironforge, Dun Morogh.", when = { class = "WARRIOR" },
+        { id = "x141#5", at = { zone = 148, x = 33.3, y = 39.8, r = 15 }, text = "Take the boat from Darkshore to Teldrassil.", when = { class = "HUNTER" },
           lines = {
-            { kind = "fly", from = 74, to = 6 },
+            { kind = "transport", to = { zone = 141, x = 54.8, y = 97.2 }, mode = "boat", at = { zone = 148, x = 33.3, y = 39.8, r = 15 } },
           } },
-        { id = "a8417", at = { zone = 1537, x = 70.34, y = 90.65, r = 10 }, when = { class = "WARRIOR" }, minLevel = 50, maxLevel = 58, targets = { friend = { 5113 } },
+        { id = "a8151", at = { zone = 1657, x = 42.21, y = 7.27, r = 10 }, when = { class = "HUNTER" }, minLevel = 50, maxLevel = 60, targets = { friend = { 4205 } },
           lines = {
-            { kind = "accept", quest = 8417, npc = 5113 },
+            { kind = "accept", quest = 8151, npc = 4205 },
           } },
       },
     },
@@ -5453,9 +5378,17 @@ Noir.Route("alliance-highorder", {
       id = "highorder-51-52-burning-steppes", name = "51-52 Burning Steppes", names = { MAGE = "52 Burning Steppes", WARRIOR = "52 Burning Steppes" }, group = "Alliance", subgroup = "50-60", minLevel = 51, maxLevel = 55, zone = 46,
       next = { { section = "highorder-52-53-western-plaguelands" } },
       steps = {
-        { id = "y6-74", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Thorium Point, Searing Gorge.", when = { class = "WARRIOR" },
+        { id = "h#27", text = "Use your hearthstone to return to The Hinterlands.",
           lines = {
-            { kind = "fly", from = 6, to = 74 },
+            { kind = "hearth", to = { zone = 47, x = 14.15, y = 41.57 } },
+          } },
+        { id = "tWARRIOR-50", at = { zone = 47, x = 14.4, y = 43, r = 10 }, when = { class = "WARRIOR" }, minLevel = 50,
+          lines = {
+            { kind = "train", level = 50, class = "WARRIOR", npc = 270278 },
+          } },
+        { id = "y43-74", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, text = "Fly from Aerie Peak, The Hinterlands to Thorium Point, Searing Gorge.",
+          lines = {
+            { kind = "fly", from = 43, to = 74 },
           } },
         { id = "g46@46", at = { zone = 46, x = 65.15, y = 23.91, r = 20 }, text = "Head south into Burning Steppes.",
           lines = {
@@ -5530,22 +5463,17 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 3825, npc = 9177 },
           } },
-        { id = "y71-45", at = { zone = 46, x = 84.33, y = 68.33, r = 10 }, text = "Fly from Morgan's Vigil, Burning Steppes to Nethergarde Keep, Blasted Lands.", when = { class = "WARRIOR" },
+        { id = "y71-6", at = { zone = 46, x = 84.33, y = 68.33, r = 10 }, text = "Fly from Morgan's Vigil, Burning Steppes to Ironforge, Dun Morogh.", when = { class = "WARRIOR" },
           lines = {
-            { kind = "fly", from = 71, to = 45 },
+            { kind = "fly", from = 71, to = 6 },
           } },
-        { id = "t8417.a8423", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, when = { class = "WARRIOR" }, minLevel = 50, targets = { friend = { 7572 } },
+        { id = "a8417", at = { zone = 1537, x = 70.34, y = 90.65, r = 10 }, when = { class = "WARRIOR" }, minLevel = 50, maxLevel = 58, targets = { friend = { 5113 } },
           lines = {
-            { kind = "turnin", quest = 8417, npc = 7572, skipIfMissing = true },
-            { kind = "accept", quest = 8423, npc = 7572 },
+            { kind = "accept", quest = 8417, npc = 5113 },
           } },
-        { id = "h#34", text = "Use your hearthstone to return to The Hinterlands.",
+        { id = "h#28", text = "Use your hearthstone to return to The Hinterlands.",
           lines = {
             { kind = "hearth", to = { zone = 47, x = 14.15, y = 41.57 } },
-          } },
-        { id = "tHUNTER-52", at = { zone = 47, x = 14.6, y = 43, r = 10 }, when = { class = "HUNTER" }, minLevel = 52,
-          lines = {
-            { kind = "train", level = 52, class = "HUNTER", npc = 270280 },
           } },
         { id = "y43-14#2", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, text = "Fly from Aerie Peak, The Hinterlands to Southshore, Hillsbrad.",
           lines = {
@@ -5565,7 +5493,7 @@ Noir.Route("alliance-highorder", {
       id = "highorder-52-53-western-plaguelands", name = "52-53 Western Plaguelands", group = "Alliance", subgroup = "50-60", minLevel = 52, maxLevel = 56, zone = 28,
       next = { { section = "highorder-53-53-un-goro-crater" } },
       steps = {
-        { id = "g28@28#3", at = { zone = 28, x = 42.92, y = 85.06, r = 20 }, text = "Head northwest into Western Plaguelands.",
+        { id = "g28@28#2", at = { zone = 28, x = 42.92, y = 85.06, r = 20 }, text = "Head northwest into Western Plaguelands.",
           lines = {
             { kind = "goto", at = { zone = 28, x = 42.92, y = 85.06, r = 20 } },
           } },
@@ -5716,26 +5644,46 @@ Noir.Route("alliance-highorder", {
       },
     },
     {
-      id = "highorder-53-53-un-goro-crater", name = "53 Un'Goro Crater", names = { DRUID = "53-54 Un'Goro Crater", MAGE = "53-54 Un'Goro Crater", ROGUE = "53-54 Un'Goro Crater", WARRIOR = "53-54 Un'Goro Crater" }, group = "Alliance", subgroup = "50-60", minLevel = 53, maxLevel = 56, zone = 490,
+      id = "highorder-53-53-un-goro-crater", name = "53 Un'Goro Crater", names = { DRUID = "53-54 Un'Goro Crater", MAGE = "53-54 Un'Goro Crater", WARRIOR = "53-54 Un'Goro Crater" }, group = "Alliance", subgroup = "50-60", minLevel = 53, maxLevel = 56, zone = 490,
       next = { { section = "highorder-53-54-eastern-plaguelands" } },
       steps = {
-        { id = "h#35", text = "Use your hearthstone to return to The Hinterlands.",
+        { id = "h#29", text = "Use your hearthstone to return to The Hinterlands.",
           lines = {
             { kind = "hearth", to = { zone = 47, x = 14.15, y = 41.57 } },
+          } },
+        { id = "tHUNTER-52", at = { zone = 47, x = 14.6, y = 43, r = 10 }, when = { class = "HUNTER" }, minLevel = 52,
+          lines = {
+            { kind = "train", level = 52, class = "HUNTER", npc = 270280 },
+          } },
+        { id = "tWARRIOR-52", at = { zone = 47, x = 14.4, y = 43, r = 10 }, when = { class = "WARRIOR" }, minLevel = 52,
+          lines = {
+            { kind = "train", level = 52, class = "WARRIOR", npc = 270278 },
           } },
         { id = "y43-7#3", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, text = "Fly from Aerie Peak, The Hinterlands to Menethil Harbor, Wetlands.",
           lines = {
             { kind = "fly", from = 43, to = 7 },
           } },
-        { id = "tROGUE-53:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "ROGUE" },
+        { id = "tMAGE-52:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "MAGE" },
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "tROGUE-53", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "ROGUE" }, minLevel = 53,
+        { id = "tMAGE-52", at = { zone = 1537, x = 27.16, y = 8.57, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "MAGE" }, minLevel = 52,
           lines = {
-            { kind = "train", level = 53, class = "ROGUE", npc = 5167 },
+            { kind = "train", level = 52, class = "MAGE", npc = 7312 },
           } },
-        { id = "tROGUE-53:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "ROGUE" },
+        { id = "tMAGE-52:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "MAGE" },
+          lines = {
+            { kind = "fly", from = 6, to = 7 },
+          } },
+        { id = "tROGUE-52:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 7, to = 6 },
+          } },
+        { id = "tROGUE-52", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "ROGUE" }, minLevel = 52,
+          lines = {
+            { kind = "train", level = 52, class = "ROGUE", npc = 5167 },
+          } },
+        { id = "tROGUE-52:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "ROGUE" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
           } },
@@ -5769,9 +5717,10 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 4501, index = 1, npc = 9166, skipIfMissing = true },
             { kind = "objective", quest = 4501, index = 2, npc = 9167, skipIfMissing = true },
           } },
-        { id = "t9052.a9051", at = { zone = 490, x = 71.64, y = 75.96, r = 10 }, when = { class = "DRUID" }, minLevel = 50, items = { 22432 }, targets = { friend = { 9619 } },
+        { id = "t9052.t9063.a9051", at = { zone = 490, x = 71.64, y = 75.96, r = 10 }, when = { class = "DRUID" }, minLevel = 50, items = { 22432 }, targets = { friend = { 9619 } },
           lines = {
             { kind = "turnin", quest = 9052, npc = 9619, skipIfMissing = true },
+            { kind = "turnin", quest = 9063, npc = 9619, skipIfMissing = true },
             { kind = "accept", quest = 9051, npc = 9619, ifDone = 9052, requires = { 9052 } },
           } },
         { id = "a4289.a4292", at = { zone = 490, x = 71.64, y = 75.96, r = 10 }, minLevel = 48, maxLevel = 60, items = { 11568, 11569, 11570 }, targets = { friend = { 9619 } },
@@ -5818,16 +5767,12 @@ Noir.Route("alliance-highorder", {
       },
     },
     {
-      id = "highorder-53-54-eastern-plaguelands", name = "53-54 Eastern Plaguelands", names = { DRUID = "54 Eastern Plaguelands", MAGE = "54 Eastern Plaguelands", ROGUE = "54 Eastern Plaguelands", WARRIOR = "54 Eastern Plaguelands" }, group = "Alliance", subgroup = "50-60", minLevel = 53, maxLevel = 57, zone = 139,
-      next = { { section = "highorder-54-54-felwood" } },
+      id = "highorder-53-54-eastern-plaguelands", name = "53-54 Eastern Plaguelands", names = { DRUID = "54-55 Eastern Plaguelands", HUNTER = "53-55 Eastern Plaguelands", MAGE = "54-55 Eastern Plaguelands", WARRIOR = "54 Eastern Plaguelands" }, group = "Alliance", subgroup = "50-60", minLevel = 53, maxLevel = 57, zone = 139,
+      next = { { section = "highorder-54-55-silithus" } },
       steps = {
-        { id = "h#36", text = "Use your hearthstone to return to The Hinterlands.",
+        { id = "h#30", text = "Use your hearthstone to return to The Hinterlands.",
           lines = {
             { kind = "hearth", to = { zone = 47, x = 14.15, y = 41.57 } },
-          } },
-        { id = "tWARRIOR-54", at = { zone = 47, x = 14.4, y = 43, r = 10 }, when = { class = "WARRIOR" }, minLevel = 54,
-          lines = {
-            { kind = "train", level = 54, class = "WARRIOR", npc = 270278 },
           } },
         { id = "y43-66", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, text = "Fly from Aerie Peak, The Hinterlands to Chillwind Camp, Western Plaguelands.",
           lines = {
@@ -5918,13 +5863,9 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 5781, npc = 1855, skipIfMissing = true },
           } },
-        { id = "h#37", text = "Use your hearthstone to return to The Hinterlands.",
+        { id = "h#31", text = "Use your hearthstone to return to The Hinterlands.",
           lines = {
             { kind = "hearth", to = { zone = 47, x = 14.15, y = 41.57 } },
-          } },
-        { id = "tHUNTER-54", at = { zone = 47, x = 14.6, y = 43, r = 10 }, when = { class = "HUNTER" }, minLevel = 54,
-          lines = {
-            { kind = "train", level = 54, class = "HUNTER", npc = 270280 },
           } },
         { id = "y43-67", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, text = "Fly from Aerie Peak, The Hinterlands to Light's Hope Chapel, Eastern Plaguelands.",
           lines = {
@@ -5938,12 +5879,6 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 6021, npc = 11038, skipIfMissing = true },
           } },
-      },
-    },
-    {
-      id = "highorder-54-54-felwood", name = "54 Felwood", names = { MAGE = "54-55 Felwood", WARRIOR = "54-55 Felwood" }, group = "Alliance", subgroup = "50-60", minLevel = 54, maxLevel = 57, zone = 361,
-      next = { { section = "highorder-54-55-western-plaguelands" } },
-      steps = {
         { id = "y67-7", at = { zone = 139, x = 71.81, y = 49.6, r = 10 }, text = "Fly from Light's Hope Chapel, Eastern Plaguelands to Menethil Harbor, Wetlands.",
           lines = {
             { kind = "fly", from = 67, to = 7 },
@@ -5971,6 +5906,10 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 8461, npc = 15395, skipIfMissing = true },
             { kind = "accept", quest = 8465, npc = 15395, ifDone = 8461, requires = { 8461 } },
           } },
+        { id = "t8465", at = { zone = 618, x = 27.73, y = 34.5, r = 10 }, targets = { friend = { 11556 } },
+          lines = {
+            { kind = "turnin", quest = 8465, npc = 11556, skipIfMissing = true },
+          } },
         { id = "a5249", at = { zone = 361, x = 50.96, y = 81.58, r = 10 }, minLevel = 53, maxLevel = 60, targets = { friend = { 10924 } },
           lines = {
             { kind = "accept", quest = 5249, npc = 10924 },
@@ -5979,9 +5918,9 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 4101, npc = 9528 },
           } },
-        { id = "tDRUID-54", at = { zone = 361, x = 61.93, y = 24.54, r = 10 }, when = { class = "DRUID" }, minLevel = 54,
+        { id = "tDRUID-52", at = { zone = 361, x = 61.93, y = 24.54, r = 10 }, when = { class = "DRUID" }, minLevel = 52,
           lines = {
-            { kind = "train", level = 54, class = "DRUID", npc = 9465 },
+            { kind = "train", level = 52, class = "DRUID", npc = 9465 },
           } },
         { id = "o4101", at = { zone = 361, x = 58.32, y = 20.01, r = 40 }, text = "Blood Amber is north of Arathandris Silversky.", targets = { enemy = { 7100, 7101, 7104 } },
           lines = {
@@ -6000,48 +5939,183 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 5882, npc = 9528, skipIfMissing = true },
           } },
+        { id = "t8151.a8153", at = { zone = 16, x = 42.4, y = 42.62, r = 10 }, when = { class = "HUNTER" }, minLevel = 50, targets = { friend = { 8405 } },
+          lines = {
+            { kind = "turnin", quest = 8151, npc = 8405, skipIfMissing = true },
+            { kind = "accept", quest = 8153, npc = 8405, ifDone = 8151, requires = { 8151 } },
+          } },
+        { id = "o8153", at = { zone = 16, x = 54.42, y = 52.79, r = 40 }, text = "Perfect Courser Antler is east of Arathandris Silversky.", when = { class = "HUNTER" }, targets = { enemy = { 8761 } },
+          lines = {
+            { kind = "objective", quest = 8153, index = 1, item = 20017, skipIfMissing = true },
+          } },
+        { id = "t8153.a8231", at = { zone = 16, x = 42.4, y = 42.62, r = 10 }, when = { class = "HUNTER" }, minLevel = 50, targets = { friend = { 8405 } },
+          lines = {
+            { kind = "turnin", quest = 8153, npc = 8405, skipIfMissing = true },
+            { kind = "accept", quest = 8231, npc = 8405, ifDone = 8153, requires = { 8153 } },
+          } },
+        { id = "o8231", at = { zone = 16, x = 67.53, y = 87.48, r = 40 }, text = "Wavethrasher Scales are east of Arathandris Silversky.", when = { class = "HUNTER" }, targets = { enemy = { 6349, 6348, 6347 } },
+          lines = {
+            { kind = "objective", quest = 8231, index = 1, item = 20087, skipIfMissing = true },
+          } },
+        { id = "t8231", at = { zone = 16, x = 42.4, y = 42.62, r = 10 }, when = { class = "HUNTER" }, targets = { friend = { 8405 } },
+          lines = {
+            { kind = "turnin", quest = 8231, npc = 8405, skipIfMissing = true },
+          } },
       },
     },
     {
-      id = "highorder-54-55-western-plaguelands", name = "54-55 Western Plaguelands", names = { MAGE = "55 Western Plaguelands", WARRIOR = "55 Western Plaguelands" }, group = "Alliance", subgroup = "50-60", minLevel = 54, maxLevel = 58, zone = 28,
-      next = { { section = "highorder-55-56-winterspring" } },
+      id = "highorder-54-55-silithus", name = "54-55 Silithus", names = { DRUID = "55 Silithus", HUNTER = "55 Silithus", MAGE = "55 Silithus" }, group = "Alliance", subgroup = "50-60", minLevel = 54, maxLevel = 58, zone = 1377,
+      next = { { section = "highorder-55-56-western-plaguelands" } },
       steps = {
-        { id = "g331@331#2", at = { zone = 331, x = 34.41, y = 47.99, r = 20 }, text = "Head southwest into Ashenvale.",
+        { id = "g16@16#2", at = { zone = 16, x = 11.9, y = 77.59, r = 20 }, text = "Head southeast into Azshara.",
           lines = {
-            { kind = "goto", at = { zone = 331, x = 34.41, y = 47.99, r = 20 } },
+            { kind = "goto", at = { zone = 16, x = 11.9, y = 77.59, r = 20 } },
           } },
-        { id = "y28-26#2", at = { zone = 331, x = 34.41, y = 47.99, r = 10 }, text = "Fly from Astranaar, Ashenvale to Auberdine, Darkshore.",
+        { id = "y64-79", at = { zone = 16, x = 11.9, y = 77.59, r = 10 }, text = "Fly from Talrendis Point, Azshara to Marshal's Refuge, Un'Goro Crater.",
           lines = {
-            { kind = "fly", from = 28, to = 26 },
+            { kind = "fly", from = 64, to = 79 },
           } },
-        { id = "x11#5", at = { zone = 148, x = 32.3, y = 44.1, r = 15 }, text = "Take the boat from Darkshore to Wetlands.",
+        { id = "g1377@1377", at = { zone = 1377, x = 50.58, y = 34.45, r = 20 }, text = "Head southwest into Silithus.",
           lines = {
-            { kind = "transport", to = { zone = 11, x = 4.5, y = 56.6 }, mode = "boat", at = { zone = 148, x = 32.3, y = 44.1, r = 15 } },
+            { kind = "goto", at = { zone = 1377, x = 50.58, y = 34.45, r = 20 } },
           } },
-        { id = "tMAGE-55:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "MAGE" },
+        { id = "f73", at = { zone = 1377, x = 50.58, y = 34.45, r = 10 },
           lines = {
-            { kind = "fly", from = 7, to = 6 },
+            { kind = "getflight", node = 73, npc = 15177 },
           } },
-        { id = "tMAGE-55", at = { zone = 1537, x = 27.16, y = 8.57, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "MAGE" }, minLevel = 55,
+        { id = "a8277.a8280", at = { zone = 1377, x = 51.61, y = 38.63, r = 10 }, minLevel = 54, maxLevel = 60, targets = { friend = { 15189, 15191 } },
           lines = {
-            { kind = "train", level = 55, class = "MAGE", npc = 7312 },
+            { kind = "accept", quest = 8277, npc = 15189 },
+            { kind = "accept", quest = 8280, npc = 15191 },
           } },
-        { id = "tMAGE-55:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "MAGE" },
+        { id = "a8859.a9415", at = { zone = 1377, x = 49.47, y = 37.3, r = 10 }, minLevel = 51, maxLevel = 60, items = { 21533 }, targets = { friend = { 15797, 17082 } },
           lines = {
-            { kind = "fly", from = 6, to = 7 },
+            { kind = "accept", quest = 8859, npc = 15797 },
+            { kind = "accept", quest = 9415, at = { zone = 1377, x = 50.68, y = 34.71, r = 10 }, npc = 17082 },
           } },
-        { id = "y7-66", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Chillwind Camp, Western Plaguelands.",
+        { id = "o8277.o8280", at = { zone = 1377, x = 55.97, y = 28.67, r = 40 }, text = "Stonelash Scorpid Stinger is northeast of Colossus Researcher Sophia.", targets = { enemy = { 11740, 11738, 11735 } },
           lines = {
-            { kind = "fly", from = 7, to = 66 },
+            { kind = "objective", quest = 8277, index = 1, item = 20373, skipIfMissing = true },
+            { kind = "objective", quest = 8277, index = 2, item = 20376, skipIfMissing = true },
+            { kind = "objective", quest = 8280, index = 1, at = { zone = 1377, x = 54.39, y = 28.15, r = 40 }, npc = 11740, skipIfMissing = true },
           } },
-        { id = "t5903.a5904", at = { zone = 28, x = 43.42, y = 84.83, r = 10 }, minLevel = 48, items = { 15042, 15044 }, targets = { friend = { 11616 } },
+        { id = "t8280.a8281.t8277.a8278.a8284.b@1377", at = { zone = 1377, x = 51.15, y = 38.29, r = 10 }, minLevel = 54, targets = { friend = { 15191, 15189, 15183 } },
+          lines = {
+            { kind = "turnin", quest = 8280, npc = 15191, skipIfMissing = true },
+            { kind = "accept", quest = 8281, npc = 15191, ifDone = 8280, requires = { 8280 } },
+            { kind = "turnin", quest = 8277, npc = 15189, skipIfMissing = true },
+            { kind = "accept", quest = 8278, npc = 15189, ifDone = 8277, requires = { 8277 } },
+            { kind = "accept", quest = 8284, at = { zone = 1377, x = 49.67, y = 37.46, r = 10 }, npc = 15183 },
+            { kind = "sethearth", at = { zone = 1377, x = 51.89, y = 39.16, r = 10 }, npc = 15174 },
+          } },
+        { id = "o8278", at = { zone = 1377, x = 40.11, y = 77.92, r = 40 }, text = "Stonelash Flayer Stinger is southwest of Windcaller Proudhorn.", targets = { enemy = { 11739, 11737, 11736 } },
+          lines = {
+            { kind = "objective", quest = 8278, index = 1, item = 20375, skipIfMissing = true },
+            { kind = "objective", quest = 8278, index = 2, item = 20374, skipIfMissing = true },
+            { kind = "objective", quest = 8278, index = 3, item = 20377, skipIfMissing = true },
+          } },
+        { id = "o8281", at = { zone = 1377, x = 39.14, y = 51.33, r = 40 }, text = "The Dredge Crushers are north of your last stop.", targets = { enemy = { 11741 } },
+          lines = {
+            { kind = "objective", quest = 8281, index = 1, npc = 11741, skipIfMissing = true },
+          } },
+        { id = "t9415", at = { zone = 1377, x = 33.29, y = 51.06, r = 10 }, targets = { friend = { 17080 } },
+          lines = {
+            { kind = "turnin", quest = 9415, npc = 17080, skipIfMissing = true },
+          } },
+        { id = "o8284", at = { zone = 1377, x = 23.03, y = 12.64, r = 40 }, text = "Twilight Tablet Fragment is north of Marshal Bluewall.",
+          lines = {
+            { kind = "objective", quest = 8284, index = 1, item = 20378 },
+          } },
+        { id = "h#32", text = "Use your hearthstone to return to Silithus.",
+          lines = {
+            { kind = "hearth", to = { zone = 1377, x = 51.89, y = 39.16 } },
+          } },
+        { id = "t8278.a8282.t8281.t8284.a8285", at = { zone = 1377, x = 51.61, y = 38.63, r = 10 }, minLevel = 54, items = { 20401 }, targets = { friend = { 15189, 15190, 15191, 15183 } },
+          lines = {
+            { kind = "turnin", quest = 8278, npc = 15189, skipIfMissing = true },
+            { kind = "accept", quest = 8282, npc = 15190, ifDone = 8278, requires = { 8278 } },
+            { kind = "turnin", quest = 8281, npc = 15191, skipIfMissing = true },
+            { kind = "turnin", quest = 8284, at = { zone = 1377, x = 49.67, y = 37.46, r = 10 }, npc = 15183 },
+            { kind = "accept", quest = 8285, at = { zone = 1377, x = 49.67, y = 37.46, r = 10 }, npc = 15183, requires = { 8284 } },
+          } },
+        { id = "t8285", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, items = { 20401 }, targets = { friend = { 15194 } },
+          lines = {
+            { kind = "turnin", quest = 8285, npc = 15194 },
+          } },
+        { id = "o8282", at = { zone = 1377, x = 44.56, y = 91.38, r = 40 }, text = "Noggle's Satchel is southwest of Hermit Ortell.",
+          lines = {
+            { kind = "objective", quest = 8282, index = 1, item = 20379, skipIfMissing = true },
+          } },
+        { id = "t8282", at = { zone = 1377, x = 51.63, y = 38.5, r = 10 }, targets = { friend = { 15190 } },
+          lines = {
+            { kind = "turnin", quest = 8282, npc = 15190, skipIfMissing = true },
+          } },
+        { id = "y73-80", at = { zone = 1377, x = 50.58, y = 34.45, r = 10 }, text = "Fly from Cenarion Hold, Silithus to Ratchet, The Barrens.",
+          lines = {
+            { kind = "fly", from = 73, to = 80 },
+          } },
+        { id = "x33#3", at = { zone = 17, x = 63.8, y = 38.8, r = 15 }, text = "Take the boat from The Barrens to Stranglethorn Vale.",
+          lines = {
+            { kind = "transport", to = { zone = 33, x = 25.7, y = 73.1 }, mode = "boat", at = { zone = 17, x = 63.8, y = 38.8, r = 15 } },
+          } },
+        { id = "tROGUE-54", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 54,
+          lines = {
+            { kind = "train", level = 54, class = "ROGUE", npc = 1411 },
+          } },
+        { id = "y19-45", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Nethergarde Keep, Blasted Lands.",
+          lines = {
+            { kind = "fly", from = 19, to = 45 },
+          } },
+        { id = "a2783", at = { zone = 4, x = 67.57, y = 19.29, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 7826 } },
+          lines = {
+            { kind = "accept", quest = 2783, npc = 7826 },
+          } },
+        { id = "t8417.a8423", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, when = { class = "WARRIOR" }, minLevel = 50, targets = { friend = { 7572 } },
+          lines = {
+            { kind = "turnin", quest = 8417, npc = 7572, skipIfMissing = true },
+            { kind = "accept", quest = 8423, npc = 7572 },
+          } },
+        { id = "a2521.a3501", at = { zone = 4, x = 51.98, y = 35.65, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 7363 } },
+          lines = {
+            { kind = "accept", quest = 2521, npc = 7363 },
+            { kind = "accept", quest = 3501, npc = 7363 },
+          } },
+        { id = "o2521.o3501", at = { zone = 4, x = 50.5, y = 39.4, r = 40 }, targets = { enemy = { 5993, 5985, 8675, 5978, 5977, 5983 } },
+          lines = {
+            { kind = "objective", quest = 2521, index = 1, item = 8244, skipIfMissing = true },
+            { kind = "objective", quest = 3501, index = 1, item = 10593, skipIfMissing = true },
+          } },
+        { id = "t2521.t3501", at = { zone = 4, x = 51.98, y = 35.65, r = 10 }, targets = { friend = { 7363 } },
+          lines = {
+            { kind = "turnin", quest = 2521, npc = 7363, skipIfMissing = true },
+            { kind = "turnin", quest = 3501, npc = 7363, skipIfMissing = true },
+          } },
+      },
+    },
+    {
+      id = "highorder-55-56-western-plaguelands", name = "55-56 Western Plaguelands", group = "Alliance", subgroup = "50-60", minLevel = 55, maxLevel = 59, zone = 28,
+      next = { { section = "highorder-56-57-winterspring" } },
+      steps = {
+        { id = "y45-66", at = { zone = 4, x = 65.54, y = 24.34, r = 10 }, text = "Fly from Nethergarde Keep, Blasted Lands to Chillwind Camp, Western Plaguelands.",
+          lines = {
+            { kind = "fly", from = 45, to = 66 },
+          } },
+        { id = "t5903.a5904.a5225.a5533.t5533.a5537", at = { zone = 28, x = 43.42, y = 84.83, r = 10 }, minLevel = 55, items = { 15042, 15044, 13189 }, targets = { friend = { 11616, 11053, 10838, 11056 } },
           lines = {
             { kind = "turnin", quest = 5903, npc = 11616, skipIfMissing = true },
             { kind = "accept", quest = 5904, npc = 11616, ifDone = 5903, requires = { 5903 } },
+            { kind = "accept", quest = 5225, npc = 11053, ifDone = 5223, requires = { 5223 } },
+            { kind = "accept", quest = 5533, at = { zone = 28, x = 42.7, y = 84.03, r = 10 }, npc = 10838, ifDone = 5097, requires = { 5097 } },
+            { kind = "turnin", quest = 5533, at = { zone = 28, x = 42.66, y = 83.77, r = 10 }, npc = 11056, skipIfMissing = true },
+            { kind = "accept", quest = 5537, at = { zone = 28, x = 42.66, y = 83.77, r = 10 }, npc = 11056, ifDone = 5533, requires = { 5533 } },
           } },
-        { id = "a4986", at = { zone = 28, x = 53.73, y = 64.66, r = 10 }, minLevel = 51, maxLevel = 60, items = { 12663 }, targets = { friend = { 10739 } },
+        { id = "o5537", at = { zone = 28, x = 44.52, y = 68.61, r = 40 }, text = "Skeletal Fragments are north of Nathaniel Dumah.", targets = { enemy = { 1787, 1788, 1789, 1783, 1784, 1785 } },
           lines = {
-            { kind = "accept", quest = 4986, npc = 10739, ifDone = 4985, requires = { 4985 } },
+            { kind = "objective", quest = 5537, index = 1, item = 14619, skipIfMissing = true },
+          } },
+        { id = "t5537", at = { zone = 28, x = 42.66, y = 83.77, r = 10 }, targets = { friend = { 11056 } },
+          lines = {
+            { kind = "turnin", quest = 5537, npc = 11056, skipIfMissing = true },
           } },
         { id = "a5022", at = { zone = 28, x = 38.73, y = 55.24, r = 10 }, minLevel = 50, maxLevel = 60, items = { 12724 },
           lines = {
@@ -6074,47 +6148,24 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 6025, npc = 11610, skipIfMissing = true },
           } },
-        { id = "h#38", text = "Use your hearthstone to return to The Hinterlands.",
-          lines = {
-            { kind = "hearth", to = { zone = 47, x = 14.15, y = 41.57 } },
-          } },
-        { id = "y43-66#2", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, text = "Fly from Aerie Peak, The Hinterlands to Chillwind Camp, Western Plaguelands.",
-          lines = {
-            { kind = "fly", from = 43, to = 66 },
-          } },
-        { id = "t6389.a5225.a5533.t5533.a5537", at = { zone = 28, x = 43.42, y = 84.83, r = 10 }, minLevel = 55, items = { 15044, 13189 }, targets = { friend = { 11616, 11053, 10838, 11056 } },
-          lines = {
-            { kind = "turnin", quest = 6389, npc = 11616, skipIfMissing = true },
-            { kind = "accept", quest = 5225, npc = 11053, ifDone = 5223, requires = { 5223 } },
-            { kind = "accept", quest = 5533, at = { zone = 28, x = 42.7, y = 84.03, r = 10 }, npc = 10838, ifDone = 5097, requires = { 5097 } },
-            { kind = "turnin", quest = 5533, at = { zone = 28, x = 42.66, y = 83.77, r = 10 }, npc = 11056, skipIfMissing = true },
-            { kind = "accept", quest = 5537, at = { zone = 28, x = 42.66, y = 83.77, r = 10 }, npc = 11056, ifDone = 5533, requires = { 5533 } },
-          } },
-        { id = "o5537", at = { zone = 28, x = 44.52, y = 68.61, r = 40 }, text = "Skeletal Fragments are north of Nathaniel Dumah.", targets = { enemy = { 1787, 1788, 1789, 1783, 1784, 1785 } },
-          lines = {
-            { kind = "objective", quest = 5537, index = 1, item = 14619, skipIfMissing = true },
-          } },
-        { id = "t5537", at = { zone = 28, x = 42.66, y = 83.77, r = 10 }, targets = { friend = { 11056 } },
-          lines = {
-            { kind = "turnin", quest = 5537, npc = 11056, skipIfMissing = true },
-          } },
         { id = "o5225.t5225.a5226", at = { zone = 28, x = 62.18, y = 59.06, r = 40 }, minLevel = 50, items = { 13189, 13193 }, targets = { enemy = { 11078 } },
           lines = {
             { kind = "objective", quest = 5225, index = 1, item = 13196, skipIfMissing = true },
             { kind = "turnin", quest = 5225, object = 176392, skipIfMissing = true },
             { kind = "accept", quest = 5226, object = 176392, ifDone = 5225, requires = { 5225 } },
           } },
-        { id = "t5226.a5237.t5237", at = { zone = 28, x = 42.97, y = 84.5, r = 10 }, minLevel = 50, items = { 13193 }, targets = { friend = { 11053, 10838 } },
+        { id = "t6389.t5226.a5237.t5237", at = { zone = 28, x = 43.42, y = 84.83, r = 10 }, minLevel = 50, items = { 15044, 13193 }, targets = { friend = { 11616, 11053, 10838 } },
           lines = {
+            { kind = "turnin", quest = 6389, npc = 11616, skipIfMissing = true },
             { kind = "turnin", quest = 5226, npc = 11053, skipIfMissing = true },
-            { kind = "accept", quest = 5237, npc = 10838, ifDone = 5226, requires = { 5226 } },
-            { kind = "turnin", quest = 5237, npc = 10838, skipIfMissing = true },
+            { kind = "accept", quest = 5237, at = { zone = 28, x = 42.7, y = 84.03, r = 10 }, npc = 10838, ifDone = 5226, requires = { 5226 } },
+            { kind = "turnin", quest = 5237, at = { zone = 28, x = 42.7, y = 84.03, r = 10 }, npc = 10838, skipIfMissing = true },
           } },
       },
     },
     {
-      id = "highorder-55-56-winterspring", name = "55-56 Winterspring", group = "Alliance", subgroup = "50-60", minLevel = 55, maxLevel = 59, zone = 618,
-      next = { { section = "highorder-56-56-stormwind-city" } },
+      id = "highorder-56-57-winterspring", name = "56-57 Winterspring", group = "Alliance", subgroup = "50-60", minLevel = 56, maxLevel = 60, zone = 618,
+      next = { { section = "highorder-57-57-eastern-plaguelands" } },
       steps = {
         { id = "y66-7", at = { zone = 28, x = 42.92, y = 85.06, r = 10 }, text = "Fly from Chillwind Camp, Western Plaguelands to Menethil Harbor, Wetlands.",
           lines = {
@@ -6132,9 +6183,8 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 618, x = 27.73, y = 34.5, r = 20 } },
           } },
-        { id = "t8465.a8464", at = { zone = 618, x = 27.73, y = 34.5, r = 10 }, minLevel = 45, targets = { friend = { 11556 } },
+        { id = "a8464", at = { zone = 618, x = 27.73, y = 34.5, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 11556 } },
           lines = {
-            { kind = "turnin", quest = 8465, npc = 11556, skipIfMissing = true },
             { kind = "accept", quest = 8464, npc = 11556 },
           } },
         { id = "t980.a4842.a5082", at = { zone = 618, x = 31.27, y = 45.16, r = 10 }, minLevel = 52, targets = { friend = { 9298 } },
@@ -6185,9 +6235,9 @@ Noir.Route("alliance-highorder", {
           } },
         { id = "o8464", at = { zone = 618, x = 68.01, y = 37.33, r = 40 }, text = "The Winterfall Shamans are east of Witch Doctor Mau'ari.", targets = { enemy = { 7438, 7439, 7440 } },
           lines = {
-            { kind = "objective", quest = 8464, index = 1, npc = 7439 },
-            { kind = "objective", quest = 8464, index = 2, npc = 7440 },
-            { kind = "objective", quest = 8464, index = 3, npc = 7438 },
+            { kind = "objective", quest = 8464, index = 1, npc = 7439, skipIfMissing = true },
+            { kind = "objective", quest = 8464, index = 2, npc = 7440, skipIfMissing = true },
+            { kind = "objective", quest = 8464, index = 3, npc = 7438, skipIfMissing = true },
           } },
         { id = "r3783", at = { zone = 618, x = 64.85, y = 39.76, r = 40 }, text = "Thick Yeti Fur is southwest of your last stop.", reminder = { ends = "turnin3783" }, targets = { enemy = { 7458, 7457 } },
           lines = {
@@ -6197,9 +6247,10 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 4809, index = 1, item = 12444, skipIfMissing = true },
           } },
-        { id = "t4809.t3783.a977", label = "turnin3783", at = { zone = 618, x = 61.63, y = 38.61, r = 10 }, minLevel = 52, targets = { friend = { 10468, 10305 } },
+        { id = "t4809.a4810.t3783.a977", label = "turnin3783", at = { zone = 618, x = 61.63, y = 38.61, r = 10 }, minLevel = 52, items = { 12445 }, targets = { friend = { 10468, 10305 } },
           lines = {
             { kind = "turnin", quest = 4809, npc = 10468, skipIfMissing = true },
+            { kind = "accept", quest = 4810, npc = 10468, ifDone = 4809, requires = { 4809 } },
             { kind = "turnin", quest = 3783, at = { zone = 618, x = 60.88, y = 37.62, r = 10 }, npc = 10305 },
             { kind = "accept", quest = 977, at = { zone = 618, x = 60.88, y = 37.62, r = 10 }, npc = 10305, requires = { 3783 } },
           } },
@@ -6216,9 +6267,12 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 4861, object = 175587 },
             { kind = "accept", quest = 4863, object = 175587, requires = { 4861 } },
           } },
-        { id = "t4863", at = { zone = 618, x = 61.44, y = 60.68, r = 10 },
+        { id = "t4863.a4864.o4864", at = { zone = 618, x = 61.44, y = 60.68, r = 10 }, minLevel = 53, targets = { enemy = { 7452, 7453, 7454, 12140 } },
           lines = {
             { kind = "turnin", quest = 4863, object = 175586 },
+            { kind = "accept", quest = 4864, object = 175586, requires = { 4863 } },
+            { kind = "objective", quest = 4864, index = 1, item = 12525 },
+            { kind = "objective", quest = 4864, index = 2, item = 12524 },
           } },
         { id = "y52-64", at = { zone = 618, x = 62.33, y = 36.61, r = 10 }, text = "Fly from Everlook, Winterspring to Talrendis Point, Azshara.", when = { class = "ROGUE" },
           lines = {
@@ -6260,12 +6314,6 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 5163, npc = 10305 },
           } },
-        { id = "a4864.o4864", at = { zone = 618, x = 61.44, y = 60.68, r = 10 }, minLevel = 53, targets = { enemy = { 7452, 7453, 7454, 12140 } },
-          lines = {
-            { kind = "accept", quest = 4864, object = 175586, requires = { 4863 } },
-            { kind = "objective", quest = 4864, index = 1, item = 12525 },
-            { kind = "objective", quest = 4864, index = 2, item = 12524 },
-          } },
         { id = "t4864.t6604", at = { zone = 618, x = 52.14, y = 30.43, r = 10 }, targets = { friend = { 10301 } },
           lines = {
             { kind = "turnin", quest = 4864, npc = 10301 },
@@ -6279,382 +6327,93 @@ Noir.Route("alliance-highorder", {
           } },
         { id = "t8464", at = { zone = 618, x = 27.73, y = 34.5, r = 10 }, targets = { friend = { 11556 } },
           lines = {
-            { kind = "turnin", quest = 8464, npc = 11556 },
+            { kind = "turnin", quest = 8464, npc = 11556, skipIfMissing = true },
           } },
-        { id = "g493@493", at = { zone = 493, x = 48.1, y = 67.34, r = 20 }, text = "Head north into Moonglade.", when = { class = "DRUID" },
+      },
+    },
+    {
+      id = "highorder-57-57-eastern-plaguelands", name = "57 Eastern Plaguelands", group = "Alliance", subgroup = "50-60", minLevel = 57, maxLevel = 60, zone = 139,
+      next = { { section = "highorder-57-58-stormwind-city" } },
+      steps = {
+        { id = "g493@493", at = { zone = 493, x = 48.1, y = 67.34, r = 20 }, text = "Head north into Moonglade.",
           lines = {
             { kind = "goto", at = { zone = 493, x = 48.1, y = 67.34, r = 20 } },
           } },
-        { id = "y49-26#2", at = { zone = 493, x = 48.1, y = 67.34, r = 10 }, text = "Fly from Moonglade to Auberdine, Darkshore.", when = { class = "DRUID" },
+        { id = "tDRUID-56:go1", at = { zone = 493, x = 48.1, y = 67.34, r = 10 }, text = "Fly from Moonglade to Talonbranch Glade, Felwood.", when = { class = "DRUID" },
           lines = {
-            { kind = "fly", from = 49, to = 26 },
+            { kind = "fly", from = 49, to = 65 },
           } },
-        { id = "x141#5", at = { zone = 148, x = 33.3, y = 39.8, r = 15 }, text = "Take the boat from Darkshore to Teldrassil.", when = { class = "DRUID" },
+        { id = "tDRUID-56", at = { zone = 361, x = 61.93, y = 24.54, r = 10 }, text = "Fly to Felwood for class training, then return.", when = { class = "DRUID" }, minLevel = 56,
           lines = {
-            { kind = "transport", to = { zone = 141, x = 54.8, y = 97.2 }, mode = "boat", at = { zone = 148, x = 33.3, y = 39.8, r = 15 } },
+            { kind = "train", level = 56, class = "DRUID", npc = 9465 },
           } },
-        { id = "tDRUID-56", at = { zone = 1657, x = 35.37, y = 8.4, r = 10 }, when = { class = "DRUID" }, minLevel = 56,
+        { id = "tDRUID-56:back1", at = { zone = 361, x = 62.49, y = 24.24, r = 10 }, text = "Fly from Talonbranch Glade, Felwood to Moonglade.", when = { class = "DRUID" },
           lines = {
-            { kind = "train", level = 56, class = "DRUID", npc = 4217 },
+            { kind = "fly", from = 65, to = 49 },
           } },
-        { id = "a9063", at = { zone = 1657, x = 35.37, y = 8.4, r = 10 }, when = { class = "DRUID" }, minLevel = 50, maxLevel = 60, targets = { friend = { 4217 } },
+        { id = "tHUNTER-56:go1", at = { zone = 493, x = 48.1, y = 67.34, r = 10 }, when = { class = "HUNTER" },
           lines = {
-            { kind = "accept", quest = 9063, npc = 4217 },
+            { kind = "getflight", node = 49, npc = 10897 },
           } },
-        { id = "g493@493#2", at = { zone = 493, x = 48.1, y = 67.34, r = 20 }, text = "Head north into Moonglade.", when = { class = "HUNTER" },
+        { id = "tHUNTER-56:go2", at = { zone = 493, x = 48.1, y = 67.34, r = 10 }, text = "Fly from Moonglade to Talonbranch Glade, Felwood.", when = { class = "HUNTER" },
+          lines = {
+            { kind = "fly", from = 49, to = 65 },
+          } },
+        { id = "tHUNTER-56", at = { zone = 361, x = 61.89, y = 23.58, r = 10 }, text = "Fly to Felwood for class training, then return.", when = { class = "HUNTER" }, minLevel = 56,
+          lines = {
+            { kind = "train", level = 56, class = "HUNTER", npc = 5501 },
+          } },
+        { id = "tHUNTER-56:back1", when = { class = "HUNTER" },
           lines = {
             { kind = "goto", at = { zone = 493, x = 48.1, y = 67.34, r = 20 } },
           } },
-        { id = "f49.y49-26#2", at = { zone = 493, x = 48.1, y = 67.34, r = 10 }, text = "Fly from Moonglade to Auberdine, Darkshore.", when = { class = "HUNTER" },
+        { id = "f49.y49-26#2", at = { zone = 493, x = 48.1, y = 67.34, r = 10 }, text = "Fly from Moonglade to Auberdine, Darkshore.",
           lines = {
             { kind = "getflight", node = 49, npc = 10897 },
             { kind = "fly", from = 49, to = 26 },
           } },
-        { id = "x141#6", at = { zone = 148, x = 33.3, y = 39.8, r = 15 }, text = "Take the boat from Darkshore to Teldrassil.", when = { class = "HUNTER" },
+        { id = "x11#5", at = { zone = 148, x = 32.3, y = 44.1, r = 15 }, text = "Take the boat from Darkshore to Wetlands.",
           lines = {
-            { kind = "transport", to = { zone = 141, x = 54.8, y = 97.2 }, mode = "boat", at = { zone = 148, x = 33.3, y = 39.8, r = 15 } },
+            { kind = "transport", to = { zone = 11, x = 4.5, y = 56.6 }, mode = "boat", at = { zone = 148, x = 32.3, y = 44.1, r = 15 } },
           } },
-        { id = "tHUNTER-56", at = { zone = 1657, x = 42.21, y = 7.27, r = 10 }, when = { class = "HUNTER" }, minLevel = 56,
+        { id = "tMAGE-56:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "MAGE" },
           lines = {
-            { kind = "train", level = 56, class = "HUNTER", npc = 4205 },
+            { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "a8151", at = { zone = 1657, x = 42.21, y = 7.27, r = 10 }, when = { class = "HUNTER" }, minLevel = 50, maxLevel = 60, targets = { friend = { 4205 } },
+        { id = "tMAGE-56", at = { zone = 1537, x = 27.16, y = 8.57, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "MAGE" }, minLevel = 56,
           lines = {
-            { kind = "accept", quest = 8151, npc = 4205 },
+            { kind = "train", level = 56, class = "MAGE", npc = 7312 },
           } },
-      },
-    },
-    {
-      id = "highorder-56-56-stormwind-city", name = "56 Stormwind City", group = "Alliance", subgroup = "50-60", minLevel = 56, maxLevel = 59, zone = 1519,
-      next = { { section = "highorder-56-57-silithus" } },
-      steps = {
-        { id = "h#39", text = "Use your hearthstone to return to The Hinterlands.",
+        { id = "tMAGE-56:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "MAGE" },
           lines = {
-            { kind = "hearth", to = { zone = 47, x = 14.15, y = 41.57 } },
+            { kind = "fly", from = 6, to = 7 },
           } },
-        { id = "tWARRIOR-56", at = { zone = 47, x = 14.4, y = 43, r = 10 }, when = { class = "WARRIOR" }, minLevel = 56,
+        { id = "tWARRIOR-56:go1", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.", when = { class = "WARRIOR" },
           lines = {
-            { kind = "train", level = 56, class = "WARRIOR", npc = 270278 },
+            { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "y43-14#3", at = { zone = 47, x = 11.07, y = 46.15, r = 10 }, text = "Fly from Aerie Peak, The Hinterlands to Southshore, Hillsbrad.",
+        { id = "tWARRIOR-56", at = { zone = 1537, x = 65.9, y = 88.41, r = 10 }, text = "Fly to Ironforge for class training, then return.", when = { class = "WARRIOR" }, minLevel = 56,
           lines = {
-            { kind = "fly", from = 43, to = 14 },
+            { kind = "train", level = 56, class = "WARRIOR", npc = 5114 },
           } },
-        { id = "g36@36#4", at = { zone = 36, x = 12, y = 56.2, r = 20 }, text = "Head west into Alterac Mountains.",
+        { id = "tWARRIOR-56:back1", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "WARRIOR" },
           lines = {
-            { kind = "goto", at = { zone = 36, x = 12, y = 56.2, r = 20 } },
-          } },
-        { id = "x1519#8", at = { zone = 36, x = 12, y = 56.2, r = 15 }, text = "Take the portal from Alterac Mountains to Stormwind City.",
-          lines = {
-            { kind = "transport", to = { zone = 1519, x = 70.5, y = 73.5 }, mode = "portal", at = { zone = 36, x = 12, y = 56.2, r = 15 } },
-          } },
-        { id = "a3789", at = { zone = 1519, x = 60.39, y = 75.27, r = 10 }, minLevel = 47, maxLevel = 58, targets = { friend = { 6740 } },
-          lines = {
-            { kind = "accept", quest = 3789, npc = 6740 },
-          } },
-        { id = "a8250", at = { zone = 1519, x = 49.25, y = 87.77, r = 10 }, when = { class = "MAGE" }, minLevel = 50, maxLevel = 60, targets = { friend = { 331 } },
-          lines = {
-            { kind = "accept", quest = 8250, npc = 331 },
-          } },
-        { id = "a1015.a5066", at = { zone = 1519, x = 56.39, y = 74.09, r = 10 }, minLevel = 54, maxLevel = 58, targets = { friend = { 2198 } },
-          lines = {
-            { kind = "accept", quest = 1015, npc = 2198 },
-            { kind = "accept", quest = 5066, npc = 2198 },
-          } },
-        { id = "t5022.a5048", at = { zone = 1519, x = 57.17, y = 48.07, r = 10 }, minLevel = 50, items = { 12724 }, targets = { friend = { 10782 } },
-          lines = {
-            { kind = "turnin", quest = 5022, npc = 10782, skipIfMissing = true },
-            { kind = "accept", quest = 5048, npc = 10782, ifDone = 5022, requires = { 5022 } },
-          } },
-        { id = "t5048.a5050", at = { zone = 1519, x = 60.2, y = 57.03, r = 10 }, minLevel = 50, items = { 12724, 12721 }, targets = { friend = { 3520 } },
-          lines = {
-            { kind = "turnin", quest = 5048, npc = 3520, skipIfMissing = true },
-            { kind = "accept", quest = 5050, npc = 3520, ifDone = 5048, requires = { 5048 } },
-          } },
-        { id = "a6182", at = { zone = 1519, x = 80.21, y = 38.35, r = 10 }, minLevel = 56, maxLevel = 60, targets = { friend = { 1748 } },
-          lines = {
-            { kind = "accept", quest = 6182, npc = 1748 },
-          } },
-        { id = "tROGUE-56", at = { zone = 1519, x = 77.43, y = 65.31, r = 10 }, when = { class = "ROGUE" }, minLevel = 56,
-          lines = {
-            { kind = "train", level = 56, class = "ROGUE", npc = 918 },
-          } },
-        { id = "a8233", at = { zone = 1519, x = 77.43, y = 65.31, r = 10 }, when = { class = "ROGUE" }, minLevel = 50, maxLevel = 60, targets = { friend = { 918 } },
-          lines = {
-            { kind = "accept", quest = 8233, npc = 918 },
-          } },
-        { id = "t6182.a6183.t6183.a6184", at = { zone = 1519, x = 78.31, y = 70.74, r = 10 }, minLevel = 56, targets = { friend = { 332 } },
-          lines = {
-            { kind = "turnin", quest = 6182, npc = 332, skipIfMissing = true },
-            { kind = "accept", quest = 6183, npc = 332, ifDone = 6182, requires = { 6182 } },
-            { kind = "turnin", quest = 6183, npc = 332, skipIfMissing = true },
-            { kind = "accept", quest = 6184, npc = 332, ifDone = 6183, requires = { 6183 } },
-          } },
-        { id = "y2-45", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Nethergarde Keep, Blasted Lands.",
-          lines = {
-            { kind = "fly", from = 2, to = 45 },
-          } },
-        { id = "a2521.a3501", at = { zone = 4, x = 51.98, y = 35.65, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 7363 } },
-          lines = {
-            { kind = "accept", quest = 2521, npc = 7363 },
-            { kind = "accept", quest = 3501, npc = 7363 },
-          } },
-        { id = "r8423", at = { zone = 4, x = 49.59, y = 41.84, r = 40 }, when = { class = "WARRIOR" }, reminder = { ends = "turnin8423" }, targets = { enemy = { 5993 } },
-          lines = {
-            { kind = "objective", quest = 8423, index = 1, npc = 5993, skipIfMissing = true },
-          } },
-        { id = "o2521.o3501", at = { zone = 4, x = 50.5, y = 39.4, r = 40 }, targets = { enemy = { 5993, 5985, 8675, 5978, 5977, 5983 } },
-          lines = {
-            { kind = "objective", quest = 2521, index = 1, item = 8244, skipIfMissing = true },
-            { kind = "objective", quest = 3501, index = 1, item = 10593, skipIfMissing = true },
-          } },
-        { id = "t2521.t3501", at = { zone = 4, x = 51.98, y = 35.65, r = 10 }, targets = { friend = { 7363 } },
-          lines = {
-            { kind = "turnin", quest = 2521, npc = 7363, skipIfMissing = true },
-            { kind = "turnin", quest = 3501, npc = 7363, skipIfMissing = true },
-          } },
-        { id = "t8423.a8424", label = "turnin8423", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, when = { class = "WARRIOR" }, minLevel = 50, targets = { friend = { 7572 } },
-          lines = {
-            { kind = "turnin", quest = 8423, npc = 7572, skipIfMissing = true },
-            { kind = "accept", quest = 8424, npc = 7572, ifDone = 8423, requires = { 8423 } },
-          } },
-        { id = "o8424", at = { zone = 4, x = 65.33, y = 37.4, r = 40 }, text = "The Shadowsworn Adept is east of Kum'isha the Collector.", when = { class = "WARRIOR" }, targets = { enemy = { 6004, 6006, 6005 } },
-          lines = {
-            { kind = "objective", quest = 8424, index = 1, npc = 6006, skipIfMissing = true },
-            { kind = "objective", quest = 8424, index = 2, npc = 6004, skipIfMissing = true },
-            { kind = "objective", quest = 8424, index = 3, npc = 6005, skipIfMissing = true },
-          } },
-        { id = "t8424", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, when = { class = "WARRIOR" }, targets = { friend = { 7572 } },
-          lines = {
-            { kind = "turnin", quest = 8424, npc = 7572, skipIfMissing = true },
-          } },
-        { id = "y45-19", at = { zone = 4, x = 65.54, y = 24.34, r = 10 }, text = "Fly from Nethergarde Keep, Blasted Lands to Booty Bay, Stranglethorn.",
-          lines = {
-            { kind = "fly", from = 45, to = 19 },
-          } },
-        { id = "x17#4", at = { zone = 33, x = 25.7, y = 73.1, r = 15 }, text = "Take the boat from Stranglethorn Vale to The Barrens.",
-          lines = {
-            { kind = "transport", to = { zone = 17, x = 63.8, y = 38.8 }, mode = "boat", at = { zone = 33, x = 25.7, y = 73.1, r = 15 } },
-          } },
-        { id = "y80-64", at = { zone = 17, x = 63.08, y = 37.16, r = 10 }, text = "Fly from Ratchet, The Barrens to Talrendis Point, Azshara.", when = { class = "HUNTER" },
-          lines = {
-            { kind = "fly", from = 80, to = 64 },
-          } },
-        { id = "t8151.a8153", at = { zone = 16, x = 42.4, y = 42.62, r = 10 }, when = { class = "HUNTER" }, minLevel = 50, targets = { friend = { 8405 } },
-          lines = {
-            { kind = "turnin", quest = 8151, npc = 8405, skipIfMissing = true },
-            { kind = "accept", quest = 8153, npc = 8405, ifDone = 8151, requires = { 8151 } },
-          } },
-        { id = "o8153", at = { zone = 16, x = 54.42, y = 52.79, r = 40 }, when = { class = "HUNTER" }, targets = { enemy = { 8761 } },
-          lines = {
-            { kind = "objective", quest = 8153, index = 1, item = 20017, skipIfMissing = true },
-          } },
-        { id = "t8153.a8231", at = { zone = 16, x = 42.4, y = 42.62, r = 10 }, when = { class = "HUNTER" }, minLevel = 50, targets = { friend = { 8405 } },
-          lines = {
-            { kind = "turnin", quest = 8153, npc = 8405, skipIfMissing = true },
-            { kind = "accept", quest = 8231, npc = 8405, ifDone = 8153, requires = { 8153 } },
-          } },
-        { id = "o8231", at = { zone = 16, x = 67.53, y = 87.48, r = 40 }, when = { class = "HUNTER" }, targets = { enemy = { 6349, 6348, 6347 } },
-          lines = {
-            { kind = "objective", quest = 8231, index = 1, item = 20087, skipIfMissing = true },
-          } },
-        { id = "t8231", at = { zone = 16, x = 42.4, y = 42.62, r = 10 }, when = { class = "HUNTER" }, targets = { friend = { 8405 } },
-          lines = {
-            { kind = "turnin", quest = 8231, npc = 8405, skipIfMissing = true },
-          } },
-        { id = "y64-80", at = { zone = 16, x = 11.9, y = 77.59, r = 10 }, text = "Fly from Talrendis Point, Azshara to Ratchet, The Barrens.", when = { class = "HUNTER" },
-          lines = {
-            { kind = "fly", from = 64, to = 80 },
-          } },
-        { id = "y80-64#2", at = { zone = 17, x = 63.08, y = 37.16, r = 10 }, text = "Fly from Ratchet, The Barrens to Talrendis Point, Azshara.", when = { class = "MAGE" },
-          lines = {
-            { kind = "fly", from = 80, to = 64 },
-          } },
-        { id = "t8250", at = { zone = 16, x = 28.11, y = 50.09, r = 10 }, when = { class = "MAGE" }, targets = { friend = { 8395 } },
-          lines = {
-            { kind = "turnin", quest = 8250, npc = 8395, skipIfMissing = true },
-          } },
-        { id = "y64-80#2", at = { zone = 16, x = 11.9, y = 77.59, r = 10 }, text = "Fly from Talrendis Point, Azshara to Ratchet, The Barrens.", when = { class = "MAGE" },
-          lines = {
-            { kind = "fly", from = 64, to = 80 },
-          } },
-        { id = "y80-79", at = { zone = 17, x = 63.08, y = 37.16, r = 10 }, text = "Fly from Ratchet, The Barrens to Marshal's Refuge, Un'Goro Crater.",
-          lines = {
-            { kind = "fly", from = 80, to = 79 },
-          } },
-        { id = "t9063", at = { zone = 490, x = 71.64, y = 75.96, r = 10 }, when = { class = "DRUID" }, targets = { friend = { 9619 } },
-          lines = {
-            { kind = "turnin", quest = 9063, npc = 9619, skipIfMissing = true },
-          } },
-      },
-    },
-    {
-      id = "highorder-56-57-silithus", name = "56-57 Silithus", group = "Alliance", subgroup = "50-60", minLevel = 56, maxLevel = 60, zone = 1377,
-      next = { { section = "highorder-57-58-eastern-plaguelands" } },
-      steps = {
-        { id = "g1377@1377", at = { zone = 1377, x = 50.58, y = 34.45, r = 20 }, text = "Head southwest into Silithus.",
-          lines = {
-            { kind = "goto", at = { zone = 1377, x = 50.58, y = 34.45, r = 20 } },
-          } },
-        { id = "f73", at = { zone = 1377, x = 50.58, y = 34.45, r = 10 },
-          lines = {
-            { kind = "getflight", node = 73, npc = 15177 },
-          } },
-        { id = "a8277.a8283.a8280.a8284", at = { zone = 1377, x = 51.61, y = 38.63, r = 10 }, minLevel = 54, maxLevel = 60, targets = { friend = { 15189, 15191, 15183 } },
-          lines = {
-            { kind = "accept", quest = 8277, npc = 15189 },
-            { kind = "accept", quest = 8283, object = 180448 },
-            { kind = "accept", quest = 8280, npc = 15191 },
-            { kind = "accept", quest = 8284, at = { zone = 1377, x = 49.67, y = 37.46, r = 10 }, npc = 15183 },
-          } },
-        { id = "a9415", at = { zone = 1377, x = 50.68, y = 34.71, r = 10 }, maxLevel = 60, targets = { friend = { 17082 } },
-          lines = {
-            { kind = "accept", quest = 9415, npc = 17082 },
-          } },
-        { id = "b@1377", at = { zone = 1377, x = 51.89, y = 39.16, r = 10 },
-          lines = {
-            { kind = "sethearth", npc = 15174 },
-          } },
-        { id = "o8277.o8280", at = { zone = 1377, x = 55.97, y = 28.67, r = 40 }, text = "Stonelash Scorpid Stinger is northeast of Calandrath.", targets = { enemy = { 11740, 11738, 11735 } },
-          lines = {
-            { kind = "objective", quest = 8277, index = 1, item = 20373, skipIfMissing = true },
-            { kind = "objective", quest = 8277, index = 2, item = 20376, skipIfMissing = true },
-            { kind = "objective", quest = 8280, index = 1, at = { zone = 1377, x = 54.39, y = 28.15, r = 40 }, npc = 11740, skipIfMissing = true },
-          } },
-        { id = "o8284", at = { zone = 1377, x = 23.03, y = 12.64, r = 40 }, text = "Twilight Tablet Fragment is west of your last stop.",
-          lines = {
-            { kind = "objective", quest = 8284, index = 1, item = 20378, skipIfMissing = true },
-          } },
-        { id = "h#40", text = "Use your hearthstone to return to Silithus.",
-          lines = {
-            { kind = "hearth", to = { zone = 1377, x = 51.89, y = 39.16 } },
-          } },
-        { id = "o8283", at = { zone = 1377, x = 45.07, y = 92.31, r = 40 }, targets = { enemy = { 15196 } },
-          lines = {
-            { kind = "objective", quest = 8283, index = 1, item = 20385, skipIfMissing = true },
-          } },
-        { id = "t9415", at = { zone = 1377, x = 33.29, y = 51.06, r = 10 }, targets = { friend = { 17080 } },
-          lines = {
-            { kind = "turnin", quest = 9415, npc = 17080, skipIfMissing = true },
-          } },
-        { id = "t8284.a8285.t8280.a8281.t8277.a8278", at = { zone = 1377, x = 49.67, y = 37.46, r = 10 }, minLevel = 54, items = { 20401 }, targets = { friend = { 15183, 15191, 15189 } },
-          lines = {
-            { kind = "turnin", quest = 8284, npc = 15183, skipIfMissing = true },
-            { kind = "accept", quest = 8285, npc = 15183, ifDone = 8284, requires = { 8284 } },
-            { kind = "turnin", quest = 8280, at = { zone = 1377, x = 51.15, y = 38.29, r = 10 }, npc = 15191, skipIfMissing = true },
-            { kind = "accept", quest = 8281, at = { zone = 1377, x = 51.15, y = 38.29, r = 10 }, npc = 15191, ifDone = 8280, requires = { 8280 } },
-            { kind = "turnin", quest = 8277, at = { zone = 1377, x = 51.61, y = 38.63, r = 10 }, npc = 15189, skipIfMissing = true },
-            { kind = "accept", quest = 8278, at = { zone = 1377, x = 51.61, y = 38.63, r = 10 }, npc = 15189, ifDone = 8277, requires = { 8277 } },
-          } },
-        { id = "t8283", at = { zone = 1377, x = 50.75, y = 33.65, r = 10 }, targets = { friend = { 15182 } },
-          lines = {
-            { kind = "turnin", quest = 8283, npc = 15182, skipIfMissing = true },
-          } },
-        { id = "o8281", at = { zone = 1377, x = 39.14, y = 51.33, r = 40 }, text = "The Dredge Crushers are southwest of Vish Kozus.", targets = { enemy = { 11741 } },
-          lines = {
-            { kind = "objective", quest = 8281, index = 1, npc = 11741, skipIfMissing = true },
-          } },
-        { id = "o8278", at = { zone = 1377, x = 40.11, y = 77.92, r = 40 }, text = "Stonelash Flayer Stinger is south of your last stop.", targets = { enemy = { 11739, 11737, 11736 } },
-          lines = {
-            { kind = "objective", quest = 8278, index = 1, item = 20375, skipIfMissing = true },
-            { kind = "objective", quest = 8278, index = 2, item = 20374, skipIfMissing = true },
-            { kind = "objective", quest = 8278, index = 3, item = 20377, skipIfMissing = true },
-          } },
-        { id = "a9419.o9419.t9419", at = { zone = 1377, x = 33.29, y = 51.06, r = 10 }, targets = { enemy = { 17090 }, friend = { 17080 } },
-          lines = {
-            { kind = "accept", quest = 9419, npc = 17080 },
-            { kind = "objective", quest = 9419, index = 1, npc = 17090 },
-            { kind = "turnin", quest = 9419, npc = 17080 },
-          } },
-        { id = "a8318", at = { zone = 1377, x = 48.57, y = 37.78, r = 10 }, minLevel = 57, maxLevel = 60, targets = { friend = { 15306 } },
-          lines = {
-            { kind = "accept", quest = 8318, npc = 15306 },
-          } },
-        { id = "t8281.t8278.a8282", at = { zone = 1377, x = 51.15, y = 38.29, r = 10 }, minLevel = 54, targets = { friend = { 15191, 15189, 15190 } },
-          lines = {
-            { kind = "turnin", quest = 8281, npc = 15191, skipIfMissing = true },
-            { kind = "turnin", quest = 8278, npc = 15189, skipIfMissing = true },
-            { kind = "accept", quest = 8282, npc = 15190, ifDone = 8278, requires = { 8278 } },
-          } },
-        { id = "o8318", at = { zone = 1377, x = 45.84, y = 47.87, r = 40 }, text = "Encrypted Twilight Text is southwest of Windcaller Proudhorn.", targets = { enemy = { 11881, 11880, 11804, 11882, 14479, 15541 } },
-          lines = {
-            { kind = "objective", quest = 8318, index = 1, item = 20404, skipIfMissing = true },
-          } },
-        { id = "o8282", at = { zone = 1377, x = 44.56, y = 91.38, r = 40 }, text = "Noggle's Satchel is south of your last stop.",
-          lines = {
-            { kind = "objective", quest = 8282, index = 1, item = 20379, skipIfMissing = true },
-          } },
-        { id = "h#41", text = "Use your hearthstone to return to Silithus.",
-          lines = {
-            { kind = "hearth", to = { zone = 1377, x = 51.89, y = 39.16 } },
-          } },
-        { id = "t8282", at = { zone = 1377, x = 51.63, y = 38.5, r = 10 }, targets = { friend = { 15190 } },
-          lines = {
-            { kind = "turnin", quest = 8282, npc = 15190, skipIfMissing = true },
-          } },
-        { id = "t8318", at = { zone = 1377, x = 48.57, y = 37.78, r = 10 }, targets = { friend = { 15306 } },
-          lines = {
-            { kind = "turnin", quest = 8318, npc = 15306, skipIfMissing = true },
-          } },
-        { id = "t8285.a8279", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, minLevel = 54, items = { 20401 }, targets = { friend = { 15194 } },
-          lines = {
-            { kind = "turnin", quest = 8285, npc = 15194, skipIfMissing = true },
-            { kind = "accept", quest = 8279, npc = 15194, ifDone = 8285, requires = { 8285 } },
-          } },
-        { id = "o8279", at = { zone = 1377, x = 26.35, y = 36.62, r = 40 }, text = "Twilight Lexicon - Chapter 1 is northwest of Hermit Ortell.", targets = { enemy = { 15200, 11804, 11803 } },
-          lines = {
-            { kind = "objective", quest = 8279, index = 1, item = 20394, skipIfMissing = true },
-            { kind = "objective", quest = 8279, index = 2, item = 20395, skipIfMissing = true },
-            { kind = "objective", quest = 8279, index = 3, item = 20396, skipIfMissing = true },
-          } },
-        { id = "t8279.a8287.a8323", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, minLevel = 54, items = { 20405 }, targets = { friend = { 15194 } },
-          lines = {
-            { kind = "turnin", quest = 8279, npc = 15194, skipIfMissing = true },
-            { kind = "accept", quest = 8287, npc = 15194, ifDone = 8279, requires = { 8279 } },
-            { kind = "accept", quest = 8323, npc = 15194, ifDone = 8279, requires = { 8279 } },
-          } },
-        { id = "o8323", at = { zone = 1377, x = 45.84, y = 47.87, r = 40 }, text = "Encrypted Twilight Text is northwest of Hermit Ortell.", targets = { enemy = { 11881, 11880, 11804, 11882, 14479, 15541 } },
-          lines = {
-            { kind = "objective", quest = 8323, index = 1, item = 20404, skipIfMissing = true },
-          } },
-        { id = "t8287", at = { zone = 1377, x = 49.2, y = 34.18, r = 10 }, items = { 20405 }, targets = { friend = { 15181 } },
-          lines = {
-            { kind = "turnin", quest = 8287, npc = 15181, skipIfMissing = true },
-          } },
-        { id = "t8323", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, targets = { friend = { 15194 } },
-          lines = {
-            { kind = "turnin", quest = 8323, npc = 15194, skipIfMissing = true },
-          } },
-      },
-    },
-    {
-      id = "highorder-57-58-eastern-plaguelands", name = "57-58 Eastern Plaguelands", group = "Alliance", subgroup = "50-60", minLevel = 57, maxLevel = 60, zone = 139,
-      next = { { section = "highorder-58-60-silithus" } },
-      steps = {
-        { id = "y73-32", at = { zone = 1377, x = 50.58, y = 34.45, r = 10 }, text = "Fly from Cenarion Hold, Silithus to Theramore, Dustwallow Marsh.",
-          lines = {
-            { kind = "fly", from = 73, to = 32 },
-          } },
-        { id = "x11#6", at = { zone = 15, x = 71.7, y = 56.6, r = 15 }, text = "Take the boat from Dustwallow Marsh to Wetlands.",
-          lines = {
-            { kind = "transport", to = { zone = 11, x = 4.7, y = 63.7 }, mode = "boat", at = { zone = 15, x = 71.7, y = 56.6, r = 15 } },
+            { kind = "fly", from = 6, to = 7 },
           } },
         { id = "y7-67", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Light's Hope Chapel, Eastern Plaguelands.",
           lines = {
             { kind = "fly", from = 7, to = 67 },
           } },
-        { id = "a9664.t6030", at = { zone = 139, x = 71.51, y = 49.66, r = 10 }, minLevel = 55, items = { 15790 }, targets = { friend = { 17069, 11039 } },
+        { id = "t8859.a9664.t6030.b@139", at = { zone = 139, x = 71.9, y = 48.41, r = 10 }, minLevel = 55, items = { 21533, 15790 }, targets = { friend = { 11034, 17069, 11039 } },
           lines = {
-            { kind = "accept", quest = 9664, npc = 17069 },
-            { kind = "turnin", quest = 6030, npc = 11039, skipIfMissing = true },
+            { kind = "turnin", quest = 8859, npc = 11034, skipIfMissing = true },
+            { kind = "accept", quest = 9664, at = { zone = 139, x = 71.51, y = 49.66, r = 10 }, npc = 17069 },
+            { kind = "turnin", quest = 6030, at = { zone = 139, x = 71.63, y = 50.09, r = 10 }, npc = 11039, skipIfMissing = true },
+            { kind = "sethearth", npc = 16256 },
           } },
         { id = "a5281", at = { zone = 139, x = 69.93, y = 53.72, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 11038 } },
           lines = {
             { kind = "accept", quest = 5281, npc = 11038 },
-          } },
-        { id = "b@139", at = { zone = 139, x = 71.8, y = 48.52, r = 10 },
-          lines = {
-            { kind = "sethearth", npc = 16256 },
           } },
         { id = "t5245", at = { zone = 139, x = 46.49, y = 16.03, r = 10 }, items = { 12891 }, targets = { friend = { 10304 } },
           lines = {
@@ -6667,7 +6426,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 9664, index = 3, npc = 17696 },
             { kind = "objective", quest = 9664, index = 4, npc = 17698 },
           } },
-        { id = "h#42", text = "Use your hearthstone to return to Eastern Plaguelands.",
+        { id = "h#33", text = "Use your hearthstone to return to Eastern Plaguelands.",
           lines = {
             { kind = "hearth", to = { zone = 139, x = 71.8, y = 48.52 } },
           } },
@@ -6704,33 +6463,195 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 5845, npc = 1855, skipIfMissing = true },
             { kind = "accept", quest = 5846, npc = 1855, ifDone = 5845, requires = { 5845 } },
           } },
+        { id = "g36@36#4", at = { zone = 36, x = 12, y = 56.2, r = 20 }, text = "Head southwest into Alterac Mountains.",
+          lines = {
+            { kind = "goto", at = { zone = 36, x = 12, y = 56.2, r = 20 } },
+          } },
+        { id = "x1519#7", at = { zone = 36, x = 12, y = 56.2, r = 15 }, text = "Take the portal from Alterac Mountains to Stormwind City.",
+          lines = {
+            { kind = "transport", to = { zone = 1519, x = 70.5, y = 73.5 }, mode = "portal", at = { zone = 36, x = 12, y = 56.2, r = 15 } },
+          } },
+        { id = "y2-45", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Nethergarde Keep, Blasted Lands.",
+          lines = {
+            { kind = "fly", from = 2, to = 45 },
+          } },
+        { id = "g8@8", at = { zone = 8, x = 34.29, y = 66.14, r = 20 }, text = "Head southeast into Swamp of Sorrows.",
+          lines = {
+            { kind = "goto", at = { zone = 8, x = 34.29, y = 66.14, r = 20 } },
+          } },
+        { id = "t2783.a2801.o2801.t2801.a2681", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, targets = { enemy = { 7572 }, friend = { 7572 } },
+          lines = {
+            { kind = "turnin", quest = 2783, npc = 7572, skipIfMissing = true },
+            { kind = "accept", quest = 2801, npc = 7572, ifDone = 2783, requires = { 2783 } },
+            { kind = "objective", quest = 2801, index = 1, npc = 7572, skipIfMissing = true },
+            { kind = "turnin", quest = 2801, npc = 7572, skipIfMissing = true },
+            { kind = "accept", quest = 2681, npc = 7572, ifDone = 2801, requires = { 2801 } },
+          } },
+        { id = "o8423", at = { zone = 4, x = 49.59, y = 41.84, r = 40 }, text = "The Helboars are south of Fallen Hero of the Horde.", when = { class = "WARRIOR" }, targets = { enemy = { 5993 } },
+          lines = {
+            { kind = "objective", quest = 8423, index = 1, npc = 5993, skipIfMissing = true },
+          } },
+        { id = "o2681", at = { zone = 4, x = 57.41, y = 54.38, r = 40 }, text = "The Servants of Razelikh are south of Fallen Hero of the Horde.", targets = { enemy = { 7668, 7670, 7669, 7671 } },
+          lines = {
+            { kind = "objective", quest = 2681, index = 1, npc = 7668, skipIfMissing = true },
+            { kind = "objective", quest = 2681, index = 2, npc = 7669, skipIfMissing = true },
+            { kind = "objective", quest = 2681, index = 3, npc = 7670, skipIfMissing = true },
+            { kind = "objective", quest = 2681, index = 4, npc = 7671, skipIfMissing = true },
+          } },
+        { id = "t8423.a8424", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, when = { class = "WARRIOR" }, minLevel = 50, targets = { friend = { 7572 } },
+          lines = {
+            { kind = "turnin", quest = 8423, npc = 7572, skipIfMissing = true },
+            { kind = "accept", quest = 8424, npc = 7572, ifDone = 8423, requires = { 8423 } },
+          } },
+        { id = "t2681.a2702.t2702.a2701.t2701", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, targets = { friend = { 7572, 7750 } },
+          lines = {
+            { kind = "turnin", quest = 2681, npc = 7572, skipIfMissing = true },
+            { kind = "accept", quest = 2702, npc = 7572, ifDone = 2681, requires = { 2681 } },
+            { kind = "turnin", quest = 2702, npc = 7750, skipIfMissing = true },
+            { kind = "accept", quest = 2701, npc = 7750, ifDone = 2702, requires = { 2702 } },
+            { kind = "turnin", quest = 2701, object = 141980, skipIfMissing = true },
+          } },
+        { id = "o8424", at = { zone = 4, x = 65.33, y = 37.4, r = 40 }, text = "The Shadowsworn Adept is southeast of Fallen Hero of the Horde.", when = { class = "WARRIOR" }, targets = { enemy = { 6004, 6006, 6005 } },
+          lines = {
+            { kind = "objective", quest = 8424, index = 1, npc = 6006, skipIfMissing = true },
+            { kind = "objective", quest = 8424, index = 2, npc = 6004, skipIfMissing = true },
+            { kind = "objective", quest = 8424, index = 3, npc = 6005, skipIfMissing = true },
+          } },
+        { id = "t8424", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, when = { class = "WARRIOR" }, targets = { friend = { 7572 } },
+          lines = {
+            { kind = "turnin", quest = 8424, npc = 7572, skipIfMissing = true },
+          } },
+      },
+    },
+    {
+      id = "highorder-57-58-stormwind-city", name = "57-58 Stormwind City", group = "Alliance", subgroup = "50-60", minLevel = 57, maxLevel = 60, zone = 1519,
+      next = { { section = "highorder-58-60-silithus" } },
+      steps = {
+        { id = "g4@4#2", at = { zone = 4, x = 65.54, y = 24.34, r = 20 }, text = "Head southeast into Blasted Lands.",
+          lines = {
+            { kind = "goto", at = { zone = 4, x = 65.54, y = 24.34, r = 20 } },
+          } },
+        { id = "y45-2", at = { zone = 4, x = 65.54, y = 24.34, r = 10 }, text = "Fly from Nethergarde Keep, Blasted Lands to Stormwind, Elwynn.",
+          lines = {
+            { kind = "fly", from = 45, to = 2 },
+          } },
+        { id = "a3789.a1015.a5066", at = { zone = 1519, x = 60.39, y = 75.27, r = 10 }, minLevel = 54, maxLevel = 58, targets = { friend = { 6740, 2198 } },
+          lines = {
+            { kind = "accept", quest = 3789, npc = 6740 },
+            { kind = "accept", quest = 1015, at = { zone = 1519, x = 56.39, y = 74.09, r = 10 }, npc = 2198 },
+            { kind = "accept", quest = 5066, at = { zone = 1519, x = 56.39, y = 74.09, r = 10 }, npc = 2198 },
+          } },
+        { id = "a7791.a7794", at = { zone = 1519, x = 53.93, y = 81.69, r = 10 }, minLevel = 40, maxLevel = 60, targets = { friend = { 14722 } },
+          lines = {
+            { kind = "accept", quest = 7791, npc = 14722 },
+            { kind = "accept", quest = 7794, npc = 14722 },
+          } },
+        { id = "a8250", at = { zone = 1519, x = 49.25, y = 87.77, r = 10 }, when = { class = "MAGE" }, minLevel = 50, maxLevel = 60, targets = { friend = { 331 } },
+          lines = {
+            { kind = "accept", quest = 8250, npc = 331 },
+          } },
+        { id = "t5022.a5048", at = { zone = 1519, x = 57.17, y = 48.07, r = 10 }, minLevel = 50, items = { 12724 }, targets = { friend = { 10782 } },
+          lines = {
+            { kind = "turnin", quest = 5022, npc = 10782, skipIfMissing = true },
+            { kind = "accept", quest = 5048, npc = 10782, ifDone = 5022, requires = { 5022 } },
+          } },
+        { id = "t5048.a5050", at = { zone = 1519, x = 60.2, y = 57.03, r = 10 }, minLevel = 50, items = { 12724, 12721 }, targets = { friend = { 3520 } },
+          lines = {
+            { kind = "turnin", quest = 5048, npc = 3520, skipIfMissing = true },
+            { kind = "accept", quest = 5050, npc = 3520, ifDone = 5048, requires = { 5048 } },
+          } },
+        { id = "a6182", at = { zone = 1519, x = 80.21, y = 38.35, r = 10 }, minLevel = 56, maxLevel = 60, targets = { friend = { 1748 } },
+          lines = {
+            { kind = "accept", quest = 6182, npc = 1748 },
+          } },
+        { id = "a8233", at = { zone = 1519, x = 77.43, y = 65.31, r = 10 }, when = { class = "ROGUE" }, minLevel = 50, maxLevel = 60, targets = { friend = { 918 } },
+          lines = {
+            { kind = "accept", quest = 8233, npc = 918 },
+          } },
+        { id = "tROGUE-56", at = { zone = 1519, x = 80.28, y = 68.58, r = 10 }, when = { class = "ROGUE" }, minLevel = 56,
+          lines = {
+            { kind = "train", level = 56, class = "ROGUE", npc = 13283 },
+          } },
+        { id = "t6182.a6183.t6183", at = { zone = 1519, x = 78.31, y = 70.74, r = 10 }, minLevel = 56, targets = { friend = { 332 } },
+          lines = {
+            { kind = "turnin", quest = 6182, npc = 332, skipIfMissing = true },
+            { kind = "accept", quest = 6183, npc = 332, ifDone = 6182, requires = { 6182 } },
+            { kind = "turnin", quest = 6183, npc = 332, skipIfMissing = true },
+          } },
+        { id = "y2-19", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Booty Bay, Stranglethorn.", when = { class = "MAGE" },
+          lines = {
+            { kind = "fly", from = 2, to = 19 },
+          } },
+        { id = "x17#4", at = { zone = 33, x = 25.7, y = 73.1, r = 15 }, text = "Take the boat from Stranglethorn Vale to The Barrens.", when = { class = "MAGE" },
+          lines = {
+            { kind = "transport", to = { zone = 17, x = 63.8, y = 38.8 }, mode = "boat", at = { zone = 33, x = 25.7, y = 73.1, r = 15 } },
+          } },
+        { id = "y80-64", at = { zone = 17, x = 63.08, y = 37.16, r = 10 }, text = "Fly from Ratchet, The Barrens to Talrendis Point, Azshara.", when = { class = "MAGE" },
+          lines = {
+            { kind = "fly", from = 80, to = 64 },
+          } },
+        { id = "t8250", at = { zone = 16, x = 28.11, y = 50.09, r = 10 }, when = { class = "MAGE" }, targets = { friend = { 8395 } },
+          lines = {
+            { kind = "turnin", quest = 8250, npc = 8395, skipIfMissing = true },
+          } },
+        { id = "o8251", at = { zone = 16, x = 57.05, y = 28.38, r = 40 }, when = { class = "MAGE" }, targets = { enemy = { 6198, 6199, 8581, 246920, 250448, 259620 } },
+          lines = {
+            { kind = "objective", quest = 8251, index = 1, item = 20028, skipIfMissing = true },
+          } },
+        { id = "t8251.a8252", at = { zone = 16, x = 29.25, y = 40.21, r = 10 }, when = { class = "MAGE" }, minLevel = 50, targets = { friend = { 8379 } },
+          lines = {
+            { kind = "turnin", quest = 8251, npc = 8379, skipIfMissing = true },
+            { kind = "accept", quest = 8252, npc = 8379, ifDone = 8251, requires = { 8251 } },
+          } },
+        { id = "o8252", at = { zone = 16, x = 43.33, y = 54.21, r = 40 }, when = { class = "MAGE" }, targets = { enemy = { 6195 } },
+          lines = {
+            { kind = "objective", quest = 8252, index = 1, item = 20029, skipIfMissing = true },
+          } },
+        { id = "t8252", at = { zone = 16, x = 29.25, y = 40.21, r = 10 }, when = { class = "MAGE" }, targets = { friend = { 8379 } },
+          lines = {
+            { kind = "turnin", quest = 8252, npc = 8379, skipIfMissing = true },
+          } },
+        { id = "h#34", text = "Use your hearthstone to return to Eastern Plaguelands.",
+          lines = {
+            { kind = "hearth", to = { zone = 139, x = 71.8, y = 48.52 } },
+          } },
+        { id = "y67-66", at = { zone = 139, x = 71.81, y = 49.6, r = 10 }, text = "Fly from Light's Hope Chapel, Eastern Plaguelands to Chillwind Camp, Western Plaguelands.",
+          lines = {
+            { kind = "fly", from = 67, to = 66 },
+          } },
+        { id = "t5066.a211.t6028", at = { zone = 28, x = 42.7, y = 84.03, r = 10 }, minLevel = 50, items = { 15788 }, targets = { friend = { 10838, 10840 } },
+          lines = {
+            { kind = "turnin", quest = 5066, npc = 10838, skipIfMissing = true },
+            { kind = "accept", quest = 211, npc = 10838, ifDone = 5097, requires = { 5097 } },
+            { kind = "turnin", quest = 6028, npc = 10840, skipIfMissing = true },
+          } },
+        { id = "o211", at = { zone = 28, x = 45.27, y = 69.21, r = 40 }, text = "Araj's Phylactery Shard is north of Commander Ashlam Valorfist.",
+          lines = {
+            { kind = "objective", quest = 211, index = 1, item = 17114, skipIfMissing = true },
+          } },
+        { id = "t211", at = { zone = 28, x = 42.7, y = 84.03, r = 10 }, targets = { friend = { 10838 } },
+          lines = {
+            { kind = "turnin", quest = 211, npc = 10838, skipIfMissing = true },
+          } },
+        { id = "t5050", at = { zone = 28, x = 38.4, y = 54.05, r = 10 }, items = { 12721 }, targets = { friend = { 10778 } },
+          lines = {
+            { kind = "turnin", quest = 5050, npc = 10778, skipIfMissing = true },
+          } },
+        { id = "a4986", at = { zone = 28, x = 53.73, y = 64.66, r = 10 }, minLevel = 51, maxLevel = 60, items = { 12663 }, targets = { friend = { 10739 } },
+          lines = {
+            { kind = "accept", quest = 4986, npc = 10739, ifDone = 4985, requires = { 4985 } },
+          } },
+        { id = "t5846", at = { zone = 28, x = 65.77, y = 75.37, r = 10 }, targets = { friend = { 11936 } },
+          lines = {
+            { kind = "turnin", quest = 5846, npc = 11936, skipIfMissing = true },
+          } },
         { id = "t8233", at = { zone = 36, x = 86.02, y = 78.88, r = 10 }, when = { class = "ROGUE" }, targets = { friend = { 6768 } },
           lines = {
             { kind = "turnin", quest = 8233, npc = 6768, skipIfMissing = true },
           } },
-        { id = "g28@28#4", at = { zone = 28, x = 42.92, y = 85.06, r = 20 }, text = "Head southwest into Western Plaguelands.",
-          lines = {
-            { kind = "goto", at = { zone = 28, x = 42.92, y = 85.06, r = 20 } },
-          } },
         { id = "y66-6", at = { zone = 28, x = 42.92, y = 85.06, r = 10 }, text = "Fly from Chillwind Camp, Western Plaguelands to Ironforge, Dun Morogh.",
           lines = {
             { kind = "fly", from = 66, to = 6 },
-          } },
-        { id = "tHUNTER-58", at = { zone = 1537, x = 69.87, y = 82.9, r = 10 }, when = { class = "HUNTER" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "HUNTER", npc = 5117 },
-          } },
-        { id = "tMAGE-58", at = { zone = 1537, x = 27.16, y = 8.57, r = 10 }, when = { class = "MAGE" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "MAGE", npc = 7312 },
-          } },
-        { id = "tROGUE-58", at = { zone = 1537, x = 51.5, y = 15.33, r = 10 }, when = { class = "ROGUE" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "ROGUE", npc = 5167 },
-          } },
-        { id = "tWARRIOR-58", at = { zone = 1537, x = 65.9, y = 88.41, r = 10 }, when = { class = "WARRIOR" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "WARRIOR", npc = 5114 },
           } },
         { id = "a3702", at = { zone = 1537, x = 38.37, y = 55.31, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 8879 } },
           lines = {
@@ -6744,44 +6665,160 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 3448, npc = 2916 },
           } },
-        { id = "t3448", at = { zone = 1537, x = 30.96, y = 4.83, r = 10 }, targets = { friend = { 8507 } },
+        { id = "t3448.a3449", at = { zone = 1537, x = 30.96, y = 4.83, r = 10 }, minLevel = 45, items = { 10445, 10444 }, targets = { friend = { 8507 } },
           lines = {
             { kind = "turnin", quest = 3448, npc = 8507, skipIfMissing = true },
+            { kind = "accept", quest = 3449, npc = 8507, ifDone = 3448, requires = { 3448 } },
           } },
         { id = "o3702.t3702", at = { zone = 1537, x = 38.37, y = 55.31, r = 40 }, targets = { enemy = { 8879 }, friend = { 8879 } },
           lines = {
             { kind = "objective", quest = 3702, index = 1, npc = 8879, skipIfMissing = true },
             { kind = "turnin", quest = 3702, npc = 8879, skipIfMissing = true },
           } },
+        { id = "y6-71", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Morgan's Vigil, Burning Steppes.",
+          lines = {
+            { kind = "fly", from = 6, to = 71 },
+          } },
+        { id = "a4283", at = { zone = 46, x = 84.56, y = 68.68, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 9177 } },
+          lines = {
+            { kind = "accept", quest = 4283, npc = 9177 },
+          } },
+        { id = "o4283", at = { zone = 46, x = 87.4, y = 49.77, r = 40 }, text = "Blackrock Medallion is north of Oralius.", targets = { enemy = { 10077, 9690, 9694, 7027, 7055, 7028 } },
+          lines = {
+            { kind = "objective", quest = 4283, index = 1, item = 11467, skipIfMissing = true },
+          } },
+        { id = "t4283", at = { zone = 46, x = 84.56, y = 68.68, r = 10 }, targets = { friend = { 9177 } },
+          lines = {
+            { kind = "turnin", quest = 4283, npc = 9177, skipIfMissing = true },
+          } },
+        { id = "o7794", at = { zone = 46, x = 59.33, y = 48.42, r = 40 }, text = "Mageweave Cloth is northwest of Oralius.",
+          lines = {
+            { kind = "objective", quest = 7794, index = 1, item = 4338, skipIfMissing = true },
+          } },
+        { id = "t4810", at = { zone = 46, x = 65.24, y = 24, r = 10 }, items = { 12445 }, targets = { friend = { 10267 } },
+          lines = {
+            { kind = "turnin", quest = 4810, npc = 10267, skipIfMissing = true },
+          } },
+        { id = "g44@44", at = { zone = 44, x = 25.5, y = 59.41, r = 20 }, text = "Head south into Redridge Mountains.",
+          lines = {
+            { kind = "goto", at = { zone = 44, x = 25.5, y = 59.41, r = 20 } },
+          } },
+        { id = "f5", at = { zone = 44, x = 25.5, y = 59.41, r = 10 },
+          lines = {
+            { kind = "getflight", node = 5, npc = 931 },
+          } },
+        { id = "t4183.t65", at = { zone = 44, x = 24.9, y = 44.45, r = 10 }, items = { 11366 }, targets = { friend = { 344, 266 } },
+          lines = {
+            { kind = "turnin", quest = 4183, npc = 344, skipIfMissing = true },
+            { kind = "turnin", quest = 65, at = { zone = 44, x = 21.39, y = 45.35, r = 10 }, npc = 266, skipIfMissing = true },
+          } },
+        { id = "y5-19", at = { zone = 44, x = 25.5, y = 59.41, r = 10 }, text = "Fly from Lakeshire, Redridge to Booty Bay, Stranglethorn.",
+          lines = {
+            { kind = "fly", from = 5, to = 19 },
+          } },
+        { id = "x17#5", at = { zone = 33, x = 25.7, y = 73.1, r = 15 }, text = "Take the boat from Stranglethorn Vale to The Barrens.",
+          lines = {
+            { kind = "transport", to = { zone = 17, x = 63.8, y = 38.8 }, mode = "boat", at = { zone = 33, x = 25.7, y = 73.1, r = 15 } },
+          } },
+        { id = "y80-64#2", at = { zone = 17, x = 63.08, y = 37.16, r = 10 }, text = "Fly from Ratchet, The Barrens to Talrendis Point, Azshara.",
+          lines = {
+            { kind = "fly", from = 80, to = 64 },
+          } },
+        { id = "o3449", at = { zone = 16, x = 36.91, y = 53.17, r = 40 }, text = "Rubbing: Rune of Beth'Amara is north of your last stop.", items = { 10445, 10444 },
+          lines = {
+            { kind = "objective", quest = 3449, index = 1, item = 10563, skipIfMissing = true },
+            { kind = "objective", quest = 3449, index = 2, item = 10564, skipIfMissing = true },
+            { kind = "objective", quest = 3449, index = 3, item = 10565, skipIfMissing = true },
+            { kind = "objective", quest = 3449, index = 4, item = 10566, skipIfMissing = true },
+          } },
+        { id = "a6804.a6805", at = { zone = 16, x = 79.28, y = 73.7, r = 10 }, minLevel = 55, maxLevel = 60, items = { 17310 }, targets = { friend = { 13278 } },
+          lines = {
+            { kind = "accept", quest = 6804, npc = 13278 },
+            { kind = "accept", quest = 6805, npc = 13278 },
+          } },
+        { id = "t3449", at = { zone = 16, x = 77.81, y = 91.4, r = 10 }, items = { 10445, 10444 }, targets = { friend = { 8392 } },
+          lines = {
+            { kind = "turnin", quest = 3449, npc = 8392, skipIfMissing = true },
+          } },
+        { id = "h#35", text = "Use your hearthstone to return to Eastern Plaguelands.",
+          lines = {
+            { kind = "hearth", to = { zone = 139, x = 71.8, y = 48.52 } },
+          } },
+        { id = "y67-7#2", at = { zone = 139, x = 71.81, y = 49.6, r = 10 }, text = "Fly from Light's Hope Chapel, Eastern Plaguelands to Menethil Harbor, Wetlands.",
+          lines = {
+            { kind = "fly", from = 67, to = 7 },
+          } },
+        { id = "x148#5", at = { zone = 11, x = 4.5, y = 56.6, r = 15 }, text = "Take the boat from Wetlands to Darkshore.",
+          lines = {
+            { kind = "transport", to = { zone = 148, x = 32.3, y = 44.1 }, mode = "boat", at = { zone = 11, x = 4.5, y = 56.6, r = 15 } },
+          } },
+        { id = "x141#6", at = { zone = 148, x = 33.3, y = 39.8, r = 15 }, text = "Take the boat from Darkshore to Teldrassil.",
+          lines = {
+            { kind = "transport", to = { zone = 141, x = 54.8, y = 97.2 }, mode = "boat", at = { zone = 148, x = 33.3, y = 39.8, r = 15 } },
+          } },
+        { id = "f27", at = { zone = 141, x = 58.4, y = 94.02, r = 10 },
+          lines = {
+            { kind = "getflight", node = 27, npc = 3838 },
+          } },
+        { id = "g1657@1657", at = { zone = 1657, x = 35.37, y = 8.4, r = 20 }, text = "Head northwest into Darnassus.",
+          lines = {
+            { kind = "goto", at = { zone = 1657, x = 35.37, y = 8.4, r = 20 } },
+          } },
+        { id = "t4986.t1015.t3789.a6761.t6761", at = { zone = 1657, x = 35.37, y = 8.4, r = 10 }, minLevel = 54, items = { 12663 }, targets = { friend = { 4217, 3516 } },
+          lines = {
+            { kind = "turnin", quest = 4986, npc = 4217, skipIfMissing = true },
+            { kind = "turnin", quest = 1015, npc = 3516, skipIfMissing = true },
+            { kind = "turnin", quest = 3789, npc = 3516, skipIfMissing = true },
+            { kind = "accept", quest = 6761, npc = 3516, ifDone = 1015, requires = { 1015 } },
+            { kind = "turnin", quest = 6761, npc = 4217, skipIfMissing = true },
+          } },
+        { id = "g141@141#3", at = { zone = 141, x = 58.4, y = 94.02, r = 20 }, text = "Head southeast into Teldrassil.",
+          lines = {
+            { kind = "goto", at = { zone = 141, x = 58.4, y = 94.02, r = 20 } },
+          } },
+        { id = "y27-26", at = { zone = 141, x = 58.4, y = 94.02, r = 10 }, text = "Fly from Rut'theran Village, Teldrassil to Auberdine, Darkshore.",
+          lines = {
+            { kind = "fly", from = 27, to = 26 },
+          } },
+        { id = "x11#6", at = { zone = 148, x = 32.3, y = 44.1, r = 15 }, text = "Take the boat from Darkshore to Wetlands.",
+          lines = {
+            { kind = "transport", to = { zone = 11, x = 4.5, y = 56.6 }, mode = "boat", at = { zone = 148, x = 32.3, y = 44.1, r = 15 } },
+          } },
+        { id = "y7-6#2", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Ironforge, Dun Morogh.",
+          lines = {
+            { kind = "fly", from = 7, to = 6 },
+          } },
         { id = "a8910", at = { zone = 1537, x = 43.53, y = 52.64, r = 10 }, when = { class = "ROGUE" }, minLevel = 58, maxLevel = 60, targets = { friend = { 16013 } },
           lines = {
             { kind = "accept", quest = 8910, npc = 16013 },
+          } },
+        { id = "x1519#8", at = { zone = 1537, x = 78, y = 51.4, r = 15 }, text = "Take the tram from Ironforge to Stormwind City.",
+          lines = {
+            { kind = "transport", to = { zone = 1519, x = 69.6, y = 30.3 }, mode = "tram", at = { zone = 1537, x = 78, y = 51.4, r = 15 } },
+          } },
+        { id = "a6184", at = { zone = 1519, x = 78.31, y = 70.74, r = 10 }, minLevel = 56, maxLevel = 60, targets = { friend = { 332 } },
+          lines = {
+            { kind = "accept", quest = 6184, npc = 332, ifDone = 6183, requires = { 6183 } },
+          } },
+        { id = "t7794", at = { zone = 1519, x = 53.93, y = 81.69, r = 10 }, targets = { friend = { 14722 } },
+          lines = {
+            { kind = "turnin", quest = 7794, npc = 14722, skipIfMissing = true },
+          } },
+        { id = "x1537#3", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 }, text = "Take the tram from Stormwind City to Ironforge.",
+          lines = {
+            { kind = "transport", to = { zone = 1537, x = 78, y = 51.4 }, mode = "tram", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 } },
           } },
         { id = "y6-66", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Chillwind Camp, Western Plaguelands.",
           lines = {
             { kind = "fly", from = 6, to = 66 },
           } },
-        { id = "t6184.a6185.t6028.t5066.a211", at = { zone = 28, x = 43.61, y = 84.51, r = 10 }, minLevel = 56, items = { 15788 }, targets = { friend = { 12425, 10840, 10838 } },
+        { id = "t6184.a6185.a5538", at = { zone = 28, x = 43.61, y = 84.51, r = 10 }, minLevel = 56, items = { 14628 }, targets = { friend = { 12425, 11056 } },
           lines = {
             { kind = "turnin", quest = 6184, npc = 12425, skipIfMissing = true },
             { kind = "accept", quest = 6185, npc = 12425, ifDone = 6184, requires = { 6184 } },
-            { kind = "turnin", quest = 6028, at = { zone = 28, x = 42.97, y = 83.55, r = 10 }, npc = 10840, skipIfMissing = true },
-            { kind = "turnin", quest = 5066, at = { zone = 28, x = 42.7, y = 84.03, r = 10 }, npc = 10838, skipIfMissing = true },
-            { kind = "accept", quest = 211, at = { zone = 28, x = 42.7, y = 84.03, r = 10 }, npc = 10838, ifDone = 5097, requires = { 5097 } },
+            { kind = "accept", quest = 5538, at = { zone = 28, x = 42.66, y = 83.77, r = 10 }, npc = 11056, ifDone = 5537, requires = { 5537 } },
           } },
-        { id = "o211", at = { zone = 28, x = 45.27, y = 69.21, r = 40 }, text = "Araj's Phylactery Shard is north of Flint Shadowmore.",
-          lines = {
-            { kind = "objective", quest = 211, index = 1, item = 17114, skipIfMissing = true },
-          } },
-        { id = "t5050", at = { zone = 28, x = 38.4, y = 54.05, r = 10 }, items = { 12721 }, targets = { friend = { 10778 } },
-          lines = {
-            { kind = "turnin", quest = 5050, npc = 10778, skipIfMissing = true },
-          } },
-        { id = "t5846", at = { zone = 28, x = 65.77, y = 75.37, r = 10 }, targets = { friend = { 11936 } },
-          lines = {
-            { kind = "turnin", quest = 5846, npc = 11936, skipIfMissing = true },
-          } },
-        { id = "o6185", at = { zone = 139, x = 24.28, y = 68.11, r = 40 }, text = "SI:7 Insignia (Rutger) is northeast of Artist Renfray.", targets = { enemy = { 11878 } },
+        { id = "o6185", at = { zone = 139, x = 24.28, y = 68.11, r = 40 }, text = "SI:7 Insignia (Rutger) is northeast of Flint Shadowmore.", targets = { enemy = { 11878 } },
           lines = {
             { kind = "objective", quest = 6185, index = 1, item = 16003, skipIfMissing = true },
             { kind = "objective", quest = 6185, index = 2, item = 16001, skipIfMissing = true },
@@ -6789,18 +6826,18 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 6185, index = 4, npc = 11878, skipIfMissing = true },
             { kind = "objective", quest = 6185, index = 5, skipIfMissing = true },
           } },
-        { id = "h#43", text = "Use your hearthstone to return to Eastern Plaguelands.",
+        { id = "h#36", text = "Use your hearthstone to return to Eastern Plaguelands.",
           lines = {
             { kind = "hearth", to = { zone = 139, x = 71.8, y = 48.52 } },
           } },
-        { id = "y67-66", at = { zone = 139, x = 71.81, y = 49.6, r = 10 }, text = "Fly from Light's Hope Chapel, Eastern Plaguelands to Chillwind Camp, Western Plaguelands.",
+        { id = "y67-66#2", at = { zone = 139, x = 71.81, y = 49.6, r = 10 }, text = "Fly from Light's Hope Chapel, Eastern Plaguelands to Chillwind Camp, Western Plaguelands.",
           lines = {
             { kind = "fly", from = 67, to = 66 },
           } },
-        { id = "t211.t6185", at = { zone = 28, x = 42.7, y = 84.03, r = 10 }, targets = { friend = { 10838, 12425 } },
+        { id = "t6185.a6186", at = { zone = 28, x = 43.61, y = 84.51, r = 10 }, minLevel = 56, targets = { friend = { 12425 } },
           lines = {
-            { kind = "turnin", quest = 211, npc = 10838, skipIfMissing = true },
-            { kind = "turnin", quest = 6185, at = { zone = 28, x = 43.61, y = 84.51, r = 10 }, npc = 12425, skipIfMissing = true },
+            { kind = "turnin", quest = 6185, npc = 12425, skipIfMissing = true },
+            { kind = "accept", quest = 6186, npc = 12425, ifDone = 6185, requires = { 6185 } },
           } },
       },
     },
@@ -6820,47 +6857,106 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 32, to = 73 },
           } },
-        { id = "a8304.a8857.a8859.a8858", at = { zone = 1377, x = 49.2, y = 34.18, r = 10 }, minLevel = 58, maxLevel = 60, items = { 21534, 21533, 21535 }, targets = { friend = { 15181, 15798, 15797, 15799 } },
+        { id = "a8304", at = { zone = 1377, x = 49.2, y = 34.18, r = 10 }, minLevel = 58, maxLevel = 60, targets = { friend = { 15181 } },
           lines = {
             { kind = "accept", quest = 8304, npc = 15181 },
+          } },
+        { id = "a8318.a8857.a8858", at = { zone = 1377, x = 48.57, y = 37.78, r = 10 }, minLevel = 57, maxLevel = 60, items = { 21534, 21535 }, targets = { friend = { 15306, 15798, 15799 } },
+          lines = {
+            { kind = "accept", quest = 8318, npc = 15306 },
             { kind = "accept", quest = 8857, at = { zone = 1377, x = 49.45, y = 37.25, r = 10 }, npc = 15798 },
-            { kind = "accept", quest = 8859, at = { zone = 1377, x = 49.47, y = 37.3, r = 10 }, npc = 15797 },
             { kind = "accept", quest = 8858, at = { zone = 1377, x = 49.55, y = 37.31, r = 10 }, npc = 15799 },
           } },
-        { id = "t8275.b@1377", at = { zone = 1377, x = 51.15, y = 38.29, r = 10 }, targets = { friend = { 15191 } },
+        { id = "t8275.a8283.b@1377", at = { zone = 1377, x = 51.15, y = 38.29, r = 10 }, minLevel = 54, targets = { friend = { 15191 } },
           lines = {
             { kind = "turnin", quest = 8275, npc = 15191, skipIfMissing = true },
+            { kind = "accept", quest = 8283, object = 180448 },
             { kind = "sethearth", at = { zone = 1377, x = 51.89, y = 39.16, r = 10 }, npc = 15174 },
           } },
-        { id = "o8304", at = { zone = 1377, x = 40.81, y = 88.86, r = 40 }, text = "Frankal Stonebridge is south of Windcaller Proudhorn.", targets = { enemy = { 15171, 15170 } },
+        { id = "o8318", at = { zone = 1377, x = 45.84, y = 47.87, r = 40 }, text = "Encrypted Twilight Text is southwest of Windcaller Proudhorn.", targets = { enemy = { 11881, 11880, 11804, 11882, 14479, 15541 } },
+          lines = {
+            { kind = "objective", quest = 8318, index = 1, item = 20404, skipIfMissing = true },
+          } },
+        { id = "a9419", at = { zone = 1377, x = 33.29, y = 51.06, r = 10 }, maxLevel = 60, targets = { friend = { 17080 } },
+          lines = {
+            { kind = "accept", quest = 9419, npc = 17080 },
+          } },
+        { id = "o6805", at = { zone = 1377, x = 24.41, y = 22, r = 40 }, text = "The Dust Stormers are northwest of Marshal Bluewall.", targets = { enemy = { 11744, 11746 } },
+          lines = {
+            { kind = "objective", quest = 6805, index = 1, npc = 11744, skipIfMissing = true },
+            { kind = "objective", quest = 6805, index = 2, npc = 11746, skipIfMissing = true },
+          } },
+        { id = "o9419.t9419", at = { zone = 1377, x = 32.95, y = 50.81, r = 40 }, targets = { enemy = { 17090 }, friend = { 17080 } },
+          lines = {
+            { kind = "objective", quest = 9419, index = 1, npc = 17090, skipIfMissing = true },
+            { kind = "turnin", quest = 9419, npc = 17080, skipIfMissing = true },
+          } },
+        { id = "o8304", at = { zone = 1377, x = 40.81, y = 88.86, r = 40 }, text = "Frankal Stonebridge is south of Marshal Bluewall.", targets = { enemy = { 15171, 15170 } },
           lines = {
             { kind = "objective", quest = 8304, index = 1, npc = 15171, skipIfMissing = true },
             { kind = "objective", quest = 8304, index = 2, npc = 15170, skipIfMissing = true },
           } },
-        { id = "t8304", at = { zone = 1377, x = 49.2, y = 34.18, r = 10 }, targets = { friend = { 15181 } },
+        { id = "o8283", at = { zone = 1377, x = 45.07, y = 92.31, r = 40 }, targets = { enemy = { 15196 } },
           lines = {
-            { kind = "turnin", quest = 8304, npc = 15181, skipIfMissing = true },
+            { kind = "objective", quest = 8283, index = 1, item = 20385 },
+          } },
+        { id = "a8279", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, minLevel = 54, maxLevel = 60, targets = { friend = { 15194 } },
+          lines = {
+            { kind = "accept", quest = 8279, npc = 15194, ifDone = 8285, requires = { 8285 } },
+          } },
+        { id = "t8283.t8304", at = { zone = 1377, x = 50.75, y = 33.65, r = 10 }, targets = { friend = { 15182, 15181 } },
+          lines = {
+            { kind = "turnin", quest = 8283, npc = 15182 },
+            { kind = "turnin", quest = 8304, at = { zone = 1377, x = 49.2, y = 34.18, r = 10 }, npc = 15181, skipIfMissing = true },
+          } },
+        { id = "t8318", at = { zone = 1377, x = 48.57, y = 37.78, r = 10 }, targets = { friend = { 15306 } },
+          lines = {
+            { kind = "turnin", quest = 8318, npc = 15306, skipIfMissing = true },
+          } },
+        { id = "o8279", at = { zone = 1377, x = 26.35, y = 36.62, r = 40 }, text = "Twilight Lexicon - Chapter 1 is west of Bor Wildmane.", targets = { enemy = { 15200, 11804, 11803 } },
+          lines = {
+            { kind = "objective", quest = 8279, index = 1, item = 20394, skipIfMissing = true },
+            { kind = "objective", quest = 8279, index = 2, item = 20395, skipIfMissing = true },
+            { kind = "objective", quest = 8279, index = 3, item = 20396, skipIfMissing = true },
+          } },
+        { id = "h#37", text = "Use your hearthstone to return to Silithus.",
+          lines = {
+            { kind = "hearth", to = { zone = 1377, x = 51.89, y = 39.16 } },
+          } },
+        { id = "t8279.a8287.a8323", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, minLevel = 54, items = { 20405 }, targets = { friend = { 15194 } },
+          lines = {
+            { kind = "turnin", quest = 8279, npc = 15194, skipIfMissing = true },
+            { kind = "accept", quest = 8287, npc = 15194, ifDone = 8279, requires = { 8279 } },
+            { kind = "accept", quest = 8323, npc = 15194, ifDone = 8279, requires = { 8279 } },
           } },
         { id = "a8309.a8310", at = { zone = 1377, x = 41.28, y = 88.45, r = 10 }, minLevel = 58, maxLevel = 60, items = { 20453 }, targets = { friend = { 15170, 15171 } },
           lines = {
             { kind = "accept", quest = 8309, npc = 15170, ifDone = 8304, requires = { 8304 } },
             { kind = "accept", quest = 8310, npc = 15171, ifDone = 8304, requires = { 8304 } },
           } },
-        { id = "o8310", at = { zone = 1377, x = 49.04, y = 36.73, r = 40 }, text = "Hive'Ashi Silithid Brain is north of Rutgar Glyphshaper.", targets = { enemy = { 11698, 11723, 11724, 11722, 11721, 13301 } },
+        { id = "o8323", at = { zone = 1377, x = 45.84, y = 47.87, r = 40 }, text = "Encrypted Twilight Text is north of Rutgar Glyphshaper.", targets = { enemy = { 11881, 11880, 11804, 11882, 14479, 15541 } },
           lines = {
-            { kind = "objective", quest = 8310, index = 1, item = 20457, skipIfMissing = true },
-            { kind = "objective", quest = 8310, index = 2, item = 20458, skipIfMissing = true },
-            { kind = "objective", quest = 8310, index = 3, item = 20459, skipIfMissing = true },
+            { kind = "objective", quest = 8323, index = 1, item = 20404, skipIfMissing = true },
           } },
-        { id = "o8309", at = { zone = 1377, x = 50.87, y = 26.76, r = 40 }, text = "Hive'Ashi Rubbing is north of your last stop.", items = { 20453 },
+        { id = "t8287", at = { zone = 1377, x = 49.2, y = 34.18, r = 10 }, items = { 20405 }, targets = { friend = { 15181 } },
+          lines = {
+            { kind = "turnin", quest = 8287, npc = 15181, skipIfMissing = true },
+          } },
+        { id = "o8309", at = { zone = 1377, x = 50.87, y = 26.76, r = 40 }, items = { 20453 },
           lines = {
             { kind = "objective", quest = 8309, index = 1, item = 20455, skipIfMissing = true },
             { kind = "objective", quest = 8309, index = 2, item = 20454, skipIfMissing = true },
             { kind = "objective", quest = 8309, index = 3, item = 20456, skipIfMissing = true },
           } },
-        { id = "h#44", text = "Use your hearthstone to return to Silithus.",
+        { id = "o8310", at = { zone = 1377, x = 49.04, y = 36.73, r = 40 }, text = "Hive'Ashi Silithid Brain is south of your last stop.", targets = { enemy = { 11698, 11723, 11724, 11722, 11721, 13301 } },
           lines = {
-            { kind = "hearth", to = { zone = 1377, x = 51.89, y = 39.16 } },
+            { kind = "objective", quest = 8310, index = 1, item = 20457, skipIfMissing = true },
+            { kind = "objective", quest = 8310, index = 2, item = 20458, skipIfMissing = true },
+            { kind = "objective", quest = 8310, index = 3, item = 20459, skipIfMissing = true },
+          } },
+        { id = "t8323", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, targets = { friend = { 15194 } },
+          lines = {
+            { kind = "turnin", quest = 8323, npc = 15194, skipIfMissing = true },
           } },
         { id = "t8309.t8310", at = { zone = 1377, x = 41.28, y = 88.45, r = 10 }, items = { 20453, 20463 }, targets = { friend = { 15170, 15171 } },
           lines = {
@@ -6909,91 +7005,28 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 8316, npc = 15183, ifDone = 8315, requires = { 8315 } },
             { kind = "turnin", quest = 8316, npc = 15183, skipIfMissing = true },
           } },
-        { id = "y73-32#2", at = { zone = 1377, x = 50.58, y = 34.45, r = 10 }, text = "Fly from Cenarion Hold, Silithus to Theramore, Dustwallow Marsh.",
+        { id = "y73-39", at = { zone = 1377, x = 50.58, y = 34.45, r = 10 }, text = "Fly from Cenarion Hold, Silithus to Gadgetzan, Tanaris.",
           lines = {
-            { kind = "fly", from = 73, to = 32 },
+            { kind = "fly", from = 73, to = 39 },
           } },
-        { id = "x11#7", at = { zone = 15, x = 71.7, y = 56.6, r = 15 }, text = "Take the boat from Dustwallow Marsh to Wetlands.",
+        { id = "t5538", at = { zone = 440, x = 51.46, y = 28.81, r = 10 }, items = { 14628 }, targets = { friend = { 5411 } },
           lines = {
-            { kind = "transport", to = { zone = 11, x = 4.7, y = 63.7 }, mode = "boat", at = { zone = 15, x = 71.7, y = 56.6, r = 15 } },
+            { kind = "turnin", quest = 5538, npc = 5411, skipIfMissing = true },
           } },
-        { id = "y7-74", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Thorium Point, Searing Gorge.",
+        { id = "y39-52", at = { zone = 440, x = 51.01, y = 29.34, r = 10 }, text = "Fly from Gadgetzan, Tanaris to Everlook, Winterspring.",
           lines = {
-            { kind = "fly", from = 7, to = 74 },
+            { kind = "fly", from = 39, to = 52 },
           } },
-        { id = "t8858", at = { zone = 51, x = 38.12, y = 26.97, r = 10 }, items = { 21535 }, targets = { friend = { 14625 } },
-          lines = {
-            { kind = "turnin", quest = 8858, npc = 14625, skipIfMissing = true },
-          } },
-        { id = "a3378", at = { zone = 51, x = 29.57, y = 26.29, r = 10 }, minLevel = 40, maxLevel = 58, targets = { friend = { 8436 } },
-          lines = {
-            { kind = "accept", quest = 3378, npc = 8436, ifDone = 3377, requires = { 3377 } },
-          } },
-        { id = "o3378", at = { zone = 51, x = 21.71, y = 34.88, r = 40 }, text = "Prayer to Elune is southwest of Zamael Lunthistle.", targets = { enemy = { 5861, 5860, 5862, 8419 } },
-          lines = {
-            { kind = "objective", quest = 3378, index = 1, item = 10458, skipIfMissing = true },
-          } },
-        { id = "y74-7", at = { zone = 51, x = 37.94, y = 30.86, r = 10 }, text = "Fly from Thorium Point, Searing Gorge to Menethil Harbor, Wetlands.",
-          lines = {
-            { kind = "fly", from = 74, to = 7 },
-          } },
-        { id = "x148#5", at = { zone = 11, x = 4.5, y = 56.6, r = 15 }, text = "Take the boat from Wetlands to Darkshore.",
-          lines = {
-            { kind = "transport", to = { zone = 148, x = 32.3, y = 44.1 }, mode = "boat", at = { zone = 11, x = 4.5, y = 56.6, r = 15 } },
-          } },
-        { id = "x141#7", at = { zone = 148, x = 33.3, y = 39.8, r = 15 }, text = "Take the boat from Darkshore to Teldrassil.",
-          lines = {
-            { kind = "transport", to = { zone = 141, x = 54.8, y = 97.2 }, mode = "boat", at = { zone = 148, x = 33.3, y = 39.8, r = 15 } },
-          } },
-        { id = "f27", at = { zone = 141, x = 58.4, y = 94.02, r = 10 },
-          lines = {
-            { kind = "getflight", node = 27, npc = 3838 },
-          } },
-        { id = "g1657@1657", at = { zone = 1657, x = 35.37, y = 8.4, r = 20 }, text = "Head northwest into Darnassus.",
-          lines = {
-            { kind = "goto", at = { zone = 1657, x = 35.37, y = 8.4, r = 20 } },
-          } },
-        { id = "tDRUID-58", at = { zone = 1657, x = 35.37, y = 8.4, r = 10 }, when = { class = "DRUID" }, minLevel = 58,
-          lines = {
-            { kind = "train", level = 58, class = "DRUID", npc = 4217 },
-          } },
-        { id = "t4986.t1015.t3789.a6761.t6761.a6762", at = { zone = 1657, x = 35.37, y = 8.4, r = 10 }, minLevel = 54, items = { 12663 }, targets = { friend = { 4217, 3516 } },
-          lines = {
-            { kind = "turnin", quest = 4986, npc = 4217, skipIfMissing = true },
-            { kind = "turnin", quest = 1015, npc = 3516, skipIfMissing = true },
-            { kind = "turnin", quest = 3789, npc = 3516, skipIfMissing = true },
-            { kind = "accept", quest = 6761, npc = 3516, ifDone = 1015, requires = { 1015 } },
-            { kind = "turnin", quest = 6761, npc = 4217, skipIfMissing = true },
-            { kind = "accept", quest = 6762, npc = 4217, ifDone = 6761, requires = { 6761 } },
-          } },
-        { id = "t3378", at = { zone = 1657, x = 38.33, y = 80.95, r = 10 }, targets = { friend = { 4090 } },
-          lines = {
-            { kind = "turnin", quest = 3378, npc = 4090, skipIfMissing = true },
-          } },
-        { id = "g141@141", at = { zone = 141, x = 58.4, y = 94.02, r = 20 }, text = "Head southeast into Teldrassil.",
-          lines = {
-            { kind = "goto", at = { zone = 141, x = 58.4, y = 94.02, r = 20 } },
-          } },
-        { id = "y27-52", at = { zone = 141, x = 58.4, y = 94.02, r = 10 }, text = "Fly from Rut'theran Village, Teldrassil to Everlook, Winterspring.",
-          lines = {
-            { kind = "fly", from = 27, to = 52 },
-          } },
-        { id = "a969.a4810.b@618", at = { zone = 618, x = 61.92, y = 38.3, r = 10 }, minLevel = 55, items = { 12445 }, targets = { friend = { 10307, 10468 } },
+        { id = "a969.b@618", at = { zone = 618, x = 61.92, y = 38.3, r = 10 }, minLevel = 55, targets = { friend = { 10307 } },
           lines = {
             { kind = "accept", quest = 969, npc = 10307 },
-            { kind = "accept", quest = 4810, npc = 10468, ifDone = 4809, requires = { 4809 } },
             { kind = "sethearth", at = { zone = 618, x = 61.36, y = 38.83, r = 10 }, npc = 11118 },
           } },
         { id = "o969", at = { zone = 618, x = 61.84, y = 68.3, r = 40 }, text = "Frostmaul Shards are south of Witch Doctor Mau'ari.", targets = { enemy = { 7429, 7428, 10198, 269213 } },
           lines = {
             { kind = "objective", quest = 969, index = 1, item = 12334 },
           } },
-        { id = "o8910", at = { zone = 618, x = 51.08, y = 11.98, r = 40 }, text = "Winterspring Blood Sample is north of your last stop.", when = { class = "ROGUE" }, targets = { enemy = { 7430, 7432, 7433, 7434, 7431, 7445 } },
-          lines = {
-            { kind = "objective", quest = 8910, index = 1, item = 21928, skipIfMissing = true },
-            { kind = "objective", quest = 8910, index = 2, item = 16710, skipIfMissing = true },
-          } },
-        { id = "h#45", text = "Use your hearthstone to return to Winterspring.",
+        { id = "h#38", text = "Use your hearthstone to return to Winterspring.",
           lines = {
             { kind = "hearth", to = { zone = 618, x = 61.36, y = 38.83 } },
           } },
@@ -7003,50 +7036,41 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 975, npc = 10307, requires = { 969 } },
             { kind = "turnin", quest = 975, npc = 10307 },
           } },
-        { id = "y52-65", at = { zone = 618, x = 62.33, y = 36.61, r = 10 }, text = "Fly from Everlook, Winterspring to Talonbranch Glade, Felwood.",
+        { id = "y52-80", at = { zone = 618, x = 62.33, y = 36.61, r = 10 }, text = "Fly from Everlook, Winterspring to Ratchet, The Barrens.",
           lines = {
-            { kind = "fly", from = 52, to = 65 },
+            { kind = "fly", from = 52, to = 80 },
           } },
-        { id = "g493@493#3", at = { zone = 493, x = 48.1, y = 67.34, r = 20 }, text = "Head west into Moonglade.",
+        { id = "x33#4", at = { zone = 17, x = 63.8, y = 38.8, r = 15 }, text = "Take the boat from The Barrens to Stranglethorn Vale.",
           lines = {
-            { kind = "goto", at = { zone = 493, x = 48.1, y = 67.34, r = 20 } },
+            { kind = "transport", to = { zone = 33, x = 25.7, y = 73.1 }, mode = "boat", at = { zone = 17, x = 63.8, y = 38.8, r = 15 } },
           } },
-        { id = "f49", at = { zone = 493, x = 48.1, y = 67.34, r = 10 },
+        { id = "tROGUE-58", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 58,
           lines = {
-            { kind = "getflight", node = 49, npc = 10897 },
+            { kind = "train", level = 58, class = "ROGUE", npc = 1411 },
           } },
-        { id = "t6762", at = { zone = 493, x = 51.69, y = 45.1, r = 10 }, targets = { friend = { 11801 } },
+        { id = "t8857", at = { zone = 33, x = 28.36, y = 76.35, r = 10 }, items = { 21534 }, targets = { friend = { 7406 } },
           lines = {
-            { kind = "turnin", quest = 6762, npc = 11801, skipIfMissing = true },
+            { kind = "turnin", quest = 8857, npc = 7406, skipIfMissing = true },
           } },
-        { id = "y49-26#3", at = { zone = 493, x = 48.1, y = 67.34, r = 10 }, text = "Fly from Moonglade to Auberdine, Darkshore.",
+        { id = "y19-4", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Sentinel Hill, Westfall.",
           lines = {
-            { kind = "fly", from = 49, to = 26 },
+            { kind = "fly", from = 19, to = 4 },
           } },
-        { id = "x11#8", at = { zone = 148, x = 32.3, y = 44.1, r = 15 }, text = "Take the boat from Darkshore to Wetlands.",
+        { id = "o7791", at = { zone = 40, x = 42.92, y = 42.92, r = 40 }, text = "Wool Cloth is north of your last stop.",
           lines = {
-            { kind = "transport", to = { zone = 11, x = 4.5, y = 56.6 }, mode = "boat", at = { zone = 148, x = 32.3, y = 44.1, r = 15 } },
+            { kind = "objective", quest = 7791, index = 1, item = 2592, skipIfMissing = true },
           } },
-        { id = "y7-8#2", at = { zone = 11, x = 9.49, y = 59.69, r = 10 }, text = "Fly from Menethil Harbor, Wetlands to Thelsamar, Loch Modan.",
+        { id = "t67", at = { zone = 40, x = 41.51, y = 66.73, r = 10 },
           lines = {
-            { kind = "fly", from = 7, to = 8 },
+            { kind = "turnin", quest = 67, object = 3643, skipIfMissing = true },
           } },
-        { id = "y8-6", at = { zone = 38, x = 33.94, y = 50.95, r = 10 }, text = "Fly from Thelsamar, Loch Modan to Ironforge, Dun Morogh.", when = { class = "ROGUE" },
+        { id = "y4-74", at = { zone = 40, x = 56.55, y = 52.64, r = 10 }, text = "Fly from Sentinel Hill, Westfall to Thorium Point, Searing Gorge.",
           lines = {
-            { kind = "fly", from = 8, to = 6 },
+            { kind = "fly", from = 4, to = 74 },
           } },
-        { id = "t8910.a8922", at = { zone = 1537, x = 43.53, y = 52.64, r = 10 }, when = { class = "ROGUE" }, minLevel = 58, items = { 21985 }, targets = { friend = { 16013 } },
+        { id = "t8858", at = { zone = 51, x = 38.12, y = 26.97, r = 10 }, items = { 21535 }, targets = { friend = { 14625 } },
           lines = {
-            { kind = "turnin", quest = 8910, npc = 16013, skipIfMissing = true },
-            { kind = "accept", quest = 8922, npc = 16013, ifDone = 8910, requires = { 8910 } },
-          } },
-        { id = "y6-8", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Thelsamar, Loch Modan.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "fly", from = 6, to = 8 },
-          } },
-        { id = "g3@3#2", at = { zone = 3, x = 61.94, y = 54.26, r = 20 }, text = "Head southeast into Badlands.",
-          lines = {
-            { kind = "goto", at = { zone = 3, x = 61.94, y = 54.26, r = 20 } },
+            { kind = "turnin", quest = 8858, npc = 14625, skipIfMissing = true },
           } },
         { id = "a717", at = { zone = 3, x = 61.94, y = 54.26, r = 10 }, minLevel = 40, maxLevel = 58, items = { 4640, 4843, 4844, 4845 }, targets = { friend = { 2888 } },
           lines = {
@@ -7073,18 +7097,6 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "transport", to = { zone = 15, x = 71.7, y = 56.6 }, mode = "boat", at = { zone = 11, x = 4.7, y = 63.7, r = 15 } },
           } },
-        { id = "y32-39#3", at = { zone = 15, x = 67.48, y = 51.3, r = 10 }, text = "Fly from Theramore, Dustwallow Marsh to Gadgetzan, Tanaris.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "fly", from = 32, to = 39 },
-          } },
-        { id = "t8922", at = { zone = 440, x = 52.47, y = 27.23, r = 10 }, when = { class = "ROGUE" }, items = { 21985 }, targets = { friend = { 16014 } },
-          lines = {
-            { kind = "turnin", quest = 8922, npc = 16014, skipIfMissing = true },
-          } },
-        { id = "y39-32#2", at = { zone = 440, x = 51.01, y = 29.34, r = 10 }, text = "Fly from Gadgetzan, Tanaris to Theramore, Dustwallow Marsh.", when = { class = "ROGUE" },
-          lines = {
-            { kind = "fly", from = 39, to = 32 },
-          } },
         { id = "y32-41", at = { zone = 15, x = 67.48, y = 51.3, r = 10 }, text = "Fly from Theramore, Dustwallow Marsh to Feathermoon, Feralas.",
           lines = {
             { kind = "fly", from = 32, to = 41 },
@@ -7099,102 +7111,103 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 2845, npc = 7765, skipIfMissing = true },
           } },
-        { id = "y41-80", at = { zone = 357, x = 30.24, y = 43.25, r = 10 }, text = "Fly from Feathermoon, Feralas to Ratchet, The Barrens.",
+        { id = "h#39", text = "Use your hearthstone to return to Winterspring.",
           lines = {
-            { kind = "fly", from = 41, to = 80 },
+            { kind = "hearth", to = { zone = 618, x = 61.36, y = 38.83 } },
           } },
-        { id = "x33#3", at = { zone = 17, x = 63.8, y = 38.8, r = 15 }, text = "Take the boat from The Barrens to Stranglethorn Vale.",
+        { id = "o8910", at = { zone = 618, x = 51.08, y = 11.98, r = 40 }, when = { class = "ROGUE" }, targets = { enemy = { 7430, 7432, 7433, 7434, 7431, 7445 } },
+          lines = {
+            { kind = "objective", quest = 8910, index = 1, item = 21928, skipIfMissing = true },
+            { kind = "objective", quest = 8910, index = 2, item = 16710, skipIfMissing = true },
+          } },
+        { id = "y52-64#2", at = { zone = 618, x = 62.33, y = 36.61, r = 10 }, text = "Fly from Everlook, Winterspring to Talrendis Point, Azshara.",
+          lines = {
+            { kind = "fly", from = 52, to = 64 },
+          } },
+        { id = "t6805", at = { zone = 16, x = 79.28, y = 73.7, r = 10 }, targets = { friend = { 13278 } },
+          lines = {
+            { kind = "turnin", quest = 6805, npc = 13278, skipIfMissing = true },
+          } },
+        { id = "y64-80", at = { zone = 16, x = 11.9, y = 77.59, r = 10 }, text = "Fly from Talrendis Point, Azshara to Ratchet, The Barrens.",
+          lines = {
+            { kind = "fly", from = 64, to = 80 },
+          } },
+        { id = "x33#5", at = { zone = 17, x = 63.8, y = 38.8, r = 15 }, text = "Take the boat from The Barrens to Stranglethorn Vale.",
           lines = {
             { kind = "transport", to = { zone = 33, x = 25.7, y = 73.1 }, mode = "boat", at = { zone = 17, x = 63.8, y = 38.8, r = 15 } },
           } },
-        { id = "t8857", at = { zone = 33, x = 28.36, y = 76.35, r = 10 }, items = { 21534 }, targets = { friend = { 7406 } },
+        { id = "y19-2", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Stormwind, Elwynn.",
           lines = {
-            { kind = "turnin", quest = 8857, npc = 7406, skipIfMissing = true },
+            { kind = "fly", from = 19, to = 2 },
           } },
-        { id = "y19-12#2", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Darkshire, Duskwood.",
+        { id = "tMAGE-58", at = { zone = 1519, x = 49.56, y = 85.8, r = 10 }, when = { class = "MAGE" }, minLevel = 58,
           lines = {
-            { kind = "fly", from = 19, to = 12 },
+            { kind = "train", level = 58, class = "MAGE", npc = 5497 },
           } },
-        { id = "g44@44", at = { zone = 44, x = 25.5, y = 59.41, r = 20 }, text = "Head northeast into Redridge Mountains.",
+        { id = "t7791", at = { zone = 1519, x = 53.93, y = 81.69, r = 10 }, targets = { friend = { 14722 } },
           lines = {
-            { kind = "goto", at = { zone = 44, x = 25.5, y = 59.41, r = 20 } },
+            { kind = "turnin", quest = 7791, npc = 14722, skipIfMissing = true },
           } },
-        { id = "f5", at = { zone = 44, x = 25.5, y = 59.41, r = 10 },
+        { id = "tHUNTER-58", at = { zone = 1519, x = 68, y = 35.99, r = 10 }, when = { class = "HUNTER" }, minLevel = 58,
           lines = {
-            { kind = "getflight", node = 5, npc = 931 },
+            { kind = "train", level = 58, class = "HUNTER", npc = 5517 },
           } },
-        { id = "t65.t4183", at = { zone = 44, x = 21.39, y = 45.35, r = 10 }, items = { 11366 }, targets = { friend = { 266, 344 } },
+        { id = "tWARRIOR-58", at = { zone = 1519, x = 80.41, y = 59.8, r = 10 }, when = { class = "WARRIOR" }, minLevel = 58,
           lines = {
-            { kind = "turnin", quest = 65, npc = 266, skipIfMissing = true },
-            { kind = "turnin", quest = 4183, at = { zone = 44, x = 24.9, y = 44.45, r = 10 }, npc = 344, skipIfMissing = true },
+            { kind = "train", level = 58, class = "WARRIOR", npc = 5480 },
           } },
-        { id = "y5-71", at = { zone = 44, x = 25.5, y = 59.41, r = 10 }, text = "Fly from Lakeshire, Redridge to Morgan's Vigil, Burning Steppes.",
+        { id = "t6186", at = { zone = 1519, x = 80.21, y = 38.35, r = 10 }, targets = { friend = { 1748 } },
           lines = {
-            { kind = "fly", from = 5, to = 71 },
+            { kind = "turnin", quest = 6186, npc = 1748, skipIfMissing = true },
           } },
-        { id = "a4283", at = { zone = 46, x = 84.56, y = 68.68, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 9177 } },
+        { id = "x1537#4", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 }, text = "Take the tram from Stormwind City to Ironforge.",
           lines = {
-            { kind = "accept", quest = 4283, npc = 9177 },
+            { kind = "transport", to = { zone = 1537, x = 78, y = 51.4 }, mode = "tram", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 } },
           } },
-        { id = "o4283", at = { zone = 46, x = 87.4, y = 49.77, r = 40 }, text = "Blackrock Medallion is north of Oralius.", targets = { enemy = { 10077, 9690, 9694, 7027, 7055, 7028 } },
+        { id = "t8910.a8922", at = { zone = 1537, x = 43.53, y = 52.64, r = 10 }, when = { class = "ROGUE" }, minLevel = 58, items = { 21985 }, targets = { friend = { 16013 } },
           lines = {
-            { kind = "objective", quest = 4283, index = 1, item = 11467, skipIfMissing = true },
+            { kind = "turnin", quest = 8910, npc = 16013, skipIfMissing = true },
+            { kind = "accept", quest = 8922, npc = 16013, ifDone = 8910, requires = { 8910 } },
           } },
-        { id = "t4283", at = { zone = 46, x = 84.56, y = 68.68, r = 10 }, targets = { friend = { 9177 } },
+        { id = "y6-67", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Light's Hope Chapel, Eastern Plaguelands.",
           lines = {
-            { kind = "turnin", quest = 4283, npc = 9177, skipIfMissing = true },
+            { kind = "fly", from = 6, to = 67 },
           } },
-        { id = "t4810", at = { zone = 46, x = 65.24, y = 24, r = 10 }, items = { 12445 }, targets = { friend = { 10267 } },
+        { id = "o6804", at = { zone = 139, x = 54.02, y = 68.69, r = 40 }, text = "Discordant Bracers are northeast of your last stop.", items = { 17310 }, targets = { enemy = { 8520, 8519, 8522, 8521, 13279 } },
           lines = {
-            { kind = "turnin", quest = 4810, npc = 10267, skipIfMissing = true },
+            { kind = "objective", quest = 6804, index = 1, item = 17309, skipIfMissing = true },
           } },
-        { id = "y71-67", at = { zone = 46, x = 84.33, y = 68.33, r = 10 }, text = "Fly from Morgan's Vigil, Burning Steppes to Light's Hope Chapel, Eastern Plaguelands.",
+        { id = "y67-7#3", at = { zone = 139, x = 71.81, y = 49.6, r = 10 }, text = "Fly from Light's Hope Chapel, Eastern Plaguelands to Menethil Harbor, Wetlands.",
           lines = {
-            { kind = "fly", from = 71, to = 67 },
+            { kind = "fly", from = 67, to = 7 },
           } },
-        { id = "t8859", at = { zone = 139, x = 71.9, y = 48.41, r = 10 }, items = { 21533 }, targets = { friend = { 11034 } },
+        { id = "x15#5", at = { zone = 11, x = 4.7, y = 63.7, r = 15 }, text = "Take the boat from Wetlands to Dustwallow Marsh.",
           lines = {
-            { kind = "turnin", quest = 8859, npc = 11034, skipIfMissing = true },
+            { kind = "transport", to = { zone = 15, x = 71.7, y = 56.6 }, mode = "boat", at = { zone = 11, x = 4.7, y = 63.7, r = 15 } },
           } },
-        { id = "l60@139", at = { zone = 139, x = 71.9, y = 48.41 }, text = "Kill creatures around Eastern Plaguelands until you reach level 60.",
+        { id = "y32-39#3", at = { zone = 15, x = 67.48, y = 51.3, r = 10 }, text = "Fly from Theramore, Dustwallow Marsh to Gadgetzan, Tanaris.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 32, to = 39 },
+          } },
+        { id = "t8922", at = { zone = 440, x = 52.47, y = 27.23, r = 10 }, when = { class = "ROGUE" }, items = { 21985 }, targets = { friend = { 16014 } },
+          lines = {
+            { kind = "turnin", quest = 8922, npc = 16014, skipIfMissing = true },
+          } },
+        { id = "y39-32#2", at = { zone = 440, x = 51.01, y = 29.34, r = 10 }, text = "Fly from Gadgetzan, Tanaris to Theramore, Dustwallow Marsh.", when = { class = "ROGUE" },
+          lines = {
+            { kind = "fly", from = 39, to = 32 },
+          } },
+        { id = "y32-64", at = { zone = 15, x = 67.48, y = 51.3, r = 10 }, text = "Fly from Theramore, Dustwallow Marsh to Talrendis Point, Azshara.",
+          lines = {
+            { kind = "fly", from = 32, to = 64 },
+          } },
+        { id = "t6804", at = { zone = 16, x = 79.28, y = 73.7, r = 10 }, items = { 17310 }, targets = { friend = { 13278 } },
+          lines = {
+            { kind = "turnin", quest = 6804, npc = 13278, skipIfMissing = true },
+          } },
+        { id = "l60@16", at = { zone = 16, x = 79.28, y = 73.7 }, text = "Kill creatures around Azshara until you reach level 60.",
           lines = {
             { kind = "grind", level = 60 },
-          } },
-        { id = "y67-66#2", at = { zone = 139, x = 71.81, y = 49.6, r = 10 }, text = "Fly from Light's Hope Chapel, Eastern Plaguelands to Chillwind Camp, Western Plaguelands.",
-          lines = {
-            { kind = "fly", from = 67, to = 66 },
-          } },
-        { id = "g36@36#5", at = { zone = 36, x = 12, y = 56.2, r = 20 }, text = "Head west into Alterac Mountains.",
-          lines = {
-            { kind = "goto", at = { zone = 36, x = 12, y = 56.2, r = 20 } },
-          } },
-        { id = "tDRUID-60", at = { zone = 36, x = 11.79, y = 56.6, r = 10 }, when = { class = "DRUID" }, minLevel = 60,
-          lines = {
-            { kind = "train", level = 60, class = "DRUID", npc = 270459 },
-          } },
-        { id = "tMAGE-60", at = { zone = 36, x = 17.72, y = 69.55, r = 10 }, when = { class = "MAGE" }, minLevel = 60,
-          lines = {
-            { kind = "train", level = 60, class = "MAGE", npc = 246797 },
-          } },
-        { id = "x1519#9", at = { zone = 36, x = 12, y = 56.2, r = 15 }, text = "Take the portal from Alterac Mountains to Stormwind City.",
-          lines = {
-            { kind = "transport", to = { zone = 1519, x = 70.5, y = 73.5 }, mode = "portal", at = { zone = 36, x = 12, y = 56.2, r = 15 } },
-          } },
-        { id = "tROGUE-60", at = { zone = 1519, x = 77.43, y = 65.31, r = 10 }, when = { class = "ROGUE" }, minLevel = 60,
-          lines = {
-            { kind = "train", level = 60, class = "ROGUE", npc = 918 },
-          } },
-        { id = "tWARRIOR-60", at = { zone = 1519, x = 80.19, y = 61.26, r = 10 }, when = { class = "WARRIOR" }, minLevel = 60,
-          lines = {
-            { kind = "train", level = 60, class = "WARRIOR", npc = 914 },
-          } },
-        { id = "y2-4#3", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 }, text = "Fly from Stormwind, Elwynn to Sentinel Hill, Westfall.",
-          lines = {
-            { kind = "fly", from = 2, to = 4 },
-          } },
-        { id = "t67", at = { zone = 40, x = 41.51, y = 66.73, r = 10 },
-          lines = {
-            { kind = "turnin", quest = 67, object = 3643, skipIfMissing = true },
           } },
       },
     },

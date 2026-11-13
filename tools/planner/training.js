@@ -9,7 +9,8 @@
 //                  seconds played by then (planner/validate3.js estimateSteps); without it, each section's levels are
 //                  spread evenly from minLevel to maxLevel - OUTLEVEL_MARGIN and the hearthstone is never used,
 //                  notes: an array that receives { cls, from, to, why } for every stretch of more than GAP_LEVELS
-//                  levels without a visit between level 4 and 58 }
+//                  levels without a visit between level 4 and 58,
+//                  margin: VISIT_MARGIN by default, townStop: false places a visit where it falls due, not at the next town stop }
 //   classTrainers(db, cls, faction) -> [{ npc, points }]
 //
 // A visit is the step
@@ -25,6 +26,9 @@
 //   - at the first step where the class's estimated level has reached an even level at least VISIT_EVERY above the
 //     last visit, with a trainer of the class standing within TRAINER_YARDS of the step's place: a visit at that even
 //     level
+//     (the level reached is the estimate less VISIT_MARGIN, everywhere below). When that step hands nothing in, the
+//     visit waits for the next step that hands a quest in with such a trainer near (a town stop), as long as the
+//     class has not reached VISIT_EVERY levels more; else it is written where it fell due
 //   - else, once FORCE_AFTER levels have passed since the last visit, at the first step in a zone where such a trainer
 //     stands: a visit at the level reached
 //   - a visit is only written when the walk there and back from the step's place (lib/travel.js travelPlan, on foot,
@@ -44,6 +48,10 @@ const { toPoint, distance, spawnPoints } = require("../lib/geo");
 const { travelPlan, toSteps, ESTIMATES } = require("../lib/travel");
 
 const TRAINER_YARDS = 300;
+// A visit is placed where the class's estimate is at least its level plus this much of a level. Players fall behind
+// the estimate (quests skipped, fights avoided): about 1,000 XP at the low levels, which is 0.13 to 0.28 of a level
+// from level 6 to 10 (3,600 to 7,600 XP a level), so a visit at exactly the level often meets a player still under it.
+const VISIT_MARGIN = 0.3;
 const MAX_DETOUR_SECONDS = 120;
 const VISIT_EVERY = 2;
 const FORCE_AFTER = 6;
@@ -165,6 +173,8 @@ const zoneName = (db, zone) => { const a = db.areas.get(zone); return a && a.nam
 function addClassTraining(db, sections, faction, options = {}) {
   const classes = (options.classes || ALL).slice().sort();
   const levelOf = options.levelOf || evenLevels(sections);
+  const margin = options.margin === undefined ? VISIT_MARGIN : options.margin;
+  const townStop = options.townStop !== false;
   const seconds = walker(db, options.graph, faction);
   const travel = tripper(db, options.graph, faction);
   const inserts = new Map(); // step -> visits to put before it, in class order
@@ -221,6 +231,7 @@ function addClassTraining(db, sections, faction, options = {}) {
     const cheapest = {};      // last visit level -> the cheapest trip (seconds added) seen after it while none fitted
     let last = 0;
     let pending = null;       // a trip that fits, waiting for a flight master within its level
+    let held = null;          // a visit near a trainer, waiting for the next talk stop near one
     let prevPlace = null;     // where the class's step before leaves the character
     let finalLevel = 0;
     const write = (step, level, npc, point, text, way) => {
@@ -282,7 +293,8 @@ function addClassTraining(db, sections, faction, options = {}) {
       const { step, estimate, here } = w;
       if (!estimate) continue;
       finalLevel = Math.max(finalLevel, Math.floor(estimate.end));
-      const level = Math.floor(estimate.start);
+      // the level the class is sure to have here: VISIT_MARGIN of a level below the estimate
+      const level = Math.floor(estimate.start - margin + 1e-9);
       if (pending && level >= pending.level + 1) { commit(pending); pending = null; }
       if (!here) {
         if (w.after) prevPlace = w.after; // a hearth or goto step without a place of its own still moves the character
@@ -299,8 +311,24 @@ function addClassTraining(db, sections, faction, options = {}) {
         }
         return pick;
       };
+      const nearTrainer = () => best((p) => distance(here, p) <= TRAINER_YARDS);
+      const talkStop = step.lines.some((l) => l.kind === "turnin");
+      if (held) {
+        // a visit that is due waits for the next stop that hands quests in near a trainer
+        const pick = talkStop ? nearTrainer() : null;
+        if (pick) {
+          write(step, held.level, pick.npc, pick.point);
+          held = null;
+          prevPlace = w.after || here;
+          continue;
+        }
+        if (level < held.level + VISIT_EVERY) { prevPlace = w.after || here; continue; }
+        write(held.step, held.level, held.pick.npc, held.pick.point); // no such stop came in time: where it fell due
+        held = null;
+      }
       if (even >= 2 && even >= last + VISIT_EVERY) {
-        const pick = best((p) => distance(here, p) <= TRAINER_YARDS);
+        const pick = nearTrainer();
+        if (pick && townStop && !talkStop) { held = { step, level: even, pick }; pending = null; prevPlace = w.after || here; continue; }
         if (pick) visit = { level: even, pick };
       }
       if (!visit && level >= 2 && level >= last + FORCE_AFTER) {
@@ -319,6 +347,7 @@ function addClassTraining(db, sections, faction, options = {}) {
       }
       prevPlace = w.after || here;
     }
+    if (held) write(held.step, held.level, held.pick.npc, held.pick.point);
     if (pending) commit(pending);
     if (notes) {
       const points = [...visitLevels.filter((l) => l <= GAP_TO), Math.min(GAP_TO, finalLevel)];
@@ -334,4 +363,4 @@ function addClassTraining(db, sections, faction, options = {}) {
   return sections.map((s) => ({ ...s, steps: s.steps.flatMap((step) => [...(inserts.get(step) || []), step]) }));
 }
 
-module.exports = { addClassTraining, classTrainers, merchants, nearestMerchant, evenLevels, SELL_JUNK_LEVEL, TRAINER_YARDS, MAX_DETOUR_SECONDS, VISIT_EVERY, FORCE_AFTER, TRIP_AFTER, MAX_TRIP_SECONDS, GAP_LEVELS };
+module.exports = { addClassTraining, classTrainers, merchants, nearestMerchant, evenLevels, SELL_JUNK_LEVEL, TRAINER_YARDS, VISIT_MARGIN, MAX_DETOUR_SECONDS, VISIT_EVERY, FORCE_AFTER, TRIP_AFTER, MAX_TRIP_SECONDS, GAP_LEVELS };

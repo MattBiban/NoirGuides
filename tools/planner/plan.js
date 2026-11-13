@@ -113,15 +113,30 @@ function planRoute(db, ch, options = {}) {
   }
   // Goes to a place by the fastest way and writes its legs as steps. A walk inside a zone is no step, and neither is
   // a single walk over the border inside a session (a hop to an objective next door): the next step's own place
-  // leads there. false when there is no way.
-  function go(target) {
+  // leads there. false when there is no way. stopNear: when a leg of the way (a flight, a transport, a hearth, a walk
+  // into the next zone) ends within READY_YARDS of a quest ready to hand in, and the target is farther than LEAVE_YARDS
+  // on, the way ends there ("stopped"): the player does not pass a hand-in it could take, and the next task is chosen
+  // from where it stands.
+  function go(target, { stopNear = false } = {}) {
     if (!st.started) return true; // the route begins wherever its first step is
     if (distance(st.pos, target) < 0.5) return true;
-    const plan = travelPlan(db, graph, traveller(), st.pos, target);
+    let plan = travelPlan(db, graph, traveller(), st.pos, target);
     if (plan.seconds === Infinity) return false;
+    // the hearthstone is an hour's cooldown: it is used when it saves at least HEARTH_MIN_SAVING, not for a few seconds
+    if (plan.legs.some((l) => l.action === "hearth")) {
+      const without = travelPlan(db, graph, { ...traveller(), hearthReady: false }, st.pos, target);
+      if (without.seconds - plan.seconds < C.HEARTH_MIN_SAVING) plan = without;
+    }
     const hop = !st.announce && plan.legs.length === 1;
-    for (const leg of plan.legs) if (leg.action !== "walk" && !(hop && leg.action === "travel")) emitLeg(leg);
-    return true;
+    const passing = () => stopNear && distance(st.pos, target) > C.LEAVE_YARDS && readyNear().length > 0;
+    let moved = false;
+    for (const leg of plan.legs) {
+      if (leg.action === "walk" || (hop && leg.action === "travel")) continue;
+      if (moved && passing()) return "stopped";
+      emitLeg(leg);
+      moved = true;
+    }
+    return moved && passing() ? "stopped" : true;
   }
 
   // ---- what can be done -------------------------------------------------------------------------------------
@@ -148,6 +163,16 @@ function planRoute(db, ch, options = {}) {
   }
   const key = (t) => `${t.kind}:${t.id}`;
   const apart = (a, b) => distance(a, b) <= C.HUB_YARDS;
+  // the quests of the log that are ready to hand in within READY_YARDS of the player, as turn-in tasks
+  function readyNear() {
+    const out = [];
+    for (const [quest, entry] of st.log) {
+      const i = info.get(quest);
+      const t = { kind: "turnin", id: quest, i, point: i.end.point };
+      if (!entry.needsObjective && !st.skip.has(key(t)) && distance(st.pos, t.point) <= C.READY_YARDS) out.push(t);
+    }
+    return out;
+  }
 
   function nextTarget() {
     // an urgent visit (zonepick.js rule 1) does the quests a transport asks for or that bring the player in, and
@@ -162,6 +187,14 @@ function planRoute(db, ch, options = {}) {
     // cross the border once: objectives next door wait until nothing is left on this side
     const hop = (t) => t.kind === "objective" && t.point.zone !== st.zone;
     if (candidates.some((t) => !hop(t) && t.kind !== "getflight")) candidates = candidates.filter((t) => !hop(t));
+    // no hand-in left behind: while a quest that is ready waits close by, the route does not move far. What is left
+    // near here comes first (the objective that holds the hub, in the same loop); when nothing is, the ready quests
+    // are handed in before the route leaves, though the hub's other objectives are still out (planner/leftbehind.js)
+    const ready = readyNear();
+    if (ready.length) {
+      const stay = candidates.filter((t) => distance(st.pos, t.point) <= C.LEAVE_YARDS);
+      candidates = stay.length ? stay : ready;
+    }
     for (const t of candidates) t.cost = seconds(st.pos, t.point);
     const between = (a, b) => walkSeconds(graph, st.level, a.point, b.point);
     const home = waiting.length ? (t) => Math.min(...waiting.map((w) => walkSeconds(graph, st.level, t.point, w.point))) : null;
@@ -200,7 +233,9 @@ function planRoute(db, ch, options = {}) {
     if (go(inn.point)) emit({ action: "sethearth", at: inn.at, npc: inn.npc });
   }
   function perform(t) {
-    if (!go(t.point)) { st.skip.add(key(t)); return; }
+    const way = go(t.point, { stopNear: true });
+    if (!way) { st.skip.add(key(t)); return; }
+    if (way === "stopped") return;
     if (t.kind === "getflight") {
       if (!st.flights.has(t.id)) emit({ action: "getflight", node: t.id, at: t.node.at, npc: t.node.npc }); // the way there may have fetched it
       return;
