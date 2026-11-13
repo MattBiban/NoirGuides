@@ -84,12 +84,12 @@ end
 
 local DEATHKNELL_MAGE = { "a363", "t363.a364.a376", "a3901", "o364.o376", "c2834", "t364.t376", "t3901", "l3@85", "g.road" }
 
-test("the world map shows the cards' places and the next steps up to 7", function()
+test("the world map shows the cards' places and the next steps up to 8", function()
   local c, Noir, Map = at("a363", { map = 1420 })
   local pins = Map.Pins("world")
-  eq(distinct(stepIds(pins)), { "a363", "t363.a364.a376", "a3901", "t364.t376", "t3901", "o364.o376", "c2834" },
-    "the current step first, then six more steps with a place (the reminder has none), merged pins together")
-  eq(#distinct(stepIds(pins)), 7)
+  eq(distinct(stepIds(pins)), { "a363", "t363.a364.a376", "a3901", "t364.t376", "t3901", "o364.o376", "l3@85", "c2834" },
+    "the current step first, then seven more steps with a place (the reminder has none), merged pins together")
+  eq(#distinct(stepIds(pins)), 8)
   ok(pins[1].current, "the card's pin comes first")
   eq(pins[1].steps[1].id, "a363")
   local drawn = Map.Read().world
@@ -146,10 +146,17 @@ test("the setting changes the limit from 0 to 20, raised to fit every place on t
   eq(c2:offScreen(), {})
 end)
 
-test("the minimap shows only the cards' places and can be switched off", function()
+test("the minimap shows the cards' places and the upcoming steps, and can be switched off", function()
   -- The player stands 5% (80 yards) north of Mordo's place, facing north.
   local c, Noir, Map = at("a363", { x = 30.2, y = 66.6 })
-  eq(stepIds(Map.Pins("minimap")), { "a363" }, "the next steps are not on the minimap")
+  local world = stepIds(Map.Pins("world"))
+  eq(stepIds(Map.Pins("minimap"))[1], "a363", "the current step first")
+  ok(#Map.Pins("minimap") > 1, "the upcoming steps are on the minimap too")
+  eq(sorted(distinct(stepIds(Map.Pins("minimap")))), sorted(distinct(world)), "the same steps as the world map")
+  -- With the upcoming steps set to 0, only the cards' places are left.
+  Noir.Options.Set("worldPins", 0)
+  c:advance(0.5)
+  eq(stepIds(Map.Pins("minimap")), { "a363" })
   local list = Map.Read().minimap.pins
   eq(#list, 1)
   -- Zoomed out the minimap is 466 2/3 yards across, drawn 140 wide: 0.3 units per yard.
@@ -180,6 +187,12 @@ end)
 test("places within 60 yards share a pin with '+' on the world map, 25 yards on the minimap, scaled by the merge setting", function()
   -- Mordo's step and a note 40 yards south of it, both on the current card.
   local c, Noir, Map = at("a363", { x = 30.2, y = 66.6, afterLoad = noteSouth(40), map = 1420 })
+  -- The minimap also shows the upcoming steps; the merging of the card's two places is read on the card's pins.
+  local function cardPins(list)
+    local out = {}
+    for _, p in ipairs(list) do if p.current then out[#out + 1] = p end end
+    return out
+  end
   local world = Map.Pins("world")
   local pin = world[1]
   eq(#pin.steps, 2, "40 yards apart: one pin on the world map")
@@ -187,7 +200,7 @@ test("places within 60 yards share a pin with '+' on the world map, 25 yards on 
   eq(pin.plus, true)
   eq(pin.label, "1", "labelled with the number of the first step")
   eq({ pin.steps[1].line, pin.steps[2].line }, { 0, 2 })
-  local mini = Map.Pins("minimap")
+  local mini = cardPins(Map.Pins("minimap"))
   eq(#mini, 2, "40 yards is more than 25: two pins on the minimap")
   eq(mini[1].merged, false)
   eq(Map.Read().world.pins[1].plus, true)
@@ -204,8 +217,8 @@ test("places within 60 yards share a pin with '+' on the world map, 25 yards on 
   eq(Map.Pins("world")[1].plus, false)
   Noir.Options.Set("pinMerge", 2)
   c:advance(0.5)
-  eq(#Map.Pins("minimap"), 1, "50 yards on the minimap: one pin")
-  eq(Map.Pins("minimap")[1].plus, true)
+  eq(#cardPins(Map.Pins("minimap")), 1, "50 yards on the minimap: one pin")
+  eq(cardPins(Map.Pins("minimap"))[1].plus, true)
   eq(c:offScreen(), {})
 end)
 

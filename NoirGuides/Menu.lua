@@ -210,7 +210,7 @@ local function drawRow(level, k, item, width)
   row.text:SetWidth(math.max(10, width - textLeft - rightWidth - m.gap))
   if row.text.SetWordWrap then row.text:SetWordWrap(false) end
   Theme.SetText(row.text, item.text or "")
-  row.text:SetTextColor(Theme.Color(item.heading and "dim" or (item.current and "lamp" or "paper")))
+  Theme.TextColor(row.text, item.heading and "dim" or (item.current and "lamp" or "paper"))
   row.text:Show()
   row.right:ClearAllPoints()
   row.right:SetPoint("TOPRIGHT", row, "TOPRIGHT", -(m.gap + (item.sub and 10 or 0)), -m.gap)

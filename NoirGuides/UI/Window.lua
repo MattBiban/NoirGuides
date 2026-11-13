@@ -111,7 +111,7 @@ end
 local function newText(parent, role, color, justify)
   local fs = parent:CreateFontString(nil, "OVERLAY")
   Theme.Font(fs, role, large())
-  fs:SetTextColor(Theme.Color(color))
+  Theme.TextColor(fs, color)
   fs:SetJustifyH(justify or "LEFT")
   fs:SetJustifyV("TOP")
   if fs.SetWordWrap then fs:SetWordWrap(true) end
@@ -741,7 +741,7 @@ local function layoutCard(card, c, width)
       row.text:ClearAllPoints()
       row.text:SetPoint("TOPLEFT", row, "TOPLEFT", textLeft, 0)
       row.text:SetWidth(math.max(1, inner - textLeft))
-      row.text:SetTextColor(Theme.Color(l.done and "dim" or "paper"))
+      Theme.TextColor(row.text, l.done and "dim" or "paper")
       -- a done line is dim throughout: its named things lose their colors too
       local words = l.done and escape(l.text or "") or colored(l.text, l.spans)
       local h = math.max(m.tick, setText(row.text, words))
@@ -844,7 +844,7 @@ local function placeCards()
       for _, line in ipairs(card.frame) do
         if c.kind == "current" then Theme.Paint(line, "lamp", 0.55) else Theme.Paint(line, "track") end
       end
-      card.badge:SetTextColor(Theme.Color(c.kind == "current" and "lamp" or (c.kind == "info" and "ok" or "faint")))
+      Theme.TextColor(card.badge, c.kind == "current" and "lamp" or (c.kind == "info" and "ok" or "faint"))
       card:Show()
       y = y + heights[k] + m.gap
     end
@@ -1251,6 +1251,15 @@ Noir.On("NOIR_OPTION", function(_, key)
     Window.Refresh()
   end
 end)
+-- A new theme or font size: the colors are already repainted (Theme.Repaint); text heights change with the font.
+for _, event in ipairs({ "NOIR_THEME", "NOIR_FONT" }) do
+  Noir.On(event, function()
+    if frame and model then
+      Window.Layout()
+      Window.Refresh()
+    end
+  end)
+end
 for _, event in ipairs({ "NOIR_STEP", "NOIR_PLACE", "NOIR_SECTION", "NOIR_READY", "NOIR_ROUTE_DONE",
   "PLAYER_XP_UPDATE", "PLAYER_LEVEL_UP" }) do
   Noir.On(event, function() Window.Refresh() end)

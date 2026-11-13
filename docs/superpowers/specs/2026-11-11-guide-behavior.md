@@ -361,8 +361,8 @@ No replay of the whole section happens. The saved step is made current, its line
 
 ### 4.5 Pins and lines on the maps
 
-- **World map:** pins for the steps on screen, then the following steps, up to a limit (default 7, setting 0 to 20; raised so every pinned line of the steps on screen fits). Pins also appear on sub-zone maps that contain the place. Not drawn in instances.
-- **Minimap:** pins for the steps on screen only (setting to turn off).
+- **World map:** pins for the steps on screen, then the following steps, up to a limit ("Upcoming steps on the maps", default 8, setting 0 to 20; raised so every pinned line of the steps on screen fits). Pins also appear on sub-zone maps that contain the place. Not drawn in instances.
+- **Minimap:** the same steps as the world map (setting to turn off). Out of range, only the current step's pin waits on the rim; the others are left out.
 - **Merging:** pins closer than about 60 yards (scaled by a setting, 0.05 to 2) share one pin on the world map; about 25 yards on the minimap. A merged pin shows a "+".
 - **Pin label:** the step's icon or number. The current steps' pins are larger and fully opaque; later pins fade a little per step. Optional ring around the current pin. Settings for pin size and background opacity.
 - **Tooltip** on hover: for each merged line, the step's title or number and the line's text.

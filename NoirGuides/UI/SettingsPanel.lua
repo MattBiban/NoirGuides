@@ -24,8 +24,7 @@
 -- quest cleanup", "Report a problem"; Guide window "Reset item buttons", "Preview window positions"; Navigation
 -- "Reset arrow"; Route "Profession to level with the route" (Professions.SetPlanned); Advanced "Find my place
 -- again"; Profiles the profile in use, a name box, new, copy, delete, reset, "Use as default for new characters"
--- and "Reset guide progress for this character". Asked first with Panel.Confirm: fontSize and accent (shown as
--- "Theme", its choices by THEME_LABELS; then ReloadUI()), outlevel (then the section is loaded again), deleting or resetting a profile and resetting guide progress.
+-- and "Reset guide progress for this character". Applied at once, with no question and no reload: fontSize and accent ("Theme"). Asked first with Panel.Confirm: outlevel (then the section is loaded again), deleting or resetting a profile and resetting guide progress.
 -- "Show Noir Guides" calls Screen.SetShown, "Hide in raids" sets hideInRaid (Screen hides and shows), "Preview
 -- window positions" turns Screen.Preview on and off.
 --
@@ -44,8 +43,6 @@ SettingsPanel.CONFLICTS = { "TomTom" }
 SettingsPanel.WIDTH = 440      -- the free window, and the width the controls are laid out for
 SettingsPanel.TAB_WIDTH = 110
 
-SettingsPanel.FONT_QUESTION = "Changing the font size reloads the interface. Change it and reload now?"
-SettingsPanel.ACCENT_QUESTION = "Changing the theme reloads the interface. Change it and reload now?"
 SettingsPanel.OUTLEVEL_QUESTION = "Changing this loads the section again, and steps may pass or come back. Go on?"
 SettingsPanel.RESET_QUESTION = "Put every setting and window place of the profile %s back to its default?"
 SettingsPanel.DELETE_QUESTION = "Delete the profile %s? Its settings and window places are lost."
@@ -230,9 +227,10 @@ local function themeLabel(value)
   return SettingsPanel.THEME_LABELS[value] or tostring(value)
 end
 
--- The choices of an option that is only applied when the interface loads: asked first, then a reload. labels: an
--- optional value -> words table for the menu rows.
-local function reloadItems(key, question, labels)
+-- The choices of a word option, applied at once (the theme and the font size repaint and lay out every window
+-- live: Theme.Repaint, Theme.Refont; no reload, which the client may refuse). labels: an optional value -> words
+-- table for the menu rows.
+local function choiceItems(key, labels)
   return function()
     local items = {}
     for _, choice in ipairs(Noir.Options.RANGES[key].choices) do
@@ -240,18 +238,15 @@ local function reloadItems(key, question, labels)
       items[#items + 1] = {
         text = labels and labels[value] or value, checked = function() return option(key) == value end,
         on = function()
-          if option(key) == value then return end
-          Panel.Confirm(question, function()
-            if setOption(key, value) then ReloadUI() end
-          end)
+          if option(key) ~= value then setOption(key, value) end
         end,
       }
     end
     return items
   end
 end
-local fontItems = reloadItems("fontSize", SettingsPanel.FONT_QUESTION)
-local accentItems = reloadItems("accent", SettingsPanel.ACCENT_QUESTION, SettingsPanel.THEME_LABELS)
+local fontItems = choiceItems("fontSize")
+local accentItems = choiceItems("accent", SettingsPanel.THEME_LABELS)
 
 local function reloadSection()
   local Guide, Progress = Noir.Guide, Noir.Progress
@@ -316,7 +311,7 @@ SettingsPanel.CONTROLS = {
     slider("arrowText", "Arrow text size", 1),
     tick("minimapPins", "Pins on the minimap"),
     tick("pinRing", "Ring on the current pin"),
-    slider("worldPins", "Pins on the world map", 1),
+    slider("worldPins", "Upcoming steps on the maps", 1),
     slider("pinSize", "Pin size", 0.05, "percent"),
     slider("pinMerge", "Merge distance", 0.05),
     slider("pinAlpha", "Pin background opacity", 0.05, "percent"),
@@ -508,7 +503,7 @@ local function buildText(control)
   if box.SetMaxLetters then box:SetMaxLetters(NAME_LETTERS) end
   if box.SetTextInsets then box:SetTextInsets(4, 4, 2, 2) end
   Theme.Font(box, "body")
-  if box.SetTextColor then box:SetTextColor(Theme.Color("paper")) end
+  if box.SetTextColor then Theme.TextColor(box, "paper") end
   local back = box:CreateTexture(nil, "BACKGROUND")
   Theme.Paint(back, "strip")
   back:SetAllPoints(box)
@@ -614,7 +609,7 @@ local function drawRowText(row, words, color, left, right)
   row.text:SetWidth(math.max(10, row:GetWidth() - left - (right or 0) - m.gap))
   if row.text.SetWordWrap then row.text:SetWordWrap(false) end
   Theme.SetText(row.text, words or "")
-  row.text:SetTextColor(Theme.Color(color))
+  Theme.TextColor(row.text, color)
   row.text:Show()
 end
 

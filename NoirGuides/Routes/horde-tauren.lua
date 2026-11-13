@@ -344,14 +344,6 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "objective", quest = 833, index = 1, npc = 3232, skipIfMissing = true },
           } },
-        { id = "p165-2", label = "train165_2", at = { zone = 215, x = 44.94, y = 61.46, r = 10 }, when = { profession = 165 },
-          lines = {
-            { kind = "train", skill = 165, rank = 2, npc = 3069 },
-          } },
-        { id = "p202-2", label = "train202_2", at = { zone = 215, x = 58.65, y = 39.38, r = 10 }, when = { profession = 202 },
-          lines = {
-            { kind = "train", skill = 202, rank = 2, npc = 10993 },
-          } },
         { id = "t833", at = { zone = 215, x = 56.98, y = 34.55, r = 10 }, targets = { friend = { 3233 } },
           lines = {
             { kind = "turnin", quest = 833, npc = 3233, skipIfMissing = true },
@@ -539,6 +531,14 @@ Noir.Route("horde-tauren", {
             { kind = "turnin", quest = 6065, npc = 3065, skipIfMissing = true },
             { kind = "accept", quest = 6087, npc = 3065, ifDone = 6061, requires = { 6061 } },
           } },
+        { id = "p165-2", label = "train165_2", at = { zone = 215, x = 44.94, y = 61.46, r = 10 }, when = { profession = 165 },
+          lines = {
+            { kind = "train", skill = 165, rank = 2, npc = 3069 },
+          } },
+        { id = "p202-2", label = "train202_2", at = { zone = 215, x = 58.65, y = 39.38, r = 10 }, when = { profession = 202 },
+          lines = {
+            { kind = "train", skill = 202, rank = 2, npc = 10993 },
+          } },
         { id = "t760", at = { zone = 215, x = 47.52, y = 63.58, r = 10 }, items = { 5416 }, targets = { friend = { 2948 } },
           lines = {
             { kind = "turnin", quest = 760, npc = 2948, skipIfMissing = true },
@@ -578,14 +578,6 @@ Noir.Route("horde-tauren", {
         { id = "p197-2-skill", when = { profession = 197 }, reminder = { ends = "train197_2" },
           lines = {
             { kind = "skill", skill = 197, value = 50 },
-          } },
-        { id = "p164-2", label = "train164_2", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
-          lines = {
-            { kind = "train", skill = 164, rank = 2, npc = 3478 },
-          } },
-        { id = "p197-2", label = "train197_2", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
-          lines = {
-            { kind = "train", skill = 197, rank = 2, npc = 3704 },
           } },
         { id = "g17@17", at = { zone = 17, x = 44.45, y = 59.15, r = 20 }, text = "Head east into The Barrens.",
           lines = {
@@ -1173,6 +1165,14 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "objective", quest = 880, index = 1, item = 5098, skipIfMissing = true },
           } },
+        { id = "p164-2", label = "train164_2", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 2, npc = 3478 },
+          } },
+        { id = "p197-2", label = "train197_2", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
+          lines = {
+            { kind = "train", skill = 197, rank = 2, npc = 3704 },
+          } },
         { id = "o4921.o899", at = { zone = 17, x = 49.33, y = 50.32, r = 40 }, text = "Beaten Corpse is south of your last stop.", targets = { enemy = { 10668, 268624, 3260, 3258, 3261, 3263 } },
           lines = {
             { kind = "objective", quest = 4921, index = 1, npc = 10668 },
@@ -1203,18 +1203,6 @@ Noir.Route("horde-tauren", {
         { id = "p333-3-skill", when = { profession = 333 }, reminder = { ends = "train333_3" },
           lines = {
             { kind = "skill", skill = 333, value = 125 },
-          } },
-        { id = "p164-3", label = "train164_3", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
-          lines = {
-            { kind = "train", skill = 164, rank = 3, npc = 3478 },
-          } },
-        { id = "p165-3", label = "train165_3", at = { zone = 17, x = 44.84, y = 59.46, r = 10 }, when = { profession = 165 },
-          lines = {
-            { kind = "train", skill = 165, rank = 3, npc = 3703 },
-          } },
-        { id = "p197-3", label = "train197_3", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
-          lines = {
-            { kind = "train", skill = 197, rank = 3, npc = 3704 },
           } },
         { id = "o891", at = { zone = 17, x = 61.85, y = 54.65, r = 40 }, text = "Captain Fairmount is east of your last stop.", targets = { enemy = { 3393, 3386, 3385, 3455, 3454, 261485 } },
           lines = {
@@ -1473,6 +1461,10 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "fly", from = 77, to = 25 },
           } },
+        { id = "g406@406", at = { zone = 406, x = 81.95, y = 87.22, r = 20 }, text = "Head northwest into Stonetalon Mountains.",
+          lines = {
+            { kind = "goto", at = { zone = 406, x = 81.95, y = 87.22, r = 20 } },
+          } },
         { id = "p333-2", label = "train333_2", at = { zone = 406, x = 49.18, y = 57.18, r = 10 }, when = { profession = 333 },
           lines = {
             { kind = "train", skill = 333, rank = 2, npc = 11074 },
@@ -1481,14 +1473,22 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "train", skill = 333, rank = 3, npc = 11074 },
           } },
-        { id = "g406@406", at = { zone = 406, x = 81.95, y = 87.22, r = 20 }, text = "Head northwest into Stonetalon Mountains.",
-          lines = {
-            { kind = "goto", at = { zone = 406, x = 81.95, y = 87.22, r = 20 } },
-          } },
         { id = "o6548", at = { zone = 406, x = 81.95, y = 87.22, r = 40 }, targets = { enemy = { 11911, 11910 } },
           lines = {
             { kind = "objective", quest = 6548, index = 1, npc = 11910, skipIfMissing = true },
             { kind = "objective", quest = 6548, index = 2, npc = 11911, skipIfMissing = true },
+          } },
+        { id = "p164-3", label = "train164_3", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 3, npc = 3478 },
+          } },
+        { id = "p165-3", label = "train165_3", at = { zone = 17, x = 44.84, y = 59.46, r = 10 }, when = { profession = 165 },
+          lines = {
+            { kind = "train", skill = 165, rank = 3, npc = 3703 },
+          } },
+        { id = "p197-3", label = "train197_3", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
+          lines = {
+            { kind = "train", skill = 197, rank = 3, npc = 3704 },
           } },
         { id = "t6548", at = { zone = 17, x = 35.19, y = 27.76, r = 10 }, targets = { friend = { 11857 } },
           lines = {
@@ -2677,10 +2677,6 @@ Noir.Route("horde-tauren", {
             { kind = "turnin", quest = 201, npc = 773 },
             { kind = "sethearth", npc = 6807 },
           } },
-        { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
-          lines = {
-            { kind = "train", skill = 164, rank = 4, npc = 2836 },
-          } },
         { id = "y18-20#3", at = { zone = 33, x = 26.87, y = 77.1, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Grom'gol, Stranglethorn.",
           lines = {
             { kind = "fly", from = 18, to = 20 },
@@ -2748,6 +2744,10 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "turnin", quest = 628, npc = 2495, skipIfMissing = true },
           } },
+        { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 4, npc = 2836 },
+          } },
         { id = "x17", at = { zone = 33, x = 25.7, y = 73.1, r = 15 }, text = "Take the boat from Stranglethorn Vale to The Barrens.",
           lines = {
             { kind = "transport", to = { zone = 17, x = 63.8, y = 38.8 }, mode = "boat", at = { zone = 33, x = 25.7, y = 73.1, r = 15 } },
@@ -2755,10 +2755,6 @@ Noir.Route("horde-tauren", {
         { id = "y80-29", at = { zone = 17, x = 63.08, y = 37.16, r = 10 }, text = "Fly from Ratchet, The Barrens to Sun Rock Retreat, Stonetalon Mountains.",
           lines = {
             { kind = "fly", from = 80, to = 29 },
-          } },
-        { id = "p393-4", label = "train393_4", at = { zone = 405, x = 23.24, y = 69.72, r = 10 }, when = { profession = 393 },
-          lines = {
-            { kind = "train", skill = 393, rank = 4, npc = 12030 },
           } },
         { id = "g405@405", at = { zone = 405, x = 38.88, y = 27.16, r = 20 }, text = "Head west into Desolace.",
           lines = {
@@ -2771,6 +2767,10 @@ Noir.Route("horde-tauren", {
         { id = "a6161", at = { zone = 405, x = 36.07, y = 30.41, r = 10 }, minLevel = 30, maxLevel = 44,
           lines = {
             { kind = "accept", quest = 6161, object = 177787 },
+          } },
+        { id = "p393-4", label = "train393_4", at = { zone = 405, x = 23.24, y = 69.72, r = 10 }, when = { profession = 393 },
+          lines = {
+            { kind = "train", skill = 393, rank = 4, npc = 12030 },
           } },
         { id = "o5741", at = { zone = 405, x = 55.17, y = 30.15, r = 40 }, text = "Sceptre of Light is east of your last stop.", targets = { enemy = { 13019 } },
           lines = {
@@ -3065,6 +3065,10 @@ Noir.Route("horde-tauren", {
           lines = {
             { kind = "transport", to = { zone = 85, x = 60.6, y = 58.9 }, mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 } },
           } },
+        { id = "g1497@1497", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 }, text = "Head into Undercity.",
+          lines = {
+            { kind = "goto", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 } },
+          } },
         { id = "p171-4", label = "train171_4", at = { zone = 1497, x = 47.77, y = 73.34, r = 10 }, when = { profession = 171 },
           lines = {
             { kind = "train", skill = 171, rank = 4, npc = 4611 },
@@ -3080,10 +3084,6 @@ Noir.Route("horde-tauren", {
         { id = "p197-4", label = "train197_4", at = { zone = 1497, x = 70.76, y = 30.69, r = 10 }, when = { profession = 197 },
           lines = {
             { kind = "train", skill = 197, rank = 4, npc = 4576 },
-          } },
-        { id = "g1497@1497", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 }, text = "Head into Undercity.",
-          lines = {
-            { kind = "goto", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 } },
           } },
         { id = "f11.y11-13", at = { zone = 1497, x = 63.25, y = 48.56, r = 10 }, text = "Fly from Undercity, Tirisfal to Tarren Mill, Hillsbrad.",
           lines = {

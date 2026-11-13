@@ -337,10 +337,6 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 92684, index = 1, item = 253597 },
           } },
-        { id = "p186-2", label = "train186_2", at = { zone = 16593, x = 65.44, y = 80.47, r = 10 }, when = { profession = 186 },
-          lines = {
-            { kind = "train", skill = 186, rank = 2, npc = 252388 },
-          } },
         { id = "t92684.a92685", at = { zone = 16593, x = 46.7, y = 81.95, r = 10 }, minLevel = 5, targets = { friend = { 252800 } },
           lines = {
             { kind = "turnin", quest = 92684, npc = 252800 },
@@ -920,14 +916,6 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "transport", to = { zone = 36, x = 12.8, y = 51.2 }, mode = "boat", at = { zone = 16593, x = 65.8, y = 83.8, r = 15 } },
           } },
-        { id = "p197-2", label = "train197_2", at = { zone = 36, x = 17.71, y = 60.28, r = 10 }, when = { profession = 197 },
-          lines = {
-            { kind = "train", skill = 197, rank = 2, npc = 251972 },
-          } },
-        { id = "p333-2", label = "train333_2", at = { zone = 36, x = 16.76, y = 62.3, r = 10 }, when = { profession = 333 },
-          lines = {
-            { kind = "train", skill = 333, rank = 2, npc = 251978 },
-          } },
         { id = "t94946.a94947.o94947", at = { zone = 36, x = 12.3, y = 56.3, r = 10 }, minLevel = 7, targets = { friend = { 259084 } },
           lines = {
             { kind = "turnin", quest = 94946, npc = 259084 },
@@ -937,30 +925,6 @@ Noir.Route("alliance-highorder", {
         { id = "x1519", at = { zone = 36, x = 12, y = 56.2, r = 15 }, text = "Take the portal from Alterac Mountains to Stormwind City.",
           lines = {
             { kind = "transport", to = { zone = 1519, x = 70.5, y = 73.5 }, mode = "portal", at = { zone = 36, x = 12, y = 56.2, r = 15 } },
-          } },
-        { id = "p164-2", label = "train164_2", at = { zone = 1519, x = 64.12, y = 37.02, r = 10 }, when = { profession = 164 },
-          lines = {
-            { kind = "train", skill = 164, rank = 2, npc = 957 },
-          } },
-        { id = "p165-2", label = "train165_2", at = { zone = 1519, x = 71.69, y = 63, r = 10 }, when = { profession = 165 },
-          lines = {
-            { kind = "train", skill = 165, rank = 2, npc = 5564 },
-          } },
-        { id = "p171-2", label = "train171_2", at = { zone = 1519, x = 55.66, y = 86.09, r = 10 }, when = { profession = 171 },
-          lines = {
-            { kind = "train", skill = 171, rank = 2, npc = 5499 },
-          } },
-        { id = "p182-2", label = "train182_2", at = { zone = 1519, x = 54.29, y = 84.1, r = 10 }, when = { profession = 182 },
-          lines = {
-            { kind = "train", skill = 182, rank = 2, npc = 5566 },
-          } },
-        { id = "p202-2", label = "train202_2", at = { zone = 1519, x = 61.88, y = 30.56, r = 10 }, when = { profession = 202 },
-          lines = {
-            { kind = "train", skill = 202, rank = 2, npc = 11026 },
-          } },
-        { id = "p393-2", label = "train393_2", at = { zone = 1519, x = 72.14, y = 62.21, r = 10 }, when = { profession = 393 },
-          lines = {
-            { kind = "train", skill = 393, rank = 2, npc = 1292 },
           } },
         { id = "f2", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 },
           lines = {
@@ -1001,6 +965,42 @@ Noir.Route("alliance-highorder", {
         { id = "x1519#2", at = { zone = 1537, x = 78, y = 51.4, r = 15 }, text = "Take the tram from Ironforge to Stormwind City.", when = { class = "WARRIOR" },
           lines = {
             { kind = "transport", to = { zone = 1519, x = 69.6, y = 30.3 }, mode = "tram", at = { zone = 1537, x = 78, y = 51.4, r = 15 } },
+          } },
+        { id = "p164-2", label = "train164_2", at = { zone = 1519, x = 64.12, y = 37.02, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 2, npc = 957 },
+          } },
+        { id = "p165-2", label = "train165_2", at = { zone = 1519, x = 72.14, y = 62.85, r = 10 }, when = { profession = 165 },
+          lines = {
+            { kind = "train", skill = 165, rank = 2, npc = 11096 },
+          } },
+        { id = "p171-2", label = "train171_2", at = { zone = 1519, x = 55.46, y = 85.65, r = 10 }, when = { profession = 171 },
+          lines = {
+            { kind = "train", skill = 171, rank = 2, npc = 5500 },
+          } },
+        { id = "p182-2", label = "train182_2", at = { zone = 1519, x = 54.29, y = 84.1, r = 10 }, when = { profession = 182 },
+          lines = {
+            { kind = "train", skill = 182, rank = 2, npc = 5566 },
+          } },
+        { id = "p186-2", label = "train186_2", at = { zone = 1519, x = 59.25, y = 37.83, r = 10 }, when = { profession = 186 },
+          lines = {
+            { kind = "train", skill = 186, rank = 2, npc = 5513 },
+          } },
+        { id = "p197-2", label = "train197_2", at = { zone = 1519, x = 53.48, y = 81.47, r = 10 }, when = { profession = 197 },
+          lines = {
+            { kind = "train", skill = 197, rank = 2, npc = 1300 },
+          } },
+        { id = "p202-2", label = "train202_2", at = { zone = 1519, x = 62.09, y = 30.31, r = 10 }, when = { profession = 202 },
+          lines = {
+            { kind = "train", skill = 202, rank = 2, npc = 5518 },
+          } },
+        { id = "p333-2", label = "train333_2", at = { zone = 1519, x = 53.03, y = 73.73, r = 10 }, when = { profession = 333 },
+          lines = {
+            { kind = "train", skill = 333, rank = 2, npc = 11068 },
+          } },
+        { id = "p393-2", label = "train393_2", at = { zone = 1519, x = 72.14, y = 62.21, r = 10 }, when = { profession = 393 },
+          lines = {
+            { kind = "train", skill = 393, rank = 2, npc = 1292 },
           } },
         { id = "t94947.a98021", at = { zone = 1519, x = 80.21, y = 38.35, r = 10 }, minLevel = 7, targets = { friend = { 1748 } },
           lines = {
@@ -1932,14 +1932,6 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "skill", skill = 171, value = 125 },
           } },
-        { id = "p165-3", label = "train165_3", at = { zone = 331, x = 35.98, y = 52.1, r = 10 }, when = { profession = 165 },
-          lines = {
-            { kind = "train", skill = 165, rank = 3, npc = 3967 },
-          } },
-        { id = "p171-3", label = "train171_3", at = { zone = 331, x = 50.85, y = 67.11, r = 10 }, when = { profession = 171 },
-          lines = {
-            { kind = "train", skill = 171, rank = 3, npc = 3964 },
-          } },
         { id = "g331@331", at = { zone = 331, x = 27.26, y = 35.58, r = 20 }, text = "Head south into Ashenvale.",
           lines = {
             { kind = "goto", at = { zone = 331, x = 27.26, y = 35.58, r = 20 } },
@@ -2081,6 +2073,14 @@ Noir.Route("alliance-highorder", {
         { id = "t4581", at = { zone = 331, x = 85.24, y = 44.71, r = 10 }, items = { 12060 }, targets = { friend = { 3848 } },
           lines = {
             { kind = "turnin", quest = 4581, npc = 3848 },
+          } },
+        { id = "p165-3", label = "train165_3", at = { zone = 331, x = 35.98, y = 52.1, r = 10 }, when = { profession = 165 },
+          lines = {
+            { kind = "train", skill = 165, rank = 3, npc = 3967 },
+          } },
+        { id = "p171-3", label = "train171_3", at = { zone = 331, x = 50.85, y = 67.11, r = 10 }, when = { profession = 171 },
+          lines = {
+            { kind = "train", skill = 171, rank = 3, npc = 3964 },
           } },
         { id = "o1027", at = { zone = 331, x = 73.87, y = 74.53, r = 40 }, text = "Iron Pommel is southwest of Kayneth Stillwind.",
           lines = {
@@ -3145,10 +3145,6 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 194, npc = 715 },
             { kind = "accept", quest = 195, npc = 715, requires = { 194 } },
           } },
-        { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
-          lines = {
-            { kind = "train", skill = 164, rank = 4, npc = 2836 },
-          } },
         { id = "o191", at = { zone = 33, x = 30.85, y = 13.77, r = 40 }, text = "The Panthers are southwest of Sir S. J. Erlgadin.", targets = { enemy = { 736 } },
           lines = {
             { kind = "objective", quest = 191, index = 1, npc = 736 },
@@ -3357,6 +3353,10 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 597, at = { zone = 33, x = 28.1, y = 76.22, r = 10 }, npc = 2490 },
             { kind = "accept", quest = 599, at = { zone = 33, x = 28.1, y = 76.22, r = 10 }, npc = 2490, requires = { 597 } },
             { kind = "turnin", quest = 599, at = { zone = 33, x = 27.17, y = 77.01, r = 10 }, npc = 2487 },
+          } },
+        { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 4, npc = 2836 },
           } },
         { id = "y19-14", at = { zone = 33, x = 27.53, y = 77.79, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Southshore, Hillsbrad.",
           lines = {
@@ -3641,13 +3641,13 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "skill", skill = 186, value = 200 },
           } },
-        { id = "p186-4", label = "train186_4", at = { zone = 38, x = 37.02, y = 47.81, r = 10 }, when = { profession = 186 },
-          lines = {
-            { kind = "train", skill = 186, rank = 4, npc = 1681 },
-          } },
         { id = "g38@38", at = { zone = 38, x = 33.94, y = 50.95, r = 20 }, text = "Head south into Loch Modan.",
           lines = {
             { kind = "goto", at = { zone = 38, x = 33.94, y = 50.95, r = 20 } },
+          } },
+        { id = "p186-4", label = "train186_4", at = { zone = 38, x = 37.02, y = 47.81, r = 10 }, when = { profession = 186 },
+          lines = {
+            { kind = "train", skill = 186, rank = 4, npc = 1681 },
           } },
         { id = "f8", at = { zone = 38, x = 33.94, y = 50.95, r = 10 },
           lines = {

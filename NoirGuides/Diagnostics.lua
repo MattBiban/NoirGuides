@@ -232,7 +232,7 @@ local function build()
   box:SetSize(WIDTH - 2 * Theme.metrics.pad, BOX_HEIGHT)
   if box.SetTextInsets then box:SetTextInsets(4, 4, 4, 4) end
   Theme.Font(box, "small")
-  if box.SetTextColor then box:SetTextColor(Theme.Color("paper")) end
+  if box.SetTextColor then Theme.TextColor(box, "paper") end
   -- A well for the text, inside a 1-pixel track line.
   local back = box:CreateTexture(nil, "BACKGROUND")
   Theme.Paint(back, "well")

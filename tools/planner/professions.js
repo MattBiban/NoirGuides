@@ -19,12 +19,17 @@
 //     lines = { { kind = "skill", skill, value = <the rank's gate> } } }
 // at the start of the train step's section: "raise the skill to the gate" stays on screen as a reminder while that
 // section is played, until the skill is reached or the train step is passed (route format 3 rule R10 keeps a
-// reminder and the step it ends at in one section, so a section's length is as far ahead as it can stand). The train
-// step goes
-// right before the first step (one every character has) at or after the rank's level that stands in a zone where a
-// trainer of that profession and rank stands, friendly to the faction; of several there, the nearest. The search runs
-// from the section where the level is reached through the two after it; a rank with no trainer there, or whose level
-// the route never reaches, gets no step and a note (docs/routes/PROFESSION-NOTES.md).
+// reminder and the step it ends at in one section, so a section's length is as far ahead as it can stand). The engine
+// passes a train step while the skill is below the gate, and the reminder ends with it, so the train step goes as
+// late in its section as the trainers allow: the candidates are the steps (ones every character has, not reminders)
+// at or after the rank's level that stand in a zone where a trainer of that profession and rank stands, friendly to
+// the faction, searched from the section where the level is reached through the two after it. The train step goes
+// right before the last candidate of the first of those sections where that candidate has at least LEAD_SHARE (half)
+// of the section's shared steps before it, so the reminder stays on screen for most of the section (and from before
+// the rank's level when the level is reached inside it); with no such section, before the candidate with the most
+// shared steps of its section before it, the earliest on ties. Its trainer is the nearest of that zone's to that
+// step. A rank with no candidate, or whose level the route never reaches, gets no step and a note
+// (docs/routes/PROFESSION-NOTES.md).
 // Who trains a rank (QuestieDB sub names; not verified in game, see PROFESSION-NOTES.md): "<Profession> Trainer" or
 // "<Crafter> Trainer" ("Blacksmithing Trainer", "Tailor Trainer") teaches every rank; "<Title> <Crafter>" teaches up
 // to its title's rank: Journeyman 2, Expert 3, Artisan and Master 4 ("Expert Blacksmith" teaches 2 and 3).
@@ -39,6 +44,7 @@ const RANKS = Object.freeze([
   Object.freeze({ rank: 4, name: "Artisan", gate: 200, cap: 300, level: 35, verified: false }),
 ]);
 const SEARCH_SECTIONS = 3;
+const LEAD_SHARE = 0.5;
 const NPC_RADIUS = 10; // planner/bundle.js RADIUS.npc
 const CRAFTER = { Alchemy: "Alchemist", Blacksmithing: "Blacksmith", Enchanting: "Enchanter", Engineering: "Engineer", Herbalism: "Herbalist",
   Leatherworking: "Leatherworker", Mining: "Miner", Skinning: "Skinner", Tailoring: "Tailor" };
@@ -84,7 +90,21 @@ function addProfessionSteps(db, sections, faction, options = {}) {
   const notes = options.notes || [];
   // the steps every character has, in route order, with their section's index
   const shared = [];
-  sections.forEach((s, si) => s.steps.forEach((step) => { if (!step.when && step.at) shared.push({ si, step }); }));
+  sections.forEach((s, si) => s.steps.forEach((step) => { if (!step.when && !step.reminder && step.at) shared.push({ si, step }); }));
+  // per shared step, how many shared steps of its section come before it; per section, how many it has
+  const leadOf = new Map(), sizes = sections.map(() => 0);
+  for (const { si, step } of shared) leadOf.set(step, sizes[si]++);
+  // The train step's place among the candidates (route order): the last one of the first section in which that one
+  // stands in the second half of the section (LEAD_SHARE), so the reminder at the section's start is on screen for
+  // most of the section; with none such, the one with the longest lead, the earliest on ties.
+  const choose = (candidates) => {
+    const last = new Map();
+    for (const c of candidates) last.set(c.si, c);
+    for (const c of last.values()) if (c.lead >= LEAD_SHARE * sizes[c.si]) return c;
+    let best = null;
+    for (const c of candidates) if (!best || c.lead > best.lead) best = c;
+    return best;
+  };
   const inserts = new Map();
   const reminders = new Map(); // section index -> reminder steps for its start
   for (const profession of professions) {
@@ -94,9 +114,10 @@ function addProfessionSteps(db, sections, faction, options = {}) {
       if (from < 0) { notes.push({ skill: profession.skill, rank: r.rank, text: `${label}: the route's estimate never reaches level ${r.level}` }); continue; }
       const trainers = professionTrainers(db, profession, r.rank, faction);
       const lastSection = shared[from].si + SEARCH_SECTIONS - 1;
-      let found = null;
-      for (let k = from; k < shared.length && shared[k].si <= lastSection && !found; k++) {
-        const { step } = shared[k];
+      // every step in the window that stands in a trainer's zone, with the nearest trainer there
+      const candidates = [];
+      for (let k = from; k < shared.length && shared[k].si <= lastSection; k++) {
+        const { si, step } = shared[k];
         const zone = zoneOf(db, step.at.zone);
         const here = zoneOnly(step.at) ? null : toPoint(db, step.at.zone, step.at.x, step.at.y);
         let pick = null;
@@ -105,8 +126,9 @@ function addProfessionSteps(db, sections, faction, options = {}) {
           const d = here ? distance(here, p) : 0;
           if (!pick || d < pick.d || (d === pick.d && t.npc < pick.npc)) pick = { npc: t.npc, point: p, d };
         }
-        if (pick) found = { step, pick };
+        if (pick) candidates.push({ si, step, pick, lead: leadOf.get(step) });
       }
+      const found = choose(candidates);
       if (!found) {
         notes.push({ skill: profession.skill, rank: r.rank, text: `${label}: no ${faction} trainer in a zone of the route within three sections of section ${sections[shared[from].si].id}` });
         continue;

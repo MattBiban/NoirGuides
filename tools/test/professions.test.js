@@ -47,7 +47,7 @@ test("the primary professions come from Data/Professions.lua", () => {
   assert.strictEqual(list.find((p) => p.skill === 164).name, "Blacksmithing");
 });
 
-test("a trainer step is written at the first step at or after the rank's level in a zone with that trainer", () => {
+test("a trainer step is written late in the first section at or after the rank's level with that trainer in its zone", () => {
   const { w } = world();
   const sections = chain([100, 200], 6);
   // Westland 8 to 12, Eastland 13 to 21: level 10 is reached in Westland, where no smith trains
@@ -56,9 +56,10 @@ test("a trainer step is written at the first step at or after the rank's level i
   const before = JSON.stringify(sections);
   const out = addProfessionSteps(w.db, sections, "Alliance", { professions: SMITH, levelOf: levelsOf(sections, levels), notes });
   assert.strictEqual(JSON.stringify(sections), before, "the input is not changed");
-  assert.deepStrictEqual(out[1].steps.map((s) => s.id), ["p164-2-skill", "p164-3-skill", "p164-2", sections[1].steps[0].id, sections[1].steps[1].id, sections[1].steps[2].id, sections[1].steps[3].id,
-    "p164-3", sections[1].steps[4].id, sections[1].steps[5].id]);
-  assert.deepStrictEqual(out[1].steps[2], { id: "p164-2", label: "train164_2", when: { profession: 164 }, at: P(200, 78, 52, 10),
+  // before the last step of Eastland: both reminders, at Eastland's start, stay on screen for nearly all of it
+  assert.deepStrictEqual(out[1].steps.map((s) => s.id), ["p164-2-skill", "p164-3-skill", ...sections[1].steps.slice(0, 5).map((s) => s.id),
+    "p164-2", "p164-3", sections[1].steps[5].id]);
+  assert.deepStrictEqual(out[1].steps[7], { id: "p164-2", label: "train164_2", when: { profession: 164 }, at: P(200, 78, 52, 10),
     lines: [{ kind: "train", skill: 164, rank: 2, npc: 700 }] });
   assert.strictEqual(out[0].steps.length, 6);
   assert.deepStrictEqual(notes.map((n) => [n.skill, n.rank]), [[164, 4]], "Artisan's level is never reached");
@@ -125,4 +126,74 @@ test("each trainer step has a reminder to raise the skill to the rank's gate, fr
   // a rank with no step gets no reminder
   assert.ok(!reminderSteps(out).some((r) => r.id === "p164-4-skill"));
   assert.strictEqual(checkRoute3({ format: 3, race: "Human", faction: "Alliance", sections: out }), null);
+});
+
+// sections whose steps stand in the zones given, one list of zones per section
+function zoned(lists) {
+  const sections = chain(lists.map((zones) => zones[0]), 0);
+  lists.forEach((zones, i) => { sections[i].steps = zones.map((zone) => obj(zone)); });
+  return sections;
+}
+const trainIndex = (out, id) => { const si = out.findIndex((s) => s.steps.some((x) => x.id === id)); return [si, out[si] ? out[si].steps.findIndex((x) => x.id === id) : -1]; };
+
+test("a trainer zone visited only at the start of a section moves the trainer step to a later section of the three", () => {
+  const { w } = world();
+  // the smith's zone (200) is the first step of section 0 only, and all of section 1
+  const sections = zoned([[200, 100, 100, 100, 100, 100], [200, 200, 200, 200, 200, 200]]);
+  const levels = Array(12).fill(12);
+  const out = addProfessionSteps(w.db, sections, "Alliance", { professions: SMITH, levelOf: levelsOf(sections, levels), notes: [] });
+  assert.deepStrictEqual(trainIndex(out, "p164-2"), [1, 1 + 5], "before the last step of section 1 (after its reminder)");
+  assert.deepStrictEqual(trainIndex(out, "p164-2-skill"), [1, 0]);
+  assert.strictEqual(out[0].steps.length, 6, "nothing in section 0");
+  assert.strictEqual(checkRoute3({ format: 3, race: "Human", faction: "Alliance", sections: out }), null);
+});
+
+test("with no section where the trainer zone reaches the second half, the step goes where the most of its section is before it", () => {
+  const { w } = world();
+  // section 0: the smith's zone at its first step; section 1: at its fourth of eight (3 before it, under half);
+  // section 2: none
+  const sections = zoned([[200, 100, 100, 100], [100, 100, 100, 200, 100, 100, 100, 100], [100, 100, 100]]);
+  const levels = Array(15).fill(12);
+  const out = addProfessionSteps(w.db, sections, "Alliance", { professions: SMITH, levelOf: levelsOf(sections, levels), notes: [] });
+  assert.deepStrictEqual(trainIndex(out, "p164-2"), [1, 1 + 3]);
+  assert.strictEqual(out[1].steps[1 + 4].id, sections[1].steps[3].id, "right before the step in the smith's zone");
+  assert.deepStrictEqual(trainIndex(out, "p164-2-skill"), [1, 0]);
+  assert.strictEqual(checkRoute3({ format: 3, race: "Human", faction: "Alliance", sections: out }), null);
+});
+
+test("a trainer step is never the last step of its section, so its reminder never holds the end of the section", () => {
+  const { w } = world();
+  const sections = chain([200, 200], 5);
+  const levels = Array.from({ length: 10 }, (_, i) => 10 + 2 * i);
+  const out = addProfessionSteps(w.db, sections, "Alliance", { professions: SMITH, levelOf: levelsOf(sections, levels), notes: [] });
+  for (const step of profSteps(out)) {
+    const section = out.find((s) => s.steps.includes(step));
+    const after = section.steps.slice(section.steps.indexOf(step) + 1);
+    assert.ok(after.some((s) => !s.when), `${step.id} has a step every character has after it`);
+  }
+});
+
+test("in the shipped routes the profession characters' reminders cover most of their section, and no trainer step ends one", () => {
+  const fs = require("fs");
+  const path = require("path");
+  const { parseRoute } = require("../sim_all");
+  const routes = path.join(__dirname, "..", "..", "NoirGuides", "Routes");
+  const shared = (s) => !s.when && !s.reminder;
+  const lead = {};
+  for (const file of fs.readdirSync(routes).filter((f) => f.endsWith(".lua"))) {
+    const route = parseRoute(fs.readFileSync(path.join(routes, file), "utf8"));
+    for (const section of route.sections) {
+      section.steps.forEach((step, i) => {
+        if (!/^p\d+-\d$/.test(step.id)) return;
+        assert.ok(section.steps.slice(i + 1).some(shared), `${route.race} ${step.id} has a shared step after it`);
+        lead[`${route.race} ${step.id}`] = section.steps.slice(0, i).filter(shared).length / section.steps.filter(shared).length;
+      });
+    }
+  }
+  // sim_all.js PROFESSION_CHARACTERS: Human Mining, Undead Tailoring (its Artisan trainer is only in Undercity, which
+  // the route passes through at the start of a section: the longest lead there is)
+  for (const key of ["Human p186-2", "Human p186-3", "Human p186-4", "Undead p197-2", "Undead p197-3"]) {
+    assert.ok(lead[key] >= 0.5, `${key}: ${lead[key]}`);
+  }
+  assert.ok(lead["Undead p197-4"] !== undefined);
 });

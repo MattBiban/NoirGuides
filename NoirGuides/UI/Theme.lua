@@ -22,6 +22,13 @@
 --                                 on NOIR_INIT before any window is built, so a change takes a reload
 --   Theme.Border()                -> the guide window's inner border color name (the lamp)
 --   Theme.Shadow(fontString)      the game's 1-pixel drop shadow under text (Theme.Font sets it)
+--   Theme.TextColor(fontString, name [, alpha])  sets a text color of the theme and remembers it
+--   Theme.Repaint()               paints every texture and text again with the colors in use (after a theme change)
+--   Theme.Refont()                sets every font that follows the font size setting again (after a size change)
+--
+-- Live changes: Paint, Tint, TextColor and Font remember what they set (weak tables: nothing is kept alive), so a
+-- new theme or font size applies at once, with no reload: the "accent" and "fontSize" options repaint or refont
+-- everything and fire NOIR_THEME or NOIR_FONT, on which the windows lay themselves out again.
 --
 -- Fonts are only ever set by file, with SetFont. A font object is never handed to a font string: the Forever
 -- client crashes when SetFontObject is given anything but one of its own named font objects.
@@ -159,8 +166,11 @@ function Theme.Shadow(fontString)
   if fontString.SetShadowColor then fontString:SetShadowColor(0, 0, 0, 0.9) end
 end
 
+local fonted = setmetatable({}, { __mode = "k" })   -- font string -> { role, follows the font size setting }
+
 function Theme.Font(fontString, role, large)
   local size = (Theme.sizes[role] or Theme.sizes.body) + (large and Theme.metrics.large or 0)
+  fonted[fontString] = { role = role, follows = large ~= nil }
   if try(fontString, Theme.fontFile, size) or try(fontString, STANDARD_TEXT_FONT, size) or try(fontString, USUAL_FONT, size) then
     Theme.Shadow(fontString)
     return true
@@ -182,7 +192,11 @@ end
 -- Textures
 -- ---------------------------------------------------------------------------------------------------------------
 
+local painted = setmetatable({}, { __mode = "k" })  -- texture -> { how, name, alpha }
+local colored = setmetatable({}, { __mode = "k" })  -- font string -> { name, alpha }
+
 function Theme.Paint(texture, name, alpha)
+  painted[texture] = { how = "paint", name = name, alpha = alpha }
   local r, g, b, a = Theme.Color(name, alpha)
   if texture.SetColorTexture then
     texture:SetColorTexture(r, g, b, a)
@@ -193,7 +207,28 @@ function Theme.Paint(texture, name, alpha)
 end
 
 function Theme.Tint(texture, name, alpha)
+  painted[texture] = { how = "tint", name = name, alpha = alpha }
   texture:SetVertexColor(Theme.Color(name, alpha))
+end
+
+function Theme.TextColor(fontString, name, alpha)
+  colored[fontString] = { name = name, alpha = alpha }
+  fontString:SetTextColor(Theme.Color(name, alpha))
+end
+
+function Theme.Repaint()
+  for texture, p in pairs(painted) do
+    if p.how == "paint" then Theme.Paint(texture, p.name, p.alpha) else Theme.Tint(texture, p.name, p.alpha) end
+  end
+  for fontString, t in pairs(colored) do Theme.TextColor(fontString, t.name, t.alpha) end
+end
+
+function Theme.Refont()
+  local Options = Noir.Options
+  local large = Options and Options.Get("fontSize") == "large"
+  for fontString, f in pairs(fonted) do
+    if f.follows then Theme.Font(fontString, f.role, large) end
+  end
 end
 
 -- ---------------------------------------------------------------------------------------------------------------
@@ -231,3 +266,20 @@ end
 Theme.ApplyAccent()
 -- Registered here, before any interface file registers its own: the lamp is set before a window is built.
 Noir.On("NOIR_INIT", Theme.ApplyAccent)
+-- A new theme or font size applies at once (the windows lay themselves out on NOIR_THEME and NOIR_FONT).
+Noir.On("NOIR_OPTION", function(_, key)
+  if key == "accent" then
+    Theme.ApplyAccent()
+    Theme.Repaint()
+    Noir.Fire("NOIR_THEME")
+  elseif key == "fontSize" then
+    Theme.Refont()
+    Noir.Fire("NOIR_FONT")
+  end
+end)
+Noir.On("NOIR_PROFILE", function()
+  Theme.ApplyAccent()
+  Theme.Repaint()
+  Theme.Refont()
+  Noir.Fire("NOIR_THEME")
+end)

@@ -400,30 +400,6 @@ Noir.Route("alliance-human", {
           lines = {
             { kind = "objective", quest = 83, index = 1, item = 1019, skipIfMissing = true },
           } },
-        { id = "p164-2", label = "train164_2", at = { zone = 12, x = 41.71, y = 65.54, r = 10 }, when = { profession = 164 },
-          lines = {
-            { kind = "train", skill = 164, rank = 2, npc = 514 },
-          } },
-        { id = "p165-2", label = "train165_2", at = { zone = 12, x = 46.38, y = 62.05, r = 10 }, when = { profession = 165 },
-          lines = {
-            { kind = "train", skill = 165, rank = 2, npc = 1632 },
-          } },
-        { id = "p171-2", label = "train171_2", at = { zone = 12, x = 39.84, y = 48.23, r = 10 }, when = { profession = 171 },
-          lines = {
-            { kind = "train", skill = 171, rank = 2, npc = 1215 },
-          } },
-        { id = "p182-2", label = "train182_2", at = { zone = 12, x = 39.96, y = 48.41, r = 10 }, when = { profession = 182 },
-          lines = {
-            { kind = "train", skill = 182, rank = 2, npc = 1218 },
-          } },
-        { id = "p197-2", label = "train197_2", at = { zone = 12, x = 79.22, y = 69.03, r = 10 }, when = { profession = 197 },
-          lines = {
-            { kind = "train", skill = 197, rank = 2, npc = 1103 },
-          } },
-        { id = "p333-2", label = "train333_2", at = { zone = 12, x = 64.93, y = 70.71, r = 10 }, when = { profession = 333 },
-          lines = {
-            { kind = "train", skill = 333, rank = 2, npc = 11072 },
-          } },
         { id = "t5545", at = { zone = 12, x = 81.38, y = 66.11, r = 10 }, targets = { friend = { 10616 } },
           lines = {
             { kind = "turnin", quest = 5545, npc = 10616, skipIfMissing = true },
@@ -591,18 +567,6 @@ Noir.Route("alliance-human", {
           lines = {
             { kind = "accept", quest = 2998, npc = 927 },
           } },
-        { id = "p186-2", label = "train186_2", at = { zone = 1519, x = 59.25, y = 37.83, r = 10 }, when = { profession = 186 },
-          lines = {
-            { kind = "train", skill = 186, rank = 2, npc = 5513 },
-          } },
-        { id = "p202-2", label = "train202_2", at = { zone = 1519, x = 61.88, y = 30.56, r = 10 }, when = { profession = 202 },
-          lines = {
-            { kind = "train", skill = 202, rank = 2, npc = 11026 },
-          } },
-        { id = "p393-2", label = "train393_2", at = { zone = 1519, x = 72.14, y = 62.21, r = 10 }, when = { profession = 393 },
-          lines = {
-            { kind = "train", skill = 393, rank = 2, npc = 1292 },
-          } },
         { id = "g1519@1519", at = { zone = 1519, x = 71.29, y = 72.23, r = 20 }, text = "Head northwest into Stormwind City.",
           lines = {
             { kind = "goto", at = { zone = 1519, x = 71.29, y = 72.23, r = 20 } },
@@ -679,6 +643,42 @@ Noir.Route("alliance-human", {
           lines = {
             { kind = "getflight", node = 5, npc = 931 },
             { kind = "fly", from = 5, to = 2 },
+          } },
+        { id = "p164-2", label = "train164_2", at = { zone = 1519, x = 64.12, y = 37.02, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 2, npc = 957 },
+          } },
+        { id = "p165-2", label = "train165_2", at = { zone = 1519, x = 72.14, y = 62.85, r = 10 }, when = { profession = 165 },
+          lines = {
+            { kind = "train", skill = 165, rank = 2, npc = 11096 },
+          } },
+        { id = "p171-2", label = "train171_2", at = { zone = 1519, x = 55.46, y = 85.65, r = 10 }, when = { profession = 171 },
+          lines = {
+            { kind = "train", skill = 171, rank = 2, npc = 5500 },
+          } },
+        { id = "p182-2", label = "train182_2", at = { zone = 1519, x = 54.29, y = 84.1, r = 10 }, when = { profession = 182 },
+          lines = {
+            { kind = "train", skill = 182, rank = 2, npc = 5566 },
+          } },
+        { id = "p186-2", label = "train186_2", at = { zone = 1519, x = 59.25, y = 37.83, r = 10 }, when = { profession = 186 },
+          lines = {
+            { kind = "train", skill = 186, rank = 2, npc = 5513 },
+          } },
+        { id = "p197-2", label = "train197_2", at = { zone = 1519, x = 53.48, y = 81.47, r = 10 }, when = { profession = 197 },
+          lines = {
+            { kind = "train", skill = 197, rank = 2, npc = 1300 },
+          } },
+        { id = "p202-2", label = "train202_2", at = { zone = 1519, x = 62.09, y = 30.31, r = 10 }, when = { profession = 202 },
+          lines = {
+            { kind = "train", skill = 202, rank = 2, npc = 5518 },
+          } },
+        { id = "p333-2", label = "train333_2", at = { zone = 1519, x = 53.03, y = 73.73, r = 10 }, when = { profession = 333 },
+          lines = {
+            { kind = "train", skill = 333, rank = 2, npc = 11068 },
+          } },
+        { id = "p393-2", label = "train393_2", at = { zone = 1519, x = 72.14, y = 62.21, r = 10 }, when = { profession = 393 },
+          lines = {
+            { kind = "train", skill = 393, rank = 2, npc = 1292 },
           } },
         { id = "tHUNTER-12", at = { zone = 1519, x = 68, y = 35.99, r = 10 }, when = { class = "HUNTER" }, minLevel = 12,
           lines = {
@@ -1374,10 +1374,6 @@ Noir.Route("alliance-human", {
           lines = {
             { kind = "objective", quest = 951, index = 1, item = 5273 },
           } },
-        { id = "p186-3", label = "train186_3", at = { zone = 148, x = 38.25, y = 41.01, r = 10 }, when = { profession = 186 },
-          lines = {
-            { kind = "train", skill = 186, rank = 3, npc = 6297 },
-          } },
         { id = "o4763", at = { zone = 148, x = 52.48, y = 33.39, r = 40 }, text = "Talisman of Corruption is southwest of your last stop.", items = { 12346, 12341, 12342, 12343, 12347 },
           lines = {
             { kind = "objective", quest = 4763, index = 1, item = 12355, skipIfMissing = true },
@@ -1398,6 +1394,10 @@ Noir.Route("alliance-human", {
         { id = "o994", at = { zone = 148, x = 41.92, y = 81.76, r = 40 },
           lines = {
             { kind = "objective", quest = 994, index = 1, skipIfMissing = true },
+          } },
+        { id = "p186-3", label = "train186_3", at = { zone = 148, x = 38.25, y = 41.01, r = 10 }, when = { profession = 186 },
+          lines = {
+            { kind = "train", skill = 186, rank = 3, npc = 6297 },
           } },
         { id = "t994.a990", at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, minLevel = 15, targets = { friend = { 3693, 3694 } },
           lines = {
@@ -1441,14 +1441,6 @@ Noir.Route("alliance-human", {
         { id = "p393-3-skill", when = { profession = 393 }, reminder = { ends = "train393_3" },
           lines = {
             { kind = "skill", skill = 393, value = 125 },
-          } },
-        { id = "p165-3", label = "train165_3", at = { zone = 331, x = 35.98, y = 52.1, r = 10 }, when = { profession = 165 },
-          lines = {
-            { kind = "train", skill = 165, rank = 3, npc = 3967 },
-          } },
-        { id = "p171-3", label = "train171_3", at = { zone = 331, x = 50.85, y = 67.11, r = 10 }, when = { profession = 171 },
-          lines = {
-            { kind = "train", skill = 171, rank = 3, npc = 3964 },
           } },
         { id = "g331@331", at = { zone = 331, x = 27.26, y = 35.58, r = 20 }, text = "Head south into Ashenvale.",
           lines = {
@@ -1636,9 +1628,17 @@ Noir.Route("alliance-human", {
           lines = {
             { kind = "accept", quest = 1698, npc = 5113 },
           } },
-        { id = "p164-3", label = "train164_3", at = { zone = 1537, x = 52.36, y = 42.55, r = 10 }, when = { profession = 164 },
+        { id = "g1537@1537#2", at = { zone = 1537, x = 55.5, y = 47.74, r = 20 }, text = "Head into Ironforge.",
           lines = {
-            { kind = "train", skill = 164, rank = 3, npc = 10276 },
+            { kind = "goto", at = { zone = 1537, x = 55.5, y = 47.74, r = 20 } },
+          } },
+        { id = "p165-3", label = "train165_3", at = { zone = 1537, x = 40.24, y = 33.68, r = 10 }, when = { profession = 165 },
+          lines = {
+            { kind = "train", skill = 165, rank = 3, npc = 5127 },
+          } },
+        { id = "p171-3", label = "train171_3", at = { zone = 1537, x = 66.62, y = 55.69, r = 10 }, when = { profession = 171 },
+          lines = {
+            { kind = "train", skill = 171, rank = 3, npc = 5177 },
           } },
         { id = "p182-3", label = "train182_3", at = { zone = 1537, x = 55.9, y = 59.13, r = 10 }, when = { profession = 182 },
           lines = {
@@ -1648,10 +1648,6 @@ Noir.Route("alliance-human", {
           lines = {
             { kind = "train", skill = 197, rank = 3, npc = 5153 },
           } },
-        { id = "p202-3", label = "train202_3", at = { zone = 1537, x = 67.48, y = 42.91, r = 10 }, when = { profession = 202 },
-          lines = {
-            { kind = "train", skill = 202, rank = 3, npc = 11029 },
-          } },
         { id = "p333-3", label = "train333_3", at = { zone = 1537, x = 59.77, y = 45.45, r = 10 }, when = { profession = 333 },
           lines = {
             { kind = "train", skill = 333, rank = 3, npc = 5157 },
@@ -1659,10 +1655,6 @@ Noir.Route("alliance-human", {
         { id = "p393-3", label = "train393_3", at = { zone = 1537, x = 39.86, y = 32.5, r = 10 }, when = { profession = 393 },
           lines = {
             { kind = "train", skill = 393, rank = 3, npc = 6291 },
-          } },
-        { id = "g1537@1537#2", at = { zone = 1537, x = 55.5, y = 47.74, r = 20 }, text = "Head into Ironforge.",
-          lines = {
-            { kind = "goto", at = { zone = 1537, x = 55.5, y = 47.74, r = 20 } },
           } },
         { id = "tMAGE-23", at = { zone = 1537, x = 27.16, y = 8.57, r = 10 }, when = { class = "MAGE" }, minLevel = 23,
           lines = {
@@ -1701,6 +1693,14 @@ Noir.Route("alliance-human", {
         { id = "g10@10", at = { zone = 10, x = 7.71, y = 33.2, r = 20 }, text = "Head south into Duskwood.",
           lines = {
             { kind = "goto", at = { zone = 10, x = 7.71, y = 33.2, r = 20 } },
+          } },
+        { id = "p164-3", label = "train164_3", at = { zone = 10, x = 74, y = 48.55, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 3, npc = 3136 },
+          } },
+        { id = "p202-3", label = "train202_3", at = { zone = 10, x = 77.38, y = 48.82, r = 10 }, when = { profession = 202 },
+          lines = {
+            { kind = "train", skill = 202, rank = 3, npc = 1676 },
           } },
         { id = "a226.a95", at = { zone = 10, x = 7.71, y = 33.2, r = 10 }, minLevel = 20, maxLevel = 29, targets = { friend = { 893, 311 } },
           lines = {
@@ -2933,10 +2933,6 @@ Noir.Route("alliance-human", {
             { kind = "turnin", quest = 577, at = { zone = 33, x = 28.29, y = 77.59, r = 10 }, npc = 2495 },
             { kind = "accept", quest = 628, at = { zone = 33, x = 28.29, y = 77.59, r = 10 }, npc = 2495, requires = { 577 } },
           } },
-        { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
-          lines = {
-            { kind = "train", skill = 164, rank = 4, npc = 2836 },
-          } },
         { id = "o628", at = { zone = 33, x = 29.48, y = 24.88, r = 40 }, text = "Elder Crocolisk Skin is north of Baron Revilgaz.", targets = { enemy = { 2635 } },
           lines = {
             { kind = "objective", quest = 628, index = 1, item = 4105 },
@@ -2986,13 +2982,13 @@ Noir.Route("alliance-human", {
             { kind = "turnin", quest = 207, npc = 739, skipIfMissing = true },
             { kind = "turnin", quest = 574, npc = 469, skipIfMissing = true },
           } },
-        { id = "p186-4", label = "train186_4", at = { zone = 10, x = 74.05, y = 49.62, r = 10 }, when = { profession = 186 },
-          lines = {
-            { kind = "train", skill = 186, rank = 4, npc = 3137 },
-          } },
         { id = "g10@10#3", at = { zone = 10, x = 77.49, y = 44.29, r = 20 }, text = "Head northeast into Duskwood.",
           lines = {
             { kind = "goto", at = { zone = 10, x = 77.49, y = 44.29, r = 20 } },
+          } },
+        { id = "p186-4", label = "train186_4", at = { zone = 10, x = 74.05, y = 49.62, r = 10 }, when = { profession = 186 },
+          lines = {
+            { kind = "train", skill = 186, rank = 4, npc = 3137 },
           } },
         { id = "tWARRIOR-36:go1", at = { zone = 10, x = 77.49, y = 44.29, r = 10 }, text = "Fly from Darkshire, Duskwood to Stormwind, Elwynn.", when = { class = "WARRIOR" },
           lines = {
@@ -3009,6 +3005,10 @@ Noir.Route("alliance-human", {
         { id = "y12-19", at = { zone = 10, x = 77.49, y = 44.29, r = 10 }, text = "Fly from Darkshire, Duskwood to Booty Bay, Stranglethorn.",
           lines = {
             { kind = "fly", from = 12, to = 19 },
+          } },
+        { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 4, npc = 2836 },
           } },
         { id = "tROGUE-36", at = { zone = 33, x = 26.82, y = 77.15, r = 10 }, when = { class = "ROGUE" }, minLevel = 36,
           lines = {

@@ -32,7 +32,7 @@ Options.DEFAULTS = {
   hideFinished = false, otherSections = false, highlight = true, itemButtons = true, buttonBackground = true,
   buttonScale = 1, backgroundAlpha = 0.75,
   -- Navigation
-  arrow = true, arrowScale = 1, arrowText = 12, minimapPins = true, pinRing = false, worldPins = 7, pinSize = 1,
+  arrow = true, arrowScale = 1, arrowText = 12, minimapPins = true, pinRing = false, worldPins = 8, pinSize = 1,
   pinMerge = 1, pinAlpha = 0.6,
   -- Automation
   autoQuests = true, guideRewards = false, rewardMarker = true, bestReward = false, train = false, flights = true,

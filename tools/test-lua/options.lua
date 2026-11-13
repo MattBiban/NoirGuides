@@ -8,7 +8,7 @@ local EXPECTED = {
   shown = true, locked = false, hideInRaid = false, minimap = true, minimapAngle = 225, windowHidden = false,
   cardsBelow = false, windowScale = 1, fontSize = "standard", stepList = true, hideFinished = false,
   otherSections = false, highlight = true, itemButtons = true, buttonBackground = true, buttonScale = 1, arrow = true,
-  arrowScale = 1, arrowText = 12, minimapPins = true, pinRing = false, worldPins = 7, pinSize = 1, pinMerge = 1,
+  arrowScale = 1, arrowText = 12, minimapPins = true, pinRing = false, worldPins = 8, pinSize = 1, pinMerge = 1,
   pinAlpha = 0.6, autoQuests = true, guideRewards = false, rewardMarker = true, bestReward = false, train = false,
   flights = true, hearth = true, dialogue = true, buy = true, sellJunk = true, targetButtons = true, nameplates = true, markers = true,
   outlevel = true, groupQuests = false, talents = true, neverSkip = false, offerCleanup = true, conflicts = true,
@@ -31,7 +31,7 @@ end)
 test("options read the defaults before the saved variables are ready", function()
   local c = sample()
   c:loadAddon()
-  eq(c.G.Noir.Options.Get("worldPins"), 7)
+  eq(c.G.Noir.Options.Get("worldPins"), 8)
   eq({ c.G.Noir.Options.Set("worldPins", 3) }, { false, "the settings are not loaded yet" })
 end)
 
@@ -51,7 +51,7 @@ test("Set refuses a value out of range and fires NOIR_OPTION for a good one", fu
   eq(Options.Set("noSuchKey", true), false)
   eq(Options.Set("worldPins", 0 / 0), false, "not a number")
   eq(fired, {}, "nothing fired for a refused value")
-  eq(Options.Get("worldPins"), 7)
+  eq(Options.Get("worldPins"), 8)
   eq(Options.Set("worldPins", 20), true)
   eq(Options.Set("fontSize", "large"), true)
   eq(Options.Set("locked", true), true)
@@ -119,7 +119,7 @@ test("profiles: new, copy, use, delete, reset, default for new characters", func
   eq(Options.NewProfile("Ghost", "Nobody"), false, "copying from a profile that does not exist")
   eq(Options.Profiles(), { "Copy", "Default", "Raid" })
   eq(Options.UseProfile("Raid"), true)
-  eq({ Options.Profile(), Options.Get("worldPins") }, { "Raid", 7 })
+  eq({ Options.Profile(), Options.Get("worldPins") }, { "Raid", 8 })
   eq(Options.UseProfile("Copy"), true)
   eq(Options.Get("worldPins"), 3, "a copy carries the values")
   Options.Set("worldPins", 9)
@@ -129,7 +129,7 @@ test("profiles: new, copy, use, delete, reset, default for new characters", func
   eq(Options.DeleteProfile("Raid"), true)
   eq(Options.Profiles(), { "Copy", "Default" })
   eq(Options.ResetProfile(), true)
-  eq(Options.Get("worldPins"), 7)
+  eq(Options.Get("worldPins"), 8)
   eq(profiles[#profiles], "Copy", "a reset tells the windows to take their places again")
   eq(Options.UseProfile("Default"), true)
   eq(Options.DeleteProfile("Copy"), true)

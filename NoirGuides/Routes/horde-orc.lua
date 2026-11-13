@@ -514,22 +514,6 @@ Noir.Route("horde-orc", {
           lines = {
             { kind = "hearth", to = { zone = 14, x = 51.51, y = 41.64 } },
           } },
-        { id = "p164-2", label = "train164_2", at = { zone = 14, x = 52.03, y = 40.72, r = 10 }, when = { profession = 164 },
-          lines = {
-            { kind = "train", skill = 164, rank = 2, npc = 3174 },
-          } },
-        { id = "p171-2", label = "train171_2", at = { zone = 14, x = 55.41, y = 73.95, r = 10 }, when = { profession = 171 },
-          lines = {
-            { kind = "train", skill = 171, rank = 2, npc = 3184 },
-          } },
-        { id = "p202-2", label = "train202_2", at = { zone = 14, x = 52.18, y = 40.8, r = 10 }, when = { profession = 202 },
-          lines = {
-            { kind = "train", skill = 202, rank = 2, npc = 11025 },
-          } },
-        { id = "p333-2", label = "train333_2", at = { zone = 14, x = 56.69, y = 73.74, r = 10 }, when = { profession = 333 },
-          lines = {
-            { kind = "train", skill = 333, rank = 2, npc = 266881 },
-          } },
         { id = "tHUNTER-10", at = { zone = 14, x = 51.85, y = 43.49, r = 10 }, when = { class = "HUNTER" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "HUNTER", npc = 3171 },
@@ -652,14 +636,6 @@ Noir.Route("horde-orc", {
           lines = {
             { kind = "turnin", quest = 815, npc = 3191 },
           } },
-        { id = "p165-2", label = "train165_2", at = { zone = 17, x = 45.97, y = 35.85, r = 10 }, when = { profession = 165 },
-          lines = {
-            { kind = "train", skill = 165, rank = 2, npc = 5784 },
-          } },
-        { id = "p197-2", label = "train197_2", at = { zone = 17, x = 52.2, y = 31.7, r = 10 }, when = { profession = 197 },
-          lines = {
-            { kind = "train", skill = 197, rank = 2, npc = 3484 },
-          } },
         { id = "o816", at = { zone = 17, x = 63.38, y = 18.4, r = 40 }, text = "Kron's Amulet is west of Cook Torka.", targets = { enemy = { 3110, 3231 } },
           lines = {
             { kind = "objective", quest = 816, index = 1, item = 4891, skipIfMissing = true },
@@ -711,18 +687,6 @@ Noir.Route("horde-orc", {
           lines = {
             { kind = "turnin", quest = 816, npc = 3193, skipIfMissing = true },
           } },
-        { id = "p182-2", label = "train182_2", at = { zone = 1637, x = 55.62, y = 39.46, r = 10 }, when = { profession = 182 },
-          lines = {
-            { kind = "train", skill = 182, rank = 2, npc = 3404 },
-          } },
-        { id = "p186-2", label = "train186_2", at = { zone = 1637, x = 73.12, y = 26.08, r = 10 }, when = { profession = 186 },
-          lines = {
-            { kind = "train", skill = 186, rank = 2, npc = 3357 },
-          } },
-        { id = "p393-2", label = "train393_2", at = { zone = 1637, x = 63.36, y = 45.42, r = 10 }, when = { profession = 393 },
-          lines = {
-            { kind = "train", skill = 393, rank = 2, npc = 7088 },
-          } },
         { id = "g1637@1637", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 }, text = "Head north into Orgrimmar.",
           lines = {
             { kind = "goto", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 } },
@@ -746,6 +710,18 @@ Noir.Route("horde-orc", {
             { kind = "turnin", quest = 1859, npc = 6446, skipIfMissing = true },
             { kind = "accept", quest = 1963, npc = 6446 },
           } },
+        { id = "p182-2", label = "train182_2", at = { zone = 1637, x = 55.62, y = 39.46, r = 10 }, when = { profession = 182 },
+          lines = {
+            { kind = "train", skill = 182, rank = 2, npc = 3404 },
+          } },
+        { id = "p186-2", label = "train186_2", at = { zone = 1637, x = 73.12, y = 26.08, r = 10 }, when = { profession = 186 },
+          lines = {
+            { kind = "train", skill = 186, rank = 2, npc = 3357 },
+          } },
+        { id = "p393-2", label = "train393_2", at = { zone = 1637, x = 63.36, y = 45.42, r = 10 }, when = { profession = 393 },
+          lines = {
+            { kind = "train", skill = 393, rank = 2, npc = 7088 },
+          } },
         { id = "o812", at = { zone = 1637, x = 47.24, y = 53.58, r = 40 }, targets = { enemy = { 3189 } },
           lines = {
             { kind = "objective", quest = 812, index = 1, item = 4904, skipIfMissing = true },
@@ -767,6 +743,14 @@ Noir.Route("horde-orc", {
             { kind = "turnin", quest = 1501, npc = 5875, skipIfMissing = true },
             { kind = "turnin", quest = 1506, npc = 5875, skipIfMissing = true },
           } },
+        { id = "p171-2", label = "train171_2", at = { zone = 14, x = 55.41, y = 73.95, r = 10 }, when = { profession = 171 },
+          lines = {
+            { kind = "train", skill = 171, rank = 2, npc = 3184 },
+          } },
+        { id = "p333-2", label = "train333_2", at = { zone = 14, x = 56.69, y = 73.74, r = 10 }, when = { profession = 333 },
+          lines = {
+            { kind = "train", skill = 333, rank = 2, npc = 266881 },
+          } },
         { id = "t812", at = { zone = 14, x = 41.54, y = 18.6, r = 10 }, targets = { friend = { 3190 } },
           lines = {
             { kind = "turnin", quest = 812, npc = 3190, skipIfMissing = true },
@@ -774,6 +758,22 @@ Noir.Route("horde-orc", {
         { id = "g17@17", at = { zone = 17, x = 62.26, y = 19.38, r = 20 }, text = "Head southwest into The Barrens.",
           lines = {
             { kind = "goto", at = { zone = 17, x = 62.26, y = 19.38, r = 20 } },
+          } },
+        { id = "p164-2", label = "train164_2", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 2, npc = 3478 },
+          } },
+        { id = "p165-2", label = "train165_2", at = { zone = 17, x = 45.97, y = 35.85, r = 10 }, when = { profession = 165 },
+          lines = {
+            { kind = "train", skill = 165, rank = 2, npc = 5784 },
+          } },
+        { id = "p197-2", label = "train197_2", at = { zone = 17, x = 52.2, y = 31.7, r = 10 }, when = { profession = 197 },
+          lines = {
+            { kind = "train", skill = 197, rank = 2, npc = 3484 },
+          } },
+        { id = "p202-2", label = "train202_2", at = { zone = 17, x = 62.67, y = 36.31, r = 10 }, when = { profession = 202 },
+          lines = {
+            { kind = "train", skill = 202, rank = 2, npc = 3494 },
           } },
         { id = "t840.a842", at = { zone = 17, x = 62.26, y = 19.38, r = 10 }, minLevel = 10, items = { 4992, 4995 }, targets = { friend = { 3337 } },
           lines = {
@@ -1424,18 +1424,6 @@ Noir.Route("horde-orc", {
           lines = {
             { kind = "skill", skill = 333, value = 125 },
           } },
-        { id = "p164-3", label = "train164_3", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
-          lines = {
-            { kind = "train", skill = 164, rank = 3, npc = 3478 },
-          } },
-        { id = "p165-3", label = "train165_3", at = { zone = 17, x = 44.84, y = 59.46, r = 10 }, when = { profession = 165 },
-          lines = {
-            { kind = "train", skill = 165, rank = 3, npc = 3703 },
-          } },
-        { id = "p197-3", label = "train197_3", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
-          lines = {
-            { kind = "train", skill = 197, rank = 3, npc = 3704 },
-          } },
         { id = "t863", at = { zone = 17, x = 62.98, y = 37.22, r = 10 }, targets = { friend = { 3442 } },
           lines = {
             { kind = "turnin", quest = 863, npc = 3442, skipIfMissing = true },
@@ -1809,18 +1797,30 @@ Noir.Route("horde-orc", {
           lines = {
             { kind = "fly", from = 80, to = 25 },
           } },
-        { id = "p333-3", label = "train333_3", at = { zone = 406, x = 49.18, y = 57.18, r = 10 }, when = { profession = 333 },
-          lines = {
-            { kind = "train", skill = 333, rank = 3, npc = 11074 },
-          } },
         { id = "g406@406", at = { zone = 406, x = 81.95, y = 87.22, r = 20 }, text = "Head west into Stonetalon Mountains.",
           lines = {
             { kind = "goto", at = { zone = 406, x = 81.95, y = 87.22, r = 20 } },
+          } },
+        { id = "p333-3", label = "train333_3", at = { zone = 406, x = 49.18, y = 57.18, r = 10 }, when = { profession = 333 },
+          lines = {
+            { kind = "train", skill = 333, rank = 3, npc = 11074 },
           } },
         { id = "o6548", at = { zone = 406, x = 81.95, y = 87.22, r = 40 }, targets = { enemy = { 11911, 11910 } },
           lines = {
             { kind = "objective", quest = 6548, index = 1, npc = 11910, skipIfMissing = true },
             { kind = "objective", quest = 6548, index = 2, npc = 11911, skipIfMissing = true },
+          } },
+        { id = "p164-3", label = "train164_3", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 3, npc = 3478 },
+          } },
+        { id = "p165-3", label = "train165_3", at = { zone = 17, x = 44.84, y = 59.46, r = 10 }, when = { profession = 165 },
+          lines = {
+            { kind = "train", skill = 165, rank = 3, npc = 3703 },
+          } },
+        { id = "p197-3", label = "train197_3", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
+          lines = {
+            { kind = "train", skill = 197, rank = 3, npc = 3704 },
           } },
         { id = "t6548", at = { zone = 17, x = 35.19, y = 27.76, r = 10 }, targets = { friend = { 11857 } },
           lines = {
@@ -3136,10 +3136,6 @@ Noir.Route("horde-orc", {
             { kind = "turnin", quest = 201, npc = 773 },
             { kind = "sethearth", npc = 6807 },
           } },
-        { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
-          lines = {
-            { kind = "train", skill = 164, rank = 4, npc = 2836 },
-          } },
         { id = "y18-20#3", at = { zone = 33, x = 26.87, y = 77.1, r = 10 }, text = "Fly from Booty Bay, Stranglethorn to Grom'gol, Stranglethorn.",
           lines = {
             { kind = "fly", from = 18, to = 20 },
@@ -3206,6 +3202,10 @@ Noir.Route("horde-orc", {
         { id = "t628", at = { zone = 33, x = 28.29, y = 77.59, r = 10 }, targets = { friend = { 2495 } },
           lines = {
             { kind = "turnin", quest = 628, npc = 2495, skipIfMissing = true },
+          } },
+        { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 4, npc = 2836 },
           } },
         { id = "x17", at = { zone = 33, x = 25.7, y = 73.1, r = 15 }, text = "Take the boat from Stranglethorn Vale to The Barrens.",
           lines = {
@@ -3312,10 +3312,6 @@ Noir.Route("horde-orc", {
           lines = {
             { kind = "fly", from = 80, to = 29 },
           } },
-        { id = "p393-4", label = "train393_4", at = { zone = 405, x = 23.24, y = 69.72, r = 10 }, when = { profession = 393 },
-          lines = {
-            { kind = "train", skill = 393, rank = 4, npc = 12030 },
-          } },
         { id = "g405@405", at = { zone = 405, x = 38.88, y = 27.16, r = 20 }, text = "Head west into Desolace.",
           lines = {
             { kind = "goto", at = { zone = 405, x = 38.88, y = 27.16, r = 20 } },
@@ -3327,6 +3323,10 @@ Noir.Route("horde-orc", {
         { id = "a6161", at = { zone = 405, x = 36.07, y = 30.41, r = 10 }, minLevel = 30, maxLevel = 44,
           lines = {
             { kind = "accept", quest = 6161, object = 177787 },
+          } },
+        { id = "p393-4", label = "train393_4", at = { zone = 405, x = 23.24, y = 69.72, r = 10 }, when = { profession = 393 },
+          lines = {
+            { kind = "train", skill = 393, rank = 4, npc = 12030 },
           } },
         { id = "o5741", at = { zone = 405, x = 55.17, y = 30.15, r = 40 }, text = "Sceptre of Light is east of your last stop.", targets = { enemy = { 13019 } },
           lines = {
@@ -3711,6 +3711,10 @@ Noir.Route("horde-orc", {
           lines = {
             { kind = "transport", to = { zone = 85, x = 60.6, y = 58.9 }, mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 } },
           } },
+        { id = "g1497@1497", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 }, text = "Head into Undercity.",
+          lines = {
+            { kind = "goto", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 } },
+          } },
         { id = "p171-4", label = "train171_4", at = { zone = 1497, x = 47.77, y = 73.34, r = 10 }, when = { profession = 171 },
           lines = {
             { kind = "train", skill = 171, rank = 4, npc = 4611 },
@@ -3726,10 +3730,6 @@ Noir.Route("horde-orc", {
         { id = "p197-4", label = "train197_4", at = { zone = 1497, x = 70.76, y = 30.69, r = 10 }, when = { profession = 197 },
           lines = {
             { kind = "train", skill = 197, rank = 4, npc = 4576 },
-          } },
-        { id = "g1497@1497", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 }, text = "Head into Undercity.",
-          lines = {
-            { kind = "goto", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 } },
           } },
         { id = "tROGUE-36", at = { zone = 1497, x = 83.86, y = 72.07, r = 10 }, when = { class = "ROGUE" }, minLevel = 36,
           lines = {

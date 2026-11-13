@@ -137,3 +137,56 @@ test("a reminder under its minimum level does not show", function()
   c:advance(0.2)
   eq(kinds(P), { "reminder r3901", "current o364.o376" }, "level 3: it shows")
 end)
+
+-- A profession's "raise the skill" reminder as tools/planner/professions.js writes it: at the start of the section,
+-- ending at the profession trainer step, which the generator puts late in the section (Lines: the train line is
+-- skipped while the skill is below the rank's gate). Mining 60/150 learned; the Expert gate is 125.
+local function withSkillReminder(client)
+  client.G.Noir.Data.professions = { [186] = { name = "Mining", kind = "primary" } }
+  local steps = client.G.Noir.Routes.Get("horde-undead").sections[1].steps
+  steps[4] = { id = "p186-3-skill", when = { profession = 186 }, reminder = { ends = "train186_3" },
+    lines = { { kind = "skill", skill = 186, value = 125 } } }
+  steps[8] = { id = "p186-3", label = "train186_3", when = { profession = 186 }, at = { zone = 85, x = 31.1, y = 65.1, r = 8 },
+    lines = { { kind = "train", skill = 186, rank = 3, npc = 1570 } } }
+  client:setProfession(186, "Mining", 60, 150)
+end
+
+local function playToTrainer(c)
+  c:completeObjectives(364)
+  c:completeObjectives(376)
+  c:giveItem(2834, 4)
+  c:advance(1)
+  eq(place(c.G.Noir.Progress), "t364.t376")
+end
+
+test("a skill reminder stays on screen over the steps before its trainer step, and ends with it below the gate", function()
+  local c, _, P = atA3901({ afterLoad = withSkillReminder })
+  c:acceptQuest(3901, QUEST3901)
+  c:advance(0.5)
+  eq(place(P), "o364.o376")
+  eq(kinds(P), { "reminder p186-3-skill", "current o364.o376" }, "open from the start of the section")
+  playToTrainer(c)
+  eq(kinds(P), { "reminder p186-3-skill", "current t364.t376" }, "still open on the last step before the trainer")
+  c:turnInQuest(364)
+  c:turnInQuest(376)
+  c:advance(1)
+  eq(place(P), "l3@85", "Mining 60 is below 125: the trainer step is passed, questing goes on")
+  eq(kinds(P), { "current l3@85" }, "past its ends step the reminder is gone")
+end)
+
+test("a skill reminder raised to its gate finishes, and the trainer step then waits to be visited", function()
+  local c, Noir, P = atA3901({ afterLoad = withSkillReminder })
+  c:acceptQuest(3901, QUEST3901)
+  c:advance(0.5)
+  eq(kinds(P), { "reminder p186-3-skill", "current o364.o376" })
+  c:setProfession(186, "Mining", 125, 150)
+  c:advance(0.2)
+  eq(kinds(P), { "current o364.o376" }, "finished: gone")
+  eq(Noir.char.guide.places[DEATHKNELL].reminders["p186-3-skill"], true)
+  playToTrainer(c)
+  c:turnInQuest(364)
+  c:turnInQuest(376)
+  c:advance(1)
+  eq(place(P), "p186-3", "at the gate the trainer step is current")
+  eq(kinds(P), { "current p186-3" })
+end)

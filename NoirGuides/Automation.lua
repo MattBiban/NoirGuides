@@ -521,7 +521,7 @@ local function newCoin(parent)
   frame.coin = coin
   local label = frame:CreateFontString(nil, "OVERLAY")
   label:SetPoint("RIGHT", frame, "LEFT", -2, 0)
-  if Noir.Theme and Noir.Theme.Font(label, "small") then label:SetTextColor(Noir.Theme.Color("lamp")) end
+  if Noir.Theme and Noir.Theme.Font(label, "small") then Noir.Theme.TextColor(label, "lamp") end
   frame.label = label
   frame:Hide()
   return frame

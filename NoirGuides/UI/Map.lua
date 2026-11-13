@@ -14,11 +14,11 @@
 --       .glyph, .plus); Map.parts.lines the path dashes (textures)
 --
 -- Rules (spec 4.5):
---   * World map: the places of the cards first, then the following steps in order, up to the "worldPins" option
---     (default 7, 0 to 20) counted in steps with a place; the limit is raised so every place of the cards fits. Pins
---     on any shown map that contains the place (zone, sub-zone, continent: Arrow.Project); none in instances.
---   * Minimap: the places of the cards only, while "minimapPins" is on. Out of range, the current step's pin waits on
---     the rim in its direction; the other pins are left out.
+--   * World map and minimap: the places of the cards first, then the following steps in order, up to the "worldPins"
+--     option ("Upcoming steps on the maps", default 8, 0 to 20) counted in steps with a place; the limit is raised so
+--     every place of the cards fits. World map pins on any shown map that contains the place (zone, sub-zone,
+--     continent: Arrow.Project); none in instances. The minimap's pins show while "minimapPins" is on; out of range,
+--     the current step's pin waits on the rim in its direction and the other pins are left out.
 --   * Merging: places closer than WORLD_YARDS * pinMerge (world map) or MINIMAP_YARDS * pinMerge (minimap) to a pin's
 --     first place share that pin, which shows a "+" beside the first step's number or icon.
 --   * Look: the cards' pins are metrics.active large and fully opaque; each following step's pins are FADE more
@@ -171,8 +171,7 @@ local function collect(cards, kind)
     if card.index then onCard[card.index] = true end
     if entries(list, card.step, card.index, Arrow.CardPlaces(card), 0, card) then cardSteps = cardSteps + 1 end
   end
-  if kind ~= "world" then return list end
-  local limit = math.max(option("worldPins") or 7, cardSteps)
+  local limit = math.max(option("worldPins") or 8, cardSteps)
   local count, rank = cardSteps, 0
   local _, at = Progress.Place()
   local steps = Progress.Steps() or {}
@@ -332,12 +331,12 @@ local function dress(pin, data, size)
   else
     pin.glyph:Hide()
     if Theme.SetText(pin.label, data.label or "") then
-      pin.label:SetTextColor(Theme.Color(data.current and "bay" or "paper"))
+      Theme.TextColor(pin.label, data.current and "bay" or "paper")
       pin.label:Show()
     end
   end
   if data.plus and Theme.SetText(pin.plus, "+") then
-    pin.plus:SetTextColor(Theme.Color("paper"))
+    Theme.TextColor(pin.plus, "paper")
     pin.plus:Show()
   else
     pin.plus:Hide()

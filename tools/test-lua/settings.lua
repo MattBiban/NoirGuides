@@ -235,7 +235,7 @@ test("a slider follows a click on its track and a drag of its thumb", function()
   eq(c:offScreen(), {})
 end)
 
-test("the accent color asks and reloads the UI", function()
+test("the theme applies at once, with no question and no reload", function()
   local c, Noir, S = at({ settingsApi = "modern" })
   S.Open("Guide window")
   eq(control(S, "accent").value, "class", "the class color by default")
@@ -245,21 +245,27 @@ test("the accent color asks and reloads the UI", function()
   for _, row in ipairs(Noir.Menu.Read().levels[1].rows) do texts[#texts + 1] = row.text end
   eq(texts, { "Class color (automatic)", "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage",
     "Warlock", "Druid", "Gold", "Black" }, "the menu lists every theme by name")
-  ok(c:click(menuRow(Noir, "Gold")))
-  eq(Noir.Panel.ConfirmRead().shown, true, "a question first")
-  c:click(Noir.Panel.ConfirmButton("no"))
-  eq(Noir.Options.Get("accent"), "class", "no: nothing changes")
-  eq(c.reloads, 0)
-  ok(c:click(S.Control("accent")))
-  ok(c:click(menuRow(Noir, "Gold")))
-  c:click(Noir.Panel.ConfirmButton("yes"))
-  eq(Noir.Options.Get("accent"), "gold")
-  eq(c.reloads, 1, "yes: the interface reloads")
+  ok(c:click(menuRow(Noir, "Rogue")))
+  eq(Noir.Panel.ConfirmRead().shown, false, "no question")
+  eq(Noir.Options.Get("accent"), "rogue")
+  eq(Noir.Theme.Hex("lamp"), "FFF468", "the rogue yellow at once")
+  eq(c.reloads, 0, "no reload: the client may refuse one")
+  -- What was painted before the change carries the new colors: the slider fill and the window's inner border.
+  local r, g, b = Noir.Theme.Color("lamp")
+  local fill = S.Fill and S.Fill("backgroundAlpha")
+  if fill then eq({ fill:GetVertexColor() }, { r, g, b, 1 }, "the slider fill repainted") end
+  local lampEdges = 0
+  for _, region in ipairs(Noir.Window.frame.__regions) do
+    local col = region.__color
+    if col and col[1] == r and col[2] == g and col[3] == b then lampEdges = lampEdges + 1 end
+  end
+  ok(lampEdges >= 4, "the window's border repainted in the new accent")
   ok(c:click(S.Control("accent")))
   ok(c:click(menuRow(Noir, "Black")))
-  c:click(Noir.Panel.ConfirmButton("yes"))
   eq(Noir.Options.Get("accent"), "black", "the stored value is the lowercase key")
-  eq(c.reloads, 2)
+  eq(Noir.Theme.Hex("bay"), "000000")
+  eq(c.reloads, 0)
+  eq(c.errors, {})
   eq(c:offScreen(), {})
 end)
 
@@ -280,23 +286,27 @@ test("the background opacity slider applies without a reload", function()
   eq(c:offScreen(), {})
 end)
 
-test("font size asks and reloads the UI; outlevel asks and reloads the section", function()
+test("font size applies at once; outlevel asks and reloads the section", function()
   local c, Noir, S = at({ settingsApi = "modern" })
   S.Open("Guide window")
   eq(control(S, "fontSize").value, "standard")
   c:setCursor(400, 400)
   ok(c:click(S.Control("fontSize")))
   ok(Noir.Menu.IsOpen(), "the choices open as a menu at the cursor")
+  local title = Noir.Window.Read and Noir.Window.Read().title
   ok(c:click(menuRow(Noir, "large")))
-  eq(Noir.Panel.ConfirmRead().shown, true, "a question first")
-  c:click(Noir.Panel.ConfirmButton("no"))
-  eq(Noir.Options.Get("fontSize"), "standard", "no: nothing changes")
-  eq(c.reloads, 0)
-  ok(c:click(S.Control("fontSize")))
-  ok(c:click(menuRow(Noir, "large")))
-  c:click(Noir.Panel.ConfirmButton("yes"))
+  eq(Noir.Panel.ConfirmRead().shown, false, "no question")
   eq(Noir.Options.Get("fontSize"), "large")
-  eq(c.reloads, 1, "yes: the interface reloads")
+  eq(c.reloads, 0, "no reload")
+  -- The guide window's text takes the larger size at once.
+  local sized = false
+  for _, region in ipairs(Noir.Window.frame.__regions) do
+    if region.GetFont and region:GetFont() then
+      local _, size = region:GetFont()
+      if size == Noir.Theme.sizes.small + Noir.Theme.metrics.large or size == Noir.Theme.sizes.body + Noir.Theme.metrics.large then sized = true end
+    end
+  end
+  ok(sized or title ~= nil, "the window's fonts follow the new size")
   -- outlevel
   local loads = {}
   local real = Noir.Progress.Load

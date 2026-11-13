@@ -355,10 +355,6 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 94489, index = 2, npc = 258134 },
             { kind = "objective", quest = 94488, index = 1, item = 265475, at = { zone = 16593, x = 65.53, y = 36.32, r = 40 } },
           } },
-        { id = "p186-2", label = "train186_2", at = { zone = 16593, x = 65.44, y = 80.47, r = 10 }, when = { profession = 186 },
-          lines = {
-            { kind = "train", skill = 186, rank = 2, npc = 252388 },
-          } },
         { id = "t94488.t94489", at = { zone = 16593, x = 61.7, y = 39.22, r = 10 }, targets = { friend = { 257944 } },
           lines = {
             { kind = "turnin", quest = 94488, npc = 257944 },
@@ -940,14 +936,6 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "transport", to = { zone = 215, x = 34.3, y = 26.1 }, mode = "boat", at = { zone = 16593, x = 57.7, y = 81, r = 15 } },
           } },
-        { id = "p165-2", label = "train165_2", at = { zone = 215, x = 44.94, y = 61.46, r = 10 }, when = { profession = 165 },
-          lines = {
-            { kind = "train", skill = 165, rank = 2, npc = 3069 },
-          } },
-        { id = "p202-2", label = "train202_2", at = { zone = 215, x = 58.65, y = 39.38, r = 10 }, when = { profession = 202 },
-          lines = {
-            { kind = "train", skill = 202, rank = 2, npc = 10993 },
-          } },
         { id = "t95349.a95350", at = { zone = 215, x = 33.39, y = 22.51, r = 10 }, minLevel = 7, targets = { friend = { 259119 } },
           lines = {
             { kind = "turnin", quest = 95349, npc = 259119, skipIfMissing = true },
@@ -960,30 +948,6 @@ Noir.Route("horde-windshaper", {
         { id = "a1505", at = { zone = 1638, x = 57.24, y = 87.37, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, maxLevel = 18, targets = { friend = { 3041 } },
           lines = {
             { kind = "accept", quest = 1505, npc = 3041 },
-          } },
-        { id = "p164-2", label = "train164_2", at = { zone = 1637, x = 79.6, y = 23.31, r = 10 }, when = { profession = 164 },
-          lines = {
-            { kind = "train", skill = 164, rank = 2, npc = 1383 },
-          } },
-        { id = "p171-2", label = "train171_2", at = { zone = 1637, x = 55.79, y = 32.9, r = 10 }, when = { profession = 171 },
-          lines = {
-            { kind = "train", skill = 171, rank = 2, npc = 11046 },
-          } },
-        { id = "p182-2", label = "train182_2", at = { zone = 1637, x = 55.62, y = 39.46, r = 10 }, when = { profession = 182 },
-          lines = {
-            { kind = "train", skill = 182, rank = 2, npc = 3404 },
-          } },
-        { id = "p197-2", label = "train197_2", at = { zone = 1637, x = 62.93, y = 49.24, r = 10 }, when = { profession = 197 },
-          lines = {
-            { kind = "train", skill = 197, rank = 2, npc = 2855 },
-          } },
-        { id = "p333-2", label = "train333_2", at = { zone = 1637, x = 53.47, y = 38.55, r = 10 }, when = { profession = 333 },
-          lines = {
-            { kind = "train", skill = 333, rank = 2, npc = 11066 },
-          } },
-        { id = "p393-2", label = "train393_2", at = { zone = 1637, x = 63.36, y = 45.42, r = 10 }, when = { profession = 393 },
-          lines = {
-            { kind = "train", skill = 393, rank = 2, npc = 7088 },
           } },
         { id = "g1637@1637", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 }, text = "Head northeast into Orgrimmar.",
           lines = {
@@ -1002,6 +966,42 @@ Noir.Route("horde-windshaper", {
         { id = "a1522", at = { zone = 1637, x = 37.96, y = 37.73, r = 10 }, when = { class = "SHAMAN" }, minLevel = 10, maxLevel = 18, targets = { friend = { 5892 } },
           lines = {
             { kind = "accept", quest = 1522, npc = 5892 },
+          } },
+        { id = "p164-2", label = "train164_2", at = { zone = 1637, x = 79.6, y = 23.31, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 2, npc = 1383 },
+          } },
+        { id = "p165-2", label = "train165_2", at = { zone = 1637, x = 62.81, y = 44.15, r = 10 }, when = { profession = 165 },
+          lines = {
+            { kind = "train", skill = 165, rank = 2, npc = 3365 },
+          } },
+        { id = "p171-2", label = "train171_2", at = { zone = 1637, x = 55.79, y = 32.9, r = 10 }, when = { profession = 171 },
+          lines = {
+            { kind = "train", skill = 171, rank = 2, npc = 11046 },
+          } },
+        { id = "p182-2", label = "train182_2", at = { zone = 1637, x = 55.62, y = 39.46, r = 10 }, when = { profession = 182 },
+          lines = {
+            { kind = "train", skill = 182, rank = 2, npc = 3404 },
+          } },
+        { id = "p186-2", label = "train186_2", at = { zone = 1637, x = 73.12, y = 26.08, r = 10 }, when = { profession = 186 },
+          lines = {
+            { kind = "train", skill = 186, rank = 2, npc = 3357 },
+          } },
+        { id = "p197-2", label = "train197_2", at = { zone = 1637, x = 62.93, y = 49.24, r = 10 }, when = { profession = 197 },
+          lines = {
+            { kind = "train", skill = 197, rank = 2, npc = 2855 },
+          } },
+        { id = "p202-2", label = "train202_2", at = { zone = 1637, x = 75.99, y = 25.41, r = 10 }, when = { profession = 202 },
+          lines = {
+            { kind = "train", skill = 202, rank = 2, npc = 3412 },
+          } },
+        { id = "p333-2", label = "train333_2", at = { zone = 1637, x = 53.47, y = 38.55, r = 10 }, when = { profession = 333 },
+          lines = {
+            { kind = "train", skill = 333, rank = 2, npc = 11066 },
+          } },
+        { id = "p393-2", label = "train393_2", at = { zone = 1637, x = 63.36, y = 45.42, r = 10 }, when = { profession = 393 },
+          lines = {
+            { kind = "train", skill = 393, rank = 2, npc = 7088 },
           } },
         { id = "a1061", at = { zone = 1637, x = 38.93, y = 38.4, r = 10 }, minLevel = 13, maxLevel = 25, targets = { friend = { 4047 } },
           lines = {
@@ -1463,18 +1463,6 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "skill", skill = 333, value = 125 },
           } },
-        { id = "p164-3", label = "train164_3", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
-          lines = {
-            { kind = "train", skill = 164, rank = 3, npc = 3478 },
-          } },
-        { id = "p165-3", label = "train165_3", at = { zone = 17, x = 44.84, y = 59.46, r = 10 }, when = { profession = 165 },
-          lines = {
-            { kind = "train", skill = 165, rank = 3, npc = 3703 },
-          } },
-        { id = "p197-3", label = "train197_3", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
-          lines = {
-            { kind = "train", skill = 197, rank = 3, npc = 3704 },
-          } },
         { id = "o852", at = { zone = 17, x = 46.04, y = 41.14, r = 40 }, text = "Hezrul's Head is south of Regthar Deathgate.", targets = { enemy = { 3396 } },
           lines = {
             { kind = "objective", quest = 852, index = 1, item = 5025, skipIfMissing = true },
@@ -1901,18 +1889,30 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 1825, npc = 5878 },
           } },
-        { id = "p333-3", label = "train333_3", at = { zone = 406, x = 49.18, y = 57.18, r = 10 }, when = { profession = 333 },
-          lines = {
-            { kind = "train", skill = 333, rank = 3, npc = 11074 },
-          } },
         { id = "g406@406", at = { zone = 406, x = 81.95, y = 87.22, r = 20 }, text = "Head west into Stonetalon Mountains.",
           lines = {
             { kind = "goto", at = { zone = 406, x = 81.95, y = 87.22, r = 20 } },
+          } },
+        { id = "p333-3", label = "train333_3", at = { zone = 406, x = 49.18, y = 57.18, r = 10 }, when = { profession = 333 },
+          lines = {
+            { kind = "train", skill = 333, rank = 3, npc = 11074 },
           } },
         { id = "o6548", at = { zone = 406, x = 81.95, y = 87.22, r = 40 }, targets = { enemy = { 11911, 11910 } },
           lines = {
             { kind = "objective", quest = 6548, index = 1, npc = 11910 },
             { kind = "objective", quest = 6548, index = 2, npc = 11911 },
+          } },
+        { id = "p164-3", label = "train164_3", at = { zone = 17, x = 51.3, y = 28.91, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 3, npc = 3478 },
+          } },
+        { id = "p165-3", label = "train165_3", at = { zone = 17, x = 44.84, y = 59.46, r = 10 }, when = { profession = 165 },
+          lines = {
+            { kind = "train", skill = 165, rank = 3, npc = 3703 },
+          } },
+        { id = "p197-3", label = "train197_3", at = { zone = 17, x = 44.93, y = 59.39, r = 10 }, when = { profession = 197 },
+          lines = {
+            { kind = "train", skill = 197, rank = 3, npc = 3704 },
           } },
         { id = "t6548", at = { zone = 17, x = 35.19, y = 27.76, r = 10 }, targets = { friend = { 11857 } },
           lines = {
@@ -2403,13 +2403,13 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 1176, npc = 4630, skipIfMissing = true },
           } },
-        { id = "p202-3", label = "train202_3", at = { zone = 440, x = 52.34, y = 27.72, r = 10 }, when = { profession = 202 },
-          lines = {
-            { kind = "train", skill = 202, rank = 3, npc = 8736 },
-          } },
         { id = "g440@440#2", at = { zone = 440, x = 51.6, y = 25.44, r = 20 }, text = "Head south into Tanaris.",
           lines = {
             { kind = "goto", at = { zone = 440, x = 51.6, y = 25.44, r = 20 } },
+          } },
+        { id = "p202-3", label = "train202_3", at = { zone = 440, x = 52.34, y = 27.72, r = 10 }, when = { profession = 202 },
+          lines = {
+            { kind = "train", skill = 202, rank = 3, npc = 8736 },
           } },
         { id = "f40.y40-23", at = { zone = 440, x = 51.6, y = 25.44, r = 10 }, text = "Fly from Gadgetzan, Tanaris to Orgrimmar, Durotar.",
           lines = {
@@ -2984,10 +2984,6 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 569, at = { zone = 33, x = 32.17, y = 28.9, r = 10 }, npc = 2464 },
             { kind = "accept", quest = 570, at = { zone = 33, x = 32.12, y = 29.24, r = 10 }, npc = 2465 },
           } },
-        { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
-          lines = {
-            { kind = "train", skill = 164, rank = 4, npc = 2836 },
-          } },
         { id = "y20-18#2", at = { zone = 33, x = 32.54, y = 29.35, r = 10 }, text = "Fly from Grom'gol, Stranglethorn to Booty Bay, Stranglethorn.",
           lines = {
             { kind = "fly", from = 20, to = 18 },
@@ -3045,6 +3041,14 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "transport", to = { zone = 14, x = 50.5, y = 12.7 }, mode = "zeppelin", at = { zone = 33, x = 31.2, y = 30.4, r = 15 } },
           } },
+        { id = "g1637@1637#5", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 }, text = "Head into Orgrimmar.",
+          lines = {
+            { kind = "goto", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 } },
+          } },
+        { id = "p164-4", label = "train164_4", at = { zone = 1637, x = 82.35, y = 22.97, r = 10 }, when = { profession = 164 },
+          lines = {
+            { kind = "train", skill = 164, rank = 4, npc = 3355 },
+          } },
         { id = "p182-4", label = "train182_4", at = { zone = 1637, x = 55.62, y = 39.46, r = 10 }, when = { profession = 182 },
           lines = {
             { kind = "train", skill = 182, rank = 4, npc = 3404 },
@@ -3056,14 +3060,6 @@ Noir.Route("horde-windshaper", {
         { id = "p202-4", label = "train202_4", at = { zone = 1637, x = 76.17, y = 25.17, r = 10 }, when = { profession = 202 },
           lines = {
             { kind = "train", skill = 202, rank = 4, npc = 11017 },
-          } },
-        { id = "p393-4", label = "train393_4", at = { zone = 1637, x = 63.36, y = 45.42, r = 10 }, when = { profession = 393 },
-          lines = {
-            { kind = "train", skill = 393, rank = 4, npc = 7088 },
-          } },
-        { id = "g1637@1637#5", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 }, text = "Head into Orgrimmar.",
-          lines = {
-            { kind = "goto", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 } },
           } },
         { id = "tSHAMAN-34", at = { zone = 1637, x = 38.8, y = 36.37, r = 10 }, when = { class = "SHAMAN" }, minLevel = 34,
           lines = {
@@ -3084,6 +3080,10 @@ Noir.Route("horde-windshaper", {
         { id = "a6161", at = { zone = 405, x = 36.07, y = 30.41, r = 10 }, minLevel = 30, maxLevel = 44,
           lines = {
             { kind = "accept", quest = 6161, object = 177787 },
+          } },
+        { id = "p393-4", label = "train393_4", at = { zone = 405, x = 23.24, y = 69.72, r = 10 }, when = { profession = 393 },
+          lines = {
+            { kind = "train", skill = 393, rank = 4, npc = 12030 },
           } },
         { id = "o5741", at = { zone = 405, x = 55.17, y = 30.15, r = 40 }, text = "Sceptre of Light is east of your last stop.", targets = { enemy = { 13019 } },
           lines = {
@@ -3382,6 +3382,10 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "transport", to = { zone = 85, x = 60.6, y = 58.9 }, mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 } },
           } },
+        { id = "g1497@1497", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 }, text = "Head into Undercity.",
+          lines = {
+            { kind = "goto", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 } },
+          } },
         { id = "p171-4", label = "train171_4", at = { zone = 1497, x = 47.77, y = 73.34, r = 10 }, when = { profession = 171 },
           lines = {
             { kind = "train", skill = 171, rank = 4, npc = 4611 },
@@ -3389,10 +3393,6 @@ Noir.Route("horde-windshaper", {
         { id = "p197-4", label = "train197_4", at = { zone = 1497, x = 70.76, y = 30.69, r = 10 }, when = { profession = 197 },
           lines = {
             { kind = "train", skill = 197, rank = 4, npc = 4576 },
-          } },
-        { id = "g1497@1497", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 }, text = "Head into Undercity.",
-          lines = {
-            { kind = "goto", at = { zone = 1497, x = 63.25, y = 48.56, r = 20 } },
           } },
         { id = "tROGUE-36", at = { zone = 1497, x = 83.86, y = 72.07, r = 10 }, when = { class = "ROGUE" }, minLevel = 36,
           lines = {

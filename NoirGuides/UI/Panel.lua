@@ -98,7 +98,7 @@ end
 function Panel.Text(parent, role, color, justify)
   local fontString = parent:CreateFontString(nil, "OVERLAY")
   Theme.Font(fontString, role)
-  fontString:SetTextColor(Theme.Color(color))
+  Theme.TextColor(fontString, color)
   fontString:SetJustifyH(justify or "LEFT")
   fontString:SetJustifyV("TOP")
   if fontString.SetWordWrap then fontString:SetWordWrap(true) end
