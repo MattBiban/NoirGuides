@@ -14,8 +14,12 @@
 --   sethearth         walk to the innkeeper and talk to it; the automation answers the bind question
 --   hearth            click the item button that holds the Hearthstone
 --   grind             fight to the level (or the percent into it)
---   train             walk to the trainer, open its window, close it
+--   train             walk to the trainer, open its window, buy every service the money covers (class training,
+--                     priced by TRAINING_COPPER), close it; at a profession trainer, learn the rank
 --   vendor            walk to the merchant, open its window, close it
+--   selljunk          walk to the merchant, open its window, wait while the automation sells the grey items, close it
+--                     (done before the step's other lines, as a player told to sell before training would)
+--   skill             raise the profession to the line's value (SKILL_LINES_CHANGED)
 --   manual            click the line's tick box in the window (Window.Tick)
 -- It never types a command. When the cards are unchanged after TRIES attempts, the player ticks every open line with
 -- the mouse (Window.Tick) and each such card counts as stuck. A level 1 character closes the setup wizard with its
@@ -26,6 +30,9 @@
 -- innkeepers, the zones' maps, and the character's flattened route (facts.flat). The character's XP follows the pace
 -- of tools/lib/xp.js (its constants come in `facts`), so the level the engine sees is the level the planner counted
 -- on. The Hearthstone has no cooldown here: the simulated clock does not run at the speed of play.
+-- Money: every quest handed in pays TURNIN_COPPER; every objective done leaves one grey item (GREY, real quality 0
+-- and a sell price) in the bags, which the automation sells at merchants. A character with facts.professions has
+-- learned them at skill 1 before it starts.
 --
 -- Sim.play(facts, opts) -> { race, class, join, stuck, cannot, unexplained, errors, slash, offScreen,
 --                            placement = { expectedFrom, landed, from, to, inside, passedSteps, landedAt }, level,
@@ -57,6 +64,16 @@ Sim.EXPLAINED = { done = true, moot = true, condition = true, outleveled = true,
 
 local HEARTHSTONE, HEARTH_SPELL, ASTRAL_RECALL = 6948, 8690, 556
 local OPTIONAL_EVERY = 7
+Sim.TURNIN_COPPER = 40
+-- The grey items an objective leaves behind: item ID -> { name, price in copper }. Made-up items of quality 0.
+Sim.GREY = { [90001] = { name = "Cracked Fang", price = 4 }, [90002] = { name = "Frayed Hide Scrap", price = 9 },
+  [90003] = { name = "Dull Stone Chip", price = 17 } }
+local GREY_ORDER = { 90001, 90002, 90003 }
+-- What class training costs at a level: two services of TRAINING_COPPER(level) / 2 each.
+function Sim.TRAINING_COPPER(level) return 20 * level * level end
+local RANK_NAMES = { "Apprentice", "Journeyman", "Expert", "Artisan" }
+local RANK_CAP = { 75, 150, 225, 300 }
+local BAGS = { 16, 16, 16, 0, 0 }
 
 -- ---------------------------------------------------------------------------------------------------------------
 -- The pace: the formulas of tools/lib/xp.js (tools/test/sim.test.js checks that both give the same numbers)
@@ -176,13 +193,34 @@ function Sim.world(facts)
   for id, n in pairs(facts.npcs) do
     npcs[id] = { name = n.name, offers = n.offers, ends = n.ends, taxi = n.taxi, binder = n.binder }
   end
+  local items, qualities, prices = { [HEARTHSTONE] = "Hearthstone" }, {}, {}
+  for id, g in pairs(Sim.GREY) do
+    items[id], qualities[id], prices[id] = g.name, 0, g.price
+  end
   return {
     maps = maps, taxi = taxi, quests = quests, npcs = npcs,
-    items = { [HEARTHSTONE] = "Hearthstone" },
+    items = items, qualities = qualities, prices = prices,
     spells = { [HEARTH_SPELL] = "Hearthstone", [ASTRAL_RECALL] = "Astral Recall" },
     itemSpells = { [HEARTHSTONE] = HEARTH_SPELL },
     stacks = { [HEARTHSTONE] = 1 },
   }
+end
+
+-- Quest money and the grey item an objective leaves.
+local function pay(c, copper)
+  c.s.money = c.s.money + copper
+  c:fire("PLAYER_MONEY")
+end
+local greyCount = 0
+local function dropGrey(c)
+  greyCount = greyCount + 1
+  c:giveItem(GREY_ORDER[(greyCount - 1) % #GREY_ORDER + 1], 1)
+end
+
+local function learnProfessions(c, facts)
+  for _, skill in ipairs(facts.professions or {}) do
+    c:setProfession(skill, facts.professionNames and facts.professionNames[skill] or ("Skill " .. skill), 1, RANK_CAP[1])
+  end
 end
 
 -- Fills the engine's data tables from the facts, for a registered route that has no generated Data files beside it.
@@ -303,9 +341,10 @@ function Sim.prepareJoin(facts, level)
   local startZone = start and facts.zones[start.zone]
   local c = Client.new({
     race = facts.race, class = facts.class, level = 1, world = world, files = {}, xpToLevel = facts.xpToLevel,
-    uiMap = startZone and startZone.uiMap or nil, x = start and start.x, y = start and start.y,
+    uiMap = startZone and startZone.uiMap or nil, x = start and start.x, y = start and start.y, bags = BAGS,
   })
   giveHearthstone(c)
+  learnProfessions(c, facts)
   local pos = start and { zone = start.zone, x = start.x, y = start.y } or nil
   local needed = neededLater(facts, flat)
   local leftOut, skipped, objectivesDone = {}, {}, {}
@@ -356,6 +395,7 @@ function Sim.prepareJoin(facts, level)
     finishObjectives(a.quest)
     local quest = facts.quests[a.quest] or {}
     c:turnInQuest(a.quest, Sim.questXp(quest.level or 1, c.s.level))
+    c.s.money = c.s.money + Sim.TURNIN_COPPER
   end
   function DO.getflight(a) c.s.flights[a.node] = true end
   function DO.fly(a)
@@ -450,7 +490,7 @@ function Sim.play(facts, opts)
   local clientOpts = {
     race = facts.race, class = facts.class, level = 1, world = world, api = opts.api or "classic",
     uiMap = startZone and startZone.uiMap or nil, x = start and start.x, y = start and start.y,
-    xpToLevel = facts.xpToLevel, swap = opts.swap, server = prepared and prepared.server or nil,
+    xpToLevel = facts.xpToLevel, swap = opts.swap, server = prepared and prepared.server or nil, bags = BAGS,
     afterLoad = function(c)
       local Noir = c.G.Noir
       if opts.register then
@@ -480,6 +520,7 @@ function Sim.play(facts, opts)
   }
   local c = Client.new(clientOpts)
   giveHearthstone(c)
+  if not prepared then learnProfessions(c, facts) end
   c:login()
   capturing = false
   local Noir = c.G.Noir
@@ -629,6 +670,7 @@ function Sim.play(facts, opts)
       objectivesDone[line.quest] = true
       c:completeObjectives(line.quest)
       c:gainXP(Sim.objectiveXp(facts.quests[line.quest] or {}, c.s.level, facts.pace))
+      dropGrey(c)
     end
     return nil
   end
@@ -652,7 +694,10 @@ function Sim.play(facts, opts)
     end
     if not c.s.completed[line.quest] then pickByHand(step, line.quest, "active") end
     c:closeNpc()
-    if c.s.completed[line.quest] then return nil end
+    if c.s.completed[line.quest] then
+      pay(c, Sim.TURNIN_COPPER)
+      return nil
+    end
     local ends = false
     for _, e in ipairs(def.ends or {}) do if e == line.quest then ends = true end end
     if not ends then return string.format("%s %d does not take quest %d", kind, id, line.quest) end
@@ -753,12 +798,34 @@ function Sim.play(facts, opts)
     return nil
   end
 
+  -- Class training: two services for the visit's level; the player buys each one the money covers.
+  local function classServices(level)
+    local each = math.floor(Sim.TRAINING_COPPER(level) / 2)
+    return { { name = "Level " .. level .. " lesson", rank = "Rank 1", kind = "available", cost = each, level = level },
+      { name = "Level " .. level .. " drill", rank = "Rank 1", kind = "available", cost = each, level = level } }
+  end
+
   function ACT.train(line)
     if line.class and line.level and c.s.level < line.level then
       return string.format("the trainer visit is for level %d and the character is level %d", line.level, c.s.level)
     end
-    c:openTrainer(line.npc or 0, {})
+    if line.skill and line.rank then
+      local name = facts.professionNames and facts.professionNames[line.skill] or ("Skill " .. line.skill)
+      c:openTrainer(line.npc or 0, { { name = name, rank = RANK_NAMES[line.rank], kind = "available", cost = 0 } }, { tradeskill = true })
+      c:advance(0.3, 0.1)
+      local have = 1
+      for _, p in ipairs(c.s.professions) do if p.skillLine == line.skill then have = p.rank end end
+      c:setProfession(line.skill, name, have, RANK_CAP[line.rank])
+      c:closeTrainer()
+      return nil
+    end
+    c:openTrainer(line.npc or 0, line.class and line.level and classServices(line.level) or {})
     c:advance(0.3, 0.1)
+    if line.class and c.trainer then
+      for i, e in ipairs(c.trainer.services) do
+        if e.kind == "available" and e.cost <= c.s.money then c.G.BuyTrainerService(i) end
+      end
+    end
     c:closeTrainer()
     if line.spell and not c.s.spells[line.spell] then return "spell " .. line.spell .. " was not learned at the trainer" end
     return nil
@@ -768,8 +835,34 @@ function Sim.play(facts, opts)
     local items = {}
     if line.buy then items[1] = { item = line.buy.item, price = 0, stack = 1, count = -1 } end
     c:openMerchant(line.npc or 0, items)
-    c:advance(0.5, 0.1)
+    c:advance(0.5 + 0.25 * #c.G.Noir.State.JunkSlots(), 0.1) -- the automation sells the grey items, one slot a tick
     c:closeMerchant()
+    return nil
+  end
+
+  function ACT.selljunk(line)
+    local before = c.s.money
+    c:openMerchant(line.npc or 0, {})
+    c:advance(0.5 + 0.25 * #c.G.Noir.State.JunkSlots(), 0.1)
+    c:closeMerchant()
+    result.sold = (result.sold or 0) + (c.s.money - before)
+    result.sellLines = (result.sellLines or 0) + 1
+    return nil
+  end
+
+  function ACT.skill(line)
+    local have, name = 0, facts.professionNames and facts.professionNames[line.skill] or ("Skill " .. line.skill)
+    local max = RANK_CAP[1]
+    for _, p in ipairs(c.s.professions) do
+      if p.skillLine == line.skill then have, max = p.rank, p.max end
+    end
+    if have < line.value then
+      c:setProfession(line.skill, name, math.min(line.value, max), max)
+      result.skillRaised = (result.skillRaised or 0) + 1
+    end
+    if math.min(line.value, max) < line.value then
+      return string.format("%s cannot pass %d before its next rank, and the line asks for %d", name, max, line.value)
+    end
     return nil
   end
 
@@ -796,7 +889,7 @@ function Sim.play(facts, opts)
 
   local function placeOf(line, step)
     if line.kind == "goto" or line.kind == "transport" then return line.at end
-    if line.kind == "hearth" or line.kind == "grind" or line.kind == "manual" then return nil end
+    if line.kind == "hearth" or line.kind == "grind" or line.kind == "manual" or line.kind == "skill" then return nil end
     if line.kind == "fly" then
       -- The flight master of the node the flight leaves from (the step's own place may be another line's).
       local t = facts.taxi[line.from]
@@ -884,7 +977,12 @@ function Sim.play(facts, opts)
         local failed = {}
         for k, card in ipairs(cards) do
           local step = card.step
-          for i, l in ipairs(card.lines) do
+          -- A selljunk line is done before the card's other lines: sell first, then train.
+          local order = {}
+          for i, l in ipairs(card.lines) do if l.line and l.line.kind == "selljunk" then order[#order + 1] = i end end
+          for i, l in ipairs(card.lines) do if not (l.line and l.line.kind == "selljunk") then order[#order + 1] = i end end
+          for _, i in ipairs(order) do
+            local l = card.lines[i]
             if open(l) then
               local line = l.line
               local act = ACT[line.kind]

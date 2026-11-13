@@ -3,8 +3,9 @@
 // The real engine plays every route: the whole addon as the toc loads it (with the shipped format 3 routes and data)
 // runs in the mock client, in a world built here from the quest data and the character's flattened steps, and
 // tools/harness/sim.lua's scripted player does what the cards on screen say. By default 56 fresh characters (level
-// 1, nothing done) and 50 joiners (each race at each of JOIN_LEVELS, its classes in turn) play; --joiners all plays
-// every class at every join level. A run passes when nothing is stuck, no step shown is impossible, every skip has
+// 1, nothing done), the PROFESSION_CHARACTERS (fresh, one per faction, each with a primary profession learned, so the
+// profession trainer steps and their "raise the skill" reminders are played) and 50 joiners (each race at each of
+// JOIN_LEVELS, its classes in turn) play; --joiners all plays every class at every join level. A run passes when nothing is stuck, no step shown is impossible, every skip has
 // the game's evidence, no Lua error or forbidden call happens, no command is typed, no frame is off the screen at
 // the end, the character ends at level 60, and a joiner is placed inside its window (see Sim.play).
 // Writes docs/routes/SIM.md (full runs only) and tools/data/sim_status.json. Exits 1 when any run fails.
@@ -17,6 +18,7 @@ const { combos, eligible } = require("./lib/characters");
 const { PACE, XP_TO_LEVEL, zoneLevels } = require("./lib/xp");
 const { flatten } = require("./planner/bundle");
 const { chainOf, applies } = require("./planner/validate3");
+const { primaryProfessions } = require("./planner/professions");
 
 const DATA = path.join(__dirname, "data");
 const ROUTES = path.join(ROOT, "NoirGuides", "Routes");
@@ -26,6 +28,12 @@ const STATUS = path.join(DATA, "sim_status.json");
 const CONTINENT_MAPS = { 0: 1415, 1: 1414 };
 const continentMap = (id) => CONTINENT_MAPS[id] || 100000 + id;
 const round2 = (n) => Math.round(n * 100) / 100;
+// One fresh character per faction with a primary profession whose Journeyman, Expert and Artisan trainer steps the
+// route has (docs/routes/PROFESSION-NOTES.md lists none missing for these).
+const PROFESSION_CHARACTERS = [
+  { race: "Human", cls: "WARRIOR", professions: [186] }, // Mining
+  { race: "Undead", cls: "MAGE", professions: [197] },   // Tailoring
+];
 const sortNum = (list) => [...new Set(list)].sort((a, b) => a - b);
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -77,16 +85,17 @@ function parseRoute(text) {
 // The simulated world: what tools/harness/sim.lua documents as `facts`
 // ---------------------------------------------------------------------------------------------------------------
 
-// The character's flattened route: its chain of sections from the start section (planner/validate3.js chainOf, no
-// profession planned), the steps and lines whose `when` holds, flattened to format 2 actions (planner/bundle.js
+// The character's flattened route: its chain of sections from the start section (planner/validate3.js chainOf, with
+// the character's professions, ch.professions, none by default), the steps and lines whose `when` holds, flattened to format 2 actions (planner/bundle.js
 // flatten), each tagged with its section and step IDs. These are "the indices of the flattened actions" that a
 // joiner's placement is measured in (1-based in Lua).
 function flattenFor(route3, ch) {
   const out = [];
-  for (const section of chainOf(route3, ch)) {
+  const professions = ch.professions || [];
+  for (const section of chainOf(route3, ch, professions)) {
     for (const step of section.steps) {
-      if (!applies(step.when, ch)) continue;
-      const lines = step.lines.filter((l) => applies(l.when, ch)).map((l) => ({ ...l, when: undefined }));
+      if (!applies(step.when, ch, professions)) continue;
+      const lines = step.lines.filter((l) => applies(l.when, ch, professions)).map((l) => ({ ...l, when: undefined }));
       for (const a of flatten([{ ...step, when: undefined, lines }])) {
         delete a.when;
         out.push({ ...a, section: section.id, step: step.id });
@@ -149,12 +158,13 @@ function buildFacts(db, graph, inns, route3, ch, options = {}) {
 
   const zoneIds = new Set();
   for (const s of mine) for (const p of [s.at, typeof s.to === "object" ? s.to : null]) if (p) zoneIds.add(p.zone);
-  // Steps without an action of their own (a trainer visit) still have places the player walks to.
-  for (const section of chainOf(route3, ch)) {
+  // Steps without an action of their own (a trainer visit, a profession trainer) still have places the player walks to.
+  const professions = ch.professions || [];
+  for (const section of chainOf(route3, ch, professions)) {
     for (const step of section.steps) {
-      if (!applies(step.when, ch)) continue;
+      if (!applies(step.when, ch, professions)) continue;
       if (step.at) zoneIds.add(step.at.zone);
-      for (const l of step.lines) if (l.at && applies(l.when, ch)) zoneIds.add(l.at.zone);
+      for (const l of step.lines) if (l.at && applies(l.when, ch, professions)) zoneIds.add(l.at.zone);
     }
   }
   for (const t of Object.values(taxi)) zoneIds.add(t.zone);
@@ -183,6 +193,11 @@ function buildFacts(db, graph, inns, route3, ch, options = {}) {
     xpToLevel, pace: { OBJECTIVE_KILLS: PACE.OBJECTIVE_KILLS, ITEM_KILL_FACTOR: PACE.ITEM_KILL_FACTOR, INCIDENTAL_YARDS: PACE.INCIDENTAL_YARDS },
     continents, zones, quests, npcs, objects, taxi, flat: mine,
   };
+  if (professions.length) {
+    facts.professions = professions.slice();
+    facts.professionNames = {};
+    for (const p of primaryProfessions()) if (professions.includes(p.skill)) facts.professionNames[p.skill] = p.name;
+  }
   if (options.withRoute) facts.route = { format: route3.format, race: route3.race, faction: route3.faction, sections: route3.sections };
   return facts;
 }
@@ -337,7 +352,7 @@ function reportMarkdown(fresh, joiners, api) {
     "|---|---|---|---|---|---|---|---|---|---|---|---|---|",
   ];
   for (const r of fresh) {
-    out.push(`| ${r.race} ${r.class} | ${passed(r) ? "pass" : "FAIL"} | ${r.level} | ${r.shown} | ${(r.stuck || []).length} | ${(r.cannot || []).length} | ` +
+    out.push(`| ${r.race} ${r.class}${r.professions ? ` (profession ${r.professions.join(", ")})` : ""} | ${passed(r) ? "pass" : "FAIL"} | ${r.level} | ${r.shown} | ${(r.stuck || []).length} | ${(r.cannot || []).length} | ` +
       `${(r.unexplained || []).length} | ${(r.errors || []).length} | ${passedAs(r, "done")} | ${passedAs(r, "moot")} | ${passedAs(r, "condition")} | ` +
       `${passedAs(r, "outleveled")} | ${(r.manual || []).length} |`);
   }
@@ -362,7 +377,7 @@ function reportMarkdown(fresh, joiners, api) {
   if (failing.length) {
     out.push("", "## Failures", "");
     for (const r of failing) {
-      out.push(`### ${r.race} ${r.class}${r.join ? ` joining at level ${r.join}` : ""}`, "", ...failureLines(r), "");
+      out.push(`### ${r.race} ${r.class}${r.professions ? ` (profession ${r.professions.join(", ")})` : ""}${r.join ? ` joining at level ${r.join}` : ""}`, "", ...failureLines(r), "");
     }
   }
   return out.join("\n") + "\n";
@@ -403,6 +418,7 @@ function workerMain() {
     } catch (e) {
       result = emptyResult(ch, e);
     }
+    if (ch.professions) result.professions = ch.professions;
     result.seconds = Math.round((Date.now() - started) / 1000);
     parentPort.postMessage(result);
   });
@@ -423,7 +439,9 @@ async function main(argv) {
   const match = (c) => (!race || c.race === race) && (!cls || c.cls === cls);
   let joiners = joinerList(characters, JOIN_LEVELS, joinersArg === "all").filter(match);
   if (joinArg) joiners = joiners.filter((j) => j.join === Number(joinArg));
-  let fresh = joinArg ? [] : characters.filter(match);
+  const withProfessions = PROFESSION_CHARACTERS.map((p) => ({ ...characters.find((c) => c.race === p.race && c.cls === p.cls), professions: p.professions }))
+    .filter((c) => c.faction && match(c));
+  let fresh = joinArg ? [] : [...characters.filter(match), ...withProfessions];
   if (joinersArg === "only") fresh = [];
   if (joinersArg === "none") joiners = [];
   const all = [...fresh, ...joiners];
@@ -431,7 +449,7 @@ async function main(argv) {
   const threads = Math.max(1, Math.min(all.length, Number(argValue(argv, "--threads")) || Math.max(1, os.cpus().length - 1)));
   const started = Date.now();
   const results = new Array(all.length);
-  const name = (r) => `${r.race} ${r.class || r.cls}${r.join ? ` joining at ${r.join}` : ""}`;
+  const name = (r) => `${r.race} ${r.class || r.cls}${r.professions ? ` with profession ${r.professions.join(", ")}` : ""}${r.join ? ` joining at ${r.join}` : ""}`;
   const status = (done) => fs.writeFileSync(STATUS, JSON.stringify({ phase: "Simulator", total: all.length, done, started,
     characters: results.filter(Boolean).map((r) => ({ race: r.race, cls: r.class, join: r.join, passed: passed(r), level: r.level, stuck: r.stuck.length,
       cannot: r.cannot.length, unexplained: r.unexplained.length, errors: r.errors.length })) }, null, 1) + "\n");
@@ -452,7 +470,7 @@ async function main(argv) {
           const p = r.placement;
           console.log(`${passed(r) ? "pass" : "FAIL"}  ${name(r)}: level ${r.level}, ${r.shown} steps shown, ${r.stuck.length} stuck, ` +
             `${r.cannot.length} cannot, ${r.unexplained.length} unexplained, ${r.errors.length} errors, ${r.slash || 0} slash, ` +
-            `${(r.offScreen || []).length} off screen${p ? `, placed at ${p.landed} (window ${p.from} to ${p.to})` : ""} (${r.seconds} s)`);
+            `${(r.offScreen || []).length} off screen, ${r.sellLines || 0} sell lines (${r.sold || 0}c), ${r.skillRaised || 0} skill raises${p ? `, placed at ${p.landed} (window ${p.from} to ${p.to})` : ""} (${r.seconds} s)`);
           status(done);
           if (done === all.length) resolve();
           feed();
@@ -478,4 +496,4 @@ const threads = require("worker_threads");
 if (!threads.isMainThread && threads.workerData && threads.workerData.worker) workerMain();
 else if (require.main === module) main(process.argv.slice(2)).then((code) => { process.exitCode = code; });
 
-module.exports = { parseRoute, flattenFor, buildFacts, toLua, simulate, problems, summarize, passed, joinerList, reportMarkdown, JOIN_LEVELS };
+module.exports = { parseRoute, flattenFor, buildFacts, toLua, simulate, problems, summarize, passed, joinerList, reportMarkdown, JOIN_LEVELS, PROFESSION_CHARACTERS };

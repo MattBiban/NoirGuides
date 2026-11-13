@@ -229,3 +229,35 @@ test("a whole character played by the real addon in the simulated world", () => 
   const s = summarize([{ ...r, level: 60 }, r]);
   assert.deepStrictEqual([s.characters, s.at60, s.stuck, s.unexplained, s.ok], [2, 1, 0, 0, false]);
 });
+
+test("the simulated player sells grey items before early training, earns quest money and raises a planned profession", () => {
+  // 0.4.0: quests pay the simulator's flat TURNIN_COPPER, objectives leave grey items, class trainers price their
+  // services, and a character with a profession learns it at skill 1 and raises it for a skill line.
+  const w = testWorld();
+  w.npc(10, 100, 30, 30, "AH", "Giver"); w.npc(12, 100, 50, 50, "", "Wolf");
+  w.kill(1, 10, 12, 100, { questLevel: 1 });
+  const route = route3([section("orc-01-02-westland", "1-2 Westland", [
+    { id: "p186-2-skill", when: { profession: 186 }, reminder: { ends: "train186_2" }, lines: [{ kind: "skill", skill: 186, value: 50 }] },
+    { id: "a1", at: npcPlace(30, 30), lines: [{ kind: "accept", quest: 1, npc: 10 }] },
+    { id: "o1", at: { ...at(100, 50, 50), r: 40 }, lines: [{ kind: "objective", quest: 1, index: 1, npc: 12 }] },
+    { id: "t1", at: npcPlace(30, 30), lines: [{ kind: "turnin", quest: 1, npc: 10 }] },
+    { id: "l2@100", at: at(100, 50, 50), lines: [{ kind: "grind", level: 2 }] },
+    { id: "tWARRIOR-2", at: npcPlace(30, 32), when: { class: "WARRIOR" }, minLevel: 2,
+      lines: [{ kind: "train", class: "WARRIOR", level: 2, npc: 44 }, { kind: "selljunk", npc: 45, at: npcPlace(31, 30) }] },
+    { id: "p186-2", label: "train186_2", at: npcPlace(32, 30), when: { profession: 186 }, lines: [{ kind: "train", skill: 186, rank: 2, npc: 46 }] },
+    { id: "f4", at: npcPlace(20, 60), lines: [{ kind: "getflight", node: 4, npc: 904 }] },
+  ], { start: true })]);
+  const ch = { ...w.orc("WARRIOR"), professions: [186] };
+  const f = buildFacts(w.db, w.graph(), w.inns, route, ch, { withRoute: true });
+  assert.deepStrictEqual([f.professions, f.professionNames], [[186], { 186: "Mining" }]);
+  const r = simulate(f, { register: true });
+  assert.deepStrictEqual([r.finished, r.stuck, r.cannot, r.unexplained, r.errors], [true, [], [], [], []]);
+  assert.strictEqual(r.sellLines, 1, "the sell line showed (grey items, 40 copper, the cost unknown) and was done");
+  assert.ok(r.sold > 0, "the automation sold the grey item at the merchant");
+  assert.strictEqual(r.skillRaised, 1, "the reminder raised Mining to 50 before the trainer step");
+  // Without the profession, neither profession step applies.
+  const plain = buildFacts(w.db, w.graph(), w.inns, route, w.orc("WARRIOR"), { withRoute: true });
+  assert.strictEqual(plain.professions, undefined);
+  const p = simulate(plain, { register: true });
+  assert.deepStrictEqual([p.finished, p.stuck, p.errors, p.skillRaised], [true, [], [], undefined]);
+});
