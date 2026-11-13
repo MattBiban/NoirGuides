@@ -12,6 +12,7 @@ const { zoneBands } = require("../planner/zones");
 const { planRoute } = require("../planner/plan");
 const { validateRoute } = require("../planner/validate");
 const { zoneOrder } = require("../planner/measure");
+const { leftBehind, MAX_LEFT_BEHIND } = require("../planner/leftbehind");
 
 const human = () => { RACES.Human.startArea = 1000; return character("Human", "WARRIOR"); };
 const index = (route) => (action, quest) => route.steps.findIndex((s) => s.action === action && s.quest === quest);
@@ -191,6 +192,20 @@ test("look-ahead: the nearest task is not taken first when that means crossing t
   // taken out of order with a second crossing of the hub
   assert.ok(["objective:1,objective:2,objective:3,objective:4", "objective:4,objective:3,objective:2,objective:1"].includes(objectives), objectives);
 });
+test("no hand-in left behind: the objective next to a hub with a ready hand-in is done in the same loop, before the next town", () => {
+  const w = testWorld();
+  // the hub at 30,50 with two quests, one fought 100 yards south and one 100 yards east, on the way to a second town
+  // 600 yards east that offers a third. The best order of the five nearest ends the loop at the hub, so it used to go
+  // to the far town first and leave quest 1's hand-in behind, with the east field taken on the way home.
+  w.npc(10, 100, 30, 50); w.npc(11, 100, 90, 50);
+  w.npc(20, 100, 30, 60, ""); w.npc(21, 100, 40, 50, ""); w.npc(22, 100, 95, 60, "");
+  w.kill(1, 10, 20, 100); w.kill(2, 10, 21, 100); w.kill(3, 11, 22, 100);
+  const { route, names, checked } = run(w, null, { maxLevel: 3 });
+  assert.deepStrictEqual(checked.errors, []);
+  const quests = names.filter((n) => /^(accept|objective|turnin)/.test(n)).join(" ");
+  assert.strictEqual(quests, "accept:1 accept:2 objective:1 objective:2 turnin:1 turnin:2 accept:3 objective:3 turnin:3");
+  assert.deepStrictEqual(leftBehind(w.db, route), []);
+});
 test("format 2 travel: a flight point is learned before it is flown from, and a transport carries the route overseas", () => {
   const w = testWorld();
   town(w);
@@ -364,6 +379,9 @@ for (const race of Object.keys(RACES)) {
     assert.ok(m.zoneChanges <= baseline.zoneChanges * 0.4, `${m.zoneChanges} zone changes against ${baseline.zoneChanges}: not 60% fewer`);
     assert.ok(m.seconds <= baseline.travelSeconds, `${m.seconds} s of travel against ${baseline.travelSeconds}`);
     assert.strictEqual(m.unreachable, 0);
+    // no hand-in that is ready is walked away from (planner/leftbehind.js; the threshold is explained there)
+    const behind = leftBehind(db, route);
+    assert.ok(behind.length <= MAX_LEFT_BEHIND, `${behind.length} hand-ins left behind: ${JSON.stringify(behind.slice(0, 5))}`);
     // grind steps are rare and short: one level each, never two in a row, a handful in a whole route
     const grinds = route.steps.map((s, i) => (s.action === "grind" ? i : -1)).filter((i) => i >= 0);
     assert.ok(grinds.length <= 3, `${grinds.length} grind steps`);

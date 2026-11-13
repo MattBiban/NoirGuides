@@ -88,8 +88,14 @@ function grindsWithLevels(steps, levels, classLevels, usedIds) {
   const known = Object.keys(classLevels).sort();
   const out = [], lv = [], cl = {};
   for (const cls of known) cl[cls] = [];
-  let lastWork = -1;        // index in out of the last work step
-  let floor = 0;            // no shared estimate after a grind to L is below L
+  // where a grind goes: after the last work step (or grind) in out that every character the grind is for plays, one
+  // with no condition or with the grind's own; a class or profession step may be somewhere the others never go
+  const anchor = (when) => {
+    const key = JSON.stringify(when || null);
+    for (let k = out.length - 1; k >= 0; k--) if ((isWork(out[k]) || isGrind(out[k])) && (!out[k].when || JSON.stringify(out[k].when) === key)) return k;
+    return -1;
+  };
+  let floor = 0;           // no shared estimate after a grind to L is below L
   const classFloor = {};    // the same for each class's own level
   const whenFloor = {};     // the same for a class condition no class levels are given for
   for (const cls of known) classFloor[cls] = 0;
@@ -119,7 +125,8 @@ function grindsWithLevels(steps, levels, classLevels, usedIds) {
     const covered = lifts !== undefined && prev && isGrind(prev) && prev.lines.every((l) => l.level >= need) &&
       (!hasClassKey(prev.when) || JSON.stringify(prev.when) === JSON.stringify(when));
     if (lifts !== undefined && !covered) {
-      const from = lastWork >= 0 ? out[lastWork] : step;
+      const last = anchor(when);
+      const from = last >= 0 ? out[last] : step;
       const place = from.at || (from.lines[0] && from.lines[0].at);
       let id = `l${need}` + (place ? `@${place.zone}` : "");
       for (let n = 2; used.has(id); n++) id = `l${need}` + (place ? `@${place.zone}` : "") + `#${n}`;
@@ -128,7 +135,7 @@ function grindsWithLevels(steps, levels, classLevels, usedIds) {
       if (place) grind.at = bare(place);
       grind.lines = [{ kind: "grind", level: need }];
       if (when) grind.when = when;
-      const at = lastWork + 1;
+      const at = last + 1;
       const lifted = lifts === "all" ? known : Array.isArray(lifts) ? lifts : [];
       out.splice(at, 0, grind);
       lv.splice(at, 0, { start, end: lifts === "all" ? Math.max(start, need) : start });
@@ -146,12 +153,10 @@ function grindsWithLevels(steps, levels, classLevels, usedIds) {
         lv[k] = lift(lv[k], floor);
         for (const cls of lifted) cl[cls][k] = lift(cl[cls][k], classFloor[cls]);
       }
-      lastWork = at;
     }
     out.push(step);
     lv.push(lift(levels[i], floor));
     for (const cls of known) cl[cls].push(lift(own(cls, i), classFloor[cls]));
-    if (isWork(step)) lastWork = out.length - 1;
   });
   return { steps: out, levels: lv, classLevels: cl };
 }

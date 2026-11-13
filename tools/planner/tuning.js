@@ -8,6 +8,8 @@ const CHOICES = Object.freeze({
   NEARBY: 1500,              // yards on foot: an objective over a zone border belongs to this zone when it is this close
                              // to one of the zone's quest places
   HUB_YARDS: 150,            // quest givers this close together are one hub: everything there is done in one stop
+  READY_YARDS: 300,         // a hand-in that is ready and this close to the player is not left behind:
+  LEAVE_YARDS: 500,         //   the route does not move farther than this while one waits (planner/leftbehind.js)
   TOWN_SECONDS: 60,          // quests to take or hand in within a minute's walk come before any objective
   SHORT_WALK_SECONDS: 60,    // a walk this short inside one zone is costed as a straight line, a longer way by travelPlan
   LOOK_AHEAD: 5,             // the next task is the first of the best order of the nearest five

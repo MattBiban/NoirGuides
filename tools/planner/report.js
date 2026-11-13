@@ -2,6 +2,7 @@
 // Routes -> markdown: what each route is, and how it compares with the routes of the baseline commit
 // (planner/baseline.json, written by tools/baseline.js). Nothing here depends on the clock, so the report is as
 // repeatable as the routes.
+const { leftBehind, MAX_LEFT_BEHIND } = require("./leftbehind");
 const CURVE = [10, 20, 30, 40, 50, 60];
 const TARGET = 0.6; // the share of the baseline's zone changes a route has to save
 
@@ -36,7 +37,7 @@ function summarize(db, { route: written, validations, measure, shared }) {
   return {
     steps: route.steps.length, quests: route.stats.quests, endLevel: Math.min(route.stats.endLevel, ...validations.map((v) => v.result.endLevel)),
     zoneChanges: measure.zoneChanges, travelSeconds: measure.seconds, walkedYards: measure.yards, unreachable: measure.unreachable, byKind: measure.byKind,
-    totalSeconds: route.stats.seconds, grinds, visits: visits.map((v) => ({ name: zoneName(db, v.zone), steps: v.steps })),
+    totalSeconds: route.stats.seconds, grinds, leftBehind: leftBehind(db, route), visits: visits.map((v) => ({ name: zoneName(db, v.zone), steps: v.steps })),
     flightsLearned: count("getflight"), flights: count("fly"), transports: count("transport"), binds: count("sethearth"), hearths: count("hearth"),
     links: route.stats.links || [], errors, warnings, classes: validations.map((v) => v.character.cls),
     characters: validations.map(({ character, result, layer, measure: mine }) => ({ race: character.race, cls: character.cls, valid: result.errors.length === 0 && result.endLevel >= 60,
@@ -63,12 +64,15 @@ function acceptance(rows) {
   const errors = rows.reduce((sum, r) => sum + r.s.errors.length, 0);
   const short = rows.filter((r) => r.s.endLevel < 60);
   const characters = rows.flatMap((r) => r.s.characters || []);
+  const behind = rows.filter((r) => (r.s.leftBehind || []).length > MAX_LEFT_BEHIND);
   return [
     { name: `Zone changes down by at least ${TARGET * 100}% for every race`, met: compared.length > 0 && compared.every((r) => saved(r) >= TARGET),
       detail: worst ? `least: ${worst.race}, ${worst.before.zoneChanges} to ${worst.s.zoneChanges} (${percent(worst.before.zoneChanges, worst.s.zoneChanges)})` : "no baseline" },
     { name: "Travel time not worse for any race", met: compared.length > 0 && !slower.length, detail: slower.length ? `slower: ${slower.map((r) => r.race).join(", ")}` : "every race is faster" },
     { name: "No validator errors", met: errors === 0, detail: `${thousands(errors)} errors` },
     { name: "Every race reaches level 60", met: !short.length, detail: short.length ? `short: ${short.map((r) => `${r.race} (${r.s.endLevel})`).join(", ")}` : "all at 60" },
+    { name: `At most ${MAX_LEFT_BEHIND} hand-ins left behind in any race`, met: !behind.length,
+      detail: behind.length ? `over: ${behind.map((r) => `${r.race} (${r.s.leftBehind.length})`).join(", ")}` : `${rows.reduce((sum, r) => sum + (r.s.leftBehind || []).length, 0)} in all` },
     characterLine(characters),
   ];
 }
@@ -153,6 +157,8 @@ function reportMarkdown(db, results, baseline) {
     "One route per race, planned by `tools/planner/plan.js` and replayed step by step by `tools/planner/validate.js`.",
     "XP and times are estimates (`tools/lib/xp.js`, `tools/lib/travel.js`, `tools/planner/tuning.js`): they pace the",
     "route, the game decides the rest. A grind step means no quest was left for the level.",
+    "A hand-in left behind is a step that moves the player more than LEAVE_YARDS while a quest ready to hand in waits",
+    "within READY_YARDS of them (`tools/planner/leftbehind.js`, `tools/planner/tuning.js`).",
     "",
   ];
   if (baseline) {
@@ -201,6 +207,7 @@ function reportMarkdown(db, results, baseline) {
     out.push(`| Hearthstone bound, used | ${s.binds}, ${s.hearths} |`);
     out.push(`| Grind steps | ${s.grinds.length}${s.grinds.length ? ` (${s.grinds.map((g) => `level ${g.from} to ${g.to}`).join(", ")})` : ""} |`);
     out.push(`| Unconfirmed transports used | ${s.links.length ? s.links.map((l) => `${l.name} (${l.kind}; not confirmed: ${l.assumed.join(", ")})`).join("; ") : "none"} |`);
+    out.push(`| Hand-ins left behind | ${s.leftBehind.length ? s.leftBehind.map((b) => `step ${thousands(b.step + 1)} (quest ${b.quests.join(", ")})`).join("; ") : "none"} |`);
     out.push(`| Zones in order (steps there) | ${s.visits.map((v) => `${v.name} (${v.steps})`).join(", ")} |`);
     if (s.characters.some((c) => c.left)) {
       const left = s.characters.filter((c) => c.left).map((c) => `${c.cls}: ${c.leftOut.map((l) => `${l.quest} (${l.reason})`).join(", ")}`);
