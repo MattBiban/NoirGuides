@@ -12,7 +12,15 @@
 //   RANKS                                          Journeyman, Expert, Artisan with their gate, cap and level
 //
 // For each primary profession and each rank 2 to 4, one step
-//   { id = "p<skill>-<rank>", when = { profession = <skill> }, at = <trainer>, lines = { { kind = "train", skill, rank, npc } } }
+//   { id = "p<skill>-<rank>", label = "train<skill>_<rank>", when = { profession = <skill> }, at = <trainer>,
+//     lines = { { kind = "train", skill, rank, npc } } }
+// and its reminder step
+//   { id = "p<skill>-<rank>-skill", when = { profession = <skill> }, reminder = { ends = "train<skill>_<rank>" },
+//     lines = { { kind = "skill", skill, value = <the rank's gate> } } }
+// at the start of the train step's section: "raise the skill to the gate" stays on screen as a reminder while that
+// section is played, until the skill is reached or the train step is passed (route format 3 rule R10 keeps a
+// reminder and the step it ends at in one section, so a section's length is as far ahead as it can stand). The train
+// step goes
 // right before the first step (one every character has) at or after the rank's level that stands in a zone where a
 // trainer of that profession and rank stands, friendly to the faction; of several there, the nearest. The search runs
 // from the section where the level is reached through the two after it; a rank with no trainer there, or whose level
@@ -78,6 +86,7 @@ function addProfessionSteps(db, sections, faction, options = {}) {
   const shared = [];
   sections.forEach((s, si) => s.steps.forEach((step) => { if (!step.when && step.at) shared.push({ si, step }); }));
   const inserts = new Map();
+  const reminders = new Map(); // section index -> reminder steps for its start
   for (const profession of professions) {
     for (const r of RANKS) {
       const label = `${profession.name} ${r.name} (rank ${r.rank}, level ${r.level})`;
@@ -103,12 +112,17 @@ function addProfessionSteps(db, sections, faction, options = {}) {
         continue;
       }
       const { npc, point } = found.pick;
+      const id = `p${profession.skill}-${r.rank}`, ends = `train${profession.skill}_${r.rank}`;
       if (!inserts.has(found.step)) inserts.set(found.step, []);
-      inserts.get(found.step).push({ id: `p${profession.skill}-${r.rank}`, when: { profession: profession.skill },
+      inserts.get(found.step).push({ id, label: ends, when: { profession: profession.skill },
         at: { zone: point.zone, x: round2(point.x), y: round2(point.y), r: NPC_RADIUS }, lines: [{ kind: "train", skill: profession.skill, rank: r.rank, npc }] });
+      const si = sections.findIndex((s) => s.steps.includes(found.step));
+      if (!reminders.has(si)) reminders.set(si, []);
+      reminders.get(si).push({ id: `${id}-skill`, when: { profession: profession.skill }, reminder: { ends },
+        lines: [{ kind: "skill", skill: profession.skill, value: r.gate }] });
     }
   }
-  return sections.map((s) => ({ ...s, steps: s.steps.flatMap((step) => [...(inserts.get(step) || []), step]) }));
+  return sections.map((s, si) => ({ ...s, steps: [...(reminders.get(si) || []), ...s.steps.flatMap((step) => [...(inserts.get(step) || []), step])] }));
 }
 
 module.exports = { addProfessionSteps, primaryProfessions, professionTrainers, RANKS };

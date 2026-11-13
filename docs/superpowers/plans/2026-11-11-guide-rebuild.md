@@ -162,6 +162,8 @@ Noir.Route("horde-undead", {
 | `grind` | `level*` (2..60), `percent` (0..99) | yes | the level is above `level`, or at `level` with at least `percent`% of the level's XP (no `percent`: reaching `level`) |
 | `train` | `spell`, or (`skill` and `rank` 1..4), or (`class` and `level` 2..60, a class trainer visit), `npc` | yes | the spell is known; for a profession rank, the skill's cap covers the rank (75, 150, 225, 300); for a class trainer visit, the character is at least `level` and has opened and closed that trainer's window since reaching it (or since the step became current) |
 | `vendor` | `npc*`, `buy` = `{ item*, count* }` | yes | a merchant window opened (at `npc` when the client gives the NPC) and closed during the step |
+| `selljunk` (0.4.0) | `npc*` (the merchant), `at` | yes | a merchant window (any merchant) opened during the step and closed, or emptied the bags of grey items while open; hidden while the bags hold no grey item that sells, once the step's class `train` line is done, and while the money covers the training cost remembered for that class and level (unknown: at least 1000 copper); shown whenever an open trainer lists an available service the money does not cover |
+| `skill` (0.4.0) | `skill*` (skill line ID), `value*` (0..1000) | yes | the profession's skill (Forever's tier lines counted) is at least `value`; counter `{ have, need }`; hidden while the profession is neither learned nor planned |
 | `use` | `item*` | passive | puts the item on an item button while the step is on screen |
 | `target` | `npc*`, `enemy` (bool) | passive | adds the NPC to the target buttons |
 | `note` | `text*` (at most 160) | passive | never blocks |

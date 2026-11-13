@@ -4,7 +4,7 @@ const assert = require("node:assert");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { normalizeQuest, loadDb } = require("../lib/db");
+const { normalizeQuest, loadDb, VENDOR_FLAG } = require("../lib/db");
 const DATA = path.join(__dirname, "..", "data");
 const real = fs.existsSync(path.join(DATA, "forever_db.json"));
 
@@ -60,6 +60,15 @@ test("real data: NPCs keep their sub name, which names class and profession trai
   const db = loadDb(DATA);
   assert.strictEqual(db.npcs.get(911).subName, "Warrior Trainer");
   assert.strictEqual(db.npcs.get(658).subName, "");
+});
+test("real data: merchants are told by the vendor bit of their NPC flags", { skip: !real }, () => {
+  const db = loadDb(DATA);
+  assert.strictEqual(VENDOR_FLAG, 4);
+  assert.strictEqual(db.npcs.get(66).vendor, true, "Tharynn Bouden, Trade Supplies (flags 4)");
+  assert.strictEqual(db.npcs.get(54).vendor, true, "Corina Steele, Weaponsmith (flags 16388: vendor and repair)");
+  assert.strictEqual(db.npcs.get(5688).vendor, true, "Innkeeper Renee (flags 135)");
+  assert.strictEqual(db.npcs.get(911).vendor, false, "Llane Beshere, Warrior Trainer (flags 19)");
+  assert.strictEqual(db.npcs.get(658).vendor, false, "a quest giver (flags 3)");
 });
 
 test("reads the conditions that take a quest away again", () => {

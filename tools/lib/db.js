@@ -4,6 +4,11 @@ const path = require("path");
 const { readCsv } = require("./csv");
 const { CLASS_SORTS, ALL_CLASSES, SKYBORNE_CONTINENT, classMask, maskAnd, maskOr, isleRaces } = require("./characters");
 
+// The merchant bit of QuestieDB npcFlags (the classic client's NPC flags: 1 gossip, 2 quest giver, 4 vendor, 8 flight
+// master, 16 trainer, 128 innkeeper, 16384 repair). The data agrees: "General Goods Vendor" and "Trade Supplies" NPCs
+// carry 4, weaponsmiths and armorers 16388 (vendor and repair), innkeepers 135.
+const VENDOR_FLAG = 4;
+
 // QuestieDB lists are arrays, or objects keyed "1".."n" (1-based) when sparse.
 const slot = (v, i) => (!v ? [] : Array.isArray(v) ? v[i] || [] : v[String(i + 1)] || []);
 const ids = (list) => (list || []).map((e) => (Array.isArray(e) ? e[0] : e)).filter((n) => typeof n === "number");
@@ -107,7 +112,9 @@ function loadDb(dataDir) {
   const db = { quests: new Map(), npcs: new Map(), objects: new Map(), items: new Map(), areas: new Map(), maps: new Map(), taxi: [], eraQuestIds: new Set() };
   for (const [id, q] of Object.entries(raw.Quest)) db.quests.set(+id, normalizeQuest(id, q));
   // subName: the title under the name ("Warrior Trainer", "Journeyman Blacksmith"), "" when there is none
-  for (const [id, n] of Object.entries(raw.Npc)) db.npcs.set(+id, { id: +id, name: n.name || "", friendly: n.friendlyToFaction || "", subName: n.subName || "", spawns: areaMap(n.spawns) });
+  // vendor: QuestieDB npcFlags has the merchant bit (VENDOR_FLAG): the NPC buys and sells items
+  for (const [id, n] of Object.entries(raw.Npc)) db.npcs.set(+id, { id: +id, name: n.name || "", friendly: n.friendlyToFaction || "", subName: n.subName || "",
+    vendor: ((n.npcFlags || 0) & VENDOR_FLAG) !== 0, spawns: areaMap(n.spawns) });
   for (const [id, o] of Object.entries(raw.Object)) db.objects.set(+id, { id: +id, name: o.name || "", spawns: areaMap(o.spawns) });
   // otherSources: the item is also sold by a vendor or found inside another item, so a drop is not the only way to it
   for (const [id, i] of Object.entries(raw.Item)) db.items.set(+id, { id: +id, name: i.name || "", npcDrops: i.npcDrops || [], objectDrops: i.objectDrops || [],
@@ -127,4 +134,4 @@ function loadDb(dataDir) {
   for (const t of wago("TaxiNodes")) db.taxi.push({ id: +t.ID, name: t.Name_lang, x: +t.Pos_0, y: +t.Pos_1, continent: +t.ContinentID });
   return applyDataRules(db);
 }
-module.exports = { loadDb, normalizeQuest, areaMap, applyDataRules };
+module.exports = { loadDb, normalizeQuest, areaMap, applyDataRules, VENDOR_FLAG };

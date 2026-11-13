@@ -18,7 +18,7 @@ const release = () => JSON.parse(fs.readFileSync(path.join(__dirname, "..", "dat
 const ORDER = {
   section: ["id", "name", "names", "group", "subgroup", "minLevel", "maxLevel", "zone", "start", "when", "loop", "noAuto", "next", "steps"],
   step: ["id", "label", "title", "at", "text", "when", "minLevel", "maxLevel", "requires", "reminder", "skip", "load", "items", "targets", "path", "lines"],
-  line: ["kind", "quest", "index", "item", "count", "node", "from", "to", "mode", "at", "level", "percent", "spell", "skill", "rank", "class", "npc", "object",
+  line: ["kind", "quest", "index", "item", "count", "node", "from", "to", "mode", "at", "level", "percent", "spell", "skill", "rank", "value", "class", "npc", "object",
     "buy", "reward", "cap", "ifDone", "requires", "manual", "skipIfMissing", "skipIfIncomplete", "enemy", "text", "when"],
   place: ["zone", "x", "y", "r", "nearest"],
   when: ["class", "notClass", "race", "notRace", "profession"],

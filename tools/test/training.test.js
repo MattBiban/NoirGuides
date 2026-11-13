@@ -6,7 +6,7 @@ const assert = require("node:assert");
 const { testWorld } = require("./world");
 const { checkRoute3 } = require("../planner/format3");
 const { applies } = require("../planner/validate3");
-const { addClassTraining, classTrainers, TRAINER_YARDS, MAX_DETOUR_SECONDS, VISIT_EVERY, FORCE_AFTER, TRIP_AFTER, MAX_TRIP_SECONDS } = require("../planner/training");
+const { addClassTraining, classTrainers, merchants, SELL_JUNK_LEVEL, TRAINER_YARDS, MAX_DETOUR_SECONDS, VISIT_EVERY, FORCE_AFTER, TRIP_AFTER, MAX_TRIP_SECONDS } = require("../planner/training");
 
 const P = (zone, x, y, r) => (r === undefined ? { zone, x, y } : { zone, x, y, r });
 function world() {
@@ -81,6 +81,38 @@ test("a visit carries its level as its minLevel, so a character under it is show
   const found = visits(out);
   assert.ok(found.length > 0);
   for (const v of found) assert.strictEqual(v.minLevel, v.lines[0].level, v.id);
+});
+
+test("a visit up to level 20 carries a sell-grey-items line at the nearest friendly merchant near the trainer", () => {
+  const w = world();
+  const vendor = (id, zone, x, y, friendly, isVendor = true) =>
+    w.db.npcs.set(id, { id, name: `Merchant ${id}`, friendly, subName: "General Goods", vendor: isVendor, spawns: { [zone]: [[x, y]] } });
+  vendor(650, 100, 35, 50, "A");        // 30 yards from the warrior trainer at (32, 50)
+  vendor(651, 100, 32, 51, "H");        // nearer, but Horde
+  vendor(652, 100, 33, 50, "A", false); // nearer, but no merchant
+  vendor(653, 100, 34, 50, "AH");       // nearest friendly merchant: 20 yards
+  vendor(654, 200, 1, 50, "A");         // across the zone border
+  assert.strictEqual(SELL_JUNK_LEVEL, 20);
+  assert.deepStrictEqual(merchants(w.db, "Alliance").map((m) => m.npc), [650, 653, 654]);
+  const steps = Array.from({ length: 4 }, () => obj(100, 30, 50));
+  const sections = chain(steps);
+  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), classes: ["WARRIOR"], levelOf: levelsOf(sections, [18, 20, 22, 24]) });
+  const byId = new Map(visits(out).map((v) => [v.id, v]));
+  assert.deepStrictEqual([...byId.keys()], ["tWARRIOR-18", "tWARRIOR-20", "tWARRIOR-22", "tWARRIOR-24"]);
+  assert.deepStrictEqual(byId.get("tWARRIOR-18").lines, [{ kind: "train", class: "WARRIOR", level: 18, npc: 600 },
+    { kind: "selljunk", npc: 653, at: P(100, 34, 50, 10) }]);
+  assert.strictEqual(byId.get("tWARRIOR-20").lines[1].npc, 653, "level 20 still has it");
+  assert.strictEqual(byId.get("tWARRIOR-22").lines.length, 1, "above level 20 the visit has its train line only");
+  assert.strictEqual(byId.get("tWARRIOR-24").lines.length, 1);
+  assert.strictEqual(checkRoute3(route3(out)), null);
+});
+
+test("a visit with no friendly merchant within 300 yards of the trainer has no sell line", () => {
+  const w = world();
+  w.db.npcs.set(660, { id: 660, name: "Far Merchant", friendly: "A", subName: "", vendor: true, spawns: { 100: [[70, 50]] } }); // 380 yards away
+  const sections = chain(Array.from({ length: 2 }, () => obj(100, 30, 50)));
+  const out = addClassTraining(w.db, sections, "Alliance", { graph: w.graph(), classes: ["WARRIOR"], levelOf: levelsOf(sections, [2, 3]) });
+  assert.deepStrictEqual(visits(out).map((v) => v.lines.map((l) => l.kind)), [["train"]]);
 });
 
 test("a visit near the end of a walk into town comes after the walk, not before it", () => {
