@@ -12,7 +12,7 @@ local EXPECTED = {
   pinAlpha = 0.6, autoQuests = true, guideRewards = false, rewardMarker = true, bestReward = false, train = false,
   flights = true, hearth = true, dialogue = true, buy = true, targetButtons = true, nameplates = true, markers = true,
   outlevel = true, groupQuests = false, talents = true, neverSkip = false, offerCleanup = true, conflicts = true,
-  debug = false, accent = "class",
+  debug = false, accent = "class", backgroundAlpha = 0.75,
 }
 
 local function options(opts)

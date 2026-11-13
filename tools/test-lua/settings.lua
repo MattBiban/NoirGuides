@@ -15,6 +15,7 @@ local TAB_OF = {
   windowHidden = "Guide window", cardsBelow = "Guide window", windowScale = "Guide window", fontSize = "Guide window", accent = "Guide window",
   stepList = "Guide window", hideFinished = "Guide window", otherSections = "Guide window", highlight = "Guide window",
   itemButtons = "Guide window", buttonBackground = "Guide window", buttonScale = "Guide window",
+  backgroundAlpha = "Guide window",
   arrow = "Navigation", arrowScale = "Navigation", arrowText = "Navigation", minimapPins = "Navigation",
   pinRing = "Navigation", worldPins = "Navigation", pinSize = "Navigation", pinMerge = "Navigation",
   pinAlpha = "Navigation",
@@ -239,16 +240,42 @@ test("the accent color asks and reloads the UI", function()
   eq(control(S, "accent").value, "class", "the class color by default")
   c:setCursor(400, 400)
   ok(c:click(S.Control("accent")))
-  ok(c:click(menuRow(Noir, "gold")))
+  local texts = {}
+  for _, row in ipairs(Noir.Menu.Read().levels[1].rows) do texts[#texts + 1] = row.text end
+  eq(texts, { "Class color (automatic)", "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage",
+    "Warlock", "Druid", "Gold", "Black" }, "the menu lists every theme by name")
+  ok(c:click(menuRow(Noir, "Gold")))
   eq(Noir.Panel.ConfirmRead().shown, true, "a question first")
   c:click(Noir.Panel.ConfirmButton("no"))
   eq(Noir.Options.Get("accent"), "class", "no: nothing changes")
   eq(c.reloads, 0)
   ok(c:click(S.Control("accent")))
-  ok(c:click(menuRow(Noir, "gold")))
+  ok(c:click(menuRow(Noir, "Gold")))
   c:click(Noir.Panel.ConfirmButton("yes"))
   eq(Noir.Options.Get("accent"), "gold")
   eq(c.reloads, 1, "yes: the interface reloads")
+  ok(c:click(S.Control("accent")))
+  ok(c:click(menuRow(Noir, "Black")))
+  c:click(Noir.Panel.ConfirmButton("yes"))
+  eq(Noir.Options.Get("accent"), "black", "the stored value is the lowercase key")
+  eq(c.reloads, 2)
+  eq(c:offScreen(), {})
+end)
+
+test("the background opacity slider applies without a reload", function()
+  local c, Noir, S = at({ settingsApi = "none" })
+  S.Open("Guide window")
+  eq(control(S, "backgroundAlpha").value, 0.75, "75% by default")
+  local slider = S.Control("backgroundAlpha")
+  local left, bottom, right, top = c:rectOf(S.Track("backgroundAlpha"))
+  c:setCursor(right, (bottom + top) / 2)
+  ok(c:click(slider))
+  near(Noir.Options.Get("backgroundAlpha"), 1, 1e-9, "the right end is opaque")
+  c:setCursor(left, (bottom + top) / 2)
+  c:drag(slider, 0, 0)
+  near(Noir.Options.Get("backgroundAlpha"), 0.2, 1e-9, "dragged to the left end: the least")
+  eq(Noir.Panel.ConfirmRead().shown, false, "no question")
+  eq(c.reloads, 0, "no reload")
   eq(c:offScreen(), {})
 end)
 

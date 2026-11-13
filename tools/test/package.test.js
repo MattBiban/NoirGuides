@@ -66,10 +66,10 @@ const built = pkg.packageAddon({ outDir: tmp });
 const entries = readZip(fs.readFileSync(built.file));
 const byName = new Map(entries.map((e) => [e.name, e.data]));
 
-test("the version comes from the toc and is 0.2.2", () => {
-  assert.strictEqual(pkg.tocVersion(fs.readFileSync(path.join(ADDON, "NoirGuides.toc"), "utf8")), "0.2.2");
-  assert.strictEqual(built.version, "0.2.2");
-  assert.strictEqual(path.basename(built.file), "NoirGuides-0.2.2.zip");
+test("the version comes from the toc and is 0.3.0", () => {
+  assert.strictEqual(pkg.tocVersion(fs.readFileSync(path.join(ADDON, "NoirGuides.toc"), "utf8")), "0.3.0");
+  assert.strictEqual(built.version, "0.3.0");
+  assert.strictEqual(path.basename(built.file), "NoirGuides-0.3.0.zip");
 });
 
 test("the default output is dist/NoirGuides-<version>.zip at the repository root", () => {

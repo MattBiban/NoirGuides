@@ -30,7 +30,7 @@ Options.DEFAULTS = {
   -- Guide window
   windowHidden = false, cardsBelow = false, windowScale = 1, fontSize = "standard", accent = "class", stepList = true,
   hideFinished = false, otherSections = false, highlight = true, itemButtons = true, buttonBackground = true,
-  buttonScale = 1,
+  buttonScale = 1, backgroundAlpha = 0.75,
   -- Navigation
   arrow = true, arrowScale = 1, arrowText = 12, minimapPins = true, pinRing = false, worldPins = 7, pinSize = 1,
   pinMerge = 1, pinAlpha = 0.6,
@@ -47,7 +47,10 @@ Options.RANGES = {
   minimapAngle = { min = 0, max = 360 },
   windowScale = { min = 0.2, max = 2 },
   fontSize = { choices = { "standard", "large" } },
-  accent = { choices = { "class", "gold" } },
+  -- The same list as Theme.THEMES (Theme.lua loads after this file); keep the two in sync.
+  accent = { choices = { "class", "warrior", "paladin", "hunter", "rogue", "priest", "shaman", "mage", "warlock",
+    "druid", "gold", "black" } },
+  backgroundAlpha = { min = 0.2, max = 1 },
   buttonScale = { min = 0.8, max = 3 },
   arrowScale = { min = 0.2, max = 2 },
   arrowText = { min = 8, max = 20, whole = true },

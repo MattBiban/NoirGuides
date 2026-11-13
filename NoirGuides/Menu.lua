@@ -130,13 +130,15 @@ end
 local function newRow(level, k)
   local row = Panel.Row(level.list.child, function(self, button) Menu.Activate(self.level, self.index, button) end)
   row.level, row.index = level.index, k
+  -- The current row: the lamp, faint, behind it (the mouse's glow adds to it).
   row.now = row:CreateTexture(nil, "BACKGROUND")
-  Theme.Paint(row.now, "strip", 0.6)
+  Theme.Paint(row.now, "lamp", 0.12)
   row.now:SetAllPoints(row)
   row.now:Hide()
+  -- A picker row's marker: a 1-pixel line down its left side (the text keeps its place after metrics.lamp).
   row.marker = row:CreateTexture(nil, "ARTWORK")
   row.marker:SetColorTexture(1, 1, 1, 1)
-  row.marker:SetWidth(metrics().lamp)
+  row.marker:SetWidth(1)
   row.marker:SetPoint("TOPLEFT", row, "TOPLEFT", 0, 0)
   row.marker:SetPoint("BOTTOMLEFT", row, "BOTTOMLEFT", 0, 0)
   row.marker:Hide()
@@ -158,14 +160,12 @@ local function newLevel(i)
   frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
   frame:EnableMouse(true) -- clicks on the menu do not fall through to the catcher
   frame:EnableMouseWheel(true)
-  local bay = frame:CreateTexture(nil, "BACKGROUND")
-  Theme.Paint(bay, "bay", m.alpha)
-  bay:SetAllPoints(frame)
-  local edge = frame:CreateTexture(nil, "BORDER")
-  Theme.Paint(edge, "lamp")
-  edge:SetHeight(1)
-  edge:SetPoint("TOPLEFT", frame, "TOPLEFT", 0, 0)
-  edge:SetPoint("TOPRIGHT", frame, "TOPRIGHT", 0, 0)
+  -- A plate with the light on it, in the guide window's double hairline: ink outside, the lamp inside.
+  local plate = frame:CreateTexture(nil, "BACKGROUND")
+  Theme.Paint(plate, "strip", m.alpha)
+  plate:SetAllPoints(frame)
+  Panel.Sheen(frame)
+  level.edges = Panel.Border(frame)
   level.title = Panel.Text(frame, "kicker", "dim")
   level.list = Panel.ScrollList(frame, { step = 3 * rowHeight() })
   frame:SetScript("OnMouseWheel", function(_, delta)
@@ -202,12 +202,7 @@ local function drawRow(level, k, item, width)
   local checked = checkedOf(item)
   row.checked = checked
   -- Tick box (Panel's) for ticks; the text starts after it.
-  if checked == nil then
-    row.box:Hide()
-  else
-    Theme.Paint(row.box, checked and "lamp" or "track")
-    row.box:Show()
-  end
+  Panel.Tick(row, checked)
   local textLeft = m.gap + metrics().lamp + (checked ~= nil and (Theme.sizes.body + m.gap) or 0)
   local rightWidth = (item.right or item.sub) and Menu.RIGHT_WIDTH or 0
   row.text:ClearAllPoints()

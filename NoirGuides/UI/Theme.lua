@@ -15,10 +15,13 @@
 --   Theme.Paint(texture, name [, alpha])   a solid color
 --   Theme.Tint(texture, name [, alpha])    colors one of the addon's white textures
 --   Theme.fontFile                the addon's own font file, once it ships one (nil: the client's default font)
---   Theme.CLASS_COLORS            class token -> the hex the lamp takes for that class with the "class" accent
---   Theme.ApplyAccent()           sets the lamp to the class color or the design's gold, as the "accent" option says;
---                                 runs on NOIR_INIT before any window is built (a change takes a reload)
---   Theme.Border()                -> the guide window border's color name: lamp with the class accent, else track
+--   Theme.CLASS_COLORS            class token -> the hex the lamp takes for that class
+--   Theme.THEMES                  the "accent" option's choices: "class" (the player's own), each class by name,
+--                                 "gold" and "black" (monochrome: a black panel, a silver accent)
+--   Theme.ApplyAccent()           sets the lamp (and, for black, the panel colors) as the "accent" option says; runs
+--                                 on NOIR_INIT before any window is built, so a change takes a reload
+--   Theme.Border()                -> the guide window's inner border color name (the lamp)
+--   Theme.Shadow(fontString)      the game's 1-pixel drop shadow under text (Theme.Font sets it)
 --
 -- Fonts are only ever set by file, with SetFont. A font object is never handed to a font string: the Forever
 -- client crashes when SetFontObject is given anything but one of its own named font objects.
@@ -31,24 +34,29 @@ Noir.Theme = Theme
 -- Tokens
 -- ---------------------------------------------------------------------------------------------------------------
 
+-- The game's tooltip, sharpened: a blue-black panel the player sets the opacity of, lifted plates for cards, a black
+-- outer hairline, white text with a drop shadow, gold for the section's facts, bright named things.
 local HEX = {
-  bay = "1C2027",     -- the window's background
-  strip = "2E343E",   -- a card's background, a lit row of the step list
-  lamp = "F2B33D",    -- the accent: the current card's side bar, the badge, the rail, the arrow, the current pin
-  quest = "F2B33D",   -- the quest icons (accept, hand in) and the accept mark: gold whatever the accent
-  paper = "ECE7DB",   -- primary text
-  dim = "A6A195",     -- secondary text
-  faint = "8F8A80",   -- a reminder's side bar, the step numbers, the next steps' pins
-  track = "454C58",   -- the rail's track, an empty tick box
-  warn = "F0825A",    -- notes: something stands in the way of the step
-  ok = "7FC97F",      -- arrived, route complete, the hand-in mark
+  bay = "141922",     -- the window's panel, at the player's "backgroundAlpha"
+  strip = "222A37",   -- a plate: a card, the header, the footer, a row of the step list under the mouse
+  ink = "000000",     -- the outer hairline and the rules between bands
+  lamp = "F2B33D",    -- the accent: the current card's edge and badge, the window's border, the rail, the arrow
+  quest = "FFD100",   -- the quest icons (accept, hand in) and the accept mark: gold whatever the accent
+  gold = "FFD100",    -- the section's facts in the header (the game's heading gold)
+  paper = "F4F5F7",   -- primary text
+  dim = "B9BFCA",     -- secondary text
+  faint = "8D95A3",   -- a reminder's top edge, the step numbers, the next steps' pins, an empty tick box
+  track = "4A5466",   -- a card's frame, a slider's track, an empty box in menus
+  well = "0B0E13",    -- the rail's track
+  warn = "FF8A5C",    -- notes: something stands in the way of the step
+  ok = "5BD675",      -- arrived, route complete, the hand-in mark
   -- Named things in a line's words, by meaning (the "highlight" option)
-  friend = "7FC9E8",  -- a friendly NPC
-  enemy = "F07A7A",   -- an enemy to kill
-  loot = "D7A8F0",    -- an item to loot or use
-  warning = "F0825A", -- a quest whose prerequisites are not handed in
-  object = "8FD6C8",  -- an object to click
-  buy = "B8D97A",     -- an item to buy
+  friend = "74CCF4",  -- a friendly NPC
+  enemy = "FF6F6F",   -- an enemy to kill
+  loot = "D9A6FF",    -- an item to loot or use
+  warning = "FF8A5C", -- a quest whose prerequisites are not handed in
+  object = "7FE0CC",  -- an object to click
+  buy = "BCE27A",     -- an item to buy
 }
 
 local function rgb(hex)
@@ -61,7 +69,11 @@ end
 
 Theme.colors = {}
 for name, hex in pairs(HEX) do Theme.colors[name] = rgb(hex) end
+local BASE = {}
+for name, hex in pairs(HEX) do BASE[name] = hex end
 local GOLD = HEX.lamp
+-- The black theme: a black panel, darker plates and frames, and a silver accent in place of a color.
+local BLACK = { lamp = "D9DDE4", bay = "000000", strip = "14171C", track = "3A3F48" }
 
 -- The game's class colors, except where one would not read as an accent on the window (DESIGN.md, Accent): the
 -- priest's white is a lavender, unlike the text; the shaman's and the warlock's blues are lighter, to 4.5 to 1.
@@ -69,6 +81,8 @@ Theme.CLASS_COLORS = {
   WARRIOR = "C69B6D", PALADIN = "F48CBA", HUNTER = "AAD372", ROGUE = "FFF468", PRIEST = "B4A7E8",
   SHAMAN = "4FA3F2", MAGE = "3FC7EB", WARLOCK = "9A9BF2", DRUID = "FF7C0A",
 }
+Theme.THEMES = { "class", "warrior", "paladin", "hunter", "rogue", "priest", "shaman", "mage", "warlock", "druid",
+  "gold", "black" }
 
 Theme.sizes = { kicker = 10, name = 14, body = 11, small = 10 }
 
@@ -76,8 +90,8 @@ Theme.metrics = {
   width = 260,  -- the window
   pad = 10,     -- from the window's edge to its content
   gap = 4,      -- between two blocks of text
-  lamp = 3,     -- a card's side bar
-  rail = 3,     -- the rail's thickness
+  lamp = 2,     -- a card's top edge in the accent
+  rail = 5,     -- the rail's thickness
   arrow = 48,   -- the arrow's side
   pin = 14,     -- a next step's pin
   active = 20,  -- the current step's pin
@@ -94,7 +108,8 @@ Theme.metrics = {
 }
 
 local TEXTURE_PATH = "Interface\\AddOns\\NoirGuides\\Textures\\"
-Theme.textures = { arrow = true, pin = true, ["pin-active"] = true, box = true, tick = true, grip = true, menu = true }
+Theme.textures = { arrow = true, pin = true, ["pin-active"] = true, box = true, tick = true, grip = true, menu = true,
+  sheen = true, bar = true }
 -- The kind icons of a line, as UI/Text.lua names them, and the timer of the flight bar: textures "icon-<name>".
 Theme.ICONS = { "accept", "turnin", "objective", "kill", "item", "vendor", "trainer", "gossip", "flight", "flightpoint",
   "hearth", "bind", "goto", "xp", "error", "note", "timer" }
@@ -138,9 +153,16 @@ local function try(fontString, file, size)
   return result and true or false
 end
 
+-- The game's own text shadow: one pixel down and right, nearly black, so text reads over any part of the world.
+function Theme.Shadow(fontString)
+  if fontString.SetShadowOffset then fontString:SetShadowOffset(1, -1) end
+  if fontString.SetShadowColor then fontString:SetShadowColor(0, 0, 0, 0.9) end
+end
+
 function Theme.Font(fontString, role, large)
   local size = (Theme.sizes[role] or Theme.sizes.body) + (large and Theme.metrics.large or 0)
   if try(fontString, Theme.fontFile, size) or try(fontString, STANDARD_TEXT_FONT, size) or try(fontString, USUAL_FONT, size) then
+    Theme.Shadow(fontString)
     return true
   end
   if not reported then
@@ -178,25 +200,32 @@ end
 -- Accent
 -- ---------------------------------------------------------------------------------------------------------------
 
-local classAccent = false
+local function set(name, hex)
+  HEX[name] = hex
+  Theme.colors[name] = rgb(hex)
+end
 
 function Theme.ApplyAccent()
-  local hex = GOLD
-  classAccent = false
+  for name, hex in pairs(BASE) do set(name, hex) end
   local Options = Noir.Options
-  if Options and Options.Get("accent") == "class" and UnitClass then
-    local _, token = UnitClass("player")
-    local color = type(token) == "string" and Theme.CLASS_COLORS[token]
-    if color then hex, classAccent = color, true end
+  local choice = Options and Options.Get("accent") or "class"
+  local hex = GOLD
+  if choice == "black" then
+    for name, value in pairs(BLACK) do set(name, value) end
+    hex = BLACK.lamp
+  elseif choice == "class" then
+    local token = UnitClass and select(2, UnitClass("player"))
+    hex = type(token) == "string" and Theme.CLASS_COLORS[token] or GOLD
+  elseif choice ~= "gold" then
+    hex = Theme.CLASS_COLORS[string.upper(tostring(choice))] or GOLD
   end
-  HEX.lamp = hex
-  Theme.colors.lamp = rgb(hex)
+  set("lamp", hex)
   -- Chat lines start with the addon's name in the accent color.
   Noir.prefix = "|cff" .. hex .. "Noir|r: "
 end
 
 function Theme.Border()
-  return classAccent and "lamp" or "track"
+  return "lamp"
 end
 
 Theme.ApplyAccent()

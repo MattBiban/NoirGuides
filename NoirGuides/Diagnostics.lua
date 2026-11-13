@@ -233,9 +233,11 @@ local function build()
   if box.SetTextInsets then box:SetTextInsets(4, 4, 4, 4) end
   Theme.Font(box, "small")
   if box.SetTextColor then box:SetTextColor(Theme.Color("paper")) end
+  -- A well for the text, inside a 1-pixel track line.
   local back = box:CreateTexture(nil, "BACKGROUND")
-  Theme.Paint(back, "strip")
+  Theme.Paint(back, "well")
   back:SetAllPoints(box)
+  box.edges = Panel.Edges(box, "BORDER", "track", 0)
   box:SetScript("OnEscapePressed", function() Diagnostics.Close() end)
   -- The box is for copying: whatever is typed into it, the report comes back.
   box:SetScript("OnTextChanged", function(self, userInput)

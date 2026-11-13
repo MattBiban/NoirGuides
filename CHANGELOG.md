@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0
+
+- **A new look.** The guide is restyled after the game's own tooltips, with ElvUI-sharp edges: a lighter blue-black panel you can see the world through, a black-and-accent double border, cards as lifted plates with a soft sheen, the game's text shadow, a gold line of section facts in the header, and a glossy progress bar. Menus, dialogs, the setup wizard, quest cleanup, the bug report and the item and target buttons share the look.
+- **Themes.** Settings, Guide window, Theme: your class color (the default), any of the nine class colors (a mage can wear rogue yellow), Gold, or Black (a black panel with a silver accent). Changing it reloads the interface.
+- **Background opacity.** A new slider in Settings, Guide window, from 20% to 100% (75% by default). It applies at once; the cards stay nearly solid so their words always read.
+- **Step numbers on cards.** Each card shows "Step N" in its top right corner, as the step list does.
+- **Clearer cards.** The current card is framed in your theme color with a colored top edge; reminders have a grey edge. A finished line is greyed out completely, names included. The current row in the step list keeps its highlight when the mouse passes over it.
+
 ## 0.2.2
 
 - **The skin takes your class color.** The accent (the current step's side bar and badge, ticked boxes, the rail, the arrow, the current map pin, menus, the minimap button and "Noir" in chat) and the guide window's border are now in your class color. The priest's white is a lavender, so it stands apart from the text, and the shaman's and warlock's blues are a little lighter so they stay readable. Quest icons stay gold. To go back to the gold look: Settings, Guide window, Accent color, gold (the interface reloads).

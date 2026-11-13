@@ -42,15 +42,19 @@ local function theme()
   return login("ROGUE", "gold")
 end
 
--- The border textures of the guide window: its 1-pixel edges, painted on the BORDER layer of the frame itself.
-local function borderColor(c)
+-- The border textures of the guide window: its 1-pixel edges on the BORDER layer of the frame itself, sorted by
+-- whether they sit just outside the frame (offset 1) or just inside it (offset 0).
+local function borderColors(c)
   local frame = c.G.Noir.Window.frame
+  local out = { outside = {}, inside = {} }
   for _, region in ipairs(frame.__regions) do
-    if region.GetDrawLayer and region:GetDrawLayer() == "BORDER" and region.__color then
-      local w, h = region:GetWidth(), region:GetHeight()
-      if w == 1 or h == 1 then return region.__color end
+    if region:GetDrawLayer() == "BORDER" and region.__color and (region:GetWidth() == 1 or region:GetHeight() == 1) then
+      local point = region.__points[1]
+      local off = point and (math.abs(point[4] or 0) + math.abs(point[5] or 0)) or 0
+      table.insert(off > 0 and out.outside or out.inside, region.__color)
     end
   end
+  return out
 end
 
 test("every color of the theme is the color the design gives it, and the design names no other", function()
@@ -187,13 +191,47 @@ test("the accent is the class color by default, and the design's gold with the g
   eq(c.G.Noir.Options.Get("accent"), "class")
   eq(Theme.Hex("lamp"), "3FC7EB", "a mage's accent is the mage color")
   eq(Theme.Border(), "lamp", "the window's border takes the class color")
-  eq(Theme.Hex("quest"), "F2B33D", "quest icons stay gold")
+  eq(Theme.Hex("quest"), "FFD100", "quest icons stay the game's quest gold")
   c:takeChat()
   c:slash("/noir version")
   has(c:chatText(), "|cff3FC7EBNoir|r", "the addon's name in chat too")
   local Gold = login("MAGE", "gold")
   eq(Gold.Hex("lamp"), "F2B33D")
-  eq(Gold.Border(), "track", "gold: the window as it was, grey border included")
+  eq(Gold.Border(), "lamp", "the border is the accent in every theme")
+end)
+
+test("any class's color can be picked as the theme, whatever the character's class", function()
+  local Rogue = login("MAGE", "rogue")
+  eq(Rogue.Hex("lamp"), "FFF468", "a mage with the rogue theme gets the rogue yellow")
+  local Druid = login("WARRIOR", "druid")
+  eq(Druid.Hex("lamp"), "FF7C0A")
+  eq(Druid.Hex("bay"), "141922", "a class theme keeps the tooltip panel")
+end)
+
+test("the black theme is monochrome: a black panel, darker plates and a silver accent", function()
+  local Black, c = login("MAGE", "black")
+  eq(Black.Hex("lamp"), "D9DDE4")
+  eq(Black.Hex("bay"), "000000")
+  eq(Black.Hex("strip"), "14171C")
+  eq(Black.Hex("track"), "3A3F48")
+  eq(Black.Hex("paper"), "F4F5F7", "the text colors stay")
+  c:takeChat()
+  c:slash("/noir version")
+  has(c:chatText(), "|cffD9DDE4Noir|r")
+  -- switching back restores every color the black theme changed
+  c.G.Noir.Options.Set("accent", "gold")
+  Black.ApplyAccent()
+  eq(Black.Hex("bay"), "141922")
+  eq(Black.Hex("strip"), "222A37")
+  eq(Black.Hex("lamp"), "F2B33D")
+end)
+
+test("text carries the game's one-pixel drop shadow", function()
+  local Theme, c = theme()
+  local text = c.G.CreateFrame("Frame", nil, c.G.UIParent):CreateFontString(nil, "OVERLAY")
+  eq(Theme.Font(text, "body"), true)
+  eq(text.__shadowOffset, { 1, -1 })
+  eq(text.__shadow, { 0, 0, 0, 0.9 })
 end)
 
 test("every class has an accent that reads on the window, and the priest's is not white", function()
@@ -228,17 +266,35 @@ test("a class without a color keeps the gold accent", function()
   Theme.CLASS_COLORS.MAGE = nil -- a class the table does not know
   Theme.ApplyAccent()
   eq(Theme.Hex("lamp"), "F2B33D")
-  eq({ Theme.Color("lamp") }, { Theme.Color("quest") })
-  eq(Theme.Border(), "track")
   eq(c.errors, {})
 end)
 
-test("the window's border is grey with gold, in the class color with the class accent", function()
-  local _, gold = login("MAGE", "gold")
-  local _, class = login("MAGE", "class")
-  local GoldTheme, ClassTheme = gold.G.Noir.Theme, class.G.Noir.Theme
-  local g, k = borderColor(gold), borderColor(class)
-  ok(g and k, "the border is found")
-  eq(g, { GoldTheme.Color("track") })
-  eq(k, { ClassTheme.Color("lamp") })
+test("the window has a double hairline: black just outside, the theme's accent just inside", function()
+  for _, accent in ipairs({ "gold", "class", "black" }) do
+    local Theme, c = login("MAGE", accent)
+    local colors = borderColors(c)
+    ok(#colors.outside == 4, accent .. ": four outer edges")
+    ok(#colors.inside == 4, accent .. ": four inner edges")
+    for _, color in ipairs(colors.outside) do eq(color, { Theme.Color("ink") }, accent .. " outside") end
+    for _, color in ipairs(colors.inside) do eq(color, { Theme.Color("lamp") }, accent .. " inside") end
+  end
+end)
+
+test("the panel's opacity is the player's background opacity, applied at once", function()
+  local _, c = login("MAGE", "gold")
+  local Noir = c.G.Noir
+  local function bayAlpha()
+    for _, region in ipairs(Noir.Window.frame.__regions) do
+      if region:GetDrawLayer() == "BACKGROUND" and region.__color then
+        local r, g, b = Noir.Theme.Color("bay")
+        if region.__color[1] == r and region.__color[2] == g and region.__color[3] == b then return region.__color[4] end
+      end
+    end
+  end
+  eq(bayAlpha(), 0.75, "a lighter panel by default")
+  Noir.Options.Set("backgroundAlpha", 0.4)
+  eq(bayAlpha(), 0.4)
+  Noir.Options.Set("backgroundAlpha", 1)
+  eq(bayAlpha(), 1)
+  eq(c.errors, {})
 end)

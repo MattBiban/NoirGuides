@@ -1,9 +1,17 @@
 -- Noir Guides, GPLv3. See LICENSE.
 -- Panel: the pieces the addon's other windows are built from (the menu, the quest cleanup, the bug report), in the
--- Strip Bay design (DESIGN.md): a dark bay, text in the design's type, rows that light up under the mouse. Plain
--- frames, textures and font strings only: no template, no backdrop, no font object, nothing named.
+-- guide window's design (DESIGN.md): the game's tooltip panel with pixel-sharp hairlines, text in the design's type,
+-- rows that light up in the lamp under the mouse. Plain frames, textures and font strings only: no template, no
+-- backdrop, no font object, nothing named.
 --
 --   Panel.New(width)                      -> a hidden frame on the DIALOG strata, centered, with the bay behind it
+--                                            and the window's double hairline (Panel.Border)
+--   Panel.Edges(owner, layer, color, inset [, alpha [, around]])  -> four 1-pixel lines around `around` (default
+--                                            owner), `inset` pixels in (-1: just outside)
+--   Panel.Border(frame [, color])         the double hairline: ink just outside, `color` (default the lamp) just
+--                                            inside; -> { outline = edges, border = edges }
+--   Panel.Sheen(owner [, alpha])          -> the light on a plate: the sheen texture in paper at 0.07, over owner
+--   Panel.Tick(row, tick)                 a row's tick box: nil hides it, true ticks it, false shows it empty
 --   Panel.Text(parent, role, color [, justify])   -> a hidden font string in the design's type
 --   Panel.Row(parent, onClick)            -> a frame that takes the mouse: row.text, row.box (a tick box, hidden
 --                                            until row:SetTick is used), row.lit; onClick(row, button)
@@ -30,6 +38,43 @@ local function metrics()
   return Theme.metrics
 end
 
+-- Four 1-pixel lines around a region, as the guide window draws its frames.
+function Panel.Edges(owner, layer, color, inset, alpha, around)
+  around = around or owner
+  inset = inset or 0
+  local list = {}
+  for _, side in ipairs({ { "TOPLEFT", "TOPRIGHT", true }, { "BOTTOMLEFT", "BOTTOMRIGHT", true },
+      { "TOPLEFT", "BOTTOMLEFT", false }, { "TOPRIGHT", "BOTTOMRIGHT", false } }) do
+    local edge = owner:CreateTexture(nil, layer)
+    Theme.Paint(edge, color, alpha)
+    local x1 = (side[1]:find("LEFT") and inset) or -inset
+    local y1 = (side[1]:find("TOP") and -inset) or inset
+    local x2 = (side[2]:find("LEFT") and inset) or -inset
+    local y2 = (side[2]:find("TOP") and -inset) or inset
+    edge:SetPoint(side[1], around, side[1], x1, y1)
+    edge:SetPoint(side[2], around, side[2], x2, y2)
+    if side[3] then edge:SetHeight(1) else edge:SetWidth(1) end
+    list[#list + 1] = edge
+  end
+  return list
+end
+
+function Panel.Border(frame, color)
+  return {
+    outline = Panel.Edges(frame, "BORDER", "ink", -1),
+    border = Panel.Edges(frame, "BORDER", color or Theme.Border(), 0),
+  }
+end
+
+function Panel.Sheen(owner, alpha)
+  local tex = owner:CreateTexture(nil, "BORDER")
+  local path = Theme.Texture("sheen")
+  if path then tex:SetTexture(path) end
+  Theme.Tint(tex, "paper", alpha or 0.07)
+  tex:SetAllPoints(owner)
+  return tex
+end
+
 function Panel.New(width)
   local frame = CreateFrame("Frame", nil, UIParent)
   frame:SetFrameStrata("DIALOG")
@@ -45,6 +90,7 @@ function Panel.New(width)
   local bay = frame:CreateTexture(nil, "BACKGROUND")
   Theme.Paint(bay, "bay", metrics().alpha)
   bay:SetAllPoints(frame)
+  frame.edges = Panel.Border(frame)
   frame:Hide()
   return frame
 end
@@ -70,13 +116,17 @@ function Panel.Row(parent, onClick)
   local row = CreateFrame("Frame", nil, parent)
   row:SetSize(parent:GetWidth() - 2 * m.pad, Theme.sizes.body + 2 * m.gap)
   row:EnableMouse(true)
+  -- Under the mouse: the lamp, faint, behind the row.
   row.glow = row:CreateTexture(nil, "BACKGROUND")
-  Theme.Paint(row.glow, "strip")
+  Theme.Paint(row.glow, "lamp", 0.16)
   row.glow:SetAllPoints(row)
+  -- The tick box: a well inside a 1-pixel line, filled with the lamp when ticked.
   row.box = row:CreateTexture(nil, "ARTWORK")
   row.box:SetSize(Theme.sizes.body - 2, Theme.sizes.body - 2)
   row.box:SetPoint("LEFT", row, "LEFT", m.gap, 0)
   row.box:Hide()
+  row.boxEdges = Panel.Edges(row, "ARTWORK", "track", 0, nil, row.box)
+  for _, edge in ipairs(row.boxEdges) do edge:Hide() end
   row.text = Panel.Text(row, "body", "paper")
   light(row, false)
   row:SetScript("OnEnter", function(self) light(self, true) end)
@@ -88,16 +138,24 @@ function Panel.Row(parent, onClick)
   return row
 end
 
--- A tick box: nil hides it, true or false shows it ticked (the lamp's color) or empty (the track's).
+-- A tick box: nil hides it, true or false shows it ticked (the lamp inside a lamp line) or empty (a well inside a
+-- track line).
 local function setTick(row, tick)
   row.tick = tick
+  local edges = row.boxEdges or {}
   if tick == nil then
     row.box:Hide()
+    for _, edge in ipairs(edges) do edge:Hide() end
     return
   end
-  Theme.Paint(row.box, tick and "lamp" or "track")
+  Theme.Paint(row.box, tick and "lamp" or "well")
   row.box:Show()
+  for _, edge in ipairs(edges) do
+    Theme.Paint(edge, tick and "lamp" or "track")
+    edge:Show()
+  end
 end
+Panel.Tick = setTick
 
 -- Stacks blocks from the top of a frame down, each as tall as its text, and sets the frame's height at the end.
 function Panel.Layout(frame)
@@ -196,7 +254,7 @@ function Panel.ScrollList(parent, opts)
   bar:SetPoint("BOTTOMRIGHT", scroll, "BOTTOMRIGHT", 0, 0)
   bar:EnableMouse(true)
   local track = bar:CreateTexture(nil, "BACKGROUND")
-  Theme.Paint(track, "track")
+  Theme.Paint(track, "well")
   track:SetAllPoints(bar)
   local thumb = CreateFrame("Frame", nil, bar)
   thumb:SetWidth(BAR_WIDTH)
@@ -205,7 +263,9 @@ function Panel.ScrollList(parent, opts)
   thumb:EnableMouse(true)
   thumb:RegisterForDrag("LeftButton")
   local fill = thumb:CreateTexture(nil, "ARTWORK")
-  Theme.Paint(fill, "faint")
+  local glossy = Theme.Texture("bar")
+  if glossy then fill:SetTexture(glossy) end
+  Theme.Tint(fill, "faint")
   fill:SetAllPoints(thumb)
   bar:Hide()
   list.frame, list.child, list.bar, list.thumb = scroll, child, bar, thumb

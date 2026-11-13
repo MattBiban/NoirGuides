@@ -39,6 +39,9 @@ Window.MIN_LIST = 60        -- the least height of the step list
 Window.MIN_WIDTH = 200
 Window.MAX_WIDTH = 600
 Window.NUMBER_WIDTH = 24    -- the step number's column in the list
+Window.CARD_ALPHA = 0.94    -- a card's plate: nearly opaque, so its words read over any panel opacity
+Window.CURRENT_ROW_ALPHA = 0.16 -- the accent tint behind the current step's row in the list
+Window.STEP_LABEL = "Step "
 Window.EMPTY_TITLE = "Choose a section"
 Window.COMPLETE_TEXT = "You have reached the end of the route."
 Window.TICK_TIP = "Tick to treat this line as done"
@@ -98,6 +101,13 @@ local function large()
   return option("fontSize") == "large"
 end
 
+-- The panel's opacity, the player's "backgroundAlpha" (DESIGN.md, Measures, alpha, until it is set).
+local function backgroundAlpha()
+  local value = option("backgroundAlpha")
+  if type(value) ~= "number" then return Theme.metrics.alpha end
+  return value
+end
+
 local function newText(parent, role, color, justify)
   local fs = parent:CreateFontString(nil, "OVERLAY")
   Theme.Font(fs, role, large())
@@ -114,11 +124,11 @@ local function setText(fs, text)
   return fs:GetStringHeight() or 0
 end
 
-local function texture(parent, layer, name, color)
+local function texture(parent, layer, name, color, alpha)
   local tex = parent:CreateTexture(nil, layer)
   local path = Theme.Texture(name)
   if path then tex:SetTexture(path) end
-  Theme.Tint(tex, color)
+  Theme.Tint(tex, color, alpha)
   return tex
 end
 
@@ -197,7 +207,7 @@ local function cardModel(card)
   local Text, Lines = Noir.Text, Noir.Lines
   local step = card.step
   local out = { kind = card.kind, index = card.index, stepId = step.id, badge = Text.StepTitle(step), text = step.text,
-    lines = {} }
+    number = step.n, lines = {} }
   local kinds = {}
   for i = 1, #card.lines do
     local l = card.lines[i]
@@ -387,6 +397,34 @@ local function forwardDrag(child)
   end)
 end
 
+-- Four 1-pixel edges around a region (inset 0) or just outside it (inset -1), painted with a color of the theme.
+-- The textures belong to owner and are anchored to around (owner itself when not given).
+local function edges(owner, layer, color, inset, alpha, around)
+  around = around or owner
+  local list = {}
+  for _, side in ipairs({ { "TOPLEFT", "TOPRIGHT", true }, { "BOTTOMLEFT", "BOTTOMRIGHT", true },
+      { "TOPLEFT", "BOTTOMLEFT", false }, { "TOPRIGHT", "BOTTOMRIGHT", false } }) do
+    local edge = owner:CreateTexture(nil, layer)
+    Theme.Paint(edge, color, alpha)
+    local x1 = (side[1]:find("LEFT") and inset) or -inset
+    local y1 = (side[1]:find("TOP") and -inset) or inset
+    local x2 = (side[2]:find("LEFT") and inset) or -inset
+    local y2 = (side[2]:find("TOP") and -inset) or inset
+    edge:SetPoint(side[1], around, side[1], x1, y1)
+    edge:SetPoint(side[2], around, side[2], x2, y2)
+    if side[3] then edge:SetHeight(1) else edge:SetWidth(1) end
+    list[#list + 1] = edge
+  end
+  return list
+end
+
+-- The light on a plate: the sheen texture, white at a low alpha, over the top of the region.
+local function sheen(owner, alpha)
+  local tex = texture(owner, "BORDER", "sheen", "paper", alpha or 0.07)
+  tex:SetAllPoints(owner)
+  return tex
+end
+
 local function newLineRow(card)
   local m = metrics()
   local row = CreateFrame("Frame", nil, card)
@@ -430,15 +468,19 @@ local function newCard()
   card:SetScript("OnMouseUp", function(_, button)
     if button == "RightButton" then openMenu("OpenMain", frame) end
   end)
+  -- a plate: the strip color, the light on its top, a 1-pixel frame, and a top edge in the card's color
   card.bg = card:CreateTexture(nil, "BACKGROUND")
-  Theme.Paint(card.bg, "strip")
+  Theme.Paint(card.bg, "strip", Window.CARD_ALPHA)
   card.bg:SetAllPoints(card)
-  card.bar = card:CreateTexture(nil, "BORDER")
+  card.sheen = sheen(card)
+  card.frame = edges(card, "ARTWORK", "track", 0)
+  card.bar = card:CreateTexture(nil, "OVERLAY")
   Theme.Paint(card.bar, "lamp")
-  card.bar:SetWidth(m.lamp)
+  card.bar:SetHeight(m.lamp)
   card.bar:SetPoint("TOPLEFT", card, "TOPLEFT", 0, 0)
-  card.bar:SetPoint("BOTTOMLEFT", card, "BOTTOMLEFT", 0, 0)
+  card.bar:SetPoint("TOPRIGHT", card, "TOPRIGHT", 0, 0)
   card.badge = newText(card, "kicker", "lamp")
+  card.number = newText(card, "small", "faint", "RIGHT")
   card.text = newText(card, "body", "dim")
   card.lines = {}
   return card
@@ -457,7 +499,7 @@ local function newRow()
   Theme.Paint(row.bar, "lamp")
   row.bar:SetPoint("TOPLEFT", row, "TOPLEFT", 0, 0)
   row.bar:SetPoint("BOTTOMLEFT", row, "BOTTOMLEFT", 0, 0)
-  row.bar:SetWidth(3)
+  row.bar:SetWidth(1)
   row.bar:Hide()
   row.number = newText(row, "small", "faint", "RIGHT")
   row.icons, row.texts = {}, {}
@@ -488,7 +530,7 @@ local function newRow()
   end)
   row:SetScript("OnLeave", function(self)
     self.lit = false
-    self.glow:Hide()
+    if not (self.model and self.model.current) then self.glow:Hide() end
     self:SetAlpha((self.model and self.model.dim) and 0.5 or 1)
     hideTooltip()
   end)
@@ -504,18 +546,12 @@ local function create()
   frame:SetSize(m.width, m.header + m.list + m.footer)
   frame:SetScale(option("windowScale") or 1)
   frame:EnableMouse(true)
-  local bay = frame:CreateTexture(nil, "BACKGROUND")
-  Theme.Paint(bay, "bay", m.alpha)
-  bay:SetAllPoints(frame)
-  -- a one-pixel border, so the window reads as one panel against the world; in the class color with that accent
-  for _, side in ipairs({ { "TOPLEFT", "TOPRIGHT", true }, { "BOTTOMLEFT", "BOTTOMRIGHT", true },
-      { "TOPLEFT", "BOTTOMLEFT", false }, { "TOPRIGHT", "BOTTOMRIGHT", false } }) do
-    local edge = frame:CreateTexture(nil, "BORDER")
-    Theme.Paint(edge, Theme.Border())
-    edge:SetPoint(side[1], frame, side[1], 0, 0)
-    edge:SetPoint(side[2], frame, side[2], 0, 0)
-    if side[3] then edge:SetHeight(1) else edge:SetWidth(1) end
-  end
+  parts.bay = frame:CreateTexture(nil, "BACKGROUND")
+  Theme.Paint(parts.bay, "bay", backgroundAlpha())
+  parts.bay:SetAllPoints(frame)
+  -- a double hairline, as the game's tooltips and ElvUI draw it: black just outside, the accent just inside
+  parts.outline = edges(frame, "BORDER", "ink", -1)
+  parts.border = edges(frame, "BORDER", Theme.Border(), 0)
 
   header = CreateFrame("Frame", nil, frame)
   header:SetPoint("TOPLEFT", frame, "TOPLEFT", 0, 0)
@@ -526,11 +562,17 @@ local function create()
   local band = header:CreateTexture(nil, "BACKGROUND")
   Theme.Paint(band, "strip")
   band:SetAllPoints(header)
-  local rule = header:CreateTexture(nil, "BORDER")
-  Theme.Paint(rule, "lamp", 0.8)
-  rule:SetPoint("BOTTOMLEFT", header, "BOTTOMLEFT", 0, 0)
-  rule:SetPoint("BOTTOMRIGHT", header, "BOTTOMRIGHT", 0, 0)
+  sheen(header)
+  local rule = header:CreateTexture(nil, "ARTWORK")
+  Theme.Paint(rule, "ink")
+  rule:SetPoint("BOTTOMLEFT", header, "BOTTOMLEFT", 1, 1)
+  rule:SetPoint("BOTTOMRIGHT", header, "BOTTOMRIGHT", -1, 1)
   rule:SetHeight(1)
+  local glow = header:CreateTexture(nil, "ARTWORK")
+  Theme.Paint(glow, "lamp", 0.7)
+  glow:SetPoint("TOPLEFT", rule, "BOTTOMLEFT", 0, 0)
+  glow:SetPoint("TOPRIGHT", rule, "BOTTOMRIGHT", 0, 0)
+  glow:SetHeight(1)
   forwardDrag(header)
   header:SetScript("OnMouseUp", function(_, button)
     if button == "RightButton" then openMenu("OpenMain", frame) end
@@ -538,7 +580,7 @@ local function create()
   parts.title = newText(header, "name", "paper")
   parts.title:SetPoint("TOPLEFT", header, "TOPLEFT", m.pad, -m.gap)
   if parts.title.SetMaxLines then parts.title:SetMaxLines(1) end
-  parts.subtitle = newText(header, "small", "dim")
+  parts.subtitle = newText(header, "small", "gold")
   parts.subtitle:SetPoint("BOTTOMLEFT", header, "BOTTOMLEFT", m.pad, m.gap)
   parts.range = newText(header, "small", "dim", "RIGHT")
   parts.range:SetPoint("BOTTOMRIGHT", header, "BOTTOMRIGHT", -m.pad, m.gap)
@@ -564,6 +606,11 @@ local function create()
   local footBand = footer:CreateTexture(nil, "BACKGROUND")
   Theme.Paint(footBand, "strip", 0.7)
   footBand:SetAllPoints(footer)
+  local footRule = footer:CreateTexture(nil, "BORDER")
+  Theme.Paint(footRule, "ink")
+  footRule:SetPoint("TOPLEFT", footer, "TOPLEFT", 1, 0)
+  footRule:SetPoint("TOPRIGHT", footer, "TOPRIGHT", -1, 0)
+  footRule:SetHeight(1)
   forwardDrag(footer)
   footer:SetScript("OnMouseUp", function(_, button)
     if button == "RightButton" then openMenu("OpenMain", frame) end
@@ -573,12 +620,12 @@ local function create()
   parts.level = newText(footer, "small", "dim", "CENTER")
   parts.level:SetPoint("TOP", footer, "TOP", 0, -m.gap)
   parts.track = footer:CreateTexture(nil, "BORDER")
-  Theme.Paint(parts.track, "track")
+  Theme.Paint(parts.track, "well")
   parts.track:SetHeight(m.rail)
   parts.track:SetPoint("BOTTOMLEFT", footer, "BOTTOMLEFT", m.pad, m.gap)
   parts.track:SetPoint("BOTTOMRIGHT", footer, "BOTTOMRIGHT", -m.pad, m.gap)
-  parts.fill = footer:CreateTexture(nil, "ARTWORK")
-  Theme.Paint(parts.fill, "lamp")
+  parts.trackEdge = edges(footer, "BACKGROUND", "ink", -1, nil, parts.track)
+  parts.fill = texture(footer, "ARTWORK", "bar", "lamp")
   parts.fill:SetHeight(m.rail)
   parts.fill:SetPoint("BOTTOMLEFT", footer, "BOTTOMLEFT", m.pad, m.gap)
 
@@ -643,11 +690,18 @@ local function layoutCard(card, c, width)
   card.model = c
   card:SetWidth(width)
   local y = m.gap * 2
-  local left = m.lamp + m.pad
+  local left = m.pad
   local inner = width - left - m.pad
+  -- "Step N" at the top right, unless the badge already is the number
+  local number = ""
+  if c.number and tostring(c.badge or "") ~= tostring(c.number) then number = Window.STEP_LABEL .. tostring(c.number) end
+  card.number:ClearAllPoints()
+  card.number:SetPoint("TOPRIGHT", card, "TOPRIGHT", -m.pad, -y)
+  setText(card.number, number)
+  local numberWidth = (number ~= "" and card.number.GetStringWidth and card.number:GetStringWidth() or 0)
   card.badge:ClearAllPoints()
   card.badge:SetPoint("TOPLEFT", card, "TOPLEFT", left, -y)
-  card.badge:SetWidth(inner)
+  card.badge:SetWidth(math.max(1, inner - (numberWidth > 0 and numberWidth + m.gap or 0)))
   y = y + setText(card.badge, string.upper(tostring(c.badge or ""))) + m.gap
   if c.text and c.text ~= "" then
     card.text:ClearAllPoints()
@@ -688,7 +742,9 @@ local function layoutCard(card, c, width)
       row.text:SetPoint("TOPLEFT", row, "TOPLEFT", textLeft, 0)
       row.text:SetWidth(math.max(1, inner - textLeft))
       row.text:SetTextColor(Theme.Color(l.done and "dim" or "paper"))
-      local h = math.max(m.tick, setText(row.text, colored(l.text, l.spans)))
+      -- a done line is dim throughout: its named things lose their colors too
+      local words = l.done and escape(l.text or "") or colored(l.text, l.spans)
+      local h = math.max(m.tick, setText(row.text, words))
       row:SetHeight(h)
       row:Show()
       y = y + h + m.gap
@@ -782,7 +838,13 @@ local function placeCards()
         card:SetPoint("TOPLEFT", cardsBox, "TOPLEFT", x, -y)
       end
       c.slide = x
-      Theme.Paint(card.bar, barColor(c, c.stepId == currentId))
+      local edge = barColor(c, c.stepId == currentId)
+      Theme.Paint(card.bar, edge)
+      -- the current card's frame takes the accent; the others keep the plain frame
+      for _, line in ipairs(card.frame) do
+        if c.kind == "current" then Theme.Paint(line, "lamp", 0.55) else Theme.Paint(line, "track") end
+      end
+      card.badge:SetTextColor(Theme.Color(c.kind == "current" and "lamp" or (c.kind == "info" and "ok" or "faint")))
       card:Show()
       y = y + heights[k] + m.gap
     end
@@ -862,8 +924,9 @@ local function layoutRows()
       row:SetHeight(height)
       row.top, row.height = y, height
       if r.current then currentTop = y end
-      -- the current step stands out: a lit background and the lamp bar on its left edge
+      -- the current step stands out: an accent-tinted background and a 1-pixel accent line on its left edge
       if r.current then row.bar:Show() else row.bar:Hide() end
+      if r.current then Theme.Paint(row.glow, "lamp", Window.CURRENT_ROW_ALPHA) else Theme.Paint(row.glow, "strip") end
       if row.lit or r.current then
         row.glow:Show()
         row:SetAlpha(1)
@@ -1169,6 +1232,7 @@ Noir.On("NOIR_INIT", function()
 end)
 Noir.On("NOIR_PROFILE", function()
   if not frame then return end
+  Theme.Paint(parts.bay, "bay", backgroundAlpha())
   loadSize()
   applyScale()
   Window.Refresh()
@@ -1176,7 +1240,9 @@ Noir.On("NOIR_PROFILE", function()
 end)
 Noir.On("NOIR_OPTION", function(_, key)
   if not frame then return end
-  if key == "windowScale" then
+  if key == "backgroundAlpha" then
+    Theme.Paint(parts.bay, "bay", backgroundAlpha())
+  elseif key == "windowScale" then
     applyScale()
   elseif key == "windowHidden" then
     applyHidden()

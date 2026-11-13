@@ -8,6 +8,9 @@
 // the circle that fits the square, because the addon turns the arrow by its texture coordinates and whatever
 // lies outside that circle would be cut off. Edges are smoothed by sampling each pixel 8 by 8 times.
 //
+// Two textures are gradients instead of shapes (gradient: true): they fill the whole square, are never turned, and
+// give their alpha by height (alphaAt(y), y from 0 at the top to 1), the same on every column.
+//
 // The format is the plainest one the game reads: uncompressed 32-bit TGA, sides a power of two, rows stored from
 // the bottom up. Nothing here depends on a library, the clock or the machine: the same source gives the same
 // bytes, and tools/test/textures.test.js fails when the files on disk are not those bytes.
@@ -99,6 +102,19 @@ const TEXTURES = {
     size: 32,
     inside: any(box(0.24, 0.28, 0.76, 0.36), box(0.24, 0.46, 0.76, 0.54), box(0.24, 0.64, 0.76, 0.72)),
   },
+  // The light falling on a plate (a card, the header): full at the top edge, gone by two thirds down. Drawn white at
+  // a low alpha over the plate's own color.
+  sheen: {
+    size: 32,
+    gradient: true,
+    alphaAt: (y) => (y < 0.04 ? 1 : y >= 0.66 ? 0 : (1 - (y - 0.04) / 0.62) ** 2),
+  },
+  // A glossy status bar fill, tinted with the accent: a bright top edge, a lighter upper half, a deeper lower half.
+  bar: {
+    size: 32,
+    gradient: true,
+    alphaAt: (y) => (y < 0.1 ? 1 : y < 0.5 ? 0.92 - (y - 0.1) * 0.2 : 0.7 - (y - 0.5) * 0.16),
+  },
   // The kind icons of a step's lines (spec 4.2), each a plain symbol of what the line asks for.
   "icon-accept": { size: 32, inside: any(box(0.44, 0.18, 0.56, 0.6), disc(0.5, 0.75, 0.07)) }, // an exclamation mark
   "icon-turnin": { // a question mark
@@ -174,6 +190,13 @@ function render(name) {
   const { size, inside } = texture;
   const mirror = texture.mirror !== false;
   const alpha = new Uint8Array(size * size);
+  if (texture.gradient) {
+    for (let py = 0; py < size; py++) {
+      const value = Math.round(Math.max(0, Math.min(1, texture.alphaAt((py + 0.5) / size))) * 255);
+      for (let px = 0; px < size; px++) alpha[py * size + px] = value;
+    }
+    return { size, alpha };
+  }
   for (let py = 0; py < size; py++) {
     for (let px = 0; px < (mirror ? size / 2 : size); px++) {
       let covered = 0;

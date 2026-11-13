@@ -28,7 +28,7 @@ const ICONS = ["accept", "turnin", "objective", "kill", "item", "vendor", "train
   "hearth", "bind", "goto", "xp", "error", "note", "timer"];
 
 test("the generator draws the textures the interface uses", () => {
-  const expected = ["arrow", "pin", "pin-active", "box", "tick", "grip", "menu", ...ICONS.map((icon) => `icon-${icon}`)];
+  const expected = ["arrow", "pin", "pin-active", "box", "tick", "grip", "menu", "sheen", "bar", ...ICONS.map((icon) => `icon-${icon}`)];
   assert.deepStrictEqual(names, expected.sort());
 });
 
@@ -95,6 +95,8 @@ test("every texture is an uncompressed 32-bit TGA with power-of-two sides, which
   }
 });
 
+const isGradient = (file) => Boolean(TEXTURES[file.replace(/.tga$/, "")].gradient);
+
 test("every texture is white with the shape in its alpha, so the theme's colors tint it", () => {
   for (const [file, buffer] of Object.entries(generate())) {
     const image = decode(buffer);
@@ -108,12 +110,13 @@ test("every texture is white with the shape in its alpha, so the theme's colors 
       }
     }
     assert.ok(opaque > 0, `${file} has solid pixels`);
-    assert.ok(clear > 0, `${file} has clear pixels`);
+    if (!isGradient(file)) assert.ok(clear > 0, `${file} has clear pixels`);
   }
 });
 
 test("every shape lies inside the circle that fits the texture, so it can be turned without being cut", () => {
   for (const [file, buffer] of Object.entries(generate())) {
+    if (isGradient(file)) continue; // gradients fill their square and are never turned
     const image = decode(buffer);
     const half = image.width / 2;
     for (let y = 0; y < image.height; y++) {
@@ -177,4 +180,23 @@ test("the design document lists each texture with the size the generator draws",
 test("package.json has the textures script", () => {
   const scripts = JSON.parse(fs.readFileSync(path.join(ROOT, "tools", "package.json"), "utf8")).scripts;
   assert.strictEqual(scripts.textures, "node gen_textures.js");
+});
+
+test("the sheen fades from the top edge to nothing, and the bar is glossy: brightest on top, deeper below", () => {
+  const sheen = decode(generate()["sheen.tga"]);
+  const bar = decode(generate()["bar.tga"]);
+  const column = (image) => Array.from({ length: image.height }, (_, y) => image.alpha(3, y));
+  const s = column(sheen);
+  assert.ok(s[0] > 200, "the sheen is strong at the top");
+  assert.strictEqual(s[s.length - 1], 0, "and gone at the bottom");
+  for (let y = 1; y < s.length; y++) assert.ok(s[y] <= s[y - 1], "never brighter lower down");
+  const b = column(bar);
+  assert.strictEqual(b[0], 255, "a bright top edge");
+  assert.ok(b[8] > b[24], "the upper half lighter than the lower");
+  assert.ok(b[b.length - 1] > 120, "solid enough to read as a fill");
+  for (const image of [sheen, bar]) {
+    for (let y = 0; y < image.height; y++) {
+      for (let x = 1; x < image.width; x++) assert.strictEqual(image.alpha(x, y), image.alpha(0, y), "the same on every column");
+    }
+  }
 });

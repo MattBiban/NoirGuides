@@ -237,8 +237,11 @@ local function pad()
   return Theme.metrics.gap
 end
 
+-- The row's panel and its double hairline (ink outside, the track inside) show and hide together.
 local function paintBackground(bar)
-  bar.bg:SetShown(option("buttonBackground") ~= false)
+  local shown = option("buttonBackground") ~= false
+  bar.bg:SetShown(shown)
+  for _, edge in ipairs(bar.edges or {}) do edge:SetShown(shown) end
 end
 
 local function newBar(key)
@@ -250,6 +253,11 @@ local function newBar(key)
   bg:SetAllPoints(bar)
   Theme.Paint(bg, "bay", Theme.metrics.alpha)
   bar.bg = bg
+  local frame = Noir.Panel.Border(bar, "track")
+  bar.edges = {}
+  for _, list in ipairs({ frame.outline, frame.border }) do
+    for _, edge in ipairs(list) do bar.edges[#bar.edges + 1] = edge end
+  end
   paintBackground(bar)
   bar:SetScale(option("buttonScale") or 1)
   bar:Hide()
@@ -299,6 +307,8 @@ local function newButton(bar, name)
   icon:SetAllPoints(button)
   icon:SetTexture(QUESTION_MARK)
   button.icon = icon
+  -- A 1-pixel ink line just outside the icon, so it reads with or without the row's panel.
+  button.edges = Noir.Panel.Edges(button, "BORDER", "ink", -1)
   forwardDrag(button, bar)
   button:Hide()
   return button

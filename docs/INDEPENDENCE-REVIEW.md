@@ -143,6 +143,8 @@ Verdicts: **Clean** (nothing copied: no lead, or each lead is a call the client 
 | `NoirGuides/Textures/icon-vendor.tga` | Clean | binary | Drawn by `tools/gen_textures.js` (task E5, guide window v2) from shapes written for this repository; the fork was not opened. |
 | `NoirGuides/Textures/icon-xp.tga` | Clean | binary | Drawn by `tools/gen_textures.js` (task E5, guide window v2) from shapes written for this repository; the fork was not opened. |
 | `NoirGuides/Textures/menu.tga` | Clean | binary | Drawn by `tools/gen_textures.js` (task E5, guide window v2) from shapes written for this repository; the fork was not opened. |
+| `NoirGuides/Textures/sheen.tga` | Clean | binary | Drawn by `tools/gen_textures.js` (0.3 tooltip look) from a gradient written for this repository: the light on a plate; no other addon was opened. |
+| `NoirGuides/Textures/bar.tga` | Clean | binary | Drawn by `tools/gen_textures.js` (0.3 tooltip look) from a gradient written for this repository: a glossy bar fill; no other addon was opened. |
 | `NoirGuides/Textures/tick.tga` | Clean | binary | Drawn by `tools/gen_textures.js` (task E5, guide window v2) from shapes written for this repository; the fork was not opened. |
 | `NoirGuides/UI/Arrow.lua` | Clean | 1 / 17 / 0 | `frame = CreateFrame("Frame", nil, UIParent)` and `local width, height if C_Map.GetMapWorldSize then width, height = C_Map.GetMapWorldSize(` (a feature check of the one call that gives a map's size; HereBeDragons does the same). |
 | `NoirGuides/UI/Buttons.lua` | Clean | not compared | Skeleton until task E9. Written in the clean-room rebuild (plan task E1); `compare_fork.js` is not run under the clean-room rule. |
@@ -242,6 +244,8 @@ Verdicts are the two of the X3 section: **Clean** (written here; no copied struc
 | `NoirGuides/Textures/icon-vendor.tga` | Clean | Drawn by `tools/gen_textures.js` in E5 from shapes written for this repository. |
 | `NoirGuides/Textures/icon-xp.tga` | Clean | Drawn by `tools/gen_textures.js` in E5 from shapes written for this repository. |
 | `NoirGuides/Textures/menu.tga` | Clean | Drawn by `tools/gen_textures.js` in E5 from shapes written for this repository. |
+| `NoirGuides/Textures/sheen.tga` | Clean | Drawn by `tools/gen_textures.js` in 0.3 from a gradient written for this repository. |
+| `NoirGuides/Textures/bar.tga` | Clean | Drawn by `tools/gen_textures.js` in 0.3 from a gradient written for this repository. |
 | `NoirGuides/Textures/pin-active.tga` | Clean | Drawn by `tools/gen_textures.js` in 0.1 (X3: its hash matches no fork file); unchanged. |
 | `NoirGuides/Textures/pin.tga` | Clean | Drawn by `tools/gen_textures.js` in 0.1 (X3: its hash matches no fork file); unchanged. |
 | `NoirGuides/Textures/tick.tga` | Clean | Drawn by `tools/gen_textures.js` in E5 from shapes written for this repository. |

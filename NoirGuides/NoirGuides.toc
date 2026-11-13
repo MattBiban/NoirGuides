@@ -2,7 +2,7 @@
 ## Title: Noir Guides
 ## Notes: Leveling routes for WoW Forever, generated from quest data and checked step by step.
 ## Author: Matthew Biban
-## Version: 0.2.2
+## Version: 0.3.0
 ## X-License: GPL-3.0-only
 ## SavedVariables: NoirGuidesDB
 ## SavedVariablesPerCharacter: NoirGuidesCharDB

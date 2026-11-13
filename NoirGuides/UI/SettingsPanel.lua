@@ -24,8 +24,8 @@
 -- quest cleanup", "Report a problem"; Guide window "Reset item buttons", "Preview window positions"; Navigation
 -- "Reset arrow"; Route "Profession to level with the route" (Professions.SetPlanned); Advanced "Find my place
 -- again"; Profiles the profile in use, a name box, new, copy, delete, reset, "Use as default for new characters"
--- and "Reset guide progress for this character". Asked first with Panel.Confirm: fontSize and accent (then ReloadUI()),
--- outlevel (then the section is loaded again), deleting or resetting a profile and resetting guide progress.
+-- and "Reset guide progress for this character". Asked first with Panel.Confirm: fontSize and accent (shown as
+-- "Theme", its choices by THEME_LABELS; then ReloadUI()), outlevel (then the section is loaded again), deleting or resetting a profile and resetting guide progress.
 -- "Show Noir Guides" calls Screen.SetShown, "Hide in raids" sets hideInRaid (Screen hides and shows), "Preview
 -- window positions" turns Screen.Preview on and off.
 --
@@ -45,7 +45,7 @@ SettingsPanel.WIDTH = 440      -- the free window, and the width the controls ar
 SettingsPanel.TAB_WIDTH = 110
 
 SettingsPanel.FONT_QUESTION = "Changing the font size reloads the interface. Change it and reload now?"
-SettingsPanel.ACCENT_QUESTION = "Changing the accent color reloads the interface. Change it and reload now?"
+SettingsPanel.ACCENT_QUESTION = "Changing the theme reloads the interface. Change it and reload now?"
 SettingsPanel.OUTLEVEL_QUESTION = "Changing this loads the section again, and steps may pass or come back. Go on?"
 SettingsPanel.RESET_QUESTION = "Put every setting and window place of the profile %s back to its default?"
 SettingsPanel.DELETE_QUESTION = "Delete the profile %s? Its settings and window places are lost."
@@ -219,14 +219,26 @@ local function profileItems()
   return items
 end
 
--- The choices of an option that is only applied when the interface loads: asked first, then a reload.
-local function reloadItems(key, question)
+-- The readable names of the "accent" choices (the stored value stays the lowercase key).
+SettingsPanel.THEME_LABELS = {
+  class = "Class color (automatic)", warrior = "Warrior", paladin = "Paladin", hunter = "Hunter", rogue = "Rogue",
+  priest = "Priest", shaman = "Shaman", mage = "Mage", warlock = "Warlock", druid = "Druid", gold = "Gold",
+  black = "Black",
+}
+
+local function themeLabel(value)
+  return SettingsPanel.THEME_LABELS[value] or tostring(value)
+end
+
+-- The choices of an option that is only applied when the interface loads: asked first, then a reload. labels: an
+-- optional value -> words table for the menu rows.
+local function reloadItems(key, question, labels)
   return function()
     local items = {}
     for _, choice in ipairs(Noir.Options.RANGES[key].choices) do
       local value = choice
       items[#items + 1] = {
-        text = value, checked = function() return option(key) == value end,
+        text = labels and labels[value] or value, checked = function() return option(key) == value end,
         on = function()
           if option(key) == value then return end
           Panel.Confirm(question, function()
@@ -239,7 +251,7 @@ local function reloadItems(key, question)
   end
 end
 local fontItems = reloadItems("fontSize", SettingsPanel.FONT_QUESTION)
-local accentItems = reloadItems("accent", SettingsPanel.ACCENT_QUESTION)
+local accentItems = reloadItems("accent", SettingsPanel.ACCENT_QUESTION, SettingsPanel.THEME_LABELS)
 
 local function reloadSection()
   local Guide, Progress = Noir.Guide, Noir.Progress
@@ -283,7 +295,9 @@ SettingsPanel.CONTROLS = {
     tick("cardsBelow", "Current steps below the window"),
     slider("windowScale", "Window scale", 0.05, "percent"),
     { key = "fontSize", kind = "choice", text = "Font size", items = fontItems, value = function() return option("fontSize") end },
-    { key = "accent", kind = "choice", text = "Accent color", items = accentItems, value = function() return option("accent") end },
+    { key = "accent", kind = "choice", text = "Theme", items = accentItems, value = function() return option("accent") end,
+      label = themeLabel },
+    slider("backgroundAlpha", "Background opacity", 0.05, "percent"),
     tick("stepList", "Show the step list"),
     tick("hideFinished", "Hide finished steps"),
     tick("otherSections", "Show sections for other races and classes"),
@@ -447,11 +461,14 @@ local function buildSlider(control)
   row.right = Panel.Text(row, "body", "dim", "RIGHT")
   local track = CreateFrame("Frame", nil, row)
   track:SetHeight(4)
+  -- a well with a black hairline, and a glossy accent fill, as the guide window draws its rail
   local back = track:CreateTexture(nil, "BACKGROUND")
-  Theme.Paint(back, "track")
+  Theme.Paint(back, "well")
   back:SetAllPoints(track)
+  Panel.Edges(track, "BACKGROUND", "ink", -1)
   control.fill = track:CreateTexture(nil, "ARTWORK")
-  Theme.Paint(control.fill, "lamp")
+  control.fill:SetTexture(Theme.Texture("bar"))
+  Theme.Tint(control.fill, "lamp")
   control.fill:SetPoint("TOPLEFT", track, "TOPLEFT", 0, 0)
   control.fill:SetPoint("BOTTOMLEFT", track, "BOTTOMLEFT", 0, 0)
   control.thumb = track:CreateTexture(nil, "OVERLAY")
@@ -624,7 +641,8 @@ local function drawControl(control, y, width)
     row.right:SetPoint("TOPRIGHT", row, "TOPRIGHT", -m.gap, -m.gap)
     row.right:SetWidth(rightWidth)
     if row.right.SetWordWrap then row.right:SetWordWrap(false) end
-    Theme.SetText(row.right, tostring(value) .. "  >")
+    local words = def.label and def.label(value) or tostring(value)
+    Theme.SetText(row.right, words .. "  >")
     row.right:Show()
   elseif def.kind == "slider" then
     local valueWidth = 50
