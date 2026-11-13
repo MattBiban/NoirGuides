@@ -91,6 +91,8 @@ case("R7", "every line kind with its fields", function(r)
     { kind = "train", skill = 186, rank = 2, npc = 3175 },
     { kind = "train", class = "ROGUE", level = 4, npc = 2122 },
     { kind = "vendor", npc = 5688, buy = { item = 159, count = 5 } },
+    { kind = "selljunk", npc = 5688, at = place(85, 61.7, 52, 10) },
+    { kind = "skill", skill = 186, value = 50 },
     { kind = "use", item = 6948 },
     { kind = "target", npc = 1501, enemy = true },
     { kind = "note", text = "Stay on the road.", when = { class = "ROGUE" } },
@@ -241,6 +243,14 @@ case("R7", "requires with a name", function(r) line1(r).requires = { 363, "x" } 
 case("R7", "fly with neither end", function(r) setLine(r, { kind = "fly" }) end, A .. " line 1 fly needs from; " .. A .. " line 1 fly needs to")
 case("R7", "grind percent of 100", function(r) setLine(r, { kind = "grind", level = 5, percent = 100 }) end,
   A .. " line 1 percent must be a number from 0 to 99")
+case("R7", "selljunk without a merchant", function(r) setLine(r, { kind = "selljunk" }) end, A .. " line 1 selljunk needs npc")
+case("R7", "selljunk with a count", function(r) setLine(r, { kind = "selljunk", npc = 5688, count = 3 }) end,
+  A .. ' line 1 has the unknown key "count"')
+case("R7", "skill without value", function(r) setLine(r, { kind = "skill", skill = 186 }) end, A .. " line 1 skill needs value")
+case("R7", "skill above 1000", function(r) setLine(r, { kind = "skill", skill = 186, value = 1001 }) end,
+  A .. " line 1 value must be a whole number from 0 to 1000")
+case("R7", "skill as a name", function(r) setLine(r, { kind = "skill", skill = "Mining", value = 50 }) end,
+  A .. " line 1 skill must be a positive whole number")
 
 -- R8 ---------------------------------------------------------------------------------------------------------------
 case("R8", "a step text of 161 characters", function(r) step1(r).text = LONG end, A .. " text is longer than 160 characters")

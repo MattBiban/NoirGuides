@@ -31,9 +31,20 @@
 --   State.discoveredAt                when the "new flight path" message last arrived
 --   State.boundAt                     when the hearthstone was last bound
 --   State.levelAt[level]              when this session saw the character reach that level
+--   State.money                       the copper the character carries (GetMoney, kept up by PLAYER_MONEY)
+--   State.JunkSlots() -> { { bag, slot, item, count, price, value } }   the bag slots holding grey (quality 0) items
+--                                     that sell: price is the sell price of one (nil while the client has not
+--                                     cached the item), value = price times count (0 while unknown). Read through
+--                                     C_Container when the client has it, else the GetContainer* globals
+--   State.Junk() -> value, stacks     the grey items' total sell value in copper and how many slots hold them
+--   State.TrainingCost(class, level) -> copper or nil   what a class trainer asked at that level, remembered
+--                                     account-wide (NoirGuidesDB.trainerCosts, saved at TRAINER_SHOW: the sum of
+--                                     GetTrainerServiceCost over the available services, the highest seen kept)
+--   State.TrainerShort() -> boolean   a trainer window is open and lists an available service the money does not
+--                                     cover
 --
--- Events fired: NOIR_STATE with "level", "quests", "completed", "flights", "hearth", "professions" or "zone" when
--- that part changed; NOIR_READY once; NOIR_FLIGHT_DISCOVERED with the node ID (or nil when it could not be told).
+-- Events fired: NOIR_STATE with "level", "quests", "completed", "flights", "hearth", "professions", "zone" or
+-- "money" when that part changed; NOIR_READY once; NOIR_FLIGHT_DISCOVERED with the node ID (or nil when it could not be told).
 local Noir = Noir
 
 local State = {
@@ -48,7 +59,7 @@ local State = {
   zone = nil,
   inCombat = false,
   acceptedAt = {}, turnedInAt = {}, levelAt = {},
-  lastCast = nil, merchant = {}, trainer = {},
+  lastCast = nil, merchant = {}, trainer = {}, money = 0,
   taxiPick = nil, controlLost = nil, flightStart = nil, discoveredAt = nil, boundAt = nil,
 }
 Noir.State = State
@@ -678,6 +689,146 @@ local function windowOpened(key)
   State[key] = { npc = npcId(), opened = now() }
 end
 
+-- ---------------------------------------------------------------------------------------------------------------
+-- Money, grey items and what training costs
+-- ---------------------------------------------------------------------------------------------------------------
+
+local function readMoney()
+  local money = GetMoney and tonumber(GetMoney()) or 0
+  if money ~= State.money then
+    State.money = money
+    changed("money")
+  end
+end
+
+local BAG_FIRST, BAG_LAST = 0, 4 -- the backpack and the four bag slots
+
+-- quality, count, item, link and "no value" of a bag slot, from C_Container (a table) or the GetContainerItemInfo
+-- global (texture, count, locked, quality, readable, lootable, link, filtered, no value, item ID); nil when empty.
+local function slotInfo(bag, slot)
+  local container = C_Container
+  if container and container.GetContainerItemInfo then
+    local info = container.GetContainerItemInfo(bag, slot)
+    if type(info) ~= "table" then return nil end
+    return info.quality, info.stackCount, info.itemID, info.hyperlink, info.hasNoValue
+  end
+  if not GetContainerItemInfo then return nil end
+  local _, count, _, quality, _, _, link, _, noValue, item = GetContainerItemInfo(bag, slot)
+  if not count then return nil end
+  return quality, count, item, link, noValue
+end
+
+local function slotCount(bag)
+  local container = C_Container
+  if container and container.GetContainerNumSlots then return container.GetContainerNumSlots(bag) or 0 end
+  if GetContainerNumSlots then return GetContainerNumSlots(bag) or 0 end
+  return 0
+end
+
+function State.JunkSlots()
+  local out = {}
+  if not ((C_Container and C_Container.GetContainerItemInfo) or GetContainerItemInfo) then
+    missing("bags", "This client cannot read bag slots; grey items cannot be found.")
+    return out
+  end
+  for bag = BAG_FIRST, BAG_LAST do
+    for slot = 1, slotCount(bag) do
+      local quality, count, item, link, noValue = slotInfo(bag, slot)
+      if count and not noValue then
+        item = item or tonumber(string.match(link or "", "item:(%d+)"))
+        local infoQuality, price
+        if GetItemInfo and (item or link) then
+          infoQuality, price = select(3, GetItemInfo(item or link)), select(11, GetItemInfo(item or link))
+        end
+        -- Old clients report -1 for the quality of some slots; the item's own quality then decides.
+        if type(quality) ~= "number" or quality < 0 then quality = infoQuality end
+        if quality == 0 and price ~= 0 then
+          local known = type(price) == "number" and price > 0
+          out[#out + 1] = { bag = bag, slot = slot, item = item, count = count, price = known and price or nil,
+            value = known and price * count or 0 }
+        end
+      end
+    end
+  end
+  return out
+end
+
+function State.Junk()
+  local value, stacks = 0, 0
+  local list = State.JunkSlots()
+  for i = 1, #list do
+    value = value + list[i].value
+    stacks = stacks + 1
+  end
+  return value, stacks
+end
+
+local MAX_LEVEL = 60
+local PET_SKILL_LINES = { ["Beast Training"] = true, ["Pet Training"] = true }
+
+-- NoirGuidesDB.trainerCosts; made only when `make` (a read leaves the saved variables as they were).
+local function costs(make)
+  local db = Noir.db
+  if type(db) ~= "table" then return nil end
+  if not make then return type(db.trainerCosts) == "table" and db.trainerCosts or nil end
+  return Noir.Table(db, "trainerCosts")
+end
+
+function State.TrainingCost(class, level)
+  local all = costs()
+  local mine = all and type(class) == "string" and all[class]
+  local cost = type(mine) == "table" and mine[level]
+  if type(cost) == "number" and cost >= 0 then return cost end
+  return nil
+end
+
+-- The available services of the open trainer: their total cost, and whether one costs more than the money.
+local function services()
+  if not (GetNumTrainerServices and GetTrainerServiceInfo and GetTrainerServiceCost) then return 0, false end
+  local total, short = 0, false
+  for i = 1, GetNumTrainerServices() or 0 do
+    local _, _, kind = GetTrainerServiceInfo(i)
+    if kind == "available" then
+      local cost = tonumber((GetTrainerServiceCost(i))) or 0
+      total = total + cost
+      if cost > State.money then short = true end
+    end
+  end
+  return total, short
+end
+
+-- A class trainer: neither a profession trainer nor a pet trainer.
+local function classTrainer()
+  if IsTradeskillTrainer and IsTradeskillTrainer() then return false end
+  if GetTrainerServiceSkillLine and GetNumTrainerServices then
+    for i = 1, GetNumTrainerServices() or 0 do
+      if PET_SKILL_LINES[GetTrainerServiceSkillLine(i) or ""] then return false end
+    end
+  end
+  return true
+end
+
+-- At a class trainer: what its available services cost together, kept for the class and level when it is more than
+-- what was kept (a second visit after buying shows less, and must not lower it).
+local function rememberCost()
+  local class, level = State.class, State.level
+  if type(class) ~= "string" or not (level >= 1 and level <= MAX_LEVEL) or not classTrainer() then return end
+  local total = services()
+  if total <= 0 then return end
+  local all = costs(true)
+  if not all then return end
+  local mine = Noir.Table(all, class)
+  local before = mine[level]
+  if type(before) ~= "number" or total > before then mine[level] = total end
+end
+
+function State.TrainerShort()
+  local t = State.trainer
+  if not (t and t.opened and not t.closed) then return false end
+  local _, short = services()
+  return short
+end
+
 local function windowClosed(key)
   local w = State[key]
   if w.opened and not w.closed then w.closed = now() end
@@ -712,6 +863,7 @@ Noir.On("NOIR_LOGIN", function()
   readCharacter()
   setLevel()
   readXP()
+  readMoney()
   readCompleted()
   State.inCombat = (InCombatLockdown and InCombatLockdown()) and true or false
 end)
@@ -781,7 +933,12 @@ end)
 
 Noir.On("MERCHANT_SHOW", function() windowOpened("merchant") end)
 Noir.On("MERCHANT_CLOSED", function() windowClosed("merchant") end)
-Noir.On("TRAINER_SHOW", function() windowOpened("trainer") end)
+Noir.On("TRAINER_SHOW", function()
+  windowOpened("trainer")
+  readMoney()
+  rememberCost()
+end)
+Noir.On("PLAYER_MONEY", readMoney)
 Noir.On("TRAINER_CLOSED", function() windowClosed("trainer") end)
 
 -- (unit, cast GUID, spell ID) on current clients; the spell ID is the fifth value on older ones.
@@ -835,6 +992,8 @@ Noir.Command("state", "what the addon knows about your character", function()
   Noir.Print(string.format("  quests in log: %d%s, done: %d", countKeys(State.quests), State.logHidden and " (part of the log is collapsed)" or "", countKeys(State.completed)))
   Noir.Print(string.format("  flight points known: %d", countKeys(State.flights)))
   Noir.Print("  hearthstone: " .. (State.hearth and State.hearth.name or "unknown"))
+  local junk, stacks = State.Junk()
+  Noir.Print(string.format("  money: %d copper; grey items: %d slot(s) worth %d copper", State.money, stacks, junk))
   for skillLine, p in pairs(State.professions) do
     Noir.Print(string.format("  profession %d %s: %d/%d", skillLine, tostring(p.name), p.rank, p.max))
   end

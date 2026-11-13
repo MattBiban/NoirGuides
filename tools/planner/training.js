@@ -14,7 +14,12 @@
 //
 // A visit is the step
 //   { id = "t<CLASS>-<level>", when = { class = <CLASS> }, at = <trainer>, minLevel = <level>,
-//     lines = { { kind = "train", class, level, npc } } }
+//     lines = { { kind = "train", class, level, npc }, { kind = "selljunk", npc, at } } }
+// with the selljunk line only at levels up to SELL_JUNK_LEVEL (20), where training can cost more than the character
+// carries: its npc is the nearest merchant (QuestieDB's vendor flag, lib/db.js) friendly to the faction in the
+// trainer's zone within TRAINER_YARDS of the trainer, lowest NPC ID on a tie, and its at is that merchant's spawn; with
+// no such merchant the line is left out. The engine shows it only when the bags hold grey items and the money may not
+// cover the training (NoirGuides/Lines.lua, check.selljunk). Trainer prices are in none of the data.
 // put right before the step it is written at (a trip's way there and back as steps around it, below). For each class, walking the sections in order over the steps that apply
 // to the class (no profession step) and have a place:
 //   - at the first step where the class's estimated level has reached an even level at least VISIT_EVERY above the
@@ -50,6 +55,7 @@ const HEARTH_COOLDOWN = 3600; // lib/xp.js PACE.HEARTH_COOLDOWN
 const NPC_RADIUS = 10; // planner/bundle.js RADIUS.npc
 const DOCK_RADIUS = 15, GOTO_RADIUS = 20; // planner/bundle.js RADIUS.dock, RADIUS.goto
 const OUTLEVEL_MARGIN = 3; // planner/sections.js
+const SELL_JUNK_LEVEL = 20; // visits up to this level carry a "sell your grey items" line
 const ALL = ["DRUID", "HUNTER", "MAGE", "PALADIN", "PRIEST", "ROGUE", "SHAMAN", "WARLOCK", "WARRIOR"];
 
 const zoneOnly = (p) => p.x === 0 && p.y === 0;
@@ -63,6 +69,30 @@ function forClass(when, cls) {
   return true;
 }
 const title = (cls) => `${cls[0]}${cls.slice(1).toLowerCase()} Trainer`;
+
+// Merchants friendly to the faction with a known spawn: [{ npc, points }], by NPC ID.
+function merchants(db, faction) {
+  const letter = faction[0];
+  const out = [];
+  for (const npc of db.npcs.values()) {
+    if (!npc.vendor || !(npc.friendly || "").includes(letter)) continue;
+    const points = spawnPoints(db, "npc", npc.id);
+    if (points.length) out.push({ npc: npc.id, points });
+  }
+  return out.sort((a, b) => a.npc - b.npc);
+}
+
+// The merchant nearest to a point, in its zone and within TRAINER_YARDS: { npc, point } or null (lowest ID on a tie).
+function nearestMerchant(list, point) {
+  let pick = null;
+  for (const m of list) for (const p of m.points) {
+    if (p.zone !== point.zone) continue;
+    const d = distance(point, p);
+    if (!(d <= TRAINER_YARDS)) continue;
+    if (!pick || d < pick.d || (d === pick.d && m.npc < pick.npc)) pick = { npc: m.npc, point: p, d };
+  }
+  return pick;
+}
 
 function classTrainers(db, cls, faction) {
   const want = title(cls), letter = faction[0];
@@ -139,6 +169,12 @@ function addClassTraining(db, sections, faction, options = {}) {
   const travel = tripper(db, options.graph, faction);
   const inserts = new Map(); // step -> visits to put before it, in class order
   const notes = options.notes;
+  let vendors = null; // merchants(db, faction), read at the first visit that wants one
+  const sellLine = (point) => {
+    vendors = vendors || merchants(db, faction);
+    const m = nearestMerchant(vendors, point);
+    return m ? { kind: "selljunk", npc: m.npc, at: { zone: m.point.zone, x: round2(m.point.x), y: round2(m.point.y), r: NPC_RADIUS } } : null;
+  };
   const pointOf = (p) => (p && !zoneOnly(p) ? toPoint(db, p.zone, p.x, p.y) : null);
   // Where a step leaves the character: the end of its last move line (a boat's landing, a flight's destination, the
   // hearthstone's inn, a goto's place), else nothing (the step's own place).
@@ -194,6 +230,7 @@ function addClassTraining(db, sections, faction, options = {}) {
       // minLevel: a character under the level is shown a grind first (spec 3.7), never a visit it cannot finish.
       const visit = { id: `t${cls}-${level}`, when: { class: cls }, at: { zone: point.zone, x: round2(point.x), y: round2(point.y), r: NPC_RADIUS }, minLevel: level,
         lines: [{ kind: "train", class: cls, level, npc }] };
+      if (level <= SELL_JUNK_LEVEL) { const sell = sellLine(point); if (sell) visit.lines.push(sell); }
       if (text) visit.text = text;
       if (way) inserts.get(step).push(...tripSteps(way.there.legs, cls, visit.id, "go"));
       inserts.get(step).push(visit);
@@ -297,4 +334,4 @@ function addClassTraining(db, sections, faction, options = {}) {
   return sections.map((s) => ({ ...s, steps: s.steps.flatMap((step) => [...(inserts.get(step) || []), step]) }));
 }
 
-module.exports = { addClassTraining, classTrainers, evenLevels, TRAINER_YARDS, MAX_DETOUR_SECONDS, VISIT_EVERY, FORCE_AFTER, TRIP_AFTER, MAX_TRIP_SECONDS, GAP_LEVELS };
+module.exports = { addClassTraining, classTrainers, merchants, nearestMerchant, evenLevels, SELL_JUNK_LEVEL, TRAINER_YARDS, MAX_DETOUR_SECONDS, VISIT_EVERY, FORCE_AFTER, TRIP_AFTER, MAX_TRIP_SECONDS, GAP_LEVELS };

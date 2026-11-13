@@ -142,7 +142,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | Fact | Value |
 | --- | --- |
 | Actions before bundling, steps after | 2,074, 1,296 (62%) |
-| Steps in the route file | 1,503 |
+| Steps in the route file | 1,523 |
 | Sections | 37 |
 | Profession steps written | p164-2, p165-2, p171-2, p182-2, p197-2, p333-2, p186-2, p202-2, p393-2, p186-3, p165-3, p171-3, p164-3, p182-3, p197-3, p202-3, p333-3, p393-3, p164-4, p186-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-35-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-35-stranglethorn-vale; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-35-stranglethorn-vale; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-35-stranglethorn-vale; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-35-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-35-stranglethorn-vale; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section human-32-35-stranglethorn-vale |
@@ -153,16 +153,16 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| human-01-12-elwynn-forest | 1-12 Elwynn Forest | 148 | 1-15 |
-| human-12-20-darkshore | 12-20 Darkshore | 138 | 12-23 |
-| human-20-23-ashenvale | 20-23 Ashenvale | 61 | 20-26 |
+| human-01-12-elwynn-forest | 1-12 Elwynn Forest | 157 | 1-15 |
+| human-12-20-darkshore | 12-20 Darkshore | 139 | 12-23 |
+| human-20-23-ashenvale | 20-23 Ashenvale | 69 | 20-26 |
 | human-23-27-duskwood | 23-27 Duskwood | 69 | 23-30 |
 | human-27-27-stormwind-city | 27 Stormwind City | 9 | 27-30 |
 | human-27-28-duskwood | 27-28 Duskwood | 30 | 27-31 |
 | human-28-30-wetlands | 28-30 Wetlands | 30 | 28-33 |
 | human-30-30-wetlands | 30 Wetlands | 19 | 30-33 |
 | human-30-32-ashenvale | 30-32 Ashenvale | 49 | 30-35 |
-| human-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 96 | 32-38 |
+| human-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 98 | 32-38 |
 | human-35-37-desolace | 35-37 Desolace | 38 | 35-40 |
 | human-37-39-arathi-highlands | 37-39 Arathi Highlands | 41 | 37-42 |
 | human-39-40-badlands | 39-40 Badlands | 16 | 39-43 |
@@ -229,7 +229,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | Fact | Value |
 | --- | --- |
 | Actions before bundling, steps after | 2,162, 1,391 (64%) |
-| Steps in the route file | 1,565 |
+| Steps in the route file | 1,584 |
 | Sections | 30 |
 | Profession steps written | p164-2, p171-2, p202-2, p333-2, p165-2, p197-2, p182-2, p186-2, p393-2, p164-3, p165-3, p197-3, p333-3, p164-4, p393-4, p171-4, p182-4, p186-4, p197-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section orc-32-35-stranglethorn-vale; Alchemy Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section orc-20-23-the-barrens; Herbalism Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section orc-20-23-the-barrens; Mining Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section orc-20-23-the-barrens; Engineering Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section orc-20-23-the-barrens; Engineering Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section orc-32-35-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section orc-32-35-stranglethorn-vale; Skinning Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section orc-20-23-the-barrens |
@@ -240,16 +240,16 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| orc-01-12-durotar | 1-12 Durotar | 164 | 1-15 |
+| orc-01-12-durotar | 1-12 Durotar | 173 | 1-15 |
 | orc-12-20-the-barrens | 12-20 The Barrens | 128 | 12-23 |
-| orc-20-23-the-barrens | 20-23 The Barrens | 88 | 20-26 |
+| orc-20-23-the-barrens | 20-23 The Barrens | 92 | 20-26 |
 | orc-23-26-stonetalon-mountains | 23-26 Stonetalon Mountains | 51 | 23-29 |
 | orc-26-27-ashenvale | 26-27 Ashenvale | 58 | 26-30 |
 | orc-27-30-thousand-needles | 27-30 Thousand Needles | 55 | 27-33 |
 | orc-30-32-hillsbrad-foothills | 30-32 Hillsbrad Foothills | 53 | 30-35 |
 | orc-32-32-dustwallow-marsh | 32 Dustwallow Marsh | 10 | 32-35 |
-| orc-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 96 | 32-38 |
-| orc-35-37-desolace | 35-37 Desolace | 81 | 35-40 |
+| orc-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 98 | 32-38 |
+| orc-35-37-desolace | 35-37 Desolace | 85 | 35-40 |
 | orc-37-40-arathi-highlands | 37-40 Arathi Highlands | 43 | 37-43 |
 | orc-40-41-badlands | 40-41 Badlands | 26 | 40-44 |
 | orc-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 84 | 41-47 |
@@ -309,7 +309,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | Fact | Value |
 | --- | --- |
 | Actions before bundling, steps after | 1,918, 1,206 (63%) |
-| Steps in the route file | 1,388 |
+| Steps in the route file | 1,404 |
 | Sections | 38 |
 | Profession steps written | p164-2, p186-2, p202-2, p182-2, p197-2, p186-3, p165-3, p171-3, p164-3, p182-3, p197-3, p202-3, p333-3, p393-3, p164-4, p186-4 |
 | Profession ranks without a step | Leatherworking Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within three sections of section dwarf-01-11-dun-morogh; Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-35-stranglethorn-vale; Alchemy Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within three sections of section dwarf-01-11-dun-morogh; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-35-stranglethorn-vale; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-35-stranglethorn-vale; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-35-stranglethorn-vale; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-35-stranglethorn-vale; Enchanting Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within three sections of section dwarf-01-11-dun-morogh; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-35-stranglethorn-vale; Skinning Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within three sections of section dwarf-01-11-dun-morogh; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section dwarf-32-35-stranglethorn-vale |
@@ -320,17 +320,17 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| dwarf-01-11-dun-morogh | 1-11 Dun Morogh | 133 | 1-14 |
-| dwarf-11-20-darkshore | 11-20 Darkshore | 109 | 11-23 |
-| dwarf-20-20-darkshore | 20 Darkshore | 18 | 20-23 |
-| dwarf-20-23-ashenvale | 20-23 Ashenvale | 71 | 20-26 |
+| dwarf-01-11-dun-morogh | 1-11 Dun Morogh | 136 | 1-14 |
+| dwarf-11-20-darkshore | 11-20 Darkshore | 111 | 11-23 |
+| dwarf-20-20-darkshore | 20 Darkshore | 19 | 20-23 |
+| dwarf-20-23-ashenvale | 20-23 Ashenvale | 79 | 20-26 |
 | dwarf-23-27-duskwood | 23-27 Duskwood | 59 | 23-30 |
 | dwarf-27-27-stormwind-city | 27 Stormwind City | 6 | 27-30 |
 | dwarf-27-28-duskwood | 27-28 Duskwood | 29 | 27-31 |
 | dwarf-28-30-wetlands | 28-30 Wetlands | 33 | 28-33 |
 | dwarf-30-30-wetlands | 30 Wetlands | 12 | 30-33 |
 | dwarf-30-32-ashenvale | 30-32 Ashenvale | 45 | 30-35 |
-| dwarf-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 74 | 32-38 |
+| dwarf-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 76 | 32-38 |
 | dwarf-35-37-desolace | 35-37 Desolace | 38 | 35-40 |
 | dwarf-37-39-arathi-highlands | 37-39 Arathi Highlands | 36 | 37-42 |
 | dwarf-39-40-badlands | 39-40 Badlands | 17 | 39-43 |
@@ -397,7 +397,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | Fact | Value |
 | --- | --- |
 | Actions before bundling, steps after | 1,972, 1,265 (64%) |
-| Steps in the route file | 1,409 |
+| Steps in the route file | 1,427 |
 | Sections | 35 |
 | Profession steps written | p165-2, p171-2, p333-2, p164-2, p186-2, p197-2, p202-2, p186-3, p165-3, p171-3, p182-3, p164-3, p197-3, p202-3, p333-3, p393-3, p164-4, p186-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale; Herbalism Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within three sections of section nightelf-01-13-teldrassil; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale; Skinning Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within three sections of section nightelf-01-13-teldrassil; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section nightelf-32-35-stranglethorn-vale |
@@ -408,18 +408,18 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| nightelf-01-13-teldrassil | 1-13 Teldrassil | 138 | 1-16 |
-| nightelf-13-20-darkshore | 13-20 Darkshore | 170 | 13-23 |
-| nightelf-20-20-darkshore | 20 Darkshore | 21 | 20-23 |
-| nightelf-20-23-ashenvale | 20-23 Ashenvale | 60 | 20-26 |
+| nightelf-01-13-teldrassil | 1-13 Teldrassil | 141 | 1-16 |
+| nightelf-13-20-darkshore | 13-20 Darkshore | 174 | 13-23 |
+| nightelf-20-20-darkshore | 20 Darkshore | 22 | 20-23 |
+| nightelf-20-23-ashenvale | 20-23 Ashenvale | 68 | 20-26 |
 | nightelf-23-28-duskwood | 23-28 Duskwood | 66 | 23-31 |
 | nightelf-28-28-stormwind-city | 28 Stormwind City | 20 | 28-31 |
 | nightelf-28-30-wetlands | 28-30 Wetlands | 29 | 28-33 |
 | nightelf-30-30-wetlands | 30 Wetlands | 20 | 30-33 |
 | nightelf-30-32-ashenvale | 30-32 Ashenvale | 38 | 30-35 |
-| nightelf-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 60 | 32-38 |
+| nightelf-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 61 | 32-38 |
 | nightelf-35-37-desolace | 35-37 Desolace | 46 | 35-40 |
-| nightelf-37-39-arathi-highlands | 37-39 Arathi Highlands | 38 | 37-42 |
+| nightelf-37-39-arathi-highlands | 37-39 Arathi Highlands | 39 | 37-42 |
 | nightelf-39-40-badlands | 39-40 Badlands | 14 | 39-43 |
 | nightelf-40-40-badlands | 40 Badlands | 15 | 40-43 |
 | nightelf-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 28 | 40-44 |
@@ -482,7 +482,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | Fact | Value |
 | --- | --- |
 | Actions before bundling, steps after | 2,121, 1,308 (62%) |
-| Steps in the route file | 1,468 |
+| Steps in the route file | 1,485 |
 | Sections | 35 |
 | Profession steps written | p165-2, p171-2, p197-2, p333-2, p164-2, p202-2, p164-3, p165-3, p197-3, p333-3, p393-4, p171-4, p182-4, p186-4, p197-4, p164-4, p202-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section undead-34-36-desolace; Alchemy Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section undead-20-24-the-barrens; Herbalism Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within three sections of section undead-08-13-tirisfal-glades; Herbalism Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section undead-20-24-the-barrens; Mining Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within three sections of section undead-08-13-tirisfal-glades; Mining Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section undead-20-24-the-barrens; Engineering Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section undead-20-24-the-barrens; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section undead-34-36-desolace; Skinning Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within three sections of section undead-08-13-tirisfal-glades; Skinning Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section undead-20-24-the-barrens |
@@ -495,18 +495,18 @@ what its class steps add to the shared route's numbers, which the race's section
 | --- | --- | --- | --- |
 | undead-01-08-tirisfal-glades | 1-8 Tirisfal Glades | 57 | 1-11 |
 | undead-08-08-durotar | 8 Durotar | 27 | 8-11 |
-| undead-08-13-tirisfal-glades | 8-13 Tirisfal Glades | 85 | 8-16 |
-| undead-13-20-the-barrens | 13-20 The Barrens | 99 | 13-23 |
-| undead-20-24-the-barrens | 20-24 The Barrens | 99 | 20-27 |
+| undead-08-13-tirisfal-glades | 8-13 Tirisfal Glades | 89 | 8-16 |
+| undead-13-20-the-barrens | 13-20 The Barrens | 101 | 13-23 |
+| undead-20-24-the-barrens | 20-24 The Barrens | 103 | 20-27 |
 | undead-24-26-stonetalon-mountains | 24-26 Stonetalon Mountains | 45 | 24-29 |
 | undead-26-28-ashenvale | 26-28 Ashenvale | 36 | 26-31 |
 | undead-28-30-hillsbrad-foothills | 28-30 Hillsbrad Foothills | 27 | 28-33 |
 | undead-30-30-hillsbrad-foothills | 30 Hillsbrad Foothills | 28 | 30-33 |
 | undead-30-32-thousand-needles | 30-32 Thousand Needles | 46 | 30-35 |
 | undead-32-34-stranglethorn-vale | 32-34 Stranglethorn Vale | 47 | 32-37 |
-| undead-34-36-desolace | 34-36 Desolace | 90 | 34-39 |
-| undead-36-39-arathi-highlands | 36-39 Arathi Highlands | 53 | 36-42 |
-| undead-39-40-dustwallow-marsh | 39-40 Dustwallow Marsh | 23 | 39-43 |
+| undead-34-36-desolace | 34-36 Desolace | 91 | 34-39 |
+| undead-36-39-arathi-highlands | 36-39 Arathi Highlands | 57 | 36-42 |
+| undead-39-40-dustwallow-marsh | 39-40 Dustwallow Marsh | 25 | 39-43 |
 | undead-40-40-dustwallow-marsh | 40 Dustwallow Marsh | 37 | 40-43 |
 | undead-40-44-stranglethorn-vale | 40-44 Stranglethorn Vale | 72 | 40-47 |
 | undead-44-45-badlands | 44-45 Badlands | 25 | 44-48 |
@@ -567,7 +567,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | Fact | Value |
 | --- | --- |
 | Actions before bundling, steps after | 1,945, 1,220 (63%) |
-| Steps in the route file | 1,307 |
+| Steps in the route file | 1,322 |
 | Sections | 33 |
 | Profession steps written | p165-2, p202-2, p164-2, p197-2, p164-3, p165-3, p197-3, p333-2, p333-3, p164-4, p393-4, p171-4, p182-4, p186-4, p197-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section tauren-32-35-stranglethorn-vale; Alchemy Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within three sections of section tauren-07-12-mulgore; Alchemy Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section tauren-20-23-the-barrens; Herbalism Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within three sections of section tauren-07-12-mulgore; Herbalism Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section tauren-20-23-the-barrens; Mining Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within three sections of section tauren-07-12-mulgore; Mining Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section tauren-20-23-the-barrens; Engineering Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section tauren-20-23-the-barrens; Engineering Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section tauren-32-35-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section tauren-32-35-stranglethorn-vale; Skinning Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within three sections of section tauren-07-12-mulgore; Skinning Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section tauren-20-23-the-barrens |
@@ -580,16 +580,16 @@ what its class steps add to the shared route's numbers, which the race's section
 | --- | --- | --- | --- |
 | tauren-01-07-mulgore | 1-7 Mulgore | 31 | 1-10 |
 | tauren-07-07-durotar | 7 Durotar | 17 | 7-10 |
-| tauren-07-12-mulgore | 7-12 Mulgore | 67 | 7-15 |
-| tauren-12-20-the-barrens | 12-20 The Barrens | 127 | 12-23 |
-| tauren-20-23-the-barrens | 20-23 The Barrens | 63 | 20-26 |
+| tauren-07-12-mulgore | 7-12 Mulgore | 69 | 7-15 |
+| tauren-12-20-the-barrens | 12-20 The Barrens | 129 | 12-23 |
+| tauren-20-23-the-barrens | 20-23 The Barrens | 68 | 20-26 |
 | tauren-23-26-stonetalon-mountains | 23-26 Stonetalon Mountains | 42 | 23-29 |
 | tauren-26-28-ashenvale | 26-28 Ashenvale | 78 | 26-31 |
 | tauren-28-30-thousand-needles | 28-30 Thousand Needles | 20 | 28-33 |
 | tauren-30-32-hillsbrad-foothills | 30-32 Hillsbrad Foothills | 48 | 30-35 |
 | tauren-32-32-dustwallow-marsh | 32 Dustwallow Marsh | 10 | 32-35 |
-| tauren-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 74 | 32-38 |
-| tauren-35-37-desolace | 35-37 Desolace | 59 | 35-40 |
+| tauren-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 76 | 32-38 |
+| tauren-35-37-desolace | 35-37 Desolace | 63 | 35-40 |
 | tauren-37-40-arathi-highlands | 37-40 Arathi Highlands | 43 | 37-43 |
 | tauren-40-41-badlands | 40-41 Badlands | 26 | 40-44 |
 | tauren-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 65 | 41-47 |
@@ -650,7 +650,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | Fact | Value |
 | --- | --- |
 | Actions before bundling, steps after | 2,015, 1,272 (63%) |
-| Steps in the route file | 1,422 |
+| Steps in the route file | 1,438 |
 | Sections | 38 |
 | Profession steps written | p164-2, p186-2, p202-2, p182-2, p197-2, p186-3, p165-3, p171-3, p164-3, p182-3, p197-3, p202-3, p333-3, p393-3, p164-4, p186-4 |
 | Profession ranks without a step | Leatherworking Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within three sections of section gnome-01-11-dun-morogh; Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-35-stranglethorn-vale; Alchemy Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within three sections of section gnome-01-11-dun-morogh; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-35-stranglethorn-vale; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-35-stranglethorn-vale; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-35-stranglethorn-vale; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-35-stranglethorn-vale; Enchanting Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within three sections of section gnome-01-11-dun-morogh; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-35-stranglethorn-vale; Skinning Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within three sections of section gnome-01-11-dun-morogh; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section gnome-32-35-stranglethorn-vale |
@@ -661,17 +661,17 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| gnome-01-11-dun-morogh | 1-11 Dun Morogh | 126 | 1-14 |
-| gnome-11-20-darkshore | 11-20 Darkshore | 115 | 11-23 |
-| gnome-20-20-darkshore | 20 Darkshore | 18 | 20-23 |
-| gnome-20-23-ashenvale | 20-23 Ashenvale | 71 | 20-26 |
+| gnome-01-11-dun-morogh | 1-11 Dun Morogh | 129 | 1-14 |
+| gnome-11-20-darkshore | 11-20 Darkshore | 117 | 11-23 |
+| gnome-20-20-darkshore | 20 Darkshore | 19 | 20-23 |
+| gnome-20-23-ashenvale | 20-23 Ashenvale | 79 | 20-26 |
 | gnome-23-27-duskwood | 23-27 Duskwood | 64 | 23-30 |
 | gnome-27-27-stormwind-city | 27 Stormwind City | 9 | 27-30 |
 | gnome-27-28-duskwood | 27-28 Duskwood | 22 | 27-31 |
 | gnome-28-30-wetlands | 28-30 Wetlands | 30 | 28-33 |
 | gnome-30-30-wetlands | 30 Wetlands | 19 | 30-33 |
 | gnome-30-32-ashenvale | 30-32 Ashenvale | 47 | 30-35 |
-| gnome-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 96 | 32-38 |
+| gnome-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 98 | 32-38 |
 | gnome-35-37-desolace | 35-37 Desolace | 38 | 35-40 |
 | gnome-37-39-arathi-highlands | 37-39 Arathi Highlands | 41 | 37-42 |
 | gnome-39-40-badlands | 39-40 Badlands | 16 | 39-43 |
@@ -738,7 +738,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | Fact | Value |
 | --- | --- |
 | Actions before bundling, steps after | 2,207, 1,426 (65%) |
-| Steps in the route file | 1,618 |
+| Steps in the route file | 1,637 |
 | Sections | 32 |
 | Profession steps written | p164-2, p171-2, p202-2, p333-2, p165-2, p197-2, p182-2, p186-2, p393-2, p164-3, p165-3, p197-3, p333-3, p164-4, p393-4, p171-4, p182-4, p186-4, p197-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section troll-32-35-stranglethorn-vale; Alchemy Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section troll-20-23-the-barrens; Herbalism Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section troll-20-23-the-barrens; Mining Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section troll-20-23-the-barrens; Engineering Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section troll-20-23-the-barrens; Engineering Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section troll-32-35-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section troll-32-35-stranglethorn-vale; Skinning Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section troll-20-23-the-barrens |
@@ -749,17 +749,17 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| troll-01-12-durotar | 1-12 Durotar | 179 | 1-15 |
+| troll-01-12-durotar | 1-12 Durotar | 188 | 1-15 |
 | troll-12-20-the-barrens | 12-20 The Barrens | 131 | 12-23 |
-| troll-20-23-the-barrens | 20-23 The Barrens | 86 | 20-26 |
+| troll-20-23-the-barrens | 20-23 The Barrens | 90 | 20-26 |
 | troll-23-26-stonetalon-mountains | 23-26 Stonetalon Mountains | 51 | 23-29 |
 | troll-26-27-ashenvale | 26-27 Ashenvale | 61 | 26-30 |
 | troll-27-30-thousand-needles | 27-30 Thousand Needles | 49 | 27-33 |
 | troll-30-30-orgrimmar | 30 Orgrimmar | 21 | 30-33 |
 | troll-30-32-hillsbrad-foothills | 30-32 Hillsbrad Foothills | 55 | 30-35 |
 | troll-32-32-dustwallow-marsh | 32 Dustwallow Marsh | 10 | 32-35 |
-| troll-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 96 | 32-38 |
-| troll-35-37-desolace | 35-37 Desolace | 82 | 35-40 |
+| troll-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 98 | 32-38 |
+| troll-35-37-desolace | 35-37 Desolace | 86 | 35-40 |
 | troll-37-40-arathi-highlands | 37-40 Arathi Highlands | 43 | 37-43 |
 | troll-40-41-badlands | 40-41 Badlands | 26 | 40-44 |
 | troll-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 85 | 41-47 |
@@ -820,7 +820,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | Fact | Value |
 | --- | --- |
 | Actions before bundling, steps after | 2,143, 1,306 (61%) |
-| Steps in the route file | 1,457 |
+| Steps in the route file | 1,471 |
 | Sections | 36 |
 | Profession steps written | p186-2, p197-2, p333-2, p164-2, p165-2, p171-2, p182-2, p202-2, p393-2, p186-3, p165-3, p171-3, p164-4, p186-4 |
 | Profession ranks without a step | Blacksmithing Expert (rank 3, level 20): no Alliance trainer in a zone of the route within three sections of section highorder-19-20-darkshore; Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale; Herbalism Expert (rank 3, level 20): no Alliance trainer in a zone of the route within three sections of section highorder-19-20-darkshore; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within three sections of section highorder-19-20-darkshore; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale; Engineering Expert (rank 3, level 20): no Alliance trainer in a zone of the route within three sections of section highorder-19-20-darkshore; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within three sections of section highorder-19-20-darkshore; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale; Skinning Expert (rank 3, level 20): no Alliance trainer in a zone of the route within three sections of section highorder-19-20-darkshore; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within three sections of section highorder-34-37-stranglethorn-vale |
@@ -831,19 +831,19 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| highorder-01-17-zephras-isle | 1-17 Zephras Isle | 198 | 1-20 |
+| highorder-01-17-zephras-isle | 1-17 Zephras Isle | 207 | 1-20 |
 | highorder-17-19-westfall | 17-19 Westfall | 49 | 17-22 |
-| highorder-19-20-darkshore | 19-20 Darkshore | 45 | 19-23 |
+| highorder-19-20-darkshore | 19-20 Darkshore | 46 | 19-23 |
 | highorder-20-23-darkshore | 20-23 Darkshore | 86 | 20-26 |
-| highorder-23-25-ashenvale | 23-25 Ashenvale | 41 | 23-28 |
+| highorder-23-25-ashenvale | 23-25 Ashenvale | 43 | 23-28 |
 | highorder-25-25-stormwind-city | 25 Stormwind City | 5 | 25-28 |
 | highorder-25-27-ashenvale | 25-27 Ashenvale | 30 | 25-30 |
 | highorder-27-30-wetlands | 27-30 Wetlands | 43 | 27-33 |
 | highorder-30-33-duskwood | 30-33 Duskwood | 74 | 30-36 |
 | highorder-33-34-hillsbrad-foothills | 33-34 Hillsbrad Foothills | 31 | 33-37 |
-| highorder-34-37-stranglethorn-vale | 34-37 Stranglethorn Vale | 65 | 34-40 |
+| highorder-34-37-stranglethorn-vale | 34-37 Stranglethorn Vale | 66 | 34-40 |
 | highorder-37-40-arathi-highlands | 37-40 Arathi Highlands | 52 | 37-43 |
-| highorder-40-41-badlands | 40-41 Badlands | 31 | 40-44 |
+| highorder-40-41-badlands | 40-41 Badlands | 32 | 40-44 |
 | highorder-41-42-desolace | 41-42 Desolace | 44 | 41-45 |
 | highorder-42-42-dustwallow-marsh | 42 Dustwallow Marsh | 28 | 42-45 |
 | highorder-42-44-stranglethorn-vale | 42-44 Stranglethorn Vale | 49 | 42-47 |
@@ -906,7 +906,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | Fact | Value |
 | --- | --- |
 | Actions before bundling, steps after | 2,105, 1,298 (62%) |
-| Steps in the route file | 1,434 |
+| Steps in the route file | 1,455 |
 | Sections | 29 |
 | Profession steps written | p186-2, p165-2, p202-2, p164-2, p171-2, p182-2, p197-2, p333-2, p393-2, p164-3, p165-3, p197-3, p333-3, p202-3, p164-4, p182-4, p186-4, p202-4, p393-4, p171-4, p197-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section windshaper-32-35-stranglethorn-vale; Alchemy Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section windshaper-20-24-the-barrens; Herbalism Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section windshaper-20-24-the-barrens; Mining Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section windshaper-20-24-the-barrens; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within three sections of section windshaper-32-35-stranglethorn-vale; Skinning Expert (rank 3, level 20): no Horde trainer in a zone of the route within three sections of section windshaper-20-24-the-barrens |
@@ -917,16 +917,16 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| windshaper-01-16-zephras-isle | 1-16 Zephras Isle | 190 | 1-19 |
+| windshaper-01-16-zephras-isle | 1-16 Zephras Isle | 199 | 1-19 |
 | windshaper-16-20-the-barrens | 16-20 The Barrens | 90 | 16-23 |
-| windshaper-20-24-the-barrens | 20-24 The Barrens | 97 | 20-27 |
+| windshaper-20-24-the-barrens | 20-24 The Barrens | 101 | 20-27 |
 | windshaper-24-27-stonetalon-mountains | 24-27 Stonetalon Mountains | 38 | 24-30 |
-| windshaper-27-29-thousand-needles | 27-29 Thousand Needles | 69 | 27-32 |
+| windshaper-27-29-thousand-needles | 27-29 Thousand Needles | 70 | 27-32 |
 | windshaper-29-30-hillsbrad-foothills | 29-30 Hillsbrad Foothills | 10 | 29-33 |
 | windshaper-30-31-hillsbrad-foothills | 30-31 Hillsbrad Foothills | 37 | 30-34 |
 | windshaper-31-32-dustwallow-marsh | 31-32 Dustwallow Marsh | 10 | 31-35 |
-| windshaper-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 76 | 32-38 |
-| windshaper-35-37-desolace | 35-37 Desolace | 67 | 35-40 |
+| windshaper-32-35-stranglethorn-vale | 32-35 Stranglethorn Vale | 81 | 32-38 |
+| windshaper-35-37-desolace | 35-37 Desolace | 69 | 35-40 |
 | windshaper-37-40-arathi-highlands | 37-40 Arathi Highlands | 45 | 37-43 |
 | windshaper-40-41-badlands | 40-41 Badlands | 26 | 40-44 |
 | windshaper-41-44-stranglethorn-vale | 41-44 Stranglethorn Vale | 72 | 41-47 |

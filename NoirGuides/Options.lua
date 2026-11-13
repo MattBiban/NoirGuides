@@ -36,7 +36,7 @@ Options.DEFAULTS = {
   pinMerge = 1, pinAlpha = 0.6,
   -- Automation
   autoQuests = true, guideRewards = false, rewardMarker = true, bestReward = false, train = false, flights = true,
-  hearth = true, dialogue = true, buy = true, targetButtons = true, nameplates = true, markers = true,
+  hearth = true, dialogue = true, buy = true, sellJunk = true, targetButtons = true, nameplates = true, markers = true,
   -- Route
   outlevel = true, groupQuests = false, talents = true,
   -- Advanced

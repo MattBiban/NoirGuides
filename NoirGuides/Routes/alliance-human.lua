@@ -7,6 +7,42 @@ Noir.Route("alliance-human", {
       id = "human-01-12-elwynn-forest", name = "1-12 Elwynn Forest", names = { WARRIOR = "1-13 Elwynn Forest" }, group = "Alliance", subgroup = "1-20", minLevel = 1, maxLevel = 15, zone = 12, start = true,
       next = { { section = "human-12-20-darkshore" } },
       steps = {
+        { id = "p164-2-skill", when = { profession = 164 }, reminder = { ends = "train164_2" },
+          lines = {
+            { kind = "skill", skill = 164, value = 50 },
+          } },
+        { id = "p165-2-skill", when = { profession = 165 }, reminder = { ends = "train165_2" },
+          lines = {
+            { kind = "skill", skill = 165, value = 50 },
+          } },
+        { id = "p171-2-skill", when = { profession = 171 }, reminder = { ends = "train171_2" },
+          lines = {
+            { kind = "skill", skill = 171, value = 50 },
+          } },
+        { id = "p182-2-skill", when = { profession = 182 }, reminder = { ends = "train182_2" },
+          lines = {
+            { kind = "skill", skill = 182, value = 50 },
+          } },
+        { id = "p186-2-skill", when = { profession = 186 }, reminder = { ends = "train186_2" },
+          lines = {
+            { kind = "skill", skill = 186, value = 50 },
+          } },
+        { id = "p197-2-skill", when = { profession = 197 }, reminder = { ends = "train197_2" },
+          lines = {
+            { kind = "skill", skill = 197, value = 50 },
+          } },
+        { id = "p202-2-skill", when = { profession = 202 }, reminder = { ends = "train202_2" },
+          lines = {
+            { kind = "skill", skill = 202, value = 50 },
+          } },
+        { id = "p333-2-skill", when = { profession = 333 }, reminder = { ends = "train333_2" },
+          lines = {
+            { kind = "skill", skill = 333, value = 50 },
+          } },
+        { id = "p393-2-skill", when = { profession = 393 }, reminder = { ends = "train393_2" },
+          lines = {
+            { kind = "skill", skill = 393, value = 50 },
+          } },
         { id = "a33.a783.t783.a7.a5261.t5261", at = { zone = 12, x = 48.94, y = 40.16, r = 10 }, targets = { friend = { 196, 823, 197 } },
           lines = {
             { kind = "accept", quest = 33, npc = 196 },
@@ -27,30 +63,37 @@ Noir.Route("alliance-human", {
         { id = "tHUNTER-2", at = { zone = 12, x = 51.21, y = 40.8, r = 10 }, when = { class = "HUNTER" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "HUNTER", npc = 248415 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "tMAGE-2", at = { zone = 12, x = 49.66, y = 39.4, r = 10 }, when = { class = "MAGE" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "MAGE", npc = 198 },
+            { kind = "selljunk", at = { zone = 12, x = 48.2, y = 41.6, r = 10 }, npc = 233335 },
           } },
         { id = "tPALADIN-2", at = { zone = 12, x = 50.43, y = 42.12, r = 10 }, when = { class = "PALADIN" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "PALADIN", npc = 925 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "tPRIEST-2", at = { zone = 12, x = 49.81, y = 39.49, r = 10 }, when = { class = "PRIEST" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "PRIEST", npc = 375 },
+            { kind = "selljunk", at = { zone = 12, x = 48.2, y = 41.6, r = 10 }, npc = 233335 },
           } },
         { id = "tROGUE-2", at = { zone = 12, x = 50.31, y = 39.92, r = 10 }, when = { class = "ROGUE" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "ROGUE", npc = 915 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "tWARLOCK-2", at = { zone = 12, x = 49.87, y = 42.65, r = 10 }, when = { class = "WARLOCK" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "WARLOCK", npc = 459 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "tWARRIOR-2", at = { zone = 12, x = 50.24, y = 42.29, r = 10 }, when = { class = "WARRIOR" }, minLevel = 2,
           lines = {
             { kind = "train", level = 2, class = "WARRIOR", npc = 911 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "a18.t7.a15", at = { zone = 12, x = 48.17, y = 42.94, r = 10 }, minLevel = 2, targets = { friend = { 823, 197 } },
           lines = {
@@ -102,30 +145,37 @@ Noir.Route("alliance-human", {
         { id = "tHUNTER-4", at = { zone = 12, x = 51.21, y = 40.8, r = 10 }, when = { class = "HUNTER" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "HUNTER", npc = 248415 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "tMAGE-4", at = { zone = 12, x = 49.66, y = 39.4, r = 10 }, when = { class = "MAGE" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "MAGE", npc = 198 },
+            { kind = "selljunk", at = { zone = 12, x = 48.2, y = 41.6, r = 10 }, npc = 233335 },
           } },
         { id = "tPALADIN-4", at = { zone = 12, x = 50.43, y = 42.12, r = 10 }, when = { class = "PALADIN" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "PALADIN", npc = 925 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "tPRIEST-4", at = { zone = 12, x = 49.81, y = 39.49, r = 10 }, when = { class = "PRIEST" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "PRIEST", npc = 375 },
+            { kind = "selljunk", at = { zone = 12, x = 48.2, y = 41.6, r = 10 }, npc = 233335 },
           } },
         { id = "tROGUE-4", at = { zone = 12, x = 50.31, y = 39.92, r = 10 }, when = { class = "ROGUE" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "ROGUE", npc = 915 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "tWARLOCK-4", at = { zone = 12, x = 49.87, y = 42.65, r = 10 }, when = { class = "WARLOCK" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "WARLOCK", npc = 459 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "tWARRIOR-4", at = { zone = 12, x = 50.24, y = 42.29, r = 10 }, when = { class = "WARRIOR" }, minLevel = 4,
           lines = {
             { kind = "train", level = 4, class = "WARRIOR", npc = 911 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "t18.a6.a3903.t15.a21.t33", at = { zone = 12, x = 48.17, y = 42.94, r = 10 }, minLevel = 2, targets = { friend = { 823, 197, 196 } },
           lines = {
@@ -167,6 +217,7 @@ Noir.Route("alliance-human", {
         { id = "tPRIEST-6", at = { zone = 12, x = 49.81, y = 39.49, r = 10 }, when = { class = "PRIEST" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "PRIEST", npc = 375 },
+            { kind = "selljunk", at = { zone = 12, x = 48.2, y = 41.6, r = 10 }, npc = 233335 },
           } },
         { id = "a5623", at = { zone = 12, x = 49.81, y = 39.49, r = 10 }, when = { class = "PRIEST" }, minLevel = 5, maxLevel = 12, targets = { friend = { 375 } },
           lines = {
@@ -175,6 +226,7 @@ Noir.Route("alliance-human", {
         { id = "tROGUE-6", at = { zone = 12, x = 50.31, y = 39.92, r = 10 }, when = { class = "ROGUE" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "ROGUE", npc = 915 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "t3102", at = { zone = 12, x = 50.31, y = 39.92, r = 10 }, when = { class = "ROGUE" }, items = { 9555 }, targets = { friend = { 915 } },
           lines = {
@@ -183,22 +235,27 @@ Noir.Route("alliance-human", {
         { id = "tHUNTER-6", at = { zone = 12, x = 51.21, y = 40.8, r = 10 }, when = { class = "HUNTER" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "HUNTER", npc = 248415 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "tMAGE-6", at = { zone = 12, x = 49.66, y = 39.4, r = 10 }, when = { class = "MAGE" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "MAGE", npc = 198 },
+            { kind = "selljunk", at = { zone = 12, x = 48.2, y = 41.6, r = 10 }, npc = 233335 },
           } },
         { id = "tPALADIN-6", at = { zone = 12, x = 50.43, y = 42.12, r = 10 }, when = { class = "PALADIN" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "PALADIN", npc = 925 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "tWARLOCK-6", at = { zone = 12, x = 49.87, y = 42.65, r = 10 }, when = { class = "WARLOCK" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "WARLOCK", npc = 459 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "tWARRIOR-6", at = { zone = 12, x = 50.24, y = 42.29, r = 10 }, when = { class = "WARRIOR" }, minLevel = 6,
           lines = {
             { kind = "train", level = 6, class = "WARRIOR", npc = 911 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "t3904.a3905.t3905", at = { zone = 12, x = 50.69, y = 39.35, r = 10 }, minLevel = 2, items = { 11125 }, targets = { friend = { 9296, 952 } },
           lines = {
@@ -282,6 +339,7 @@ Noir.Route("alliance-human", {
         { id = "tWARLOCK-8", at = { zone = 12, x = 49.87, y = 42.65, r = 10 }, when = { class = "WARLOCK" }, minLevel = 8,
           lines = {
             { kind = "train", level = 8, class = "WARLOCK", npc = 459 },
+            { kind = "selljunk", at = { zone = 12, x = 50.05, y = 42.69, r = 10 }, npc = 6373 },
           } },
         { id = "o1598", at = { zone = 12, x = 56.71, y = 43.96, r = 40 }, when = { class = "WARLOCK" },
           lines = {
@@ -342,27 +400,27 @@ Noir.Route("alliance-human", {
           lines = {
             { kind = "objective", quest = 83, index = 1, item = 1019, skipIfMissing = true },
           } },
-        { id = "p164-2", at = { zone = 12, x = 41.71, y = 65.54, r = 10 }, when = { profession = 164 },
+        { id = "p164-2", label = "train164_2", at = { zone = 12, x = 41.71, y = 65.54, r = 10 }, when = { profession = 164 },
           lines = {
             { kind = "train", skill = 164, rank = 2, npc = 514 },
           } },
-        { id = "p165-2", at = { zone = 12, x = 46.38, y = 62.05, r = 10 }, when = { profession = 165 },
+        { id = "p165-2", label = "train165_2", at = { zone = 12, x = 46.38, y = 62.05, r = 10 }, when = { profession = 165 },
           lines = {
             { kind = "train", skill = 165, rank = 2, npc = 1632 },
           } },
-        { id = "p171-2", at = { zone = 12, x = 39.84, y = 48.23, r = 10 }, when = { profession = 171 },
+        { id = "p171-2", label = "train171_2", at = { zone = 12, x = 39.84, y = 48.23, r = 10 }, when = { profession = 171 },
           lines = {
             { kind = "train", skill = 171, rank = 2, npc = 1215 },
           } },
-        { id = "p182-2", at = { zone = 12, x = 39.96, y = 48.41, r = 10 }, when = { profession = 182 },
+        { id = "p182-2", label = "train182_2", at = { zone = 12, x = 39.96, y = 48.41, r = 10 }, when = { profession = 182 },
           lines = {
             { kind = "train", skill = 182, rank = 2, npc = 1218 },
           } },
-        { id = "p197-2", at = { zone = 12, x = 79.22, y = 69.03, r = 10 }, when = { profession = 197 },
+        { id = "p197-2", label = "train197_2", at = { zone = 12, x = 79.22, y = 69.03, r = 10 }, when = { profession = 197 },
           lines = {
             { kind = "train", skill = 197, rank = 2, npc = 1103 },
           } },
-        { id = "p333-2", at = { zone = 12, x = 64.93, y = 70.71, r = 10 }, when = { profession = 333 },
+        { id = "p333-2", label = "train333_2", at = { zone = 12, x = 64.93, y = 70.71, r = 10 }, when = { profession = 333 },
           lines = {
             { kind = "train", skill = 333, rank = 2, npc = 11072 },
           } },
@@ -377,6 +435,7 @@ Noir.Route("alliance-human", {
         { id = "tMAGE-10", at = { zone = 12, x = 43.25, y = 66.19, r = 10 }, when = { class = "MAGE" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "MAGE", npc = 328 },
+            { kind = "selljunk", at = { zone = 12, x = 43.77, y = 65.8, r = 10 }, npc = 295 },
           } },
         { id = "a1860", at = { zone = 12, x = 43.25, y = 66.19, r = 10 }, when = { class = "MAGE" }, minLevel = 10, maxLevel = 18, targets = { friend = { 328 } },
           lines = {
@@ -385,6 +444,7 @@ Noir.Route("alliance-human", {
         { id = "tPRIEST-10", at = { zone = 12, x = 43.28, y = 65.72, r = 10 }, when = { class = "PRIEST" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "PRIEST", npc = 377 },
+            { kind = "selljunk", at = { zone = 12, x = 43.77, y = 65.8, r = 10 }, npc = 295 },
           } },
         { id = "o5624", at = { zone = 12, x = 48.15, y = 68.05, r = 40 }, text = "Guard Roberts is west of Sara Timberlain.", when = { class = "PRIEST" }, targets = { enemy = { 12423 } },
           lines = {
@@ -397,6 +457,7 @@ Noir.Route("alliance-human", {
         { id = "tROGUE-10", at = { zone = 12, x = 43.87, y = 65.94, r = 10 }, when = { class = "ROGUE" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "ROGUE", npc = 917 },
+            { kind = "selljunk", at = { zone = 12, x = 43.96, y = 65.92, r = 10 }, npc = 151 },
           } },
         { id = "a2205", at = { zone = 12, x = 43.87, y = 65.94, r = 10 }, when = { class = "ROGUE" }, minLevel = 10, maxLevel = 18, items = { 7674 }, targets = { friend = { 917 } },
           lines = {
@@ -405,18 +466,22 @@ Noir.Route("alliance-human", {
         { id = "tHUNTER-10", at = { zone = 12, x = 41.15, y = 66.23, r = 10 }, when = { class = "HUNTER" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "HUNTER", npc = 251507 },
+            { kind = "selljunk", at = { zone = 12, x = 41.53, y = 65.9, r = 10 }, npc = 54 },
           } },
         { id = "tPALADIN-10", at = { zone = 12, x = 41.1, y = 66.04, r = 10 }, when = { class = "PALADIN" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "PALADIN", npc = 927 },
+            { kind = "selljunk", at = { zone = 12, x = 41.37, y = 65.59, r = 10 }, npc = 74 },
           } },
         { id = "tWARLOCK-10", at = { zone = 12, x = 44.39, y = 66.24, r = 10 }, when = { class = "WARLOCK" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "WARLOCK", npc = 906 },
+            { kind = "selljunk", at = { zone = 12, x = 44.4, y = 65.99, r = 10 }, npc = 6374 },
           } },
         { id = "tWARRIOR-10", at = { zone = 12, x = 41.09, y = 65.77, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10,
           lines = {
             { kind = "train", level = 10, class = "WARRIOR", npc = 913 },
+            { kind = "selljunk", at = { zone = 12, x = 41.37, y = 65.59, r = 10 }, npc = 74 },
           } },
         { id = "t39.t76.t176.a59.a239", at = { zone = 12, x = 42.11, y = 65.93, r = 10 }, minLevel = 7, items = { 748 }, targets = { friend = { 240 } },
           lines = {
@@ -502,6 +567,7 @@ Noir.Route("alliance-human", {
         { id = "tMAGE-12", at = { zone = 1519, x = 49.56, y = 85.8, r = 10 }, when = { class = "MAGE" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "MAGE", npc = 5497 },
+            { kind = "selljunk", at = { zone = 1519, x = 51.84, y = 83.51, r = 10 }, npc = 1309 },
           } },
         { id = "t1860.a1861", at = { zone = 1519, x = 49.56, y = 85.8, r = 10 }, when = { class = "MAGE" }, minLevel = 10, items = { 7207 }, targets = { friend = { 5497 } },
           lines = {
@@ -519,20 +585,21 @@ Noir.Route("alliance-human", {
         { id = "tPALADIN-12", at = { zone = 12, x = 41.1, y = 66.04, r = 10 }, when = { class = "PALADIN" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "PALADIN", npc = 927 },
+            { kind = "selljunk", at = { zone = 12, x = 41.37, y = 65.59, r = 10 }, npc = 74 },
           } },
         { id = "a2998", at = { zone = 12, x = 41.1, y = 66.04, r = 10 }, when = { class = "PALADIN" }, minLevel = 12, maxLevel = 20, targets = { friend = { 927 } },
           lines = {
             { kind = "accept", quest = 2998, npc = 927 },
           } },
-        { id = "p186-2", at = { zone = 1519, x = 59.25, y = 37.83, r = 10 }, when = { profession = 186 },
+        { id = "p186-2", label = "train186_2", at = { zone = 1519, x = 59.25, y = 37.83, r = 10 }, when = { profession = 186 },
           lines = {
             { kind = "train", skill = 186, rank = 2, npc = 5513 },
           } },
-        { id = "p202-2", at = { zone = 1519, x = 61.88, y = 30.56, r = 10 }, when = { profession = 202 },
+        { id = "p202-2", label = "train202_2", at = { zone = 1519, x = 61.88, y = 30.56, r = 10 }, when = { profession = 202 },
           lines = {
             { kind = "train", skill = 202, rank = 2, npc = 11026 },
           } },
-        { id = "p393-2", at = { zone = 1519, x = 72.14, y = 62.21, r = 10 }, when = { profession = 393 },
+        { id = "p393-2", label = "train393_2", at = { zone = 1519, x = 72.14, y = 62.21, r = 10 }, when = { profession = 393 },
           lines = {
             { kind = "train", skill = 393, rank = 2, npc = 1292 },
           } },
@@ -543,10 +610,12 @@ Noir.Route("alliance-human", {
         { id = "tROGUE-12", at = { zone = 1519, x = 77.43, y = 65.31, r = 10 }, when = { class = "ROGUE" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "ROGUE", npc = 918 },
+            { kind = "selljunk", at = { zone = 1519, x = 76.8, y = 65.96, r = 10 }, npc = 12805 },
           } },
         { id = "tWARRIOR-12", at = { zone = 1519, x = 80.19, y = 61.26, r = 10 }, when = { class = "WARRIOR" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "WARRIOR", npc = 914 },
+            { kind = "selljunk", at = { zone = 1519, x = 77.51, y = 61.3, r = 10 }, npc = 1341 },
           } },
         { id = "f2", at = { zone = 1519, x = 71.29, y = 72.23, r = 10 },
           lines = {
@@ -572,6 +641,7 @@ Noir.Route("alliance-human", {
         { id = "tWARLOCK-12", at = { zone = 1519, x = 39.24, y = 84.96, r = 10 }, when = { class = "WARLOCK" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "WARLOCK", npc = 461 },
+            { kind = "selljunk", at = { zone = 1519, x = 39.53, y = 84.53, r = 10 }, npc = 5520 },
           } },
         { id = "t1685", at = { zone = 1519, x = 39.22, y = 85.23, r = 10 }, when = { class = "WARLOCK" }, targets = { friend = { 6122 } },
           lines = {
@@ -613,6 +683,7 @@ Noir.Route("alliance-human", {
         { id = "tHUNTER-12", at = { zone = 1519, x = 68, y = 35.99, r = 10 }, when = { class = "HUNTER" }, minLevel = 12,
           lines = {
             { kind = "train", level = 12, class = "HUNTER", npc = 5517 },
+            { kind = "selljunk", at = { zone = 1519, x = 63.26, y = 37.74, r = 10 }, npc = 5512 },
           } },
         { id = "x1537", at = { zone = 1519, x = 69.6, y = 30.3, r = 15 }, text = "Take the tram from Stormwind City to Ironforge.",
           lines = {
@@ -677,6 +748,10 @@ Noir.Route("alliance-human", {
       id = "human-12-20-darkshore", name = "12-20 Darkshore", names = { MAGE = "12-21 Darkshore", ROGUE = "12-21 Darkshore", WARRIOR = "13-20 Darkshore" }, group = "Alliance", subgroup = "1-20", minLevel = 12, maxLevel = 23, zone = 148,
       next = { { section = "human-20-23-ashenvale" } },
       steps = {
+        { id = "p186-3-skill", when = { profession = 186 }, reminder = { ends = "train186_3" },
+          lines = {
+            { kind = "skill", skill = 186, value = 125 },
+          } },
         { id = "g11@11", at = { zone = 11, x = 9.49, y = 59.69, r = 20 }, text = "Head north into Wetlands.",
           lines = {
             { kind = "goto", at = { zone = 11, x = 9.49, y = 59.69, r = 20 } },
@@ -839,6 +914,7 @@ Noir.Route("alliance-human", {
         { id = "tROGUE-14", at = { zone = 141, x = 56.38, y = 60.14, r = 10 }, when = { class = "ROGUE" }, minLevel = 14,
           lines = {
             { kind = "train", level = 14, class = "ROGUE", npc = 3599 },
+            { kind = "selljunk", at = { zone = 141, x = 56.12, y = 60.25, r = 10 }, npc = 3611 },
           } },
         { id = "a2241", at = { zone = 141, x = 56.38, y = 60.14, r = 10 }, when = { class = "ROGUE" }, minLevel = 10, maxLevel = 18, items = { 7735 }, targets = { friend = { 3599 } },
           lines = {
@@ -864,6 +940,7 @@ Noir.Route("alliance-human", {
         { id = "tWARRIOR-14", at = { zone = 1657, x = 58.71, y = 34.9, r = 10 }, when = { class = "WARRIOR" }, minLevel = 14,
           lines = {
             { kind = "train", level = 14, class = "WARRIOR", npc = 4087 },
+            { kind = "selljunk", at = { zone = 1657, x = 58.02, y = 34.52, r = 10 }, npc = 15351 },
           } },
         { id = "a1686", at = { zone = 1657, x = 57.3, y = 34.61, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, maxLevel = 18, targets = { friend = { 4088 } },
           lines = {
@@ -920,6 +997,7 @@ Noir.Route("alliance-human", {
         { id = "tWARRIOR-16", at = { zone = 1657, x = 58.71, y = 34.9, r = 10 }, when = { class = "WARRIOR" }, minLevel = 16,
           lines = {
             { kind = "train", level = 16, class = "WARRIOR", npc = 4087 },
+            { kind = "selljunk", at = { zone = 1657, x = 58.02, y = 34.52, r = 10 }, npc = 15351 },
           } },
         { id = "t1686.a1692.t1692.a1693.t1693", at = { zone = 1657, x = 57.3, y = 34.61, r = 10 }, when = { class = "WARRIOR" }, minLevel = 10, items = { 6812 }, targets = { friend = { 4088, 6142 } },
           lines = {
@@ -955,6 +1033,7 @@ Noir.Route("alliance-human", {
         { id = "tROGUE-16", at = { zone = 1537, x = 51.96, y = 14.84, r = 10 }, when = { class = "ROGUE" }, minLevel = 16,
           lines = {
             { kind = "train", level = 16, class = "ROGUE", npc = 5165 },
+            { kind = "selljunk", at = { zone = 1537, x = 52.95, y = 13.71, r = 10 }, npc = 5169 },
           } },
         { id = "a2298", at = { zone = 1537, x = 51.96, y = 14.84, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, maxLevel = 24, targets = { friend = { 5165 } },
           lines = {
@@ -1046,6 +1125,7 @@ Noir.Route("alliance-human", {
         { id = "tMAGE-16", at = { zone = 12, x = 43.25, y = 66.19, r = 10 }, when = { class = "MAGE" }, minLevel = 16,
           lines = {
             { kind = "train", level = 16, class = "MAGE", npc = 328 },
+            { kind = "selljunk", at = { zone = 12, x = 43.77, y = 65.8, r = 10 }, npc = 295 },
           } },
         { id = "a1919", at = { zone = 12, x = 43.25, y = 66.19, r = 10 }, when = { class = "MAGE" }, minLevel = 15, maxLevel = 23, targets = { friend = { 328 } },
           lines = {
@@ -1128,6 +1208,7 @@ Noir.Route("alliance-human", {
         { id = "tROGUE-18", at = { zone = 1519, x = 80.28, y = 68.58, r = 10 }, when = { class = "ROGUE" }, minLevel = 18,
           lines = {
             { kind = "train", level = 18, class = "ROGUE", npc = 13283 },
+            { kind = "selljunk", at = { zone = 1519, x = 80.28, y = 70.07, r = 10 }, npc = 1325 },
           } },
         { id = "t2298.t2300", at = { zone = 1519, x = 78.29, y = 71.14, r = 10 }, when = { class = "ROGUE" }, targets = { friend = { 6946 } },
           lines = {
@@ -1293,7 +1374,7 @@ Noir.Route("alliance-human", {
           lines = {
             { kind = "objective", quest = 951, index = 1, item = 5273 },
           } },
-        { id = "p186-3", at = { zone = 148, x = 38.25, y = 41.01, r = 10 }, when = { profession = 186 },
+        { id = "p186-3", label = "train186_3", at = { zone = 148, x = 38.25, y = 41.01, r = 10 }, when = { profession = 186 },
           lines = {
             { kind = "train", skill = 186, rank = 3, npc = 6297 },
           } },
@@ -1329,11 +1410,43 @@ Noir.Route("alliance-human", {
       id = "human-20-23-ashenvale", name = "20-23 Ashenvale", names = { MAGE = "21-23 Ashenvale", ROGUE = "21-24 Ashenvale" }, group = "Alliance", subgroup = "20-30", minLevel = 20, maxLevel = 26, zone = 331,
       next = { { section = "human-23-27-duskwood" } },
       steps = {
-        { id = "p165-3", at = { zone = 331, x = 35.98, y = 52.1, r = 10 }, when = { profession = 165 },
+        { id = "p164-3-skill", when = { profession = 164 }, reminder = { ends = "train164_3" },
+          lines = {
+            { kind = "skill", skill = 164, value = 125 },
+          } },
+        { id = "p165-3-skill", when = { profession = 165 }, reminder = { ends = "train165_3" },
+          lines = {
+            { kind = "skill", skill = 165, value = 125 },
+          } },
+        { id = "p171-3-skill", when = { profession = 171 }, reminder = { ends = "train171_3" },
+          lines = {
+            { kind = "skill", skill = 171, value = 125 },
+          } },
+        { id = "p182-3-skill", when = { profession = 182 }, reminder = { ends = "train182_3" },
+          lines = {
+            { kind = "skill", skill = 182, value = 125 },
+          } },
+        { id = "p197-3-skill", when = { profession = 197 }, reminder = { ends = "train197_3" },
+          lines = {
+            { kind = "skill", skill = 197, value = 125 },
+          } },
+        { id = "p202-3-skill", when = { profession = 202 }, reminder = { ends = "train202_3" },
+          lines = {
+            { kind = "skill", skill = 202, value = 125 },
+          } },
+        { id = "p333-3-skill", when = { profession = 333 }, reminder = { ends = "train333_3" },
+          lines = {
+            { kind = "skill", skill = 333, value = 125 },
+          } },
+        { id = "p393-3-skill", when = { profession = 393 }, reminder = { ends = "train393_3" },
+          lines = {
+            { kind = "skill", skill = 393, value = 125 },
+          } },
+        { id = "p165-3", label = "train165_3", at = { zone = 331, x = 35.98, y = 52.1, r = 10 }, when = { profession = 165 },
           lines = {
             { kind = "train", skill = 165, rank = 3, npc = 3967 },
           } },
-        { id = "p171-3", at = { zone = 331, x = 50.85, y = 67.11, r = 10 }, when = { profession = 171 },
+        { id = "p171-3", label = "train171_3", at = { zone = 331, x = 50.85, y = 67.11, r = 10 }, when = { profession = 171 },
           lines = {
             { kind = "train", skill = 171, rank = 3, npc = 3964 },
           } },
@@ -1523,27 +1636,27 @@ Noir.Route("alliance-human", {
           lines = {
             { kind = "accept", quest = 1698, npc = 5113 },
           } },
-        { id = "p164-3", at = { zone = 1537, x = 52.36, y = 42.55, r = 10 }, when = { profession = 164 },
+        { id = "p164-3", label = "train164_3", at = { zone = 1537, x = 52.36, y = 42.55, r = 10 }, when = { profession = 164 },
           lines = {
             { kind = "train", skill = 164, rank = 3, npc = 10276 },
           } },
-        { id = "p182-3", at = { zone = 1537, x = 55.9, y = 59.13, r = 10 }, when = { profession = 182 },
+        { id = "p182-3", label = "train182_3", at = { zone = 1537, x = 55.9, y = 59.13, r = 10 }, when = { profession = 182 },
           lines = {
             { kind = "train", skill = 182, rank = 3, npc = 5137 },
           } },
-        { id = "p197-3", at = { zone = 1537, x = 43.15, y = 29.36, r = 10 }, when = { profession = 197 },
+        { id = "p197-3", label = "train197_3", at = { zone = 1537, x = 43.15, y = 29.36, r = 10 }, when = { profession = 197 },
           lines = {
             { kind = "train", skill = 197, rank = 3, npc = 5153 },
           } },
-        { id = "p202-3", at = { zone = 1537, x = 67.48, y = 42.91, r = 10 }, when = { profession = 202 },
+        { id = "p202-3", label = "train202_3", at = { zone = 1537, x = 67.48, y = 42.91, r = 10 }, when = { profession = 202 },
           lines = {
             { kind = "train", skill = 202, rank = 3, npc = 11029 },
           } },
-        { id = "p333-3", at = { zone = 1537, x = 59.77, y = 45.45, r = 10 }, when = { profession = 333 },
+        { id = "p333-3", label = "train333_3", at = { zone = 1537, x = 59.77, y = 45.45, r = 10 }, when = { profession = 333 },
           lines = {
             { kind = "train", skill = 333, rank = 3, npc = 5157 },
           } },
-        { id = "p393-3", at = { zone = 1537, x = 39.86, y = 32.5, r = 10 }, when = { profession = 393 },
+        { id = "p393-3", label = "train393_3", at = { zone = 1537, x = 39.86, y = 32.5, r = 10 }, when = { profession = 393 },
           lines = {
             { kind = "train", skill = 393, rank = 3, npc = 6291 },
           } },
@@ -2602,6 +2715,14 @@ Noir.Route("alliance-human", {
       id = "human-32-35-stranglethorn-vale", name = "32-35 Stranglethorn Vale", names = { MAGE = "32-36 Stranglethorn Vale", ROGUE = "32-36 Stranglethorn Vale", WARLOCK = "32-36 Stranglethorn Vale", WARRIOR = "32-36 Stranglethorn Vale" }, group = "Alliance", subgroup = "30-40", minLevel = 32, maxLevel = 38, zone = 33,
       next = { { section = "human-35-37-desolace" } },
       steps = {
+        { id = "p164-4-skill", when = { profession = 164 }, reminder = { ends = "train164_4" },
+          lines = {
+            { kind = "skill", skill = 164, value = 200 },
+          } },
+        { id = "p186-4-skill", when = { profession = 186 }, reminder = { ends = "train186_4" },
+          lines = {
+            { kind = "skill", skill = 186, value = 200 },
+          } },
         { id = "y6-7#3", at = { zone = 1537, x = 55.5, y = 47.74, r = 10 }, text = "Fly from Ironforge, Dun Morogh to Menethil Harbor, Wetlands.", when = { class = "WARRIOR" },
           lines = {
             { kind = "fly", from = 6, to = 7 },
@@ -2812,7 +2933,7 @@ Noir.Route("alliance-human", {
             { kind = "turnin", quest = 577, at = { zone = 33, x = 28.29, y = 77.59, r = 10 }, npc = 2495 },
             { kind = "accept", quest = 628, at = { zone = 33, x = 28.29, y = 77.59, r = 10 }, npc = 2495, requires = { 577 } },
           } },
-        { id = "p164-4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
+        { id = "p164-4", label = "train164_4", at = { zone = 33, x = 28.99, y = 75.56, r = 10 }, when = { profession = 164 },
           lines = {
             { kind = "train", skill = 164, rank = 4, npc = 2836 },
           } },
@@ -2865,7 +2986,7 @@ Noir.Route("alliance-human", {
             { kind = "turnin", quest = 207, npc = 739, skipIfMissing = true },
             { kind = "turnin", quest = 574, npc = 469, skipIfMissing = true },
           } },
-        { id = "p186-4", at = { zone = 10, x = 74.05, y = 49.62, r = 10 }, when = { profession = 186 },
+        { id = "p186-4", label = "train186_4", at = { zone = 10, x = 74.05, y = 49.62, r = 10 }, when = { profession = 186 },
           lines = {
             { kind = "train", skill = 186, rank = 4, npc = 3137 },
           } },

@@ -102,7 +102,8 @@ local function defaultWorld()
         { text = "Erland must reach Rane Yorick", type = "event" },
       } },
     },
-    -- Items the client has in its cache: GetItemInfo knows these and returns nil for any other.
+    -- Items the client has in its cache: GetItemInfo knows these and returns nil for any other. qualities: an item's
+    -- quality (0 poor/grey, 1 common, ...; 1 when not listed); prices: its sell price in copper (0 when not listed).
     items = { [3265] = "Scavenger Paw", [159] = "Refreshing Spring Water", [2287] = "Haunch of Meat", [6948] = "Hearthstone" },
     -- Spells by ID, for GetSpellInfo; itemSpells: the spell an item casts when used, itemCooldowns its cooldown.
     spells = { [556] = "Astral Recall", [8690] = "Hearthstone" },
@@ -1580,6 +1581,29 @@ function Client:buildGlobals()
     return "|cffffffff|Hitem:" .. id .. "::::::::|h[" .. name .. "]|h|r"
   end
   c.itemLink = itemLink
+  -- Using a bag slot: at an open merchant the stack is sold (its sell price times its count, world.prices; an item
+  -- without a price is refused with the game's message), else the item is used.
+  local function useSlot(bag, slot)
+    record("UseContainerItem", bag, slot)
+    local e = slotInfo(bag, slot)
+    if not e then return end
+    if c.merchant then
+      local price = (c.world.prices and c.world.prices[e.id]) or 0
+      if price <= 0 then
+        c:fire("UI_ERROR_MESSAGE", 51, "The merchant doesn't want that item.")
+        return
+      end
+      s.bags[bag][slot] = nil
+      s.money = s.money + price * e.count
+      c.sold = c.sold or {}
+      c.sold[#c.sold + 1] = { item = e.id, count = e.count, quality = c:itemQuality(e.id), copper = price * e.count }
+      c:fire("BAG_UPDATE", bag)
+      c:fire("PLAYER_MONEY")
+      c:fire("BAG_UPDATE_DELAYED")
+      return
+    end
+    c:useItem(e.id)
+  end
   if self.api == "modern" then
     G.C_Container = {
       GetContainerNumSlots = function(bag) return s.bags[bag] and s.bags[bag].size or 0 end,
@@ -1590,9 +1614,11 @@ function Client:buildGlobals()
       GetContainerItemInfo = function(bag, slot)
         local e = slotInfo(bag, slot)
         if not e then return nil end
-        return { iconFileID = 134400, stackCount = e.count, itemID = e.id, hyperlink = itemLink(e.id), isLocked = false }
+        return { iconFileID = 134400, stackCount = e.count, itemID = e.id, hyperlink = itemLink(e.id), isLocked = false,
+          quality = c:itemQuality(e.id), hasNoValue = ((c.world.prices and c.world.prices[e.id]) or 0) <= 0 }
       end,
       GetItemCooldown = cooldown,
+      UseContainerItem = useSlot,
     }
   else
     G.GetContainerNumSlots = function(bag) return s.bags[bag] and s.bags[bag].size or 0 end
@@ -1603,8 +1629,10 @@ function Client:buildGlobals()
     G.GetContainerItemInfo = function(bag, slot)
       local e = slotInfo(bag, slot)
       if not e then return nil end
-      return 134400, e.count, false, 1, false, false, itemLink(e.id), false, false, e.id
+      return 134400, e.count, false, c:itemQuality(e.id), false, false, itemLink(e.id), false,
+        ((c.world.prices and c.world.prices[e.id]) or 0) <= 0, e.id
     end
+    G.UseContainerItem = useSlot
     G.GetContainerItemLink = function(bag, slot)
       local e = slotInfo(bag, slot)
       return e and itemLink(e.id) or nil
@@ -1836,15 +1864,16 @@ function Client:buildGlobals()
     if s.pos.hidden then return nil end
     return s.facing or 0
   end
-  -- As the classic client: name, link, quality, item level, required level, type, subtype, stack size, equip slot,
-  -- texture, sell price (world.prices, copper). Takes an ID or an item link; nil for an item not in the cache.
+  -- As the classic client: name, link, quality (world.qualities, 1 when not listed), item level, required level, type,
+  -- subtype, stack size, equip slot, texture, sell price (world.prices, copper). Takes an ID or an item link; nil for
+  -- an item not in the cache.
   G.GetItemInfo = function(id)
     if type(id) == "string" then id = tonumber(id:match("item:(%d+)")) end
     local name = id and c.world.items and c.world.items[id]
     if not name then return nil end
     local stack = (c.world.stacks and c.world.stacks[id]) or 20
     local price = (c.world.prices and c.world.prices[id]) or 0
-    return name, "|cffffffff|Hitem:" .. id .. "::::::::|h[" .. name .. "]|h|r", 1, 1, 0, "Miscellaneous", "Junk", stack, "",
+    return name, "|cffffffff|Hitem:" .. id .. "::::::::|h[" .. name .. "]|h|r", c:itemQuality(id), 1, 0, "Miscellaneous", "Junk", stack, "",
       134400, price
   end
   G.GetItemIcon = function(id) return 134400 end
@@ -3252,6 +3281,17 @@ end
 -- ---------------------------------------------------------------------------------------------------------------
 -- Bags, items, spells
 -- ---------------------------------------------------------------------------------------------------------------
+
+-- Sets the character's money (copper) and fires PLAYER_MONEY.
+function Client:setMoney(copper)
+  self.s.money = copper
+  self:fire("PLAYER_MONEY")
+end
+
+-- An item's quality: world.qualities[id], else 1 (common).
+function Client:itemQuality(id)
+  return (self.world.qualities and self.world.qualities[id]) or 1
+end
 
 function Client:itemCount(id)
   local n = 0

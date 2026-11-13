@@ -31,7 +31,9 @@ function levelsOf(sections, list) {
   sections.flatMap((s) => s.steps).forEach((s, i) => map.set(s, i));
   return (step) => ({ start: list[map.get(step)], end: list[map.get(step)] });
 }
-const profSteps = (sections) => sections.flatMap((s) => s.steps).filter((s) => s.id.startsWith("p"));
+// the trainer steps; their reminders ("raise the skill to the gate") are p<skill>-<rank>-skill
+const profSteps = (sections) => sections.flatMap((s) => s.steps).filter((s) => /^p\d+-\d$/.test(s.id));
+const reminderSteps = (sections) => sections.flatMap((s) => s.steps).filter((s) => /^p\d+-\d-skill$/.test(s.id));
 
 test("the ranks are the plan's: gates 50, 125, 200, caps 150, 225, 300, levels 10, 20, 35 not verified", () => {
   assert.deepStrictEqual(RANKS.map((r) => [r.rank, r.name, r.gate, r.cap, r.level, r.verified]),
@@ -54,9 +56,10 @@ test("a trainer step is written at the first step at or after the rank's level i
   const before = JSON.stringify(sections);
   const out = addProfessionSteps(w.db, sections, "Alliance", { professions: SMITH, levelOf: levelsOf(sections, levels), notes });
   assert.strictEqual(JSON.stringify(sections), before, "the input is not changed");
-  assert.deepStrictEqual(out[1].steps.map((s) => s.id), ["p164-2", sections[1].steps[0].id, sections[1].steps[1].id, sections[1].steps[2].id, sections[1].steps[3].id,
+  assert.deepStrictEqual(out[1].steps.map((s) => s.id), ["p164-2-skill", "p164-3-skill", "p164-2", sections[1].steps[0].id, sections[1].steps[1].id, sections[1].steps[2].id, sections[1].steps[3].id,
     "p164-3", sections[1].steps[4].id, sections[1].steps[5].id]);
-  assert.deepStrictEqual(out[1].steps[0], { id: "p164-2", when: { profession: 164 }, at: P(200, 78, 52, 10), lines: [{ kind: "train", skill: 164, rank: 2, npc: 700 }] });
+  assert.deepStrictEqual(out[1].steps[2], { id: "p164-2", label: "train164_2", when: { profession: 164 }, at: P(200, 78, 52, 10),
+    lines: [{ kind: "train", skill: 164, rank: 2, npc: 700 }] });
   assert.strictEqual(out[0].steps.length, 6);
   assert.deepStrictEqual(notes.map((n) => [n.skill, n.rank]), [[164, 4]], "Artisan's level is never reached");
   assert.strictEqual(checkRoute3({ format: 3, race: "Human", faction: "Alliance", sections: out }), null);
@@ -100,4 +103,26 @@ test("a rank with no trainer within three sections is listed in the notes and no
   // the Horde trainer in that zone is not used either
   const horde = addProfessionSteps(w.db, sections, "Horde", { professions: SMITH, levelOf: levelsOf(sections, [10, 10, 11, 11, 12, 12, 13, 13]), notes: [] });
   assert.deepStrictEqual(profSteps(horde), []);
+});
+
+test("each trainer step has a reminder to raise the skill to the rank's gate, from the start of its section", () => {
+  const { w } = world();
+  const sections = chain([100, 200], 6);
+  const levels = [8, 9, 10, 11, 12, 12, 13, 15, 17, 19, 20, 21];
+  const out = addProfessionSteps(w.db, sections, "Alliance", { professions: SMITH, levelOf: levelsOf(sections, levels), notes: [] });
+  assert.deepStrictEqual(reminderSteps(out), [
+    { id: "p164-2-skill", when: { profession: 164 }, reminder: { ends: "train164_2" }, lines: [{ kind: "skill", skill: 164, value: 50 }] },
+    { id: "p164-3-skill", when: { profession: 164 }, reminder: { ends: "train164_3" }, lines: [{ kind: "skill", skill: 164, value: 125 }] },
+  ]);
+  // in the train step's section, before it, with the same condition
+  for (const r of reminderSteps(out)) {
+    const section = out.find((s) => s.steps.includes(r));
+    const at = section.steps.indexOf(r), train = section.steps.findIndex((s) => s.label === r.reminder.ends);
+    assert.ok(train > at, `${r.id} comes before its train step`);
+    assert.deepStrictEqual(section.steps[train].when, r.when);
+  }
+  assert.strictEqual(reminderSteps([out[0]]).length, 0, "nothing in a section without a trainer step");
+  // a rank with no step gets no reminder
+  assert.ok(!reminderSteps(out).some((r) => r.id === "p164-4-skill"));
+  assert.strictEqual(checkRoute3({ format: 3, race: "Human", faction: "Alliance", sections: out }), null);
 });

@@ -8,6 +8,17 @@
 --   Lines.FLY_ARRIVE_YARDS = 60                         this near the destination's flight master counts as arrived
 --   Lines.RANK_CAP = { 75, 150, 225, 300 }              the skill cap of each profession rank
 --   Lines.RANK_GATE = { 0, 50, 125, 200 }               the skill a Forever trainer asks before teaching each rank
+--   Lines.SELL_JUNK_FLOOR = 1000                        copper (10 silver): while what the visit's training costs is
+--                                                       not known, a selljunk line shows only below this much money
+--   Lines.TrainingCost(step) -> copper or nil           what the class training of a visit step (its train line's
+--                                                       class and level) cost before, State.TrainingCost
+--   selljunk line ("sell your grey items before training", on early trainer visits): hidden while the bags hold no
+--       grey item that sells, once the step's train line is done, and while the money covers the known cost of
+--       the training (or, the cost unknown, is at least SELL_JUNK_FLOOR); shown, whatever the cost, while a trainer
+--       window lists an available service the money does not cover. Done when a merchant window opened (and
+--       closed) after the step became current: at any merchant, not only the line's.
+--   skill line ("raise the skill to the trainer's gate", reminders before profession trainer steps): done at
+--       skill >= value, with the counter { have, need }; hidden while the profession is neither learned nor planned.
 --   Lines.Active(line) -> boolean                       use, target, note, and goto without a positive radius are
 --                                                       passive (they never block the step and count as done)
 --   Lines.Check(line, step, ctx) -> state, evidence, counter
@@ -15,7 +26,7 @@
 --              says why),
 --       "missing" (a turn-in or objective whose quest is neither in the log nor handed in), "hidden" (a collect with
 --       count 0, or a line whose `when` does not hold). evidence: a short sentence for done and skip.
---       counter: { have, need } (also as counter.have, counter.need) for objective, collect and grind lines.
+--       counter: { have, need } (also as counter.have, counter.need) for objective, collect, grind and skill lines.
 --       ctx (kept by Progress): since = GetTime() when the step became current; ticks = { [line index] = true }
 --       for ticked lines (a manual line is done only when ticked); bound = the bind location name of this step's
 --       inn when Progress knows it.
@@ -47,6 +58,7 @@ Lines.FLY_GRACE = 1.5
 Lines.FLY_ARRIVE_YARDS = 60
 Lines.RANK_CAP = { 75, 150, 225, 300 }
 Lines.RANK_GATE = { 0, 50, 125, 200 }
+Lines.SELL_JUNK_FLOOR = 1000
 Lines.Applies = Noir.Guide.When
 
 -- A bind within this many yards of the step's place is at the step's inn.
@@ -484,6 +496,56 @@ check.train = function(line, _, ctx)
     return "todo"
   end
   return "todo"
+end
+
+-- The step's class train line, if any.
+local function classTrain(step)
+  local list = type(step) == "table" and step.lines or {}
+  for i = 1, #list do
+    local l = list[i]
+    if l.kind == "train" and l.class and l.level then return l end
+  end
+  return nil
+end
+
+function Lines.TrainingCost(step)
+  local train = classTrain(step)
+  if not train then return nil end
+  return State.TrainingCost(train.class, train.level)
+end
+
+check.selljunk = function(line, step, ctx)
+  local train = classTrain(step)
+  if train and Lines.Check(train, step, ctx) == "done" then return "hidden" end
+  local m = State.merchant
+  if m.opened and within(m.opened, ctx.since) then
+    if m.closed then return "done", "sold at a vendor" end
+    local _, stacks = State.Junk()
+    if stacks == 0 then return "done", "grey items sold" end
+    return "todo"
+  end
+  local _, stacks = State.Junk()
+  if stacks == 0 then return "hidden" end
+  if State.TrainerShort() then return "todo" end
+  local cost = Lines.TrainingCost(step)
+  local money = State.money or 0
+  if cost then
+    if money >= cost then return "hidden" end
+  elseif money >= Lines.SELL_JUNK_FLOOR then
+    return "hidden"
+  end
+  return "todo"
+end
+
+check.skill = function(line)
+  local professions = Noir.Professions
+  local learned = professions and professions.Has and professions.Has(line.skill)
+  local planned = professions and professions.IsPlanned and professions.IsPlanned(line.skill)
+  if not (learned or planned) then return "hidden" end
+  local have = skillOf(line.skill)
+  local need = line.value or 0
+  if have >= need then return "done", "skill reached", counter(need, need) end
+  return "todo", nil, counter(have, need)
 end
 
 check.vendor = function(line, _, ctx)

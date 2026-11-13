@@ -200,7 +200,9 @@ end
 -- ---------------------------------------------------------------------------------------------------------------
 -- Saved variables: NoirGuidesDB for the account, NoirGuidesCharDB for the character, schema 2:
 --   NoirGuidesDB     = { schema = 2, profiles = { <name> = { <option key> = value, positions = { ... } } },
---                        defaultProfile = "Default" }                     (Options.lua reads and writes the profiles)
+--                        defaultProfile = "Default",                      (Options.lua reads and writes the profiles)
+--                        trainerCosts = { <CLASS> = { [level] = copper } } }   (State.lua: what class training cost,
+--                                                                          for every character of the account)
 --   NoirGuidesCharDB = { schema = 2, profile = "<name>", owner = "<UnitGUID('player')>", guide = { ... },
 --                        why = { ... }, professions = { ... }, talents = { ... } }
 -- Schema 1 (0.1.x) is migrated, not reset: NoirGuidesDB.options becomes the Default profile (the automation
@@ -261,6 +263,27 @@ local function migrateAccount(db)
   db.defaultProfile = DEFAULT_PROFILE
 end
 
+-- The remembered training costs: class tokens to tables of whole levels 1 to 60 and copper amounts of at least 0.
+-- Added in 0.4.0 within schema 2 (a missing table is simply empty); anything else in it is dropped.
+local function shapeCosts(db)
+  local costs = db.trainerCosts
+  if costs == nil then return end
+  if type(costs) ~= "table" then
+    db.trainerCosts = nil
+    return
+  end
+  for class, levels in pairs(costs) do
+    if type(class) ~= "string" or type(levels) ~= "table" then
+      costs[class] = nil
+    else
+      for level, cost in pairs(levels) do
+        local wholeLevel = type(level) == "number" and level == math.floor(level) and level >= 1 and level <= 60
+        if not (wholeLevel and finite(cost) and cost >= 0) then levels[level] = nil end
+      end
+    end
+  end
+end
+
 -- Schema 1 character data: the format 2 places are dropped, with one entry in the why-log saying so.
 local function migrateCharacter(char)
   if char.progress ~= nil then
@@ -306,6 +329,7 @@ local function shapeAccount(db)
     end
     db.defaultProfile = profiles[DEFAULT_PROFILE] and DEFAULT_PROFILE or first
   end
+  shapeCosts(db)
 end
 
 -- A character uses its saved profile while it exists, else the account's default for new characters.
