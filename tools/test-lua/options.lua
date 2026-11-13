@@ -10,7 +10,7 @@ local EXPECTED = {
   otherSections = false, highlight = true, itemButtons = true, buttonBackground = true, buttonScale = 1, arrow = true,
   arrowScale = 1, arrowText = 12, minimapPins = true, pinRing = false, worldPins = 7, pinSize = 1, pinMerge = 1,
   pinAlpha = 0.6, autoQuests = true, guideRewards = false, rewardMarker = true, bestReward = false, train = false,
-  flights = true, hearth = true, dialogue = true, buy = true, targetButtons = true, nameplates = true, markers = true,
+  flights = true, hearth = true, dialogue = true, buy = true, sellJunk = true, targetButtons = true, nameplates = true, markers = true,
   outlevel = true, groupQuests = false, talents = true, neverSkip = false, offerCleanup = true, conflicts = true,
   debug = false, accent = "class", backgroundAlpha = 0.75,
 }

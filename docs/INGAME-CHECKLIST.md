@@ -135,6 +135,12 @@ Most of section 2 needs nothing more than `/noir state` and `/noir problems` aft
 - [ ] The minimap button sits on the minimap's edge at the bottom left; drag it around the edge and it follows the cursor along the rim and stays there after /reload; left click hides every Noir window and a second click brings them back; right click opens the main menu at the cursor (#98).
 - [ ] With TomTom loaded, 20 seconds after login one chat line warns about the second arrow; with the warning switched off (Advanced) it does not come (#99).
 
+### Grey items and profession skill reminders (0.4.0)
+
+- [ ] At level 2 to 20 with grey items in the bags and under 10 silver, a class trainer visit shows "Sell your grey items at <vendor> before training" with an arrow to that vendor; `/noir state` prints the money and the grey items it sees (#100). After the trainer window has been opened once at that level, the line says "training costs about ..." with the sum of the spells that were available, also on another character of the same class (#102).
+- [ ] Open any vendor with grey items: one slot is sold every 0.2 s, whites and better stay, and one chat line gives the count and the total; hold Shift (or Ctrl or Alt) while opening the vendor and nothing is sold (#101).
+- [ ] With a planned or learned profession, a reminder "Raise <profession> to 50" with the skill counter shows from the start of the section that holds the Journeyman trainer step, ticks itself at 50, and is gone once the trainer step is passed.
+
 ## 3. Skyborne start (High Order and Windshaper)
 
 The two Skyborne races, `HighOrder` (Alliance) and `Windshaper` (Horde), start on Zephras Isle (AreaTable area 16593, its own continent 2991). Their routes rest on the most assumptions.

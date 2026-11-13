@@ -332,6 +332,7 @@ SettingsPanel.CONTROLS = {
     tick("hearth", "Set the hearthstone"),
     tick("dialogue", "Pick dialogue options"),
     tick("buy", "Buy what the steps need"),
+    tick("sellJunk", "Sell grey items at vendors"),
     tick("targetButtons", "Target buttons"),
     tick("nameplates", "Longer nameplate range"),
     tick("markers", "Raid markers on targets"),

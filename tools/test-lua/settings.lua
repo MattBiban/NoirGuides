@@ -21,6 +21,7 @@ local TAB_OF = {
   pinAlpha = "Navigation",
   autoQuests = "Automation", guideRewards = "Automation", rewardMarker = "Automation", bestReward = "Automation",
   train = "Automation", flights = "Automation", hearth = "Automation", dialogue = "Automation", buy = "Automation",
+  sellJunk = "Automation",
   targetButtons = "Automation", nameplates = "Automation", markers = "Automation",
   outlevel = "Route", groupQuests = "Route", talents = "Route",
   neverSkip = "Advanced", offerCleanup = "Advanced", conflicts = "Advanced", debug = "Advanced",

@@ -3,18 +3,19 @@
 -- follows the game by itself: no command is needed for anything here.
 --
 --   Automation.Enabled(key) -> boolean   the option of that name: autoQuests, guideRewards, rewardMarker, bestReward,
---                                        flights, hearth, dialogue, buy, train (false for any other key)
+--                                        flights, hearth, dialogue, buy, sellJunk, train (false for any other key)
 --   Automation.Read() -> { marker, logMarker, training, talk }
 --                                        marker / logMarker = { quest, choice, shown } while the coin marks a choice
 --                                        on the reward page / in the quest log's detail pane; training = true while
---                                        the trainer automation runs; talk = { ctrl, shift, any } for the NPC
---                                        conversation in progress
+--                                        the trainer automation runs; selling = true while grey items are being
+--                                        sold; talk = { ctrl, shift, any } for the NPC conversation in progress
 --   Automation.FOLLOW_UP_SECONDS = 0.5   a quest page this soon after a hand-in is a follow-up
 --   Automation.GETFLIGHT_SECONDS = 10    a flight point line re-picks the flight master option at most this often
 --   Automation.FLIGHT_DELAY = 0.2        the flight is taken this long after the flight map opens
 --   Automation.TRAIN_SECONDS = 15, Automation.TRAIN_EVERY = 0.2   the trainer automation's span and pace
 --   Automation.HANDOVER_SECONDS = 0.5    after the gossip list closes, another window of the NPC opened this soon
 --                                        is the same conversation
+--   Automation.SELL_EVERY = 0.2          grey items are sold one bag slot per this many seconds
 --
 -- Rules:
 --   * Holding Ctrl when an NPC window opens keeps accept, hand-in and reward automation away for that conversation;
@@ -45,6 +46,10 @@
 --     count, capped by the stock, in full stacks, and closes once the bags hold it; nothing when a collect line of the
 --     same item on the cards is done. An item sold in bundles is bought in whole bundles (the count rounded up), and
 --     its stock counts bundles.
+--   * Grey items (sellJunk, on by default): at any merchant, unless a modifier key was held when its window opened,
+--     one bag slot of quality 0 (poor) items is sold every SELL_EVERY until none is left, then one chat line gives
+--     the total. Nothing above quality 0 is sold (each slot is read again just before), and no item a collect line
+--     on the cards still needs. A vendor line that closes the merchant once it bought waits for the selling to end.
 --   * Trainer (train off by default): for TRAIN_SECONDS after TRAINER_SHOW, every TRAIN_EVERY, buys one available
 --     service, lowest level first: every one at a class trainer, only those named by a train line on a card at a
 --     profession trainer; nothing at a pet trainer. No gold check.
@@ -61,10 +66,11 @@ Automation.FLIGHT_DELAY = 0.2
 Automation.TRAIN_SECONDS = 15
 Automation.TRAIN_EVERY = 0.2
 Automation.HANDOVER_SECONDS = 0.5
+Automation.SELL_EVERY = 0.2
 
 local KEYS = {
   autoQuests = true, guideRewards = true, rewardMarker = true, bestReward = true, flights = true, hearth = true,
-  dialogue = true, buy = true, train = true,
+  dialogue = true, buy = true, sellJunk = true, train = true,
 }
 -- A conversation with no window event for this long has ended even if the client never said so.
 local STALE_SECONDS = 60
@@ -741,9 +747,99 @@ local function merchantIndex(item)
   return nil
 end
 
+local selling = nil -- { serial, copper, count } while grey items are being sold
+local sellSerial = 0
+
+local function merchantOpen()
+  local merchant = State.merchant
+  return merchant and merchant.opened and not merchant.closed
+end
+
+-- Closes the merchant once the bags hold what a vendor line bought, unless grey items are still being sold.
+local function closeIfBought()
+  if not closing or selling or not merchantOpen() then return end
+  if State.ItemCount(closing.item) >= closing.target then
+    closing = nil
+    if CloseMerchant then CloseMerchant() end
+  end
+end
+
+-- Items a collect line on the cards still needs (not done): never sold.
+local function collected()
+  local keep = {}
+  eachCardLine(function(line, entry)
+    if line.kind == "collect" and type(line.item) == "number" and entry.state ~= "done" then keep[line.item] = true end
+  end)
+  return keep
+end
+
+local function useSlot(bag, slot)
+  if C_Container and C_Container.UseContainerItem then
+    C_Container.UseContainerItem(bag, slot)
+  elseif UseContainerItem then
+    UseContainerItem(bag, slot)
+  end
+end
+
+local function money(copper)
+  local text = Noir.Text
+  if text and text.Money then return text.Money(copper) end
+  return tostring(copper) .. "c"
+end
+
+local function stopSelling()
+  local done = selling
+  selling = nil
+  if done and done.count > 0 then
+    Noir.Print("Sold " .. done.count .. (done.count == 1 and " grey item" or " grey items") .. " for " .. money(done.copper) .. ".")
+  end
+  closeIfBought()
+end
+
+-- One bag slot of grey items a tick; the slot is taken from a fresh read of the bags, so only quality 0 is sold.
+local function sellTick(serial)
+  if not selling or selling.serial ~= serial then return end
+  if not merchantOpen() then return stopSelling() end
+  local keep = collected()
+  local list = State.JunkSlots()
+  local pick
+  for i = 1, #list do
+    local slot = list[i]
+    if not (slot.item and keep[slot.item]) and not (selling.tried[slot.bag .. ":" .. slot.slot]) then
+      pick = slot
+      break
+    end
+  end
+  if not pick then return stopSelling() end
+  selling.tried[pick.bag .. ":" .. pick.slot] = true
+  useSlot(pick.bag, pick.slot)
+  selling.count = selling.count + pick.count
+  selling.copper = selling.copper + pick.value
+  Noir.After(Automation.SELL_EVERY, function() sellTick(serial) end)
+end
+
+local function startSelling(conversation)
+  selling = nil
+  if not Automation.Enabled("sellJunk") or conversation.any then return end
+  if not ((C_Container and C_Container.UseContainerItem) or UseContainerItem) then return end
+  local _, stacks = State.Junk()
+  if stacks == 0 then return end
+  sellSerial = sellSerial + 1
+  selling = { serial = sellSerial, copper = 0, count = 0, tried = {} }
+  local serial = sellSerial
+  Noir.After(Automation.SELL_EVERY, function() sellTick(serial) end)
+end
+
+local onMerchantBuy
+
 local function onMerchant()
-  begin()
+  local conversation = begin()
   closing = nil
+  startSelling(conversation)
+  onMerchantBuy()
+end
+
+onMerchantBuy = function()
   if not Automation.Enabled("buy") or not BuyMerchantItem then return end
   local line = cardLine("vendor", function(l) return type(l.buy) == "table" and not otherNpc(l) end)
   if not line then return end
@@ -778,14 +874,7 @@ end
 
 local function bagsChanged()
   if not closing then return end
-  Noir.After(0, function()
-    local merchant = State.merchant
-    if not closing or not (merchant and merchant.opened and not merchant.closed) then return end
-    if State.ItemCount(closing.item) >= closing.target then
-      closing = nil
-      if CloseMerchant then CloseMerchant() end
-    end
-  end)
+  Noir.After(0, closeIfBought)
 end
 
 -- ---------------------------------------------------------------------------------------------------------------
@@ -873,7 +962,7 @@ function Automation.Read()
     shownMarker.shown = markerFrame ~= nil and markerFrame:IsVisible() and marker.shown or false
   end
   return {
-    marker = shownMarker, logMarker = log, training = training ~= nil,
+    marker = shownMarker, logMarker = log, training = training ~= nil, selling = selling ~= nil,
     talk = talk and { ctrl = talk.ctrl, shift = talk.shift, any = talk.any } or nil,
   }
 end
@@ -907,6 +996,7 @@ Noir.On("GOSSIP_CLOSED", gossipClosed)
 Noir.On("TAXIMAP_CLOSED", finish)
 Noir.On("MERCHANT_CLOSED", function()
   closing = nil
+  if selling then stopSelling() end
   finish()
 end)
 Noir.On("TRAINER_CLOSED", function()

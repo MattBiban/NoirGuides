@@ -14,6 +14,8 @@
 --       "Flight point 7", "Spell 9"
 --   Text.Place(point) -> "Tirisfal Glades 30.8, 66.2" (the zone alone when x = y = 0)
 --   Text.Distance(yards) -> "120 yd"
+--   Text.Money(copper) -> "1g 2s 3c": gold, silver and copper, the parts that are 0 left out ("1s 20c", "85c", "2g");
+--       "0c" for nothing
 --   Text.RANKS                     the names of the profession ranks 1 to 4
 local Noir = Noir
 local State = Noir.State
@@ -91,6 +93,17 @@ end
 
 function Text.Distance(yards)
   return string.format("%d yd", math.floor((yards or 0) + 0.5))
+end
+
+function Text.Money(copper)
+  copper = math.floor(tonumber(copper) or 0)
+  if copper < 0 then copper = 0 end
+  local gold, silver, rest = math.floor(copper / 10000), math.floor(copper / 100) % 100, copper % 100
+  local parts = {}
+  if gold > 0 then parts[#parts + 1] = gold .. "g" end
+  if silver > 0 then parts[#parts + 1] = silver .. "s" end
+  if rest > 0 or #parts == 0 then parts[#parts + 1] = rest .. "c" end
+  return table.concat(parts, " ")
 end
 
 function Text.StepTitle(step)
@@ -244,6 +257,28 @@ words.vendor = function(line)
     b.add(", buy " .. tostring(line.buy.count) .. " ").add(Text.ItemName(line.buy.item), "buy")
   end
   return b.done("vendor")
+end
+
+-- "Sell your grey items at <Vendor> (training costs about 1s 20c, you have 85c)"; without a known cost, "... before
+-- training".
+words.selljunk = function(line, step)
+  local b = builder().add("Sell your grey items at ")
+  if line.npc then b.add(Text.NpcName(line.npc), "friend") else b.add("a vendor") end
+  local cost = Noir.Lines.TrainingCost and Noir.Lines.TrainingCost(step)
+  if cost then
+    b.add(" (training costs about " .. Text.Money(cost) .. ", you have " .. Text.Money(State.money) .. ")")
+  else
+    b.add(" before training")
+  end
+  return b.done("vendor")
+end
+
+-- "Raise Mining to 50 12/50"
+words.skill = function(line, step)
+  local _, _, counter = check(line, step)
+  local b = builder().add("Raise " .. Noir.Lines.ProfessionName(line.skill) .. " to " .. tostring(line.value))
+  if counter then b.add(" " .. counterText(counter)) end
+  return b.done("trainer")
 end
 
 words.use = function(line)
