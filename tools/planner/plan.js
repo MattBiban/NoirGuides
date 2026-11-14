@@ -25,7 +25,8 @@ function planRoute(db, ch, options = {}) {
   const { info, byZone, bands } = ctx;
   const st = { level: 1, xp: 0, pos: null, started: false, zone: zoneOf(db, ch.startArea), log: new Map(), done: new Set(), have: new Set(),
     flights: new Set(), hearth: null, lastHearth: -Infinity, clock: 0, steps: [], levelAt: [0, 0], links: new Map(),
-    announce: false, skip: new Set(), barren: new Set(), chosen: false, finishing: false, hopped: new Set(), grinds: 0, relaxed: false, urgent: false, errands: false };
+    announce: false, skip: new Set(), barren: new Set(), chosen: false, finishing: false, hopped: new Set(), grinds: 0, relaxed: false, urgent: false, errands: false,
+    inRun: false }; // inRun: the last quest step was an objective, so the next objective goes on with the same loop
 
   const speed = () => (st.level >= ESTIMATES.MOUNT_LEVEL ? ESTIMATES.MOUNT_SPEED : ESTIMATES.RUN_SPEED);
   const wrapUp = () => st.level >= maxLevel || st.finishing; // no new quests: what is in the log is finished
@@ -85,7 +86,7 @@ function planRoute(db, ch, options = {}) {
       st.level = step.level;
       st.xp = 0;
     }
-    if (i) { st.barren.clear(); st.chosen = false; st.announce = false; }
+    if (i) { st.barren.clear(); st.chosen = false; st.announce = false; st.inRun = step.action === "objective"; }
     st.steps.push(step);
     for (let level = before + 1; level <= st.level; level++) st.levelAt[level] = st.steps.length - 1;
     if (st.level > before) { st.relaxed = false; st.errands = false; }
@@ -197,9 +198,18 @@ function planRoute(db, ch, options = {}) {
       candidates = stay.length ? stay : ready;
     }
     for (const t of candidates) t.cost = seconds(st.pos, t.point);
+    // one loop: the quests around are taken before the first objective (GATHER_SECONDS), and while objectives are
+    // open a hand-in that is not on the way waits for the end of the loop (LOOP_SHARE). Objectives over the border
+    // do not count: they are the end of the visit, and what is ready is handed in before the crossing.
+    if (candidates.some((t) => t.kind === "accept" && t.cost <= C.GATHER_SECONDS)) candidates = candidates.filter((t) => t.kind !== "objective");
+    const open = candidates.filter((t) => t.kind === "objective" && !hop(t));
+    if (open.length) {
+      const nearest = Math.min(...open.map((t) => t.cost));
+      candidates = candidates.filter((t) => t.kind !== "turnin" || t.cost <= nearest * C.LOOP_SHARE);
+    }
     const between = (a, b) => walkSeconds(graph, st.level, a.point, b.point);
     const home = waiting.length ? (t) => Math.min(...waiting.map((w) => walkSeconds(graph, st.level, t.point, w.point))) : null;
-    return nextTask(candidates, between, home);
+    return nextTask(candidates, between, home, st.inRun);
   }
   const stepOf = (t) => {
     const place = t.kind === "accept" ? t.i.start : t.kind === "turnin" ? t.i.end : t.i.obj;
