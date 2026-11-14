@@ -15,6 +15,7 @@ const { emptyGraph, plannerGraph, buildContext } = require("./context");
 const { makePolicy } = require("./policy");
 const { nextTask } = require("./session");
 const { bestZone, urgentZone } = require("./zonepick");
+const { supplyZone } = require("./supply");
 
 function planRoute(db, ch, options = {}) {
   const maxLevel = options.maxLevel || 60;
@@ -24,7 +25,7 @@ function planRoute(db, ch, options = {}) {
   const { info, byZone, bands } = ctx;
   const st = { level: 1, xp: 0, pos: null, started: false, zone: zoneOf(db, ch.startArea), log: new Map(), done: new Set(), have: new Set(),
     flights: new Set(), hearth: null, lastHearth: -Infinity, clock: 0, steps: [], levelAt: [0, 0], links: new Map(),
-    announce: false, skip: new Set(), barren: new Set(), chosen: false, finishing: false, hopped: new Set(), grinds: 0, relaxed: false, urgent: false };
+    announce: false, skip: new Set(), barren: new Set(), chosen: false, finishing: false, hopped: new Set(), grinds: 0, relaxed: false, urgent: false, errands: false };
 
   const speed = () => (st.level >= ESTIMATES.MOUNT_LEVEL ? ESTIMATES.MOUNT_SPEED : ESTIMATES.RUN_SPEED);
   const wrapUp = () => st.level >= maxLevel || st.finishing; // no new quests: what is in the log is finished
@@ -87,7 +88,7 @@ function planRoute(db, ch, options = {}) {
     if (i) { st.barren.clear(); st.chosen = false; st.announce = false; }
     st.steps.push(step);
     for (let level = before + 1; level <= st.level; level++) st.levelAt[level] = st.steps.length - 1;
-    if (st.level > before) st.relaxed = false;
+    if (st.level > before) { st.relaxed = false; st.errands = false; }
   }
   // the legs of a flight, a transport and a hearth move the player without a walk
   function emitLeg(leg) {
@@ -279,6 +280,15 @@ function planRoute(db, ch, options = {}) {
     if (!pick.grind) {
       // Nothing where the route was going: until the next level, quests are taken even where it was not going.
       if (!st.relaxed) { st.relaxed = true; st.barren.clear(); st.chosen = false; continue; }
+      // Nothing the look-ahead finds worth a visit. Before a grind step is written, an errand (planner/supply.js): a
+      // visit that earns nothing itself but puts quests in the log or moves them on, when what it leads to is worth
+      // the way. From here to the next level a quest out to another zone and back is taken too (planner/policy.js).
+      st.errands = true;
+      const supply = supplyZone(view);
+      if (supply) {
+        st.zone = supply; st.announce = true; st.chosen = true; st.urgent = false; st.skip.clear(); st.hopped.clear(); st.plan = null;
+        continue;
+      }
       // Nothing anywhere at this level: one level of grinding when that opens something, or is the last level.
       // Otherwise the route ends here, short of the cap, once the log is empty.
       if (ground || (st.level + 1 < maxLevel && !bestZone(view, { level: st.level + 1 }).zone)) {

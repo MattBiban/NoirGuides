@@ -3,7 +3,7 @@
 // zone (planner/zonepick.js), so what the look-ahead expects of a zone is what the route then does there.
 //   S, the state the rules read: { level, done, log, hopped }, where done has has(), log is a Map of quest ID ->
 //   { needsObjective } (or anything with has, keys, entries and size), and hopped is the set of neighbouring zones
-//   this session has already crossed into.
+//   this session has already crossed into. Of the route itself also plan, relaxed and errands (see travelWanted).
 const { questXp, objectiveXp } = require("../lib/xp");
 const { canAccept } = require("../lib/quests");
 const { CHOICES: C } = require("./tuning");
@@ -53,8 +53,9 @@ function makePolicy(ctx) {
     if (i.obj && i.obj.point.zone !== i.zone && !hops(i) && !going(i.obj.point.zone)) return false;
     if (i.endZone !== i.zone) return going(i.endZone);
     // out and back: the route has to return to this zone as well. Not even when relaxed: a quest that is two
-    // crossings of a border for one reward is only taken when the route comes back here anyway
-    return business(S, i.zone, i.q.id) || (S.plan ? S.plan.has(i.zone) : offers(S, i.zone, true) >= C.RETURN_MIN_QUESTS);
+    // crossings of a border for one reward is only taken when the route comes back here anyway, or on an errand
+    // (S.errands: the next step would be a grind step, and planner/supply.js has weighed the crossings)
+    return business(S, i.zone, i.q.id) || !!S.errands || (S.plan ? S.plan.has(i.zone) : offers(S, i.zone, true) >= C.RETURN_MIN_QUESTS);
   }
   function wanted(i, S) {
     if (!canAccept(i.q, S) || !worth(i, S.level)) return false;
