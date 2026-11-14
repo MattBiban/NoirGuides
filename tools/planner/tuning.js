@@ -42,6 +42,11 @@ const CHOICES = Object.freeze({
                              //   visits before making them. Measured: walking gives an eighth of a route's XP
   MAX_GRINDS: 0,             // levels of grinding the look-ahead may plan in a route. None: a grind step is only
                              //   written when no quest is left for the level (see planRoute)
+  SUPPLY_VISITS: 3,          // before a grind step, an errand is followed this many rounds of visits (planner/supply.js)
+  SUPPLY_MIN_SHARE: 0.15,    //   and is worth its changes of zone when a visit of it gives this share of the level, or
+                             //   when it reaches the next level. Measured: the share hardly matters from 0.08 up (the
+                             //   errands that reach the level are the ones taken); under 0.05 every grind step saved
+                             //   costs over twenty changes of zone
   MAX_ITERATIONS: 200000,    // a guard against a planner bug that never finishes; real routes take a few thousand turns
 });
 module.exports = { CHOICES };
