@@ -25,12 +25,16 @@ const PACE = Object.freeze({
                           // open country. The capital with the most has 247 (critters, neutral traders), the emptiest
                           // questing zone 364 (Riverglades); the peaceful places below it (Moonglade 119, Mount Hyjal
                           // 114) give no walking XP
+  YIELD: 0.6,             // the share of the estimated XP the planner counts on (gain). Calibrated: with the full estimate a
+                          // route reached level 22 on 80 to 100 quests, where well-tested routes of the game need 160 to
+                          // 200; at 0.6 it plans 140 to 175. Erring low is the safe side: a player ahead of the plan meets
+                          // quests a little under their level, a player behind it meets quests above it
   TALK_SECONDS: 10,       // accepting or turning in a quest, binding the hearthstone: a guess
   HEARTH_COOLDOWN: 3600,  // the hearthstone's cooldown in the original game: one hour
 });
 
 function gain(state, xp) {
-  state.xp += xp;
+  state.xp += Math.round(xp * PACE.YIELD);
   while (state.level < 60 && state.xp >= XP_TO_LEVEL[state.level]) { state.xp -= XP_TO_LEVEL[state.level]; state.level++; }
 }
 

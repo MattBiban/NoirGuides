@@ -343,7 +343,7 @@ local function actionDone(c, a, leftOut)
 end
 
 function Sim.prepareJoin(facts, level, xpScale)
-  local function sx(n) return round(n * (xpScale or 1)) end
+  local function sx(n) return round(n * (xpScale or 1) * (facts.pace.YIELD or 1)) end
   local world = Sim.world(facts)
   local flat = facts.flat or {}
   local start = startOf(facts)
@@ -495,7 +495,7 @@ function Sim.play(facts, opts)
   local capturing, landed = true, nil
 
   local prepared = opts.join and Sim.prepareJoin(facts, opts.join, opts.xpScale) or nil
-  local function sx(n) return round(n * (opts.xpScale or 1)) end
+  local function sx(n) return round(n * (opts.xpScale or 1) * (facts.pace.YIELD or 1)) end
   local start = startOf(facts)
   local startZone = start and facts.zones[start.zone]
   local clientOpts = {

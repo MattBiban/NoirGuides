@@ -193,7 +193,7 @@ function buildFacts(db, graph, inns, route3, ch, options = {}) {
   const first = route3.sections.length && chainOf(route3, ch).flatMap((s) => s.steps).find((s) => applies(s.when, ch) && s.at && zones[s.at.zone]);
   const facts = {
     race: ch.race, class: ch.cls, start: first ? { ...first.at } : undefined,
-    xpToLevel, pace: { OBJECTIVE_KILLS: PACE.OBJECTIVE_KILLS, ITEM_KILL_FACTOR: PACE.ITEM_KILL_FACTOR, INCIDENTAL_YARDS: PACE.INCIDENTAL_YARDS },
+    xpToLevel, pace: { OBJECTIVE_KILLS: PACE.OBJECTIVE_KILLS, ITEM_KILL_FACTOR: PACE.ITEM_KILL_FACTOR, INCIDENTAL_YARDS: PACE.INCIDENTAL_YARDS, YIELD: PACE.YIELD },
     continents, zones, quests, npcs, objects, taxi, flat: mine,
   };
   if (professions.length) {
