@@ -281,7 +281,8 @@ function planRoute(db, ch, options = {}) {
       if (!st.relaxed) { st.relaxed = true; st.barren.clear(); st.chosen = false; continue; }
       // Nothing anywhere at this level: one level of grinding when that opens something, or is the last level.
       // Otherwise the route ends here, short of the cap, once the log is empty.
-      if (ground || (st.level + 1 < maxLevel && !bestZone(view, { level: st.level + 1 }).zone)) {
+      // (pick.wait: small visits are left for later, zonepick.js rule 4; the rest of this level is a grind step)
+      if (!pick.wait && (ground || (st.level + 1 < maxLevel && !bestZone(view, { level: st.level + 1 }).zone))) {
         st.finishing = true; st.barren.clear(); st.chosen = false;
         continue;
       }

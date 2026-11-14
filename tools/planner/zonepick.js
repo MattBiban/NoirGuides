@@ -124,8 +124,11 @@ function urgentZone(view) {
   return nearestTask(view, (quest) => view.ctx.linkQuests.has(quest), (zone) => zone === st.zone || st.barren.has(zone));
 }
 
-// What comes next: { zone } (0 when no zone is worth going to), or { zone: 0, grind: true } when the look-ahead
-// plans a level of grinding first.
+// The search behind bestZone: the first zone of the best sequence of visits, as { zone, path, level } (level: the
+// level the sequence ends at), { zone: 0 } when there is none, or { zone: 0, grind: true } when the look-ahead plans a
+// level of grinding first.
+//   options.min         only visits worth at least this share of a level count (bestZone, MIN_VISIT)
+//   options.depth       the number of visits to look ahead, when not SEARCH_DEPTH
 //   options.wrapUp      no new quests are taken: only the log counts, and the nearest task wins
 //   options.cap         the level the route ends at (60)
 //   options.ground      the last step was a grind step: the look-ahead must not start with another
@@ -141,7 +144,7 @@ function urgentZone(view) {
 //      travel and work), so the search spends its visits where they give most: the fewest zone changes to the cap.
 //      A sequence that reaches the cap ends the search; of several, the quickest wins. The first zone of the best
 //      sequence is the answer. Equal sequences: the one whose zones have the lower IDs.
-function bestZone(view, options = {}) {
+function search(view, options = {}) {
   const { st } = view;
   const peek = options.level !== undefined;
   const skipped = (zone) => !peek && ((zone === st.zone && !options.here) || st.barren.has(zone));
@@ -155,7 +158,7 @@ function bestZone(view, options = {}) {
   let beam = [{ S: start, pos: st.pos, zone: st.zone, xp: 0, time: 0, path: [], score: 0, grinds: st.grinds, ground: !!options.ground }];
   let best = null;
   const order = (a, b) => (a.score !== b.score ? b.score - a.score : a.path.join(",") < b.path.join(",") ? -1 : 1);
-  for (let depth = 1; depth <= (peek ? 1 : C.SEARCH_DEPTH); depth++) {
+  for (let depth = 1; depth <= (peek ? 1 : options.depth || C.SEARCH_DEPTH); depth++) {
     const next = [], seen = new Set();
     for (const node of beam) {
       if (node.S.level >= cap) continue;
@@ -177,6 +180,8 @@ function bestZone(view, options = {}) {
         const S = copyOf(node.S);
         const visit = simVisit(view, S, zone, cap);
         if (visit.xp <= 0 && !(peek && visit.count > 0)) continue; // a quest to pick up counts when asking what a level opens
+        // a small visit is not worth a change of zone; the level is the one the visit starts at
+        if (options.min && visit.xp * PACE.YIELD < options.min * XP_TO_LEVEL[node.S.level]) continue;
         const key = `${zone}:${S.level}:${S.xp}:${S.log.size}`;
         if (seen.has(key)) continue; // the same visits in another order
         seen.add(key);
@@ -193,7 +198,31 @@ function bestZone(view, options = {}) {
     if (finished.length) { best = finished.sort((a, b) => a.time - b.time || order(a, b))[0]; break; }
   }
   if (!best) return { zone: 0 };
-  return best.path[0] === GRIND ? { zone: 0, grind: true, path: best.path } : { zone: best.path[0], path: best.path };
+  return best.path[0] === GRIND ? { zone: 0, grind: true, path: best.path } : { zone: best.path[0], path: best.path, level: best.S.level };
+}
+
+// What comes next: { zone } (0 when no zone is worth going to), { zone: 0, grind: true } when the look-ahead plans a
+// level of grinding first, or { zone: 0, wait: true } when only small visits are left and they are not made now.
+// The options and rules 1 and 2 are the search's, above. On top of them, a zone is worth a change of zone only when
+// the visit there is a real piece of the level:
+//   3. first only visits worth at least MIN_VISIT of the level they start at are looked at, at every depth of the
+//      search. A zone with one or two quests at the level is left alone: it grows with every level the player gains,
+//      and is gone to once, when it is worth the way, not every level for whatever it has just opened.
+//   4. when no visit is worth that much, the small ones are made only when at most LAST_VISITS of them reach the next
+//      level; the first of the best such sequence is the answer. Otherwise the answer is { zone: 0, wait: true }: the
+//      rest of the level is a grind step (planner/plan.js), which costs no way at all, and the small visits wait.
+//      After a grind step (options.ground) the small visits are made whatever they reach: never two grind steps in a
+//      row.
+// Without rules 3 and 4 a route that needs every quest it can get (lib/xp.js YIELD) went to every zone at every
+// level for the two or three quests the level had opened there: 243 to 277 zone changes a route, and still a grind
+// step at the end of most levels, for the last few percent.
+function bestZone(view, options = {}) {
+  if (options.wrapUp || options.level !== undefined || !C.MIN_VISIT) return search(view, options);
+  const worth = search(view, { ...options, min: C.MIN_VISIT });
+  if (worth.zone || worth.grind) return worth;
+  const small = search(view, { ...options, depth: C.LAST_VISITS });
+  if (!small.zone || options.ground || small.level > view.st.level) return small;
+  return { zone: 0, wait: true };
 }
 
 module.exports = { Overlay, copyOf, simVisit, bestZone, urgentZone };

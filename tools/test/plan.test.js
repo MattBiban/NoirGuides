@@ -266,6 +266,33 @@ test("pacing: a grind step bridges one level to the next quests, and the route s
   assert.ok(route.stats.endLevel < 9);
   assert.strictEqual(checked.endLevel, route.stats.endLevel);
 });
+test("a small visit is not worth a change of zone: it waits while the rest of the level is ground", () => {
+  const { XP_TO_LEVEL, PACE, questXp } = require("../lib/xp");
+  const { CHOICES } = require("../planner/tuning");
+  // one errand at level 1 is a small visit (planner/zonepick.js rule 3)
+  assert.ok(questXp(1, 1) * PACE.YIELD < CHOICES.MIN_VISIT * XP_TO_LEVEL[1]);
+  const world = () => {
+    const w = testWorld();
+    w.npc(10, 100, 30, 50); w.npc(20, 100, 40, 50, ""); w.kill(1, 10, 20, 100);
+    w.npc(30, 200, 50, 50); w.npc(31, 200, 52, 50); w.errand(5, 30, 31, 200); // all Eastland has: one errand
+    return w;
+  };
+  // Westland's quest leaves the level open by more than the errand gives: the errand does not reach level 2, so the
+  // level is ground where the player stands, and the errand is done after it (never two grind steps in a row)
+  const short = run(world(), null, { maxLevel: 3 });
+  assert.deepStrictEqual(short.checked.errors, []);
+  assert.deepStrictEqual(short.names.filter((n) => n.startsWith("getflight") === false && n !== "travel"), ["accept:1", "objective:1", "turnin:1", "grind", "accept:5", "turnin:5", "grind"]);
+  assert.deepStrictEqual(short.route.steps.find((s) => s.action === "grind").at.zone, 100, "ground in Westland, before the way east");
+  // with enough in Westland that the errand reaches level 2, the small visit is made (rule 4) and no grind step is needed
+  const w = world();
+  w.errand(2, 10, 10, 100);
+  w.npc(11, 100, 31, 50); w.errand(4, 11, 11, 100, { requiredLevel: 2, questLevel: 2 }); // something to do at level 2
+  const enough = run(w, null, { maxLevel: 3 });
+  assert.deepStrictEqual(enough.checked.errors, []);
+  const first = enough.names.indexOf("grind");
+  assert.ok(enough.at("turnin", 5) >= 0 && (first < 0 || enough.at("turnin", 5) < first), "the errand is done before any grind step");
+  assert.strictEqual(enough.route.stats.levelAt[2], enough.at("turnin", 5), "and it is the step that reaches level 2");
+});
 test("the last level may be ground, and the route ends there", () => {
   const w = testWorld();
   w.npc(10, 100, 30, 50); w.npc(20, 100, 40, 50, "");

@@ -32,6 +32,12 @@ const CHOICES = Object.freeze({
   SEARCH_ZONES: 12,          //   each continued with the zones that have the most quests to offer (and the log's zones).
   SEARCH_TIME_XP: 2,         // XP a second of travel and work is worth when two sequences are compared: time breaks
                              //   ties between sequences, the XP of their visits decides
+  MIN_VISIT: 0.25,           // a zone is gone to when the visit there is worth at least this share of the player's level
+                             //   (planner/zonepick.js rule 3): four such visits are a level. Smaller ones wait and grow
+  LAST_VISITS: 6,            // ... unless at most this many small visits reach the next level (rule 4); else the rest
+                             //   of the level is a grind step. Lower: fewer zone changes, more grinding. Measured on
+                             //   the ten routes: without the two rules 243 to 277 zone changes; 6 gives 129 to 138 and
+                             //   no route more grind steps than before; 5 gives 120 to 135, three routes one step more
   PLAN_WALK_SHARE: 0.12,     // the fights on the way inside an open zone, as a share of a visit's XP, for comparing
                              //   visits before making them. Measured: walking gives an eighth of a route's XP
   MAX_GRINDS: 0,             // levels of grinding the look-ahead may plan in a route. None: a grind step is only
