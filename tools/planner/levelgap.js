@@ -9,7 +9,7 @@
 // more than EASY levels under it. steps is the number of steps looked at. Only the route's own steps are read, so the
 // check stands apart from the rule that plans them. With cls, the steps of other classes (when.class) are left out, so
 // a layered route is measured class by class, each against its own levels.
-const { CHOICES: C } = require("./tuning");
+const { CHOICES: C, above: allowed } = require("./tuning");
 
 // No quest above the player's level is the rule, and the shared route meets it exactly. A class layered onto it can be
 // a few XP behind the class the shared route was planned with, and so meet a quest one level up at a level's very
@@ -30,7 +30,7 @@ function levelGap(db, route, levels, { easy = C.EASY, cls } = {}) {
     steps++;
     const level = Math.floor(levels[k]);
     const entry = { step: k, quest: s.quest, questLevel: q.level, level };
-    if (q.level > level) above.push(entry);
+    if (q.level > level + allowed(level, true)) above.push(entry);
     else if (q.level < level - easy) below.push(entry);
   });
   return { above, below, steps };

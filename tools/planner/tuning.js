@@ -7,6 +7,10 @@ const CHOICES = Object.freeze({
                              // rule is a smooth run, every quest at the player's level or below (it was 3, and real
                              // players, who level a little behind the estimate, met quests three and four levels up)
   HARD_TALK: 0,              // the same for a quest without fights (a delivery, a talk): it too shows as hard in the log
+  START_HARD: 2,             // ... except in the first levels: a new character is handed quests one and two levels up by its
+  START_UNTIL: 10,           //   own starting zone (a level 1 orc gets level 2 quests, and the zone's quests run a little ahead of the
+                             //   player to its end), so below this level that much is allowed. Without it a level 6 character was
+                             //   sent to another race's starting zone for quests of its exact level
   EASY: 3,                   // a quest more than this many levels below the player is left out (little XP), unless a
                              // travel link or another quest needs it (planner/policy.js)
   NEARBY: 1500,              // yards on foot: an objective over a zone border belongs to this zone when it is this close
@@ -49,4 +53,6 @@ const CHOICES = Object.freeze({
                              //   costs over twenty changes of zone
   MAX_ITERATIONS: 200000,    // a guard against a planner bug that never finishes; real routes take a few thousand turns
 });
-module.exports = { CHOICES };
+// How many levels above the player a quest may be at this level: HARD or HARD_TALK, and START_HARD in the first levels.
+const above = (level, kills) => Math.max(kills ? CHOICES.HARD : CHOICES.HARD_TALK, level < CHOICES.START_UNTIL ? CHOICES.START_HARD : 0);
+module.exports = { CHOICES, above };
