@@ -17,6 +17,16 @@ const { levelGap, MAX_ABOVE, MAX_BELOW_SHARE } = require("../planner/levelgap");
 
 const human = () => { RACES.Human.startArea = 1000; return character("Human", "WARRIOR"); };
 const index = (route) => (action, quest) => route.steps.findIndex((s) => s.action === action && s.quest === quest);
+// objectives per trip out: the objective steps of a route over its rows of objectives with no accept or turn-in between
+const objectivesPerRun = (route) => {
+  let objectives = 0, runs = 0, last = null;
+  for (const s of route.steps) {
+    if (s.action !== "objective" && s.action !== "accept" && s.action !== "turnin") continue;
+    if (s.action === "objective") { objectives++; if (last !== "objective") runs++; }
+    last = s.action;
+  }
+  return runs ? objectives / runs : 0;
+};
 const names = (route) => route.steps.map((s) => s.action + (s.quest !== undefined ? ":" + s.quest : s.node !== undefined ? ":" + s.node : ""));
 
 test("zone bands come from quest levels", () => {
@@ -197,15 +207,57 @@ test("no hand-in left behind: the objective next to a hub with a ready hand-in i
   const w = testWorld();
   // the hub at 30,50 with two quests, one fought 100 yards south and one 100 yards east, on the way to a second town
   // 600 yards east that offers a third. The best order of the five nearest ends the loop at the hub, so it used to go
-  // to the far town first and leave quest 1's hand-in behind, with the east field taken on the way home.
+  // to the far town first and leave quest 1's hand-in behind, with the east field taken on the way home. The far town
+  // is within GATHER_SECONDS, so its quest is taken before the loop starts; the two fields by the hub are still one
+  // loop that ends with both hand-ins.
   w.npc(10, 100, 30, 50); w.npc(11, 100, 90, 50);
   w.npc(20, 100, 30, 60, ""); w.npc(21, 100, 40, 50, ""); w.npc(22, 100, 95, 60, "");
   w.kill(1, 10, 20, 100); w.kill(2, 10, 21, 100); w.kill(3, 11, 22, 100);
   const { route, names, checked } = run(w, null, { maxLevel: 3 });
   assert.deepStrictEqual(checked.errors, []);
   const quests = names.filter((n) => /^(accept|objective|turnin)/.test(n)).join(" ");
-  assert.strictEqual(quests, "accept:1 accept:2 objective:1 objective:2 turnin:1 turnin:2 accept:3 objective:3 turnin:3");
+  assert.strictEqual(quests, "accept:1 accept:2 accept:3 objective:3 turnin:3 objective:2 objective:1 turnin:1 turnin:2");
   assert.deepStrictEqual(leftBehind(w.db, route), []);
+});
+test("one loop: the quest givers around are visited before the first objective", () => {
+  const w = testWorld();
+  // two givers 400 yards apart, each with a quest fought in a field between them. Nearest first would do the first
+  // quest out and back before the second giver is spoken to: two trips with one objective each.
+  w.npc(10, 100, 20, 50); w.npc(11, 100, 60, 50);
+  w.npc(20, 100, 40, 40, ""); w.npc(21, 100, 45, 60, "");
+  w.kill(1, 10, 20, 100); w.kill(2, 11, 21, 100);
+  const { route, names, checked } = run(w, null, { maxLevel: 3 });
+  assert.deepStrictEqual(checked.errors, []);
+  assert.strictEqual(names.filter((n) => /^(accept|objective|turnin)/.test(n)).join(" "), "accept:1 accept:2 objective:2 objective:1 turnin:1 turnin:2");
+  assert.strictEqual(objectivesPerRun(route), 2);
+  assert.deepStrictEqual(leftBehind(w.db, route), []);
+});
+test("one loop: a hand-in away from the objectives waits until they are done", () => {
+  const w = testWorld();
+  // three fields in a row east of the hub; the first quest is handed in at a camp 360 yards off the row. The camp
+  // is not on the way to the next field, so it comes after the last one, not between two objectives.
+  w.npc(10, 100, 20, 50); w.npc(12, 100, 50, 30);
+  w.npc(20, 100, 40, 50, ""); w.npc(21, 100, 60, 50, ""); w.npc(22, 100, 80, 50, "");
+  w.quest(1, { startedBy: [[10]], finishedBy: [[12]], objectives: [[[20, null, 0]]], zoneOrSort: 100 });
+  w.kill(2, 10, 21, 100); w.kill(3, 10, 22, 100);
+  const { route, names, checked } = run(w, null, { maxLevel: 4 });
+  assert.deepStrictEqual(checked.errors, []);
+  const quests = names.filter((n) => /^(accept|objective|turnin)/.test(n)).map((n) => n.split(":")[0]).join(" ");
+  assert.strictEqual(quests, "accept accept accept objective objective objective turnin turnin turnin");
+  assert.deepStrictEqual(leftBehind(w.db, route), []);
+});
+test("one loop: an order that breaks off a row of objectives for a quest giver has to save RUN_SECONDS", () => {
+  const { nextTask } = require("../planner/session");
+  const { CHOICES } = require("../planner/tuning");
+  // a quest giver 70 seconds away and a field at 200, 150 seconds from each other
+  const tasks = (field, apart) => ({ list: [{ kind: "accept", id: 1, cost: 70 }, { kind: "objective", id: 2, cost: field }], between: () => apart });
+  const near = tasks(200, 150), far = tasks(CHOICES.RUN_SECONDS * 2, CHOICES.RUN_SECONDS * 2);
+  // before the loop the giver is on the way: giver, field is the shorter order
+  assert.strictEqual(nextTask(near.list, near.between).id, 1);
+  // in the middle of a row of objectives the same giver waits: the field first is 130 seconds more, not RUN_SECONDS
+  assert.strictEqual(nextTask(near.list, near.between, null, true).id, 2);
+  // unless the row goes on so far away that coming back for the giver costs more than breaking it off
+  assert.strictEqual(nextTask(far.list, far.between, null, true).id, 1);
 });
 test("format 2 travel: a flight point is learned before it is flown from, and a transport carries the route overseas", () => {
   const w = testWorld();
@@ -399,6 +451,21 @@ for (const race of Object.keys(RACES)) {
       if (s.action === "fly") assert.ok(learned.has(s.from) && learned.has(s.to));
     }
     assert.ok(route.steps.some((s) => s.action === "fly") && route.steps.some((s) => s.action === "sethearth") && route.steps.some((s) => s.action === "hearth"));
+  });
+}
+for (const race of Object.keys(RACES)) {
+  test(`real data: the ${race} route does its objectives in loops and never fills the log past its limit`, { skip: !real }, () => {
+    const { route } = realRoute(race);
+    // It was 1.25 to 1.4 before the quests around were gathered first and hand-ins waited for the end of the loop.
+    // Most trips still have one objective: a visit often has one quest to offer, or a chain that gives one at a time.
+    const perRun = objectivesPerRun(route);
+    assert.ok(perRun >= 1.4, `${perRun.toFixed(2)} objectives per trip out`);
+    const log = new Set();
+    for (const s of route.steps) {
+      if (s.action === "accept") log.add(s.quest);
+      if (s.action === "turnin") log.delete(s.quest);
+      assert.ok(log.size <= 20, `${log.size} quests in the log`);
+    }
   });
 }
 test("real data: planning the same race twice gives the same route", { skip: !real }, () => {

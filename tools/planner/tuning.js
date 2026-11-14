@@ -17,6 +17,12 @@ const CHOICES = Object.freeze({
   TOWN_SECONDS: 60,          // quests to take or hand in within a minute's walk come before any objective
   SHORT_WALK_SECONDS: 60,    // a walk this short inside one zone is costed as a straight line, a longer way by travelPlan
   LOOK_AHEAD: 5,             // the next task is the first of the best order of the nearest five
+  GATHER_SECONDS: 150,       // a quest to take within this walk comes before any objective: the givers around a hub
+                             //   are all visited before the loop starts, so the loop is walked once with a fuller log
+  LOOP_SHARE: 0.25,          // a hand-in away from the player waits while objectives are open: it comes first only when
+                             //   it is at most this share of the way to the nearest of them (it is then on the way)
+  RUN_SECONDS: 600,          // what breaking off a row of objectives for a quest giver costs when orders are compared:
+                             //   objectives are done in one row unless the other order saves more than this
   QUEST_WALK_SECONDS: 120,   // the walking a quest takes inside its zone, for comparing visits before making them
   MAX_CARRY: 12,             // quests in the log with a part in another zone: the rest of the log stays free
   CARRY_MIN_QUESTS: 3,       // a quest with a part in another zone is taken when that zone has at least this many
