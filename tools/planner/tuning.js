@@ -3,8 +3,12 @@
 // is a game fact (those are in lib/xp.js PACE and lib/travel.js ESTIMATES); each is a preference, set once here.
 const CHOICES = Object.freeze({
   LOG_LIMIT: 20,             // the classic quest log holds 20 quests (a fact, kept with the rest for the planner)
-  HARD: 3,                   // a quest with fights is taken up to this many levels above the player: creatures four
-                             // levels up are missed and resisted too often to be worth it
+  HARD: 0,                   // a quest with fights is taken up to this many levels above the player. None: the owner's
+                             // rule is a smooth run, every quest at the player's level or below (it was 3, and real
+                             // players, who level a little behind the estimate, met quests three and four levels up)
+  HARD_TALK: 0,              // the same for a quest without fights (a delivery, a talk): it too shows as hard in the log
+  EASY: 3,                   // a quest more than this many levels below the player is left out (little XP), unless a
+                             // travel link or another quest needs it (planner/policy.js)
   NEARBY: 1500,              // yards on foot: an objective over a zone border belongs to this zone when it is this close
                              // to one of the zone's quest places
   HUB_YARDS: 150,            // quest givers this close together are one hub: everything there is done in one stop

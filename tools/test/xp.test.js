@@ -41,7 +41,7 @@ test("walking gives kill XP only in a zone with creatures of a level worth fight
 test("zone levels come from the quests filed under the zone, and wild from its hostile creatures", () => {
   const db = fixtureDb();
   let levels = zoneLevels(db);
-  assert.deepStrictEqual(levels.get(1000), { min: 2, max: 4, wild: false });
+  assert.deepStrictEqual(levels.get(1000), { min: 1, max: 2, wild: false });
   for (let i = 0; i < PACE.WILD_SPAWNS; i++) db.npcs.get(3).spawns[1000].push([60, 60]);
   levels = zoneLevels(db);
   assert.strictEqual(levels.get(1000).wild, true);

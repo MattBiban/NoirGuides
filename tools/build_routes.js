@@ -29,7 +29,9 @@ const REPORT = path.join(__dirname, "..", "docs", "routes", "REPORT.md");
 const PROFESSION_NOTES = path.join(__dirname, "..", "docs", "routes", "PROFESSION-NOTES.md");
 const BASELINE = path.join(__dirname, "planner", "baseline.json");
 // what task P3 asks of every race's format 3 route
-const MAX_BUNDLED_SHARE = 0.65, MIN_SECTIONS = 6, MAX_SECTIONS = 45;
+// (0.65 and 45 before quests were held to the player's level: the routes change zone more often now, so there is
+// less to bundle and there are more, shorter sections)
+const MAX_BUNDLED_SHARE = 0.7, MIN_SECTIONS = 6, MAX_SECTIONS = 60;
 
 // The format 3 route of one race from its layered format 2 route and each class's replay of it (validations).
 function toFormat3(db, graph, inns, route, classes, validations) {

@@ -52,7 +52,7 @@ const RANKS = Object.freeze([
   Object.freeze({ rank: 3, name: "Expert", gate: 125, cap: 225, level: 20, verified: false }),
   Object.freeze({ rank: 4, name: "Artisan", gate: 200, cap: 300, level: 35, verified: false }),
 ]);
-const SEARCH_SECTIONS = 3;
+const SEARCH_SECTIONS = 5; // sections are shorter since quests are held to the player's level (it was 3)
 const LEAD_SHARE = 0.5;
 // a trainer step with fewer shared steps of its section before it than LEAD_STEPS also gets a reminder leg in the section before (LEAD_END: the label that leg ends at, when its step has none)
 const LEAD_STEPS = 10, LEAD_END = "leadend";
@@ -150,7 +150,7 @@ function addProfessionSteps(db, sections, faction, options = {}) {
       }
       const found = choose(candidates);
       if (!found) {
-        notes.push({ skill: profession.skill, rank: r.rank, text: `${label}: no ${faction} trainer in a zone of the route within three sections of section ${sections[shared[from].si].id}` });
+        notes.push({ skill: profession.skill, rank: r.rank, text: `${label}: no ${faction} trainer in a zone of the route within five sections of section ${sections[shared[from].si].id}` });
         continue;
       }
       const { npc, point } = found.pick;

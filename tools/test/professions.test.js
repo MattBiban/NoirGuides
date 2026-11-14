@@ -94,15 +94,15 @@ test("the step exists only for characters with the profession", () => {
   assert.ok(!applies(step.when, { race: "Human", cls: "WARRIOR" }, [171]));
 });
 
-test("a rank with no trainer within three sections is listed in the notes and not written", () => {
+test("a rank with no trainer within five sections is listed in the notes and not written", () => {
   const { w } = world();
-  // level 10 is reached in the first section; the smith stands in the fourth section's zone
-  const sections = chain([100, 300, 301, 200], 2);
+  // level 10 is reached in the first section; the smith stands in the sixth section's zone
+  const sections = chain([100, 300, 301, 300, 301, 200], 2);
   const notes = [];
   const out = addProfessionSteps(w.db, sections, "Alliance", { professions: SMITH, levelOf: levelsOf(sections, [10, 10, 11, 11, 12, 12, 13, 13]), notes });
   assert.deepStrictEqual(profSteps(out), []);
   assert.deepStrictEqual(notes.map((n) => [n.skill, n.rank]), [[164, 2], [164, 3], [164, 4]]);
-  assert.match(notes[0].text, /^Blacksmithing Journeyman \(rank 2, level 10\): no Alliance trainer in a zone of the route within three sections of section human-0-westland$/);
+  assert.match(notes[0].text, /^Blacksmithing Journeyman \(rank 2, level 10\): no Alliance trainer in a zone of the route within five sections of section human-0-westland$/);
   // the Horde trainer in that zone is not used either
   const horde = addProfessionSteps(w.db, sections, "Horde", { professions: SMITH, levelOf: levelsOf(sections, [10, 10, 11, 11, 12, 12, 13, 13]), notes: [] });
   assert.deepStrictEqual(profSteps(horde), []);

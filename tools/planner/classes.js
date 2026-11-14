@@ -7,7 +7,7 @@
 // shared route, the gap before one of its steps. A part is put where it costs the least extra time: the way from
 // where the player is in that slot to the part's place and on to the next shared step, less the way the shared
 // route already takes. The slots a part may use keep
-//   the level         accepted at or above the quest's level requirement; its creatures not more than HARD levels
+//   the level         accepted at or above the quest's level requirement and its level (HARD_TALK); its creatures not more than HARD levels
 //                     above the player; all of it done before the player is LATE levels past it (wider only when
 //                     nothing fits: then a step later, never left out for being late alone)
 //   prerequisites     everything canAccept asks, from what the shared route and the class's own steps have done by then
@@ -217,7 +217,7 @@ function layerClass(db, graph, facts, ch, maxLevel) {
       const inWindow = (k) => k >= 1 && levels[k] <= top;
       const offered = [];
       for (let k = 1; k <= n; k++) {
-        if (!inWindow(k) || levels[k] < q.minLevel) continue;
+        if (!inWindow(k) || levels[k] < Math.max(q.minLevel, q.level - C.HARD_TALK)) continue; // never taken above the level (tuning.js)
         if (!canAccept(q, view(k))) { reason = "the route never offers it (a prerequisite, an exclusive quest or its level cap)"; continue; }
         if (logPeak[k] + occupied[k] + 1 > C.LOG_LIMIT) { reason = "the quest log is full wherever it is offered"; continue; }
         offered.push(k);

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1
+
+- **Quests at your level.** The routes no longer send you to quests above your level. Every route was rebuilt so each quest is taken at your level or up to three levels below it; before, quests up to three levels higher were planned in, and players a little behind met quests three and four levels up. Easier quests are only kept when a quest chain or a boat or zeppelin needs them. The routes move between zones a little more often to stay at your level.
+
 ## 0.4.0
 
 - **Work ahead while under level.** When the next step needs a higher level (a trainer visit, a quest you cannot take yet), the guide no longer stalls on it or sends you to an NPC you cannot use. It saves that step for later and moves on to the quests and objectives right around you that you can do now. The saved step stays out of the way until you reach its level, then comes back at the top of the window and the arrow takes you to it. The guide only works ahead within the same area (a few steps, a few hundred yards) and never into the next section; anything that depends on the saved step waits with it.

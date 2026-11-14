@@ -43,7 +43,7 @@ test("the report sets the routes beside the baseline and says whether each accep
   assert.match(md, /commit `abc1234`/);
   const row = md.split("\n").find((l) => l.startsWith("| Human | "));
   assert.match(row, /^\| Human \| 10 \| 1 \| -90% \| 27 h 47 min \| 0 h \d\d min \| -\d+% \| 4,000 \| [\d,]+ \| [-+]\d+% \| 90 \| \d+ \| 30 \| 5 \| 1 \| \d \| \d+ \|$/);
-  assert.match(md, /\| Zone changes down by at least 60% for every race \| yes \| least: Human, 10 to 1 \(-90%\) \|/);
+  assert.match(md, /\| Zone changes down by at least 40% for every race \| yes \| least: Human, 10 to 1 \(-90%\) \|/);
   assert.match(md, /\| Travel time not worse for any race \| yes \|/);
   assert.match(md, /\| No validator errors \| yes \| 0 errors \|/);
   assert.match(md, /\| Every race reaches level 60 \| \*\*no\*\* \| short: Human \(\d+\) \|/);
@@ -60,9 +60,9 @@ test("an acceptance line that is not met is reported as not met", () => {
   const { db, result } = built();
   const s = summarize(db, result);
   const rows = (b) => [{ race: "Human", s, before: b.races.Human }];
-  // 2 zone changes before, 1 now: 50% fewer is not 60%
-  const few = acceptance(rows(before(2, 100000)));
-  assert.deepStrictEqual([few[0].met, few[0].detail], [false, "least: Human, 2 to 1 (-50%)"]);
+  // 1 zone change before, 1 now: none fewer is not 40%
+  const few = acceptance(rows(before(1, 100000)));
+  assert.deepStrictEqual([few[0].met, few[0].detail], [false, "least: Human, 1 to 1 (-0%)"]);
   // travel got slower
   const slow = acceptance(rows(before(10, 1)));
   assert.deepStrictEqual([slow[1].met, slow[1].detail], [false, "slower: Human"]);

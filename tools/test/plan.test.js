@@ -13,6 +13,7 @@ const { planRoute } = require("../planner/plan");
 const { validateRoute } = require("../planner/validate");
 const { zoneOrder } = require("../planner/measure");
 const { leftBehind, MAX_LEFT_BEHIND } = require("../planner/leftbehind");
+const { levelGap, MAX_ABOVE, MAX_BELOW_SHARE } = require("../planner/levelgap");
 
 const human = () => { RACES.Human.startArea = 1000; return character("Human", "WARRIOR"); };
 const index = (route) => (action, quest) => route.steps.findIndex((s) => s.action === action && s.quest === quest);
@@ -376,7 +377,12 @@ for (const race of Object.keys(RACES)) {
     assert.strictEqual(checked.endLevel, 60);
     assert.strictEqual(route.stats.endLevel, 60);
     const m = measureRoute(db, graph, route, ch, checked.levels);
-    assert.ok(m.zoneChanges <= baseline.zoneChanges * 0.4, `${m.zoneChanges} zone changes against ${baseline.zoneChanges}: not 60% fewer`);
+    // 40% fewer (planner/report.js TARGET): it was 60% while quests up to three levels above the player were taken
+    assert.ok(m.zoneChanges <= baseline.zoneChanges * 0.6, `${m.zoneChanges} zone changes against ${baseline.zoneChanges}: not 40% fewer`);
+    // a smooth run: no quest above the player's level, few far below it (planner/levelgap.js)
+    const gap = levelGap(db, route, checked.levels);
+    assert.ok(gap.above.length === 0 && MAX_ABOVE <= 2, `${gap.above.length} quests above the level: ${JSON.stringify(gap.above.slice(0, 5))}`);
+    assert.ok(gap.below.length <= gap.steps * MAX_BELOW_SHARE, `${gap.below.length} of ${gap.steps} quest steps far below the level`);
     assert.ok(m.seconds <= baseline.travelSeconds, `${m.seconds} s of travel against ${baseline.travelSeconds}`);
     assert.strictEqual(m.unreachable, 0);
     // no hand-in that is ready is walked away from (planner/leftbehind.js; the threshold is explained there)

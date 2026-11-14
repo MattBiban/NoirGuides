@@ -12,14 +12,14 @@ function fixtureDb() {
   npc(7, "Horde Only Giver", 1000, 50, 52, "H");
   db.items.set(100, { id: 100, name: "Boar Tusk", npcDrops: [4], objectDrops: [] });
   const quest = (id, raw) => { db.quests.set(id, normalizeQuest(id, raw)); db.eraQuestIds.add(id); };
-  quest(10, { name: "Wolves", startedBy: [[1]], finishedBy: [[1]], requiredLevel: 1, questLevel: 2, objectives: [[[3, null, 0]]], zoneOrSort: 1001 });
-  quest(11, { name: "Tusks", startedBy: [[2]], finishedBy: [[2]], requiredLevel: 1, questLevel: 3, objectives: { "3": [[100, null, 0]] }, zoneOrSort: 1000 });
-  quest(12, { name: "More Wolves", startedBy: [[1]], finishedBy: [[2]], requiredLevel: 2, questLevel: 4, objectives: [[[3, null, 0]]], preQuestSingle: [10], zoneOrSort: 1000 });
+  quest(10, { name: "Wolves", startedBy: [[1]], finishedBy: [[1]], requiredLevel: 1, questLevel: 1, objectives: [[[3, null, 0]]], zoneOrSort: 1001 });
+  quest(11, { name: "Tusks", startedBy: [[2]], finishedBy: [[2]], requiredLevel: 1, questLevel: 1, objectives: { "3": [[100, null, 0]] }, zoneOrSort: 1000 });
+  quest(12, { name: "More Wolves", startedBy: [[1]], finishedBy: [[2]], requiredLevel: 2, questLevel: 2, objectives: [[[3, null, 0]]], preQuestSingle: [10], zoneOrSort: 1000 });
   quest(13, { name: "Horde Errand", startedBy: [[7]], finishedBy: [[7]], requiredLevel: 1, questLevel: 2, requiredRaces: 178, zoneOrSort: 1000 });
   quest(14, { name: "Too High", startedBy: [[1]], finishedBy: [[1]], requiredLevel: 40, questLevel: 45, zoneOrSort: 1000 });
   quest(15, { name: "Daily", startedBy: [[1]], finishedBy: [[1]], requiredLevel: 1, questLevel: 2, specialFlags: 1, zoneOrSort: 1000 });
-  quest(20, { name: "Far Beasts", startedBy: [[5]], finishedBy: [[5]], requiredLevel: 4, questLevel: 6, objectives: [[[6, null, 0]]], zoneOrSort: 2000 });
-  quest(21, { name: "Far Report", startedBy: [[5]], finishedBy: [[5]], requiredLevel: 5, questLevel: 7, preQuestSingle: [20], zoneOrSort: 2000 });
+  quest(20, { name: "Far Beasts", startedBy: [[5]], finishedBy: [[5]], requiredLevel: 4, questLevel: 4, objectives: [[[6, null, 0]]], zoneOrSort: 2000 });
+  quest(21, { name: "Far Report", startedBy: [[5]], finishedBy: [[5]], requiredLevel: 5, questLevel: 5, preQuestSingle: [20], zoneOrSort: 2000 });
   return db;
 }
 module.exports = { fixtureDb };

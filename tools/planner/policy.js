@@ -11,8 +11,12 @@ const { CHOICES: C } = require("./tuning");
 function makePolicy(ctx) {
   const { info, byZone } = ctx;
 
-  // worth doing at this level: it gives XP, and its creatures are not too far above the player
-  const worth = (i, level) => questXp(i.q.level, level) + objectiveXp(i.q, level) > 0 && !(i.kills && i.q.level > level + C.HARD);
+  // quests another quest waits for: a chain is not cut off because its first quest is an easy one
+  const gates = new Set();
+  for (const i of info.values()) for (const pre of [...(i.q.preAll || []), ...(i.q.preAny || [])]) gates.add(pre);
+  // worth doing at this level: it gives XP, it is not above the player (HARD, HARD_TALK), and it is not more than
+  // EASY levels below, unless a travel link or another quest needs it
+  const worth = (i, level) => questXp(i.q.level, level) + objectiveXp(i.q, level) > 0 && !(i.q.level > level + (i.kills ? C.HARD : C.HARD_TALK)) && (i.q.level >= level - C.EASY || ctx.linkQuests.has(i.q.id) || gates.has(i.q.id));
   // true when the quest's objective is over the border of the zone it starts in and is done from there (a hop)
   const hops = (i) => i.objNear && i.obj.point.zone !== i.endZone;
   // true when the quest's objective is done in a session of this zone
