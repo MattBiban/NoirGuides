@@ -195,6 +195,28 @@ test("the world gives the planner's share of the estimated XP, and grind cards a
   eq(r.gatedAims, 0, "the arrow never aimed at a step under its level")
 end)
 
+test("the player does not act on a card in the instant it appears: steps that pass by themselves are waited out", function()
+  -- Found by the simulator's joiners: after a run of steps that passed by themselves, a flight on the other continent
+  -- became the place at the very end of the player's wait. It was moot (the next move came back to where the player
+  -- stood) and would have passed a moment later, but the player had already walked to it: a step it "cannot do".
+  for notes = 0, 10 do
+    local r = play(sampleFacts("ROGUE"), { afterLoad = function(c)
+      local steps = c.G.Noir.Routes.Get("horde-undead").sections[1].steps
+      local at = 2
+      for n = 1, notes do
+        table.insert(steps, at, { id = "note" .. n, lines = { { kind = "note", text = "Nothing to do here." } } })
+        at = at + 1
+      end
+      table.insert(steps, at, { id = "g14x", at = { zone = 14, x = 51, y = 13.9, r = 20 },
+        lines = { { kind = "goto", at = { zone = 14, x = 51, y = 13.9, r = 20 } } } })
+      table.insert(steps, at + 1, { id = "zep85", at = { zone = 14, x = 51, y = 13.9, r = 15 },
+        lines = { { kind = "transport", mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 }, to = { zone = 85, x = 60.7, y = 58.8 } } } })
+    end })
+    eq(r.cannot, {}, "with " .. notes .. " steps passing before the moot walk")
+    eq(Sim.problems(r, 7), {})
+  end
+end)
+
 test("a stuck card is ticked with the mouse and reported", function()
   local facts = sampleFacts("ROGUE")
   -- Executor Arren takes nothing back in this world: the hand-in of Rattling the Rattlecages cannot be done.

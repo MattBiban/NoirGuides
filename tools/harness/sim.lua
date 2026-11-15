@@ -21,8 +21,9 @@
 --                     (done before the step's other lines, as a player told to sell before training would)
 --   skill             raise the profession to the line's value (SKILL_LINES_CHANGED)
 --   manual            click the line's tick box in the window (Window.Tick)
--- It never types a command. When the cards are unchanged after TRIES attempts, the player ticks every open line with
--- the mouse (Window.Tick) and each such card counts as stuck. A level 1 character closes the setup wizard with its
+-- It acts once the place has stood still for STILL seconds (steps that pass by themselves are on screen for a moment
+-- each: nobody acts on those). It never types a command. When the cards are unchanged after TRIES attempts, the
+-- player ticks every open line with the mouse (Window.Tick) and each such card counts as stuck. A level 1 character closes the setup wizard with its
 -- close button when it appears.
 --
 -- The world comes from the quest data (tools/sim_all.js writes it as `facts`, see Sim.world): which NPC offers and
@@ -67,6 +68,8 @@ Sim.JOIN_BACK = 40   -- flattened actions a joiner may be placed before the last
 Sim.TRIES = 2        -- times the player does the cards before they count as stuck
 Sim.SETTLE = 1.5     -- seconds after each round of the player's actions
 Sim.FRAME = 0.25     -- the frame length inside SETTLE
+Sim.STILL = 0.5      -- the place has to stand still this long before the player acts on the cards
+Sim.STILL_ROUNDS = 400
 Sim.END_LEVEL = 60
 -- Why-log kinds that carry the game's evidence or describe placement.
 Sim.EXPLAINED = { done = true, moot = true, condition = true, outleveled = true, place = true, section = true, route = true,
@@ -965,6 +968,19 @@ function Sim.play(facts, opts)
     if button and c:click(button) then result.wizardClosed = true end
   end
 
+  -- The engine passes the steps that need nothing one per pass, each on screen for a moment. The player does not act
+  -- on a card in the instant it appears: it waits until the place stands still.
+  local function settle(seconds)
+    if seconds > 0 then c:advance(seconds, Sim.FRAME) end
+    for _ = 1, Sim.STILL_ROUNDS do
+      local section, index = P.Place()
+      c:advance(Sim.STILL, Sim.FRAME)
+      local section2, index2 = P.Place()
+      if section == section2 and index == index2 then break end
+    end
+  end
+
+  settle(0)
   local seen = {}
   local trace = opts.trace and {} or nil
   result.trace = trace
@@ -982,7 +998,7 @@ function Sim.play(facts, opts)
     if #cards == 0 then
       idle = idle + 1
       if idle > 5 then break end
-      c:advance(Sim.SETTLE, Sim.FRAME)
+      settle(Sim.SETTLE)
     else
       idle = 0
       local currentCard = cards[#cards]
@@ -1078,7 +1094,7 @@ function Sim.play(facts, opts)
           end
         end
       end
-      c:advance(Sim.SETTLE, Sim.FRAME)
+      settle(Sim.SETTLE)
     end
   end
 
