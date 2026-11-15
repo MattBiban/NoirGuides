@@ -64,7 +64,7 @@ function planRoute(db, ch, options = {}) {
     if (step.action === "accept") {
       st.log.set(step.quest, { needsObjective: !!i.obj });
       st.have.add(step.quest);
-      st.clock += PACE.TALK_SECONDS;
+      st.clock += PACE.TALK_SECONDS + (step.item ? PACE.STARTER_KILLS * PACE.KILL_SECONDS : 0);
     } else if (step.action === "objective") {
       st.log.get(step.quest).needsObjective = false;
       gain(st, objectiveXp(i.q, st.level));
@@ -360,7 +360,7 @@ function planRoute(db, ch, options = {}) {
     if (!pick.grind) {
       // Nothing where the route was going: until the next level, quests are taken even where it was not going.
       if (!st.relaxed) { st.relaxed = true; st.barren.clear(); st.chosen = false; continue; }
-      // No zone the look-ahead finds anything in, small visits included (zonepick.js rule 4). Before a grind step is
+      // No zone the look-ahead finds anything in, small visits included. Before a grind step is
       // written, an errand (planner/supply.js): a visit that earns nothing itself but puts quests in the log or moves
       // them on, when what it leads to gives more than grinding does in the same time. From here to the next level a
       // quest out to another zone and back is taken too (planner/policy.js).

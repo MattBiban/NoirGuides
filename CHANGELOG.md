@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.1
+
+- **No grind step in any route.** Every race now reaches level 60 on quests alone (0.6.0 still had one short grind step at the end of level 59 in four routes). Each route keeps a last step to level 60, which you only see if you get there under 60.
+- **Far fewer trips.** The routes plan twice as far ahead, so they finish more of a continent before crossing the sea: 17 to 24 crossings a route (40 to 44 in 0.6.0), 195 to 216 zone changes (236 to 258), and about eight hours less travel.
+- **A few more quests.** 880 to 970 quests on the way to 60 (850 to 935 in 0.6.0).
+
 ## 0.6.0
 
 - **Quests instead of grinding.** The routes no longer send you to grind whole levels. In 0.5.0 every route had 10 to 13 grind steps, each a full level, though quests were there to be done; that was a fault in how the routes were built. Six of the ten routes now have no grind step at all, and the other four have one short one at the end of level 59 (about an hour at most).

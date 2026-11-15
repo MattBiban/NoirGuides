@@ -6,7 +6,7 @@ does every open line with the mouse and the world, never a command. See tools/ha
 
 **58 of 58 fresh characters and 50 of 50 joiners pass.** 108 of 108 runs reach level 60; 0 stuck steps; 0 steps the character cannot do; 0 unexplained skips; 0 Lua errors; 0 slash commands; 0 frames off the screen; 50 of 50 joiners placed inside their window.
 
-The player picked a quest by hand 977 times: where two quests in one NPC's list share a title and the client
+The player picked a quest by hand 987 times: where two quests in one NPC's list share a title and the client
 gives titles only, the automation leaves the choice to the player by design (NoirGuides/Automation.lua). That is not a failure.
 
 Passed (done), (moot), (condition) and (outleveled) count the steps and lines the engine moved past with the game's
@@ -16,64 +16,64 @@ evidence and wrote to the why-log. Every other way past a step is unexplained.
 
 | Character | Result | Level | Steps shown | Stuck | Cannot | Unexplained | Errors | Passed (done) | Passed (moot) | Passed (condition) | Passed (outleveled) | Picked by hand |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Dwarf HUNTER | pass | 60 | 1985 | 0 | 0 | 0 | 0 | 4 | 8 | 0 | 0 | 10 |
-| Dwarf PALADIN | pass | 60 | 1976 | 0 | 0 | 0 | 0 | 4 | 7 | 0 | 0 | 10 |
-| Dwarf PRIEST | pass | 60 | 1978 | 0 | 0 | 0 | 0 | 5 | 8 | 0 | 0 | 10 |
-| Dwarf ROGUE | pass | 60 | 2025 | 0 | 0 | 0 | 0 | 10 | 8 | 4 | 1 | 10 |
-| Dwarf SHAMAN | pass | 60 | 1967 | 0 | 0 | 0 | 0 | 5 | 8 | 0 | 0 | 10 |
-| Dwarf WARRIOR | pass | 60 | 2014 | 0 | 0 | 0 | 0 | 12 | 8 | 7 | 1 | 10 |
-| Gnome MAGE | pass | 60 | 2020 | 0 | 0 | 0 | 0 | 2 | 7 | 0 | 0 | 10 |
-| Gnome PRIEST | pass | 60 | 1973 | 0 | 0 | 0 | 0 | 5 | 8 | 0 | 0 | 10 |
-| Gnome ROGUE | pass | 60 | 2025 | 0 | 0 | 0 | 0 | 10 | 8 | 4 | 1 | 10 |
-| Gnome WARLOCK | pass | 60 | 2015 | 0 | 0 | 0 | 0 | 4 | 8 | 0 | 0 | 10 |
-| Gnome WARRIOR | pass | 60 | 2014 | 0 | 0 | 0 | 0 | 12 | 8 | 7 | 1 | 10 |
-| HighOrder DRUID | pass | 60 | 1933 | 0 | 0 | 0 | 0 | 19 | 11 | 17 | 3 | 9 |
-| HighOrder HUNTER | pass | 60 | 1942 | 0 | 0 | 0 | 0 | 11 | 10 | 6 | 2 | 9 |
-| HighOrder MAGE | pass | 60 | 1958 | 0 | 0 | 0 | 0 | 11 | 10 | 6 | 2 | 9 |
-| HighOrder ROGUE | pass | 60 | 1988 | 0 | 0 | 0 | 0 | 17 | 10 | 10 | 3 | 9 |
-| HighOrder WARRIOR | pass | 60 | 1983 | 0 | 0 | 0 | 0 | 15 | 9 | 13 | 3 | 9 |
-| Human HUNTER | pass | 60 | 1928 | 0 | 0 | 0 | 0 | 5 | 6 | 0 | 0 | 11 |
-| Human MAGE | pass | 60 | 1975 | 0 | 0 | 0 | 0 | 4 | 7 | 0 | 0 | 11 |
-| Human PALADIN | pass | 60 | 1929 | 0 | 0 | 0 | 0 | 5 | 6 | 0 | 0 | 11 |
-| Human PRIEST | pass | 60 | 1933 | 0 | 0 | 0 | 0 | 3 | 9 | 0 | 0 | 11 |
-| Human ROGUE | pass | 60 | 1982 | 0 | 0 | 0 | 0 | 10 | 6 | 4 | 1 | 11 |
-| Human WARLOCK | pass | 60 | 1969 | 0 | 0 | 0 | 0 | 5 | 6 | 0 | 0 | 11 |
-| Human WARRIOR | pass | 60 | 1968 | 0 | 0 | 0 | 0 | 12 | 6 | 7 | 1 | 11 |
-| NightElf DRUID | pass | 60 | 1894 | 0 | 0 | 0 | 0 | 16 | 9 | 28 | 1 | 10 |
-| NightElf HUNTER | pass | 60 | 1905 | 0 | 0 | 0 | 0 | 3 | 8 | 0 | 0 | 10 |
-| NightElf PRIEST | pass | 60 | 1895 | 0 | 0 | 0 | 0 | 4 | 8 | 0 | 0 | 10 |
-| NightElf ROGUE | pass | 60 | 1931 | 0 | 0 | 0 | 0 | 9 | 9 | 9 | 2 | 10 |
-| NightElf WARRIOR | pass | 60 | 1929 | 0 | 0 | 0 | 0 | 8 | 11 | 8 | 2 | 10 |
-| Orc HUNTER | pass | 60 | 1931 | 0 | 0 | 0 | 0 | 4 | 3 | 0 | 0 | 9 |
-| Orc MAGE | pass | 60 | 1938 | 0 | 0 | 0 | 0 | 2 | 3 | 0 | 0 | 9 |
-| Orc ROGUE | pass | 60 | 1945 | 0 | 0 | 0 | 0 | 6 | 5 | 0 | 0 | 9 |
-| Orc SHAMAN | pass | 60 | 1969 | 0 | 0 | 0 | 0 | 7 | 6 | 6 | 2 | 9 |
-| Orc WARLOCK | pass | 60 | 1994 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | 0 | 9 |
-| Orc WARRIOR | pass | 60 | 1948 | 0 | 0 | 0 | 0 | 5 | 3 | 0 | 0 | 9 |
-| Tauren DRUID | pass | 60 | 1908 | 0 | 0 | 0 | 0 | 24 | 7 | 32 | 3 | 9 |
-| Tauren HUNTER | pass | 60 | 1923 | 0 | 0 | 0 | 0 | 6 | 4 | 4 | 2 | 9 |
-| Tauren SHAMAN | pass | 60 | 1964 | 0 | 0 | 0 | 0 | 9 | 4 | 10 | 4 | 9 |
-| Tauren WARRIOR | pass | 60 | 1933 | 0 | 0 | 0 | 0 | 6 | 4 | 4 | 2 | 9 |
-| Troll HUNTER | pass | 60 | 1889 | 0 | 0 | 0 | 0 | 7 | 6 | 4 | 2 | 9 |
-| Troll MAGE | pass | 60 | 1917 | 0 | 0 | 0 | 0 | 8 | 7 | 4 | 2 | 9 |
-| Troll PRIEST | pass | 60 | 1887 | 0 | 0 | 0 | 0 | 5 | 6 | 4 | 2 | 9 |
-| Troll ROGUE | pass | 60 | 1901 | 0 | 0 | 0 | 0 | 10 | 9 | 4 | 2 | 16 |
-| Troll SHAMAN | pass | 60 | 1923 | 0 | 0 | 0 | 0 | 12 | 7 | 10 | 4 | 9 |
-| Troll WARLOCK | pass | 60 | 1941 | 0 | 0 | 0 | 0 | 7 | 8 | 4 | 2 | 9 |
-| Troll WARRIOR | pass | 60 | 1919 | 0 | 0 | 0 | 0 | 9 | 7 | 4 | 2 | 9 |
-| Undead MAGE | pass | 60 | 1950 | 0 | 0 | 0 | 0 | 17 | 4 | 38 | 3 | 9 |
-| Undead PALADIN | pass | 60 | 1925 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | 0 | 9 |
-| Undead PRIEST | pass | 60 | 1925 | 0 | 0 | 0 | 0 | 19 | 4 | 38 | 3 | 9 |
-| Undead ROGUE | pass | 60 | 1963 | 0 | 0 | 0 | 0 | 22 | 3 | 38 | 3 | 9 |
-| Undead WARLOCK | pass | 60 | 1969 | 0 | 0 | 0 | 0 | 21 | 4 | 38 | 3 | 9 |
-| Undead WARRIOR | pass | 60 | 1938 | 0 | 0 | 0 | 0 | 22 | 4 | 38 | 3 | 9 |
-| Windshaper DRUID | pass | 60 | 1884 | 0 | 0 | 0 | 0 | 9 | 5 | 6 | 3 | 9 |
-| Windshaper HUNTER | pass | 60 | 1891 | 0 | 0 | 0 | 0 | 7 | 6 | 6 | 3 | 9 |
-| Windshaper ROGUE | pass | 60 | 1921 | 0 | 0 | 0 | 0 | 11 | 5 | 6 | 3 | 16 |
-| Windshaper SHAMAN | pass | 60 | 1957 | 0 | 0 | 0 | 0 | 9 | 5 | 6 | 3 | 9 |
-| Windshaper WARRIOR | pass | 60 | 1927 | 0 | 0 | 0 | 0 | 11 | 5 | 6 | 3 | 9 |
-| Human WARRIOR (profession 186) | pass | 60 | 1972 | 0 | 0 | 0 | 0 | 12 | 5 | 7 | 1 | 11 |
-| Undead MAGE (profession 197) | pass | 60 | 1953 | 0 | 0 | 0 | 0 | 18 | 4 | 38 | 3 | 9 |
+| Dwarf HUNTER | pass | 60 | 1844 | 0 | 0 | 0 | 0 | 6 | 8 | 0 | 0 | 9 |
+| Dwarf PALADIN | pass | 60 | 1839 | 0 | 0 | 0 | 0 | 3 | 7 | 0 | 0 | 9 |
+| Dwarf PRIEST | pass | 60 | 1843 | 0 | 0 | 0 | 0 | 4 | 8 | 0 | 0 | 9 |
+| Dwarf ROGUE | pass | 60 | 1888 | 0 | 0 | 0 | 0 | 18 | 9 | 20 | 3 | 10 |
+| Dwarf SHAMAN | pass | 60 | 1829 | 0 | 0 | 0 | 0 | 3 | 8 | 0 | 0 | 9 |
+| Dwarf WARRIOR | pass | 60 | 1874 | 0 | 0 | 0 | 0 | 10 | 9 | 7 | 1 | 9 |
+| Gnome MAGE | pass | 60 | 1869 | 0 | 0 | 0 | 0 | 10 | 11 | 12 | 1 | 10 |
+| Gnome PRIEST | pass | 60 | 1841 | 0 | 0 | 0 | 0 | 3 | 9 | 0 | 0 | 10 |
+| Gnome ROGUE | pass | 60 | 1895 | 0 | 0 | 0 | 0 | 16 | 11 | 20 | 3 | 9 |
+| Gnome WARLOCK | pass | 60 | 1888 | 0 | 0 | 0 | 0 | 2 | 11 | 0 | 0 | 10 |
+| Gnome WARRIOR | pass | 60 | 1879 | 0 | 0 | 0 | 0 | 10 | 11 | 7 | 1 | 10 |
+| HighOrder DRUID | pass | 60 | 1807 | 0 | 0 | 0 | 0 | 4 | 7 | 0 | 0 | 11 |
+| HighOrder HUNTER | pass | 60 | 1806 | 0 | 0 | 0 | 0 | 5 | 7 | 0 | 0 | 11 |
+| HighOrder MAGE | pass | 60 | 1822 | 0 | 0 | 0 | 0 | 4 | 7 | 0 | 0 | 11 |
+| HighOrder ROGUE | pass | 60 | 1838 | 0 | 0 | 0 | 0 | 16 | 10 | 16 | 2 | 13 |
+| HighOrder WARRIOR | pass | 60 | 1846 | 0 | 0 | 0 | 0 | 8 | 7 | 7 | 1 | 11 |
+| Human HUNTER | pass | 60 | 1831 | 0 | 0 | 0 | 0 | 7 | 3 | 0 | 0 | 11 |
+| Human MAGE | pass | 60 | 1883 | 0 | 0 | 0 | 0 | 3 | 3 | 0 | 0 | 11 |
+| Human PALADIN | pass | 60 | 1845 | 0 | 0 | 0 | 0 | 3 | 3 | 0 | 0 | 11 |
+| Human PRIEST | pass | 60 | 1845 | 0 | 0 | 0 | 0 | 4 | 3 | 0 | 0 | 11 |
+| Human ROGUE | pass | 60 | 1892 | 0 | 0 | 0 | 0 | 9 | 4 | 4 | 1 | 11 |
+| Human WARLOCK | pass | 60 | 1894 | 0 | 0 | 0 | 0 | 3 | 3 | 0 | 0 | 11 |
+| Human WARRIOR | pass | 60 | 1878 | 0 | 0 | 0 | 0 | 10 | 4 | 7 | 1 | 11 |
+| NightElf DRUID | pass | 60 | 1784 | 0 | 0 | 0 | 0 | 4 | 8 | 0 | 0 | 10 |
+| NightElf HUNTER | pass | 60 | 1778 | 0 | 0 | 0 | 0 | 4 | 8 | 0 | 0 | 10 |
+| NightElf PRIEST | pass | 60 | 1776 | 0 | 0 | 0 | 0 | 2 | 9 | 0 | 0 | 10 |
+| NightElf ROGUE | pass | 60 | 1811 | 0 | 0 | 0 | 0 | 8 | 9 | 9 | 2 | 10 |
+| NightElf WARRIOR | pass | 60 | 1808 | 0 | 0 | 0 | 0 | 9 | 10 | 8 | 2 | 10 |
+| Orc HUNTER | pass | 60 | 1779 | 0 | 0 | 0 | 0 | 3 | 2 | 0 | 0 | 9 |
+| Orc MAGE | pass | 60 | 1791 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | 9 |
+| Orc ROGUE | pass | 60 | 1793 | 0 | 0 | 0 | 0 | 3 | 4 | 0 | 0 | 16 |
+| Orc SHAMAN | pass | 60 | 1812 | 0 | 0 | 0 | 0 | 5 | 2 | 6 | 2 | 9 |
+| Orc WARLOCK | pass | 60 | 1836 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | 9 |
+| Orc WARRIOR | pass | 60 | 1806 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | 9 |
+| Tauren DRUID | pass | 60 | 1769 | 0 | 0 | 0 | 0 | 22 | 8 | 30 | 2 | 9 |
+| Tauren HUNTER | pass | 60 | 1781 | 0 | 0 | 0 | 0 | 7 | 6 | 2 | 1 | 9 |
+| Tauren SHAMAN | pass | 60 | 1819 | 0 | 0 | 0 | 0 | 11 | 4 | 8 | 3 | 9 |
+| Tauren WARRIOR | pass | 60 | 1813 | 0 | 0 | 0 | 0 | 4 | 5 | 2 | 1 | 9 |
+| Troll HUNTER | pass | 60 | 1776 | 0 | 0 | 0 | 0 | 3 | 2 | 0 | 0 | 9 |
+| Troll MAGE | pass | 60 | 1803 | 0 | 0 | 0 | 0 | 2 | 2 | 0 | 0 | 9 |
+| Troll PRIEST | pass | 60 | 1771 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | 9 |
+| Troll ROGUE | pass | 60 | 1792 | 0 | 0 | 0 | 0 | 2 | 4 | 0 | 0 | 16 |
+| Troll SHAMAN | pass | 60 | 1809 | 0 | 0 | 0 | 0 | 5 | 2 | 6 | 2 | 9 |
+| Troll WARLOCK | pass | 60 | 1828 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | 0 | 9 |
+| Troll WARRIOR | pass | 60 | 1802 | 0 | 0 | 0 | 0 | 2 | 2 | 0 | 0 | 9 |
+| Undead MAGE | pass | 60 | 1751 | 0 | 0 | 0 | 0 | 3 | 4 | 0 | 0 | 9 |
+| Undead PALADIN | pass | 60 | 1699 | 0 | 0 | 0 | 0 | 3 | 4 | 0 | 0 | 9 |
+| Undead PRIEST | pass | 60 | 1720 | 0 | 0 | 0 | 0 | 5 | 4 | 0 | 0 | 9 |
+| Undead ROGUE | pass | 60 | 1753 | 0 | 0 | 0 | 0 | 4 | 5 | 0 | 0 | 9 |
+| Undead WARLOCK | pass | 60 | 1785 | 0 | 0 | 0 | 0 | 4 | 4 | 0 | 0 | 9 |
+| Undead WARRIOR | pass | 60 | 1743 | 0 | 0 | 0 | 0 | 4 | 4 | 0 | 0 | 9 |
+| Windshaper DRUID | pass | 60 | 1752 | 0 | 0 | 0 | 0 | 8 | 3 | 2 | 1 | 7 |
+| Windshaper HUNTER | pass | 60 | 1765 | 0 | 0 | 0 | 0 | 3 | 2 | 2 | 1 | 7 |
+| Windshaper ROGUE | pass | 60 | 1795 | 0 | 0 | 0 | 0 | 5 | 3 | 2 | 1 | 14 |
+| Windshaper SHAMAN | pass | 60 | 1812 | 0 | 0 | 0 | 0 | 6 | 3 | 2 | 1 | 7 |
+| Windshaper WARRIOR | pass | 60 | 1805 | 0 | 0 | 0 | 0 | 7 | 2 | 2 | 1 | 7 |
+| Human WARRIOR (profession 186) | pass | 60 | 1881 | 0 | 0 | 0 | 0 | 10 | 4 | 7 | 1 | 11 |
+| Undead MAGE (profession 197) | pass | 60 | 1754 | 0 | 0 | 0 | 0 | 3 | 4 | 0 | 0 | 9 |
 
 ## Joiners (a character that played without the addon, then installs it)
 
@@ -86,51 +86,51 @@ first one after it that is not done.
 |---|---|---|---|---|---|---|---|---|---|---|
 | Dwarf HUNTER | 1 | pass | 60 | 1 | 2 (dwarf-01-12-dun-morogh/a2160) | 1 to 2 | 1 | 0 | 0 | 0 |
 | Dwarf PALADIN | 12 | pass | 60 | 139 | 135 (dwarf-01-12-dun-morogh/t96390) | 99 to 140 | 85 | 0 | 0 | 0 |
-| Dwarf PRIEST | 25 | pass | 60 | 664 | 660 (dwarf-24-25-redridge-mountains/o98386) | 624 to 665 | 417 | 0 | 0 | 0 |
-| Dwarf ROGUE | 40 | pass | 60 | 1417 | 1418 (dwarf-40-40-badlands/o722) | 1377 to 1418 | 859 | 0 | 0 | 0 |
-| Dwarf SHAMAN | 55 | pass | 60 | 2447 | 2447 (dwarf-55-55-silithus/o8278) | 2407 to 2448 | 1594 | 0 | 0 | 0 |
+| Dwarf PRIEST | 25 | pass | 60 | 667 | 656 (dwarf-24-25-redridge-mountains/o89) | 627 to 668 | 419 | 0 | 0 | 0 |
+| Dwarf ROGUE | 40 | pass | 60 | 1473 | 1474 (dwarf-40-40-badlands/o732) | 1433 to 1474 | 897 | 0 | 0 | 0 |
+| Dwarf SHAMAN | 55 | pass | 60 | 2432 | 2431 (dwarf-54-55-blasted-lands/o2681) | 2392 to 2433 | 1518 | 0 | 0 | 0 |
 | Gnome MAGE | 1 | pass | 60 | 1 | 2 (gnome-01-12-dun-morogh/a2160) | 1 to 2 | 1 | 0 | 0 | 0 |
 | Gnome PRIEST | 12 | pass | 60 | 154 | 154 (gnome-12-14-elwynn-forest/t123.a147.b@12) | 114 to 155 | 97 | 0 | 0 | 0 |
-| Gnome ROGUE | 25 | pass | 60 | 695 | 690 (gnome-24-25-redridge-mountains/o98386) | 655 to 696 | 445 | 0 | 0 | 0 |
-| Gnome WARLOCK | 40 | pass | 60 | 1393 | 1394 (gnome-40-40-badlands/o722) | 1353 to 1394 | 838 | 0 | 0 | 0 |
-| Gnome WARRIOR | 55 | pass | 60 | 2519 | 2519 (gnome-55-55-silithus/o8278) | 2479 to 2520 | 1645 | 0 | 0 | 0 |
+| Gnome ROGUE | 25 | pass | 60 | 707 | 706 (gnome-24-25-redridge-mountains/o98386) | 667 to 708 | 462 | 0 | 0 | 0 |
+| Gnome WARLOCK | 40 | pass | 60 | 1440 | 1441 (gnome-40-40-badlands/o732) | 1400 to 1441 | 870 | 0 | 0 | 0 |
+| Gnome WARRIOR | 55 | pass | 60 | 2521 | 2517 (gnome-55-55-silithus/t8280.a8281.t8277.a8278) | 2481 to 2522 | 1583 | 0 | 0 | 0 |
 | HighOrder DRUID | 1 | pass | 60 | 1 | 1 (highorder-01-15-zephras-isle/a92460.t92460.a92461.a92462) | 1 to 2 | 0 | 0 | 0 | 0 |
 | HighOrder HUNTER | 12 | pass | 60 | 150 | 148 (highorder-01-15-zephras-isle/t92685.a92693.o92693.t92693.a92703) | 110 to 151 | 70 | 0 | 0 | 0 |
 | HighOrder MAGE | 25 | pass | 60 | 655 | 654 (highorder-24-25-redridge-mountains/o98386) | 615 to 656 | 371 | 0 | 0 | 0 |
-| HighOrder ROGUE | 40 | pass | 60 | 1397 | 1398 (highorder-39-40-badlands/o722) | 1357 to 1398 | 800 | 0 | 0 | 0 |
-| HighOrder WARRIOR | 55 | pass | 60 | 2517 | 2515 (highorder-53-55-blasted-lands/b@440) | 2477 to 2518 | 1620 | 0 | 0 | 0 |
+| HighOrder ROGUE | 40 | pass | 60 | 1432 | 1433 (highorder-40-40-badlands/o732) | 1392 to 1433 | 824 | 0 | 0 | 0 |
+| HighOrder WARRIOR | 55 | pass | 60 | 2510 | 2509 (highorder-54-55-blasted-lands/o8423) | 2470 to 2511 | 1546 | 0 | 0 | 0 |
 | Human HUNTER | 1 | pass | 60 | 1 | 1 (human-01-12-elwynn-forest/a33.a783.t783.a7.a5261.t5261) | 1 to 2 | 0 | 0 | 0 | 0 |
-| Human MAGE | 12 | pass | 60 | 189 | 189 (human-12-14-dun-morogh/o417) | 149 to 190 | 106 | 0 | 0 | 0 |
-| Human PALADIN | 25 | pass | 60 | 672 | 664 (human-24-25-redridge-mountains/o98386) | 632 to 673 | 409 | 0 | 0 | 0 |
-| Human PRIEST | 40 | pass | 60 | 1373 | 1374 (human-40-40-badlands/o722) | 1333 to 1374 | 807 | 0 | 0 | 0 |
-| Human ROGUE | 55 | pass | 60 | 2506 | 2506 (human-54-55-winterspring/t4863) | 2466 to 2507 | 1632 | 0 | 0 | 0 |
+| Human MAGE | 12 | pass | 60 | 190 | 190 (human-12-14-dun-morogh/o417) | 150 to 191 | 108 | 0 | 0 | 0 |
+| Human PALADIN | 25 | pass | 60 | 676 | 668 (human-24-25-redridge-mountains/o98386) | 636 to 677 | 417 | 0 | 0 | 0 |
+| Human PRIEST | 40 | pass | 60 | 1387 | 1388 (human-40-40-badlands/o732) | 1347 to 1388 | 822 | 0 | 0 | 0 |
+| Human ROGUE | 55 | pass | 60 | 2498 | 2492 (human-54-55-blasted-lands/o2521.o3501.o81919) | 2458 to 2499 | 1569 | 0 | 0 | 0 |
 | NightElf DRUID | 1 | pass | 60 | 1 | 2 (nightelf-01-12-teldrassil/a458) | 1 to 2 | 1 | 0 | 0 | 0 |
 | NightElf HUNTER | 12 | pass | 60 | 140 | 139 (nightelf-01-12-teldrassil/o7383) | 100 to 141 | 94 | 0 | 0 | 0 |
-| NightElf PRIEST | 25 | pass | 60 | 595 | 596 (nightelf-24-28-duskwood/f12) | 555 to 596 | 373 | 0 | 0 | 0 |
-| NightElf ROGUE | 40 | pass | 60 | 1327 | 1326 (nightelf-39-40-dustwallow-marsh/t1204.t1222) | 1287 to 1328 | 792 | 0 | 0 | 0 |
-| NightElf WARRIOR | 55 | pass | 60 | 2418 | 2416 (nightelf-55-55-silithus/o8277.o8280) | 2378 to 2419 | 1591 | 0 | 0 | 0 |
+| NightElf PRIEST | 25 | pass | 60 | 608 | 604 (nightelf-24-28-duskwood/o56) | 568 to 609 | 374 | 0 | 0 | 0 |
+| NightElf ROGUE | 40 | pass | 60 | 1352 | 1351 (nightelf-40-40-stranglethorn-vale/o197) | 1312 to 1353 | 809 | 0 | 0 | 0 |
+| NightElf WARRIOR | 55 | pass | 60 | 2398 | 2396 (nightelf-54-55-eastern-plaguelands/t5542.t5543.t5544) | 2358 to 2399 | 1519 | 0 | 0 | 0 |
 | Orc HUNTER | 1 | pass | 60 | 1 | 1 (orc-01-12-durotar/a788.a97279.a4641.t4641) | 1 to 2 | 0 | 0 | 0 | 0 |
 | Orc MAGE | 12 | pass | 60 | 129 | 121 (orc-01-12-durotar/o99052) | 89 to 130 | 78 | 0 | 0 | 0 |
 | Orc ROGUE | 25 | pass | 60 | 605 | 605 (orc-23-25-stonetalon-mountains/t86576.t6393) | 565 to 606 | 370 | 0 | 0 | 0 |
-| Orc SHAMAN | 40 | pass | 60 | 1411 | 1412 (orc-40-40-badlands/y17-21) | 1371 to 1412 | 874 | 0 | 0 | 0 |
-| Orc WARLOCK | 55 | pass | 60 | 2442 | 2442 (orc-55-55-silithus/o8278) | 2402 to 2443 | 1596 | 0 | 0 | 0 |
+| Orc SHAMAN | 40 | pass | 60 | 1398 | 1392 (orc-39-40-stranglethorn-vale/t600.t209.a604.a617) | 1358 to 1399 | 842 | 0 | 0 | 0 |
+| Orc WARLOCK | 55 | pass | 60 | 2412 | 2410 (orc-54-55-blasted-lands/t2681.a2702.t2702.a2701.t2701) | 2372 to 2413 | 1503 | 0 | 0 | 0 |
 | Tauren DRUID | 1 | pass | 60 | 1 | 2 (tauren-01-09-mulgore/a747.a752) | 1 to 2 | 1 | 0 | 0 | 0 |
-| Tauren HUNTER | 12 | pass | 60 | 143 | 143 (tauren-11-14-durotar/o834) | 103 to 144 | 90 | 0 | 0 | 0 |
-| Tauren SHAMAN | 25 | pass | 60 | 621 | 610 (tauren-23-25-stonetalon-mountains/t6481) | 581 to 622 | 366 | 0 | 0 | 0 |
-| Tauren WARRIOR | 40 | pass | 60 | 1364 | 1364 (tauren-40-40-arathi-highlands/o518) | 1324 to 1365 | 828 | 0 | 0 | 0 |
-| Tauren DRUID | 55 | pass | 60 | 2396 | 2394 (tauren-55-55-silithus/t8280.a8281.t8277.a8278) | 2356 to 2397 | 1547 | 0 | 0 | 0 |
+| Tauren HUNTER | 12 | pass | 60 | 152 | 152 (tauren-11-14-durotar/t99048.a99049) | 112 to 153 | 93 | 0 | 0 | 0 |
+| Tauren SHAMAN | 25 | pass | 60 | 621 | 610 (tauren-23-25-stonetalon-mountains/t6481) | 581 to 622 | 367 | 0 | 0 | 0 |
+| Tauren WARRIOR | 40 | pass | 60 | 1368 | 1367 (tauren-39-40-badlands/t1419) | 1328 to 1369 | 824 | 0 | 0 | 0 |
+| Tauren DRUID | 55 | pass | 60 | 2383 | 2383 (tauren-55-55-silithus/o8278) | 2343 to 2384 | 1463 | 0 | 0 | 0 |
 | Troll HUNTER | 1 | pass | 60 | 1 | 1 (troll-01-12-durotar/a788.a97279.a4641.t4641) | 1 to 2 | 0 | 0 | 0 | 0 |
 | Troll MAGE | 12 | pass | 60 | 129 | 122 (troll-01-12-durotar/o99052) | 89 to 130 | 79 | 0 | 0 | 0 |
 | Troll PRIEST | 25 | pass | 60 | 596 | 588 (troll-23-25-stonetalon-mountains/t86576.t6393) | 556 to 597 | 360 | 0 | 0 | 0 |
-| Troll ROGUE | 40 | pass | 60 | 1343 | 1342 (troll-39-40-swamp-of-sorrows/o518) | 1303 to 1344 | 834 | 0 | 0 | 0 |
-| Troll SHAMAN | 55 | pass | 60 | 2387 | 2384 (troll-54-55-winterspring/o977) | 2347 to 2388 | 1562 | 0 | 0 | 0 |
+| Troll ROGUE | 40 | pass | 60 | 1356 | 1355 (troll-40-40-stranglethorn-vale/o193) | 1316 to 1357 | 820 | 0 | 0 | 0 |
+| Troll SHAMAN | 55 | pass | 60 | 2394 | 2393 (troll-55-55-western-plaguelands/a4022.o4022.t4022) | 2354 to 2395 | 1486 | 0 | 0 | 0 |
 | Undead MAGE | 1 | pass | 60 | 1 | 2 (undead-01-08-tirisfal-glades/a364) | 1 to 2 | 1 | 0 | 0 | 0 |
 | Undead PALADIN | 12 | pass | 60 | 128 | 128 (undead-08-13-tirisfal-glades/o369) | 88 to 129 | 71 | 0 | 0 | 0 |
-| Undead PRIEST | 25 | pass | 60 | 594 | 588 (undead-23-25-stonetalon-mountains/t86576.t6393) | 554 to 595 | 353 | 0 | 0 | 0 |
-| Undead ROGUE | 40 | pass | 60 | 1382 | 1383 (undead-40-40-badlands/o782) | 1342 to 1383 | 861 | 0 | 0 | 0 |
-| Undead WARLOCK | 55 | pass | 60 | 2395 | 2392 (undead-54-55-felwood/o6042) | 2355 to 2396 | 1565 | 0 | 0 | 0 |
+| Undead PRIEST | 25 | pass | 60 | 572 | 553 (undead-23-25-stonetalon-mountains/t6393) | 532 to 573 | 334 | 0 | 0 | 0 |
+| Undead ROGUE | 40 | pass | 60 | 1365 | 1365 (undead-40-40-badlands/t1108.a1137.t703.t2418) | 1325 to 1366 | 799 | 0 | 0 | 0 |
+| Undead WARLOCK | 55 | pass | 60 | 2416 | 2416 (undead-54-55-blasted-lands/o5098) | 2376 to 2417 | 1482 | 0 | 0 | 0 |
 | Windshaper DRUID | 1 | pass | 60 | 1 | 1 (windshaper-01-14-zephras-isle/a92460.t92460.a92461.a92462) | 1 to 2 | 0 | 0 | 0 | 0 |
 | Windshaper HUNTER | 12 | pass | 60 | 153 | 150 (windshaper-01-14-zephras-isle/o92550.o92551) | 113 to 154 | 74 | 0 | 0 | 0 |
-| Windshaper ROGUE | 25 | pass | 60 | 593 | 593 (windshaper-24-25-the-barrens/o2478) | 553 to 594 | 350 | 0 | 0 | 0 |
-| Windshaper SHAMAN | 40 | pass | 60 | 1416 | 1416 (windshaper-40-40-badlands/a782.t2258.a2202) | 1376 to 1417 | 858 | 0 | 0 | 0 |
-| Windshaper WARRIOR | 55 | pass | 60 | 2402 | 2402 (windshaper-55-55-silithus/o8277.o8280) | 2362 to 2403 | 1556 | 0 | 0 | 0 |
+| Windshaper ROGUE | 25 | pass | 60 | 593 | 584 (windshaper-24-25-ashenvale/o25) | 553 to 594 | 338 | 0 | 0 | 0 |
+| Windshaper SHAMAN | 40 | pass | 60 | 1397 | 1396 (windshaper-40-40-stranglethorn-vale/o604) | 1357 to 1398 | 834 | 0 | 0 | 0 |
+| Windshaper WARRIOR | 55 | pass | 60 | 2406 | 2405 (windshaper-55-56-eastern-plaguelands/o6164) | 2366 to 2407 | 1517 | 0 | 0 | 0 |

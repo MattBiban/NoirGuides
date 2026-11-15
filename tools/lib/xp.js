@@ -32,6 +32,9 @@ const PACE = Object.freeze({
   YIELD_LATE: 0.68,       // ... and the share from level YIELD_TO on, rising evenly from YIELD_FROM. Calibrated the same
   YIELD_FROM: 30,         // way: at 0.6 a route that does as much quest XP from level 40 to 60 as well-tested routes do
   YIELD_TO: 50,           // (four fifths of the XP of those levels) was still most of level 59 short of level 60
+  STARTER_KILLS: 8,       // fights before an item that starts a quest drops: a guess, the same as one creature objective.
+                          // Only their time is counted, no XP: where the item comes from one named creature it can take
+                          // much longer, and a route must not count on XP the player may not get
   TALK_SECONDS: 10,       // accepting or turning in a quest, binding the hearthstone: a guess
   HEARTH_COOLDOWN: 3600,  // the hearthstone's cooldown in the original game: one hour
 });

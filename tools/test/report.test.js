@@ -71,7 +71,7 @@ test("the report sets the routes beside the baseline and says whether each accep
   assert.match(md, /\| Zone changes at most 140% of the baseline for every race \| yes \| most: Human, 10 to 1 \(-90%\) \|/);
   assert.match(md, /\| Travel time at most 150% of the baseline for every race \| yes \| most: Human, 27 h 47 min to 0 h \d\d min \(-\d+%\) \|/);
   assert.match(md, /\| At most 2 grind steps in any race \| yes \| most: \d \|/);
-  assert.match(md, /\| No quest more than 3 levels above the player in any race \(4 for a quest without fights\) \| yes \| most: 0 quest steps a class \(2 allowed: [^|]+\) \|/);
+  assert.match(md, /\| No quest more than 3 levels above the player in any race \(4 for a quest without fights\) \| yes \| most: 0 quest steps a class \(4 allowed: [^|]+\) \|/);
   assert.match(md, /\| At most 10% of quest steps more than 5 levels below the player in any race \| yes \| most: 0% \|/);
   // the pace is said as it is counted (lib/xp.js yieldAt), and the price of quests instead of grinding is said too
   assert.match(md, /The planner counts on 60% of the estimated XP up to level 30, rising to 68% at level 50, so a\nplayer at a usual pace is not behind the route\./);
@@ -117,13 +117,13 @@ test("an acceptance line that is not met is reported as not met", () => {
   assert.deepStrictEqual([grind(0).met, grind(0).detail], [true, "most: 0"]);
   assert.deepStrictEqual([grind(2).met, grind(2).detail], [true, "most: 2"]);
   assert.deepStrictEqual([grind(3).met, grind(3).detail], [false, "over: Human (3)"]);
-  // quests above the level: two steps a class are allowed (planner/levelgap.js MAX_ABOVE), a third is not; and a
+  // quests above the level: four steps a class are allowed (planner/levelgap.js MAX_ABOVE), a fifth is not; and a
   // tenth of the quest steps may be far below the level, not more
   const gapLine = (levelGap, name) => acceptance([{ race: "Human", s: { ...s, levelGap }, before: before(10, 100000).races.Human }]).find((a) => name.test(a.name));
   const steps = (n) => Array.from({ length: n }, (_, k) => ({ step: k, quest: 1, questLevel: 9, level: 1 }));
   const above = (n) => gapLine({ above: steps(n), below: [], steps: 100 }, /levels above/), below = (n) => gapLine({ above: [], below: steps(n), steps: 100 }, /levels below/);
-  assert.match(above(2).detail, /^most: 2 quest steps a class/);
-  assert.deepStrictEqual([above(2).met, above(3).met, above(3).detail], [true, false, "over: Human (3)"]);
+  assert.match(above(4).detail, /^most: 4 quest steps a class/);
+  assert.deepStrictEqual([above(4).met, above(5).met, above(5).detail], [true, false, "over: Human (5)"]);
   assert.deepStrictEqual([below(10).met, below(10).detail], [true, "most: 10%"]);
   assert.deepStrictEqual([below(11).met, below(11).detail], [false, "over: Human"]);
   // one walk through a zone far above the player is one too many

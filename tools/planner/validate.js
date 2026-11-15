@@ -231,7 +231,7 @@ function validateRoute(db, route, ch, options = {}) {
         if (state.log.size >= LOG_LIMIT) err(`accepting quest ${q.id} would put more than ${LOG_LIMIT} quests in the log`);
         state.log.add(q.id);
       }
-      state.clock += PACE.TALK_SECONDS;
+      state.clock += PACE.TALK_SECONDS + (step.item ? PACE.STARTER_KILLS * PACE.KILL_SECONDS : 0);
       return;
     }
 
