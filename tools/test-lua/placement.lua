@@ -101,6 +101,45 @@ test("early quests left undone do not hold the place back", function()
   eq(left, 2, "two quest steps before the place are left undone")
 end)
 
+test("a hand-in already done across the sea places the character at its step, past the moves and flight points before it", function()
+  -- Found by the simulator's joiners: a quest taken in one section was handed in at the start of the next, after a
+  -- walk, a flight point and a boat. Counted at its accept only, the place stayed before that journey and the joiner,
+  -- standing at the hand-in, was sent back across the sea for a flight point the client cannot tell is known.
+  local function route(client)
+    local sections = client.G.Noir.Routes.Get("horde-undead").sections
+    sections[2].steps = {
+      { id = "a365x", at = { zone = 85, x = 59.4, y = 52.4, r = 10 }, lines = { { kind = "accept", quest = 365, npc = 1518 } } },
+    }
+    sections[3].steps = {
+      { id = "g85x", at = { zone = 85, x = 58.9, y = 51.9, r = 20 }, lines = { { kind = "goto", at = { zone = 85, x = 58.9, y = 51.9, r = 20 } } } },
+      { id = "fp384x", at = { zone = 85, x = 58.9, y = 51.9, r = 10 }, lines = { { kind = "getflight", node = 384, npc = 4551 } } },
+      { id = "zep14", at = { zone = 85, x = 60.6, y = 58.9, r = 15 },
+        lines = { { kind = "transport", mode = "zeppelin", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, to = { zone = 14, x = 51, y = 13.9 } } } },
+      { id = "t365x.a435x", at = { zone = 14, x = 50, y = 20, r = 10 },
+        lines = { { kind = "turnin", quest = 365, npc = 1950 }, { kind = "accept", quest = 435, npc = 1950 } } },
+      { id = "a367x", at = { zone = 14, x = 50, y = 22, r = 10 }, lines = { { kind = "accept", quest = 367, npc = 1518 } } },
+    }
+  end
+  local _, Noir, P = join(5, { 363, 364, 376, 3901, 365 }, {}, { zone = 14, x = 50, y = 20, afterLoad = route })
+  local id, index = P.Locate(Noir.Guide.Chain(DEATHKNELL))
+  eq({ id, index }, { SILVERPINE, 4 }, "on the step of the hand-in: its accept is still to do")
+  eq({ place(P) }, { SILVERPINE, "t365x.a435x", 4 })
+  eq(Noir.Why.ForStep(SILVERPINE, "g85x"), nil, "the walk before it was never shown")
+  -- A quest left out on the way is work the character may still be at: the hand-in does not carry the place over it.
+  local _, Noir2, P2 = join(5, { 363, 364, 376, 3901, 365 }, {}, { zone = 14, x = 50, y = 20, afterLoad = function(client)
+    route(client)
+    table.insert(client.G.Noir.Routes.Get("horde-undead").sections[3].steps, 1,
+      { id = "a370x", at = { zone = 85, x = 60, y = 52, r = 10 }, lines = { { kind = "accept", quest = 370, npc = 1500 } } })
+  end })
+  local id2, index2 = P2.Locate(Noir2.Guide.Chain(DEATHKNELL))
+  eq({ id2, index2 }, { SILVERPINE, 1 }, "just after the accept of the quest handed in")
+  -- Standing on the continent of the steps before the hand-in, the character can still walk to them: nothing is
+  -- passed over (the flight point may be unknown).
+  local _, Noir3, P3 = join(5, { 363, 364, 376, 3901, 365 }, {}, { zone = 85, x = 59, y = 52, afterLoad = route })
+  local id3, index3 = P3.Locate(Noir3.Guide.Chain(DEATHKNELL))
+  eq({ id3, index3 }, { SILVERPINE, 1 })
+end)
+
 test("a saved place behind the quest log moves forward at login with one chat line", function()
   local c = sample3({ class = "MAGE", level = 2, saved = savedAt(DEATHKNELL, "a363") })
   c:acceptQuest(364)

@@ -603,6 +603,48 @@ test("a move the player is already past on its journey is passed as moot", funct
   eq(place(c2.G.Noir.Progress), "g85x")
 end)
 
+test("a move at the end of a section is moot when the next section's first move goes to where the player stands", function()
+  -- Found by the simulator's joiners: a section ended with "go to Thalanaar" and "fly to Ratchet", the next one began
+  -- with the boat to Booty Bay, and a joiner standing in Booty Bay was sent to the other continent and back. The
+  -- journey of a move goes on into the next section when no work is left in its own.
+  local function steps(client)
+    local sections = client.G.Noir.Routes.Get("horde-undead").sections
+    sections[2].steps = {
+      { id = "g130x", at = { zone = 130, x = 45, y = 42, r = 20 }, lines = { { kind = "goto", at = { zone = 130, x = 45, y = 42, r = 20 } } } },
+    }
+    sections[3].steps = {
+      { id = "zep14", at = { zone = 130, x = 45, y = 42, r = 15 },
+        lines = { { kind = "transport", mode = "zeppelin", at = { zone = 130, x = 45, y = 42, r = 15 }, to = { zone = 14, x = 51, y = 13.9 } } } },
+      { id = "a435x", at = { zone = 14, x = 50, y = 20, r = 10 }, lines = { { kind = "accept", quest = 435, npc = 1950 } } },
+    }
+  end
+  local c = sample3({ class = "MAGE", level = 5, zone = 14, x = 50, y = 30, saved = savedAt(TIRISFAL, "g130x"), afterLoad = steps })
+  c:login()
+  local Noir, P = c.G.Noir, c.G.Noir.Progress
+  c:advance(2)
+  eq(Noir.Guide.Current(), SILVERPINE, "in Durotar already: the walk to the zeppelin is passed and the next section loads")
+  eq(place(P), "a435x", "the zeppelin to where the player stands is done")
+  local e = Noir.Why.ForStep(TIRISFAL, "g130x")
+  ok(e and e.kind == "moot", "the walk is logged as moot")
+  has(e.text, "later move of the way")
+  -- In Tirisfal the walk still leads to the zeppelin.
+  local c2 = sample3({ class = "MAGE", level = 5, zone = 85, x = 50, y = 50, saved = savedAt(TIRISFAL, "g130x"), afterLoad = steps })
+  c2:login()
+  c2:advance(2)
+  eq(c2.G.Noir.Guide.Current(), TIRISFAL)
+  eq(place(c2.G.Noir.Progress), "g130x")
+  -- Work still to do in the next section before the move back ends the journey: the walk leads to it.
+  local c3 = sample3({ class = "MAGE", level = 5, zone = 14, x = 50, y = 30, saved = savedAt(TIRISFAL, "g130x"),
+    afterLoad = function(client)
+      steps(client)
+      table.insert(client.G.Noir.Routes.Get("horde-undead").sections[3].steps, 1,
+        { id = "a367x", at = { zone = 130, x = 45, y = 42, r = 10 }, lines = { { kind = "accept", quest = 367, npc = 1518 } } })
+    end })
+  c3:login()
+  c3:advance(2)
+  eq(place(c3.G.Noir.Progress), "g130x")
+end)
+
 test("Jump goes back and forward without confirmation and logs it", function()
   local c, Noir, P = play({ class = "MAGE", level = 1 })
   local asked = 0

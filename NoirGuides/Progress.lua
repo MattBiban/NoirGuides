@@ -43,7 +43,10 @@
 --   Progress.Locate(chain) -> sectionId, index, score, left
 --                                   placement from quest history over the sections of `chain`, in order: a quest in
 --                                   the log +4 (at its accept line only), handed in +2, missing -1, a known flight point +2 (an unknown one 0),
---                                   each quest once at its first line; the place is just after the highest score,
+--                                   each quest once at its first line (a later hand-in line of a quest handed in
+--                                   counts 0, a tie, when it is on the continent the character stands on, a step
+--                                   since the best evidence is on another one, and no quest first met since then
+--                                   is in neither the log nor the history); the place is just after the highest score,
 --                                   latest on ties (on that step while one of its quest lines is still to do). Steps and sections the character outlevels (above maxLevel while
 --                                   "outlevel" is on) and steps under their minLevel are not counted as missing.
 --                                   Score 0 means no evidence. left: the quests before the place counted missing
@@ -94,8 +97,8 @@
 --     tick: why "tick";
 --   * a movement step whose next work step is already done is passed (why "moot") unless the work left lies that way
 --     (or the move crosses to the continent that work is on) or the player jumped to it; a movement step is also
---     passed (why "moot") when a later move of its journey (up to the next work step) goes to the zone the player
---     already stands in.
+--     passed (why "moot") when a later move of its journey (up to the next work step, into the next section when no
+--     work is left in this one) goes to the zone the player already stands in.
 -- Nearby: while the current step is an objective step (only objective and collect lines), the objective steps right
 -- after it whose areas lie within NEARBY_YARDS of its area, whose quests are in the log, that are at or above their
 -- level and need nothing the current step does, show as "nearby" cards (at most NEARBY_CARDS; steps already done are
@@ -644,9 +647,22 @@ local function placeOf(step)
   return nil
 end
 
+-- A step of another section has a line still to do, as the game shows it now (no ticks: they belong to the section
+-- on screen).
+local function openElsewhere(step)
+  for k = 1, #step.lines do
+    local line = step.lines[k]
+    local state = Lines.Check(line, step, { since = now() })
+    if Lines.Active(line) and state ~= "hidden" and state ~= "done" and state ~= "skip" then return true end
+  end
+  return false
+end
+
 -- A later move of the journey this move starts (the moves after it, up to the first work step still to do) that goes
 -- to the zone the player already stands in, while this move goes elsewhere: the player is past this move on the way
--- (it was left behind by work that passed). Returns that step's index or nil.
+-- (it was left behind by work that passed). With no work left in the section the journey goes on into the next one
+-- (a section that ends with the flight to the dock, the next one beginning with the boat). Returns that step (and
+-- its index when it is of this section) or nil.
 local function pastOnJourney(step, i)
   local own = destination(step)
   if own and inZone(own) then return nil end
@@ -656,7 +672,19 @@ local function pastOnJourney(step, i)
       if isWork(other) and not doneNow(other) then return nil end
       if isMove(other) then
         local zone = destination(other)
-        if zone and inZone(zone) and not sameZone(zone, own) then return j end
+        if zone and inZone(zone) and not sameZone(zone, own) then return other, j end
+      end
+    end
+  end
+  local chain = current and Guide.Chain(current) or {}
+  local list = chain[2] and Guide.Steps(chain[2]) or {}
+  for j = 1, #list do
+    local other = list[j]
+    if not other.reminder then
+      if isWork(other) and openElsewhere(other) then return nil end
+      if isMove(other) then
+        local zone = destination(other)
+        if zone and inZone(zone) and not sameZone(zone, own) then return other end
       end
     end
   end
@@ -1017,7 +1045,7 @@ local function judgeCurrent(step, onScreen)
           text = string.format("the step it leads to (step %s, %s) is already done", tostring(steps[j].n), Why.Describe(steps[j])) }
       elseif k then
         decision = { to = index + 1, kind = "moot",
-          text = string.format("you already stand where a later move of the way (step %s, %s) goes", tostring(steps[k].n), Why.Describe(steps[k])) }
+          text = string.format("you already stand where a later move of the way (step %s, %s) goes", tostring(k.n), Why.Describe(k)) }
       end
     end
   end
@@ -1465,6 +1493,8 @@ local function locate(chain)
   local running_, best = 0, 0
   local bestSection, bestStep, bestPos = nil, 0, 0
   local counted, flights, missing = {}, {}, {}
+  local absent, absentAtBest = 0, 0
+  local here, across = continentOf(State.zone), false
   local order = {}
   local pos = 0
   for c = 1, #(chain or {}) do
@@ -1476,6 +1506,9 @@ local function locate(chain)
         local step = list[i]
         pos = pos + 1
         local exempt = notMissing(step, sec)
+        local where = placeOf(step)
+        local there = where and continentOf(where.zone) or nil
+        if here ~= nil and there ~= nil and there ~= here then across = true end
         for k = 1, #step.lines do
           local line = step.lines[k]
           if applies(line) then
@@ -1488,10 +1521,20 @@ local function locate(chain)
                 if line.kind == "accept" then evidence = 4 end
               elseif State.IsDone(line.quest) then
                 evidence = 2
-              elseif not exempt then
-                running_ = running_ - 1
-                missing[#missing + 1] = pos
+              else
+                absent = absent + 1
+                if not exempt then
+                  running_ = running_ - 1
+                  missing[#missing + 1] = pos
+                end
               end
+            elseif line.kind == "turnin" and line.quest and across and there == here and absent == absentAtBest
+              and State.IsDone(line.quest) then
+              -- A hand-in the character has done (its quest counted at its first line) on the continent the
+              -- character stands on, after steps across the sea: the character is past that crossing, and its
+              -- moves and flight points (which the client cannot tell are known) are behind it. The place is here
+              -- when no quest first met since the best evidence is absent from the log and the history.
+              evidence = 0
             elseif line.kind == "getflight" and line.node and not flights[line.node] then
               flights[line.node] = true
               -- The client tells which flight points are known only while a flight map is open: an unknown one
@@ -1500,7 +1543,10 @@ local function locate(chain)
             end
             if evidence then
               running_ = running_ + evidence
-              if running_ >= best then best, bestSection, bestStep, bestPos = running_, #order, i, pos end
+              if running_ >= best then
+                best, bestSection, bestStep, bestPos = running_, #order, i, pos
+                absentAtBest, across = absent, false
+              end
             end
           end
         end
