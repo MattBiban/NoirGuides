@@ -57,6 +57,20 @@ const CHOICES = Object.freeze({
                              //   when it reaches the next level. Measured: the share hardly matters from 0.08 up (the
                              //   errands that reach the level are the ones taken); under 0.05 every grind step saved
                              //   costs over twenty changes of zone
+  GRIND_BELOW: 2,            // a grind step is at a place where creatures stand whose levels are from this many under
+  GRIND_ABOVE: 1,            //   the player's level to this many above it (planner/grindspots.js): never higher, and
+                             //   not so low that a kill gives under two thirds of the XP of one at the level (from
+                             //   level 8; lib/xp.js mobXp)
+  GRIND_RADIUS: 150,         // yards: the creatures of one place to grind at stand within this of its middle
+  GRIND_MIN_SPAWNS: 12,      // ... and at least this many spawn there: a fight every 30 seconds (lib/xp.js KILL_SECONDS)
+                             //   empties ten spawns in the five minutes a creature takes to come back (a guess)
+  GRIND_NAMED_SHARE: 0.2,    // the creatures a grind step names and offers as targets: those with at least this share
+  GRIND_NAMED: 3,            //   of the place's spawns, at most this many
+  GRIND_LOOK: 8,             // the places weighed for a grind step (planner/plan.js grindSpot): the nearest this many
+                             //   in the zone the player stands in; when it has none, the nearest this many anywhere
+                             //   and as many in the zone the route goes to next
+  GRIND_ZONE_SECONDS: 900,   // what a place costs that is neither in the zone the player stands in nor in the one the
+                             //   route goes to next: grinding there is a change of zone of its own
   MAX_ITERATIONS: 200000,    // a guard against a planner bug that never finishes; real routes take a few thousand turns
 });
 // How many levels above the player a quest may be at this level: HARD or HARD_TALK, and START_HARD in the first levels.

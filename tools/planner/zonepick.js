@@ -225,4 +225,4 @@ function bestZone(view, options = {}) {
   return { zone: 0, wait: true };
 }
 
-module.exports = { Overlay, copyOf, simVisit, bestZone, urgentZone };
+module.exports = { Overlay, copyOf, simVisit, bestZone, urgentZone, entryOf };

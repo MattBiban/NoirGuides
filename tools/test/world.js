@@ -56,6 +56,11 @@ function testWorld(change) {
   world.object = (id, z, x, y, name = "Object " + id) => { db.objects.set(id, { id, name, spawns: { [z]: [[x, y]] } }); return id; };
   // a herd: enough hostile spawns around one place to make the zone open country
   world.herd = (id, z, x, y, count = 320) => { db.npcs.set(id, { id, name: "Beast " + id, friendly: "", spawns: { [z]: Array.from({ length: count }, () => [x, y]) } }); return id; };
+  // a pack: hostile creatures of one level standing in one place, a place to grind at (planner/grindspots.js)
+  world.pack = (id, z, x, y, level, count = 20, more = {}) => {
+    db.npcs.set(id, { id, name: "Wolf " + id, friendly: "", minLevel: level, maxLevel: level, rank: 0, spawns: { [z]: Array.from({ length: count }, () => [x, y]) }, ...more });
+    return id;
+  };
   world.quest = (id, raw) => {
     db.quests.set(id, normalizeQuest(id, { name: "Quest " + id, requiredLevel: 1, questLevel: 1, ...raw }));
     db.eraQuestIds.add(id);

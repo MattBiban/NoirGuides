@@ -43,6 +43,16 @@ test("each template gives the text for its step kind", () => {
   // a grind
   const grind = { id: "l7@100", at: P(100, 30, 50), lines: [{ kind: "grind", level: 7 }] };
   assert.strictEqual(stepText(db, grind, { previous: talk, section }), "Kill creatures around Westland until you reach level 7.");
+  // a grind at a place with creatures to kill names them (the first two) and the part of the zone
+  db.npcs.set(21, { id: 21, name: "Dustwind Harpy", friendly: "", spawns: {} });
+  db.npcs.set(22, { id: 22, name: "Dustwind Harpy", friendly: "", spawns: {} }); // the same name under another ID
+  db.npcs.set(23, { id: 23, name: "Burning Blade Felsworn", friendly: "", spawns: {} });
+  const spot = (x, y, enemy) => ({ id: "l7@100", at: P(100, x, y), lines: [{ kind: "grind", level: 7 }], targets: { enemy } });
+  assert.strictEqual(stepText(db, spot(48, 12, [21]), { section }), "Kill Dustwind Harpies in the north of Westland until you reach level 7.");
+  assert.strictEqual(stepText(db, spot(85, 80, [21, 22, 20, 23]), { section }), "Kill Dustwind Harpies and Grey Wolves in the southeast of Westland until you reach level 7.");
+  assert.strictEqual(stepText(db, spot(45, 55, [23, 20]), { section }), "Kill Burning Blade Felsworn and Grey Wolves in the middle of Westland until you reach level 7.");
+  assert.strictEqual(stepText(db, spot(10, 50, [999]), { section }), "Kill creatures around Westland until you reach level 7.", "a creature without a name");
+  assert.strictEqual(stepText(db, spot(0, 0, [21]), { section }), "Kill creatures around Westland until you reach level 7.", "a zone without a place");
   // an objective step far from the previous one (500 yards east of Giver Ann)
   const far = { id: "o1", at: P(100, 80, 50, 40), lines: [{ kind: "objective", quest: 1, index: 1, npc: 20 }], targets: { enemy: [20] } };
   assert.strictEqual(stepText(db, far, { previous: talk, section }), "The Grey Wolves are east of Giver Ann.");
