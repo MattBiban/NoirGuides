@@ -20,7 +20,7 @@ const { supplyZone } = require("./supply");
 function planRoute(db, ch, options = {}) {
   const maxLevel = options.maxLevel || 60;
   const id = `${ch.faction.toLowerCase()}-${ch.race.toLowerCase()}`;
-  const graph = plannerGraph(options.graph || emptyGraph(db));
+  const graph = plannerGraph(db, options.graph || emptyGraph(db));
   const ctx = buildContext(db, ch, graph, options.inns || []);
   const { info, byZone, bands } = ctx;
   const st = { level: 1, xp: 0, pos: null, started: false, zone: zoneOf(db, ch.startArea), log: new Map(), done: new Set(), have: new Set(),
@@ -104,6 +104,10 @@ function planRoute(db, ch, options = {}) {
       emit({ action: "transport", kind: leg.kind, at: place(leg.at), to });
       st.clock += leg.seconds;
       st.pos = toPoint(db, to.zone, to.x, to.y);
+      // A transport that asks for a quest leaves a place for good (the skycutter off Zephras Isle). A hearthstone still
+      // bound there is no way the route counts on: with the walks through dangerous zones gone (planner/danger.js),
+      // home to the isle and off it again had become the fastest way from Loch Modan to Stormwind.
+      if (leg.requires && st.hearth && st.hearth.zone === leg.at.zone) st.hearth = null;
       if (!leg.verified) st.links.set(leg.link, { id: leg.link, name: leg.name, kind: leg.kind, assumed: leg.assumed });
     } else if (leg.action === "hearth") {
       const to = place(leg.to);
@@ -239,6 +243,7 @@ function planRoute(db, ch, options = {}) {
     const objectives = tasks(st.zone).filter((t) => t.kind === "objective" && apart(t.i.end.point, anchor));
     if (!objectives.length) return;
     const back = Math.max(...objectives.map((t) => walkSeconds(graph, st.level, t.point, inn.point)));
+    if (back === Infinity) return; // an objective no safe way leads back from (planner/danger.js): nothing to count on
     const detour = 2 * walkSeconds(graph, st.level, st.pos, inn.point) + PACE.TALK_SECONDS;
     if (back - ESTIMATES.HEARTH_SECONDS - detour < C.HEARTH_MIN_SAVING) return;
     if (go(inn.point)) emit({ action: "sethearth", at: inn.at, npc: inn.npc });

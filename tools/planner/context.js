@@ -9,6 +9,7 @@ const { levelingQuests, startPoint, endPoint, objectivePoint } = require("../lib
 const { zoneLevels } = require("../lib/xp");
 const { buildGraph, travelPlan, walkYards } = require("../lib/travel");
 const { CHOICES } = require("./tuning");
+const { safeLevels, havens } = require("./danger");
 
 // "Welcome to Azeroth" and the quest after it: what a Skyborne character is given on arriving from Zephras Isle
 // (docs/routes/DATA-NOTES.md, section 3). They are Forever's own quests outside the isle, which levelingQuests leaves
@@ -25,14 +26,17 @@ const emptyGraph = (db) => buildGraph(db, { taxiNodes: [], taxiPaths: [], taxiPa
 
 // The graph without the links whose users are an assumption (transports.json: assumed "factions"): a route must not
 // depend on a boat nobody has seen the faction board. The validator keeps the full graph and fails such a step.
-function plannerGraph(graph) {
+// And with the danger rule (planner/danger.js): on this graph lib/travel.js knows no walk through a zone whose
+// creatures are far above the traveller's level, so no way the planner, the class layer or the trainer visits cost
+// is such a walk.
+function plannerGraph(db, graph) {
   const links = graph.links.filter((l) => !l.assumed.includes("factions"));
   const ground = {};
   for (const [faction, g] of Object.entries(graph.ground)) {
     // a link's two ends follow each other in the list, and both go together
     ground[faction] = { places: g.places.filter((p) => !p.link || links.includes(p.link)), nodeCount: g.nodeCount, indexOfNode: g.indexOfNode, yards: new Map() };
   }
-  return { ...graph, links, ground };
+  return { ...graph, links, ground, safeLevel: safeLevels(db), havens: havens({ links }) };
 }
 
 // Every innkeeper with a known place: [{ npc, name, friendly, point }], by NPC ID.

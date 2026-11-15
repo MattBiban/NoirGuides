@@ -57,6 +57,13 @@ const CHOICES = Object.freeze({
                              //   when it reaches the next level. Measured: the share hardly matters from 0.08 up (the
                              //   errands that reach the level are the ones taken); under 0.05 every grind step saved
                              //   costs over twenty changes of zone
+  DANGER_LEVELS: 5,          // an open zone is dangerous when the low end of its creatures' levels (lib/xp.js zoneLevels,
+                             //   min) is more than this many levels above the player: no way on foot leads through it or
+                             //   into it then (planner/danger.js; lib/travel.js keeps the rule for every way that is costed).
+                             //   Lower: safer walks, later zones, more grind steps
+  ARRIVAL_YARDS: 150,        // ... except within this distance of the end of a transport that asks for a quest: there the
+                             //   game itself puts a new character down (the skycutter from Zephras Isle lands in Dalaran, in
+                             //   the Alterac Mountains, 96 yards from the portal on to Stormwind)
   MAX_ITERATIONS: 200000,    // a guard against a planner bug that never finishes; real routes take a few thousand turns
 });
 // How many levels above the player a quest may be at this level: HARD or HARD_TALK, and START_HARD in the first levels.
