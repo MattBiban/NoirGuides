@@ -101,7 +101,7 @@ function acceptance(rows) {
     { name: "Every race reaches level 60", met: !short.length, detail: short.length ? `short: ${short.map((r) => `${r.race} (${r.s.endLevel})`).join(", ")}` : "all at 60" },
     { name: `At most ${MAX_LEFT_BEHIND} hand-ins left behind in any race`, met: !behind.length,
       detail: behind.length ? `over: ${behind.map((r) => `${r.race} (${r.s.leftBehind.length})`).join(", ")}` : `${rows.reduce((sum, r) => sum + (r.s.leftBehind || []).length, 0)} in all` },
-    { name: `No quest above the player's level from level ${C.START_UNTIL} in any race (up to ${C.START_HARD} above before it)`, met: !over.length,
+    { name: `No quest more than ${C.HARD} levels above the player in any race (${C.HARD_TALK} for a quest without fights)`, met: !over.length,
       detail: over.length ? `over: ${over.map((r) => `${r.race} (${gap(r).above.length})`).join(", ")}` : "none above" },
     { name: `At most ${MAX_BELOW_SHARE * 100}% of quest steps far below the level in any race`, met: !easy.length,
       detail: easy.length ? `over: ${easy.map((r) => r.race).join(", ")}` : `most: ${Math.round(Math.max(0, ...rows.map((r) => (gap(r).steps ? gap(r).below.length / gap(r).steps : 0))) * 100)}%` },
