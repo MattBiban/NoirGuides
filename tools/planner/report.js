@@ -11,7 +11,7 @@ const { PACE } = require("../lib/xp");
 const CURVE = [10, 20, 30, 40, 50, 60];
 // What is asked of a route beside the baseline. The routes plan for a realistic pace (lib/xp.js yieldAt: 60% of the
 // estimated XP is counted on up to level 30, rising to 68% at level 50) and do quests instead of grinding: a small
-// visit and an errand come before a grind step (planner/zonepick.js rule 4, planner/supply.js). So they do 11 to 25%
+// visit and an errand come before a grind step (planner/zonepick.js, planner/supply.js). So they do 11 to 25%
 // more quests than the baseline routes did (850 to 935 against 680 to 795), in more visits to more zones, and the
 // limits say what that may cost. Zone changes and travel time are ABOVE the baseline's: that is the accepted price
 // of quests instead of grinding. The limits keep the price from growing unseen.

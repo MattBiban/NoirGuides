@@ -44,7 +44,7 @@ const CHOICES = Object.freeze({
   HEARTH_MIN_SAVING: 60,     // the hearthstone is bound at a hub's inn when one use there saves at least a minute
   HEARTH_MARGIN: 600,        // seconds past the cooldown before the planner counts on the hearthstone: its clock is an estimate
   GETFLIGHT_SECONDS: 300,    // a flight point in the zone is fetched when it is this close on foot
-  SEARCH_DEPTH: 8,           // the next zone is the first of the best sequence of this many visits,
+  SEARCH_DEPTH: 16,           // the next zone is the first of the best sequence of this many visits,
   SEARCH_BEAM: 6,            //   with this many sequences kept after each visit,
   SEARCH_ZONES: 12,          //   each continued with the zones that have the most quests to offer (and the log's zones).
   SEARCH_TIME_XP: 2,         // XP a second of travel and work is worth when two sequences are compared: time breaks
@@ -53,14 +53,6 @@ const CHOICES = Object.freeze({
                              //   earns nothing, so a zone across the sea has to be worth its crossing
   CROSSING_SECONDS: 3600,     // ... and a visit on another continent counts this much more of it: the boat or zeppelin has
                              //   to be waited for, and the way back is as long
-  MIN_VISIT: 0.25,           // a zone is gone to when the visit there is worth at least this share of the player's level
-                             //   (planner/zonepick.js rule 3): four such visits are a level. Smaller ones wait and grow
-                             //   while a visit of that size is left anywhere
-  LAST_VISITS: 3,            // ... and when none is, the small visits are made (rule 4): the next zone is the first of
-                             //   the best sequence of this many of them. They used to wait while the rest of the level
-                             //   was ground, unless this many reached the next level: that saved changes of zone (123 to
-                             //   158 a route) and cost 10 to 12 grind steps of up to a whole level. Quests come before
-                             //   grinding now, and the changes of zone are the price (planner/report.js MAX_ZONE_SHARE)
   PLAN_WALK_SHARE: 0.12,     // the fights on the way inside an open zone, as a share of a visit's XP, for comparing
                              //   visits before making them. Measured: walking gives an eighth of a route's XP
   MAX_GRINDS: 0,             // levels of grinding the look-ahead may plan in a route. None: a grind step is the last

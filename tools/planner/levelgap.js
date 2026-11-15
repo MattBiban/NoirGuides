@@ -18,9 +18,9 @@ const { CHOICES: C, above: allowed } = require("./tuning");
 
 // No quest above what the level allows is the rule, and the shared route meets it exactly (measured: none in any
 // race). A class layered onto it can be a few XP behind the class the shared route was planned with, and so meet a
-// quest one level further up at a level's very start: at most this many steps a class (measured: none to two, one
-// quest's accept and objective).
-const MAX_ABOVE = 2;
+// quest one level further up at a level's very start: at most this many steps a class (measured: none to three; the
+// limit is two quests' accept and objective).
+const MAX_ABOVE = 4;
 // Quests far below the level are the ones a chain or a travel link needs (planner/policy.js): at most this share of
 // the steps looked at. It was 0.25 while a quest more than three levels under the player counted as far below
 // (3 to 22% a route then, most where a race starts in long chains). Far below is more than five levels now (EASY):
