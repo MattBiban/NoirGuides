@@ -4,6 +4,7 @@
 // repeatable as the routes.
 const { leftBehind, MAX_LEFT_BEHIND } = require("./leftbehind");
 const { levelGap, MAX_ABOVE, MAX_BELOW_SHARE } = require("./levelgap");
+const { MAX_DANGEROUS_WALKS } = require("./danger");
 const { CHOICES: C } = require("./tuning");
 const { PACE } = require("../lib/xp");
 const CURVE = [10, 20, 30, 40, 50, 60];
@@ -27,11 +28,12 @@ const hours = (seconds) => { const minutes = Math.round(seconds / 60); return `$
 const percent = (before, after) => (before > 0 ? `${after <= before ? "-" : "+"}${Math.abs(Math.round((1 - after / before) * 100))}%` : "n/a");
 
 // The facts of one route, counted from its steps. build_routes.js prints from the same numbers.
-//   result: { route, validations: [{ character, result, layer, measure }], measure, shared } (measure from planner/measure.js)
+//   result: { route, validations: [{ character, result, layer, measure, danger }], measure, shared } (measure from planner/measure.js)
 //   route is the route file as written; shared, when the classes are layered in (planner/classes.js), the route every
 //   class has in common, which the facts and the measurement are about; layer is the class's entry of layerClasses;
 //   a validation's measure is of the character's own steps (shared and its class's), so the report shows what each
-//   class's steps add to the shared route's zone changes and travel time.
+//   class's steps add to the shared route's zone changes and travel time; danger is the character's walks through
+//   zones too dangerous for its level (planner/danger.js dangerousWalks), and the report shows the class with the most.
 function summarize(db, { route: written, validations, measure, shared }) {
   const route = shared || written;
   const count = (action) => route.steps.filter((s) => s.action === action).length;
@@ -54,6 +56,7 @@ function summarize(db, { route: written, validations, measure, shared }) {
     zoneChanges: measure.zoneChanges, travelSeconds: measure.seconds, walkedYards: measure.yards, unreachable: measure.unreachable, byKind: measure.byKind,
     totalSeconds: route.stats.seconds, grinds, leftBehind: leftBehind(db, route),
     levelGap: validations.reduce((worst, v) => { const g = v.result.levels ? levelGap(db, written, v.result.levels, { cls: v.character.cls }) : null; return g && (!worst || g.above.length > worst.above.length || (g.above.length === worst.above.length && g.below.length > worst.below.length)) ? g : worst; }, null) || { above: [], below: [], steps: 0 },
+    dangerous: validations.reduce((worst, v) => (v.danger && v.danger.length > worst.length ? v.danger.map((d) => ({ ...d, cls: v.character.cls })) : worst), []),
     visits: visits.map((v) => ({ name: zoneName(db, v.zone), steps: v.steps })),
     flightsLearned: count("getflight"), flights: count("fly"), transports: count("transport"), binds: count("sethearth"), hearths: count("hearth"),
     links: route.stats.links || [], errors, warnings, classes: validations.map((v) => v.character.cls),
@@ -88,6 +91,7 @@ function acceptance(rows) {
   const gap = (r) => r.s.levelGap || { above: [], below: [], steps: 0 };
   const over = rows.filter((r) => gap(r).above.length > MAX_ABOVE);
   const easy = rows.filter((r) => gap(r).steps > 0 && gap(r).below.length / gap(r).steps > MAX_BELOW_SHARE);
+  const unsafe = rows.filter((r) => (r.s.dangerous || []).length > MAX_DANGEROUS_WALKS);
   return [
     { name: `Zone changes at most ${Math.round(MAX_ZONE_SHARE * 100)}% of the baseline for every race`, met: compared.length > 0 && compared.every((r) => r.s.zoneChanges <= r.before.zoneChanges * MAX_ZONE_SHARE),
       detail: worst ? `least saved: ${worst.race}, ${worst.before.zoneChanges} to ${worst.s.zoneChanges} (${percent(worst.before.zoneChanges, worst.s.zoneChanges)})` : "no baseline" },
@@ -97,10 +101,12 @@ function acceptance(rows) {
     { name: "Every race reaches level 60", met: !short.length, detail: short.length ? `short: ${short.map((r) => `${r.race} (${r.s.endLevel})`).join(", ")}` : "all at 60" },
     { name: `At most ${MAX_LEFT_BEHIND} hand-ins left behind in any race`, met: !behind.length,
       detail: behind.length ? `over: ${behind.map((r) => `${r.race} (${r.s.leftBehind.length})`).join(", ")}` : `${rows.reduce((sum, r) => sum + (r.s.leftBehind || []).length, 0)} in all` },
-    { name: `No quest above the player's level from level ${C.START_UNTIL} in any race (up to ${C.START_HARD} above before it)`, met: !over.length,
+    { name: `No quest more than ${C.HARD} levels above the player in any race (${C.HARD_TALK} for a quest without fights)`, met: !over.length,
       detail: over.length ? `over: ${over.map((r) => `${r.race} (${gap(r).above.length})`).join(", ")}` : "none above" },
     { name: `At most ${MAX_BELOW_SHARE * 100}% of quest steps far below the level in any race`, met: !easy.length,
       detail: easy.length ? `over: ${easy.map((r) => r.race).join(", ")}` : `most: ${Math.round(Math.max(0, ...rows.map((r) => (gap(r).steps ? gap(r).below.length / gap(r).steps : 0))) * 100)}%` },
+    { name: `No walk through a zone whose creatures start more than ${C.DANGER_LEVELS} levels above the player, for any class of any race`, met: !unsafe.length,
+      detail: unsafe.length ? `over: ${unsafe.map((r) => `${r.race} (${r.s.dangerous.length})`).join(", ")}` : MAX_DANGEROUS_WALKS ? `most: ${Math.max(0, ...rows.map((r) => (r.s.dangerous || []).length))}` : "none" },
     { name: `At most ${MAX_GRIND_STEPS} grind steps in any race`, met: !grinding.length,
       detail: grinding.length ? `over: ${grinding.map((r) => `${r.race} (${r.s.grinds.length})`).join(", ")}` : `most: ${Math.max(0, ...rows.map((r) => (r.s.grinds || []).length))}` },
     characterLine(characters),
@@ -191,6 +197,8 @@ function reportMarkdown(db, results, baseline) {
     "zone, and wait until they are.",
     "A hand-in left behind is a step that moves the player more than LEAVE_YARDS while a quest ready to hand in waits",
     "within READY_YARDS of them (`tools/planner/leftbehind.js`, `tools/planner/tuning.js`).",
+    "A dangerous walk is a walk through or inside an open zone whose creatures start more than DANGER_LEVELS above the",
+    "player's level there (`tools/planner/danger.js`); flying over it or standing where a boat arrives is none.",
     "",
   ];
   if (baseline) {
@@ -245,6 +253,7 @@ function reportMarkdown(db, results, baseline) {
     out.push(`| Unconfirmed transports used | ${s.links.length ? s.links.map((l) => `${l.name} (${l.kind}; not confirmed: ${l.assumed.join(", ")})`).join("; ") : "none"} |`);
     out.push(`| Hand-ins left behind | ${s.leftBehind.length ? s.leftBehind.map((b) => `step ${thousands(b.step + 1)} (quest ${b.quests.join(", ")})`).join("; ") : "none"} |`);
     out.push(`| Quests above the level allowed, far below the player's level | ${(s.levelGap || { above: [] }).above.length}, ${(s.levelGap || { below: [] }).below.length} of ${(s.levelGap || { steps: 0 }).steps} quest steps |`);
+    out.push(`| Walks through dangerous zones | ${s.dangerous.length ? s.dangerous.map((d) => `step ${thousands(d.step + 1)} (${d.cls}, level ${d.level}: ${zoneName(db, d.zone)}, creatures from ${d.min})`).join("; ") : "none"} |`);
     out.push(`| Zones in order (steps there) | ${s.visits.map((v) => `${v.name} (${v.steps})`).join(", ")} |`);
     if (s.characters.some((c) => c.left)) {
       const left = s.characters.filter((c) => c.left).map((c) => `${c.cls}: ${c.leftOut.map((l) => `${l.quest} (${l.reason})`).join(", ")}`);

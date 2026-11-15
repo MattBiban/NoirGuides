@@ -39,7 +39,7 @@ const LAYER = Object.freeze({
 // find, below the level cap, and with every place reachable. Returns [{ q, start, end, obj, kills }] by level and ID.
 // options: { graph (as loadTravel gives it), maxLevel }.
 function classQuests(db, ch, options = {}) {
-  return candidates(db, ch, plannerGraph(options.graph || emptyGraph(db)), options.maxLevel || 60).routable;
+  return candidates(db, ch, plannerGraph(db, options.graph || emptyGraph(db)), options.maxLevel || 60).routable;
 }
 // Whether a quest is from the Skyborne start: given on Zephras Isle. A quest filed under a class sort has no zone, so
 // this is read from where it is given, not from the quest's zone.
@@ -333,7 +333,7 @@ function layerClass(db, graph, facts, ch, maxLevel) {
 function layerClasses(db, route, characters, options = {}) {
   const maxLevel = options.maxLevel || 60;
   const rawGraph = options.graph || emptyGraph(db);
-  const graph = plannerGraph(rawGraph);
+  const graph = plannerGraph(db, rawGraph);
   const classes = {};
   const inserts = new Map();
   if (characters.length) {

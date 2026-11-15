@@ -6,6 +6,7 @@ const { classMask } = require("../lib/characters");
 const { planRoute } = require("../planner/plan");
 const { validateRoute } = require("../planner/validate");
 const { classQuests, layerClasses } = require("../planner/classes");
+const { dangerousWalks } = require("../planner/danger");
 
 const ROGUE = classMask("ROGUE"), MAGE = classMask("MAGE");
 const M = (zone, x, y) => ({ zone, x, y });
@@ -231,6 +232,9 @@ test("real data: all 56 characters are valid and reach 60 on their race's route 
       const r = validateRoute(db, out.route, ch, { graph, inns });
       layered += out.classes[ch.cls].layered.length;
       if (r.errors.length || r.endLevel < 60) failures.push(`${race} ${ch.cls}: level ${r.endLevel}, ${r.errors.slice(0, 3).join("; ")}`);
+      // no step, shared or its class's, walks the character through a zone far above its level (planner/danger.js)
+      const unsafe = dangerousWalks(db, graph, out.route, ch, r.levels);
+      if (unsafe.length) failures.push(`${race} ${ch.cls}: ${unsafe.length} dangerous walks, the first ${JSON.stringify(unsafe[0])}`);
       // no class quest reaches a class it is not for
       for (const s of mine(out.route, ch.cls)) {
         const q = QUEST_ACTIONS.has(s.action) ? db.quests.get(s.quest) : null;

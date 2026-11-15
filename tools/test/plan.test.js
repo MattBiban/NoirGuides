@@ -14,6 +14,7 @@ const { validateRoute } = require("../planner/validate");
 const { zoneOrder } = require("../planner/measure");
 const { leftBehind, MAX_LEFT_BEHIND } = require("../planner/leftbehind");
 const { levelGap, MAX_ABOVE, MAX_BELOW_SHARE } = require("../planner/levelgap");
+const { dangerousWalks, MAX_DANGEROUS_WALKS } = require("../planner/danger");
 const { MAX_ZONE_SHARE, MAX_TRAVEL_SHARE, MAX_GRIND_STEPS } = require("../planner/report");
 
 const human = () => { RACES.Human.startArea = 1000; return character("Human", "WARRIOR"); };
@@ -480,6 +481,10 @@ for (const race of Object.keys(RACES)) {
     // no hand-in that is ready is walked away from (planner/leftbehind.js; the threshold is explained there)
     const behind = leftBehind(db, route);
     assert.ok(behind.length <= MAX_LEFT_BEHIND, `${behind.length} hand-ins left behind: ${JSON.stringify(behind.slice(0, 5))}`);
+    // no walk through a zone whose creatures are far above the player (planner/danger.js)
+    const unsafe = dangerousWalks(db, graph, route, ch, checked.levels);
+    assert.strictEqual(MAX_DANGEROUS_WALKS, 0);
+    assert.deepStrictEqual(unsafe.slice(0, 5), [], `${unsafe.length} dangerous walks`);
     // grind steps are short: each the rest of one level, never two in a row, at most twenty in a whole route
     const grinds = route.steps.map((s, i) => (s.action === "grind" ? i : -1)).filter((i) => i >= 0);
     assert.strictEqual(MAX_GRIND_STEPS, 20);

@@ -205,7 +205,8 @@ function buildLinks(db, src, paths) {
 }
 
 // The passes, and the walking distance between every two of them: two passes of one zone are joined by a straight
-// line, longer ways go from pass to pass.
+// line, longer ways go from pass to pass. through[i][j]: the zones that way crosses, each the zone two passes in a row
+// share (both, when they join the same two zones).
 function buildPasses(db, src, notes) {
   const passes = src.transports.passes.map((raw) => {
     const point = toPoint(db, raw.at.zone, raw.at.x, raw.at.y);
@@ -221,16 +222,20 @@ function buildPasses(db, src, notes) {
     if (i === j) between[i][j] = 0;
     else if (p.a === q.a || p.a === q.b || p.b === q.a || p.b === q.b) between[i][j] = dist(p.point, q.point);
   }
+  const mid = passes.map(() => new Array(n).fill(-1)); // a pass on the way from i to j; none when they share a zone
   for (let k = 0; k < n; k++) for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
-    if (between[i][k] + between[k][j] < between[i][j]) between[i][j] = between[i][k] + between[k][j];
+    if (between[i][k] + between[k][j] < between[i][j]) { between[i][j] = between[i][k] + between[k][j]; mid[i][j] = k; }
   }
+  const shared = (p, q) => [p.a, p.b].filter((z) => z === q.a || z === q.b);
+  const crossed = (i, j) => (i === j ? [] : mid[i][j] < 0 ? shared(passes[i], passes[j]) : [...crossed(i, mid[i][j]), ...crossed(mid[i][j], j)]);
+  const through = passes.map((_, i) => passes.map((__, j) => (between[i][j] < Infinity ? [...new Set(crossed(i, j))] : [])));
   // a zone map without a pass, on a continent that has passes: walking there can only be guessed
   const charted = new Set(passes.map((p) => p.point.continent));
   for (const m of [...db.maps.values()].sort((a, b) => a.area - b.area)) {
     const area = db.areas.get(m.area);
     if (area && charted.has(area.continent) && !passesOf.has(m.area)) notes.push(`zone ${m.area} ${area.name} has no pass: walking to it is a straight-line guess`);
   }
-  return { passes, passesOf, between };
+  return { passes, passesOf, between, through };
 }
 
 // src: { taxiNodes, taxiPaths, taxiPathNodes: rows of the client tables; flightMasters: [{ id, name, friendly, spawns }];
@@ -268,27 +273,57 @@ function loadTravel(db, dataDir, transportsFile = path.join(__dirname, "..", "pl
     transports: JSON.parse(fs.readFileSync(transportsFile, "utf8")) });
 }
 
-// Walking distance in yards: { yards } or { yards, guess: true }, or null when there is no way on foot.
-function walkYards(graph, p, q) {
+// The way on foot: { yards, out, in } with the passes it leaves the first zone and enters the last by (-1 for a
+// straight line), and guess: true for a zone without a pass; null when there is no way on foot.
+function footWay(graph, p, q) {
   if (p.continent !== q.continent) return null;
   const straight = dist(p, q);
-  if (p.zone === q.zone) return { yards: straight };
+  if (p.zone === q.zone) return { yards: straight, out: -1, in: -1 };
   const from = graph.passesOf.get(p.zone), to = graph.passesOf.get(q.zone);
-  if (!from || !to) return { yards: straight, guess: true };
-  let best = Infinity;
+  if (!from || !to) return { yards: straight, guess: true, out: -1, in: -1 };
+  let best = Infinity, out = -1, into = -1;
   for (const i of from) {
     const first = dist(p, graph.passes[i].point);
     for (const j of to) {
       const d = first + graph.between[i][j] + dist(graph.passes[j].point, q);
-      if (d < best) best = d;
+      if (d < best) { best = d; out = i; into = j; }
     }
   }
   if (best === Infinity) return null;
-  return straight <= E.NEAR_BORDER && straight < best ? { yards: straight } : { yards: best };
+  return straight <= E.NEAR_BORDER && straight < best ? { yards: straight, out: -1, in: -1 } : { yards: best, out, in: into };
+}
+// Walking distance in yards: { yards } or { yards, guess: true }, or null when there is no way on foot.
+function walkYards(graph, p, q) {
+  const w = footWay(graph, p, q);
+  return w && (w.guess ? { yards: w.yards, guess: true } : { yards: w.yards });
+}
+// The zones a walk crosses, in the order of the way: the zones of its two ends and the ones between the passes. null
+// when there is no way on foot. There is no road data: a zone crossed is a zone walked through, wherever the road runs.
+function walkZones(graph, p, q) {
+  const w = footWay(graph, p, q);
+  return w && [...new Set([p.zone, ...(w.out < 0 ? [] : graph.through[w.out][w.in]), q.zone])];
+}
+// The lowest level a way on foot is safe at: the highest of graph.safeLevel (a Map of zone -> level; the planner's
+// graph has one, planner/danger.js) over the zones it crosses. 0 on a graph without the table, and for no walk at all:
+// standing where a flight or a transport arrives is not walking through the zone. 0 also inside a haven: both ends
+// in one zone and within reach of one of graph.havens ([{ point, yards }], planner/danger.js).
+const sheltered = (graph, p) => (graph.havens || []).some((h) => h.point.zone === p.zone && dist(h.point, p) <= h.yards);
+function wayLevel(graph, w, p, q) {
+  const safe = graph.safeLevel;
+  if (!safe || w.yards < 0.5 || (p.zone === q.zone && sheltered(graph, p) && sheltered(graph, q))) return 0;
+  let level = Math.max(safe.get(p.zone) || 0, safe.get(q.zone) || 0);
+  if (w.out >= 0) for (const zone of graph.through[w.out][w.in]) level = Math.max(level, safe.get(zone) || 0);
+  return level;
+}
+// The way on foot for a character of this level: null also when a zone on it is too dangerous for the level.
+function safeWay(graph, level, p, q) {
+  const w = footWay(graph, p, q);
+  return w && level >= wayLevel(graph, w, p, q) ? w : null;
 }
 const speedAt = (level) => (level >= E.MOUNT_LEVEL ? E.MOUNT_SPEED : E.RUN_SPEED);
+// Seconds on foot; Infinity when there is no way, or none that is safe at the level (see wayLevel).
 function walkSeconds(graph, level, p, q) {
-  const w = walkYards(graph, p, q);
+  const w = safeWay(graph, level, p, q);
   return w ? (w.yards * E.WALK_DETOUR) / speedAt(level) : Infinity;
 }
 
@@ -308,6 +343,9 @@ function walkSeconds(graph, level, p, q) {
 //   { action: "transport", kind, link, name, at, to, verified, pathVerified, assumed, seconds } (and requires, when the
 //                                                                  link has one); see buildLinks for the three flags
 //   { action: "hearth", to, seconds }
+// On a graph with safeLevel (the planner's) no leg is a walk through a zone too dangerous for state.level: such a
+// walk does not exist for the search, whoever asks (the next zone, an errand, a class quest, a trainer). Flying over,
+// riding a transport and standing where one arrives are no walk; walking on from there is.
 // A flight only passes through nodes in state.flights; its first node may be one learned by a getflight leg earlier in
 // the same plan. `db` is not read today (points carry their world position); it is part of the planner's calling form.
 function travelPlan(db, graph, state, from, to, options = {}) {
@@ -325,14 +363,19 @@ function travelPlan(db, graph, state, from, to, options = {}) {
   const pointOf = (v) => (v === S ? from : v === T ? to : v === H ? hearth : fixed[v - F].point);
   const allowed = (link) => (!link.requires || ((!link.requires.level || level >= link.requires.level) && (!link.requires.quest || (!!state.quests && state.quests.has(link.requires.quest)))));
   const blocked = []; // links the search got to and could not board
+  const foot = (p, q) => safeWay(graph, level, p, q);
   const walk = (u, v) => {
     if (u >= F && v >= F && u !== H && v !== H) { // between two fixed places: worked out once per graph
       const key = (u - F) * n + (v - F);
       let w = ground.yards.get(key);
-      if (w === undefined) { w = walkYards(graph, pointOf(u), pointOf(v)); ground.yards.set(key, w); }
-      return w;
+      if (w === undefined) {
+        w = footWay(graph, pointOf(u), pointOf(v));
+        if (w) w.level = wayLevel(graph, w, pointOf(u), pointOf(v));
+        ground.yards.set(key, w);
+      }
+      return w && level >= w.level ? w : null;
     }
-    return walkYards(graph, pointOf(u), pointOf(v));
+    return foot(pointOf(u), pointOf(v));
   };
   const cost = new Float64Array(V).fill(Infinity), prev = new Int32Array(V).fill(-1), how = new Array(V), done = new Uint8Array(V);
   const relax = (u, v, seconds, edge) => {
@@ -386,12 +429,12 @@ function travelPlan(db, graph, state, from, to, options = {}) {
   // a walk, with the flight points near it picked up on the way
   const walkTo = (p, q) => {
     while (options.pickups !== false) {
-      const direct = walkYards(graph, p, q);
+      const direct = foot(p, q);
       let best = null;
       for (let k = 0; k < ground.nodeCount; k++) {
         const { node, point } = fixed[k];
         if (learned.has(node.id) || point.continent !== p.continent) continue;
-        const there = walkYards(graph, p, point), on = there && walkYards(graph, point, q);
+        const there = foot(p, point), on = there && foot(point, q);
         if (!on) continue;
         const extra = there.yards + on.yards - direct.yards;
         if ((extra * E.WALK_DETOUR) / speed <= E.PICKUP_SECONDS && (!best || extra < best.extra)) best = { node, point, there, extra };
@@ -402,16 +445,16 @@ function travelPlan(db, graph, state, from, to, options = {}) {
       learned.add(best.node.id);
       p = best.point;
     }
-    walkLeg(p, q, walkYards(graph, p, q));
+    walkLeg(p, q, foot(p, q));
   };
   // Walks in a row are one walk, as long as that walk is no longer than its parts. It can be longer, or not exist at
-  // all: two places within NEAR_BORDER are walked straight while the whole goes through a pass, and a zone without a
+  // all (or not safely: the parts were chosen to keep out of a zone the straight way crosses): two places within NEAR_BORDER are walked straight while the whole goes through a pass, and a zone without a
   // pass is a straight-line guess from anywhere, also from land the passes do not join. Then the parts are kept.
   let pos = from, flight = null, walked = null;
   const walkAll = () => {
     const { places, yards } = walked;
     walked = null;
-    const whole = places.length > 2 ? walkYards(graph, places[0], places[places.length - 1]) : null;
+    const whole = places.length > 2 ? foot(places[0], places[places.length - 1]) : null;
     if (places.length === 2 || (whole && whole.yards <= yards + 1e-6)) walkTo(places[0], places[places.length - 1]);
     else for (let i = 1; i < places.length; i++) walkTo(places[i - 1], places[i]);
   };
@@ -463,4 +506,4 @@ function toSteps(legs) {
   return steps;
 }
 
-module.exports = { ESTIMATES, ASSUMABLE, buildGraph, loadTravel, walkYards, walkSeconds, travelPlan, toSteps, pointAt };
+module.exports = { ESTIMATES, ASSUMABLE, buildGraph, loadTravel, walkYards, walkZones, walkSeconds, travelPlan, toSteps, pointAt };

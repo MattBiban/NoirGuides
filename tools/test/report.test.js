@@ -77,6 +77,11 @@ test("an acceptance line that is not met is reported as not met", () => {
   const grind = (n) => acceptance([{ race: "Human", s: { ...s, grinds: Array.from({ length: n }, (_, k) => ({ from: k + 1, to: k + 2 })) }, before: before(10, 100000).races.Human }]).find((a) => /grind steps/.test(a.name));
   assert.deepStrictEqual([grind(20).met, grind(20).detail], [true, "most: 20"]);
   assert.deepStrictEqual([grind(21).met, grind(21).detail], [false, "over: Human (21)"]);
+  // one walk through a zone far above the player is one too many
+  const walk = (n) => acceptance([{ race: "Human", s: { ...s, dangerous: Array.from({ length: n }, (_, k) => ({ step: k, level: 19, from: 33, to: 40, zone: 33, min: 36, cls: "WARRIOR" })) }, before: before(10, 100000).races.Human }]).find((a) => /No walk through/.test(a.name));
+  assert.deepStrictEqual([walk(0).met, walk(0).detail], [true, "none"]);
+  assert.deepStrictEqual([walk(1).met, walk(1).detail], [false, "over: Human (1)"]);
+  assert.deepStrictEqual(s.dangerous, [], "a result without the check has none to show");
   // an error counts
   const bad = acceptance([{ race: "Human", s: { ...s, errors: ["WARRIOR: step 1: x"] }, before: before(10, 100000).races.Human }]);
   assert.deepStrictEqual([bad[2].met, bad[2].detail], [false, "1 errors"]);

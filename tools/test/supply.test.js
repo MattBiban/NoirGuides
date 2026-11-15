@@ -27,7 +27,7 @@ function letters(w, count) {
 // what planner/supply.js reads of the planner, for a character standing at the Westland quest giver
 function viewOf(w, state) {
   const ch = w.human();
-  const ctx = buildContext(w.db, ch, plannerGraph(w.graph()), w.inns);
+  const ctx = buildContext(w.db, ch, plannerGraph(w.db, w.graph()), w.inns);
   const st = { level: 1, xp: 0, log: new Map(), done: new Set(), hopped: new Set(), barren: new Set(), zone: 100, relaxed: true, errands: true,
     pos: w.P(100, 30, 50), ...state };
   return { ctx, policy: makePolicy(ctx), st, secondsAt: () => 60 };

@@ -3,10 +3,11 @@
 // is a game fact (those are in lib/xp.js PACE and lib/travel.js ESTIMATES); each is a preference, set once here.
 const CHOICES = Object.freeze({
   LOG_LIMIT: 20,             // the classic quest log holds 20 quests (a fact, kept with the rest for the planner)
-  HARD: 0,                   // a quest with fights is taken up to this many levels above the player. None: the owner's
-                             // rule is a smooth run, every quest at the player's level or below (it was 3, and real
-                             // players, who level a little behind the estimate, met quests three and four levels up)
-  HARD_TALK: 0,              // the same for a quest without fights (a delivery, a talk): it too shows as hard in the log
+  HARD: 2,                   // a quest with fights is taken up to this many levels above the player: yellow in the quest
+                             // log, never orange or red. It was 3 on a pace that was too fast (players met quests three and
+                             // four levels up), then 0, which left too few quests: routes ground 14 to 17 part levels and
+                             // hopped zones for single quests. At a realistic pace (lib/xp.js YIELD) 2 gives 9 to 11
+  HARD_TALK: 3,              // the same for a quest without fights (a delivery, a talk): nothing in it can kill the player
   START_HARD: 2,             // ... except in the first levels: a new character is handed quests one and two levels up by its
   START_UNTIL: 10,           //   own starting zone (a level 1 orc gets level 2 quests, and the zone's quests run a little ahead of the
                              //   player to its end), so below this level that much is allowed. Without it a level 6 character was
@@ -44,10 +45,12 @@ const CHOICES = Object.freeze({
                              //   ties between sequences, the XP of their visits decides
   MIN_VISIT: 0.25,           // a zone is gone to when the visit there is worth at least this share of the player's level
                              //   (planner/zonepick.js rule 3): four such visits are a level. Smaller ones wait and grow
-  LAST_VISITS: 6,            // ... unless at most this many small visits reach the next level (rule 4); else the rest
+  LAST_VISITS: 3,            // ... unless at most this many small visits reach the next level (rule 4); else the rest
                              //   of the level is a grind step. Lower: fewer zone changes, more grinding. Measured on
                              //   the ten routes: without the two rules 243 to 277 zone changes; 6 gives 129 to 138 and
                              //   no route more grind steps than before; 5 gives 120 to 135, three routes one step more
+                             //   (those on the old cap of no quest above the level). With quests up to two levels above
+                             //   (HARD) 6 gives 135 to 183 and 9 to 11 grind steps, 3 gives 123 to 158 and 10 to 12
   PLAN_WALK_SHARE: 0.12,     // the fights on the way inside an open zone, as a share of a visit's XP, for comparing
                              //   visits before making them. Measured: walking gives an eighth of a route's XP
   MAX_GRINDS: 0,             // levels of grinding the look-ahead may plan in a route. None: a grind step is only
@@ -57,6 +60,13 @@ const CHOICES = Object.freeze({
                              //   when it reaches the next level. Measured: the share hardly matters from 0.08 up (the
                              //   errands that reach the level are the ones taken); under 0.05 every grind step saved
                              //   costs over twenty changes of zone
+  DANGER_LEVELS: 5,          // an open zone is dangerous when the low end of its creatures' levels (lib/xp.js zoneLevels,
+                             //   min) is more than this many levels above the player: no way on foot leads through it or
+                             //   into it then (planner/danger.js; lib/travel.js keeps the rule for every way that is costed).
+                             //   Lower: safer walks, later zones, more grind steps
+  ARRIVAL_YARDS: 150,        // ... except within this distance of the end of a transport that asks for a quest: there the
+                             //   game itself puts a new character down (the skycutter from Zephras Isle lands in Dalaran, in
+                             //   the Alterac Mountains, 96 yards from the portal on to Stormwind)
   MAX_ITERATIONS: 200000,    // a guard against a planner bug that never finishes; real routes take a few thousand turns
 });
 // How many levels above the player a quest may be at this level: HARD or HARD_TALK, and START_HARD in the first levels.

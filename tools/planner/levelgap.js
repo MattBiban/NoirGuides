@@ -35,7 +35,7 @@ function levelGap(db, route, levels, { easy = C.EASY, cls } = {}) {
     const level = Math.floor(levels[k]);
     const entry = { step: k, quest: s.quest, questLevel: q.level, level };
     if (s.action === "accept" && level < C.START_UNTIL) starter.add(s.quest); // taken in the starting zone: judged there
-    if (q.level > level + allowed(level, true) && !(s.action === "objective" && starter.has(s.quest))) above.push(entry);
+    if (q.level > level + Math.max(allowed(level, true), allowed(level, false)) && !(s.action === "objective" && starter.has(s.quest))) above.push(entry);
     else if (q.level < level - easy) below.push(entry);
   });
   return { above, below, steps };

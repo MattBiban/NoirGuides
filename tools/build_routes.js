@@ -12,6 +12,7 @@ const { planRoute } = require("./planner/plan");
 const { layerClasses } = require("./planner/classes");
 const { validateRoute } = require("./planner/validate");
 const { measureRoute } = require("./planner/measure");
+const { dangerousWalks, MAX_DANGEROUS_WALKS } = require("./planner/danger");
 const { emitNames, emitZones, emitFlights } = require("./planner/emit");
 const { bundleSteps } = require("./planner/bundle");
 const { splitSections, regrindSections, stepLevels, MAX_SECTION_STEPS } = require("./planner/sections");
@@ -61,7 +62,7 @@ function toFormat3(db, graph, inns, route, classes, validations) {
   sections = addProfessionSteps(db, sections, route.faction, { levelOf: sharedLevel, notes: professionNotes });
   const trainingNotes = [];
   // a trainer trip is planned like the route: without the links whose users are an assumption (planner/context.js)
-  sections = addClassTraining(db, sections, route.faction, { graph: plannerGraph(graph), classes: classes.map((c) => c.cls), levelOf: (cls, step) => estimate[cls].get(step), notes: trainingNotes });
+  sections = addClassTraining(db, sections, route.faction, { graph: plannerGraph(db, graph), classes: classes.map((c) => c.cls), levelOf: (cls, step) => estimate[cls].get(step), notes: trainingNotes });
   // a trainer trip's way there and back changes its class's estimate: grinds again where a step's minLevel is missed
   const trained = { ...draft, sections };
   const after = {};
@@ -113,7 +114,8 @@ function main(argv) {
     const validations = classes.map((character) => {
       const result = validateRoute(db, route, character, { graph, inns });
       // the character's own steps measured, to show what its class steps add to the shared route
-      return { character, result, layer: layered.classes[character.cls], measure: measureRoute(db, graph, route, character, result.levels) };
+      return { character, result, layer: layered.classes[character.cls], measure: measureRoute(db, graph, route, character, result.levels),
+        danger: dangerousWalks(db, graph, route, character, result.levels) };
     });
     const measure = measureRoute(db, graph, shared, classes[0], validateRoute(db, shared, classes[0], { graph, inns }).levels);
     const f3 = toFormat3(db, graph, inns, route, classes, validations);
@@ -130,9 +132,9 @@ function main(argv) {
     }
     results.push(result);
     const s = summarize(db, result);
-    if (s.errors.length || s.endLevel < 60) failed = true;
+    if (s.errors.length || s.endLevel < 60 || s.dangerous.length > MAX_DANGEROUS_WALKS) failed = true;
     console.log(`${race}: ${thousands(s.steps)} steps, ${thousands(s.quests)} quests, level ${s.endLevel}, ${s.zoneChanges} zone changes, ${hours(s.travelSeconds)} of travel, ` +
-      `${s.grinds.length} grind steps, ${thousands(s.errors.length)} errors`);
+      `${s.grinds.length} grind steps, ${s.dangerous.length} dangerous walks, ${thousands(s.errors.length)} errors`);
     for (const c of s.characters) console.log(`  ${c.cls}: ${c.valid ? "valid" : "NOT VALID"}, level ${c.endLevel}, ${c.layered} class quests layered, ${c.left} left out, ` +
       `${c.zoneChanges} zone changes (${c.addedZoneChanges >= 0 ? "+" : ""}${c.addedZoneChanges}), ${hours(c.travelSeconds)} of travel`);
     for (const e of s.errors.slice(0, 20)) console.log(`  ${e}`);
