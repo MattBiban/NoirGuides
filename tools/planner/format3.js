@@ -55,6 +55,8 @@ const MODES = ["zeppelin", "boat", "tram", "portal"];
 //   mode      one of MODES                    buy    { item = id, count = positive whole number }
 //   label     a label of the section (R10)
 // Each list is in the order the fields are checked; `need` marks a required field.
+// An accept line with `item` is a quest started by that item: its npc or object is what drops the item (a creature to
+// kill, an object to loot), not a quest giver (planner/bundle.js).
 const F = (name, kind, need, lo, hi) => ({ name, kind, need: need === true, lo, hi });
 const LINES = {
   accept: [F("quest", "id", true), F("npc", "id"), F("object", "id"), F("item", "id"), F("manual", "bool"), F("ifDone", "id"), F("requires", "ids")],

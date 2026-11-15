@@ -30,6 +30,10 @@
 //     moved up to it past the actions in between, by the same rules (never past its own quest's accept or a related
 //     quest), as long as every action in between is a hub action in the head's zone. So the objectives of one area
 //     are one step, and the hand-ins come after the area is done.
+//   - an accept that names an item is a quest started by that item: its npc or object is what drops the item, a
+//     creature to kill or an object to loot at a place in the open, not someone to talk to. Such an accept is no talk
+//     action: it shares a step only within BUNDLE_YARDS, its place has the radius of an area, its creature is an
+//     enemy target and never a friend, and its line carries the item
 //   - a getflight followed by a fly from that node is one step; every other fly, transport, travel, hearth and grind
 //     is a step of its own
 //   - a grind step's enemy targets are the creatures of the level that stand at its place (planner/grindspots.js)
@@ -77,11 +81,14 @@ function nearness(db) {
     return !!pa && !!pb && distance(pa, pb) <= yards;
   };
 }
+// an accept of a quest started by an item found in the world (lib/quests.js startPoint): a place to kill or loot at
+const drops = (a) => a.action === "accept" && a.item !== undefined;
+const talks = (a) => TALK.has(a.action) && !drops(a);
 const sameGiver = (a, b) => (a.npc !== undefined && a.npc === b.npc) || (a.object !== undefined && a.object === b.object);
 // whether hub action b joins a step whose first action is a
 function sharesStep(near, a, b) {
   if (whenKey(a) !== whenKey(b) || !HUB.has(a.action) || !HUB.has(b.action)) return false;
-  if (TALK.has(a.action) && TALK.has(b.action)) return sameGiver(a, b) || near(a.at, b.at, HUB_YARDS);
+  if (talks(a) && talks(b)) return sameGiver(a, b) || near(a.at, b.at, HUB_YARDS);
   if (a.action === "objective" && b.action === "objective") return near(a.at, b.at, OBJECTIVE_YARDS);
   return near(a.at, b.at, BUNDLE_YARDS);
 }
@@ -194,7 +201,7 @@ const named = (map, id) => { const e = map.get(id); return !!e && typeof e.name 
 function makeStep(db, actions, handedIn, near) {
   const first = actions[0];
   const step = { id: "" };
-  if (first.at) step.at = placed(first.at, STEP_RADIUS[first.action]);
+  if (first.at) step.at = placed(first.at, drops(first) ? RADIUS.area : STEP_RADIUS[first.action]);
   const lines = [];
   // a line's own place when it is farther than OWN_PLACE_YARDS from the step's
   const own = (a, r) => (step.at && a.at && !near(step.at, a.at, OWN_PLACE_YARDS) && !(a.at.zone === step.at.zone && a.at.x === step.at.x && a.at.y === step.at.y) ? placed(a.at, r) : undefined);
@@ -208,13 +215,14 @@ function makeStep(db, actions, handedIn, near) {
     switch (a.action) {
       case "accept": {
         const line = giver({ kind: "accept", quest: a.quest }, a);
+        if (drops(a)) line.item = a.item;
         const pre = prerequisites(q);
         const done = (p) => handedHere.has(p) || (handedIn.has(p) && fit(a)(handedIn.get(p)));
         // all of the group; of "any one of", those the route hands in before, in an earlier step or earlier in this
         // one (another race's version never is)
         const requires = [...pre.all, ...pre.any.filter((p) => done(p) && !pre.all.includes(p))];
         if (requires.length) line.requires = requires;
-        lines.push(withAt(line, own(a, RADIUS.npc)));
+        lines.push(withAt(line, own(a, drops(a) ? RADIUS.area : RADIUS.npc)));
         break;
       }
       case "turnin": lines.push(withAt(giver({ kind: "turnin", quest: a.quest }, a), own(a, RADIUS.npc))); handedHere.add(a.quest); break;
@@ -260,11 +268,13 @@ function makeStep(db, actions, handedIn, near) {
   }
   if (items.length) step.items = items;
 
-  // target buttons: the creatures of the step's kill objectives and the droppers of its item objectives, nearest
-  // spawn first; the NPCs its quest lines talk to
+  // target buttons: the creatures of the step's kill objectives, the droppers of its item objectives and the
+  // creature that drops the item a quest accepted here starts from, nearest spawn first; the NPCs its quest lines
+  // talk to
   const enemies = [];
   const addEnemy = (id) => { if (!enemies.includes(id) && named(db.npcs, id)) enemies.push(id); };
   for (const a of actions) {
+    if (drops(a) && a.npc !== undefined) addEnemy(a.npc);
     if (a.action !== "objective") continue;
     for (const o of objectiveList(db.quests.get(a.quest))) {
       if (o.kind === "kill") addEnemy(o.id);
@@ -273,7 +283,7 @@ function makeStep(db, actions, handedIn, near) {
     }
   }
   const friends = [];
-  for (const l of lines) if ((l.kind === "accept" || l.kind === "turnin") && l.npc !== undefined && !friends.includes(l.npc) && named(db.npcs, l.npc)) friends.push(l.npc);
+  for (const l of lines) if ((l.kind === "accept" || l.kind === "turnin") && l.npc !== undefined && !(l.kind === "accept" && l.item !== undefined) && !friends.includes(l.npc) && named(db.npcs, l.npc)) friends.push(l.npc);
   const targets = {};
   if (enemies.length) {
     const here = step.at && !zoneOnly(step.at) ? toPoint(db, step.at.zone, step.at.x, step.at.y) : null;
@@ -332,6 +342,7 @@ function flatten(steps) {
           accepts.add(line.quest);
           a = { action: line.kind, quest: line.quest, at: place(line) };
           if (line.npc !== undefined) a.npc = line.npc; else if (line.object !== undefined) a.object = line.object;
+          if (line.item !== undefined) a.item = line.item;
           break;
         case "turnin":
           a = { action: line.kind, quest: line.quest, at: place(line) };

@@ -611,3 +611,30 @@ X2 adds no engine code (only the toc's version). It checks that every client ass
 - the profession rank levels 10, 20 and 35 (`verified = false`): #45.
 
 `tools/test/cleanroom.test.js` (new) keeps the clean room: no file under `NoirGuides/` or `tools/` (outside `tools/data/`) names the old fork's folder, no tool names an absolute path outside the repository (only the 7-Zip and Windows `tar.exe` programs that unpack downloads), and every addon source starts with the license line. `tools/compare_fork.js` and its test are deleted: the clean room forbids reading the fork, which was all that tool did.
+
+## Quests started by an item found in the world
+
+A quest whose only start is an item (it drops from a creature or is looted from an object in the open world, and using it offers the quest) is routed like any other. Only an item with a known open-world drop counts (`tools/lib/quests.js` `itemStart`).
+
+### The encoding
+
+- **No new key.** The accept action (format 2) and the accept line (format 3) name the starter item in `item`, which both formats already allowed. On such an accept, `npc` or `object` is **what drops the item**, a creature to kill or an object to loot, never someone to talk to: `{ kind = "accept", quest = 4, item = 300, npc = 25 }`. An accept without `item` is a quest giver's, as before. A quest that has a giver and a starter item is a plain accept at the giver; its item is only on the step's `items`.
+- **The step** (`tools/planner/bundle.js`): the place is where most of the droppers stand, with the radius of an area (40), not of an NPC (10). Such an accept is no talk action: it shares a step with other actions only within `BUNDLE_YARDS`, never as a hub by `HUB_YARDS`. The creature is in `targets.enemy` and never in `targets.friend`; the item is in the step's `items`. `flatten` gives the item back on the accept action.
+- **Step texts** (`tools/planner/texts.js`): the dropping creature is never the NPC an objective is "north of".
+
+### The engine
+
+- **Words** (`UI/Text.lua`): "Kill <creature> until it drops <item>, then use it to accept <quest>" (icon `kill`), "Loot <object> for <item>, then use it to accept <quest>" (icon `item`); with the item in the bags, or no source on the line, "Use <item> to accept <quest>" (icon `accept`). The card's text is part of the cards' signature, so the line changes when the bags do (`BAG_UPDATE_DELAYED`). `Text.ObjectName(id)` names an object from `Noir.Data.objects`.
+- **Done** exactly like any accept: the quest is in the log, or handed in. The item alone passes nothing. Placement needs nothing of its own: a quest in the log counts at its accept line.
+- **The item button** shows the starter while it is in the bags and the quest is neither in the log nor handed in (the rule the buttons already had). The dropping creature is on an enemy target button.
+- **Automation**: the quest page the item opens is a `QUEST_DETAIL` like any other and is accepted under the same rules (not with Ctrl held, not a `manual` line, not a quest in `noAuto`). There is no NPC behind the page; nothing in the accept path asks for one.
+
+### The simulator
+
+- The mock client knows `world.itemQuests[item] = quest`: using such an item opens the quest's page while the quest is offered to the character, with `UnitGUID("npc")` nil; accepting takes the item out of the bags. The facts carry `items[id] = { name, quest }`. The scripted player walks to the place, gets the item (the kill or the loot), clicks the item button that holds it, and the automation accepts. The fights for the item give no XP and take no time, as in the planner's estimate (an accept costs `TALK_SECONDS`).
+
+### Unverified assumptions about the Forever client (continued)
+
+| # | Assumption | If wrong |
+|---|---|---|
+| 103 | Using an item that starts a quest fires `QUEST_DETAIL` with `GetQuestID()` (else `GetTitleText()`) naming the quest, `AcceptQuest()` accepts it from that page, and a secure button with `type = "item"` uses such an item like any other. | The quest is not accepted by itself after the item is used (the player presses Accept), or the item button does nothing and the item is used from the bags. The step is still done once the quest is in the log. |

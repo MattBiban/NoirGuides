@@ -9,9 +9,9 @@
 --       meaning ("friend", "enemy", "loot", "warning", "object", "buy") for highlighting. tooltip: extra lines, set
 --       when an accept line's prerequisites (`requires`) are not all handed in (icon "error"; never skipped).
 --   Text.StepTitle(step) -> step.title or tostring(step.n)
---   Text.QuestName(id), Text.NpcName(id), Text.ItemName(id), Text.ZoneName(area), Text.FlightName(node),
---   Text.SpellName(id): Noir.Data first, then the client, then "Quest 364", "NPC 42", "Item 1", "Zone 5",
---       "Flight point 7", "Spell 9"
+--   Text.QuestName(id), Text.NpcName(id), Text.ObjectName(id), Text.ItemName(id), Text.ZoneName(area),
+--   Text.FlightName(node), Text.SpellName(id): Noir.Data first, then the client, then "Quest 364", "NPC 42",
+--       "Object 3", "Item 1", "Zone 5", "Flight point 7", "Spell 9"
 --   Text.Place(point) -> "Tirisfal Glades 30.8, 66.2" (the zone alone when x = y = 0)
 --   Text.Distance(yards) -> "120 yd"
 --   Text.Money(copper) -> "1g 2s 3c": gold, silver and copper, the parts that are 0 left out ("1s 20c", "85c", "2g");
@@ -51,6 +51,10 @@ end
 
 function Text.NpcName(id)
   return filled(Noir.Data.npcs[id]) or ("NPC " .. tostring(id))
+end
+
+function Text.ObjectName(id)
+  return filled(Noir.Data.objects[id]) or ("Object " .. tostring(id))
 end
 
 function Text.ItemName(id)
@@ -169,11 +173,32 @@ local OBJECTIVE_ICON = { monster = "kill", item = "item" }
 
 local words = {}
 
+-- An accept line that names an item is a quest started by that item, and its npc or object is what drops the item:
+-- a creature to kill or an object to loot, never someone to talk to. "Kill <creature> until it drops <item>, then use
+-- it to accept <quest>", "Loot <object> for <item>, then use it to accept <quest>"; with the item in the bags (or no
+-- source on the line), "Use <item> to accept <quest>".
+local function starterWords(b, line)
+  local have = State.ItemCount(line.item) > 0
+  if not have and line.npc then
+    b.add("Kill ").add(Text.NpcName(line.npc), "enemy").add(" until it drops ").add(Text.ItemName(line.item), "loot")
+    b.add(", then use it to accept ")
+    return "kill"
+  elseif not have and line.object then
+    b.add("Loot ").add(Text.ObjectName(line.object), "object").add(" for ").add(Text.ItemName(line.item), "loot")
+    b.add(", then use it to accept ")
+    return "item"
+  end
+  b.add("Use ").add(Text.ItemName(line.item), "loot").add(" to accept ")
+  return "accept"
+end
+
 words.accept = function(line)
   local missing = missingPrereqs(line)
-  local b = builder().add("Accept ")
+  local b = builder()
+  local icon = "accept"
+  if line.item then icon = starterWords(b, line) else b.add("Accept ") end
   if #missing == 0 then
-    return b.add(Text.QuestName(line.quest)).done("accept", line.quest)
+    return b.add(Text.QuestName(line.quest)).done(icon, line.quest)
   end
   local t = b.add(Text.QuestName(line.quest), "warning").done("error", line.quest)
   t.tooltip = { Text.PREREQ_TITLE }
