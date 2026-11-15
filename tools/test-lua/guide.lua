@@ -196,6 +196,36 @@ test("Next skips an outleveled section through its own next list when outlevel i
   eq(off.Guide.Next(), TIRISFAL)
 end)
 
+test("Next does not skip an outleveled section when the one after it begins on another continent", function()
+  -- Found by the simulator with a fast player: the sections passed over as outleveled held the boat, and the next
+  -- one began with a flight on the other continent. The outleveled section is taken: its steps pass one by one and
+  -- its moves bring the player across.
+  local _, Noir = play({ race = "Undead", class = "MAGE", level = 7, zone = 14, x = 50, y = 14,
+    saved = savedWith({ guide = { section = DEATHKNELL, how = "hand" } }) })
+  eq(Noir.Guide.Next(), TIRISFAL, "the player stands in Durotar and Silverpine is across the sea")
+  eq(Noir.Guide.Next(), SILVERPINE)
+  -- A place the data does not know says nothing: the section is skipped as before.
+  local _, blind = play({ race = "Undead", class = "MAGE", level = 7, zone = 14, x = 50, y = 14,
+    saved = savedWith({ guide = { section = DEATHKNELL, how = "hand" } }) })
+  blind.Data.zones[14].continent = nil
+  eq(blind.Guide.Next(), SILVERPINE)
+end)
+
+test("Next does not skip an outleveled section that has work for a quest in the log", function()
+  -- Found by the simulator with a fast player: a quest taken two sections back had its objectives in a section
+  -- passed over as outleveled, and its hand-in came up with nothing done.
+  local c, Noir = play({ race = "Undead", class = "MAGE", level = 7,
+    saved = savedWith({ guide = { section = DEATHKNELL, how = "hand" } }) })
+  c:acceptQuest(365)
+  c:advance(0.5)
+  eq(Noir.Guide.Next(), TIRISFAL, "Fields of Grief is in the log and Tirisfal has its objectives")
+  c:markCompleted(365)
+  c:abandonQuest(365)
+  c:advance(0.5)
+  ok(Noir.Guide.Select(DEATHKNELL, "hand"))
+  eq(Noir.Guide.Next(), SILVERPINE, "nothing in the log for it: passed over")
+end)
+
 test("the last section ends with NOIR_ROUTE_DONE", function()
   local c, Noir = play({ race = "Undead", class = "MAGE", level = 5,
     saved = savedWith({ guide = { section = SILVERPINE, how = "next" } }) })

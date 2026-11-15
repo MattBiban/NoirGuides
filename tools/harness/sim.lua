@@ -28,17 +28,19 @@
 -- The world comes from the quest data (tools/sim_all.js writes it as `facts`, see Sim.world): which NPC offers and
 -- takes back which quest, what a quest needs before it is offered, its objectives, the flight masters and
 -- innkeepers, the zones' maps, and the character's flattened route (facts.flat). The character's XP follows the pace
--- of tools/lib/xp.js (its constants come in `facts`), so the level the engine sees is the level the planner counted
--- on. The Hearthstone has no cooldown here: the simulated clock does not run at the speed of play.
+-- of tools/lib/xp.js (its constants come in `facts`; every XP the world gives is the estimate times pace.YIELD, as in
+-- the planner's gain), so the level the engine sees is the level the planner counted on. The Hearthstone has no
+-- cooldown here: the simulated clock does not run at the speed of play.
 -- Money: every quest handed in pays TURNIN_COPPER; every objective done leaves one grey item (GREY, real quality 0
 -- and a sell price) in the bags, which the automation sells at merchants. A character with facts.professions has
 -- learned them at skill 1 before it starts.
 --
 -- Sim.play(facts, opts) -> { race, class, join, stuck, cannot, unexplained, errors, slash, offScreen,
 --                            placement = { expectedFrom, landed, from, to, inside, passedSteps, landedAt }, level,
---                            finished, shown, passed, manual, ticked, wizardClosed, grindCards, gatedAims,
---                            gatedAimSteps }
---   grindCards: times a grind card (a gated current card) appeared; gatedAims: rounds in which the arrow aimed at a
+--                            finished, shown, passed, manual, ticked, wizardClosed, grindCards, grindNoPlace,
+--                            gatedAims, gatedAimSteps }
+--   grindCards: times a grind card (a gated current card) appeared, grindNoPlace: how many of them had no place to
+--   grind at (no arrow); gatedAims: rounds in which the arrow aimed at a
 --   step whose minLevel is above the character's level (not at a grind place), with the first such in gatedAimSteps;
 --   passed.deferred: steps deferred until a level (work ahead).
 --   opts: join = level (the character joins there: Sim.prepareJoin), api ("classic"), xpScale (every XP the world
@@ -141,7 +143,9 @@ end
 -- facts:
 --   race, class                      the character (route names: "Undead", "HighOrder", ...)
 --   start = place                    where a fresh character stands
---   xpToLevel = { ... }              XP to finish each level; pace = { OBJECTIVE_KILLS, ITEM_KILL_FACTOR, INCIDENTAL_YARDS }
+--   xpToLevel = { ... }              XP to finish each level
+--   pace = { OBJECTIVE_KILLS, ITEM_KILL_FACTOR, INCIDENTAL_YARDS, YIELD }   tools/lib/xp.js PACE; YIELD (1 when left
+--                                    out) is the share of the estimated XP the world gives, as the planner counts it
 --   continents[mapId] = { uiMap, name, top, left, width, height }   world yards (top: north edge, left: west edge)
 --   zones[area] = { uiMap, name, continent = mapId, minX, maxX, minY, maxY [, band = { min, max, wild }] }
 --   quests[id] = { title, level, minLevel, maxLevel, pre, preAny, exclusive, closed, kills, objects, items, credits,
@@ -489,7 +493,8 @@ function Sim.play(facts, opts)
   local info = Client.RACES[facts.race]
   local flat = facts.flat or {}
   local result = { race = facts.race, class = facts.class, join = opts.join, stuck = {}, cannot = {}, unexplained = {},
-    errors = {}, manual = {}, shown = 0, passed = {}, ticked = 0, grindCards = 0, gatedAims = 0, gatedAimSteps = {} }
+    errors = {}, manual = {}, shown = 0, passed = {}, ticked = 0, grindCards = 0, grindNoPlace = 0, gatedAims = 0,
+    gatedAimSteps = {} }
   local tickAllowance = 0
   local whyLog = {}
   local capturing, landed = true, nil
@@ -989,7 +994,11 @@ function Sim.play(facts, opts)
       local grindKey = nil
       if currentCard.gated then
         grindKey = tostring(P.Place()) .. "/" .. tostring(currentCard.step.id) .. "/" .. tostring(currentCard.lines[1] and currentCard.lines[1].line.level)
-        if grindKey ~= lastGrind then result.grindCards = result.grindCards + 1 end
+        if grindKey ~= lastGrind then
+          result.grindCards = result.grindCards + 1
+          local first = currentCard.lines[1]
+          if not (first and first.line.kind == "grind" and first.line.at) then result.grindNoPlace = result.grindNoPlace + 1 end
+        end
       end
       lastGrind = grindKey
       -- The arrow must never aim at a step the character's level does not allow yet.
