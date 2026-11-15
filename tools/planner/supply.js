@@ -5,25 +5,31 @@
 // no zone at all, such a visit can still beat a level of grinding: it puts quests in the log, or moves them on,
 // and the look-ahead then leads to their ends.
 //   view: { ctx, policy, st, secondsAt(from, to, level) } from planner/plan.js
-const { PACE, XP_TO_LEVEL } = require("../lib/xp");
+const { PACE, XP_TO_LEVEL, mobXp, yieldAt } = require("../lib/xp");
 const { CHOICES: C } = require("./tuning");
 const { copyOf, simVisit } = require("./zonepick");
 
 // What a visit to a zone leads to, played on a copy of the character: the visit itself, then, SUPPLY_VISITS times
 // at most, a visit to every zone the quests it took or moved on send the player to next (the lower zone ID first).
-// Returns { xp, visits }: the XP of it all and the visits it took; no visits when the first one does nothing.
+// Returns { xp, visits, seconds }: the XP of it all, the visits it took and the time they take, each visit's work
+// and the way to it (to the zone's main hub; SUPPLY_UNKNOWN_WAY for a zone without one or with no way known to it).
+// No visits when the first one does nothing.
 function errand(view, zone) {
   const { ctx, st } = view;
   const S = copyOf(st);
   S.errands = st.errands; // the copy takes what the character would take now (planner/policy.js)
-  const out = { xp: 0, visits: 0 };
-  let zones = [zone];
+  const out = { xp: 0, visits: 0, seconds: 0 };
+  let zones = [zone], pos = st.pos;
   for (let round = 0; round <= C.SUPPLY_VISITS && zones.length; round++) {
     for (const z of zones) {
       const visit = simVisit(view, S, z);
       if (!round && !visit.count) return out;
       out.xp += visit.xp;
       out.visits++;
+      const hub = ctx.hubs.get(z);
+      const way = hub ? view.secondsAt(pos, hub, S.level) : Infinity;
+      out.seconds += visit.seconds + (way < Infinity ? way : C.SUPPLY_UNKNOWN_WAY);
+      if (hub) pos = hub;
     }
     const next = new Set();
     for (const [quest, entry] of S.log) {
@@ -37,26 +43,28 @@ function errand(view, zone) {
   return out;
 }
 
-// The zone to go to though the visit itself earns nothing: the one whose errand gives the most XP a visit. An
-// errand is worth its changes of zone when a visit of it gives SUPPLY_MIN_SHARE of the level, or when the whole of
-// it reaches the next level, so that no grind step is written at all (XP as the planner counts it, PACE.YIELD).
-// Below that the grind step is the shorter way. Not a zone found spent; only zones a way leads to. 0 when there
-// is none. Equal zones: the lower ID.
+// The zone to go to though the visit itself earns nothing: the one whose errand gives the most XP a second. An
+// errand is judged against the grind step it stands in for: it is taken when it gives at least SUPPLY_RATE times
+// the XP a second of fights with creatures of the level, or when the whole of it reaches the next level, so that
+// no grind step is written at all (XP as the planner counts it, lib/xp.js yieldAt). Below that the grind step is
+// the quicker way. Not a zone found spent; only zones a way leads to. 0 when there is none. Equal zones: the
+// lower ID.
 function supplyZone(view) {
   const { ctx, policy, st } = view;
   const zones = new Set();
   for (const [zone, list] of ctx.byZone) if (list.some((i) => policy.wanted(i, st))) zones.add(zone);
   for (const [quest, entry] of st.log) zones.add((entry.needsObjective ? ctx.info.get(quest).obj.point : ctx.info.get(quest).end.point).zone);
   const need = XP_TO_LEVEL[st.level];
+  const grind = mobXp(st.level, st.level) / PACE.KILL_SECONDS; // XP a second of a grind step
   let best = 0, bestXp = 0;
   for (const zone of [...zones].sort((a, b) => a - b)) {
     if (st.barren.has(zone)) continue;
-    const { xp, visits } = errand(view, zone);
-    if (!visits || xp / visits <= bestXp) continue;
-    if ((xp / visits) * PACE.YIELD < C.SUPPLY_MIN_SHARE * need && st.xp + xp * PACE.YIELD < need) continue;
+    const { xp, visits, seconds } = errand(view, zone);
+    if (!visits || xp <= 0 || xp / seconds <= bestXp) continue;
+    if (xp / seconds < C.SUPPLY_RATE * grind && st.xp + xp * yieldAt(st.level) < need) continue;
     const hub = ctx.hubs.get(zone);
     if (!hub || view.secondsAt(st.pos, hub, st.level) === Infinity) continue;
-    best = zone; bestXp = xp / visits;
+    best = zone; bestXp = xp / seconds;
   }
   return best;
 }

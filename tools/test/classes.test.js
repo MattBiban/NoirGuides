@@ -245,3 +245,34 @@ test("real data: all 56 characters are valid and reach 60 on their race's route 
   assert.deepStrictEqual(failures, []);
   assert.ok(layered > 500, `${layered} class quests layered in all`);
 });
+
+test("a class quest after the last step to the cap is led from where the character stands, not from the place to grind at", () => {
+  // Westland's quest and three letters from Eastland reach level 2, the cap here; wolves of level 1 stand far off in
+  // Eastland, at East Camp, so the last step (planner/plan.js) is there. The character is at the cap and passes it
+  // where it stands. (Before, the rogue was flown from the town to East Camp after its errand, to a step it passes.)
+  const w = testWorld();
+  w.npc(10, 100, 30, 50); w.npc(20, 100, 40, 50, ""); w.kill(1, 10, 20, 100);
+  w.npc(30, 200, 20, 50);
+  for (let n = 0; n < 3; n++) w.errand(70 + n, 30, 10, 200);
+  w.pack(50, 200, 85, 50, 1, 320);
+  // a rogue's errand in the Westland town that opens when the letters are handed in: after the route's last hand-in
+  w.npc(13, 100, 32, 50);
+  w.quest(40, { startedBy: [[13]], finishedBy: [[13]], zoneOrSort: 100, requiredClasses: ROGUE, preQuestGroup: [70, 71, 72] });
+  const { graph, route } = shared(w, 2);
+  const tail = route.steps[route.steps.length - 1];
+  assert.deepStrictEqual([tail.action, tail.level, tail.at.zone], ["grind", 2, 200], "the last step, at the wolves");
+  assert.deepStrictEqual(route.steps[route.steps.length - 2].at, { zone: 100, x: 30, y: 50 }, "the route ends in the Westland town");
+  const plain = check(w, graph, route, w.human("WARRIOR"));
+  assert.deepStrictEqual([plain.errors, plain.levels[route.steps.length - 1]], [[], 2]);
+  const chars = [w.human("WARRIOR"), w.human("ROGUE")];
+  const out = layerClasses(w.db, route, chars, { graph, maxLevel: 3 });
+  assert.deepStrictEqual(out.classes.ROGUE.layered, [40]);
+  const own = out.route.steps.filter((s) => s.when);
+  assert.deepStrictEqual(own.map((s) => [s.action, s.quest, s.at.zone]), [["accept", 40, 100], ["turnin", 40, 100]], "two talks in town: no flight to the wolves and none back");
+  assert.deepStrictEqual(out.route.steps[out.route.steps.length - 1], tail, "the last step is still the last: the errand comes before it");
+  const rogue = check(w, graph, out.route, w.human("ROGUE"));
+  assert.deepStrictEqual([rogue.errors, rogue.endLevel], [[], 2]);
+  assert.ok(rogue.seconds - plain.seconds < 60, `the errand costs ${Math.round(rogue.seconds - plain.seconds)} s`);
+  assert.deepStrictEqual(dangerousWalks(w.db, graph, out.route, w.human("ROGUE"), rogue.levels), []);
+  assert.deepStrictEqual(mine(out.route, "WARRIOR"), route.steps, "the shared route is not changed");
+});

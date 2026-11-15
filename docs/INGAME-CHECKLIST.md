@@ -141,6 +141,10 @@ Most of section 2 needs nothing more than `/noir state` and `/noir problems` aft
 - [ ] Open any vendor with grey items: one slot is sold every 0.2 s, whites and better stay, and one chat line gives the count and the total; hold Shift (or Ctrl or Alt) while opening the vendor and nothing is sold (#101).
 - [ ] With a planned or learned profession, a reminder "Raise <profession> to 50" with the skill counter shows from the start of the section that holds the Journeyman trainer step, ticks itself at 50, and is gone once the trainer step is passed.
 
+### Quests started by an item (after 0.5.0)
+
+- [ ] At a step "Kill <creature> until it drops <item>, then use it to accept <quest>": the arrow leads to the creatures, the creature is on an enemy target button, and once the item is looted the line reads "Use <item> to accept <quest>" and the item is on an item button. Clicking the button opens the quest's page and the quest is accepted by itself; the step is done when the quest is in the log (#103).
+
 ## 3. Skyborne start (High Order and Windshaper)
 
 The two Skyborne races, `HighOrder` (Alliance) and `Windshaper` (Horde), start on Zephras Isle (AreaTable area 16593, its own continent 2991). Their routes rest on the most assumptions.

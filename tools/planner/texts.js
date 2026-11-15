@@ -153,10 +153,10 @@ function subject(db, step) {
   for (const id of (step.targets && step.targets.enemy) || []) { const s = creature(id, quest); if (s) return s; }
   return undefined;
 }
-// The NPC the previous step talks to, if any.
+// The NPC the previous step talks to, if any (not a creature that drops the item a quest starts from).
 function previousNpc(db, step) {
   if (!step) return undefined;
-  for (const l of step.lines) if (l.npc !== undefined && l.kind !== "objective") { const n = npcName(db, l.npc); if (n) return n; }
+  for (const l of step.lines) if (l.npc !== undefined && l.kind !== "objective" && !(l.kind === "accept" && l.item !== undefined)) { const n = npcName(db, l.npc); if (n) return n; }
   return undefined;
 }
 

@@ -5,7 +5,7 @@
 // a zone with a single quest is not worth one of the visits.
 //   view: { ctx, policy, st, secondsAt(from, to, level) } from planner/plan.js
 const { distance } = require("../lib/geo");
-const { PACE, XP_TO_LEVEL, gain, questXp, objectiveXp, objectiveSeconds, grindSeconds } = require("../lib/xp");
+const { PACE, XP_TO_LEVEL, yieldAt, gain, questXp, objectiveXp, objectiveSeconds, grindSeconds } = require("../lib/xp");
 const { CHOICES: C } = require("./tuning");
 
 const GRIND = -1; // in a sequence of zones: a level of grinding where the character stands
@@ -28,16 +28,21 @@ function copyOf(S) {
 // One whole visit to a zone, played on S (which it changes): the log's objectives and turn-ins there, every quest
 // the zone offers under the policy, and what those open, with the levels gained on the way counted in. It is the
 // session of planner/plan.js without the walking; the fights on the way are a flat PLAN_WALK_SHARE on top.
-// Returns { xp, seconds, count }: XP gained (none once the character is at the cap), time on the spot, tasks done.
+// Returns { xp, value, seconds, count }: XP gained (none once the character is at the cap), the same XP as the search
+// weighs it (AHEAD_DISCOUNT, LAST_CHANCE), time on the spot, tasks done.
 function simVisit(view, S, zone, cap = 60) {
   const { ctx, policy } = view;
-  const out = { xp: 0, seconds: 0, count: 0 };
+  const out = { xp: 0, value: 0, seconds: 0, count: 0 };
   const band = ctx.bands.get(zone);
   const walk = band && band.wild ? 1 + C.PLAN_WALK_SHARE : 1;
-  const earn = (xp) => {
+  // what a quest's XP counts for when visits are compared: less the further the quest is above the player (it can
+  // wait), more when it is about to be too easy (it cannot)
+  const weight = (q) => (q.level > S.level ? Math.max(0, 1 - C.AHEAD_DISCOUNT * (q.level - S.level)) : q.level <= S.level - C.EASY + C.LAST_CHANCE ? C.LAST_CHANCE_BONUS : 1);
+  const earn = (xp, q) => {
     if (S.level >= cap) return;
     const got = Math.round(xp * walk);
     out.xp += got;
+    out.value += got * weight(q);
     gain(S, got);
   };
   for (let changed = true; changed;) {
@@ -45,13 +50,13 @@ function simVisit(view, S, zone, cap = 60) {
     for (const [quest, entry] of S.log) {
       const i = ctx.info.get(quest);
       if (entry.needsObjective && policy.objectiveIn(i, zone)) {
-        earn(objectiveXp(i.q, S.level));
+        earn(objectiveXp(i.q, S.level), i.q);
         entry.needsObjective = false;
         out.seconds += objectiveSeconds(i.q) + C.QUEST_WALK_SECONDS; out.count++;
         changed = true;
       }
       if (!entry.needsObjective && i.endZone === zone) {
-        earn(questXp(i.q.level, S.level));
+        earn(questXp(i.q.level, S.level), i.q);
         S.log.delete(quest);
         S.done.add(quest);
         out.seconds += PACE.TALK_SECONDS; out.count++;
@@ -140,8 +145,9 @@ function urgentZone(view) {
 //      nearest such task wins, as { zone, urgent: true }. (The way off Zephras Isle ends beside the quest's turn-in;
 //      nothing should come between: planner/plan.js does nothing else in that zone until it is handed in.)
 //   2. sequences of up to SEARCH_DEPTH visits are played out, the SEARCH_BEAM best kept after each visit. After the
-//      same number of visits the sequence with more XP is the better one (less SEARCH_TIME_XP for every second of
-//      travel and work), so the search spends its visits where they give most: the fewest zone changes to the cap.
+//      same number of visits the sequence with more XP is the better one (as simVisit weighs it: less for a quest
+//      above the player, more for one about to be too easy; less SEARCH_TIME_XP for every second of travel and
+//      work), so the search spends its visits where they give most: the fewest zone changes to the cap.
 //      A sequence that reaches the cap ends the search; of several, the quickest wins. The first zone of the best
 //      sequence is the answer. Equal sequences: the one whose zones have the lower IDs.
 function search(view, options = {}) {
@@ -155,7 +161,7 @@ function search(view, options = {}) {
   const cap = options.cap || 60;
   const start = copyOf(st);
   if (peek) { start.level = options.level; start.xp = 0; }
-  let beam = [{ S: start, pos: st.pos, zone: st.zone, xp: 0, time: 0, path: [], score: 0, grinds: st.grinds, ground: !!options.ground }];
+  let beam = [{ S: start, pos: st.pos, zone: st.zone, xp: 0, time: 0, travel: 0, path: [], score: 0, grinds: st.grinds, ground: !!options.ground }];
   let best = null;
   const order = (a, b) => (a.score !== b.score ? b.score - a.score : a.path.join(",") < b.path.join(",") ? -1 : 1);
   for (let depth = 1; depth <= (peek ? 1 : options.depth || C.SEARCH_DEPTH); depth++) {
@@ -166,7 +172,7 @@ function search(view, options = {}) {
       if (!peek && node.grinds < C.MAX_GRINDS && !node.ground) {
         const S = copyOf(node.S);
         const made = { S, pos: node.pos, zone: node.zone, xp: node.xp + XP_TO_LEVEL[S.level] - S.xp, time: node.time + grindSeconds(S.level, S.xp),
-          path: [...node.path, GRIND], grinds: node.grinds + 1, ground: true };
+          path: [...node.path, GRIND], grinds: node.grinds + 1, ground: true, travel: node.travel };
         S.level++; S.xp = 0;
         made.score = made.xp - C.SEARCH_TIME_XP * made.time;
         next.push(made);
@@ -181,12 +187,12 @@ function search(view, options = {}) {
         const visit = simVisit(view, S, zone, cap);
         if (visit.xp <= 0 && !(peek && visit.count > 0)) continue; // a quest to pick up counts when asking what a level opens
         // a small visit is not worth a change of zone; the level is the one the visit starts at
-        if (options.min && visit.xp * PACE.YIELD < options.min * XP_TO_LEVEL[node.S.level]) continue;
+        if (options.min && visit.xp * yieldAt(node.S.level) < options.min * XP_TO_LEVEL[node.S.level]) continue;
         const key = `${zone}:${S.level}:${S.xp}:${S.log.size}`;
         if (seen.has(key)) continue; // the same visits in another order
         seen.add(key);
-        const made = { S, pos: entry, zone, xp: node.xp + visit.xp, time: node.time + travel + visit.seconds, path: [...node.path, zone], grinds: node.grinds, ground: false };
-        made.score = made.xp - C.SEARCH_TIME_XP * made.time;
+        const made = { S, pos: entry, zone, xp: node.xp + visit.value, time: node.time + travel + visit.seconds, travel: node.travel + travel + (entry.continent !== node.pos.continent ? C.CROSSING_SECONDS : 0), path: [...node.path, zone], grinds: node.grinds, ground: false };
+        made.score = made.xp - C.SEARCH_TIME_XP * made.time - C.SEARCH_TRAVEL_SHARE * XP_TO_LEVEL[Math.min(59, st.level)] * made.travel / 3600;
         next.push(made);
       }
     }
@@ -201,28 +207,23 @@ function search(view, options = {}) {
   return best.path[0] === GRIND ? { zone: 0, grind: true, path: best.path } : { zone: best.path[0], path: best.path, level: best.S.level };
 }
 
-// What comes next: { zone } (0 when no zone is worth going to), { zone: 0, grind: true } when the look-ahead plans a
-// level of grinding first, or { zone: 0, wait: true } when only small visits are left and they are not made now.
-// The options and rules 1 and 2 are the search's, above. On top of them, a zone is worth a change of zone only when
-// the visit there is a real piece of the level:
+// What comes next: { zone } (0 when no zone has anything to give), or { zone: 0, grind: true } when the look-ahead
+// plans a level of grinding first.
+// The options and rules 1 and 2 are the search's, above. On top of them, the visits that are a real piece of the
+// level come first:
 //   3. first only visits worth at least MIN_VISIT of the level they start at are looked at, at every depth of the
-//      search. A zone with one or two quests at the level is left alone: it grows with every level the player gains,
-//      and is gone to once, when it is worth the way, not every level for whatever it has just opened.
-//   4. when no visit is worth that much, the small ones are made only when at most LAST_VISITS of them reach the next
-//      level; the first of the best such sequence is the answer. Otherwise the answer is { zone: 0, wait: true }: the
-//      rest of the level is a grind step (planner/plan.js), which costs no way at all, and the small visits wait.
-//      After a grind step (options.ground) the small visits are made whatever they reach: never two grind steps in a
-//      row.
-// Without rules 3 and 4 a route that needs every quest it can get (lib/xp.js YIELD) went to every zone at every
-// level for the two or three quests the level had opened there: 243 to 277 zone changes a route, and still a grind
-// step at the end of most levels, for the last few percent.
+//      search. A zone with one or two quests at the level is left alone while there is such a visit: it grows with
+//      every level the player gains, and is better gone to once than every level for whatever it has just opened.
+//   4. when no visit is worth that much, the small ones are made: the first zone of the best sequence of LAST_VISITS
+//      of them is the answer. A small visit is a change of zone for a quest or two, and still better than the fights
+//      of a grind step: grinding is the last resort (planner/plan.js), for when no zone has anything to give.
+// Rule 4 used to leave the small visits waiting and have the rest of the level ground, unless they reached the next
+// level: fewer changes of zone, and ten or more grind steps a route.
 function bestZone(view, options = {}) {
   if (options.wrapUp || options.level !== undefined || !C.MIN_VISIT) return search(view, options);
   const worth = search(view, { ...options, min: C.MIN_VISIT });
   if (worth.zone || worth.grind) return worth;
-  const small = search(view, { ...options, depth: C.LAST_VISITS });
-  if (!small.zone || options.ground || small.level > view.st.level) return small;
-  return { zone: 0, wait: true };
+  return search(view, { ...options, depth: C.LAST_VISITS });
 }
 
 module.exports = { Overlay, copyOf, simVisit, bestZone, urgentZone, entryOf };

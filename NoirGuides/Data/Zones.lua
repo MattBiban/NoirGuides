@@ -48,3 +48,4 @@ Noir.Data.zones[1638] = { uiMap = 1456, name = "Thunder Bluff", continent = 1 }
 Noir.Data.zones[1657] = { uiMap = 1457, name = "Darnassus", continent = 1 }
 Noir.Data.zones[16591] = { uiMap = 2548, name = "Riverglades", continent = 0 }
 Noir.Data.zones[16593] = { uiMap = 2521, name = "Zephras Isle", continent = 2991 }
+Noir.Data.zones[16651] = { uiMap = 2652, name = "Shen'dralas", continent = 1 }

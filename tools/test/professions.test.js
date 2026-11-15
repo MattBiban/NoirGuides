@@ -233,7 +233,7 @@ test("in the shipped routes the profession characters' reminders cover most of t
   const { parseRoute } = require("../sim_all");
   const routes = path.join(__dirname, "..", "..", "NoirGuides", "Routes");
   const shared = (s) => !s.when && !s.reminder;
-  const lead = {}, combined = {};
+  const lead = {}, combined = {}, stacked = [];
   let legs = 0;
   for (const file of fs.readdirSync(routes).filter((f) => f.endsWith(".lua"))) {
     const route = parseRoute(fs.readFileSync(path.join(routes, file), "utf8"));
@@ -257,6 +257,11 @@ test("in the shipped routes the profession characters' reminders cover most of t
         assert.ok(section.steps.slice(i + 1).some(shared), `${route.race} ${step.id} has a shared step after it`);
         const own = section.steps.slice(0, i).filter(shared).length;
         lead[`${route.race} ${step.id}`] = own / sharedSteps.length;
+        // A rank whose previous rank's trainer step stands before it in the same section gets no leg in the section
+        // before (planner/professions.js: the skill cannot reach its gate before that step). The NightElf route
+        // learns Journeyman and Expert Herbalism and Skinning in one visit to Stormwind, nine shared steps in.
+        const rank = /^p(\d+)-(\d)$/.exec(step.id);
+        if (section.steps.slice(0, i).some((s) => s.id === `p${rank[1]}-${rank[2] - 1}`)) { stacked.push(`${route.race} ${step.id}`); return; }
         // shared steps the reminder is on screen for: from its own section's start, and from its leg in the section
         // before (if any) to the leg's end
         const before = route.sections.find((s) => (s.next || []).some((n) => n.section === section.id));
@@ -278,6 +283,7 @@ test("in the shipped routes the profession characters' reminders cover most of t
   const short = Object.values(lead).filter((v) => v < 0.05).length;
   assert.ok(short <= 24, `trainer steps with almost no reminder lead in their section: ${short}`);
   assert.deepStrictEqual(Object.entries(combined).filter(([, n]) => n < 10).map(([k, n]) => `${k}: ${n}`), []);
+  assert.ok(stacked.length <= 4, `trainer steps right after their previous rank's, without a leg: ${stacked.join(", ")}`);
   // legs are only written where the lead in the own section is short: 24 and more on the 0.4 routes, 10 on the routes
   // planned at a realistic pace, whose sections are cut elsewhere
   assert.ok(legs >= 5, `reminder legs: ${legs}`);

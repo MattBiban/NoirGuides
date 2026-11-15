@@ -5,23 +5,24 @@ const assert = require("node:assert");
 const { testWorld } = require("./world");
 const { planRoute } = require("../planner/plan");
 const { validateRoute } = require("../planner/validate");
-const { bundleSteps } = require("../planner/bundle");
+const { bundleSteps, flatten } = require("../planner/bundle");
+const { checkRoute3 } = require("../planner/format3");
 const { splitSections, stepLevels } = require("../planner/sections");
 const { validate3, estimateSteps, applies, chainOf } = require("../planner/validate3");
 
 const clone = (o) => JSON.parse(JSON.stringify(o));
 // a small planned route on the test world, in format 3
-function built() {
+function built(maxLevel = 4) {
   const w = testWorld();
   w.npc(10, 100, 30, 50); w.npc(20, 100, 60, 30, ""); w.kill(1, 10, 20, 100);
   w.npc(50, 400, 50, 12); w.errand(7, 10, 50, 100); w.npc(51, 400, 52, 14, ""); w.kill(9, 50, 51, 400); w.kill(10, 50, 51, 400); w.kill(11, 50, 51, 400);
   const graph = w.graph(), ch = w.human();
-  const route = planRoute(w.db, ch, { graph, inns: w.inns, maxLevel: 4 });
+  const route = planRoute(w.db, ch, { graph, inns: w.inns, maxLevel });
   const v = validateRoute(w.db, route, ch, { graph, inns: w.inns });
   assert.deepStrictEqual(v.errors, []);
   const bundled = bundleSteps(w.db, route, v.levels);
   const sections = splitSections(w.db, "Human", "Alliance", bundled, stepLevels(v.levels, bundled.origin, v.endLevel), {});
-  return { w, graph, ch, v, route3: { id: "alliance-human", format: 3, race: "Human", faction: "Alliance", sections } };
+  return { w, graph, ch, v, route, route3: { id: "alliance-human", format: 3, race: "Human", faction: "Alliance", sections } };
 }
 
 test("conditions apply by class, race and planned professions", () => {
@@ -86,4 +87,24 @@ test("an unreachable section, a broken reminder label and a missing grind are ea
   down.sections[0].minLevel = 4; down.sections[0].maxLevel = 7;
   const e4 = validate3(w.db, down, ch, opts).errors;
   assert.ok(e4.includes(`section human-01-01-low starts at level ${Math.max(1, first.minLevel)}, more than one level below section ${first.id} (4)`), e4.join("\n"));
+});
+
+test("the last step to the cap goes through bundling, sections and the format 3 replay as a step the estimate passes", () => {
+  // with 2 as the cap this world's route reaches it on quests and ends with the last step (planner/plan.js)
+  const { w, graph, ch, v, route, route3 } = built(2);
+  const tail = route.steps[route.steps.length - 1];
+  assert.deepStrictEqual([tail.action, tail.level, v.levels[route.steps.length - 1]], ["grind", 2, 2]);
+  const steps = route3.sections.flatMap((s) => s.steps);
+  const last = steps[steps.length - 1];
+  assert.deepStrictEqual(last, { id: `l2@${tail.at.zone}`, at: tail.at, lines: [{ kind: "grind", level: 2 }] }, "a step of its own, at its place, without a radius");
+  assert.deepStrictEqual(steps.filter((s) => s.lines.some((l) => l.kind === "grind")), [last], "the only grind step: none is inserted before it");
+  assert.strictEqual(checkRoute3(route3), null);
+  const actions = flatten(steps);
+  assert.deepStrictEqual(actions[actions.length - 1], tail, "and back to the action it was");
+  const got = validate3(w.db, route3, ch, { graph, inns: w.inns });
+  assert.deepStrictEqual([got.errors, got.endLevel], [[], 2]);
+  const est = estimateSteps(w.db, route3, ch, { graph, inns: w.inns });
+  assert.deepStrictEqual(est.levels.get(last), { start: 2, end: 2, clock: est.result.seconds }, "the character is at the cap there, and the step takes no time");
+  const section = route3.sections[route3.sections.length - 1];
+  assert.ok(section.minLevel <= 2 && section.maxLevel >= 2, `${section.id}: ${section.minLevel} to ${section.maxLevel}`);
 });

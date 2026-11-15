@@ -383,6 +383,31 @@ test("regrindSections: a step whose minLevel a later estimate does not reach get
   assert.deepStrictEqual(enough[0].steps.map((s) => s.id), before.map((s) => s.id), "every estimate reaches: nothing added");
 });
 
+test("regrindSections: a grind with no work step before it in its section stands at the last work place of the section before", () => {
+  // Found on the Human route: a section opened with the way from Loch Modan to Un'Goro Crater and a step there that
+  // needed level 49. No work step of the section came before it, so the grind took that step's own place: "kill
+  // creatures around Un'Goro Crater", across the sea from the player, as the section's first step.
+  const last = { ...turn(100, 5, 40, 40) };
+  const classOnly = { ...acc(100, 6, 45, 45), when: { class: "ROGUE" } };
+  const need = { ...acc(400, 7, 70, 70), minLevel: 6 };
+  const sections = [
+    { id: "human-04-05-westland", steps: [obj(100), last, classOnly, go(100, 50, 90)] },
+    { id: "human-05-06-farshore", steps: [go(400, 50, 10), need, obj(400)] },
+  ];
+  const out = regrindSections(sections, ["ROGUE", "WARRIOR"], () => ({ start: 5, end: 5 }));
+  assert.deepStrictEqual(out[0].steps.map((s) => s.id), sections[0].steps.map((s) => s.id));
+  assert.deepStrictEqual(out[1].steps.map((s) => s.id), ["l6@100", "g400@400", need.id, sections[1].steps[2].id], "before the way, as the section's first step");
+  assert.deepStrictEqual(out[1].steps[0], { id: "l6@100", at: { zone: 100, x: 40, y: 40 }, lines: [{ kind: "grind", level: 6 }] },
+    "where every character last worked: not the rogue's step, not the way's end, not the step that needs the level");
+  // the first section of all has no section before it: there the step's own place is all there is
+  const first = regrindSections([{ id: "human-01-02-farshore", steps: [go(400, 50, 10), need] }], ["WARRIOR"], () => ({ start: 5, end: 5 }));
+  assert.deepStrictEqual(first[0].steps[0].at, { zone: 400, x: 70, y: 70 });
+  // a work step earlier in the section is still the anchor
+  const own = regrindSections([sections[0], { id: "human-05-06-farshore", steps: [go(400, 50, 10), acc(400, 9, 20, 20), need] }], ["WARRIOR"], () => ({ start: 5, end: 5 }));
+  assert.deepStrictEqual(own[1].steps.map((s) => s.id), ["g400@400", "a9", "l6@400", need.id]);
+  assert.deepStrictEqual(own[1].steps[2].at, { zone: 400, x: 20, y: 20 });
+});
+
 test("the objective and turnin lines of a quest accepted in an earlier section skip when the quest is missing", () => {
   // Found by the simulator's joiners (task X1): a character that joined with one quest of an earlier section never
   // taken met its hand-in further on, which no step of that section could accept ("cannot", no evidence).
@@ -551,7 +576,8 @@ test("real route: March of the Silithid (4494), which either 32 or 7732 unlocks,
   // only one of them had 4494 passed while the game offered it, and its chain (4496 ifDone 4494) was lost. The routes
   // of 0.4.0 took it on horde-orc after handing in both; the routes planned for 60% of the estimated XP hand in 32
   // only, and the accept is one line that waits for it (planner/sections.js: of the any-of members, those the route
-  // hands in). A route that reaches 60 without the chain leaves the check to the tests above.
+  // hands in before it: the Windshaper route takes it after 7732 and hands in 32 later, so its one line waits for
+  // 7732). A route that reaches 60 without the chain leaves the check to the tests above.
   const { loadDb } = require("../lib/db");
   const { parseRoute } = require("../sim_all");
   const q = loadDb(DATA_DIR).quests.get(4494);
@@ -560,11 +586,14 @@ test("real route: March of the Silithid (4494), which either 32 or 7732 unlocks,
   let routes = 0;
   for (const file of fs.readdirSync(ROUTES).filter((f) => f.endsWith(".lua")).sort()) {
     const route = parseRoute(fs.readFileSync(require("node:path").join(ROUTES, file), "utf8"));
-    const hits = [];
-    for (const sec of route.sections) for (const st of sec.steps) for (const l of st.lines) if (l.kind === "accept" && l.quest === 4494) hits.push({ st, l });
+    const hits = [], handedBefore = new Set();
+    for (const sec of route.sections) for (const st of sec.steps) for (const l of st.lines) {
+      if (l.kind === "accept" && l.quest === 4494) hits.push({ st, l });
+      if (l.kind === "turnin" && !hits.length) handedBefore.add(l.quest);
+    }
     if (!hits.length) continue;
     routes++;
-    const handedIn = [32, 7732].filter((p) => route.sections.some((sec) => sec.steps.some((st) => st.lines.some((l) => l.kind === "turnin" && l.quest === p))));
+    const handedIn = [32, 7732].filter((p) => handedBefore.has(p));
     assert.ok(handedIn.length > 0, `${file}: hands in one of the two`);
     assert.deepStrictEqual(hits.map((h) => h.l.ifDone).sort((a, b) => a - b), handedIn, file);
     assert.ok(hits.every((h) => h.st === hits[0].st), `${file}: in one step`);

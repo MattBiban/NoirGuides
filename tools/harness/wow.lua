@@ -105,9 +105,11 @@ local function defaultWorld()
     -- Items the client has in its cache: GetItemInfo knows these and returns nil for any other. qualities: an item's
     -- quality (0 poor/grey, 1 common, ...; 1 when not listed); prices: its sell price in copper (0 when not listed).
     items = { [3265] = "Scavenger Paw", [159] = "Refreshing Spring Water", [2287] = "Haunch of Meat", [6948] = "Hearthstone" },
-    -- Spells by ID, for GetSpellInfo; itemSpells: the spell an item casts when used, itemCooldowns its cooldown.
+    -- Spells by ID, for GetSpellInfo; itemSpells: the spell an item casts when used, itemCooldowns its cooldown;
+    -- itemQuests: the quest an item starts when used (item ID -> quest ID).
     spells = { [556] = "Astral Recall", [8690] = "Hearthstone" },
     itemSpells = { [6948] = 8690 },
+    itemQuests = {},
     itemCooldowns = { [6948] = 3600 },
     stacks = { [6948] = 1 },
     -- Who the player can talk to: offers and ends are quest IDs, taxi a node ID, binder the inn's place name,
@@ -2134,8 +2136,11 @@ function Client:buildGlobals()
   end
   G.UnitGUID = function(unit)
     if isPlayer(unit) then return "Player-4444-0000002A" end
+    if unit == "npc" and c.npc and c.npc.item then return nil end -- a quest page an item opened: nobody is talked to
     if unit == "npc" and c.npc then
       if c.opts.oldGuid then return string.format("0xF13000%04X00%06X", c.npc.id, 0x1A2B3C) end
+      -- an object of the world that gives or takes a quest (its definition says object = true)
+      if c.npc.def and c.npc.def.object then return "GameObject-0-4444-0-55-" .. c.npc.id .. "-00001A2B3C" end
       return "Creature-0-4444-0-55-" .. c.npc.id .. "-00001A2B3C"
     end
     if unit == "target" and c.target then return "Creature-0-4444-0-55-" .. c.target .. "-00002B3C4D" end
@@ -2286,10 +2291,11 @@ function Client:buildGlobals()
       c:fire("UI_ERROR_MESSAGE", 47, "Your quest log is full.")
       return
     end
-    local id = c.dialog.quest
+    local id, item = c.dialog.quest, c.dialog.item
     c.dialog = nil
     c:acceptQuest(id)
     c:closeNpc()
+    if item then c:takeItem(item, 1) end -- the item that started the quest is gone once the quest is taken
   end
   G.DeclineQuest = function() record("DeclineQuest") c:closeNpc() end
   G.IsQuestCompletable = function() return c.dialog ~= nil and c.dialog.kind == "progress" and isReady(c.dialog.quest) end
@@ -3104,7 +3110,8 @@ end
 -- a single gossip option or a single quest is opened directly, anything more shows the gossip (or greeting) list.
 -- ---------------------------------------------------------------------------------------------------------------
 
--- Right-clicks an NPC. `def` overrides the world's definition.
+-- Right-clicks an NPC. `def` overrides the world's definition. A definition with object = true is an object of the
+-- world (a crate, a poster): UnitGUID("npc") is then a GameObject's.
 function Client:talkTo(id, def)
   def = def or (self.world.npcs and self.world.npcs[id])
   assert(def, "the mock world has no NPC " .. tostring(id))
@@ -3379,9 +3386,22 @@ function Client:castSpell(spell)
 end
 
 -- Uses an item from the bags: nothing without one or while it cools down; else its cooldown starts and the
--- spell it casts (world.itemSpells) is cast. Returns true when it was used.
+-- spell it casts (world.itemSpells) is cast. An item that starts a quest (world.itemQuests) opens the quest's page
+-- instead, with nobody to talk to (UnitGUID("npc") is nil), as long as the quest is offered to the character
+-- (Client:offerable); while it is not, the item does nothing. Returns true when it was used.
 function Client:useItem(id)
   if self:itemCount(id) <= 0 then return false end
+  local quest = self.world.itemQuests and self.world.itemQuests[id]
+  if quest then
+    if not self:offerable(quest) then return false end
+    self.calls[#self.calls + 1] = { "UseItem", id }
+    self:closeNpc()
+    self.npc = { id = 0, def = {}, window = "quest", available = {}, active = {}, options = {}, item = id }
+    self.dialog = { kind = "detail", quest = quest, item = id }
+    setShown(rawget(self.G, "QuestFrame"), true)
+    self:fire("QUEST_DETAIL")
+    return true
+  end
   local cd = self.itemCooldownsAt[id]
   if cd and self.now < cd[1] + cd[2] then return false end
   self.calls[#self.calls + 1] = { "UseItem", id }

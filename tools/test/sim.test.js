@@ -6,7 +6,7 @@ const test = require("node:test");
 const assert = require("node:assert");
 const { testWorld, at } = require("./world");
 const { createVm } = require("../harness/vm");
-const { mobXp, questXp, walkXp, objectiveXp, XP_TO_LEVEL, PACE } = require("../lib/xp");
+const { mobXp, questXp, walkXp, objectiveXp, XP_TO_LEVEL, PACE, yieldAt } = require("../lib/xp");
 const { emitRoute3 } = require("../planner/emit3");
 const { buildFacts, flattenFor, parseRoute, toLua, simulate, summarize, passed, joinerList } = require("../sim_all");
 
@@ -57,6 +57,19 @@ test("the simulator's pace formulas give the numbers of lib/xp.js", () => {
     }
     assert.strictEqual(call(`HARNESS.Sim.walkXp(500, { min = 10, max = 18, wild = false }, ${player}, ${pace})`), 0);
   }
+});
+test("the simulator's share of the estimated XP is the planner's at every level (Sim.yieldAt, lib/xp.js yieldAt)", () => {
+  const { call } = simVm();
+  // the constants as tools/sim_all.js buildFacts hands them over
+  const pace = `{ YIELD = ${PACE.YIELD}, YIELD_LATE = ${PACE.YIELD_LATE}, YIELD_FROM = ${PACE.YIELD_FROM}, YIELD_TO = ${PACE.YIELD_TO} }`;
+  const share = (level) => call(`string.format("%.17g", HARNESS.Sim.yieldAt(${pace}, ${level}))`); // every digit of the number
+  for (const level of [1, 30, 40, 50, 60]) assert.strictEqual(share(level), yieldAt(level), `level ${level}`);
+  for (let level = 1; level <= 60; level++) assert.strictEqual(share(level), yieldAt(level), `level ${level}`);
+  assert.deepStrictEqual([share(1), share(30), share(50), share(60)], [PACE.YIELD, PACE.YIELD, PACE.YIELD_LATE, PACE.YIELD_LATE]);
+  assert.ok(yieldAt(40) > PACE.YIELD && yieldAt(40) < PACE.YIELD_LATE && yieldAt(60) > yieldAt(1), "the share rises: the test is not of one constant");
+  // a world told of no late share plays at one share throughout, and one told of none at all at the whole estimate
+  assert.strictEqual(call(`HARNESS.Sim.yieldAt({ YIELD = 0.6 }, 55)`), 0.6);
+  assert.strictEqual(call(`HARNESS.Sim.yieldAt({}, 55)`), 1);
 });
 
 test("a format 3 route file reads back as its sections, steps and lines", () => {
@@ -209,7 +222,7 @@ test("a whole character played by the real addon in the simulated world", () => 
   // through the same runner instead, with the route registered by the simulator.
   const w = testWorld();
   w.npc(10, 100, 30, 30, "AH", "Giver"); w.npc(12, 100, 50, 50, "", "Wolf"); w.npc(13, 100, 50, 50, "", "Boar");
-  // two kinds of creature: the simulated world gives the share of the XP the planner counts on (lib/xp.js YIELD),
+  // two kinds of creature: the simulated world gives the share of the XP the planner counts on (lib/xp.js yieldAt),
   // and one kind's fights and the reward would leave the character at level 1
   w.kill(1, 10, 12, 100, { questLevel: 1, objectives: [[[12, null, 0], [13, null, 0]]] });
   const route = route3([section("orc-01-02-westland", "1-2 Westland", [
@@ -223,7 +236,12 @@ test("a whole character played by the real addon in the simulated world", () => 
   assert.ok(f.route, "the route is carried for registering");
   const r = simulate(f, { register: true });
   assert.deepStrictEqual([r.finished, r.stuck, r.cannot, r.unexplained, r.errors, r.slash, r.offScreen], [true, [], [], [], [], 0, []]);
-  assert.strictEqual(f.pace.YIELD, PACE.YIELD, "the world plays at the planner's pace");
+  assert.deepStrictEqual([f.pace.YIELD, f.pace.YIELD_LATE, f.pace.YIELD_FROM, f.pace.YIELD_TO], [PACE.YIELD, PACE.YIELD_LATE, PACE.YIELD_FROM, PACE.YIELD_TO],
+    "the world plays at the planner's pace, at every level");
+  // ... and a joiner's past grinds to the planner's gate (planner/tuning.js gateLevel; tools/test-lua/sim.lua)
+  const { CHOICES, gateLevel } = require("../planner/tuning");
+  assert.strictEqual(f.pace.GATE, CHOICES.HARD_TALK + CHOICES.BEHIND);
+  assert.strictEqual(gateLevel({ minLevel: 1, level: 20 }), 20 - f.pace.GATE);
   assert.strictEqual(r.level, 2);
   assert.strictEqual(passed(r), false, "a run that ends below level 60 fails");
   assert.strictEqual(passed({ ...r, level: 60 }), true);

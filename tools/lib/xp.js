@@ -25,16 +25,26 @@ const PACE = Object.freeze({
                           // open country. The capital with the most has 247 (critters, neutral traders), the emptiest
                           // questing zone 364 (Riverglades); the peaceful places below it (Moonglade 119, Mount Hyjal
                           // 114) give no walking XP
-  YIELD: 0.6,             // the share of the estimated XP the planner counts on (gain). Calibrated: with the full estimate a
+  YIELD: 0.6,             // the share of the estimated XP the planner counts on (gain, yieldAt). Calibrated: with the full estimate a
                           // route reached level 22 on 80 to 100 quests, where well-tested routes of the game need 160 to
                           // 200; at 0.6 it plans 140 to 175. Erring low is the safe side: a player ahead of the plan meets
                           // quests a little under their level, a player behind it meets quests above it
+  YIELD_LATE: 0.68,       // ... and the share from level YIELD_TO on, rising evenly from YIELD_FROM. Calibrated the same
+  YIELD_FROM: 30,         // way: at 0.6 a route that does as much quest XP from level 40 to 60 as well-tested routes do
+  YIELD_TO: 50,           // (four fifths of the XP of those levels) was still most of level 59 short of level 60
   TALK_SECONDS: 10,       // accepting or turning in a quest, binding the hearthstone: a guess
   HEARTH_COOLDOWN: 3600,  // the hearthstone's cooldown in the original game: one hour
 });
 
+// The share of the estimated XP counted on at a level: YIELD up to YIELD_FROM, YIELD_LATE from YIELD_TO, a straight
+// line between.
+function yieldAt(level) {
+  if (level <= PACE.YIELD_FROM) return PACE.YIELD;
+  if (level >= PACE.YIELD_TO) return PACE.YIELD_LATE;
+  return PACE.YIELD + (PACE.YIELD_LATE - PACE.YIELD) * (level - PACE.YIELD_FROM) / (PACE.YIELD_TO - PACE.YIELD_FROM);
+}
 function gain(state, xp) {
-  state.xp += Math.round(xp * PACE.YIELD);
+  state.xp += Math.round(xp * yieldAt(state.level));
   while (state.level < 60 && state.xp >= XP_TO_LEVEL[state.level]) { state.xp -= XP_TO_LEVEL[state.level]; state.level++; }
 }
 
@@ -101,7 +111,9 @@ function walkXp(yards, band, playerLevel) {
   const mob = Math.min(Math.max(playerLevel, band.min), band.max);
   return Math.round((yards / PACE.INCIDENTAL_YARDS) * mobXp(mob, playerLevel));
 }
-// One level of nothing but fights with creatures of the player's level: how long a grind step is said to take.
-const grindSeconds = (level, xp) => Math.ceil(Math.max(0, XP_TO_LEVEL[level] - xp) / mobXp(level, level)) * PACE.KILL_SECONDS;
+// One level of nothing but fights with creatures of the player's level: how long a grind step is said to take. A
+// fight counts for the share of its XP every other gain counts for (yieldAt), so an hour of grinding and an hour of
+// quests are measured alike; rounded a fight, as gain rounds what it is given.
+const grindSeconds = (level, xp) => Math.ceil(Math.max(0, XP_TO_LEVEL[level] - xp) / Math.round(mobXp(level, level) * yieldAt(level))) * PACE.KILL_SECONDS;
 
-module.exports = { PACE, XP_TO_LEVEL, gain, mobXp, questXp, objectiveXp, objectiveSeconds, zoneLevels, walkXp, grindSeconds };
+module.exports = { PACE, XP_TO_LEVEL, yieldAt, gain, mobXp, questXp, objectiveXp, objectiveSeconds, zoneLevels, walkXp, grindSeconds };

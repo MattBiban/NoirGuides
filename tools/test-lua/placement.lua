@@ -140,6 +140,47 @@ test("a hand-in already done across the sea places the character at its step, pa
   eq({ id3, index3 }, { SILVERPINE, 1 })
 end)
 
+test("accepts never taken on a step across the sea do not hold the place there when the history goes on here", function()
+  -- Found by the simulator's joiners: one quest of two at an NPC was taken, the other passed by; the character then
+  -- crossed the sea and handed the quest in. The place stayed on the step of the two accepts, on the other continent.
+  local function route(client)
+    local sections = client.G.Noir.Routes.Get("horde-undead").sections
+    sections[2].steps = {
+      { id = "a365x.a370x", at = { zone = 85, x = 59.4, y = 52.4, r = 10 },
+        lines = { { kind = "accept", quest = 365, npc = 1518 }, { kind = "accept", quest = 370, npc = 1518 } } },
+    }
+    sections[3].steps = {
+      { id = "zep14", at = { zone = 85, x = 60.6, y = 58.9, r = 15 },
+        lines = { { kind = "transport", mode = "zeppelin", at = { zone = 85, x = 60.6, y = 58.9, r = 15 }, to = { zone = 14, x = 51, y = 13.9 } } } },
+      { id = "t365x.a435x", at = { zone = 14, x = 50, y = 20, r = 10 },
+        lines = { { kind = "turnin", quest = 365, npc = 1950 }, { kind = "accept", quest = 435, npc = 1950 } } },
+      { id = "a367x", at = { zone = 14, x = 50, y = 22, r = 10 }, lines = { { kind = "accept", quest = 367, npc = 1518 } } },
+    }
+  end
+  local done = { 363, 364, 376, 3901, 365 }
+  local _, Noir, P = join(5, done, {}, { zone = 14, x = 50, y = 20, afterLoad = route })
+  local id, index = P.Locate(Noir.Guide.Chain(DEATHKNELL))
+  eq({ id, index }, { SILVERPINE, 2 }, "on the step of the hand-in, on the character's continent: its accept is still to do")
+  eq({ place(P) }, { SILVERPINE, "t365x.a435x", 2 })
+  -- Standing on the continent of the two accepts, the character can walk to the one it left: the place stays on it.
+  local _, Noir2, P2 = join(5, done, {}, { zone = 85, x = 59, y = 52, afterLoad = route })
+  local id2, index2 = P2.Locate(Noir2.Guide.Chain(DEATHKNELL))
+  eq({ id2, index2 }, { TIRISFAL, 1 })
+  -- Without history on its own continent after the step (the quest is still in the log), nothing says the character
+  -- is past it: the place stays on the step.
+  local _, Noir3, P3 = join(5, { 363, 364, 376, 3901 }, { 365 }, { zone = 14, x = 50, y = 20, afterLoad = route })
+  local id3, index3 = P3.Locate(Noir3.Guide.Chain(DEATHKNELL))
+  eq({ id3, index3 }, { TIRISFAL, 1 })
+  -- A line of another kind still to do on that step (a hand-in of a quest in the log) holds the place as before.
+  local _, Noir4, P4 = join(5, { 363, 364, 376, 365 }, { 3901 }, { zone = 14, x = 50, y = 20, afterLoad = function(client)
+    route(client)
+    local step = client.G.Noir.Routes.Get("horde-undead").sections[2].steps[1]
+    step.lines[#step.lines + 1] = { kind = "turnin", quest = 3901, npc = 1518 }
+  end })
+  local id4, index4 = P4.Locate(Noir4.Guide.Chain(DEATHKNELL))
+  eq({ id4, index4 }, { TIRISFAL, 1 })
+end)
+
 test("a saved place behind the quest log moves forward at login with one chat line", function()
   local c = sample3({ class = "MAGE", level = 2, saved = savedAt(DEATHKNELL, "a363") })
   c:acceptQuest(364)

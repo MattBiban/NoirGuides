@@ -9,6 +9,9 @@
 //   - a step with a place (`at`) is walked to from where the last step left the player; walking inside one open zone
 //     gives the fights' XP (walkXp); then the step does its own work
 //   - fly ends at the flight master of `to`, transport at its `to`, hearth at its `to`
+//   - a grind step to a level the character already has is passed as it comes, as the engine passes it: no walk to
+//     its place, no time and no XP. Every route that reaches the cap ends with one (planner/plan.js), and a class
+//     ahead of the shared route meets the others' the same way
 const { zoneOf, toPoint } = require("../lib/geo");
 const { eligible, hasBit, CLASSES } = require("../lib/characters");
 const { PACE, gain, questXp, objectiveXp, objectiveSeconds, zoneLevels, walkXp, grindSeconds } = require("../lib/xp");
@@ -39,6 +42,7 @@ function validateRoute(db, route, ch, options = {}) {
     flights: new Set(), hearth: null, lastHearth: -Infinity, clock: 0, lastGrind: false };
   const speed = () => (state.level >= ESTIMATES.MOUNT_LEVEL ? ESTIMATES.MOUNT_SPEED : ESTIMATES.RUN_SPEED);
   const levels = [];
+  const xps = []; // the XP into the level at each step
   const clocks = [];
 
   if (route.format !== 2) errors.push(`the route is in format ${route.format === undefined ? 1 : route.format}; this validator reads format 2`);
@@ -67,6 +71,7 @@ function validateRoute(db, route, ch, options = {}) {
   route.steps.forEach((step, i) => {
     const err = (msg) => errors.push(`step ${i + 1}: ${msg}`);
     levels.push(state.level);
+    xps.push(state.xp);
     clocks.push(state.clock);
     const what = QUEST_ACTIONS.has(step.action) ? `${step.action} of quest ${step.quest}` : String(step.action);
 
@@ -118,11 +123,16 @@ function validateRoute(db, route, ch, options = {}) {
         err(`grind to level ${step.level}, which is not a whole level from 1 to ${MAX_LEVEL}`);
         return;
       }
-      arrive();
       if (wasGrind) err("two grind steps in a row: a grind of more than one level");
-      if (step.level > state.level + 1) err(`grind to level ${step.level} from level ${state.level}: more than one level`);
-      if (step.level > state.level) { state.clock += grindSeconds(state.level, state.xp); state.level = step.level; state.xp = 0; }
       state.lastGrind = true;
+      if (step.level <= state.level) {
+        // passed as it comes; its place is still checked
+        if (!step.at) err(`${what} has no place`); else point(step.at, what);
+        return;
+      }
+      arrive();
+      if (step.level > state.level + 1) err(`grind to level ${step.level} from level ${state.level}: more than one level`);
+      state.clock += grindSeconds(state.level, state.xp); state.level = step.level; state.xp = 0;
       return;
     }
     if (step.action === "getflight") {
@@ -250,7 +260,7 @@ function validateRoute(db, route, ch, options = {}) {
     errors.push(`the route ends with ${ids.length} quest${ids.length === 1 ? "" : "s"} in the log: ${ids.join(", ")}`);
   }
   if (state.level < MAX_LEVEL) warnings.push(`route ends at level ${state.level}`);
-  return { errors, warnings, endLevel: state.level, xp: state.xp, levels, clocks, seconds: state.clock };
+  return { errors, warnings, endLevel: state.level, xp: state.xp, levels, xps, clocks, seconds: state.clock };
 }
 
 module.exports = { validateRoute };

@@ -47,7 +47,11 @@
 --                                   counts 0, a tie, when it is on the continent the character stands on, a step
 --                                   since the best evidence is on another one, and no quest first met since then
 --                                   is in neither the log nor the history); the place is just after the highest score,
---                                   latest on ties (on that step while one of its quest lines is still to do). Steps and sections the character outlevels (above maxLevel while
+--                                   latest on ties (on that step while one of its quest lines is still to do). When that
+--                                   step is on another continent than the character and all that is still to do on it
+--                                   are accepts never taken, those accepts do not count against evidence on a later
+--                                   step of the character's own continent: the place moves on to it.
+--                                   Steps and sections the character outlevels (above maxLevel while
 --                                   "outlevel" is on) and steps under their minLevel are not counted as missing.
 --                                   Score 0 means no evidence. left: the quests before the place counted missing
 --   Progress.Complete() -> boolean  the last section of the route is done
@@ -1495,6 +1499,25 @@ local function locate(chain)
   local counted, flights, missing = {}, {}, {}
   local absent, absentAtBest = 0, 0
   local here, across = continentOf(State.zone), false
+  -- Accepts of the best step never taken, when that step is across the sea from the character (the others of a
+  -- bundle of which one was taken): siblings counts them, siblingCost what they took off the score. Evidence on a
+  -- later step of the character's own continent does not pay for them: see forgiven() below.
+  local bestObj, bestAcross, siblings, siblingCost = nil, false, 0, 0
+  -- Whether the quest lines still to do on the best step are all accepts (of quests never taken, then).
+  local acceptsOnly = nil
+  local function forgiven(pos_, there)
+    if not (bestAcross and pos_ > bestPos and there ~= nil and there == here and siblings > 0) then return false end
+    if acceptsOnly == nil then
+      acceptsOnly = true
+      for k = 1, #bestObj.lines do
+        local line = bestObj.lines[k]
+        if QUEST_LINE[line.kind] and line.kind ~= "accept" and applies(line) and Lines.Check(line, bestObj, {}) == "todo" then
+          acceptsOnly = false
+        end
+      end
+    end
+    return acceptsOnly
+  end
   local order = {}
   local pos = 0
   for c = 1, #(chain or {}) do
@@ -1523,13 +1546,16 @@ local function locate(chain)
                 evidence = 2
               else
                 absent = absent + 1
+                local sibling = bestAcross and pos == bestPos and line.kind == "accept"
+                if sibling then siblings = siblings + 1 end
                 if not exempt then
                   running_ = running_ - 1
                   missing[#missing + 1] = pos
+                  if sibling then siblingCost = siblingCost + 1 end
                 end
               end
-            elseif line.kind == "turnin" and line.quest and across and there == here and absent == absentAtBest
-              and State.IsDone(line.quest) then
+            elseif line.kind == "turnin" and line.quest and across and there == here
+              and absent - (forgiven(pos, there) and siblings or 0) == absentAtBest and State.IsDone(line.quest) then
               -- A hand-in the character has done (its quest counted at its first line) on the continent the
               -- character stands on, after steps across the sea: the character is past that crossing, and its
               -- moves and flight points (which the client cannot tell are known) are behind it. The place is here
@@ -1543,9 +1569,18 @@ local function locate(chain)
             end
             if evidence then
               running_ = running_ + evidence
+              -- The best step is across the sea and all that is left on it are accepts never taken, while the
+              -- character's history goes on here, on its own continent: those accepts do not hold the place over
+              -- there (the character would be sent back across the sea for a quest it passed by). An accept on the
+              -- character's own continent, which it can walk to, holds the place as before.
+              if running_ < best and running_ + siblingCost >= best and forgiven(pos, there) then
+                running_ = running_ + siblingCost
+              end
               if running_ >= best then
                 best, bestSection, bestStep, bestPos = running_, #order, i, pos
                 absentAtBest, across = absent, false
+                bestObj, bestAcross = step, here ~= nil and there ~= nil and there ~= here
+                siblings, siblingCost, acceptsOnly = 0, 0, nil
               end
             end
           end

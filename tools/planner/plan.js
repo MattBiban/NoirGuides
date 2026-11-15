@@ -4,8 +4,9 @@
 //   hub batching      at a hub everything is handed in and taken; the objectives are one loop; the hub is returned
 //                     to once, when all its quests are ready (planner/session.js orders the loop)
 //   cost-based        every way is costed in seconds by lib/travel.js travelPlan, and its legs become the steps
-//   pacing            XP and time come from lib/xp.js; a grind step bridges one level, never two in a row, at a
-//                     place where creatures of the level stand (planner/grindspots.js)
+//   pacing            XP and time come from lib/xp.js; a grind step is the last resort, written when no visit and no
+//                     errand is left for the level: it bridges one level, at a place where creatures of the level
+//                     stand (planner/grindspots.js)
 // The route's state changes in one place, emit(), from nothing but the step it is given: that is the rule the
 // validator replays on its own, so the two agree on position, level and clock at every step.
 const { zoneOf, toPoint, distance } = require("../lib/geo");
@@ -222,7 +223,8 @@ function planRoute(db, ch, options = {}) {
     const step = { action: t.kind, quest: t.id, at: place.at };
     if (place.npc !== undefined) step.npc = place.npc;
     else if (place.object !== undefined) step.object = place.object;
-    if (t.kind === "objective" && place.item !== undefined) step.item = place.item;
+    // an objective's item; on an accept, the item that starts the quest: its npc or object is then what drops it
+    if (t.kind !== "turnin" && place.item !== undefined) step.item = place.item;
     return step;
   };
   // Everything at the hub the player stands in: hand in what is ready, take what is offered, until nothing changes.
@@ -311,6 +313,19 @@ function planRoute(db, ch, options = {}) {
     return best && best.s;
   }
 
+  function grindStep() {
+    const level = st.level, announce = st.announce;
+    const spot = grindSpot();
+    st.announce = true;
+    const there = !!spot && go(spot.point);
+    st.announce = announce;
+    if (st.level > level) return; // the fights on the way there made the level
+    st.grinds++;
+    emit({ action: "grind", level: st.level + 1, at: there ? spot.at : { zone: st.pos.zone, x: Math.round(st.pos.x * 100) / 100, y: Math.round(st.pos.y * 100) / 100 } });
+    st.barren.clear();
+    st.chosen = false;
+  }
+
   // ---- the route ----------------------------------------------------------------------------------------------
   // starting position: the giver of the lowest-level, lowest-ID quest in the starting zone
   const first = (byZone.get(st.zone) || []).slice().sort((a, b) => a.q.minLevel - b.q.minLevel || a.q.id - b.q.id)[0];
@@ -345,19 +360,24 @@ function planRoute(db, ch, options = {}) {
     if (!pick.grind) {
       // Nothing where the route was going: until the next level, quests are taken even where it was not going.
       if (!st.relaxed) { st.relaxed = true; st.barren.clear(); st.chosen = false; continue; }
-      // Nothing the look-ahead finds worth a visit. Before a grind step is written, an errand (planner/supply.js): a
-      // visit that earns nothing itself but puts quests in the log or moves them on, when what it leads to is worth
-      // the way. From here to the next level a quest out to another zone and back is taken too (planner/policy.js).
+      // No zone the look-ahead finds anything in, small visits included (zonepick.js rule 4). Before a grind step is
+      // written, an errand (planner/supply.js): a visit that earns nothing itself but puts quests in the log or moves
+      // them on, when what it leads to gives more than grinding does in the same time. From here to the next level a
+      // quest out to another zone and back is taken too (planner/policy.js).
       st.errands = true;
       const supply = supplyZone(view);
       if (supply) {
         st.zone = supply; st.announce = true; st.chosen = true; st.urgent = false; st.skip.clear(); st.hopped.clear(); st.plan = null;
         continue;
       }
-      // Nothing anywhere at this level: one level of grinding when that opens something, or is the last level.
-      // Otherwise the route ends here, short of the cap, once the log is empty.
-      // (pick.wait: small visits are left for later, zonepick.js rule 4; the rest of this level is a grind step)
-      if (!pick.wait && (ground || (st.level + 1 < maxLevel && !bestZone(view, { level: st.level + 1 }).zone))) {
+      // Nothing anywhere at this level: the last resort, one level of grinding, when a later level opens something
+      // or this is the last level; the route goes on to the cap. Where the next quests are more than a level on,
+      // that is a grind step after a grind step, which the validator reports (planner/validate.js): such a route is
+      // not accepted, and says where the quests are missing. When no later level opens anything the route ends
+      // here, short of the cap, once the log is empty.
+      let opens = false;
+      for (let level = st.level + 1; level < maxLevel && !opens; level++) opens = !!bestZone(view, { level }).zone;
+      if (!opens && st.level + 1 < maxLevel) {
         st.finishing = true; st.barren.clear(); st.chosen = false;
         continue;
       }
@@ -365,16 +385,17 @@ function planRoute(db, ch, options = {}) {
     // The rest of the level is ground where creatures of the level stand. The way there is part of the route: its
     // legs are steps (a walk into the next zone too), the last walk is the grind step's own. Without such a place
     // (a world without creature levels) the level is ground where the player stands.
-    const level = st.level, announce = st.announce;
-    const spot = grindSpot();
-    st.announce = true;
-    const there = !!spot && go(spot.point);
-    st.announce = announce;
-    if (st.level > level) continue; // the fights on the way there made the level
-    st.grinds++;
-    emit({ action: "grind", level: st.level + 1, at: there ? spot.at : { zone: st.pos.zone, x: Math.round(st.pos.x * 100) / 100, y: Math.round(st.pos.y * 100) / 100 } });
-    st.barren.clear();
-    st.chosen = false;
+    grindStep();
+  }
+
+  // The last step: a player who reaches the end of the route under the cap (quests left out on the way) is told to
+  // grind the rest. On the plan the character is at the cap already and the step is passed as it comes. A route
+  // that grinds the end of its last level already has a grind step to the cap, and nothing after that step needs XP
+  // (what follows hands in what is left in the log): it gets no second one.
+  const tail = st.steps[st.steps.length - 1];
+  if (st.level >= maxLevel && st.pos && tail && !st.steps.some((s) => s.action === "grind" && s.level >= maxLevel)) {
+    const spot = grindSpots(db, maxLevel - 1).map((s) => ({ s, d: distance(st.pos, s.point) })).filter((e) => e.d < Infinity).sort((a, b) => a.d - b.d)[0];
+    st.steps.push({ action: "grind", level: maxLevel, at: spot ? spot.s.at : { zone: st.pos.zone, x: Math.round(st.pos.x * 100) / 100, y: Math.round(st.pos.y * 100) / 100 } });
   }
 
   return { id, format: 2, race: ch.race, faction: ch.faction, steps: st.steps,

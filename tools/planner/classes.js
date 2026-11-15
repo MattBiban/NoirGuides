@@ -21,6 +21,7 @@ const { eligible, CLASS_SORTS, SKYBORNE_CONTINENT } = require("../lib/characters
 const { instanced, instanceBound, startPoint, endPoint, objectivePoint, canAccept } = require("../lib/quests");
 const { ESTIMATES, travelPlan, walkYards, walkSeconds, toSteps } = require("../lib/travel");
 const { validateRoute } = require("./validate");
+const { passedGrind } = require("./measure");
 const { CHOICES: C, above } = require("./tuning");
 const { emptyGraph, plannerGraph, spot } = require("./context");
 
@@ -73,6 +74,11 @@ function candidates(db, ch, graph, maxLevel) {
 }
 
 // What the shared route does, slot by slot. Slot k is the gap before step k (slot steps.length is after the last).
+// A grind step to a level the route already has (the last step to the cap, planner/plan.js) is passed as it comes:
+// nobody walks to it or stands at its place, so the slot before it leads on to the step after it, and the slot after
+// it is the same moment and is not used (`open`): a class part there goes before the step instead, so the last step
+// stays the last. Without this a class quest handed in after the last step was led there from the place to grind at,
+// where no character on the plan ever is.
 function sharedFacts(db, route, ch, rawGraph) {
   const steps = route.steps, n = steps.length;
   const replay = validateRoute(db, route, ch, { graph: rawGraph });
@@ -84,9 +90,10 @@ function sharedFacts(db, route, ch, rawGraph) {
   const accepted = new Map(), turnedIn = new Map(), learned = new Map();
   const logBefore = [0];
   let pos = null, log = 0;
+  const passed = steps.map((s, k) => passedGrind(s, replay.levels[k]));
   steps.forEach((s, k) => {
-    next.push(s.action === "hearth" ? null : at(s.at));
-    if (s.at) pos = at(s.at);
+    next.push(s.action === "hearth" || passed[k] ? null : at(s.at));
+    if (s.at && !passed[k]) pos = at(s.at);
     if (s.action === "fly") { const node = rawGraph.nodes.get(s.to); if (node && node.masters[ch.faction]) pos = node.masters[ch.faction].point; }
     else if (s.action === "transport" || s.action === "hearth") pos = at(s.to);
     else if (s.action === "getflight" && !learned.has(s.node)) learned.set(s.node, k);
@@ -96,14 +103,16 @@ function sharedFacts(db, route, ch, rawGraph) {
     logBefore.push(log);
   });
   next.push(null);
+  for (let k = n - 1; k >= 0; k--) if (passed[k]) next[k] = next[k + 1];
   // the most quests the shared route holds at any moment of slot k: before step k, or after it
   const logPeak = logBefore.map((v, k) => Math.max(v, k < n ? logBefore[k + 1] : v));
-  return { n, levels, before, next, accepted, turnedIn, learned, logPeak };
+  const open = before.map((_, k) => !(k >= 1 && passed[k - 1]));
+  return { n, levels, before, next, accepted, turnedIn, learned, logPeak, open };
 }
 
 // One class's quests in the shared route: { inserts: Map slot -> steps, layered: [quest IDs], left: [{ quest, reason }] }.
 function layerClass(db, graph, facts, ch, maxLevel) {
-  const { n, levels, before, next, accepted, turnedIn, learned, logPeak } = facts;
+  const { n, levels, before, next, accepted, turnedIn, learned, logPeak, open } = facts;
   const parts = new Map();          // slot -> [{ point, step }], in the order they are done
   const held = new Map();           // quest -> { s, u }: the slots it is accepted and handed in
   const occupied = new Int32Array(n + 1); // class quests in the log during each slot
@@ -214,7 +223,7 @@ function layerClass(db, graph, facts, ch, maxLevel) {
     let reason = `the route never reaches level ${q.minLevel}`;
     for (let late = LAYER.LATE; ; late += LAYER.LATE) {
       const top = Math.max(q.level, q.minLevel) + late;
-      const inWindow = (k) => k >= 1 && levels[k] <= top;
+      const inWindow = (k) => k >= 1 && open[k] && levels[k] <= top;
       const offered = [];
       for (let k = 1; k <= n; k++) {
         if (!inWindow(k) || levels[k] < Math.max(q.minLevel, q.level - above(Math.floor(levels[k]), false))) continue; // never taken above the level (tuning.js)
