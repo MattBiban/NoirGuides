@@ -33,7 +33,9 @@ const BASELINE = path.join(__dirname, "planner", "baseline.json");
 // less to bundle and there are more, shorter sections)
 // (60 sections before the planner counted on 60% of the estimated XP, lib/xp.js YIELD: a route is 2,550 to 2,730
 // actions now where it was 2,060 to 2,270, and has 63 to 74 sections where it had 45 to 57)
-const MAX_BUNDLED_SHARE = 0.7, MIN_SECTIONS = 6, MAX_SECTIONS = 80;
+// (0.7 bundled before the same change: quests now come a few a level per zone, so more visits have one objective and
+// nothing to bundle it with; measured 68 to 71%)
+const MAX_BUNDLED_SHARE = 0.75, MIN_SECTIONS = 6, MAX_SECTIONS = 80;
 
 // The format 3 route of one race from its layered format 2 route and each class's replay of it (validations).
 function toFormat3(db, graph, inns, route, classes, validations) {
