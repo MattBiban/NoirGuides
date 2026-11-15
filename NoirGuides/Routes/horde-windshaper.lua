@@ -891,13 +891,13 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 92646, npc = 251968, skipIfMissing = true },
             { kind = "accept", quest = 93836, npc = 251968, ifDone = 92646, requires = { 92646 } },
           } },
-        { id = "o93836.t93836.a93090", at = { zone = 16593, x = 66.17, y = 76.51, r = 40 }, minLevel = 7, targets = { enemy = { 252476 }, friend = { 252476 } },
+        { id = "o93836.t93836.a93090", at = { zone = 16593, x = 66.17, y = 76.51, r = 40 }, minLevel = 8, targets = { enemy = { 252476 }, friend = { 252476 } },
           lines = {
             { kind = "objective", quest = 93836, index = 1, npc = 252476, skipIfMissing = true },
             { kind = "turnin", quest = 93836, npc = 252476, skipIfMissing = true },
             { kind = "accept", quest = 93090, npc = 252476, ifDone = 93836, requires = { 93836 } },
           } },
-        { id = "t93090.a95349", at = { zone = 16593, x = 59.15, y = 79.78, r = 10 }, minLevel = 7, targets = { friend = { 251968 } },
+        { id = "t93090.a95349", at = { zone = 16593, x = 59.15, y = 79.78, r = 10 }, minLevel = 8, targets = { friend = { 251968 } },
           lines = {
             { kind = "turnin", quest = 93090, npc = 251968, skipIfMissing = true },
             { kind = "accept", quest = 95349, npc = 251968, ifDone = 93090, requires = { 93090 } },
@@ -947,7 +947,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "train", skill = 202, rank = 2, npc = 10993 },
           } },
-        { id = "t95349.a95350", at = { zone = 215, x = 33.39, y = 22.51, r = 10 }, minLevel = 7, targets = { friend = { 259119 } },
+        { id = "t95349.a95350", at = { zone = 215, x = 33.39, y = 22.51, r = 10 }, minLevel = 8, targets = { friend = { 259119 } },
           lines = {
             { kind = "turnin", quest = 95349, npc = 259119, skipIfMissing = true },
             { kind = "accept", quest = 95350, npc = 259119 },
@@ -1090,7 +1090,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "train", skill = 393, rank = 2, npc = 7088 },
           } },
-        { id = "a97326", at = { zone = 1637, x = 36.82, y = 29.06, r = 10 }, minLevel = 5, maxLevel = 23, targets = { friend = { 268684 } },
+        { id = "a97326", at = { zone = 1637, x = 36.82, y = 29.06, r = 10 }, minLevel = 10, maxLevel = 23, targets = { friend = { 268684 } },
           lines = {
             { kind = "accept", quest = 97326, npc = 268684 },
           } },
@@ -1194,7 +1194,7 @@ Noir.Route("horde-windshaper", {
             { kind = "accept", quest = 895, object = 3972 },
             { kind = "accept", quest = 894, at = { zone = 17, x = 62.98, y = 37.22, r = 10 }, npc = 3442 },
           } },
-        { id = "a97253", at = { zone = 17, x = 63.07, y = 36.32, r = 10 }, minLevel = 9, maxLevel = 23, targets = { friend = { 7161 } },
+        { id = "a97253", at = { zone = 17, x = 63.07, y = 36.32, r = 10 }, minLevel = 10, maxLevel = 23, targets = { friend = { 7161 } },
           lines = {
             { kind = "accept", quest = 97253, npc = 7161 },
           } },
@@ -1290,7 +1290,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 869, index = 1, item = 5062 },
           } },
-        { id = "t844.a845.t869.a3281", at = { zone = 17, x = 52.23, y = 31.01, r = 10 }, minLevel = 10, targets = { friend = { 3338, 3464 } },
+        { id = "t844.a845.t869.a3281", at = { zone = 17, x = 52.23, y = 31.01, r = 10 }, minLevel = 13, targets = { friend = { 3338, 3464 } },
           lines = {
             { kind = "turnin", quest = 844, npc = 3338 },
             { kind = "accept", quest = 845, npc = 3338, requires = { 844 } },
@@ -1360,7 +1360,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 903, at = { zone = 17, x = 52.23, y = 31.01, r = 10 }, npc = 3338 },
             { kind = "accept", quest = 881, at = { zone = 17, x = 52.23, y = 31.01, r = 10 }, npc = 3338, requires = { 903 } },
           } },
-        { id = "t870.a877", at = { zone = 17, x = 52.26, y = 31.93, r = 10 }, minLevel = 10, items = { 5068 }, targets = { friend = { 3448 } },
+        { id = "t870.a877", at = { zone = 17, x = 52.26, y = 31.93, r = 10 }, minLevel = 11, items = { 5068 }, targets = { friend = { 3448 } },
           lines = {
             { kind = "turnin", quest = 870, npc = 3448 },
             { kind = "accept", quest = 877, npc = 3448, requires = { 870 } },
@@ -1449,13 +1449,13 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "hearth", to = { zone = 17, x = 51.99, y = 29.89 } },
           } },
-        { id = "t3281.t881.a905", at = { zone = 17, x = 51.93, y = 30.32, r = 10 }, minLevel = 10, items = { 10327, 5165 }, targets = { friend = { 3464, 3338 } },
+        { id = "t3281.t881.a905", at = { zone = 17, x = 51.93, y = 30.32, r = 10 }, minLevel = 12, items = { 10327, 5165 }, targets = { friend = { 3464, 3338 } },
           lines = {
             { kind = "turnin", quest = 3281, npc = 3464 },
             { kind = "turnin", quest = 881, at = { zone = 17, x = 52.23, y = 31.01, r = 10 }, npc = 3338 },
             { kind = "accept", quest = 905, at = { zone = 17, x = 52.23, y = 31.01, r = 10 }, npc = 3338, requires = { 881 } },
           } },
-        { id = "t877.a880.a899", at = { zone = 17, x = 52.26, y = 31.93, r = 10 }, minLevel = 14, items = { 5068 }, targets = { friend = { 3448, 3432 } },
+        { id = "t877.a880.a899", at = { zone = 17, x = 52.26, y = 31.93, r = 10 }, minLevel = 15, items = { 5068 }, targets = { friend = { 3448, 3432 } },
           lines = {
             { kind = "turnin", quest = 877, npc = 3448 },
             { kind = "accept", quest = 880, npc = 3448, requires = { 877 } },
@@ -1538,7 +1538,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 901, index = 1, item = 5089, skipIfMissing = true },
           } },
-        { id = "t901.a902", at = { zone = 17, x = 52.4, y = 11.65, r = 10 }, minLevel = 10, items = { 5054 },
+        { id = "t901.a902", at = { zone = 17, x = 52.4, y = 11.65, r = 10 }, minLevel = 11, items = { 5054 },
           lines = {
             { kind = "turnin", quest = 901, object = 4141, skipIfMissing = true },
             { kind = "accept", quest = 902, object = 4141, ifDone = 901, requires = { 901 } },
@@ -1580,7 +1580,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 4921, index = 1, npc = 10668 },
             { kind = "objective", quest = 95774, index = 1, item = 277277, at = { zone = 17, x = 49.81, y = 51.4, r = 40 } },
           } },
-        { id = "f77.t3261.a882", at = { zone = 17, x = 44.45, y = 59.15, r = 10 }, minLevel = 10, items = { 10338 }, targets = { friend = { 3387 } },
+        { id = "f77.t3261.a882", at = { zone = 17, x = 44.45, y = 59.15, r = 10 }, minLevel = 14, items = { 10338 }, targets = { friend = { 3387 } },
           lines = {
             { kind = "getflight", node = 77, npc = 10378 },
             { kind = "turnin", quest = 3261, at = { zone = 17, x = 44.86, y = 59.14, r = 10 }, npc = 3387 },
@@ -1620,7 +1620,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 2381, npc = 7161, skipIfMissing = true },
           } },
-        { id = "t819.a821.a891", at = { zone = 17, x = 62.26, y = 38.39, r = 10 }, minLevel = 13, items = { 4926 }, targets = { friend = { 3292, 3339 } },
+        { id = "t819.a821.a891", at = { zone = 17, x = 62.26, y = 38.39, r = 10 }, minLevel = 15, items = { 4926 }, targets = { friend = { 3292, 3339 } },
           lines = {
             { kind = "turnin", quest = 819, npc = 3292, skipIfMissing = true },
             { kind = "accept", quest = 821, npc = 3292, ifDone = 819, requires = { 819 } },
@@ -1632,7 +1632,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 896, npc = 3453 },
             { kind = "accept", quest = 892, npc = 3453, ifDone = 890, requires = { 890 } },
           } },
-        { id = "t892.a888", at = { zone = 17, x = 62.68, y = 36.23, r = 10 }, minLevel = 9, items = { 5080 }, targets = { friend = { 3391 } },
+        { id = "t892.a888", at = { zone = 17, x = 62.68, y = 36.23, r = 10 }, minLevel = 11, items = { 5080 }, targets = { friend = { 3391 } },
           lines = {
             { kind = "turnin", quest = 892, npc = 3391, skipIfMissing = true },
             { kind = "accept", quest = 888, npc = 3391, ifDone = 892, requires = { 892 } },
@@ -1646,7 +1646,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 4921, npc = 3432 },
             { kind = "turnin", quest = 95774, npc = 3432 },
           } },
-        { id = "a97003", at = { zone = 17, x = 52.65, y = 29.06, r = 10 }, minLevel = 15, maxLevel = 29, targets = { friend = { 267310 } },
+        { id = "a97003", at = { zone = 17, x = 52.65, y = 29.06, r = 10 }, minLevel = 16, maxLevel = 29, targets = { friend = { 267310 } },
           lines = {
             { kind = "accept", quest = 97003, npc = 267310 },
           } },
@@ -1654,11 +1654,11 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 25, to = 77 },
           } },
-        { id = "a878", at = { zone = 17, x = 44.55, y = 59.26, r = 10 }, minLevel = 14, maxLevel = 29, targets = { friend = { 3430 } },
+        { id = "a878", at = { zone = 17, x = 44.55, y = 59.26, r = 10 }, minLevel = 16, maxLevel = 29, targets = { friend = { 3430 } },
           lines = {
             { kind = "accept", quest = 878, npc = 3430 },
           } },
-        { id = "a79007", at = { zone = 17, x = 46.36, y = 73.9, r = 10 }, minLevel = 14, maxLevel = 30,
+        { id = "a79007", at = { zone = 17, x = 46.36, y = 73.9, r = 10 }, minLevel = 17, maxLevel = 30,
           lines = {
             { kind = "accept", quest = 79007, object = 415106 },
           } },
@@ -1716,7 +1716,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 25, to = 77 },
           } },
-        { id = "t878.a5052", at = { zone = 17, x = 44.55, y = 59.26, r = 10 }, minLevel = 14, targets = { friend = { 3430 } },
+        { id = "t878.a5052", at = { zone = 17, x = 44.55, y = 59.26, r = 10 }, minLevel = 16, targets = { friend = { 3430 } },
           lines = {
             { kind = "turnin", quest = 878, npc = 3430, skipIfMissing = true },
             { kind = "accept", quest = 5052, npc = 3430, ifDone = 878, requires = { 878 } },
@@ -1725,7 +1725,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "sethearth", npc = 7714 },
           } },
-        { id = "a883", at = { zone = 17, x = 47.19, y = 51.63, r = 40 }, minLevel = 10, maxLevel = 30, items = { 5099 }, targets = { enemy = { 3474 } },
+        { id = "a883", at = { zone = 17, x = 47.19, y = 51.63, r = 40 }, minLevel = 17, maxLevel = 30, items = { 5099 }, targets = { enemy = { 3474 } },
           lines = {
             { kind = "accept", quest = 883, item = 5099, npc = 3474 },
           } },
@@ -1796,7 +1796,7 @@ Noir.Route("horde-windshaper", {
             { kind = "accept", quest = 907, at = { zone = 17, x = 44.86, y = 59.14, r = 10 }, npc = 3387, ifDone = 882, requires = { 882 } },
             { kind = "accept", quest = 6382, at = { zone = 17, x = 44.86, y = 59.14, r = 10 }, npc = 3387, ifDone = 882, requires = { 882 } },
           } },
-        { id = "a884", at = { zone = 17, x = 47.05, y = 61.4, r = 40 }, minLevel = 10, maxLevel = 32, items = { 5102 }, targets = { enemy = { 3473 } },
+        { id = "a884", at = { zone = 17, x = 47.05, y = 61.4, r = 40 }, minLevel = 19, maxLevel = 32, items = { 5102 }, targets = { enemy = { 3473 } },
           lines = {
             { kind = "accept", quest = 884, item = 5102, npc = 3473 },
           } },
@@ -1804,11 +1804,11 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 907, index = 1, item = 5143, skipIfMissing = true },
           } },
-        { id = "a897", at = { zone = 17, x = 42, y = 70, r = 40 }, minLevel = 10, maxLevel = 32, items = { 5138 }, targets = { enemy = { 3253 } },
+        { id = "a897", at = { zone = 17, x = 42, y = 70, r = 40 }, minLevel = 19, maxLevel = 32, items = { 5138 }, targets = { enemy = { 3253 } },
           lines = {
             { kind = "accept", quest = 897, item = 5138, npc = 3253 },
           } },
-        { id = "a843", at = { zone = 17, x = 45.89, y = 77, r = 10 }, minLevel = 17, maxLevel = 31, targets = { friend = { 3341 } },
+        { id = "a843", at = { zone = 17, x = 45.89, y = 77, r = 10 }, minLevel = 18, maxLevel = 31, targets = { friend = { 3341 } },
           lines = {
             { kind = "accept", quest = 843, npc = 3341 },
           } },
@@ -1827,7 +1827,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "hearth", to = { zone = 17, x = 45.58, y = 59.04 } },
           } },
-        { id = "t884.t897.t907.a913.t97250", at = { zone = 17, x = 44.86, y = 59.14, r = 10 }, minLevel = 10, items = { 5102, 5138 }, targets = { friend = { 3387, 5911 } },
+        { id = "t884.t897.t907.a913.t97250", at = { zone = 17, x = 44.86, y = 59.14, r = 10 }, minLevel = 15, items = { 5102, 5138 }, targets = { friend = { 3387, 5911 } },
           lines = {
             { kind = "turnin", quest = 884, npc = 3387, skipIfMissing = true },
             { kind = "turnin", quest = 897, npc = 3387, skipIfMissing = true },
@@ -1847,7 +1847,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 843, npc = 3341, skipIfMissing = true },
           } },
-        { id = "a898", at = { zone = 17, x = 61.96, y = 54.96, r = 10 }, minLevel = 13, maxLevel = 28, targets = { friend = { 3465 } },
+        { id = "a898", at = { zone = 17, x = 61.96, y = 54.96, r = 10 }, minLevel = 15, maxLevel = 28, targets = { friend = { 3465 } },
           lines = {
             { kind = "accept", quest = 898, npc = 3465 },
           } },
@@ -1860,11 +1860,11 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 80, to = 77 },
           } },
-        { id = "a3513", at = { zone = 17, x = 46, y = 70, r = 40 }, minLevel = 15, maxLevel = 33, items = { 10621 }, targets = { enemy = { 5797 } },
+        { id = "a3513", at = { zone = 17, x = 46, y = 70, r = 40 }, minLevel = 20, maxLevel = 33, items = { 10621 }, targets = { enemy = { 5797 } },
           lines = {
             { kind = "accept", quest = 3513, item = 10621, npc = 5797 },
           } },
-        { id = "a885", at = { zone = 17, x = 45.05, y = 78.63, r = 40 }, minLevel = 10, maxLevel = 33, items = { 5103 }, targets = { enemy = { 3472 } },
+        { id = "a885", at = { zone = 17, x = 45.05, y = 78.63, r = 40 }, minLevel = 20, maxLevel = 33, items = { 5103 }, targets = { enemy = { 3472 } },
           lines = {
             { kind = "accept", quest = 885, item = 5103, npc = 3472 },
           } },
@@ -1872,7 +1872,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 885, npc = 3387, skipIfMissing = true },
           } },
-        { id = "a893", at = { zone = 17, x = 45.1, y = 57.68, r = 10 }, minLevel = 17, maxLevel = 32, targets = { friend = { 3433 } },
+        { id = "a893", at = { zone = 17, x = 45.1, y = 57.68, r = 10 }, minLevel = 19, maxLevel = 32, targets = { friend = { 3433 } },
           lines = {
             { kind = "accept", quest = 893, npc = 3433 },
           } },
@@ -1959,13 +1959,13 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 77, to = 25 },
           } },
-        { id = "t850.t855.a851", at = { zone = 17, x = 45.34, y = 28.41, r = 10 }, minLevel = 11, targets = { friend = { 3389 } },
+        { id = "t850.t855.a851", at = { zone = 17, x = 45.34, y = 28.41, r = 10 }, minLevel = 13, targets = { friend = { 3389 } },
           lines = {
             { kind = "turnin", quest = 850, npc = 3389, skipIfMissing = true },
             { kind = "turnin", quest = 855, npc = 3389, skipIfMissing = true },
             { kind = "accept", quest = 851, npc = 3389, ifDone = 850, requires = { 850 } },
           } },
-        { id = "a1062.t1061.a6548", at = { zone = 17, x = 35.26, y = 27.88, r = 10 }, minLevel = 13, targets = { friend = { 4049, 11857 } },
+        { id = "a1062.t1061.a6548", at = { zone = 17, x = 35.26, y = 27.88, r = 10 }, minLevel = 14, targets = { friend = { 4049, 11857 } },
           lines = {
             { kind = "accept", quest = 1062, npc = 4049 },
             { kind = "turnin", quest = 1061, npc = 4049, skipIfMissing = true },
@@ -2026,7 +2026,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "hearth", to = { zone = 17, x = 45.58, y = 59.04 } },
           } },
-        { id = "a879", at = { zone = 17, x = 44.55, y = 59.26, r = 10 }, minLevel = 17, maxLevel = 33, targets = { friend = { 3430 } },
+        { id = "a879", at = { zone = 17, x = 44.55, y = 59.26, r = 10 }, minLevel = 20, maxLevel = 33, targets = { friend = { 3430 } },
           lines = {
             { kind = "accept", quest = 879, npc = 3430, ifDone = 5052, requires = { 5052 } },
           } },
@@ -2036,7 +2036,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 879, index = 2, item = 5073, skipIfMissing = true },
             { kind = "objective", quest = 879, index = 3, item = 5072, skipIfMissing = true },
           } },
-        { id = "t879.a906", at = { zone = 17, x = 44.55, y = 59.26, r = 10 }, minLevel = 17, items = { 5072 }, targets = { friend = { 3430 } },
+        { id = "t879.a906", at = { zone = 17, x = 44.55, y = 59.26, r = 10 }, minLevel = 20, items = { 5072 }, targets = { friend = { 3430 } },
           lines = {
             { kind = "turnin", quest = 879, npc = 3430, skipIfMissing = true },
             { kind = "accept", quest = 906, npc = 3430, ifDone = 879, requires = { 879 } },
@@ -2049,7 +2049,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 906, npc = 3429, skipIfMissing = true },
           } },
-        { id = "t851.a852", at = { zone = 17, x = 45.34, y = 28.41, r = 10 }, minLevel = 11, targets = { friend = { 3389 } },
+        { id = "t851.a852", at = { zone = 17, x = 45.34, y = 28.41, r = 10 }, minLevel = 14, targets = { friend = { 3389 } },
           lines = {
             { kind = "turnin", quest = 851, npc = 3389, skipIfMissing = true },
             { kind = "accept", quest = 852, npc = 3389, ifDone = 851, requires = { 851 } },
@@ -2062,7 +2062,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 852, npc = 3389, skipIfMissing = true },
           } },
-        { id = "t3922.a3923", at = { zone = 17, x = 49.05, y = 11.17, r = 10 }, minLevel = 10, items = { 11146 }, targets = { friend = { 9316 } },
+        { id = "t3922.a3923", at = { zone = 17, x = 49.05, y = 11.17, r = 10 }, minLevel = 13, items = { 11146 }, targets = { friend = { 9316 } },
           lines = {
             { kind = "turnin", quest = 3922, npc = 9316, skipIfMissing = true },
             { kind = "accept", quest = 3923, npc = 9316, ifDone = 3922, requires = { 3922 } },
@@ -2110,11 +2110,11 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "accept", quest = 6542, npc = 11821 },
           } },
-        { id = "a6461", at = { zone = 406, x = 71.25, y = 95.02, r = 10 }, minLevel = 13, maxLevel = 27, targets = { friend = { 12816 } },
+        { id = "a6461", at = { zone = 406, x = 71.25, y = 95.02, r = 10 }, minLevel = 14, maxLevel = 27, targets = { friend = { 12816 } },
           lines = {
             { kind = "accept", quest = 6461, npc = 12816 },
           } },
-        { id = "a6523", at = { zone = 406, x = 73.48, y = 85.59, r = 10 }, minLevel = 12, maxLevel = 26, targets = { friend = { 11856 } },
+        { id = "a6523", at = { zone = 406, x = 73.48, y = 85.59, r = 10 }, minLevel = 13, maxLevel = 26, targets = { friend = { 11856 } },
           lines = {
             { kind = "accept", quest = 6523, npc = 11856 },
           } },
@@ -2127,11 +2127,11 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 1483, npc = 4201, skipIfMissing = true },
             { kind = "accept", quest = 1093, npc = 4201 },
           } },
-        { id = "a6284", at = { zone = 406, x = 59.06, y = 75.71, r = 10 }, minLevel = 15, maxLevel = 29,
+        { id = "a6284", at = { zone = 406, x = 59.06, y = 75.71, r = 10 }, minLevel = 16, maxLevel = 29,
           lines = {
             { kind = "accept", quest = 6284, object = 177904 },
           } },
-        { id = "a6393.a6421", at = { zone = 406, x = 47.36, y = 64.25, r = 10 }, minLevel = 19, maxLevel = 26, targets = { friend = { 11862, 11861 } },
+        { id = "a6393.a6421", at = { zone = 406, x = 47.36, y = 64.25, r = 10 }, minLevel = 20, maxLevel = 26, targets = { friend = { 11862, 11861 } },
           lines = {
             { kind = "accept", quest = 6393, npc = 11862 },
             { kind = "accept", quest = 6421, npc = 11861 },
@@ -2145,7 +2145,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "sethearth", npc = 7731 },
           } },
-        { id = "a6301", at = { zone = 406, x = 47.46, y = 58.38, r = 10 }, minLevel = 17, maxLevel = 31, targets = { friend = { 11864 } },
+        { id = "a6301", at = { zone = 406, x = 47.46, y = 58.38, r = 10 }, minLevel = 18, maxLevel = 31, targets = { friend = { 11864 } },
           lines = {
             { kind = "accept", quest = 6301, npc = 11864 },
           } },
@@ -2200,20 +2200,20 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "hearth", to = { zone = 406, x = 47.47, y = 62.13 } },
           } },
-        { id = "t6393.t6421.a6481", at = { zone = 406, x = 47.36, y = 64.25, r = 10 }, minLevel = 14, items = { 16603 }, targets = { friend = { 11862, 11861 } },
+        { id = "t6393.t6421.a6481", at = { zone = 406, x = 47.36, y = 64.25, r = 10 }, minLevel = 15, items = { 16603 }, targets = { friend = { 11862, 11861 } },
           lines = {
             { kind = "turnin", quest = 6393, npc = 11862, skipIfMissing = true },
             { kind = "turnin", quest = 6421, npc = 11861, skipIfMissing = true },
             { kind = "accept", quest = 6481, npc = 11861, ifDone = 6421, requires = { 6421 } },
           } },
-        { id = "t6284.a6282.a86576.t1087", at = { zone = 406, x = 47.2, y = 61.16, r = 10 }, minLevel = 18, targets = { friend = { 11860, 4198 } },
+        { id = "t6284.a6282.a86576.t1087", at = { zone = 406, x = 47.2, y = 61.16, r = 10 }, minLevel = 21, targets = { friend = { 11860, 4198 } },
           lines = {
             { kind = "turnin", quest = 6284, npc = 11860, skipIfMissing = true },
             { kind = "accept", quest = 6282, npc = 11860 },
             { kind = "accept", quest = 86576, npc = 11860 },
             { kind = "turnin", quest = 1087, at = { zone = 406, x = 45.94, y = 60.42, r = 10 }, npc = 4198 },
           } },
-        { id = "t6301.a6381", at = { zone = 406, x = 47.46, y = 58.38, r = 10 }, minLevel = 17, items = { 16208 }, targets = { friend = { 11864 } },
+        { id = "t6301.a6381", at = { zone = 406, x = 47.46, y = 58.38, r = 10 }, minLevel = 20, items = { 16208 }, targets = { friend = { 11864 } },
           lines = {
             { kind = "turnin", quest = 6301, npc = 11864, skipIfMissing = true },
             { kind = "accept", quest = 6381, npc = 11864, ifDone = 6301, requires = { 6301 } },
@@ -2238,7 +2238,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 6523, index = 1, skipIfMissing = true },
           } },
-        { id = "a1058", at = { zone = 406, x = 74.54, y = 97.94, r = 10 }, minLevel = 20, maxLevel = 34, targets = { friend = { 3995 } },
+        { id = "a1058", at = { zone = 406, x = 74.54, y = 97.94, r = 10 }, minLevel = 21, maxLevel = 34, targets = { friend = { 3995 } },
           lines = {
             { kind = "accept", quest = 1058, npc = 3995 },
           } },
@@ -2380,7 +2380,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 80, to = 77 },
           } },
-        { id = "a874", at = { zone = 17, x = 44.86, y = 59.14, r = 10 }, minLevel = 9, maxLevel = 35, targets = { friend = { 3387 } },
+        { id = "a874", at = { zone = 17, x = 44.86, y = 59.14, r = 10 }, minLevel = 22, maxLevel = 35, targets = { friend = { 3387 } },
           lines = {
             { kind = "accept", quest = 874, npc = 3387, ifDone = 913, requires = { 913 } },
           } },
@@ -2393,7 +2393,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 1824, index = 1, item = 7119 },
           } },
-        { id = "a846", at = { zone = 17, x = 45.89, y = 77, r = 10 }, minLevel = 17, maxLevel = 34, targets = { friend = { 3341 } },
+        { id = "a846", at = { zone = 17, x = 45.89, y = 77, r = 10 }, minLevel = 21, maxLevel = 34, targets = { friend = { 3341 } },
           lines = {
             { kind = "accept", quest = 846, npc = 3341, ifDone = 843, requires = { 843 } },
           } },
@@ -2403,7 +2403,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 846, index = 2, item = 5018, skipIfMissing = true },
             { kind = "objective", quest = 846, index = 3, item = 5019, skipIfMissing = true },
           } },
-        { id = "t846.a849", at = { zone = 17, x = 45.89, y = 77, r = 10 }, minLevel = 17, items = { 5021 }, targets = { friend = { 3341 } },
+        { id = "t846.a849", at = { zone = 17, x = 45.89, y = 77, r = 10 }, minLevel = 21, items = { 5021 }, targets = { friend = { 3341 } },
           lines = {
             { kind = "turnin", quest = 846, npc = 3341, skipIfMissing = true },
             { kind = "accept", quest = 849, npc = 3341, ifDone = 846, requires = { 846 } },
@@ -2434,7 +2434,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 1528, npc = 5901, skipIfMissing = true },
             { kind = "accept", quest = 1530, npc = 5901 },
           } },
-        { id = "t874.a873", at = { zone = 17, x = 65.84, y = 43.86, r = 10 }, minLevel = 10, targets = { friend = { 3388 } },
+        { id = "t874.a873", at = { zone = 17, x = 65.84, y = 43.86, r = 10 }, minLevel = 22, targets = { friend = { 3388 } },
           lines = {
             { kind = "turnin", quest = 874, npc = 3388, skipIfMissing = true },
             { kind = "accept", quest = 873, npc = 3388, ifDone = 874, requires = { 874 } },
@@ -2506,7 +2506,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 6441, index = 1, item = 5481 },
           } },
-        { id = "a24", at = { zone = 331, x = 57.5, y = 56.05, r = 40 }, minLevel = 20, maxLevel = 35, items = { 16304 }, targets = { enemy = { 12677 } },
+        { id = "a24", at = { zone = 331, x = 57.5, y = 56.05, r = 40 }, minLevel = 22, maxLevel = 35, items = { 16304 }, targets = { enemy = { 12677 } },
           lines = {
             { kind = "accept", quest = 24, item = 16304, npc = 12677, requires = { 6383 } },
           } },
@@ -2606,7 +2606,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 1918, at = { zone = 331, x = 73.67, y = 60, r = 10 }, npc = 12737, skipIfMissing = true },
             { kind = "accept", quest = 824, at = { zone = 331, x = 73.67, y = 60, r = 10 }, npc = 12737, ifDone = 1918, requires = { 1918 } },
           } },
-        { id = "a2", at = { zone = 331, x = 74.98, y = 70.06, r = 40 }, minLevel = 20, maxLevel = 38, items = { 16305 }, targets = { enemy = { 12676 } },
+        { id = "a2", at = { zone = 331, x = 74.98, y = 70.06, r = 40 }, minLevel = 25, maxLevel = 38, items = { 16305 }, targets = { enemy = { 12676 } },
           lines = {
             { kind = "accept", quest = 2, item = 16305, npc = 12676, requires = { 6383 } },
           } },
@@ -2614,7 +2614,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 2, npc = 12696, skipIfMissing = true },
           } },
-        { id = "a247", at = { zone = 331, x = 73.78, y = 61.46, r = 10 }, minLevel = 20, skip = { { kind = "notturnedin", quest = 23 }, { kind = "notturnedin", quest = 2 } }, items = { 16305 }, targets = { friend = { 12696 } },
+        { id = "a247", at = { zone = 331, x = 73.78, y = 61.46, r = 10 }, minLevel = 25, skip = { { kind = "notturnedin", quest = 23 }, { kind = "notturnedin", quest = 2 } }, items = { 16305 }, targets = { friend = { 12696 } },
           lines = {
             { kind = "accept", quest = 247, npc = 12696, ifDone = 24, requires = { 2, 23, 24 } },
           } },
@@ -2647,7 +2647,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "train", level = 24, class = "ROGUE", npc = 3401 },
           } },
-        { id = "t2478.a2479", at = { zone = 1637, x = 43.05, y = 53.74, r = 10 }, when = { class = "ROGUE" }, minLevel = 20, items = { 8066, 8087 }, targets = { friend = { 3401 } },
+        { id = "t2478.a2479", at = { zone = 1637, x = 43.05, y = 53.74, r = 10 }, when = { class = "ROGUE" }, minLevel = 21, items = { 8066, 8087 }, targets = { friend = { 3401 } },
           lines = {
             { kind = "turnin", quest = 2478, npc = 3401, skipIfMissing = true },
             { kind = "accept", quest = 2479, npc = 3401, ifDone = 2478, requires = { 2478 } },
@@ -2709,7 +2709,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 267, x = 63.58, y = 53.11, r = 20 } },
           } },
-        { id = "a98095.t98095", at = { zone = 267, x = 63.58, y = 53.11, r = 10 }, minLevel = 19, items = { 279395 }, targets = { friend = { 270438 } },
+        { id = "a98095.t98095", at = { zone = 267, x = 63.58, y = 53.11, r = 10 }, minLevel = 20, items = { 279395 }, targets = { friend = { 270438 } },
           lines = {
             { kind = "accept", quest = 98095, npc = 270438 },
             { kind = "turnin", quest = 98095, npc = 270438 },
@@ -2967,7 +2967,7 @@ Noir.Route("horde-windshaper", {
       id = "windshaper-27-29-thousand-needles", name = "27-29 Thousand Needles", names = { ROGUE = "28-29 Thousand Needles", SHAMAN = "28-29 Thousand Needles" }, group = "Horde", subgroup = "20-30", minLevel = 27, maxLevel = 32, zone = 400,
       next = { { section = "windshaper-29-29-mulgore" } },
       steps = {
-        { id = "t4865.a5062.a5151.t4881.a4966", at = { zone = 400, x = 21.54, y = 32.35, r = 10 }, minLevel = 24, items = { 12942 }, targets = { friend = { 10428, 10941, 10638 } },
+        { id = "t4865.a5062.a5151.t4881.a4966", at = { zone = 400, x = 21.54, y = 32.35, r = 10 }, minLevel = 25, items = { 12942 }, targets = { friend = { 10428, 10941, 10638 } },
           lines = {
             { kind = "turnin", quest = 4865, npc = 10428, skipIfMissing = true },
             { kind = "accept", quest = 5062, npc = 10428, ifDone = 4865, requires = { 4865 } },
@@ -3229,17 +3229,17 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 215, x = 33.41, y = 22.58, r = 20 } },
           } },
-        { id = "a96259.a96261", at = { zone = 215, x = 33.41, y = 22.58, r = 10 }, minLevel = 23, maxLevel = 38, targets = { friend = { 259118 } },
+        { id = "a96259.a96261", at = { zone = 215, x = 33.41, y = 22.58, r = 10 }, minLevel = 26, maxLevel = 38, targets = { friend = { 259118 } },
           lines = {
             { kind = "accept", quest = 96259, npc = 259118 },
             { kind = "accept", quest = 96261, npc = 259118 },
           } },
-        { id = "a96241.a96260", at = { zone = 215, x = 32.5, y = 20.66, r = 10 }, minLevel = 23, maxLevel = 38, items = { 273015 }, targets = { friend = { 264074, 264072 } },
+        { id = "a96241.a96260", at = { zone = 215, x = 32.5, y = 20.66, r = 10 }, minLevel = 25, maxLevel = 38, items = { 273015 }, targets = { friend = { 264074, 264072 } },
           lines = {
             { kind = "accept", quest = 96241, npc = 264074 },
             { kind = "accept", quest = 96260, npc = 264072 },
           } },
-        { id = "a96294.o96261", at = { zone = 215, x = 33.23, y = 8.78, r = 40 }, minLevel = 23, items = { 273658, 273659 }, targets = { enemy = { 264082 } },
+        { id = "a96294.o96261", at = { zone = 215, x = 33.23, y = 8.78, r = 40 }, minLevel = 25, items = { 273658, 273659 }, targets = { enemy = { 264082 } },
           lines = {
             { kind = "accept", quest = 96294, item = 273658, npc = 264082 },
             { kind = "objective", quest = 96261, index = 1, npc = 264082, skipIfMissing = true },
@@ -3316,7 +3316,7 @@ Noir.Route("horde-windshaper", {
             { kind = "getflight", node = 11, npc = 4551 },
             { kind = "fly", from = 11, to = 13 },
           } },
-        { id = "a97287.t546.t528.a529.t547.b@267", at = { zone = 267, x = 61.6, y = 20.85, r = 10 }, minLevel = 24, items = { 251961 }, targets = { friend = { 2410, 2418, 2215, 2419 } },
+        { id = "a97287.t546.t528.a529.t547.b@267", at = { zone = 267, x = 61.6, y = 20.85, r = 10 }, minLevel = 28, items = { 251961 }, targets = { friend = { 2410, 2418, 2215, 2419 } },
           lines = {
             { kind = "accept", quest = 97287, npc = 2410 },
             { kind = "turnin", quest = 546, npc = 2418, skipIfMissing = true },
@@ -3601,7 +3601,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 33, x = 35.66, y = 10.53, r = 20 } },
           } },
-        { id = "a583.t583.t5762.a194.a185.a190", at = { zone = 33, x = 35.66, y = 10.53, r = 10 }, minLevel = 28, items = { 14542 }, targets = { friend = { 716, 715, 717, 718 } },
+        { id = "a583.t583.t5762.a194.a185.a190", at = { zone = 33, x = 35.66, y = 10.53, r = 10 }, minLevel = 29, items = { 14542 }, targets = { friend = { 716, 715, 717, 718 } },
           lines = {
             { kind = "accept", quest = 583, npc = 716 },
             { kind = "turnin", quest = 583, npc = 715 },
@@ -3646,7 +3646,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 186, index = 1, npc = 682 },
           } },
-        { id = "t186.a187.t191", at = { zone = 33, x = 35.62, y = 10.62, r = 10 }, minLevel = 28, targets = { friend = { 717, 718 } },
+        { id = "t186.a187.t191", at = { zone = 33, x = 35.62, y = 10.62, r = 10 }, minLevel = 30, targets = { friend = { 717, 718 } },
           lines = {
             { kind = "turnin", quest = 186, npc = 717 },
             { kind = "accept", quest = 187, npc = 717, requires = { 186 } },
@@ -3810,7 +3810,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "accept", quest = 5741, npc = 11863 },
           } },
-        { id = "a1480", at = { zone = 405, x = 55.3, y = 26.6, r = 40 }, minLevel = 25, maxLevel = 41, items = { 20310 }, targets = { enemy = { 4663 } },
+        { id = "a1480", at = { zone = 405, x = 55.3, y = 26.6, r = 40 }, minLevel = 28, maxLevel = 41, items = { 20310 }, targets = { enemy = { 4663 } },
           lines = {
             { kind = "accept", quest = 1480, item = 20310, npc = 4663 },
           } },
@@ -3832,7 +3832,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 5561, index = 1, npc = 4700, skipIfMissing = true },
           } },
-        { id = "t1480.a1481", at = { zone = 405, x = 52.25, y = 53.44, r = 10 }, minLevel = 25, items = { 20310 }, targets = { friend = { 4498 } },
+        { id = "t1480.a1481", at = { zone = 405, x = 52.25, y = 53.44, r = 10 }, minLevel = 28, items = { 20310 }, targets = { friend = { 4498 } },
           lines = {
             { kind = "turnin", quest = 1480, npc = 4498, skipIfMissing = true },
             { kind = "accept", quest = 1481, npc = 4498, ifDone = 1480, requires = { 1480 } },
@@ -3857,7 +3857,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 5741, npc = 11863, skipIfMissing = true },
           } },
-        { id = "a6161", at = { zone = 405, x = 36.07, y = 30.41, r = 10 }, minLevel = 30, maxLevel = 44,
+        { id = "a6161", at = { zone = 405, x = 36.07, y = 30.41, r = 10 }, minLevel = 31, maxLevel = 44,
           lines = {
             { kind = "accept", quest = 6161, object = 177787 },
           } },
@@ -3907,7 +3907,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 1368, npc = 5397, skipIfMissing = true },
           } },
-        { id = "t1481.a1482", at = { zone = 405, x = 52.25, y = 53.44, r = 10 }, minLevel = 25, targets = { friend = { 4498 } },
+        { id = "t1481.a1482", at = { zone = 405, x = 52.25, y = 53.44, r = 10 }, minLevel = 30, targets = { friend = { 4498 } },
           lines = {
             { kind = "turnin", quest = 1481, npc = 4498, skipIfMissing = true },
             { kind = "accept", quest = 1482, npc = 4498, ifDone = 1481, requires = { 1481 } },
@@ -3930,7 +3930,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 1482, index = 1, item = 6442, skipIfMissing = true },
           } },
-        { id = "t1482.a1484.t1484", at = { zone = 405, x = 52.25, y = 53.44, r = 10 }, minLevel = 25, targets = { friend = { 4498, 5641 } },
+        { id = "t1482.a1484.t1484", at = { zone = 405, x = 52.25, y = 53.44, r = 10 }, minLevel = 30, targets = { friend = { 4498, 5641 } },
           lines = {
             { kind = "turnin", quest = 1482, npc = 4498, skipIfMissing = true },
             { kind = "accept", quest = 1484, npc = 4498, ifDone = 1482, requires = { 1482 } },
@@ -3982,7 +3982,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 15, x = 29.63, y = 48.62, r = 20 } },
           } },
-        { id = "a1251.a1269.a1268", at = { zone = 15, x = 29.63, y = 48.62, r = 10 }, minLevel = 30, maxLevel = 43, items = { 5919, 5950 },
+        { id = "a1251.a1269.a1268", at = { zone = 15, x = 29.63, y = 48.62, r = 10 }, minLevel = 32, maxLevel = 43, items = { 5919, 5950 },
           lines = {
             { kind = "accept", quest = 1251, object = 20992 },
             { kind = "accept", quest = 1269, object = 21042 },
@@ -4006,13 +4006,13 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 1201, index = 1, npc = 4834 },
           } },
-        { id = "t1201.a1202.a1322", at = { zone = 15, x = 35.21, y = 30.66, r = 10 }, minLevel = 30, targets = { friend = { 4791, 5087 } },
+        { id = "t1201.a1202.a1322", at = { zone = 15, x = 35.21, y = 30.66, r = 10 }, minLevel = 32, targets = { friend = { 4791, 5087 } },
           lines = {
             { kind = "turnin", quest = 1201, npc = 4791 },
             { kind = "accept", quest = 1202, npc = 4791, requires = { 1201 } },
             { kind = "accept", quest = 1322, at = { zone = 15, x = 36.53, y = 30.79, r = 10 }, npc = 5087, ifDone = 1321, requires = { 1321 } },
           } },
-        { id = "a1273", at = { zone = 15, x = 40.96, y = 36.69, r = 10 }, minLevel = 30, maxLevel = 45, targets = { friend = { 4983 } },
+        { id = "a1273", at = { zone = 15, x = 40.96, y = 36.69, r = 10 }, minLevel = 32, maxLevel = 45, targets = { friend = { 4983 } },
           lines = {
             { kind = "accept", quest = 1273, npc = 4983, ifDone = 1269, requires = { 1269 } },
           } },
@@ -4043,14 +4043,14 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 1177, npc = 4503, skipIfMissing = true },
           } },
-        { id = "t1273.t1322.a1323.t1323", at = { zone = 15, x = 36.42, y = 31.88, r = 10 }, minLevel = 30, items = { 5919, 5917 }, targets = { friend = { 4926, 5087, 4791 } },
+        { id = "t1273.t1322.a1323.t1323", at = { zone = 15, x = 36.42, y = 31.88, r = 10 }, minLevel = 32, items = { 5919, 5917 }, targets = { friend = { 4926, 5087, 4791 } },
           lines = {
             { kind = "turnin", quest = 1273, npc = 4926, skipIfMissing = true },
             { kind = "turnin", quest = 1322, at = { zone = 15, x = 36.53, y = 30.79, r = 10 }, npc = 5087, skipIfMissing = true },
             { kind = "accept", quest = 1323, at = { zone = 15, x = 36.53, y = 30.79, r = 10 }, npc = 5087, ifDone = 1322, requires = { 1322 } },
             { kind = "turnin", quest = 1323, npc = 4926, skipIfMissing = true },
           } },
-        { id = "a1276", at = { zone = 15, x = 36.42, y = 31.88, r = 10 }, minLevel = 30, skip = { { kind = "notturnedin", quest = 1323 } }, items = { 5919, 5917 }, targets = { friend = { 4926, 5087, 4791 } },
+        { id = "a1276", at = { zone = 15, x = 36.42, y = 31.88, r = 10 }, minLevel = 32, skip = { { kind = "notturnedin", quest = 1323 } }, items = { 5919, 5917 }, targets = { friend = { 4926, 5087, 4791 } },
           lines = {
             { kind = "accept", quest = 1276, npc = 4926, ifDone = 1273, requires = { 1273, 1323 } },
           } },
@@ -4146,7 +4146,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 577, index = 1, item = 4104, skipIfMissing = true },
           } },
-        { id = "t5763.a195.a188", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 28, items = { 14546 }, targets = { friend = { 715, 717 } },
+        { id = "t5763.a195.a188", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 32, items = { 14546 }, targets = { friend = { 715, 717 } },
           lines = {
             { kind = "turnin", quest = 5763, npc = 715, skipIfMissing = true },
             { kind = "accept", quest = 195, npc = 715, ifDone = 194, requires = { 194 } },
@@ -4216,7 +4216,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 20, to = 18 },
           } },
-        { id = "a628", at = { zone = 33, x = 28.29, y = 77.59, r = 10 }, minLevel = 31, maxLevel = 46, targets = { friend = { 2495 } },
+        { id = "a628", at = { zone = 33, x = 28.29, y = 77.59, r = 10 }, minLevel = 33, maxLevel = 46, targets = { friend = { 2495 } },
           lines = {
             { kind = "accept", quest = 628, npc = 2495, ifDone = 577, requires = { 577 } },
           } },
@@ -4232,7 +4232,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 628, index = 1, item = 4105, skipIfMissing = true },
           } },
-        { id = "a192.t188.t195", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, minLevel = 28, targets = { friend = { 718, 717, 715 } },
+        { id = "a192.t188.t195", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, minLevel = 33, targets = { friend = { 718, 717, 715 } },
           lines = {
             { kind = "accept", quest = 192, npc = 718, ifDone = 191, requires = { 191 } },
             { kind = "turnin", quest = 188, npc = 717, skipIfMissing = true },
@@ -4304,7 +4304,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 11, to = 17 },
           } },
-        { id = "t638.a639.a678.a672.a97539.b@45", at = { zone = 45, x = 73.8, y = 33.96, r = 10 }, minLevel = 32, targets = { friend = { 2703, 2771, 2706, 12920 } },
+        { id = "t638.a639.a678.a672.a97539.b@45", at = { zone = 45, x = 73.8, y = 33.96, r = 10 }, minLevel = 33, targets = { friend = { 2703, 2771, 2706, 12920 } },
           lines = {
             { kind = "turnin", quest = 638, npc = 2703, skipIfMissing = true },
             { kind = "accept", quest = 639, npc = 2703 },
@@ -4313,7 +4313,7 @@ Noir.Route("horde-windshaper", {
             { kind = "accept", quest = 97539, at = { zone = 45, x = 73.41, y = 36.89, r = 10 }, npc = 12920 },
             { kind = "sethearth", at = { zone = 45, x = 73.84, y = 32.46, r = 10 }, npc = 9501 },
           } },
-        { id = "t635.a642", at = { zone = 45, x = 62.5, y = 33.73, r = 10 }, minLevel = 30, items = { 4614 },
+        { id = "t635.a642", at = { zone = 45, x = 62.5, y = 33.73, r = 10 }, minLevel = 32, items = { 4614 },
           lines = {
             { kind = "turnin", quest = 635, object = 138492, skipIfMissing = true },
             { kind = "accept", quest = 642, object = 138492 },
@@ -4322,7 +4322,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 642, index = 1, item = 4435 },
           } },
-        { id = "t642.a651", at = { zone = 45, x = 84.31, y = 30.95, r = 10 }, minLevel = 30,
+        { id = "t642.a651", at = { zone = 45, x = 84.31, y = 30.95, r = 10 }, minLevel = 33,
           lines = {
             { kind = "turnin", quest = 642, object = 2701 },
             { kind = "accept", quest = 651, object = 2701, requires = { 642 } },
@@ -4357,7 +4357,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "hearth", to = { zone = 45, x = 73.84, y = 32.46 } },
           } },
-        { id = "t639.t678.t672.a674.t97539.t674.a675.t675.a701", at = { zone = 45, x = 73.8, y = 33.96, r = 10 }, minLevel = 29, items = { 4526 }, targets = { friend = { 2703, 2771, 2706, 12920, 2792 } },
+        { id = "t639.t678.t672.a674.t97539.t674.a675.t675.a701", at = { zone = 45, x = 73.8, y = 33.96, r = 10 }, minLevel = 32, items = { 4526 }, targets = { friend = { 2703, 2771, 2706, 12920, 2792 } },
           lines = {
             { kind = "turnin", quest = 639, npc = 2703 },
             { kind = "turnin", quest = 678, npc = 2771, skipIfMissing = true },
@@ -4369,7 +4369,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 675, at = { zone = 45, x = 74.72, y = 36.29, r = 10 }, npc = 2706, skipIfMissing = true },
             { kind = "accept", quest = 701, at = { zone = 45, x = 74.72, y = 36.29, r = 10 }, npc = 2706, ifDone = 675, requires = { 675 } },
           } },
-        { id = "a79678.t79678", at = { zone = 45, x = 57.53, y = 74.47, r = 10 }, minLevel = 26, targets = { friend = { 217300 } },
+        { id = "a79678.t79678", at = { zone = 45, x = 57.53, y = 74.47, r = 10 }, minLevel = 35, targets = { friend = { 217300 } },
           lines = {
             { kind = "accept", quest = 79678, npc = 217300 },
             { kind = "turnin", quest = 79678, npc = 217300 },
@@ -4394,12 +4394,12 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 651, object = 2702 },
           } },
-        { id = "t701.a702", at = { zone = 45, x = 74.72, y = 36.29, r = 10 }, minLevel = 29, items = { 4528 }, targets = { friend = { 2706 } },
+        { id = "t701.a702", at = { zone = 45, x = 74.72, y = 36.29, r = 10 }, minLevel = 32, items = { 4528 }, targets = { friend = { 2706 } },
           lines = {
             { kind = "turnin", quest = 701, npc = 2706, skipIfMissing = true },
             { kind = "accept", quest = 702, npc = 2706, ifDone = 701, requires = { 701 } },
           } },
-        { id = "t702.a847", label = "leadend", at = { zone = 45, x = 72.64, y = 33.93, r = 10 }, minLevel = 29, items = { 4528 }, targets = { friend = { 2792 } },
+        { id = "t702.a847", label = "leadend", at = { zone = 45, x = 72.64, y = 33.93, r = 10 }, minLevel = 32, items = { 4528 }, targets = { friend = { 2792 } },
           lines = {
             { kind = "turnin", quest = 702, npc = 2792, skipIfMissing = true },
             { kind = "accept", quest = 847, npc = 2792, ifDone = 702, requires = { 702 } },
@@ -4466,7 +4466,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 23, to = 38 },
           } },
-        { id = "a5381.b@405", at = { zone = 405, x = 25.82, y = 68.21, r = 10 }, minLevel = 32, items = { 14523 }, targets = { friend = { 11624 } },
+        { id = "a5381.b@405", at = { zone = 405, x = 25.82, y = 68.21, r = 10 }, minLevel = 33, items = { 14523 }, targets = { friend = { 11624 } },
           lines = {
             { kind = "accept", quest = 5381, npc = 11624 },
             { kind = "sethearth", at = { zone = 405, x = 24.09, y = 68.21, r = 10 }, npc = 11106 },
@@ -4480,7 +4480,7 @@ Noir.Route("horde-windshaper", {
             { kind = "accept", quest = 93044, npc = 5397 },
             { kind = "turnin", quest = 93044, npc = 5397 },
           } },
-        { id = "a5943", at = { zone = 405, x = 45.4, y = 75.29, r = 10 }, minLevel = 32, maxLevel = 46, targets = { friend = { 11626 } },
+        { id = "a5943", at = { zone = 405, x = 45.4, y = 75.29, r = 10 }, minLevel = 33, maxLevel = 46, targets = { friend = { 11626 } },
           lines = {
             { kind = "accept", quest = 5943, npc = 11626 },
           } },
@@ -4488,7 +4488,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "accept", quest = 6134, npc = 6019 },
           } },
-        { id = "a79229", at = { zone = 405, x = 47.49, y = 54.67, r = 10 }, minLevel = 30, maxLevel = 48,
+        { id = "a79229", at = { zone = 405, x = 47.49, y = 54.67, r = 10 }, minLevel = 35, maxLevel = 48,
           lines = {
             { kind = "accept", quest = 79229, object = 417353 },
           } },
@@ -4496,7 +4496,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "accept", quest = 5386, npc = 11259 },
           } },
-        { id = "a92743.t92743", at = { zone = 405, x = 74.97, y = 68.16, r = 10 }, minLevel = 30, targets = { friend = { 5398 } },
+        { id = "a92743.t92743", at = { zone = 405, x = 74.97, y = 68.16, r = 10 }, minLevel = 35, targets = { friend = { 5398 } },
           lines = {
             { kind = "accept", quest = 92743, npc = 5398 },
             { kind = "turnin", quest = 92743, npc = 5398 },
@@ -4525,13 +4525,13 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 5386, npc = 11259, skipIfMissing = true },
           } },
-        { id = "t79229.a5501.a79235", at = { zone = 405, x = 62.33, y = 38.99, r = 10 }, minLevel = 33, targets = { friend = { 11438 } },
+        { id = "t79229.a5501.a79235", at = { zone = 405, x = 62.33, y = 38.99, r = 10 }, minLevel = 35, targets = { friend = { 11438 } },
           lines = {
             { kind = "turnin", quest = 79229, npc = 11438, skipIfMissing = true },
             { kind = "accept", quest = 5501, npc = 11438 },
             { kind = "accept", quest = 79235, npc = 11438 },
           } },
-        { id = "a6027", at = { zone = 405, x = 38.88, y = 27.16, r = 10 }, minLevel = 30, maxLevel = 46, items = { 15766 }, targets = { friend = { 11863 } },
+        { id = "a6027", at = { zone = 405, x = 38.88, y = 27.16, r = 10 }, minLevel = 33, maxLevel = 46, items = { 15766 }, targets = { friend = { 11863 } },
           lines = {
             { kind = "accept", quest = 6027, npc = 11863, ifDone = 5741, requires = { 5741 } },
           } },
@@ -4563,7 +4563,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "hearth", to = { zone = 405, x = 24.09, y = 68.21 } },
           } },
-        { id = "t5381.a5581", at = { zone = 405, x = 25.82, y = 68.21, r = 10 }, minLevel = 32, items = { 14523, 14547 }, targets = { friend = { 11624 } },
+        { id = "t5381.a5581", at = { zone = 405, x = 25.82, y = 68.21, r = 10 }, minLevel = 33, items = { 14523, 14547 }, targets = { friend = { 11624 } },
           lines = {
             { kind = "turnin", quest = 5381, npc = 11624 },
             { kind = "accept", quest = 5581, npc = 11624, requires = { 5381 } },
@@ -4576,11 +4576,11 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 5581, npc = 11624 },
           } },
-        { id = "a1488", at = { zone = 405, x = 52.57, y = 54.39, r = 10 }, minLevel = 25, maxLevel = 48, targets = { friend = { 5641 } },
+        { id = "a1488", at = { zone = 405, x = 52.57, y = 54.39, r = 10 }, minLevel = 35, maxLevel = 48, targets = { friend = { 5641 } },
           lines = {
             { kind = "accept", quest = 1488, npc = 5641, ifDone = 1484, requires = { 1484 } },
           } },
-        { id = "a93225", at = { zone = 405, x = 56.29, y = 59.68, r = 10 }, minLevel = 30, maxLevel = 48, targets = { friend = { 5412 } },
+        { id = "a93225", at = { zone = 405, x = 56.29, y = 59.68, r = 10 }, minLevel = 35, maxLevel = 48, targets = { friend = { 5412 } },
           lines = {
             { kind = "accept", quest = 93225, npc = 5412 },
           } },
@@ -4683,7 +4683,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 11, to = 17 },
           } },
-        { id = "a680.a640.a679", at = { zone = 45, x = 74.04, y = 33.07, r = 10 }, minLevel = 32, maxLevel = 48, targets = { friend = { 2772, 2703, 2771 } },
+        { id = "a680.a640.a679", at = { zone = 45, x = 74.04, y = 33.07, r = 10 }, minLevel = 35, maxLevel = 48, targets = { friend = { 2772, 2703, 2771 } },
           lines = {
             { kind = "accept", quest = 680, npc = 2772, ifDone = 678, requires = { 678 } },
             { kind = "accept", quest = 640, npc = 2703, ifDone = 639, requires = { 639 } },
@@ -4697,11 +4697,11 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "sethearth", npc = 9501 },
           } },
-        { id = "a79677", at = { zone = 45, x = 57.53, y = 74.47, r = 10 }, minLevel = 26, maxLevel = 48, items = { 283389 }, targets = { friend = { 217300 } },
+        { id = "a79677", at = { zone = 45, x = 57.53, y = 74.47, r = 10 }, minLevel = 35, maxLevel = 48, items = { 283389 }, targets = { friend = { 217300 } },
           lines = {
             { kind = "accept", quest = 79677, npc = 217300 },
           } },
-        { id = "a79624", at = { zone = 45, x = 52.87, y = 75.9, r = 40 }, minLevel = 32, maxLevel = 48, items = { 213422 }, targets = { enemy = { 2566 } },
+        { id = "a79624", at = { zone = 45, x = 52.87, y = 75.9, r = 40 }, minLevel = 35, maxLevel = 48, items = { 213422 }, targets = { enemy = { 2566 } },
           lines = {
             { kind = "accept", quest = 79624, item = 213422, npc = 2566 },
           } },
@@ -4744,7 +4744,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 680, npc = 2772, skipIfMissing = true },
             { kind = "turnin", quest = 679, npc = 2771, skipIfMissing = true },
           } },
-        { id = "t640.t673.a641.t641", at = { zone = 45, x = 74.72, y = 36.29, r = 10 }, minLevel = 32, items = { 4453 }, targets = { friend = { 2706, 2703 } },
+        { id = "t640.t673.a641.t641", at = { zone = 45, x = 74.72, y = 36.29, r = 10 }, minLevel = 35, items = { 4453 }, targets = { friend = { 2706, 2703 } },
           lines = {
             { kind = "turnin", quest = 640, npc = 2706, skipIfMissing = true },
             { kind = "turnin", quest = 673, npc = 2706, skipIfMissing = true },
@@ -4781,7 +4781,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 13, to = 17 },
           } },
-        { id = "a643", at = { zone = 45, x = 73.8, y = 33.96, r = 10 }, minLevel = 32, maxLevel = 49, targets = { friend = { 2703 } },
+        { id = "a643", at = { zone = 45, x = 73.8, y = 33.96, r = 10 }, minLevel = 36, maxLevel = 49, targets = { friend = { 2703 } },
           lines = {
             { kind = "accept", quest = 643, npc = 2703, ifDone = 641, requires = { 641 } },
           } },
@@ -4819,7 +4819,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "train", level = 36, class = "HUNTER", npc = 1404 },
           } },
-        { id = "a572.a584.a1261.a95748.a95770.t95770.b@33", at = { zone = 33, x = 32.12, y = 29.24, r = 10 }, minLevel = 33, targets = { friend = { 2465, 2497, 2519 } },
+        { id = "a572.a584.a1261.a95748.a95770.t95770.b@33", at = { zone = 33, x = 32.12, y = 29.24, r = 10 }, minLevel = 36, targets = { friend = { 2465, 2497, 2519 } },
           lines = {
             { kind = "accept", quest = 572, npc = 2465, ifDone = 570, requires = { 570 } },
             { kind = "accept", quest = 584, at = { zone = 33, x = 32.16, y = 27.72, r = 10 }, npc = 2497, ifDone = 582, requires = { 582 } },
@@ -4837,7 +4837,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "train", level = 36, class = "ROGUE", npc = 1411 },
           } },
-        { id = "t79235.a79242.a600.t669.a670.a606", at = { zone = 33, x = 27.02, y = 77.27, r = 10 }, minLevel = 35, items = { 4502, 4494 }, targets = { friend = { 215643, 2498, 2487, 2501 } },
+        { id = "t79235.a79242.a600.t669.a670.a606", at = { zone = 33, x = 27.02, y = 77.27, r = 10 }, minLevel = 36, items = { 4502, 4494 }, targets = { friend = { 215643, 2498, 2487, 2501 } },
           lines = {
             { kind = "turnin", quest = 79235, npc = 215643, skipIfMissing = true },
             { kind = "accept", quest = 79242, npc = 215643 },
@@ -4870,7 +4870,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 600, npc = 2498, skipIfMissing = true },
           } },
-        { id = "t606.a607", at = { zone = 33, x = 26.9, y = 73.59, r = 10 }, minLevel = 30, items = { 3922 }, targets = { friend = { 2502 } },
+        { id = "t606.a607", at = { zone = 33, x = 26.9, y = 73.59, r = 10 }, minLevel = 36, items = { 3922 }, targets = { friend = { 2502 } },
           lines = {
             { kind = "turnin", quest = 606, npc = 2502 },
             { kind = "accept", quest = 607, npc = 2502, requires = { 606 } },
@@ -4914,7 +4914,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 95748, index = 1, item = 2007 },
           } },
-        { id = "a193.a196", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, minLevel = 28, maxLevel = 48, targets = { friend = { 718, 715 } },
+        { id = "a193.a196", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, minLevel = 36, maxLevel = 48, targets = { friend = { 718, 715 } },
           lines = {
             { kind = "accept", quest = 193, npc = 718, ifDone = 192, requires = { 192 } },
             { kind = "accept", quest = 196, npc = 715, ifDone = 195, requires = { 195 } },
@@ -4940,7 +4940,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 18, to = 20 },
           } },
-        { id = "t572.a571.t95748.t584.a585.b@33", at = { zone = 33, x = 32.12, y = 29.24, r = 10 }, minLevel = 33, targets = { friend = { 2465, 2519 } },
+        { id = "t572.a571.t95748.t584.a585.b@33", at = { zone = 33, x = 32.12, y = 29.24, r = 10 }, minLevel = 36, targets = { friend = { 2465, 2519 } },
           lines = {
             { kind = "turnin", quest = 572, npc = 2465, skipIfMissing = true },
             { kind = "accept", quest = 571, npc = 2465, ifDone = 572, requires = { 572 } },
@@ -4959,7 +4959,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 571, index = 1, item = 3862, skipIfMissing = true },
           } },
-        { id = "a624", at = { zone = 33, x = 31.16, y = 89.05, r = 40 }, minLevel = 35, maxLevel = 51, items = { 4056 },
+        { id = "a624", at = { zone = 33, x = 31.16, y = 89.05, r = 40 }, minLevel = 38, maxLevel = 51, items = { 4056 },
           lines = {
             { kind = "accept", quest = 624, item = 4056, object = 2554 },
           } },
@@ -4987,7 +4987,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 571, npc = 2465, skipIfMissing = true },
           } },
-        { id = "a598", at = { zone = 33, x = 32.12, y = 29.24, r = 10 }, minLevel = 30, skip = { { kind = "notturnedin", quest = 629 } }, targets = { friend = { 2465, 2519 } },
+        { id = "a598", at = { zone = 33, x = 32.12, y = 29.24, r = 10 }, minLevel = 37, skip = { { kind = "notturnedin", quest = 629 } }, targets = { friend = { 2465, 2519 } },
           lines = {
             { kind = "accept", quest = 598, at = { zone = 33, x = 32.27, y = 27.71, r = 10 }, npc = 2519, ifDone = 596, requires = { 596, 629 } },
           } },
@@ -5071,12 +5071,12 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 11, to = 17 },
           } },
-        { id = "a644.b@45", at = { zone = 45, x = 73.8, y = 33.96, r = 10 }, minLevel = 32, targets = { friend = { 2703 } },
+        { id = "a644.b@45", at = { zone = 45, x = 73.8, y = 33.96, r = 10 }, minLevel = 37, targets = { friend = { 2703 } },
           lines = {
             { kind = "accept", quest = 644, npc = 2703, ifDone = 643, requires = { 643 } },
             { kind = "sethearth", at = { zone = 45, x = 73.84, y = 32.46, r = 10 }, npc = 9501 },
           } },
-        { id = "a652", at = { zone = 45, x = 36.23, y = 57.38, r = 10 }, minLevel = 30, maxLevel = 50,
+        { id = "a652", at = { zone = 45, x = 36.23, y = 57.38, r = 10 }, minLevel = 37, maxLevel = 50,
           lines = {
             { kind = "accept", quest = 652, object = 2702, ifDone = 651, requires = { 651 } },
           } },
@@ -5088,7 +5088,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 652, index = 1, item = 4469, skipIfMissing = true },
           } },
-        { id = "t644.a645", at = { zone = 45, x = 73.8, y = 33.96, r = 10 }, minLevel = 32, items = { 4467 }, targets = { friend = { 2703 } },
+        { id = "t644.a645", at = { zone = 45, x = 73.8, y = 33.96, r = 10 }, minLevel = 37, items = { 4467 }, targets = { friend = { 2703 } },
           lines = {
             { kind = "turnin", quest = 644, npc = 2703, skipIfMissing = true },
             { kind = "accept", quest = 645, npc = 2703, ifDone = 644, requires = { 644 } },
@@ -5097,12 +5097,12 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 79242, object = 418855, skipIfMissing = true },
           } },
-        { id = "t652.a688", at = { zone = 45, x = 36.08, y = 58.09, r = 10 }, minLevel = 30,
+        { id = "t652.a688", at = { zone = 45, x = 36.08, y = 58.09, r = 10 }, minLevel = 35,
           lines = {
             { kind = "turnin", quest = 652, object = 2688, skipIfMissing = true },
             { kind = "accept", quest = 688, object = 2688, ifDone = 652, requires = { 652 } },
           } },
-        { id = "t645.a646", at = { zone = 45, x = 28.86, y = 59.62, r = 10 }, minLevel = 32, items = { 4467, 4468 },
+        { id = "t645.a646", at = { zone = 45, x = 28.86, y = 59.62, r = 10 }, minLevel = 37, items = { 4467, 4468 },
           lines = {
             { kind = "turnin", quest = 645, object = 2703, skipIfMissing = true },
             { kind = "accept", quest = 646, object = 2703, ifDone = 645, requires = { 645 } },
@@ -5111,7 +5111,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 670, npc = 2610, skipIfMissing = true },
           } },
-        { id = "t688.a687.t646", at = { zone = 45, x = 74.54, y = 35.64, r = 10 }, minLevel = 30, items = { 4468 }, targets = { friend = { 2787, 2703 } },
+        { id = "t688.a687.t646", at = { zone = 45, x = 74.54, y = 35.64, r = 10 }, minLevel = 35, items = { 4468 }, targets = { friend = { 2787, 2703 } },
           lines = {
             { kind = "turnin", quest = 688, npc = 2787, skipIfMissing = true },
             { kind = "accept", quest = 687, npc = 2787, ifDone = 688, requires = { 688 } },
@@ -5136,7 +5136,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 566, index = 1, item = 3626, skipIfMissing = true },
           } },
-        { id = "a1712", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30, maxLevel = 48, items = { 6929, 4480, 4479, 4481 }, targets = { friend = { 6176 } },
+        { id = "a1712", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 35, maxLevel = 48, items = { 6929, 4480, 4479, 4481 }, targets = { friend = { 6176 } },
           lines = {
             { kind = "accept", quest = 1712, npc = 6176, ifDone = 1791, requires = { 1791 } },
           } },
@@ -5155,7 +5155,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 1712, index = 2, item = 3901, skipIfMissing = true },
             { kind = "objective", quest = 1712, index = 3, item = 6851, skipIfMissing = true },
           } },
-        { id = "t1712.a1713", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30, items = { 6929, 4480, 4479, 4481 }, targets = { friend = { 6176 } },
+        { id = "t1712.a1713", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 35, items = { 6929, 4480, 4479, 4481 }, targets = { friend = { 6176 } },
           lines = {
             { kind = "turnin", quest = 1712, npc = 6176, skipIfMissing = true },
             { kind = "accept", quest = 1713, npc = 6176, ifDone = 1712, requires = { 1712 } },
@@ -5164,7 +5164,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 1713, index = 1, item = 6894, skipIfMissing = true },
           } },
-        { id = "t1713.a1792.t1792", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30, targets = { friend = { 6176 } },
+        { id = "t1713.a1792.t1792", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 35, targets = { friend = { 6176 } },
           lines = {
             { kind = "turnin", quest = 1713, npc = 6176, skipIfMissing = true },
             { kind = "accept", quest = 1792, npc = 6176, ifDone = 1713, requires = { 1713 } },
@@ -5184,13 +5184,13 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 3, x = 42.39, y = 52.93, r = 20 } },
           } },
-        { id = "a703.a705.a2418", at = { zone = 3, x = 42.39, y = 52.93, r = 10 }, minLevel = 33, maxLevel = 44, targets = { friend = { 2817 } },
+        { id = "a703.a705.a2418", at = { zone = 3, x = 42.39, y = 52.93, r = 10 }, minLevel = 35, maxLevel = 44, targets = { friend = { 2817 } },
           lines = {
             { kind = "accept", quest = 703, npc = 2817 },
             { kind = "accept", quest = 705, npc = 2817 },
             { kind = "accept", quest = 2418, npc = 2817 },
           } },
-        { id = "t687.a692.a709", at = { zone = 3, x = 51.39, y = 76.87, r = 10 }, minLevel = 30, targets = { friend = { 2785 } },
+        { id = "t687.a692.a709", at = { zone = 3, x = 51.39, y = 76.87, r = 10 }, minLevel = 36, targets = { friend = { 2785 } },
           lines = {
             { kind = "turnin", quest = 687, npc = 2785, skipIfMissing = true },
             { kind = "accept", quest = 692, npc = 2785, ifDone = 687, requires = { 687 } },
@@ -5281,7 +5281,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 1419, npc = 5394, skipIfMissing = true },
           } },
-        { id = "t711.a712", at = { zone = 3, x = 25.95, y = 44.87, r = 10 }, minLevel = 35, targets = { friend = { 2921 } },
+        { id = "t711.a712", at = { zone = 3, x = 25.95, y = 44.87, r = 10 }, minLevel = 37, targets = { friend = { 2921 } },
           lines = {
             { kind = "turnin", quest = 711, npc = 2921, skipIfMissing = true },
             { kind = "accept", quest = 712, npc = 2921, ifDone = 711, requires = { 711 } },
@@ -5317,7 +5317,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 8, x = 22.87, y = 48.19, r = 20 } },
           } },
-        { id = "t624.a625", at = { zone = 8, x = 22.87, y = 48.19, r = 10 }, minLevel = 35,
+        { id = "t624.a625", at = { zone = 8, x = 22.87, y = 48.19, r = 10 }, minLevel = 38,
           lines = {
             { kind = "turnin", quest = 624, object = 2553, skipIfMissing = true },
             { kind = "accept", quest = 625, object = 2553, ifDone = 624, requires = { 624 } },
@@ -5341,11 +5341,11 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 1420, at = { zone = 8, x = 47.74, y = 55.2, r = 10 }, npc = 1442, skipIfMissing = true },
             { kind = "accept", quest = 1424, at = { zone = 8, x = 47.93, y = 54.78, r = 10 }, npc = 1443 },
           } },
-        { id = "a1392", at = { zone = 8, x = 54.9, y = 34.1, r = 40 }, minLevel = 29, maxLevel = 47, items = { 6196 }, targets = { enemy = { 5477 } },
+        { id = "a1392", at = { zone = 8, x = 54.9, y = 34.1, r = 40 }, minLevel = 34, maxLevel = 47, items = { 6196 }, targets = { enemy = { 5477 } },
           lines = {
             { kind = "accept", quest = 1392, item = 6196, npc = 5477 },
           } },
-        { id = "a1393", at = { zone = 8, x = 65.47, y = 18.16, r = 10 }, minLevel = 30, maxLevel = 46, targets = { friend = { 5391 } },
+        { id = "a1393", at = { zone = 8, x = 65.47, y = 18.16, r = 10 }, minLevel = 33, maxLevel = 46, targets = { friend = { 5391 } },
           lines = {
             { kind = "accept", quest = 1393, npc = 5391 },
           } },
@@ -5365,7 +5365,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 1424, index = 1, item = 6175 },
           } },
-        { id = "t698.a699", at = { zone = 8, x = 81.32, y = 80.97, r = 10 }, minLevel = 35, targets = { friend = { 5592 } },
+        { id = "t698.a699", at = { zone = 8, x = 81.32, y = 80.97, r = 10 }, minLevel = 37, targets = { friend = { 5592 } },
           lines = {
             { kind = "turnin", quest = 698, npc = 5592 },
             { kind = "accept", quest = 699, npc = 5592, requires = { 698 } },
@@ -5395,12 +5395,12 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 1389, npc = 1776, skipIfMissing = true },
             { kind = "turnin", quest = 1392, npc = 1776, skipIfMissing = true },
           } },
-        { id = "a1430.b@8", at = { zone = 8, x = 44.7, y = 57.21, r = 10 }, minLevel = 35, targets = { friend = { 5591 } },
+        { id = "a1430.b@8", at = { zone = 8, x = 44.7, y = 57.21, r = 10 }, minLevel = 39, targets = { friend = { 5591 } },
           lines = {
             { kind = "accept", quest = 1430, npc = 5591 },
             { kind = "sethearth", npc = 6930 },
           } },
-        { id = "a1422.t1422.a1426", at = { zone = 8, x = 81.32, y = 80.97, r = 10 }, minLevel = 35, targets = { friend = { 5592, 5593 } },
+        { id = "a1422.t1422.a1426", at = { zone = 8, x = 81.32, y = 80.97, r = 10 }, minLevel = 40, targets = { friend = { 5592, 5593 } },
           lines = {
             { kind = "accept", quest = 1422, npc = 5592, requires = { 699 } },
             { kind = "turnin", quest = 1422, at = { zone = 8, x = 83.76, y = 80.41, r = 10 }, npc = 5593 },
@@ -5412,7 +5412,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 1426, index = 2, npc = 750 },
             { kind = "objective", quest = 1426, index = 3, npc = 751 },
           } },
-        { id = "t1426.a1427.t1427", at = { zone = 8, x = 83.76, y = 80.41, r = 10 }, minLevel = 35, targets = { friend = { 5593, 5592 } },
+        { id = "t1426.a1427.t1427", at = { zone = 8, x = 83.76, y = 80.41, r = 10 }, minLevel = 38, targets = { friend = { 5593, 5592 } },
           lines = {
             { kind = "turnin", quest = 1426, npc = 5593 },
             { kind = "accept", quest = 1427, npc = 5593, requires = { 1426 } },
@@ -5444,7 +5444,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 56, to = 20 },
           } },
-        { id = "a573.b@33", at = { zone = 33, x = 32.12, y = 29.24, r = 10 }, minLevel = 33, targets = { friend = { 2465 } },
+        { id = "a573.b@33", at = { zone = 33, x = 32.12, y = 29.24, r = 10 }, minLevel = 39, targets = { friend = { 2465 } },
           lines = {
             { kind = "accept", quest = 573, npc = 2465, ifDone = 571, requires = { 571 } },
             { kind = "sethearth", at = { zone = 33, x = 31.49, y = 29.75, r = 10 }, npc = 5814 },
@@ -5493,7 +5493,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "train", level = 40, class = "ROGUE", npc = 1411 },
           } },
-        { id = "t621.t604.t617.t609.a613", at = { zone = 33, x = 27.12, y = 77.21, r = 10 }, minLevel = 30, targets = { friend = { 2498, 2487, 2494, 2501 } },
+        { id = "t621.t604.t617.t609.a613", at = { zone = 33, x = 27.12, y = 77.21, r = 10 }, minLevel = 39, targets = { friend = { 2498, 2487, 2494, 2501 } },
           lines = {
             { kind = "turnin", quest = 621, npc = 2498 },
             { kind = "turnin", quest = 604, npc = 2487, skipIfMissing = true },
@@ -5513,7 +5513,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 573, npc = 2465, skipIfMissing = true },
           } },
-        { id = "a197", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 28, maxLevel = 51, targets = { friend = { 715 } },
+        { id = "a197", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 38, maxLevel = 51, targets = { friend = { 715 } },
           lines = {
             { kind = "accept", quest = 197, npc = 715, ifDone = 196, requires = { 196 } },
           } },
@@ -5529,7 +5529,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 197, npc = 715, skipIfMissing = true },
           } },
-        { id = "a208", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 28, skip = { { kind = "notturnedin", quest = 197 }, { kind = "notturnedin", quest = 188 } }, targets = { friend = { 715 } },
+        { id = "a208", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 38, skip = { { kind = "notturnedin", quest = 197 }, { kind = "notturnedin", quest = 188 } }, targets = { friend = { 715 } },
           lines = {
             { kind = "accept", quest = 208, npc = 715, ifDone = 193, requires = { 188, 193, 197 } },
           } },
@@ -5655,7 +5655,7 @@ Noir.Route("horde-windshaper", {
             { kind = "accept", quest = 2987, npc = 8021 },
             { kind = "accept", quest = 2975, at = { zone = 357, x = 75.8, y = 43.58, r = 10 }, npc = 7777 },
           } },
-        { id = "a2973.a2862", at = { zone = 357, x = 75.94, y = 42.74, r = 10 }, minLevel = 39, maxLevel = 50, targets = { friend = { 4544, 7875 } },
+        { id = "a2973.a2862", at = { zone = 357, x = 75.94, y = 42.74, r = 10 }, minLevel = 40, maxLevel = 50, targets = { friend = { 4544, 7875 } },
           lines = {
             { kind = "accept", quest = 2973, npc = 4544 },
             { kind = "accept", quest = 2862, at = { zone = 357, x = 74.91, y = 42.46, r = 10 }, npc = 7875 },
@@ -5688,7 +5688,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "train", level = 40, class = "DRUID", npc = 8142 },
           } },
-        { id = "t2862.a2863.t2973.a2974", at = { zone = 357, x = 74.91, y = 42.46, r = 10 }, minLevel = 39, targets = { friend = { 7875, 4544 } },
+        { id = "t2862.a2863.t2973.a2974", at = { zone = 357, x = 74.91, y = 42.46, r = 10 }, minLevel = 40, targets = { friend = { 7875, 4544 } },
           lines = {
             { kind = "turnin", quest = 2862, npc = 7875, skipIfMissing = true },
             { kind = "accept", quest = 2863, npc = 7875, ifDone = 2862, requires = { 2862 } },
@@ -5717,7 +5717,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 2863, index = 1, npc = 5258, skipIfMissing = true },
           } },
-        { id = "t2987.t2975.a2980.t2974.a2976", at = { zone = 357, x = 75.7, y = 44.31, r = 10 }, minLevel = 38, items = { 9466, 9462 }, targets = { friend = { 8021, 7777, 4544 } },
+        { id = "t2987.t2975.a2980.t2974.a2976", at = { zone = 357, x = 75.7, y = 44.31, r = 10 }, minLevel = 40, items = { 9466, 9462 }, targets = { friend = { 8021, 7777, 4544 } },
           lines = {
             { kind = "turnin", quest = 2987, npc = 8021 },
             { kind = "turnin", quest = 2975, at = { zone = 357, x = 75.8, y = 43.58, r = 10 }, npc = 7777 },
@@ -5753,7 +5753,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 2902, object = 142195, skipIfMissing = true },
             { kind = "accept", quest = 2903, object = 142195, ifDone = 2902, requires = { 2902 } },
           } },
-        { id = "a2979", at = { zone = 357, x = 75.8, y = 43.58, r = 10 }, minLevel = 38, maxLevel = 54, targets = { friend = { 7777 } },
+        { id = "a2979", at = { zone = 357, x = 75.8, y = 43.58, r = 10 }, minLevel = 41, maxLevel = 54, targets = { friend = { 7777 } },
           lines = {
             { kind = "accept", quest = 2979, npc = 7777, ifDone = 2978, requires = { 2978 } },
           } },
@@ -5761,7 +5761,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "train", level = 42, class = "DRUID", npc = 8142 },
           } },
-        { id = "t2903.a7730.a2822", at = { zone = 357, x = 74.91, y = 42.46, r = 10 }, minLevel = 40, items = { 9266 }, targets = { friend = { 7875, 7854 } },
+        { id = "t2903.a7730.a2822", at = { zone = 357, x = 74.91, y = 42.46, r = 10 }, minLevel = 41, items = { 9266 }, targets = { friend = { 7875, 7854 } },
           lines = {
             { kind = "turnin", quest = 2903, npc = 7875, skipIfMissing = true },
             { kind = "accept", quest = 7730, npc = 7875, ifDone = 2903, requires = { 2903 } },
@@ -5842,12 +5842,12 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 1170, at = { zone = 15, x = 36.29, y = 31.41, r = 10 }, npc = 4500, skipIfMissing = true },
             { kind = "accept", quest = 1171, at = { zone = 15, x = 36.29, y = 31.41, r = 10 }, npc = 4500, ifDone = 1170, requires = { 1170 } },
           } },
-        { id = "t1261.a1262", at = { zone = 15, x = 35.21, y = 30.66, r = 10 }, minLevel = 30, items = { 5942 }, targets = { friend = { 4791 } },
+        { id = "t1261.a1262", at = { zone = 15, x = 35.21, y = 30.66, r = 10 }, minLevel = 35, items = { 5942 }, targets = { friend = { 4791 } },
           lines = {
             { kind = "turnin", quest = 1261, npc = 4791, skipIfMissing = true },
             { kind = "accept", quest = 1262, npc = 4791, ifDone = 1261, requires = { 1261 } },
           } },
-        { id = "t1171.a1172", at = { zone = 15, x = 37.15, y = 33.09, r = 10 }, minLevel = 38, targets = { friend = { 4501 } },
+        { id = "t1171.a1172", at = { zone = 15, x = 37.15, y = 33.09, r = 10 }, minLevel = 40, targets = { friend = { 4501 } },
           lines = {
             { kind = "turnin", quest = 1171, npc = 4501, skipIfMissing = true },
             { kind = "accept", quest = 1172, npc = 4501, ifDone = 1171, requires = { 1171 } },
@@ -5856,7 +5856,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 1172, index = 1, object = 20359, skipIfMissing = true },
           } },
-        { id = "t1172.a1173", at = { zone = 15, x = 37.15, y = 33.09, r = 10 }, minLevel = 38, targets = { friend = { 4501, 4500 } },
+        { id = "t1172.a1173", at = { zone = 15, x = 37.15, y = 33.09, r = 10 }, minLevel = 40, targets = { friend = { 4501, 4500 } },
           lines = {
             { kind = "turnin", quest = 1172, npc = 4501, skipIfMissing = true },
             { kind = "accept", quest = 1173, at = { zone = 15, x = 36.29, y = 31.41, r = 10 }, npc = 4500, ifDone = 1172, requires = { 1172 } },
@@ -5903,7 +5903,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "transport", to = { zone = 33, x = 31.2, y = 30.4 }, mode = "zeppelin", at = { zone = 14, x = 50.5, y = 12.7, r = 15 } },
           } },
-        { id = "a586", at = { zone = 33, x = 32.22, y = 27.6, r = 10 }, minLevel = 30, maxLevel = 54,
+        { id = "a586", at = { zone = 33, x = 32.22, y = 27.6, r = 10 }, minLevel = 41, maxLevel = 54,
           lines = {
             { kind = "accept", quest = 586, object = 2076, ifDone = 584, requires = { 584 } },
           } },
@@ -5948,7 +5948,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 608, npc = 2487, skipIfMissing = true },
             { kind = "turnin", quest = 348, at = { zone = 33, x = 27.61, y = 76.74, r = 10 }, npc = 2486 },
           } },
-        { id = "a8551", at = { zone = 33, x = 26.69, y = 73.61, r = 10 }, minLevel = 35, maxLevel = 55, targets = { friend = { 2500 } },
+        { id = "a8551", at = { zone = 33, x = 26.69, y = 73.61, r = 10 }, minLevel = 42, maxLevel = 55, targets = { friend = { 2500 } },
           lines = {
             { kind = "accept", quest = 8551, npc = 2500 },
           } },
@@ -5972,11 +5972,11 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 586, object = 2076, skipIfMissing = true },
           } },
-        { id = "a588", at = { zone = 33, x = 32.22, y = 27.6, r = 10 }, minLevel = 30, skip = { { kind = "notturnedin", quest = 586 } }, targets = { friend = { 2519 } },
+        { id = "a588", at = { zone = 33, x = 32.22, y = 27.6, r = 10 }, minLevel = 40, skip = { { kind = "notturnedin", quest = 586 } }, targets = { friend = { 2519 } },
           lines = {
             { kind = "accept", quest = 588, object = 2076, ifDone = 585, requires = { 585, 586 } },
           } },
-        { id = "t588.a589", at = { zone = 33, x = 32.22, y = 27.6, r = 10 }, minLevel = 30, targets = { friend = { 2519 } },
+        { id = "t588.a589", at = { zone = 33, x = 32.22, y = 27.6, r = 10 }, minLevel = 40, targets = { friend = { 2519 } },
           lines = {
             { kind = "turnin", quest = 588, npc = 2519, skipIfMissing = true },
             { kind = "accept", quest = 589, npc = 2519, ifDone = 588, requires = { 588 } },
@@ -5989,7 +5989,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 589, index = 1, item = 3911, skipIfMissing = true },
           } },
-        { id = "t589.a591", at = { zone = 33, x = 32.27, y = 27.71, r = 10 }, minLevel = 30, targets = { friend = { 2519 } },
+        { id = "t589.a591", at = { zone = 33, x = 32.27, y = 27.71, r = 10 }, minLevel = 41, targets = { friend = { 2519 } },
           lines = {
             { kind = "turnin", quest = 589, npc = 2519, skipIfMissing = true },
             { kind = "accept", quest = 591, npc = 2519, ifDone = 589, requires = { 589 } },
@@ -5998,7 +5998,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 591, index = 1, item = 3616, skipIfMissing = true },
           } },
-        { id = "t591.a592", at = { zone = 33, x = 32.27, y = 27.71, r = 10 }, minLevel = 30, items = { 3912 }, targets = { friend = { 2519 } },
+        { id = "t591.a592", at = { zone = 33, x = 32.27, y = 27.71, r = 10 }, minLevel = 41, items = { 3912 }, targets = { friend = { 2519 } },
           lines = {
             { kind = "turnin", quest = 591, npc = 2519, skipIfMissing = true },
             { kind = "accept", quest = 592, npc = 2519, ifDone = 591, requires = { 591 } },
@@ -6029,7 +6029,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 23, to = 40 },
           } },
-        { id = "a992", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 38, maxLevel = 54, items = { 8584 }, targets = { friend = { 7724 } },
+        { id = "a992", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 41, maxLevel = 54, items = { 8584 }, targets = { friend = { 7724 } },
           lines = {
             { kind = "accept", quest = 992, npc = 7724 },
           } },
@@ -6041,12 +6041,12 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 992, index = 1, item = 8585, skipIfMissing = true },
           } },
-        { id = "t992.a82", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 39, items = { 8584 }, targets = { friend = { 7724 } },
+        { id = "t992.a82", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 42, items = { 8584 }, targets = { friend = { 7724 } },
           lines = {
             { kind = "turnin", quest = 992, npc = 7724, skipIfMissing = true },
             { kind = "accept", quest = 82, npc = 7724, ifDone = 992, requires = { 992 } },
           } },
-        { id = "a2781.t3520.a97530", at = { zone = 440, x = 66.82, y = 22.29, r = 10 }, minLevel = 40, items = { 10699 }, targets = { friend = { 8579, 7882 } },
+        { id = "a2781.t3520.a97530", at = { zone = 440, x = 66.82, y = 22.29, r = 10 }, minLevel = 42, items = { 10699 }, targets = { friend = { 8579, 7882 } },
           lines = {
             { kind = "accept", quest = 2781, object = 142122 },
             { kind = "turnin", quest = 3520, npc = 8579, skipIfMissing = true },
@@ -6098,7 +6098,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 1637, x = 45.12, y = 63.89, r = 20 } },
           } },
-        { id = "a7541.t7541", at = { zone = 1637, x = 38.93, y = 38.4, r = 10 }, minLevel = 30, targets = { friend = { 4047 } },
+        { id = "a7541.t7541", at = { zone = 1637, x = 38.93, y = 38.4, r = 10 }, minLevel = 35, targets = { friend = { 4047 } },
           lines = {
             { kind = "accept", quest = 7541, npc = 4047, ifDone = 1262, requires = { 1262 } },
             { kind = "turnin", quest = 7541, npc = 4047, skipIfMissing = true },
@@ -6107,7 +6107,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "train", level = 42, class = "WARRIOR", npc = 3353 },
           } },
-        { id = "a649.t649", at = { zone = 1637, x = 59.49, y = 36.57, r = 10 }, minLevel = 42, targets = { friend = { 6986, 6987 } },
+        { id = "a649.t649", at = { zone = 1637, x = 59.49, y = 36.57, r = 10 }, minLevel = 43, targets = { friend = { 6986, 6987 } },
           lines = {
             { kind = "accept", quest = 649, npc = 6986 },
             { kind = "turnin", quest = 649, npc = 6987 },
@@ -6164,7 +6164,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 16651, x = 21.2, y = 23.2, r = 20 } },
           } },
-        { id = "a93037.t93037.a93122.t93122.a93128", at = { zone = 16651, x = 21.2, y = 23.2, r = 10 }, minLevel = 35, targets = { friend = { 253177 } },
+        { id = "a93037.t93037.a93122.t93122.a93128", at = { zone = 16651, x = 21.2, y = 23.2, r = 10 }, minLevel = 38, targets = { friend = { 253177 } },
           lines = {
             { kind = "accept", quest = 93037, npc = 253177 },
             { kind = "turnin", quest = 93037, npc = 253177 },
@@ -6229,7 +6229,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 4450, index = 3, item = 11724, skipIfMissing = true },
             { kind = "objective", quest = 4450, index = 4, item = 11723, skipIfMissing = true },
           } },
-        { id = "a3441", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 40, maxLevel = 56, targets = { friend = { 8479 } },
+        { id = "a3441", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 43, maxLevel = 56, targets = { friend = { 8479 } },
           lines = {
             { kind = "accept", quest = 3441, npc = 8479 },
           } },
@@ -6238,7 +6238,7 @@ Noir.Route("horde-windshaper", {
             { kind = "accept", quest = 7728, object = 179827 },
             { kind = "accept", quest = 7729, object = 179827 },
           } },
-        { id = "o3441.t3441.a3442.o7729", at = { zone = 51, x = 39.06, y = 38.99, r = 40 }, minLevel = 40, targets = { enemy = { 8479, 5844, 5846 }, friend = { 8479 } },
+        { id = "o3441.t3441.a3442.o7729", at = { zone = 51, x = 39.06, y = 38.99, r = 40 }, minLevel = 43, targets = { enemy = { 8479, 5844, 5846 }, friend = { 8479 } },
           lines = {
             { kind = "objective", quest = 3441, index = 1, npc = 8479, skipIfMissing = true },
             { kind = "turnin", quest = 3441, npc = 8479, skipIfMissing = true },
@@ -6256,7 +6256,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 7728, index = 1, item = 18959, skipIfMissing = true },
             { kind = "objective", quest = 7728, index = 2, item = 18960, skipIfMissing = true },
           } },
-        { id = "t3442.a3443.o3443.t3443", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 40, targets = { enemy = { 5843, 5844, 5846, 8504, 5840, 8566 }, friend = { 8479 } },
+        { id = "t3442.a3443.o3443.t3443", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 43, targets = { enemy = { 5843, 5844, 5846, 8504, 5840, 8566 }, friend = { 8479 } },
           lines = {
             { kind = "turnin", quest = 3442, npc = 8479, skipIfMissing = true },
             { kind = "accept", quest = 3443, npc = 8479, ifDone = 3442, requires = { 3442 } },
@@ -6399,7 +6399,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 23, to = 40 },
           } },
-        { id = "a10", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 39, maxLevel = 56, targets = { friend = { 7724 } },
+        { id = "a10", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 43, maxLevel = 56, targets = { friend = { 7724 } },
           lines = {
             { kind = "accept", quest = 10, npc = 7724, ifDone = 82, requires = { 82 } },
           } },
@@ -6432,7 +6432,7 @@ Noir.Route("horde-windshaper", {
             { kind = "accept", quest = 2605, npc = 7564 },
             { kind = "sethearth", at = { zone = 440, x = 52.51, y = 27.91, r = 10 }, npc = 7733 },
           } },
-        { id = "t10.a110.t110.a113.t113", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 39, items = { 8594 }, targets = { friend = { 7724, 5594 } },
+        { id = "t10.a110.t110.a113.t113", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 43, items = { 8594 }, targets = { friend = { 7724, 5594 } },
           lines = {
             { kind = "turnin", quest = 10, npc = 7724, skipIfMissing = true },
             { kind = "accept", quest = 110, npc = 7724, ifDone = 10, requires = { 10 } },
@@ -6477,11 +6477,11 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 40, to = 42 },
           } },
-        { id = "a3002", at = { zone = 357, x = 75.8, y = 43.58, r = 10 }, minLevel = 38, maxLevel = 55, items = { 9371 }, targets = { friend = { 7777 } },
+        { id = "a3002", at = { zone = 357, x = 75.8, y = 43.58, r = 10 }, minLevel = 42, maxLevel = 55, items = { 9371 }, targets = { friend = { 7777 } },
           lines = {
             { kind = "accept", quest = 3002, npc = 7777, ifDone = 2979, requires = { 2979 } },
           } },
-        { id = "a7731.a7734", at = { zone = 357, x = 74.91, y = 42.46, r = 10 }, minLevel = 40, maxLevel = 55, targets = { friend = { 7875, 7854 } },
+        { id = "a7731.a7734", at = { zone = 357, x = 74.91, y = 42.46, r = 10 }, minLevel = 43, maxLevel = 55, targets = { friend = { 7875, 7854 } },
           lines = {
             { kind = "accept", quest = 7731, npc = 7875, ifDone = 2903, requires = { 2903 } },
             { kind = "accept", quest = 7734, at = { zone = 357, x = 74.43, y = 42.91, r = 10 }, npc = 7854, ifDone = 2822, requires = { 2822 } },
@@ -6525,7 +6525,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 7734, npc = 7854, skipIfMissing = true },
             { kind = "turnin", quest = 7731, at = { zone = 357, x = 74.91, y = 42.46, r = 10 }, npc = 7875, skipIfMissing = true },
           } },
-        { id = "a7732", at = { zone = 357, x = 74.43, y = 42.91, r = 10 }, minLevel = 39, skip = { { kind = "notturnedin", quest = 7731 } }, items = { 19020 }, targets = { friend = { 7854, 7875 } },
+        { id = "a7732", at = { zone = 357, x = 74.43, y = 42.91, r = 10 }, minLevel = 43, skip = { { kind = "notturnedin", quest = 7731 } }, items = { 19020 }, targets = { friend = { 7854, 7875 } },
           lines = {
             { kind = "accept", quest = 7732, at = { zone = 357, x = 74.91, y = 42.46, r = 10 }, npc = 7875, ifDone = 7730, requires = { 7730, 7731 } },
           } },
@@ -6573,11 +6573,11 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 1497, x = 50.14, y = 67.97, r = 20 } },
           } },
-        { id = "a232", at = { zone = 1497, x = 50.14, y = 67.97, r = 10 }, minLevel = 38, maxLevel = 53, items = { 8525 }, targets = { friend = { 5204 } },
+        { id = "a232", at = { zone = 1497, x = 50.14, y = 67.97, r = 10 }, minLevel = 40, maxLevel = 53, items = { 8525 }, targets = { friend = { 5204 } },
           lines = {
             { kind = "accept", quest = 232, npc = 5204 },
           } },
-        { id = "t232.a238", at = { zone = 1497, x = 58.61, y = 54.68, r = 10 }, minLevel = 38, items = { 8525, 8523 }, targets = { friend = { 7683 } },
+        { id = "t232.a238", at = { zone = 1497, x = 58.61, y = 54.68, r = 10 }, minLevel = 40, items = { 8525, 8523 }, targets = { friend = { 7683 } },
           lines = {
             { kind = "turnin", quest = 232, npc = 7683, skipIfMissing = true },
             { kind = "accept", quest = 238, npc = 7683, ifDone = 232, requires = { 232 } },
@@ -6590,7 +6590,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 11, to = 76 },
           } },
-        { id = "a7843.a7840.b@47", at = { zone = 47, x = 79.38, y = 79.08, r = 10 }, minLevel = 44, items = { 19036 }, targets = { friend = { 14738, 14731 } },
+        { id = "a7843.a7840.b@47", at = { zone = 47, x = 79.38, y = 79.08, r = 10 }, minLevel = 45, items = { 19036 }, targets = { friend = { 14738, 14731 } },
           lines = {
             { kind = "accept", quest = 7843, npc = 14738, ifDone = 7842, requires = { 7842 } },
             { kind = "accept", quest = 7840, at = { zone = 47, x = 78.14, y = 81.38, r = 10 }, npc = 14731 },
@@ -6705,7 +6705,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "train", level = 46, class = "DRUID", npc = 8142 },
           } },
-        { id = "t3122.a3128", at = { zone = 357, x = 74.42, y = 43.36, r = 10 }, minLevel = 40, items = { 9628 }, targets = { friend = { 8115 } },
+        { id = "t3122.a3128", at = { zone = 357, x = 74.42, y = 43.36, r = 10 }, minLevel = 45, items = { 9628 }, targets = { friend = { 8115 } },
           lines = {
             { kind = "turnin", quest = 3122, npc = 8115, skipIfMissing = true },
             { kind = "accept", quest = 3128, npc = 8115, ifDone = 3122, requires = { 3122 } },
@@ -6825,7 +6825,7 @@ Noir.Route("horde-windshaper", {
             { kind = "accept", quest = 7701, object = 179827 },
             { kind = "accept", quest = 7722, at = { zone = 51, x = 38.8, y = 28.51, r = 10 }, npc = 14624 },
           } },
-        { id = "a3452.o7701.o7722", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 40, targets = { enemy = { 14621 }, friend = { 8479 } },
+        { id = "a3452.o7701.o7722", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 45, targets = { enemy = { 14621 }, friend = { 8479 } },
           lines = {
             { kind = "accept", quest = 3452, npc = 8479, ifDone = 3443, requires = { 3443 } },
             { kind = "objective", quest = 7701, index = 1, item = 18946, at = { zone = 51, x = 40.77, y = 35.89, r = 40 }, skipIfMissing = true },
@@ -6840,7 +6840,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 7701, npc = 14634, skipIfMissing = true },
             { kind = "turnin", quest = 7722, at = { zone = 51, x = 38.8, y = 28.51, r = 10 }, npc = 14624, skipIfMissing = true },
           } },
-        { id = "t3452.a3453.o3453.t3453.a3454.t3454.a3462.t3462.a3463", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 40, items = { 10515 }, targets = { enemy = { 8479 }, friend = { 8479, 8509 } },
+        { id = "t3452.a3453.o3453.t3453.a3454.t3454.a3462.t3462.a3463", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 47, items = { 10515 }, targets = { enemy = { 8479 }, friend = { 8479, 8509 } },
           lines = {
             { kind = "turnin", quest = 3452, npc = 8479, skipIfMissing = true },
             { kind = "accept", quest = 3453, npc = 8479, ifDone = 3452, requires = { 3452 } },
@@ -6859,7 +6859,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 3463, index = 3, object = 149031, skipIfMissing = true },
             { kind = "objective", quest = 3463, index = 4, object = 149032, skipIfMissing = true },
           } },
-        { id = "t3463.a3481.t3481", at = { zone = 51, x = 39.17, y = 39, r = 10 }, minLevel = 40, items = { 10515 }, targets = { friend = { 8509 } },
+        { id = "t3463.a3481.t3481", at = { zone = 51, x = 39.17, y = 39, r = 10 }, minLevel = 45, items = { 10515 }, targets = { friend = { 8509 } },
           lines = {
             { kind = "turnin", quest = 3463, npc = 8509, skipIfMissing = true },
             { kind = "accept", quest = 3481, object = 149502, ifDone = 3463, requires = { 3463 } },
@@ -6941,7 +6941,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 76, to = 13 },
           } },
-        { id = "a520.b@267", at = { zone = 267, x = 62.63, y = 20.65, r = 10 }, minLevel = 34, targets = { friend = { 2278 } },
+        { id = "a520.b@267", at = { zone = 267, x = 62.63, y = 20.65, r = 10 }, minLevel = 38, targets = { friend = { 2278 } },
           lines = {
             { kind = "accept", quest = 520, npc = 2278, ifDone = 519, requires = { 519 } },
             { kind = "sethearth", at = { zone = 267, x = 62.78, y = 19.03, r = 10 }, npc = 2388 },
@@ -6976,7 +6976,7 @@ Noir.Route("horde-windshaper", {
             { kind = "getflight", node = 3203, npc = 255993 },
             { kind = "accept", quest = 95882, at = { zone = 16591, x = 59.6, y = 46.9, r = 10 }, object = 707249 },
           } },
-        { id = "a95119.a95165.t95165", at = { zone = 16591, x = 79.36, y = 53.08, r = 10 }, minLevel = 38, items = { 268505 }, targets = { friend = { 259961 } },
+        { id = "a95119.a95165.t95165", at = { zone = 16591, x = 79.36, y = 53.08, r = 10 }, minLevel = 39, items = { 268505 }, targets = { friend = { 259961 } },
           lines = {
             { kind = "accept", quest = 95119, npc = 259961 },
             { kind = "accept", quest = 95165, npc = 259961 },
@@ -7013,7 +7013,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "accept", quest = 2784, npc = 7572 },
           } },
-        { id = "a1428", at = { zone = 8, x = 83.76, y = 80.41, r = 10 }, minLevel = 35, maxLevel = 53, targets = { friend = { 5593 } },
+        { id = "a1428", at = { zone = 8, x = 83.76, y = 80.41, r = 10 }, minLevel = 40, maxLevel = 53, targets = { friend = { 5593 } },
           lines = {
             { kind = "accept", quest = 1428, npc = 5593, ifDone = 1427, requires = { 1427 } },
           } },
@@ -7061,7 +7061,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 56, to = 18 },
           } },
-        { id = "a8552", at = { zone = 33, x = 23.25, y = 72.1, r = 40 }, minLevel = 40, maxLevel = 58, items = { 3985 }, targets = { enemy = { 1493 } },
+        { id = "a8552", at = { zone = 33, x = 23.25, y = 72.1, r = 40 }, minLevel = 45, maxLevel = 58, items = { 3985 }, targets = { enemy = { 1493 } },
           lines = {
             { kind = "accept", quest = 8552, item = 3985, npc = 1493 },
           } },
@@ -7069,7 +7069,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "train", level = 46, class = "ROGUE", npc = 1411 },
           } },
-        { id = "t8552.a8553.t8553.a8554", at = { zone = 33, x = 26.69, y = 73.61, r = 10 }, minLevel = 40, items = { 3985 }, targets = { friend = { 2500, 2594 } },
+        { id = "t8552.a8553.t8553.a8554", at = { zone = 33, x = 26.69, y = 73.61, r = 10 }, minLevel = 45, items = { 3985 }, targets = { friend = { 2500, 2594 } },
           lines = {
             { kind = "turnin", quest = 8552, npc = 2500, skipIfMissing = true },
             { kind = "accept", quest = 8553, npc = 2500, ifDone = 8552, requires = { 8552 } },
@@ -7084,7 +7084,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 8554, index = 1, item = 3935, skipIfMissing = true },
           } },
-        { id = "t594.a630", at = { zone = 33, x = 38.53, y = 80.58, r = 10 }, minLevel = 45, targets = { friend = { 2634 } },
+        { id = "t594.a630", at = { zone = 33, x = 38.53, y = 80.58, r = 10 }, minLevel = 46, targets = { friend = { 2634 } },
           lines = {
             { kind = "turnin", quest = 594, npc = 2634, skipIfMissing = true },
             { kind = "accept", quest = 630, npc = 2634, ifDone = 594, requires = { 594 } },
@@ -7136,7 +7136,7 @@ Noir.Route("horde-windshaper", {
             { kind = "accept", quest = 5535, npc = 11548 },
             { kind = "accept", quest = 5536, npc = 11548 },
           } },
-        { id = "f44.a3517", at = { zone = 16, x = 21.96, y = 49.62, r = 10 }, minLevel = 45, targets = { friend = { 8587 } },
+        { id = "f44.a3517", at = { zone = 16, x = 21.96, y = 49.62, r = 10 }, minLevel = 47, targets = { friend = { 8587 } },
           lines = {
             { kind = "getflight", node = 44, npc = 8610 },
             { kind = "accept", quest = 3517, at = { zone = 16, x = 22.56, y = 51.42, r = 10 }, npc = 8587 },
@@ -7164,13 +7164,13 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 5535, npc = 11548, skipIfMissing = true },
             { kind = "turnin", quest = 5536, npc = 11548, skipIfMissing = true },
           } },
-        { id = "t3517.a3518.a3561", at = { zone = 16, x = 22.56, y = 51.42, r = 10 }, minLevel = 45, items = { 10538, 10541 }, targets = { friend = { 8587 } },
+        { id = "t3517.a3518.a3561", at = { zone = 16, x = 22.56, y = 51.42, r = 10 }, minLevel = 47, items = { 10538, 10541 }, targets = { friend = { 8587 } },
           lines = {
             { kind = "turnin", quest = 3517, npc = 8587 },
             { kind = "accept", quest = 3518, npc = 8587, requires = { 3517 } },
             { kind = "accept", quest = 3561, npc = 8587, requires = { 3517 } },
           } },
-        { id = "t3561.a3565", at = { zone = 16, x = 29.25, y = 40.21, r = 10 }, minLevel = 45, items = { 10541, 10681 }, targets = { friend = { 8379 } },
+        { id = "t3561.a3565", at = { zone = 16, x = 29.25, y = 40.21, r = 10 }, minLevel = 47, items = { 10541, 10681 }, targets = { friend = { 8379 } },
           lines = {
             { kind = "turnin", quest = 3561, npc = 8379 },
             { kind = "accept", quest = 3565, npc = 8379, requires = { 3561 } },
@@ -7272,7 +7272,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 3362, index = 1, npc = 5490, skipIfMissing = true },
             { kind = "objective", quest = 3362, index = 2, npc = 5485, skipIfMissing = true },
           } },
-        { id = "a1560", at = { zone = 440, x = 30.32, y = 67.41, r = 10 }, minLevel = 40, maxLevel = 58, targets = { friend = { 5955 } },
+        { id = "a1560", at = { zone = 440, x = 30.32, y = 67.41, r = 10 }, minLevel = 45, maxLevel = 58, targets = { friend = { 5955 } },
           lines = {
             { kind = "accept", quest = 1560, npc = 5955 },
           } },
@@ -7317,7 +7317,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 3762, npc = 5769, skipIfMissing = true },
           } },
-        { id = "t3518.a3562", at = { zone = 1638, x = 69.85, y = 30.91, r = 10 }, minLevel = 45, items = { 10538, 10678 }, targets = { friend = { 4046 } },
+        { id = "t3518.a3562", at = { zone = 1638, x = 69.85, y = 30.91, r = 10 }, minLevel = 47, items = { 10538, 10678 }, targets = { friend = { 4046 } },
           lines = {
             { kind = "turnin", quest = 3518, npc = 4046, skipIfMissing = true },
             { kind = "accept", quest = 3562, npc = 4046, ifDone = 3518, requires = { 3518 } },
@@ -7334,7 +7334,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 22, to = 44 },
           } },
-        { id = "t3562.a3541", at = { zone = 16, x = 22.56, y = 51.42, r = 10 }, minLevel = 45, items = { 10678, 10539 }, targets = { friend = { 8587 } },
+        { id = "t3562.a3541", at = { zone = 16, x = 22.56, y = 51.42, r = 10 }, minLevel = 47, items = { 10678, 10539 }, targets = { friend = { 8587 } },
           lines = {
             { kind = "turnin", quest = 3562, npc = 8587, skipIfMissing = true },
             { kind = "accept", quest = 3541, npc = 8587, ifDone = 3517, requires = { 3517 } },
@@ -7343,12 +7343,12 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 44, to = 23 },
           } },
-        { id = "t3541.a3563", at = { zone = 1637, x = 55.52, y = 34.08, r = 10 }, minLevel = 45, items = { 10539, 10680 }, targets = { friend = { 8659 } },
+        { id = "t3541.a3563", at = { zone = 1637, x = 55.52, y = 34.08, r = 10 }, minLevel = 47, items = { 10539, 10680 }, targets = { friend = { 8659 } },
           lines = {
             { kind = "turnin", quest = 3541, npc = 8659, skipIfMissing = true },
             { kind = "accept", quest = 3563, npc = 8659, ifDone = 3541, requires = { 3541 } },
           } },
-        { id = "a3504", at = { zone = 1637, x = 75.23, y = 34.24, r = 10 }, minLevel = 44, maxLevel = 60, items = { 10643 }, targets = { friend = { 4485 } },
+        { id = "a3504", at = { zone = 1637, x = 75.23, y = 34.24, r = 10 }, minLevel = 48, maxLevel = 60, items = { 10643 }, targets = { friend = { 4485 } },
           lines = {
             { kind = "accept", quest = 3504, npc = 4485 },
           } },
@@ -7418,11 +7418,11 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 23, to = 44 },
           } },
-        { id = "a3505", at = { zone = 16, x = 22.26, y = 51.48, r = 10 }, minLevel = 44, maxLevel = 60, targets = { friend = { 8576 } },
+        { id = "a3505", at = { zone = 16, x = 22.26, y = 51.48, r = 10 }, minLevel = 48, maxLevel = 60, targets = { friend = { 8576 } },
           lines = {
             { kind = "accept", quest = 3505, npc = 8576, ifDone = 3504, requires = { 3504 } },
           } },
-        { id = "a3601", at = { zone = 16, x = 53.45, y = 21.82, r = 10 }, minLevel = 47, maxLevel = 60, targets = { friend = { 8420 } },
+        { id = "a3601", at = { zone = 16, x = 53.45, y = 21.82, r = 10 }, minLevel = 48, maxLevel = 60, targets = { friend = { 8420 } },
           lines = {
             { kind = "accept", quest = 3601, npc = 8420 },
           } },
@@ -7443,7 +7443,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 3505, object = 151286, skipIfMissing = true },
           } },
-        { id = "t3601.a5534", label = "turnin3601", at = { zone = 16, x = 53.45, y = 21.82, r = 10 }, minLevel = 47, targets = { friend = { 8420 } },
+        { id = "t3601.a5534", label = "turnin3601", at = { zone = 16, x = 53.45, y = 21.82, r = 10 }, minLevel = 48, targets = { friend = { 8420 } },
           lines = {
             { kind = "turnin", quest = 3601, npc = 8420, skipIfMissing = true },
             { kind = "accept", quest = 5534, npc = 8420, ifDone = 3601, requires = { 3601 } },
@@ -7466,7 +7466,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 44, to = 79 },
           } },
-        { id = "a4284", at = { zone = 490, x = 41.92, y = 2.7, r = 10 }, minLevel = 47, maxLevel = 60, targets = { friend = { 9117 } },
+        { id = "a4284", at = { zone = 490, x = 41.92, y = 2.7, r = 10 }, minLevel = 48, maxLevel = 60, targets = { friend = { 9117 } },
           lines = {
             { kind = "accept", quest = 4284, npc = 9117 },
           } },
@@ -7515,7 +7515,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 3881, npc = 9270, skipIfMissing = true },
           } },
-        { id = "t4284.a4285.a4287.a4288", at = { zone = 490, x = 41.92, y = 2.7, r = 10 }, minLevel = 47, targets = { friend = { 9117 } },
+        { id = "t4284.a4285.a4287.a4288", at = { zone = 490, x = 41.92, y = 2.7, r = 10 }, minLevel = 48, targets = { friend = { 9117 } },
           lines = {
             { kind = "turnin", quest = 4284, npc = 9117, skipIfMissing = true },
             { kind = "accept", quest = 4285, npc = 9117, ifDone = 4284, requires = { 4284 } },
@@ -7540,7 +7540,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 4287, npc = 9117, skipIfMissing = true },
             { kind = "turnin", quest = 4288, npc = 9117, skipIfMissing = true },
           } },
-        { id = "a4321", at = { zone = 490, x = 41.92, y = 2.7, r = 10 }, minLevel = 47, skip = { { kind = "notturnedin", quest = 4287 }, { kind = "notturnedin", quest = 4288 } }, targets = { friend = { 9117 } },
+        { id = "a4321", at = { zone = 490, x = 41.92, y = 2.7, r = 10 }, minLevel = 48, skip = { { kind = "notturnedin", quest = 4287 }, { kind = "notturnedin", quest = 4288 } }, targets = { friend = { 9117 } },
           lines = {
             { kind = "accept", quest = 4321, npc = 9117, ifDone = 4285, requires = { 4285, 4287, 4288 } },
           } },
@@ -7556,7 +7556,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 93128, npc = 5397, skipIfMissing = true },
           } },
-        { id = "a94872", at = { zone = 405, x = 56.29, y = 59.68, r = 10 }, minLevel = 30, maxLevel = 53, items = { 257685 }, targets = { friend = { 5412 } },
+        { id = "a94872", at = { zone = 405, x = 56.29, y = 59.68, r = 10 }, minLevel = 40, maxLevel = 53, items = { 257685 }, targets = { friend = { 5412 } },
           lines = {
             { kind = "accept", quest = 94872, npc = 5412 },
           } },
@@ -7621,12 +7621,12 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 6162, npc = 9620 },
           } },
-        { id = "t5157.a5156", at = { zone = 361, x = 51.21, y = 82.11, r = 10 }, minLevel = 48, items = { 12922 }, targets = { friend = { 10922, 10921 } },
+        { id = "t5157.a5156", at = { zone = 361, x = 51.21, y = 82.11, r = 10 }, minLevel = 49, items = { 12922 }, targets = { friend = { 10922, 10921 } },
           lines = {
             { kind = "turnin", quest = 5157, npc = 10922, skipIfMissing = true },
             { kind = "accept", quest = 5156, npc = 10921 },
           } },
-        { id = "a8462", at = { zone = 361, x = 50.93, y = 85.01, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 11554 } },
+        { id = "a8462", at = { zone = 361, x = 50.93, y = 85.01, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 11554 } },
           lines = {
             { kind = "accept", quest = 8462, npc = 11554, ifDone = 8460, requires = { 8460 } },
           } },
@@ -7634,7 +7634,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "accept", quest = 4505, npc = 9996 },
           } },
-        { id = "a5202", at = { zone = 361, x = 37.95, y = 50.91, r = 40 }, minLevel = 49, maxLevel = 60, items = { 13140 }, targets = { enemy = { 7118 } },
+        { id = "a5202", at = { zone = 361, x = 37.95, y = 50.91, r = 40 }, minLevel = 50, maxLevel = 60, items = { 13140 }, targets = { enemy = { 7118 } },
           lines = {
             { kind = "accept", quest = 5202, item = 13140, npc = 7118 },
           } },
@@ -7648,7 +7648,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 4505, index = 1, item = 12567, skipIfMissing = true },
           } },
-        { id = "t5202.a5203", at = { zone = 361, x = 36.21, y = 55.47, r = 10 }, minLevel = 49, items = { 13140 }, targets = { friend = { 11016 } },
+        { id = "t5202.a5203", at = { zone = 361, x = 36.21, y = 55.47, r = 10 }, minLevel = 50, items = { 13140 }, targets = { friend = { 11016 } },
           lines = {
             { kind = "turnin", quest = 5202, npc = 11016, skipIfMissing = true },
             { kind = "accept", quest = 5203, npc = 11016, ifDone = 5202, requires = { 5202 } },
@@ -7669,7 +7669,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 5156, npc = 10921 },
             { kind = "turnin", quest = 5203, at = { zone = 361, x = 51.35, y = 82.01, r = 10 }, npc = 11019, skipIfMissing = true },
           } },
-        { id = "a8470", at = { zone = 361, x = 62.21, y = 8.73, r = 40 }, minLevel = 45, maxLevel = 60, items = { 20741 }, targets = { enemy = { 7157 } },
+        { id = "a8470", at = { zone = 361, x = 62.21, y = 8.73, r = 40 }, minLevel = 50, maxLevel = 60, items = { 20741 }, targets = { enemy = { 7157 } },
           lines = {
             { kind = "accept", quest = 8470, item = 20741, npc = 7157 },
           } },
@@ -7774,7 +7774,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 4, x = 50.64, y = 14.3, r = 20 } },
           } },
-        { id = "a81917.a81919", at = { zone = 4, x = 50.64, y = 14.3, r = 10 }, minLevel = 45, maxLevel = 60, items = { 220216 }, targets = { friend = { 7506 } },
+        { id = "a81917.a81919", at = { zone = 4, x = 50.64, y = 14.3, r = 10 }, minLevel = 49, maxLevel = 60, items = { 220216 }, targets = { friend = { 7506 } },
           lines = {
             { kind = "accept", quest = 81917, npc = 7506 },
             { kind = "accept", quest = 81919, npc = 7506 },
@@ -8018,7 +8018,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 85, x = 83.04, y = 71.91, r = 20 } },
           } },
-        { id = "t5234.a5901", at = { zone = 85, x = 83.04, y = 71.91, r = 10 }, minLevel = 48, items = { 13192, 15042 }, targets = { friend = { 11055, 11615 } },
+        { id = "t5234.a5901", at = { zone = 85, x = 83.04, y = 71.91, r = 10 }, minLevel = 50, items = { 13192, 15042 }, targets = { friend = { 11055, 11615 } },
           lines = {
             { kind = "turnin", quest = 5234, npc = 11055, skipIfMissing = true },
             { kind = "accept", quest = 5901, npc = 11615 },
@@ -8083,7 +8083,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 85, x = 83.29, y = 72.34, r = 20 } },
           } },
-        { id = "t5901.a5902", at = { zone = 85, x = 83.29, y = 72.34, r = 10 }, minLevel = 48, items = { 15042, 15044 }, targets = { friend = { 11615 } },
+        { id = "t5901.a5902", at = { zone = 85, x = 83.29, y = 72.34, r = 10 }, minLevel = 50, items = { 15042, 15044 }, targets = { friend = { 11615 } },
           lines = {
             { kind = "turnin", quest = 5901, npc = 11615 },
             { kind = "accept", quest = 5902, npc = 11615, requires = { 5901 } },
@@ -8092,7 +8092,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 28, x = 48.34, y = 31.99, r = 20 } },
           } },
-        { id = "t5902.a6390", at = { zone = 28, x = 48.34, y = 31.99, r = 10 }, minLevel = 48, items = { 15044 },
+        { id = "t5902.a6390", at = { zone = 28, x = 48.34, y = 31.99, r = 10 }, minLevel = 50, items = { 15044 },
           lines = {
             { kind = "turnin", quest = 5902, object = 177491 },
             { kind = "accept", quest = 6390, object = 177491, requires = { 5902 } },
@@ -8109,7 +8109,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 4, x = 51.98, y = 35.65, r = 20 } },
           } },
-        { id = "a2521.a3501", at = { zone = 4, x = 51.98, y = 35.65, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 7363 } },
+        { id = "a2521.a3501", at = { zone = 4, x = 51.98, y = 35.65, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 7363 } },
           lines = {
             { kind = "accept", quest = 2521, npc = 7363 },
             { kind = "accept", quest = 3501, npc = 7363 },
@@ -8128,7 +8128,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 8, x = 44.97, y = 57.37, r = 20 } },
           } },
-        { id = "a2623", at = { zone = 8, x = 44.97, y = 57.37, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 7643 } },
+        { id = "a2623", at = { zone = 8, x = 44.97, y = 57.37, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 7643 } },
           lines = {
             { kind = "accept", quest = 2623, npc = 7643, ifDone = 2622, requires = { 2622 } },
           } },
@@ -8148,7 +8148,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 56, to = 20 },
           } },
-        { id = "a7810", at = { zone = 33, x = 30.52, y = 47.87, r = 40 }, maxLevel = 60, items = { 18706 },
+        { id = "a7810", at = { zone = 33, x = 30.52, y = 47.87, r = 40 }, minLevel = 50, maxLevel = 60, items = { 18706 },
           lines = {
             { kind = "accept", quest = 7810, item = 18706, object = 179697 },
           } },
@@ -8174,7 +8174,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 23, to = 79 },
           } },
-        { id = "a4501", at = { zone = 490, x = 43.53, y = 8.44, r = 10 }, minLevel = 49, maxLevel = 60,
+        { id = "a4501", at = { zone = 490, x = 43.53, y = 8.44, r = 10 }, minLevel = 50, maxLevel = 60,
           lines = {
             { kind = "accept", quest = 4501, object = 174682 },
           } },
@@ -8183,7 +8183,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 4501, index = 1, npc = 9166, skipIfMissing = true },
             { kind = "objective", quest = 4501, index = 2, npc = 9167, skipIfMissing = true },
           } },
-        { id = "a4289", at = { zone = 490, x = 71.64, y = 75.96, r = 10 }, minLevel = 47, maxLevel = 60, targets = { friend = { 9619 } },
+        { id = "a4289", at = { zone = 490, x = 71.64, y = 75.96, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 9619 } },
           lines = {
             { kind = "accept", quest = 4289, npc = 9619 },
           } },
@@ -8206,7 +8206,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 4301, index = 1, item = 11476, skipIfMissing = true },
           } },
-        { id = "t4301.a4292", at = { zone = 490, x = 71.64, y = 75.96, r = 10 }, minLevel = 48, items = { 11568, 11569, 11570 }, targets = { friend = { 9619 } },
+        { id = "t4301.a4292", at = { zone = 490, x = 71.64, y = 75.96, r = 10 }, minLevel = 51, items = { 11568, 11569, 11570 }, targets = { friend = { 9619 } },
           lines = {
             { kind = "turnin", quest = 4301, npc = 9619, skipIfMissing = true },
             { kind = "accept", quest = 4292, npc = 9619, ifDone = 4291, requires = { 4291 } },
@@ -8307,7 +8307,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 8471, npc = 11558, skipIfMissing = true },
           } },
-        { id = "a8461", at = { zone = 361, x = 64.77, y = 8.13, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 15395 } },
+        { id = "a8461", at = { zone = 361, x = 64.77, y = 8.13, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 15395 } },
           lines = {
             { kind = "accept", quest = 8461, npc = 15395 },
           } },
@@ -8322,7 +8322,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 5084, object = 176091, skipIfMissing = true },
             { kind = "accept", quest = 5085, object = 176091, ifDone = 5084, requires = { 5084 } },
           } },
-        { id = "t8461.a8465", label = "turnin8461", at = { zone = 361, x = 64.77, y = 8.13, r = 10 }, minLevel = 45, targets = { friend = { 15395 } },
+        { id = "t8461.a8465", label = "turnin8461", at = { zone = 361, x = 64.77, y = 8.13, r = 10 }, minLevel = 50, targets = { friend = { 15395 } },
           lines = {
             { kind = "turnin", quest = 8461, npc = 15395, skipIfMissing = true },
             { kind = "accept", quest = 8465, npc = 15395, ifDone = 8461, requires = { 8461 } },
@@ -8343,7 +8343,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "accept", quest = 4521, npc = 10306 },
           } },
-        { id = "a4102", at = { zone = 361, x = 46.75, y = 83.13, r = 10 }, minLevel = 48, maxLevel = 60, targets = { friend = { 9529 } },
+        { id = "a4102", at = { zone = 361, x = 46.75, y = 83.13, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 9529 } },
           lines = {
             { kind = "accept", quest = 4102, npc = 9529 },
           } },
@@ -8351,7 +8351,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 4102, index = 1, item = 11503, skipIfMissing = true },
           } },
-        { id = "t4102.a5887", at = { zone = 361, x = 46.75, y = 83.13, r = 10 }, minLevel = 48, targets = { friend = { 9529 } },
+        { id = "t4102.a5887", at = { zone = 361, x = 46.75, y = 83.13, r = 10 }, minLevel = 50, targets = { friend = { 9529 } },
           lines = {
             { kind = "turnin", quest = 4102, npc = 9529, skipIfMissing = true },
             { kind = "accept", quest = 5887, npc = 9529, ifDone = 4102, requires = { 4102 } },
@@ -8372,12 +8372,12 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 61, to = 44 },
           } },
-        { id = "a3506.o3506", at = { zone = 16, x = 59.51, y = 31.3, r = 10 }, minLevel = 44, targets = { enemy = { 8578 } },
+        { id = "a3506.o3506", at = { zone = 16, x = 59.51, y = 31.3, r = 10 }, minLevel = 51, targets = { enemy = { 8578 } },
           lines = {
             { kind = "accept", quest = 3506, object = 151286, ifDone = 3505, requires = { 3505 } },
             { kind = "objective", quest = 3506, index = 1, item = 10597, skipIfMissing = true },
           } },
-        { id = "t3506.a3507", at = { zone = 16, x = 22.26, y = 51.48, r = 10 }, minLevel = 44, items = { 10597 }, targets = { friend = { 8576 } },
+        { id = "t3506.a3507", at = { zone = 16, x = 22.26, y = 51.48, r = 10 }, minLevel = 51, items = { 10597 }, targets = { friend = { 8576 } },
           lines = {
             { kind = "turnin", quest = 3506, npc = 8576, skipIfMissing = true },
             { kind = "accept", quest = 3507, npc = 8576, ifDone = 3506, requires = { 3506 } },
@@ -8480,7 +8480,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "accept", quest = 4985, npc = 10739, ifDone = 4984, requires = { 4984 } },
           } },
-        { id = "a6004", at = { zone = 28, x = 51.92, y = 28.06, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 11610 } },
+        { id = "a6004", at = { zone = 28, x = 51.92, y = 28.06, r = 10 }, minLevel = 51, maxLevel = 60, targets = { friend = { 11610 } },
           lines = {
             { kind = "accept", quest = 6004, npc = 11610 },
           } },
@@ -8516,7 +8516,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 4972, npc = 10667, skipIfMissing = true },
           } },
-        { id = "t6004.a6023", at = { zone = 28, x = 51.92, y = 28.06, r = 10 }, minLevel = 50, targets = { friend = { 11610 } },
+        { id = "t6004.a6023", at = { zone = 28, x = 51.92, y = 28.06, r = 10 }, minLevel = 52, targets = { friend = { 11610 } },
           lines = {
             { kind = "turnin", quest = 6004, npc = 11610, skipIfMissing = true },
             { kind = "accept", quest = 6023, npc = 11610, ifDone = 6004, requires = { 6004 } },
@@ -8526,7 +8526,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 6023, index = 1, npc = 11613, skipIfMissing = true },
             { kind = "objective", quest = 6023, index = 2, npc = 11611, skipIfMissing = true },
           } },
-        { id = "t6023.a6025", at = { zone = 28, x = 51.92, y = 28.06, r = 10 }, minLevel = 50, targets = { friend = { 11610 } },
+        { id = "t6023.a6025", at = { zone = 28, x = 51.92, y = 28.06, r = 10 }, minLevel = 53, targets = { friend = { 11610 } },
           lines = {
             { kind = "turnin", quest = 6023, npc = 11610, skipIfMissing = true },
             { kind = "accept", quest = 6025, npc = 11610, ifDone = 6023, requires = { 6023 } },
@@ -8543,7 +8543,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 85, x = 83.19, y = 68.45, r = 20 } },
           } },
-        { id = "t6029.a5098", at = { zone = 85, x = 83.19, y = 68.45, r = 10 }, minLevel = 50, items = { 15788, 12815 }, targets = { friend = { 10839, 10837 } },
+        { id = "t6029.a5098", at = { zone = 85, x = 83.19, y = 68.45, r = 10 }, minLevel = 51, items = { 15788, 12815 }, targets = { friend = { 10839, 10837 } },
           lines = {
             { kind = "turnin", quest = 6029, npc = 10839, skipIfMissing = true },
             { kind = "accept", quest = 5098, npc = 10837, ifDone = 5096, requires = { 5096 } },
@@ -8571,7 +8571,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "accept", quest = 5050, npc = 8403, ifDone = 5049, requires = { 5049 } },
           } },
-        { id = "a4294", at = { zone = 1497, x = 47.45, y = 73.35, r = 10 }, minLevel = 48, maxLevel = 60, items = { 12235 }, targets = { friend = { 10136 } },
+        { id = "a4294", at = { zone = 1497, x = 47.45, y = 73.35, r = 10 }, minLevel = 51, maxLevel = 60, items = { 12235 }, targets = { friend = { 10136 } },
           lines = {
             { kind = "accept", quest = 4294, npc = 10136 },
           } },
@@ -8651,7 +8651,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 4504, npc = 7876, skipIfMissing = true },
             { kind = "accept", quest = 4507, at = { zone = 440, x = 50.89, y = 26.96, r = 10 }, npc = 5594, ifDone = 4496, requires = { 4496 } },
           } },
-        { id = "a32", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 39, maxLevel = 56, items = { 8594 }, targets = { friend = { 7724 } },
+        { id = "a32", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 43, maxLevel = 56, items = { 8594 }, targets = { friend = { 7724 } },
           lines = {
             { kind = "accept", quest = 32, npc = 7724, ifDone = 113, requires = { 113 } },
           } },
@@ -8723,11 +8723,11 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 361, x = 51.35, y = 82.01, r = 20 } },
           } },
-        { id = "a5204", at = { zone = 361, x = 51.35, y = 82.01, r = 10 }, minLevel = 49, maxLevel = 60, targets = { friend = { 11019 } },
+        { id = "a5204", at = { zone = 361, x = 51.35, y = 82.01, r = 10 }, minLevel = 52, maxLevel = 60, targets = { friend = { 11019 } },
           lines = {
             { kind = "accept", quest = 5204, npc = 11019, ifDone = 5203, requires = { 5203 } },
           } },
-        { id = "o5204.t5204.a5385", at = { zone = 361, x = 38.3, y = 50.51, r = 40 }, minLevel = 49, items = { 13562 }, targets = { enemy = { 9518 }, friend = { 11020 } },
+        { id = "o5204.t5204.a5385", at = { zone = 361, x = 38.3, y = 50.51, r = 40 }, minLevel = 52, items = { 13562 }, targets = { enemy = { 9518 }, friend = { 11020 } },
           lines = {
             { kind = "objective", quest = 5204, index = 1, npc = 9518, skipIfMissing = true },
             { kind = "turnin", quest = 5204, npc = 11020, skipIfMissing = true },
@@ -8804,7 +8804,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 8417, npc = 7572, skipIfMissing = true },
           } },
-        { id = "a2801.o2801.t2801.a2681", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, targets = { enemy = { 7572 }, friend = { 7572 } },
+        { id = "a2801.o2801.t2801.a2681", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 52, targets = { enemy = { 7572 }, friend = { 7572 } },
           lines = {
             { kind = "accept", quest = 2801, npc = 7572, ifDone = 2623, requires = { 2623 } },
             { kind = "objective", quest = 2801, index = 1, npc = 7572, skipIfMissing = true },
@@ -8827,7 +8827,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 8423, npc = 7572, skipIfMissing = true },
             { kind = "accept", quest = 8424, npc = 7572, ifDone = 8423, requires = { 8423 } },
           } },
-        { id = "t2681.a2702.t2702.a2701.t2701", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, targets = { friend = { 7572, 7750 } },
+        { id = "t2681.a2702.t2702.a2701.t2701", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 52, targets = { friend = { 7572, 7750 } },
           lines = {
             { kind = "turnin", quest = 2681, npc = 7572, skipIfMissing = true },
             { kind = "accept", quest = 2702, npc = 7572, ifDone = 2681, requires = { 2681 } },
@@ -8933,7 +8933,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 838, npc = 11057, skipIfMissing = true },
             { kind = "accept", quest = 964, npc = 11057, ifDone = 838, requires = { 838 } },
           } },
-        { id = "a5235", at = { zone = 85, x = 83.04, y = 71.91, r = 10 }, minLevel = 50, maxLevel = 60, items = { 13189 }, targets = { friend = { 11055 } },
+        { id = "a5235", at = { zone = 85, x = 83.04, y = 71.91, r = 10 }, minLevel = 53, maxLevel = 60, items = { 13189 }, targets = { friend = { 11055 } },
           lines = {
             { kind = "accept", quest = 5235, npc = 11055, ifDone = 5234, requires = { 5234 } },
           } },
@@ -8949,7 +8949,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 28, x = 62.18, y = 59.06, r = 20 } },
           } },
-        { id = "o5235.t5235.a5236", at = { zone = 28, x = 62.18, y = 59.06, r = 40 }, minLevel = 50, items = { 13189, 13193 }, targets = { enemy = { 11078 } },
+        { id = "o5235.t5235.a5236", at = { zone = 28, x = 62.18, y = 59.06, r = 40 }, minLevel = 53, items = { 13189, 13193 }, targets = { enemy = { 11078 } },
           lines = {
             { kind = "objective", quest = 5235, index = 1, item = 13196, skipIfMissing = true },
             { kind = "turnin", quest = 5235, object = 176392, skipIfMissing = true },
@@ -8967,7 +8967,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 5236, npc = 11055, skipIfMissing = true },
           } },
-        { id = "a5238.t5238", at = { zone = 85, x = 83.13, y = 68.94, r = 10 }, minLevel = 50, targets = { friend = { 10837 } },
+        { id = "a5238.t5238", at = { zone = 85, x = 83.13, y = 68.94, r = 10 }, minLevel = 53, targets = { friend = { 10837 } },
           lines = {
             { kind = "accept", quest = 5238, npc = 10837, ifDone = 5236, requires = { 5236 } },
             { kind = "turnin", quest = 5238, npc = 10837, skipIfMissing = true },
@@ -8980,7 +8980,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "accept", quest = 6042, npc = 11878 },
           } },
-        { id = "a5845", at = { zone = 139, x = 5.16, y = 35.57, r = 10 }, minLevel = 52, maxLevel = 60, targets = { friend = { 1855 } },
+        { id = "a5845", at = { zone = 139, x = 5.16, y = 35.57, r = 10 }, minLevel = 53, maxLevel = 60, targets = { friend = { 1855 } },
           lines = {
             { kind = "accept", quest = 5845, npc = 1855, ifDone = 5781, requires = { 5781 } },
           } },
@@ -8997,7 +8997,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 6042, npc = 11878, skipIfMissing = true },
           } },
-        { id = "t5845.a5846", at = { zone = 139, x = 5.16, y = 35.57, r = 10 }, minLevel = 52, targets = { friend = { 1855 } },
+        { id = "t5845.a5846", at = { zone = 139, x = 5.16, y = 35.57, r = 10 }, minLevel = 53, targets = { friend = { 1855 } },
           lines = {
             { kind = "turnin", quest = 5845, npc = 1855, skipIfMissing = true },
             { kind = "accept", quest = 5846, npc = 1855, ifDone = 5845, requires = { 5845 } },
@@ -9061,7 +9061,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 22, to = 53 },
           } },
-        { id = "a5123", at = { zone = 618, x = 69.56, y = 38.31, r = 40 }, minLevel = 52, maxLevel = 60, items = { 12842 }, targets = { enemy = { 10738 } },
+        { id = "a5123", at = { zone = 618, x = 69.56, y = 38.31, r = 40 }, minLevel = 54, maxLevel = 60, items = { 12842 }, targets = { enemy = { 10738 } },
           lines = {
             { kind = "accept", quest = 5123, item = 12842, npc = 10738, ifDone = 5087, requires = { 5087 } },
           } },
@@ -9069,7 +9069,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "accept", quest = 5055, npc = 10303, ifDone = 5054, requires = { 5054 } },
           } },
-        { id = "a977.b@618", at = { zone = 618, x = 60.88, y = 37.62, r = 10 }, minLevel = 52, targets = { friend = { 10305 } },
+        { id = "a977.b@618", at = { zone = 618, x = 60.88, y = 37.62, r = 10 }, minLevel = 53, targets = { friend = { 10305 } },
           lines = {
             { kind = "accept", quest = 977, npc = 10305, ifDone = 3783, requires = { 3783 } },
             { kind = "sethearth", at = { zone = 618, x = 61.36, y = 38.83, r = 10 }, npc = 11118 },
@@ -9086,7 +9086,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 5055, npc = 10303, skipIfMissing = true },
           } },
-        { id = "t977.a5163", at = { zone = 618, x = 60.88, y = 37.62, r = 10 }, minLevel = 52, items = { 12928 }, targets = { friend = { 10305 } },
+        { id = "t977.a5163", at = { zone = 618, x = 60.88, y = 37.62, r = 10 }, minLevel = 53, items = { 12928 }, targets = { friend = { 10305 } },
           lines = {
             { kind = "turnin", quest = 977, npc = 10305, skipIfMissing = true },
             { kind = "accept", quest = 5163, npc = 10305, ifDone = 977, requires = { 977 } },
@@ -9109,7 +9109,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 618, x = 27.73, y = 34.5, r = 20 } },
           } },
-        { id = "a8464", at = { zone = 618, x = 27.73, y = 34.5, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 11556 } },
+        { id = "a8464", at = { zone = 618, x = 27.73, y = 34.5, r = 10 }, minLevel = 53, maxLevel = 60, targets = { friend = { 11556 } },
           lines = {
             { kind = "accept", quest = 8464, npc = 11556 },
           } },
@@ -9153,7 +9153,7 @@ Noir.Route("horde-windshaper", {
             { kind = "accept", quest = 6606, npc = 11755 },
             { kind = "turnin", quest = 6606, at = { zone = 618, x = 61.92, y = 38.3, r = 10 }, npc = 10307 },
           } },
-        { id = "a5121", at = { zone = 618, x = 31.27, y = 45.16, r = 10 }, minLevel = 52, maxLevel = 60, targets = { friend = { 9298 } },
+        { id = "a5121", at = { zone = 618, x = 31.27, y = 45.16, r = 10 }, minLevel = 54, maxLevel = 60, targets = { friend = { 9298 } },
           lines = {
             { kind = "accept", quest = 5121, npc = 9298, ifDone = 5087, requires = { 5087 } },
           } },
@@ -9173,14 +9173,14 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 69, to = 80 },
           } },
-        { id = "a96339.t96339.a96383.t96383", at = { zone = 17, x = 62.05, y = 39.41, r = 10 }, targets = { friend = { 6791 } },
+        { id = "a96339.t96339.a96383.t96383", at = { zone = 17, x = 62.05, y = 39.41, r = 10 }, minLevel = 55, targets = { friend = { 6791 } },
           lines = {
             { kind = "accept", quest = 96339, npc = 6791 },
             { kind = "turnin", quest = 96339, npc = 6791 },
             { kind = "accept", quest = 96383, npc = 6791 },
             { kind = "turnin", quest = 96383, npc = 6791 },
           } },
-        { id = "a5159", at = { zone = 17, x = 65.83, y = 43.78, r = 10 }, minLevel = 48, maxLevel = 60, items = { 12906 }, targets = { friend = { 5901 } },
+        { id = "a5159", at = { zone = 17, x = 65.83, y = 43.78, r = 10 }, minLevel = 49, maxLevel = 60, items = { 12906 }, targets = { friend = { 5901 } },
           lines = {
             { kind = "accept", quest = 5159, npc = 5901, ifDone = 5158, requires = { 5158 } },
           } },
@@ -9194,7 +9194,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 80, to = 72 },
           } },
-        { id = "a9416", at = { zone = 1377, x = 48.95, y = 36.69, r = 10 }, maxLevel = 60, targets = { friend = { 17081 } },
+        { id = "a9416", at = { zone = 1377, x = 48.95, y = 36.69, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 17081 } },
           lines = {
             { kind = "accept", quest = 9416, npc = 17081 },
           } },
@@ -9257,7 +9257,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 361, x = 51.21, y = 82.11, r = 20 } },
           } },
-        { id = "t5159.a5165", at = { zone = 361, x = 51.21, y = 82.11, r = 10 }, minLevel = 48, items = { 12906 }, targets = { friend = { 10922 } },
+        { id = "t5159.a5165", at = { zone = 361, x = 51.21, y = 82.11, r = 10 }, minLevel = 50, items = { 12906 }, targets = { friend = { 10922 } },
           lines = {
             { kind = "turnin", quest = 5159, npc = 10922, skipIfMissing = true },
             { kind = "accept", quest = 5165, npc = 10922, ifDone = 5159, requires = { 5159 } },
@@ -9269,7 +9269,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 5165, index = 3, object = 176160, skipIfMissing = true },
             { kind = "objective", quest = 5165, index = 4, object = 176161, skipIfMissing = true },
           } },
-        { id = "t5165.a5242", at = { zone = 361, x = 51.21, y = 82.11, r = 10 }, minLevel = 48, items = { 12906 }, targets = { friend = { 10922 } },
+        { id = "t5165.a5242", at = { zone = 361, x = 51.21, y = 82.11, r = 10 }, minLevel = 53, items = { 12906 }, targets = { friend = { 10922 } },
           lines = {
             { kind = "turnin", quest = 5165, npc = 10922, skipIfMissing = true },
             { kind = "accept", quest = 5242, npc = 10922, ifDone = 5165, requires = { 5165 } },
@@ -9387,7 +9387,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 20, to = 56 },
           } },
-        { id = "a2721", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 7572 } },
+        { id = "a2721", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 53, maxLevel = 60, targets = { friend = { 7572 } },
           lines = {
             { kind = "accept", quest = 2721, npc = 7572, ifDone = 2701, requires = { 2701 } },
           } },
@@ -9401,7 +9401,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 4, x = 68.8, y = 31.07, r = 20 } },
           } },
-        { id = "t2721.a2743", at = { zone = 4, x = 68.8, y = 31.07, r = 10 }, minLevel = 45, targets = { friend = { 7729 } },
+        { id = "t2721.a2743", at = { zone = 4, x = 68.8, y = 31.07, r = 10 }, minLevel = 55, targets = { friend = { 7729 } },
           lines = {
             { kind = "turnin", quest = 2721, npc = 7729, skipIfMissing = true },
             { kind = "accept", quest = 2743, npc = 7729, ifDone = 2721, requires = { 2721 } },
@@ -9430,11 +9430,11 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 1497, x = 48.71, y = 71.39, r = 20 } },
           } },
-        { id = "a3568", at = { zone = 1497, x = 48.71, y = 71.39, r = 10 }, minLevel = 45, maxLevel = 60, items = { 10695, 12288 }, targets = { friend = { 8390, 10136 } },
+        { id = "a3568", at = { zone = 1497, x = 48.71, y = 71.39, r = 10 }, minLevel = 47, maxLevel = 60, items = { 10695, 12288 }, targets = { friend = { 8390, 10136 } },
           lines = {
             { kind = "accept", quest = 3568, npc = 8390 },
           } },
-        { id = "a4642", at = { zone = 1497, x = 48.71, y = 71.39, r = 10 }, minLevel = 48, maxLevel = 60, skip = { { kind = "notturnedin", quest = 4293 } }, items = { 10695, 12288 }, targets = { friend = { 8390, 10136 } },
+        { id = "a4642", at = { zone = 1497, x = 48.71, y = 71.39, r = 10 }, minLevel = 50, maxLevel = 60, skip = { { kind = "notturnedin", quest = 4293 } }, items = { 10695, 12288 }, targets = { friend = { 8390, 10136 } },
           lines = {
             { kind = "accept", quest = 4642, npc = 10136, ifDone = 4294, requires = { 4293, 4294 } },
           } },
@@ -9454,7 +9454,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 23, to = 44 },
           } },
-        { id = "a3542", at = { zone = 16, x = 22.56, y = 51.42, r = 10 }, minLevel = 45, maxLevel = 60, items = { 10540 }, targets = { friend = { 8587 } },
+        { id = "a3542", at = { zone = 16, x = 22.56, y = 51.42, r = 10 }, minLevel = 47, maxLevel = 60, items = { 10540 }, targets = { friend = { 8587 } },
           lines = {
             { kind = "accept", quest = 3542, npc = 8587, ifDone = 3517, requires = { 3517 } },
           } },
@@ -9474,7 +9474,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "hearth", to = { zone = 1377, x = 51.89, y = 39.16 } },
           } },
-        { id = "a8858.a8859.a8857", at = { zone = 1377, x = 49.55, y = 37.31, r = 10 }, minLevel = 51, maxLevel = 60, items = { 21535, 21533, 21534 }, targets = { friend = { 15799, 15797, 15798 } },
+        { id = "a8858.a8859.a8857", at = { zone = 1377, x = 49.55, y = 37.31, r = 10 }, minLevel = 55, maxLevel = 60, items = { 21535, 21533, 21534 }, targets = { friend = { 15799, 15797, 15798 } },
           lines = {
             { kind = "accept", quest = 8858, npc = 15799 },
             { kind = "accept", quest = 8859, npc = 15797 },
@@ -9533,7 +9533,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 1497, x = 48.71, y = 71.39, r = 20 } },
           } },
-        { id = "t3568.a3569.t3569.a3570.t3570.t4642.t3542.a3564", at = { zone = 1497, x = 48.71, y = 71.39, r = 10 }, minLevel = 45, items = { 10695, 10712, 12288, 10540, 10679 }, targets = { friend = { 8390, 8393, 10136, 6522 } },
+        { id = "t3568.a3569.t3569.a3570.t3570.t4642.t3542.a3564", at = { zone = 1497, x = 48.71, y = 71.39, r = 10 }, minLevel = 47, items = { 10695, 10712, 12288, 10540, 10679 }, targets = { friend = { 8390, 8393, 10136, 6522 } },
           lines = {
             { kind = "turnin", quest = 3568, npc = 8390, skipIfMissing = true },
             { kind = "accept", quest = 3569, npc = 8390, ifDone = 3568, requires = { 3568 } },
@@ -9568,7 +9568,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "turnin", quest = 8858, npc = 14625, skipIfMissing = true },
           } },
-        { id = "a81900", at = { zone = 51, x = 14.47, y = 36.4, r = 10 }, minLevel = 45, maxLevel = 60,
+        { id = "a81900", at = { zone = 51, x = 14.47, y = 36.4, r = 10 }, minLevel = 49, maxLevel = 60,
           lines = {
             { kind = "accept", quest = 81900, object = 441061 },
           } },
@@ -9604,11 +9604,11 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "accept", quest = 8318, npc = 15306 },
           } },
-        { id = "a9422", at = { zone = 1377, x = 50.75, y = 69.54, r = 10 }, maxLevel = 60, targets = { friend = { 17079 } },
+        { id = "a9422", at = { zone = 1377, x = 50.75, y = 69.54, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 17079 } },
           lines = {
             { kind = "accept", quest = 9422, npc = 17079 },
           } },
-        { id = "a8279", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, minLevel = 54, maxLevel = 60, targets = { friend = { 15194 } },
+        { id = "a8279", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 15194 } },
           lines = {
             { kind = "accept", quest = 8279, npc = 15194, ifDone = 8285, requires = { 8285 } },
           } },
@@ -9631,7 +9631,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 8279, index = 2, item = 20395, skipIfMissing = true },
             { kind = "objective", quest = 8279, index = 3, item = 20396, skipIfMissing = true },
           } },
-        { id = "t8279.a8287.a8323", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, minLevel = 54, items = { 20405 }, targets = { friend = { 15194 } },
+        { id = "t8279.a8287.a8323", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, minLevel = 55, items = { 20405 }, targets = { friend = { 15194 } },
           lines = {
             { kind = "turnin", quest = 8279, npc = 15194, skipIfMissing = true },
             { kind = "accept", quest = 8287, npc = 15194, ifDone = 8279, requires = { 8279 } },
@@ -9696,7 +9696,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "transport", to = { zone = 85, x = 60.6, y = 58.9 }, mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 } },
           } },
-        { id = "a105", at = { zone = 85, x = 83.13, y = 68.94, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 10837 } },
+        { id = "a105", at = { zone = 85, x = 83.13, y = 68.94, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 10837 } },
           lines = {
             { kind = "accept", quest = 105, npc = 10837, ifDone = 5098, requires = { 5098 } },
           } },
@@ -9721,7 +9721,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 1497, x = 71.66, y = 29.23, r = 20 } },
           } },
-        { id = "a7813.b@1497", at = { zone = 1497, x = 71.66, y = 29.23, r = 10 }, minLevel = 12, targets = { friend = { 14729 } },
+        { id = "a7813.b@1497", at = { zone = 1497, x = 71.66, y = 29.23, r = 10 }, minLevel = 55, targets = { friend = { 14729 } },
           lines = {
             { kind = "accept", quest = 7813, npc = 14729 },
             { kind = "sethearth", at = { zone = 1497, x = 67.74, y = 37.89, r = 10 }, npc = 6741 },
@@ -9768,11 +9768,11 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 9665, index = 3, npc = 17696 },
             { kind = "objective", quest = 9665, index = 4, npc = 17698 },
           } },
-        { id = "a6133", at = { zone = 139, x = 22.23, y = 63.51, r = 10 }, minLevel = 54, maxLevel = 60, targets = { friend = { 11878 } },
+        { id = "a6133", at = { zone = 139, x = 22.23, y = 63.51, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 11878 } },
           lines = {
             { kind = "accept", quest = 6133, npc = 11878 },
           } },
-        { id = "a6024", at = { zone = 139, x = 22.9, y = 72.96, r = 10 }, minLevel = 54, maxLevel = 60,
+        { id = "a6024", at = { zone = 139, x = 22.9, y = 72.96, r = 10 }, minLevel = 55, maxLevel = 60,
           lines = {
             { kind = "accept", quest = 6024, object = 177667 },
           } },
@@ -9870,13 +9870,13 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 5056, index = 1, npc = 10737, skipIfMissing = true },
           } },
-        { id = "t5056.a5057.t5057", at = { zone = 618, x = 61.93, y = 38.38, r = 10 }, minLevel = 53, items = { 12733 }, targets = { friend = { 10303 } },
+        { id = "t5056.a5057.t5057", at = { zone = 618, x = 61.93, y = 38.38, r = 10 }, minLevel = 55, items = { 12733 }, targets = { friend = { 10303 } },
           lines = {
             { kind = "turnin", quest = 5056, npc = 10303, skipIfMissing = true },
             { kind = "accept", quest = 5057, npc = 10303, ifDone = 5056, requires = { 5056 } },
             { kind = "turnin", quest = 5057, npc = 10303, skipIfMissing = true },
           } },
-        { id = "a5128", at = { zone = 618, x = 31.27, y = 45.16, r = 10 }, minLevel = 52, maxLevel = 60, items = { 12842 }, targets = { friend = { 9298 } },
+        { id = "a5128", at = { zone = 618, x = 31.27, y = 45.16, r = 10 }, minLevel = 54, maxLevel = 60, items = { 12842 }, targets = { friend = { 9298 } },
           lines = {
             { kind = "accept", quest = 5128, npc = 9298, ifDone = 5123, requires = { 5123 } },
           } },
@@ -9932,18 +9932,18 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 1637, x = 52.9, y = 66.56, r = 20 } },
           } },
-        { id = "a7926.a8276", at = { zone = 1637, x = 52.9, y = 66.56, r = 10 }, minLevel = 54, maxLevel = 60, items = { 19338 }, targets = { friend = { 14843, 15188 } },
+        { id = "a7926.a8276", at = { zone = 1637, x = 52.9, y = 66.56, r = 10 }, minLevel = 55, maxLevel = 60, items = { 19338 }, targets = { friend = { 14843, 15188 } },
           lines = {
             { kind = "accept", quest = 7926, npc = 14843 },
             { kind = "accept", quest = 8276, at = { zone = 1637, x = 47.64, y = 65.76, r = 10 }, npc = 15188 },
           } },
-        { id = "a7833.a7834.a7835", at = { zone = 1637, x = 37.7, y = 87.9, r = 10 }, minLevel = 40, maxLevel = 60, targets = { friend = { 14727 } },
+        { id = "a7833.a7834.a7835", at = { zone = 1637, x = 37.7, y = 87.9, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 14727 } },
           lines = {
             { kind = "accept", quest = 7833, npc = 14727 },
             { kind = "accept", quest = 7834, npc = 14727 },
             { kind = "accept", quest = 7835, npc = 14727 },
           } },
-        { id = "a7826.a7827.a7831", at = { zone = 1637, x = 63.6, y = 51.23, r = 10 }, minLevel = 40, maxLevel = 60, targets = { friend = { 14726 } },
+        { id = "a7826.a7827.a7831", at = { zone = 1637, x = 63.6, y = 51.23, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 14726 } },
           lines = {
             { kind = "accept", quest = 7826, npc = 14726 },
             { kind = "accept", quest = 7827, npc = 14726 },
@@ -10245,7 +10245,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 8, x = 34.29, y = 66.14, r = 20 } },
           } },
-        { id = "a2744", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 7572 } },
+        { id = "a2744", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 7572 } },
           lines = {
             { kind = "accept", quest = 2744, npc = 7572, ifDone = 2743, requires = { 2743 } },
           } },
@@ -10276,7 +10276,7 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 7667, index = 1, item = 12800, skipIfMissing = true },
             { kind = "objective", quest = 7667, index = 2, item = 18335, skipIfMissing = true },
           } },
-        { id = "o2744.t2744.a3141.o3141.t3141.a3508.t3508.a3509", at = { zone = 16, x = 60.82, y = 66.35, r = 40 }, minLevel = 45, targets = { enemy = { 7783 }, friend = { 7783 } },
+        { id = "o2744.t2744.a3141.o3141.t3141.a3508.t3508.a3509", at = { zone = 16, x = 60.82, y = 66.35, r = 40 }, minLevel = 53, targets = { enemy = { 7783 }, friend = { 7783 } },
           lines = {
             { kind = "objective", quest = 2744, index = 1, npc = 7783, skipIfMissing = true },
             { kind = "turnin", quest = 2744, npc = 7783, skipIfMissing = true },
@@ -10287,7 +10287,7 @@ Noir.Route("horde-windshaper", {
             { kind = "turnin", quest = 3508, npc = 7783, skipIfMissing = true },
             { kind = "accept", quest = 3509, npc = 7783, ifDone = 3508, requires = { 3508 } },
           } },
-        { id = "t3509.a3510", at = { zone = 16, x = 77.13, y = 42.79, r = 10 }, minLevel = 45, targets = { friend = { 6134 } },
+        { id = "t3509.a3510", at = { zone = 16, x = 77.13, y = 42.79, r = 10 }, minLevel = 53, targets = { friend = { 6134 } },
           lines = {
             { kind = "turnin", quest = 3509, npc = 6134, skipIfMissing = true },
             { kind = "accept", quest = 3510, npc = 6134, ifDone = 3509, requires = { 3509 } },
@@ -10298,12 +10298,12 @@ Noir.Route("horde-windshaper", {
             { kind = "objective", quest = 3510, index = 2, item = 10598, skipIfMissing = true },
             { kind = "objective", quest = 3510, index = 3, item = 10600, skipIfMissing = true },
           } },
-        { id = "t3510.a3511", at = { zone = 16, x = 77.13, y = 42.79, r = 10 }, minLevel = 45, items = { 10610 }, targets = { friend = { 6134 } },
+        { id = "t3510.a3511", at = { zone = 16, x = 77.13, y = 42.79, r = 10 }, minLevel = 53, items = { 10610 }, targets = { friend = { 6134 } },
           lines = {
             { kind = "turnin", quest = 3510, npc = 6134, skipIfMissing = true },
             { kind = "accept", quest = 3511, npc = 6134, ifDone = 3510, requires = { 3510 } },
           } },
-        { id = "t3511.a3602", at = { zone = 16, x = 60.82, y = 66.35, r = 10 }, minLevel = 45, items = { 10610, 10834, 10831, 10832 }, targets = { friend = { 7783 } },
+        { id = "t3511.a3602", at = { zone = 16, x = 60.82, y = 66.35, r = 10 }, minLevel = 53, items = { 10610, 10834, 10831, 10832 }, targets = { friend = { 7783 } },
           lines = {
             { kind = "turnin", quest = 3511, npc = 7783, skipIfMissing = true },
             { kind = "accept", quest = 3602, npc = 7783, ifDone = 3511, requires = { 3511 } },
@@ -10312,7 +10312,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "objective", quest = 3602, index = 1, item = 10714, skipIfMissing = true },
           } },
-        { id = "t3602.a3621", at = { zone = 16, x = 60.82, y = 66.35, r = 10 }, minLevel = 45, items = { 10834, 10831, 10832, 10738 }, targets = { friend = { 7783 } },
+        { id = "t3602.a3621", at = { zone = 16, x = 60.82, y = 66.35, r = 10 }, minLevel = 53, items = { 10834, 10831, 10832, 10738 }, targets = { friend = { 7783 } },
           lines = {
             { kind = "turnin", quest = 3602, npc = 7783, skipIfMissing = true },
             { kind = "accept", quest = 3621, npc = 7783, ifDone = 3602, requires = { 3602 } },
@@ -10337,7 +10337,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "transport", to = { zone = 33, x = 31.2, y = 30.4 }, mode = "zeppelin", at = { zone = 14, x = 50.5, y = 12.7, r = 15 } },
           } },
-        { id = "t3621.a3625.o3625.t3625.a3626", at = { zone = 33, x = 50.62, y = 20.48, r = 10 }, minLevel = 45, items = { 10738 }, targets = { enemy = { 7802 }, friend = { 7802 } },
+        { id = "t3621.a3625.o3625.t3625.a3626", at = { zone = 33, x = 50.62, y = 20.48, r = 10 }, minLevel = 53, items = { 10738 }, targets = { enemy = { 7802 }, friend = { 7802 } },
           lines = {
             { kind = "turnin", quest = 3621, npc = 7802, skipIfMissing = true },
             { kind = "accept", quest = 3625, npc = 7802, ifDone = 3621, requires = { 3621 } },
@@ -10357,7 +10357,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "train", level = 58, class = "WARRIOR", npc = 985 },
           } },
-        { id = "t3626.a3627", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, targets = { friend = { 7572 } },
+        { id = "t3626.a3627", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 55, targets = { friend = { 7572 } },
           lines = {
             { kind = "turnin", quest = 3626, npc = 7572, skipIfMissing = true },
             { kind = "accept", quest = 3627, npc = 7572, ifDone = 3626, requires = { 3626 } },
@@ -10455,7 +10455,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 20, to = 56 },
           } },
-        { id = "a3628", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, maxLevel = 60, items = { 10757 }, targets = { friend = { 7572 } },
+        { id = "a3628", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 55, maxLevel = 60, items = { 10757 }, targets = { friend = { 7572 } },
           lines = {
             { kind = "accept", quest = 3628, npc = 7572, ifDone = 3627, requires = { 3627 } },
           } },
@@ -10491,7 +10491,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 23, to = 22 },
           } },
-        { id = "a7820.a7821.a7822", at = { zone = 1638, x = 43.05, y = 42.72, r = 10 }, minLevel = 40, maxLevel = 60, targets = { friend = { 14728 } },
+        { id = "a7820.a7821.a7822", at = { zone = 1638, x = 43.05, y = 42.72, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 14728 } },
           lines = {
             { kind = "accept", quest = 7820, npc = 14728 },
             { kind = "accept", quest = 7821, npc = 14728 },
@@ -10552,7 +10552,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 215, x = 34.2, y = 22.46, r = 20 } },
           } },
-        { id = "a99196.a99198", at = { zone = 215, x = 34.2, y = 22.46, r = 10 }, minLevel = 40, maxLevel = 60, targets = { friend = { 276171 } },
+        { id = "a99196.a99198", at = { zone = 215, x = 34.2, y = 22.46, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 276171 } },
           lines = {
             { kind = "accept", quest = 99196, npc = 276171 },
             { kind = "accept", quest = 99198, npc = 276171 },
@@ -10633,7 +10633,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "goto", at = { zone = 1497, x = 71.66, y = 29.23, r = 20 } },
           } },
-        { id = "a7814.a7817", at = { zone = 1497, x = 71.66, y = 29.23, r = 10 }, minLevel = 40, maxLevel = 60, targets = { friend = { 14729 } },
+        { id = "a7814.a7817", at = { zone = 1497, x = 71.66, y = 29.23, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 14729 } },
           lines = {
             { kind = "accept", quest = 7814, npc = 14729 },
             { kind = "accept", quest = 7817, npc = 14729 },
@@ -10691,7 +10691,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "accept", quest = 2641, npc = 7583, ifDone = 2606, requires = { 2606 } },
           } },
-        { id = "a2741", at = { zone = 440, x = 52.39, y = 26.97, r = 10 }, minLevel = 42, maxLevel = 60,
+        { id = "a2741", at = { zone = 440, x = 52.39, y = 26.97, r = 10 }, minLevel = 55, maxLevel = 60,
           lines = {
             { kind = "accept", quest = 2741, object = 142071 },
           } },
@@ -10779,7 +10779,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 72, to = 80 },
           } },
-        { id = "a4502", at = { zone = 17, x = 62.45, y = 38.73, r = 10 }, minLevel = 49, maxLevel = 60, targets = { friend = { 8496 } },
+        { id = "a4502", at = { zone = 17, x = 62.45, y = 38.73, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 8496 } },
           lines = {
             { kind = "accept", quest = 4502, npc = 8496 },
           } },
@@ -10803,7 +10803,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 80, to = 48 },
           } },
-        { id = "a4741", at = { zone = 361, x = 34.73, y = 52.79, r = 10 }, minLevel = 52, maxLevel = 60, targets = { friend = { 10306 } },
+        { id = "a4741", at = { zone = 361, x = 34.73, y = 52.79, r = 10 }, minLevel = 53, maxLevel = 60, targets = { friend = { 10306 } },
           lines = {
             { kind = "accept", quest = 4741, npc = 10306, ifDone = 4521, requires = { 4521 } },
           } },
@@ -10819,7 +10819,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 53, to = 48 },
           } },
-        { id = "t4741.a4721", at = { zone = 361, x = 34.73, y = 52.79, r = 10 }, minLevel = 52, targets = { friend = { 10306 } },
+        { id = "t4741.a4721", at = { zone = 361, x = 34.73, y = 52.79, r = 10 }, minLevel = 54, targets = { friend = { 10306 } },
           lines = {
             { kind = "turnin", quest = 4741, npc = 10306, skipIfMissing = true },
             { kind = "accept", quest = 4721, npc = 10306, ifDone = 4741, requires = { 4741 } },
@@ -10828,7 +10828,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 48, to = 53 },
           } },
-        { id = "a4882", at = { zone = 618, x = 64.42, y = 38.35, r = 40 }, minLevel = 52, maxLevel = 60, items = { 12558 }, targets = { enemy = { 7453 } },
+        { id = "a4882", at = { zone = 618, x = 64.42, y = 38.35, r = 40 }, minLevel = 54, maxLevel = 60, items = { 12558 }, targets = { enemy = { 7453 } },
           lines = {
             { kind = "accept", quest = 4882, item = 12558, npc = 7453, ifDone = 4741, requires = { 4741 } },
           } },
@@ -10840,7 +10840,7 @@ Noir.Route("horde-windshaper", {
           lines = {
             { kind = "fly", from = 53, to = 48 },
           } },
-        { id = "t4721.t4882.a4883", at = { zone = 361, x = 34.73, y = 52.79, r = 10 }, minLevel = 52, items = { 12558 }, targets = { friend = { 10306 } },
+        { id = "t4721.t4882.a4883", at = { zone = 361, x = 34.73, y = 52.79, r = 10 }, minLevel = 54, items = { 12558 }, targets = { friend = { 10306 } },
           lines = {
             { kind = "turnin", quest = 4721, npc = 10306, skipIfMissing = true },
             { kind = "turnin", quest = 4882, npc = 10306, skipIfMissing = true },

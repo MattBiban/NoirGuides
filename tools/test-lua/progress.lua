@@ -281,6 +281,18 @@ test("with work ahead off, a step under its minimum level shows a grind line fir
   c:setLevel(7)
   c:advance(0.5)
   eq(place(P), "m.chest", "level 7: the step completes (and the level 5 step after it is outleveled)")
+  -- A player at the step's level is not held: no grind line, the card is the step's own work, and doing it passes
+  -- the step. (The planner writes minLevel as the gate of the step's quests, tools/planner/tuning.js gateLevel.)
+  local c2, _, P2 = play({ class = "MAGE", level = 7, saved = savedAt(TIRISFAL, "a367", nil, { workAhead = false }) })
+  c2:advance(0.5)
+  eq(place(P2), "a367")
+  local card2 = currentCard(P2)
+  eq(card2.gated, nil, "not a grind card")
+  eq(card2.lines[1].line.kind, "accept")
+  eq(card2.lines[1].line.synthetic, nil)
+  c2:acceptQuest(367)
+  c2:advance(0.5)
+  eq(place(P2), "m.chest", "at the level the accept is all the step asks")
 end)
 
 test("an outleveled step is passed with the reason", function()
@@ -747,6 +759,45 @@ test("the last section says the route is complete", function()
   eq({ index2, step2 and step2.id }, { count2, "g14" })
   no(again:chatText():find("end of the route", 1, true), "no second message")
   eq(again:slashCount(), 0)
+end)
+
+test("the last step: a grind step to a level the player has is passed as it comes, and a player under it is told to grind", function()
+  -- As the planner ends a route that reaches the cap (tools/planner/plan.js): a grind step to the cap after the last
+  -- piece of work. Here the cap of the sample is played as level 9.
+  local function withLastStep(client)
+    for _, sec in ipairs(client.G.Noir.Routes.Get("horde-undead").sections) do
+      if sec.id == SILVERPINE then
+        sec.steps[#sec.steps + 1] = { id = "l9@14", at = { zone = 14, x = 60, y = 40 }, lines = { { kind = "grind", level = 9 } } }
+      end
+    end
+  end
+  -- On the plan: the character is at the level when it comes to the step, and never sees it.
+  local c = sample3({ class = "MAGE", level = 9, afterLoad = withLastStep, saved = savedAt(SILVERPINE, "g14") }):login()
+  local P = c.G.Noir.Progress
+  -- The walk before it leads to nothing the character still has to do, so it is passed too: the route is complete
+  -- where the player stands (the place stays on the last step, spec 2.4.5).
+  c:advance(1)
+  ok(P.Complete(), "at level 9 the last step is passed at once, where the player stands: the route is complete")
+  eq(place(P), "l9@14")
+  eq(P.Cards(), {})
+  eq(c:slashCount(), 0)
+  -- Behind the plan: the step holds the place and asks for the rest of the level, then lets the route end.
+  local c2 = sample3({ class = "MAGE", level = 8, afterLoad = withLastStep, saved = savedAt(SILVERPINE, "g14") }):login()
+  local P2 = c2.G.Noir.Progress
+  c2:advance(0.5)
+  c2:moveTo({ zone = 14, x = 52, y = 28 })
+  c2:advance(1)
+  eq(place(P2), "l9@14")
+  no(P2.Complete(), "under level 9 the route is not over")
+  local card = currentCard(P2)
+  eq(card.lines[1].line.kind, "grind")
+  eq(card.lines[1].line.level, 9)
+  eq(card.lines[1].line.synthetic, nil, "the step's own line, not a gate")
+  eq(card.lines[1].state, "todo")
+  c2:setLevel(9)
+  c2:advance(1)
+  ok(P2.Complete(), "level 9: the route is complete")
+  eq(c2:slashCount(), 0)
 end)
 
 test("a finished section picked again by hand shows its last step", function()

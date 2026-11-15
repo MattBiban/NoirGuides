@@ -11,14 +11,14 @@ const { levelingQuests } = require("../lib/quests");
 const { zoneBands } = require("../planner/zones");
 const { planRoute } = require("../planner/plan");
 const { validateRoute } = require("../planner/validate");
-const { zoneOrder } = require("../planner/measure");
+const { zoneOrder, measureRoute, neededGrinds, planLevels } = require("../planner/measure");
 const { leftBehind, MAX_LEFT_BEHIND } = require("../planner/leftbehind");
 const { levelGap, MAX_ABOVE, MAX_BELOW_SHARE } = require("../planner/levelgap");
 const { dangerousWalks, MAX_DANGEROUS_WALKS } = require("../planner/danger");
 const { MAX_ZONE_SHARE, MAX_TRAVEL_SHARE, MAX_GRIND_STEPS } = require("../planner/report");
 const { grindSpotAt } = require("../planner/grindspots");
 const { zoneLevels } = require("../lib/xp");
-const { CHOICES: C } = require("../planner/tuning");
+const { CHOICES: C, gateLevel } = require("../planner/tuning");
 
 const human = () => { RACES.Human.startArea = 1000; return character("Human", "WARRIOR"); };
 const index = (route) => (action, quest) => route.steps.findIndex((s) => s.action === action && s.quest === quest);
@@ -441,6 +441,64 @@ test("the last level may be ground, and the route ends there", () => {
   assert.deepStrictEqual(names.filter((n) => n !== "getflight:1"), ["accept:1", "objective:1", "turnin:1", "grind"]);
   assert.strictEqual(route.stats.endLevel, 2);
 });
+test("the last step: a route that reaches the cap ends with one grind step to the cap, which the plan passes at no cost", () => {
+  // Westland's quest and three letters from Eastland reach level 2, the cap here, on quests alone (test/supply.test.js)
+  const world = (letters) => {
+    const w = testWorld();
+    w.npc(10, 100, 30, 50); w.npc(20, 100, 40, 50, ""); w.kill(1, 10, 20, 100);
+    w.npc(30, 200, 20, 50);
+    for (let n = 0; n < letters; n++) w.errand(70 + n, 30, 10, 200);
+    return w;
+  };
+  const w = world(3), ch = w.human(), graph = w.graph();
+  const route = planRoute(w.db, ch, { graph, inns: w.inns, maxLevel: 2 });
+  const checked = validateRoute(w.db, route, ch, { graph, inns: w.inns });
+  const last = route.steps.length - 1;
+  assert.deepStrictEqual(checked.errors, []);
+  // the level is reached by a hand-in; the last step is a grind step to the cap at the place the route ends
+  assert.strictEqual(route.steps[route.stats.levelAt[2]].action, "turnin");
+  assert.deepStrictEqual(route.steps[last], { action: "grind", level: 2, at: { zone: 100, x: 30, y: 50 } });
+  assert.deepStrictEqual(route.steps.filter((s) => s.action === "grind").length, 1, "exactly one");
+  // it changed nothing of the plan: the level was reached before it, and the plan's clock is the validator's
+  assert.ok(route.stats.levelAt[2] < last);
+  assert.strictEqual(route.stats.endLevel, 2);
+  assert.deepStrictEqual([checked.levels[last], checked.endLevel], [2, 2], "the character is at the cap when it comes to the step");
+  assert.strictEqual(checked.seconds, checked.clocks[last], "no time");
+  assert.ok(Math.abs(checked.seconds - route.stats.seconds) <= 1, `${checked.seconds} s replayed, ${route.stats.seconds} s planned`);
+  // it is no grind step the plan needs, by the validator's levels and by the plan's own, and no work in a zone
+  assert.deepStrictEqual([neededGrinds(route, checked.levels), neededGrinds(route)], [[], []]);
+  assert.deepStrictEqual(planLevels(route), checked.levels);
+  const without = { ...route, steps: route.steps.slice(0, last) };
+  const m = measureRoute(w.db, graph, route, ch, checked.levels), bare = measureRoute(w.db, graph, without, ch, checked.levels);
+  assert.deepStrictEqual({ ...m, steps: 0 }, { ...bare, steps: 0 }, "no zone change, no travel");
+  assert.strictEqual(m.steps, bare.steps + 1);
+  // a route whose last level is ground ends with that grind step and gets no second one
+  const one = world(1), ground = planRoute(one.db, one.human(), { graph: one.graph(), inns: one.inns, maxLevel: 2 });
+  assert.deepStrictEqual(ground.steps.filter((s) => s.action === "grind").map((s) => s.level), [2]);
+  assert.strictEqual(ground.steps[ground.steps.length - 1].action, "grind");
+  assert.strictEqual(ground.stats.levelAt[2], ground.steps.length - 1, "this one makes the level");
+  assert.deepStrictEqual(neededGrinds(ground), [ground.steps.length - 1]);
+  // a route that ends short of the cap has none: there is nothing to grind towards (the pacing test above)
+  const short = world(1), under = planRoute(short.db, short.human(), { graph: short.graph(), inns: short.inns, maxLevel: 10 });
+  assert.ok(under.stats.endLevel < 10 && under.steps[under.steps.length - 1].action !== "grind", names(under).join(" "));
+});
+test("the gate: a step that accepts a quest asks for the game's minimum, and no more than HARD_TALK + BEHIND under the quest", () => {
+  assert.deepStrictEqual([C.HARD_TALK, C.BEHIND], [4, 1]);
+  // far above its own minimum: the gate is five under the quest's level
+  assert.strictEqual(gateLevel({ minLevel: 1, level: 20 }), 15);
+  assert.strictEqual(gateLevel({ minLevel: 14, level: 20 }), 15);
+  // the game's minimum when that is higher
+  assert.strictEqual(gateLevel({ minLevel: 15, level: 20 }), 15);
+  assert.strictEqual(gateLevel({ minLevel: 18, level: 20 }), 18);
+  assert.strictEqual(gateLevel({ minLevel: 55, level: 60 }), 55);
+  // a low quest, and one whose levels the data does not give, gate nothing
+  assert.strictEqual(gateLevel({ minLevel: 1, level: 6 }), 1);
+  assert.strictEqual(gateLevel({ minLevel: 1, level: 7 }), 2);
+  assert.strictEqual(gateLevel({ minLevel: 1, level: -1 }), 1);
+  assert.strictEqual(gateLevel({}), 1);
+  // a player on the plan never meets it: the planner takes a quest at most HARD_TALK above the player
+  for (let level = 1; level <= 60; level++) assert.ok(gateLevel({ minLevel: 1, level: level + C.HARD_TALK }) <= level);
+});
 test("the log is empty at the end: quests in hand at the level cap are finished, new ones are not taken", () => {
   const w = testWorld();
   // Westland: one quest and an errand to Eastland, too little for the cap, so the route goes on to Eastland's three
@@ -593,9 +651,25 @@ for (const race of Object.keys(RACES)) {
     const unsafe = dangerousWalks(db, graph, route, ch, checked.levels);
     assert.strictEqual(MAX_DANGEROUS_WALKS, 0);
     assert.deepStrictEqual(unsafe.slice(0, 5), [], `${unsafe.length} dangerous walks`);
-    // grinding is the last resort: at most two grind steps in a whole route (measured: none or one, the end of
-    // level 59), each the rest of one level, never two in a row
-    const grinds = route.steps.map((s, i) => (s.action === "grind" ? i : -1)).filter((i) => i >= 0);
+    // the route has exactly one grind step to the cap, and no step after it needs XP: a player who comes to it under
+    // 60 is told to grind the rest. Where the plan reached 60 on quests it is the route's last step, passed as it
+    // comes: no time, and not counted below. Where the plan grinds the end of level 59 (Orc, Tauren, Troll,
+    // Windshaper) it is that grind step, and only what is left in the log is finished after it.
+    const all = route.steps.map((s, i) => (s.action === "grind" ? i : -1)).filter((i) => i >= 0);
+    const toCap = all.filter((i) => route.steps[i].level === 60);
+    assert.strictEqual(toCap.length, 1, `grind steps to 60 at ${toCap.join(", ")}`);
+    const last = toCap[0];
+    assert.strictEqual(all[all.length - 1], last, "the route's last grind step");
+    assert.strictEqual(checked.levels[last + 1] === undefined ? checked.endLevel : checked.levels[last + 1], 60);
+    for (const s of route.steps.slice(last + 1)) assert.notStrictEqual(s.action, "accept", "no new quest after it");
+    if (checked.levels[last] === 60) assert.strictEqual(last, route.steps.length - 1, "passed on the plan: the route's last step");
+    assert.deepStrictEqual(planLevels(route), checked.levels, "the plan's levels are the validator's");
+    if (checked.levels[last] === 60) assert.strictEqual(checked.seconds, checked.clocks[last], "it costs no time on the plan");
+    assert.ok(Math.abs(checked.seconds - route.stats.seconds) <= 1, `${checked.seconds} s replayed, ${route.stats.seconds} s planned`);
+    // grinding is the last resort: at most two grind steps in a whole route that the plan needs (measured: none or
+    // one, the end of level 59), each the rest of one level, never two in a row
+    const grinds = neededGrinds(route, checked.levels);
+    assert.deepStrictEqual(all.filter((i) => !grinds.includes(i)), checked.levels[last] === 60 ? [last] : [], "only the last step is passed");
     assert.strictEqual(MAX_GRIND_STEPS, 2);
     assert.ok(grinds.length <= MAX_GRIND_STEPS, `${grinds.length} grind steps: ${grinds.map((i) => `to ${route.steps[i].level}`).join(", ")}`);
     for (const i of grinds) assert.strictEqual(route.steps[i].level, checked.levels[i] + 1, `the grind step at ${i} ends the level it starts in`);

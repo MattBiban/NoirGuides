@@ -72,6 +72,29 @@ test("a grind step names the next whole level, and two never follow each other",
   assert.match(twice.errors[0], /^step 2: two grind steps in a row/);
   assert.match(validateRoute(db, route([{ action: "grind", level: 2 }]), human).errors[0], /no place/);
 });
+test("a grind step to a level the character already has is passed as it comes: no walk, no time, and its place is still checked", () => {
+  const db = fixtureDb();
+  const far = { zone: 1000, x: 90, y: 90 };
+  // level 2 by grinding; the grind step to 2 that comes later, far away, is passed
+  const steps = [{ action: "grind", level: 2, at }, { action: "travel", at }, { action: "grind", level: 2, at: far }];
+  const r = validateRoute(db, route(steps), human);
+  assert.deepStrictEqual(r.errors, []);
+  assert.deepStrictEqual([r.levels[2], r.endLevel, r.xp], [2, 2, 0]);
+  assert.strictEqual(r.seconds, r.clocks[2], "no time");
+  // the character never went there: the next step, where it stood, is no walk
+  const on = validateRoute(db, route([...steps, { action: "travel", at }]), human);
+  assert.strictEqual(on.seconds, r.seconds);
+  // a grind step to a lower level is passed the same way
+  assert.deepStrictEqual(validateRoute(db, route([...steps, { action: "travel", at }, { action: "grind", level: 1, at: far }]), human).errors, []);
+  // the character it is for, under the level, walks there and grinds
+  const under = validateRoute(db, route([{ action: "travel", at }, { action: "grind", level: 2, at: far }]), human);
+  assert.deepStrictEqual([under.errors, under.levels[1], under.endLevel], [[], 1, 2]);
+  assert.ok(under.seconds > under.clocks[1], "the walk and the fights take time");
+  // a passed step is still a step of the route: it needs a place on a map, and is no way to chain grind steps
+  assert.match(validateRoute(db, route([...steps.slice(0, 2), { action: "grind", level: 2 }]), human).errors[0], /^step 3: grind has no place/);
+  assert.match(validateRoute(db, route([...steps.slice(0, 2), { action: "grind", level: 2, at: { zone: 999999, x: 50, y: 50 } }]), human).errors[0], /^step 3: .*not a zone with a map/);
+  assert.match(validateRoute(db, route([{ action: "grind", level: 2, at }, { action: "grind", level: 2, at: far }]), human).errors[0], /^step 2: two grind steps in a row/);
+});
 test("an unknown action and a route in another format are errors", () => {
   const db = fixtureDb();
   assert.match(validateRoute(db, route([{ action: "dance", at }]), human).errors[0], /unknown action dance/);

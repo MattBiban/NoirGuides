@@ -227,6 +227,34 @@ test("a title in the list is never taken for a quest of that title that was hand
   eq(c:callsTo("GetQuestReward"), {})
 end)
 
+-- A quest of the next step, taken at another NPC or at an object, may share its title with a quest this NPC offers
+-- that no step on screen asks for (a character who left an earlier part out). The list gives titles only: that
+-- title is not the next step's quest, and picking it would open the wrong page and keep the card's own quest away.
+test("a title on offer is never taken for a quest whose line names another NPC or an object", function()
+  local stray = { title = "The Mindless Ones", level = 1, objectives = {} }
+  local c, Noir = at("a363", { world = { quests = { [9300] = stray } } })
+  eq(placeId(Noir), "a363")
+  eq(Noir.Data.quests[364], stray.title, "the next step's quest, at Sarvis, has the same title")
+  c:talkTo(1568, { name = "Undertaker Mordo", offers = { 9300, 363 } })
+  eq(c:callsTo("AcceptQuest"), { { "AcceptQuest", 363 } })
+  eq(Noir.State.HasQuest(9300), false)
+  -- The same when the next step's quest is taken at an object and the player talks to an NPC.
+  local o, NoirO = at("a363", { world = { quests = { [9300] = stray } },
+    afterLoad = editStep(1, "t363.a364.a376", function(step)
+      for _, line in ipairs(step.lines) do
+        if line.kind == "accept" and line.quest == 364 then line.npc, line.object = nil, 5000 end
+      end
+    end) })
+  o:talkTo(1568, { name = "Undertaker Mordo", offers = { 9300, 363 } })
+  eq(o:callsTo("AcceptQuest"), { { "AcceptQuest", 363 } })
+  -- At the object itself, the title is the line's quest.
+  o:talkTo(5000, { name = "A Crate", object = true, offers = { 364, 9300 }, alwaysGossip = true })
+  eq(NoirO.State.HasQuest(364), false, "two entries share the title: the choice is the player's")
+  o:closeNpc()
+  o:talkTo(5000, { name = "A Crate", object = true, offers = { 364 }, alwaysGossip = true })
+  eq(o:callsTo("AcceptQuest"), { { "AcceptQuest", 363 }, { "AcceptQuest", 364 } })
+end)
+
 test("a title on offer is the part of the chain that is neither done nor in the log", function()
   -- Two accept lines on the card share a title; the first part is handed in, so the offer can only be the second.
   local second = { title = "The Mindless Ones", level = 2, objectives = {} }

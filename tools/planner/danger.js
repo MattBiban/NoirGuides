@@ -59,6 +59,7 @@ function dangerousWalks(db, graph, route, ch, levels) {
   route.steps.forEach((s, k) => {
     const level = Math.floor(levels[k]);
     if (s.when && ((s.when.class !== undefined && s.when.class !== ch.cls) || (s.when.level !== undefined && level < s.when.level))) return;
+    if (s.action === "grind" && level >= s.level) return; // passed as it comes (planner/validate.js): nobody walks to it
     const p = point(s.at);
     if (p) {
       const walk = pos && pos.continent === p.continent ? walkYards(graph, pos, p) : null;

@@ -645,7 +645,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 93949, index = 1, npc = 251727 },
           } },
-        { id = "t92727.a92849", at = { zone = 16593, x = 53.33, y = 72.14, r = 10 }, minLevel = 4,
+        { id = "t92727.a92849", at = { zone = 16593, x = 53.33, y = 72.14, r = 10 }, minLevel = 5,
           lines = {
             { kind = "turnin", quest = 92727, object = 581822 },
             { kind = "accept", quest = 92849, object = 581822, requires = { 92727 } },
@@ -655,7 +655,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 92849, index = 1, npc = 253002 },
             { kind = "objective", quest = 92849, index = 2, object = 581820 },
           } },
-        { id = "t92849.a92850", at = { zone = 16593, x = 52.09, y = 69.39, r = 10 }, minLevel = 4, targets = { friend = { 253284 } },
+        { id = "t92849.a92850", at = { zone = 16593, x = 52.09, y = 69.39, r = 10 }, minLevel = 5, targets = { friend = { 253284 } },
           lines = {
             { kind = "turnin", quest = 92849, npc = 253284 },
             { kind = "accept", quest = 92850, npc = 253284, requires = { 92849 } },
@@ -680,7 +680,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 93949, npc = 252383 },
           } },
-        { id = "t92741.t92850.a99260.t92709.t99260.a92840", at = { zone = 16593, x = 66.34, y = 79.5, r = 10 }, minLevel = 5, items = { 254584 }, targets = { friend = { 253004, 253285, 252475 } },
+        { id = "t92741.t92850.a99260.t92709.t99260.a92840", at = { zone = 16593, x = 66.34, y = 79.5, r = 10 }, minLevel = 6, items = { 254584 }, targets = { friend = { 253004, 253285, 252475 } },
           lines = {
             { kind = "turnin", quest = 92741, npc = 253004 },
             { kind = "turnin", quest = 92850, npc = 253285 },
@@ -721,7 +721,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 94979, npc = 252389 },
             { kind = "accept", quest = 94013, npc = 252389, requires = { 94979 } },
           } },
-        { id = "t92840.a92834.a92860", at = { zone = 16593, x = 66.63, y = 79.94, r = 10 }, minLevel = 6, items = { 254584 }, targets = { friend = { 252475 } },
+        { id = "t92840.a92834.a92860", at = { zone = 16593, x = 66.63, y = 79.94, r = 10 }, minLevel = 7, items = { 254584 }, targets = { friend = { 252475 } },
           lines = {
             { kind = "turnin", quest = 92840, npc = 252475 },
             { kind = "accept", quest = 92834, npc = 252475, requires = { 92840 } },
@@ -849,13 +849,13 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 93835, npc = 252475 },
             { kind = "accept", quest = 94369, npc = 252475, requires = { 93835 } },
           } },
-        { id = "o94369.t94369.a93089", at = { zone = 16593, x = 66.17, y = 76.51, r = 40 }, minLevel = 7, targets = { enemy = { 252476 }, friend = { 252476 } },
+        { id = "o94369.t94369.a93089", at = { zone = 16593, x = 66.17, y = 76.51, r = 40 }, minLevel = 8, targets = { enemy = { 252476 }, friend = { 252476 } },
           lines = {
             { kind = "objective", quest = 94369, index = 1, npc = 252476 },
             { kind = "turnin", quest = 94369, npc = 252476 },
             { kind = "accept", quest = 93089, npc = 252476, requires = { 94369 } },
           } },
-        { id = "t93089.a94946", at = { zone = 16593, x = 66.63, y = 79.94, r = 10 }, minLevel = 7, targets = { friend = { 252475 } },
+        { id = "t93089.a94946", at = { zone = 16593, x = 66.63, y = 79.94, r = 10 }, minLevel = 8, targets = { friend = { 252475 } },
           lines = {
             { kind = "turnin", quest = 93089, npc = 252475 },
             { kind = "accept", quest = 94946, npc = 252475, requires = { 93089 } },
@@ -891,7 +891,7 @@ Noir.Route("alliance-highorder", {
             { kind = "train", level = 14, class = "DRUID", npc = 270459 },
             { kind = "selljunk", at = { zone = 36, x = 15.29, y = 57.13, r = 10 }, npc = 32631 },
           } },
-        { id = "t94946.a94947.o94947", at = { zone = 36, x = 12.3, y = 56.3, r = 10 }, minLevel = 7, targets = { friend = { 259084 } },
+        { id = "t94946.a94947.o94947", at = { zone = 36, x = 12.3, y = 56.3, r = 10 }, minLevel = 8, targets = { friend = { 259084 } },
           lines = {
             { kind = "turnin", quest = 94946, npc = 259084 },
             { kind = "accept", quest = 94947, npc = 259084 },
@@ -987,7 +987,7 @@ Noir.Route("alliance-highorder", {
             { kind = "train", level = 14, class = "HUNTER", npc = 5517 },
             { kind = "selljunk", at = { zone = 1519, x = 63.26, y = 37.74, r = 10 }, npc = 5512 },
           } },
-        { id = "t94947.a93963.a98021", at = { zone = 1519, x = 80.21, y = 38.35, r = 10 }, minLevel = 7, items = { 285356 }, targets = { friend = { 1748 } },
+        { id = "t94947.a93963.a98021", at = { zone = 1519, x = 80.21, y = 38.35, r = 10 }, minLevel = 8, items = { 285356 }, targets = { friend = { 1748 } },
           lines = {
             { kind = "turnin", quest = 94947, npc = 1748 },
             { kind = "accept", quest = 93963, npc = 1748, requires = { 94947 } },
@@ -1087,11 +1087,11 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 92744, at = { zone = 40, x = 52.48, y = 52.97, r = 10 }, npc = 253092 },
             { kind = "sethearth", at = { zone = 40, x = 52.86, y = 53.71, r = 10 }, npc = 8931 },
           } },
-        { id = "a92909", at = { zone = 40, x = 51.53, y = 32.31, r = 10 }, minLevel = 8, maxLevel = 23, targets = { friend = { 253395 } },
+        { id = "a92909", at = { zone = 40, x = 51.53, y = 32.31, r = 10 }, minLevel = 10, maxLevel = 23, targets = { friend = { 253395 } },
           lines = {
             { kind = "accept", quest = 92909, npc = 253395 },
           } },
-        { id = "a9.a109.a22", at = { zone = 40, x = 56.04, y = 31.23, r = 10 }, minLevel = 9, maxLevel = 18, targets = { friend = { 233, 235 } },
+        { id = "a9.a109.a22", at = { zone = 40, x = 56.04, y = 31.23, r = 10 }, minLevel = 10, maxLevel = 18, targets = { friend = { 233, 235 } },
           lines = {
             { kind = "accept", quest = 9, npc = 233 },
             { kind = "accept", quest = 109, npc = 233 },
@@ -1112,7 +1112,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 64, index = 1, item = 841, skipIfMissing = true },
           } },
-        { id = "a136", at = { zone = 40, x = 28.5, y = 35.66, r = 40 }, minLevel = 10, maxLevel = 24, items = { 1357 }, targets = { enemy = { 171 } },
+        { id = "a136", at = { zone = 40, x = 28.5, y = 35.66, r = 40 }, minLevel = 11, maxLevel = 24, items = { 1357 }, targets = { enemy = { 171 } },
           lines = {
             { kind = "accept", quest = 136, item = 1357, npc = 171 },
           } },
@@ -1120,7 +1120,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 92744, index = 1, item = 254548 },
           } },
-        { id = "t136.a138", at = { zone = 40, x = 25.91, y = 47.75, r = 10 }, minLevel = 10, items = { 1358 },
+        { id = "t136.a138", at = { zone = 40, x = 25.91, y = 47.75, r = 10 }, minLevel = 11, items = { 1358 },
           lines = {
             { kind = "turnin", quest = 136, object = 35, skipIfMissing = true },
             { kind = "accept", quest = 138, object = 35, ifDone = 136, requires = { 136 } },
@@ -1163,7 +1163,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 153, index = 1, item = 829 },
           } },
-        { id = "t138.a139", at = { zone = 40, x = 40.52, y = 47.79, r = 10 }, minLevel = 10, items = { 1358, 1361 },
+        { id = "t138.a139", at = { zone = 40, x = 40.52, y = 47.79, r = 10 }, minLevel = 11, items = { 1358, 1361 },
           lines = {
             { kind = "turnin", quest = 138, object = 36, skipIfMissing = true },
             { kind = "accept", quest = 139, object = 36, ifDone = 138, requires = { 138 } },
@@ -1225,7 +1225,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 92745, index = 1, npc = 1236 },
             { kind = "objective", quest = 92745, index = 2, npc = 1426 },
           } },
-        { id = "t139.a140", at = { zone = 40, x = 40.63, y = 17.03, r = 10 }, minLevel = 10, items = { 1361, 1362 },
+        { id = "t139.a140", at = { zone = 40, x = 40.63, y = 17.03, r = 10 }, minLevel = 11, items = { 1361, 1362 },
           lines = {
             { kind = "turnin", quest = 139, object = 34, skipIfMissing = true },
             { kind = "accept", quest = 140, object = 34, ifDone = 139, requires = { 139 } },
@@ -1234,7 +1234,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "hearth", to = { zone = 40, x = 52.86, y = 53.71 } },
           } },
-        { id = "t92745.a92747", at = { zone = 40, x = 52.48, y = 52.97, r = 10 }, minLevel = 9, targets = { friend = { 253092 } },
+        { id = "t92745.a92747", at = { zone = 40, x = 52.48, y = 52.97, r = 10 }, minLevel = 10, targets = { friend = { 253092 } },
           lines = {
             { kind = "turnin", quest = 92745, npc = 253092 },
             { kind = "accept", quest = 92747, npc = 253092, requires = { 92745 } },
@@ -1244,7 +1244,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 13, index = 1, npc = 589 },
             { kind = "objective", quest = 13, index = 2, npc = 590 },
           } },
-        { id = "a103.a152", at = { zone = 40, x = 30.01, y = 86.02, r = 10 }, minLevel = 10, maxLevel = 24, targets = { friend = { 392 } },
+        { id = "a103.a152", at = { zone = 40, x = 30.01, y = 86.02, r = 10 }, minLevel = 14, maxLevel = 24, targets = { friend = { 392 } },
           lines = {
             { kind = "accept", quest = 103, npc = 392 },
             { kind = "accept", quest = 152, npc = 392 },
@@ -1257,12 +1257,12 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 103, index = 1, item = 814, skipIfMissing = true },
           } },
-        { id = "t13.a14", at = { zone = 40, x = 56.33, y = 47.52, r = 10 }, minLevel = 9, targets = { friend = { 234 } },
+        { id = "t13.a14", at = { zone = 40, x = 56.33, y = 47.52, r = 10 }, minLevel = 12, targets = { friend = { 234 } },
           lines = {
             { kind = "turnin", quest = 13, npc = 234 },
             { kind = "accept", quest = 14, npc = 234, requires = { 13 } },
           } },
-        { id = "t92747.a92748", at = { zone = 40, x = 52.48, y = 52.97, r = 10 }, minLevel = 9, targets = { friend = { 253092 } },
+        { id = "t92747.a92748", at = { zone = 40, x = 52.48, y = 52.97, r = 10 }, minLevel = 11, targets = { friend = { 253092 } },
           lines = {
             { kind = "turnin", quest = 92747, npc = 253092 },
             { kind = "accept", quest = 92748, npc = 253092, requires = { 92747 } },
@@ -1359,7 +1359,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 38, x = 24.76, y = 18.4, r = 20 } },
           } },
-        { id = "a307.a1338", at = { zone = 38, x = 24.76, y = 18.4, r = 10 }, minLevel = 9, maxLevel = 22, items = { 5998 }, targets = { friend = { 1343 } },
+        { id = "a307.a1338", at = { zone = 38, x = 24.76, y = 18.4, r = 10 }, minLevel = 10, maxLevel = 22, items = { 5998 }, targets = { friend = { 1343 } },
           lines = {
             { kind = "accept", quest = 307, npc = 1343 },
             { kind = "accept", quest = 1338, npc = 1343 },
@@ -1376,7 +1376,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 436, npc = 1105 },
           } },
-        { id = "a1339", at = { zone = 38, x = 32.63, y = 49.74, r = 10 }, minLevel = 9, maxLevel = 23, targets = { friend = { 1340 } },
+        { id = "a1339", at = { zone = 38, x = 32.63, y = 49.74, r = 10 }, minLevel = 10, maxLevel = 23, targets = { friend = { 1340 } },
           lines = {
             { kind = "accept", quest = 1339, npc = 1340 },
           } },
@@ -1384,7 +1384,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "sethearth", npc = 6734 },
           } },
-        { id = "a86614", at = { zone = 38, x = 45.68, y = 43.29, r = 10 }, minLevel = 13, maxLevel = 28, items = { 278051 },
+        { id = "a86614", at = { zone = 38, x = 45.68, y = 43.29, r = 10 }, minLevel = 15, maxLevel = 28, items = { 278051 },
           lines = {
             { kind = "accept", quest = 86614, object = 665289 },
           } },
@@ -1487,7 +1487,7 @@ Noir.Route("alliance-highorder", {
             { kind = "train", level = 18, class = "HUNTER", npc = 10930 },
             { kind = "selljunk", at = { zone = 38, x = 82.47, y = 63.35, r = 10 }, npc = 1685 },
           } },
-        { id = "t257.a258", at = { zone = 38, x = 83.47, y = 65.46, r = 10 }, minLevel = 11, targets = { friend = { 1187 } },
+        { id = "t257.a258", at = { zone = 38, x = 83.47, y = 65.46, r = 10 }, minLevel = 12, targets = { friend = { 1187 } },
           lines = {
             { kind = "turnin", quest = 257, npc = 1187, skipIfMissing = true },
             { kind = "accept", quest = 258, npc = 1187, ifDone = 257, requires = { 257 } },
@@ -1559,7 +1559,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 224, npc = 1089 },
             { kind = "accept", quest = 267, at = { zone = 38, x = 23.23, y = 73.68, r = 10 }, npc = 1092 },
           } },
-        { id = "a86585.o86585", at = { zone = 38, x = 31.78, y = 86.32, r = 10 }, minLevel = 10, items = { 253247 }, targets = { enemy = { 269185 }, friend = { 269153 } },
+        { id = "a86585.o86585", at = { zone = 38, x = 31.78, y = 86.32, r = 10 }, minLevel = 12, items = { 253247 }, targets = { enemy = { 269185 }, friend = { 269153 } },
           lines = {
             { kind = "accept", quest = 86585, npc = 269153 },
             { kind = "objective", quest = 86585, index = 1, at = { zone = 38, x = 32.07, y = 84.69, r = 40 }, npc = 269185 },
@@ -1608,7 +1608,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 263, npc = 1090, skipIfMissing = true },
           } },
-        { id = "a217", at = { zone = 38, x = 23.47, y = 74.51, r = 10 }, minLevel = 10, skip = { { kind = "notturnedin", quest = 267 } }, targets = { friend = { 1090, 1092 } },
+        { id = "a217", at = { zone = 38, x = 23.47, y = 74.51, r = 10 }, minLevel = 12, skip = { { kind = "notturnedin", quest = 267 } }, targets = { friend = { 1090, 1092 } },
           lines = {
             { kind = "accept", quest = 217, npc = 1092, ifDone = 263, requires = { 263, 267 } },
           } },
@@ -1793,7 +1793,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 955, index = 1, item = 5336, skipIfMissing = true },
           } },
-        { id = "t955.a956", at = { zone = 148, x = 44.17, y = 36.29, r = 10 }, minLevel = 7, targets = { friend = { 3650 } },
+        { id = "t955.a956", at = { zone = 148, x = 44.17, y = 36.29, r = 10 }, minLevel = 8, targets = { friend = { 3650 } },
           lines = {
             { kind = "turnin", quest = 955, npc = 3650, skipIfMissing = true },
             { kind = "accept", quest = 956, npc = 3650, ifDone = 955, requires = { 955 } },
@@ -1977,7 +1977,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 2282, index = 1, item = 7871 },
           } },
-        { id = "t2282.a2358", at = { zone = 44, x = 22.97, y = 52.04, r = 10 }, when = { class = "ROGUE" }, minLevel = 16, items = { 5060 }, targets = { friend = { 6966, 7009 } },
+        { id = "t2282.a2358", at = { zone = 44, x = 22.97, y = 52.04, r = 10 }, when = { class = "ROGUE" }, minLevel = 17, items = { 5060 }, targets = { friend = { 6966, 7009 } },
           lines = {
             { kind = "turnin", quest = 2282, npc = 6966 },
             { kind = "accept", quest = 2358, npc = 7009 },
@@ -2020,7 +2020,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 4762, npc = 3649, skipIfMissing = true },
             { kind = "accept", quest = 4763, npc = 3649, ifDone = 4762, requires = { 4762 } },
           } },
-        { id = "t985.a986", at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, minLevel = 10, targets = { friend = { 3693 } },
+        { id = "t985.a986", at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, minLevel = 15, targets = { friend = { 3693 } },
           lines = {
             { kind = "turnin", quest = 985, npc = 3693, skipIfMissing = true },
             { kind = "accept", quest = 986, npc = 3693, ifDone = 985, requires = { 985 } },
@@ -2033,7 +2033,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 4727, object = 176196, ifDone = 4681, requires = { 4681 } },
           } },
-        { id = "a2098", at = { zone = 148, x = 56.66, y = 13.48, r = 10 }, minLevel = 14, maxLevel = 28, targets = { friend = { 6667 } },
+        { id = "a2098", at = { zone = 148, x = 56.66, y = 13.48, r = 10 }, minLevel = 15, maxLevel = 28, targets = { friend = { 6667 } },
           lines = {
             { kind = "accept", quest = 2098, npc = 6667 },
           } },
@@ -2062,7 +2062,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 4725, npc = 10219, skipIfMissing = true },
             { kind = "turnin", quest = 4727, npc = 10219, skipIfMissing = true },
           } },
-        { id = "t2138.a2139", at = { zone = 148, x = 38.84, y = 43.42, r = 10 }, minLevel = 10, targets = { friend = { 3701 } },
+        { id = "t2138.a2139", at = { zone = 148, x = 38.84, y = 43.42, r = 10 }, minLevel = 13, targets = { friend = { 3701 } },
           lines = {
             { kind = "turnin", quest = 2138, npc = 3701, skipIfMissing = true },
             { kind = "accept", quest = 2139, npc = 3701, ifDone = 2138, requires = { 2138 } },
@@ -2079,15 +2079,15 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 4730, object = 175227, ifDone = 4681, requires = { 4681 } },
           } },
-        { id = "a4731", at = { zone = 148, x = 31.67, y = 83.68, r = 10 }, minLevel = 13, maxLevel = 27, items = { 12292 },
+        { id = "a4731", at = { zone = 148, x = 31.67, y = 83.68, r = 10 }, minLevel = 14, maxLevel = 27, items = { 12292 },
           lines = {
             { kind = "accept", quest = 4731, object = 176198, ifDone = 4681, requires = { 4681 } },
           } },
-        { id = "a4732", at = { zone = 148, x = 31.23, y = 85.6, r = 10 }, minLevel = 13, maxLevel = 27, items = { 12289 },
+        { id = "a4732", at = { zone = 148, x = 31.23, y = 85.6, r = 10 }, minLevel = 14, maxLevel = 27, items = { 12289 },
           lines = {
             { kind = "accept", quest = 4732, object = 176191, ifDone = 4681, requires = { 4681 } },
           } },
-        { id = "a4733", at = { zone = 148, x = 31.26, y = 87.44, r = 10 }, minLevel = 13, maxLevel = 27, items = { 12242 },
+        { id = "a4733", at = { zone = 148, x = 31.26, y = 87.44, r = 10 }, minLevel = 14, maxLevel = 27, items = { 12242 },
           lines = {
             { kind = "accept", quest = 4733, object = 175230, ifDone = 4681, requires = { 4681 } },
           } },
@@ -2097,7 +2097,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 2098, index = 2, item = 7499, skipIfMissing = true },
             { kind = "objective", quest = 2098, index = 3, item = 7500, skipIfMissing = true },
           } },
-        { id = "t948.t98028.a944.a98013", at = { zone = 148, x = 43.55, y = 76.29, r = 10 }, minLevel = 12, items = { 279275, 5251 }, targets = { friend = { 3616, 270269 } },
+        { id = "t948.t98028.a944.a98013", at = { zone = 148, x = 43.55, y = 76.29, r = 10 }, minLevel = 15, items = { 279275, 5251 }, targets = { friend = { 3616, 270269 } },
           lines = {
             { kind = "turnin", quest = 948, npc = 3616 },
             { kind = "turnin", quest = 98028, npc = 3616, skipIfMissing = true },
@@ -2147,7 +2147,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 986, index = 1, item = 5386, skipIfMissing = true },
           } },
-        { id = "t986.a993.t2139", at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, minLevel = 10, items = { 5387 }, targets = { friend = { 3693, 3701 } },
+        { id = "t986.a993.t2139", at = { zone = 148, x = 39.37, y = 43.48, r = 10 }, minLevel = 15, items = { 5387 }, targets = { friend = { 3693, 3701 } },
           lines = {
             { kind = "turnin", quest = 986, npc = 3693, skipIfMissing = true },
             { kind = "accept", quest = 993, npc = 3693, ifDone = 986, requires = { 986 } },
@@ -2162,7 +2162,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 966, npc = 3661, skipIfMissing = true },
             { kind = "accept", quest = 967, npc = 3661, ifDone = 966, requires = { 966 } },
           } },
-        { id = "t2098.a2078", at = { zone = 148, x = 56.66, y = 13.48, r = 10 }, minLevel = 14, items = { 7442 }, targets = { friend = { 6667 } },
+        { id = "t2098.a2078", at = { zone = 148, x = 56.66, y = 13.48, r = 10 }, minLevel = 15, items = { 7442 }, targets = { friend = { 6667 } },
           lines = {
             { kind = "turnin", quest = 2098, npc = 6667, skipIfMissing = true },
             { kind = "accept", quest = 2078, npc = 6667, ifDone = 2098, requires = { 2098 } },
@@ -2182,12 +2182,12 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 98013, npc = 270269 },
             { kind = "accept", quest = 5321, at = { zone = 148, x = 44.4, y = 76.43, r = 10 }, npc = 11218 },
           } },
-        { id = "t993.a994", at = { zone = 148, x = 45.01, y = 85.3, r = 10 }, minLevel = 10, items = { 5387 }, targets = { friend = { 3692 } },
+        { id = "t993.a994", at = { zone = 148, x = 45.01, y = 85.3, r = 10 }, minLevel = 17, items = { 5387 }, targets = { friend = { 3692 } },
           lines = {
             { kind = "turnin", quest = 993, npc = 3692, skipIfMissing = true },
             { kind = "accept", quest = 994, npc = 3692, ifDone = 993, requires = { 993 } },
           } },
-        { id = "a98042.a945.o98042", at = { zone = 148, x = 38.54, y = 86.05, r = 10 }, minLevel = 12, targets = { enemy = { 2339, 2338 }, friend = { 3584 } },
+        { id = "a98042.a945.o98042", at = { zone = 148, x = 38.54, y = 86.05, r = 10 }, minLevel = 13, targets = { enemy = { 2339, 2338 }, friend = { 3584 } },
           lines = {
             { kind = "accept", quest = 98042, object = 12666 },
             { kind = "accept", quest = 945, at = { zone = 148, x = 38.64, y = 87.33, r = 10 }, npc = 3584 },
@@ -2271,7 +2271,7 @@ Noir.Route("alliance-highorder", {
             { kind = "getflight", node = 28, npc = 4267 },
             { kind = "accept", quest = 1008, at = { zone = 331, x = 34.67, y = 48.84, r = 10 }, npc = 3845 },
           } },
-        { id = "t990.a991.a1054.b@331", at = { zone = 331, x = 36.62, y = 49.58, r = 10 }, minLevel = 18, targets = { friend = { 3691 } },
+        { id = "t990.a991.a1054.b@331", at = { zone = 331, x = 36.62, y = 49.58, r = 10 }, minLevel = 20, targets = { friend = { 3691 } },
           lines = {
             { kind = "turnin", quest = 990, npc = 3691, skipIfMissing = true },
             { kind = "accept", quest = 991, npc = 3691 },
@@ -2363,7 +2363,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "hearth", to = { zone = 331, x = 36.99, y = 49.22 } },
           } },
-        { id = "t1023.a1024.a1025", at = { zone = 331, x = 36.62, y = 49.58, r = 10 }, minLevel = 18, items = { 5505, 5463 }, targets = { friend = { 3691 } },
+        { id = "t1023.a1024.a1025", at = { zone = 331, x = 36.62, y = 49.58, r = 10 }, minLevel = 19, items = { 5505, 5463 }, targets = { friend = { 3691 } },
           lines = {
             { kind = "turnin", quest = 1023, npc = 3691 },
             { kind = "accept", quest = 1024, npc = 3691, requires = { 1023 } },
@@ -2380,7 +2380,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 1025, index = 3, npc = 3750 },
             { kind = "objective", quest = 1025, index = 4, npc = 3743 },
           } },
-        { id = "t1024.a1026", at = { zone = 331, x = 53.54, y = 46.22, r = 10 }, minLevel = 18, items = { 5463, 5475 }, targets = { friend = { 3916 } },
+        { id = "t1024.a1026", at = { zone = 331, x = 53.54, y = 46.22, r = 10 }, minLevel = 22, items = { 5463, 5475 }, targets = { friend = { 3916 } },
           lines = {
             { kind = "turnin", quest = 1024, npc = 3916 },
             { kind = "accept", quest = 1026, npc = 3916, requires = { 1024 } },
@@ -2397,7 +2397,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 1025, npc = 3691 },
           } },
-        { id = "a1140", at = { zone = 331, x = 26.2, y = 38.7, r = 10 }, minLevel = 13, maxLevel = 36, targets = { friend = { 3663 } },
+        { id = "a1140", at = { zone = 331, x = 26.2, y = 38.7, r = 10 }, minLevel = 23, maxLevel = 36, targets = { friend = { 3663 } },
           lines = {
             { kind = "accept", quest = 1140, npc = 3663, ifDone = 973, requires = { 973 } },
           } },
@@ -2498,7 +2498,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 98387, npc = 382 },
             { kind = "accept", quest = 125, npc = 341 },
           } },
-        { id = "a91.a169.a95999.a127.a150.a180.t65", at = { zone = 44, x = 24.63, y = 44.26, r = 10 }, minLevel = 20, targets = { friend = { 900, 381, 266 } },
+        { id = "a91.a169.a95999.a127.a150.a180.t65", at = { zone = 44, x = 24.63, y = 44.26, r = 10 }, minLevel = 21, targets = { friend = { 900, 381, 266 } },
           lines = {
             { kind = "accept", quest = 91, npc = 900 },
             { kind = "accept", quest = 169, object = 60 },
@@ -2508,7 +2508,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 180, at = { zone = 44, x = 21.66, y = 46.44, r = 10 }, object = 47 },
             { kind = "turnin", quest = 65, at = { zone = 44, x = 21.39, y = 45.35, r = 10 }, npc = 266, skipIfMissing = true },
           } },
-        { id = "a34", at = { zone = 44, x = 16.77, y = 46.33, r = 10 }, minLevel = 18, maxLevel = 32, targets = { friend = { 342 } },
+        { id = "a34", at = { zone = 44, x = 16.77, y = 46.33, r = 10 }, minLevel = 19, maxLevel = 32, targets = { friend = { 342 } },
           lines = {
             { kind = "accept", quest = 34, npc = 342 },
           } },
@@ -2516,7 +2516,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "sethearth", npc = 6727 },
           } },
-        { id = "a219.o128", at = { zone = 44, x = 23.3, y = 12.55, r = 10 }, minLevel = 19, targets = { enemy = { 435 }, friend = { 349 } },
+        { id = "a219.o128", at = { zone = 44, x = 23.3, y = 12.55, r = 10 }, minLevel = 20, targets = { enemy = { 435 }, friend = { 349 } },
           lines = {
             { kind = "accept", quest = 219, npc = 349 },
             { kind = "objective", quest = 128, index = 1, at = { zone = 44, x = 24.81, y = 11.53, r = 40 }, npc = 435 },
@@ -2600,7 +2600,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 89, index = 1, item = 2856, skipIfMissing = true },
             { kind = "objective", quest = 89, index = 2, item = 1013, skipIfMissing = true },
           } },
-        { id = "t89.a98386", at = { zone = 44, x = 27.05, y = 48.64, r = 10 }, minLevel = 15, targets = { friend = { 341 } },
+        { id = "t89.a98386", at = { zone = 44, x = 27.05, y = 48.64, r = 10 }, minLevel = 16, targets = { friend = { 341 } },
           lines = {
             { kind = "turnin", quest = 89, npc = 341, skipIfMissing = true },
             { kind = "accept", quest = 98386, npc = 341, ifDone = 89, requires = { 89 } },
@@ -2644,7 +2644,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 98386, npc = 341, skipIfMissing = true },
             { kind = "turnin", quest = 98387, npc = 382, skipIfMissing = true },
           } },
-        { id = "a19", at = { zone = 44, x = 27.05, y = 48.64, r = 10 }, minLevel = 18, skip = { { kind = "notturnedin", quest = 98387 } }, targets = { friend = { 341, 382 } },
+        { id = "a19", at = { zone = 44, x = 27.05, y = 48.64, r = 10 }, minLevel = 20, skip = { { kind = "notturnedin", quest = 98387 } }, targets = { friend = { 341, 382 } },
           lines = {
             { kind = "accept", quest = 19, npc = 382, ifDone = 20, requires = { 20, 98387 } },
           } },
@@ -2799,7 +2799,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 95, object = 59, skipIfMissing = true },
             { kind = "accept", quest = 230, object = 59, ifDone = 95, requires = { 95 } },
           } },
-        { id = "f12.t148.a66", at = { zone = 10, x = 77.49, y = 44.29, r = 10 }, minLevel = 22, targets = { friend = { 265 } },
+        { id = "f12.t148.a66", at = { zone = 10, x = 77.49, y = 44.29, r = 10 }, minLevel = 23, targets = { friend = { 265 } },
           lines = {
             { kind = "getflight", node = 12, npc = 2409 },
             { kind = "turnin", quest = 148, at = { zone = 10, x = 75.79, y = 45.32, r = 10 }, npc = 265, skipIfMissing = true },
@@ -2828,12 +2828,12 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "hearth", to = { zone = 10, x = 73.87, y = 44.41 } },
           } },
-        { id = "t93.a101", at = { zone = 10, x = 73.75, y = 43.48, r = 10 }, minLevel = 18, targets = { friend = { 272, 265 } },
+        { id = "t93.a101", at = { zone = 10, x = 73.75, y = 43.48, r = 10 }, minLevel = 20, targets = { friend = { 272, 265 } },
           lines = {
             { kind = "turnin", quest = 93, npc = 272, skipIfMissing = true },
             { kind = "accept", quest = 101, at = { zone = 10, x = 75.79, y = 45.32, r = 10 }, npc = 265 },
           } },
-        { id = "t96139.a56", at = { zone = 10, x = 72.62, y = 47.62, r = 10 }, minLevel = 18, targets = { friend = { 268, 264 } },
+        { id = "t96139.a56", at = { zone = 10, x = 72.62, y = 47.62, r = 10 }, minLevel = 19, targets = { friend = { 268, 264 } },
           lines = {
             { kind = "turnin", quest = 96139, npc = 268 },
             { kind = "accept", quest = 56, npc = 264 },
@@ -2859,7 +2859,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 149, npc = 302, skipIfMissing = true },
             { kind = "accept", quest = 154, npc = 302, ifDone = 149, requires = { 149 } },
           } },
-        { id = "t154.a157.t56.a57", at = { zone = 10, x = 75.79, y = 45.32, r = 10 }, minLevel = 20, items = { 1518, 1596 }, targets = { friend = { 265, 264 } },
+        { id = "t154.a157.t56.a57", at = { zone = 10, x = 75.79, y = 45.32, r = 10 }, minLevel = 21, items = { 1518, 1596 }, targets = { friend = { 265, 264 } },
           lines = {
             { kind = "turnin", quest = 154, npc = 265, skipIfMissing = true },
             { kind = "accept", quest = 157, npc = 265, ifDone = 154, requires = { 154 } },
@@ -2901,7 +2901,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 81747, npc = 221471 },
             { kind = "turnin", quest = 81747, npc = 221471 },
           } },
-        { id = "a96138", at = { zone = 10, x = 46.6, y = 58.64, r = 40 }, minLevel = 18, maxLevel = 38, items = { 281142 }, targets = { enemy = { 272273 } },
+        { id = "a96138", at = { zone = 10, x = 46.6, y = 58.64, r = 40 }, minLevel = 25, maxLevel = 38, items = { 281142 }, targets = { enemy = { 272273 } },
           lines = {
             { kind = "accept", quest = 96138, item = 281142, npc = 272273 },
           } },
@@ -2909,7 +2909,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 337, item = 2794, npc = 205 },
           } },
-        { id = "a164.a165.a173.t57.a58", at = { zone = 10, x = 75.34, y = 48.75, r = 10 }, minLevel = 23, items = { 1922 }, targets = { friend = { 633, 663, 264 } },
+        { id = "a164.a165.a173.t57.a58", at = { zone = 10, x = 75.34, y = 48.75, r = 10 }, minLevel = 25, items = { 1922 }, targets = { friend = { 633, 663, 264 } },
           lines = {
             { kind = "accept", quest = 164, npc = 633 },
             { kind = "accept", quest = 165, npc = 633 },
@@ -2932,7 +2932,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 174, npc = 276 },
           } },
-        { id = "a67", at = { zone = 10, x = 72.54, y = 46.87, r = 10 }, minLevel = 22, maxLevel = 36, targets = { friend = { 267 } },
+        { id = "a67", at = { zone = 10, x = 72.54, y = 46.87, r = 10 }, minLevel = 23, maxLevel = 36, targets = { friend = { 267 } },
           lines = {
             { kind = "accept", quest = 67, npc = 267, requires = { 66 } },
           } },
@@ -2961,7 +2961,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "hearth", to = { zone = 10, x = 73.87, y = 44.41 } },
           } },
-        { id = "t156.a159.t96138.t58.t173.a221", at = { zone = 10, x = 73.78, y = 44.49, r = 10 }, minLevel = 23, items = { 1451, 281142 }, targets = { friend = { 273, 268, 264, 663 } },
+        { id = "t156.a159.t96138.t58.t173.a221", at = { zone = 10, x = 73.78, y = 44.49, r = 10 }, minLevel = 24, items = { 1451, 281142 }, targets = { friend = { 273, 268, 264, 663 } },
           lines = {
             { kind = "turnin", quest = 156, npc = 273, skipIfMissing = true },
             { kind = "accept", quest = 159, npc = 273, ifDone = 156, requires = { 156 } },
@@ -2983,7 +2983,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 453, npc = 288, skipIfMissing = true },
             { kind = "accept", quest = 268, npc = 288, ifDone = 453, requires = { 453 } },
           } },
-        { id = "t164.t268.a323", at = { zone = 10, x = 7.78, y = 34.07, r = 10 }, minLevel = 20, items = { 1922, 2560 }, targets = { friend = { 311 } },
+        { id = "t164.t268.a323", at = { zone = 10, x = 7.78, y = 34.07, r = 10 }, minLevel = 23, items = { 1922, 2560 }, targets = { friend = { 311 } },
           lines = {
             { kind = "turnin", quest = 164, npc = 311 },
             { kind = "turnin", quest = 268, npc = 311, skipIfMissing = true },
@@ -2995,12 +2995,12 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 323, index = 2, npc = 787, skipIfMissing = true },
             { kind = "objective", quest = 323, index = 3, npc = 785, skipIfMissing = true },
           } },
-        { id = "t323.a269", at = { zone = 10, x = 7.78, y = 34.07, r = 10 }, minLevel = 20, items = { 2560 }, targets = { friend = { 311 } },
+        { id = "t323.a269", at = { zone = 10, x = 7.78, y = 34.07, r = 10 }, minLevel = 24, items = { 2560 }, targets = { friend = { 311 } },
           lines = {
             { kind = "turnin", quest = 323, npc = 311, skipIfMissing = true },
             { kind = "accept", quest = 269, npc = 311, ifDone = 323, requires = { 323 } },
           } },
-        { id = "t159.a133", at = { zone = 10, x = 28.11, y = 31.46, r = 10 }, minLevel = 20, items = { 1451 }, targets = { friend = { 289 } },
+        { id = "t159.a133", at = { zone = 10, x = 28.11, y = 31.46, r = 10 }, minLevel = 22, items = { 1451 }, targets = { friend = { 289 } },
           lines = {
             { kind = "turnin", quest = 159, npc = 289, skipIfMissing = true },
             { kind = "accept", quest = 133, npc = 289, ifDone = 159, requires = { 159 } },
@@ -3009,7 +3009,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 133, index = 1, item = 884, skipIfMissing = true },
           } },
-        { id = "t133.a134", at = { zone = 10, x = 28.11, y = 31.46, r = 10 }, minLevel = 20, targets = { friend = { 289 } },
+        { id = "t133.a134", at = { zone = 10, x = 28.11, y = 31.46, r = 10 }, minLevel = 25, targets = { friend = { 289 } },
           lines = {
             { kind = "turnin", quest = 133, npc = 289, skipIfMissing = true },
             { kind = "accept", quest = 134, npc = 289, ifDone = 133, requires = { 133 } },
@@ -3018,7 +3018,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 134, index = 1, item = 1349, skipIfMissing = true },
           } },
-        { id = "t134.a160", at = { zone = 10, x = 28.11, y = 31.46, r = 10 }, minLevel = 20, items = { 1637 }, targets = { friend = { 289 } },
+        { id = "t134.a160", at = { zone = 10, x = 28.11, y = 31.46, r = 10 }, minLevel = 25, items = { 1637 }, targets = { friend = { 289 } },
           lines = {
             { kind = "turnin", quest = 134, npc = 289, skipIfMissing = true },
             { kind = "accept", quest = 160, npc = 289, ifDone = 134, requires = { 134 } },
@@ -3027,7 +3027,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 81744, npc = 221471 },
           } },
-        { id = "t160.a251.t251.a401.t401.a252.t252.a253", at = { zone = 10, x = 71.93, y = 46.42, r = 10 }, minLevel = 20, items = { 1637, 1656 }, targets = { friend = { 263, 268 } },
+        { id = "t160.a251.t251.a401.t401.a252.t252.a253", at = { zone = 10, x = 71.93, y = 46.42, r = 10 }, minLevel = 25, items = { 1637, 1656 }, targets = { friend = { 263, 268 } },
           lines = {
             { kind = "turnin", quest = 160, npc = 263, skipIfMissing = true },
             { kind = "accept", quest = 251, npc = 263, ifDone = 160, requires = { 160 } },
@@ -3038,7 +3038,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 252, npc = 263, skipIfMissing = true },
             { kind = "accept", quest = 253, npc = 263, ifDone = 252, requires = { 252 } },
           } },
-        { id = "t221.a222", at = { zone = 10, x = 75.75, y = 47.57, r = 10 }, minLevel = 23, targets = { friend = { 663 } },
+        { id = "t221.a222", at = { zone = 10, x = 75.75, y = 47.57, r = 10 }, minLevel = 26, targets = { friend = { 663 } },
           lines = {
             { kind = "turnin", quest = 221, npc = 663 },
             { kind = "accept", quest = 222, npc = 663, requires = { 221 } },
@@ -3060,7 +3060,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 253, npc = 263, skipIfMissing = true },
           } },
-        { id = "t222.a223.t223", at = { zone = 10, x = 75.75, y = 47.57, r = 10 }, minLevel = 23, items = { 2113 }, targets = { friend = { 663, 661 } },
+        { id = "t222.a223.t223", at = { zone = 10, x = 75.75, y = 47.57, r = 10 }, minLevel = 26, items = { 2113 }, targets = { friend = { 663, 661 } },
           lines = {
             { kind = "turnin", quest = 222, npc = 663 },
             { kind = "accept", quest = 223, npc = 663, requires = { 222 } },
@@ -3116,7 +3116,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 177, index = 1, item = 1946, skipIfMissing = true },
           } },
-        { id = "t177.a181", at = { zone = 10, x = 79.8, y = 48.02, r = 10 }, minLevel = 20, targets = { friend = { 276 } },
+        { id = "t177.a181", at = { zone = 10, x = 79.8, y = 48.02, r = 10 }, minLevel = 25, targets = { friend = { 276 } },
           lines = {
             { kind = "turnin", quest = 177, npc = 276, skipIfMissing = true },
             { kind = "accept", quest = 181, npc = 276, ifDone = 177, requires = { 177 } },
@@ -3139,7 +3139,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 12, to = 7 },
           } },
-        { id = "a279.a98189.t98189.a464.a98190.a98221.t98221.a98230.a98240", at = { zone = 11, x = 8.32, y = 58.57, r = 10 }, minLevel = 23, items = { 279589, 279595, 280099 }, targets = { friend = { 1242, 2104, 2094 } },
+        { id = "a279.a98189.t98189.a464.a98190.a98221.t98221.a98230.a98240", at = { zone = 11, x = 8.32, y = 58.57, r = 10 }, minLevel = 24, items = { 279589, 279595, 280099 }, targets = { friend = { 1242, 2104, 2094 } },
           lines = {
             { kind = "accept", quest = 279, npc = 1242 },
             { kind = "accept", quest = 98189, npc = 1242 },
@@ -3186,19 +3186,19 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 464, index = 1, item = 3337 },
           } },
-        { id = "t98230.t98240.a98245.a98291", at = { zone = 11, x = 49.36, y = 42.13, r = 10 }, minLevel = 22, items = { 280099 }, targets = { friend = { 270637 } },
+        { id = "t98230.t98240.a98245.a98291", at = { zone = 11, x = 49.36, y = 42.13, r = 10 }, minLevel = 25, items = { 280099 }, targets = { friend = { 270637 } },
           lines = {
             { kind = "turnin", quest = 98230, npc = 270637 },
             { kind = "turnin", quest = 98240, npc = 270637 },
             { kind = "accept", quest = 98245, npc = 270637 },
             { kind = "accept", quest = 98291, npc = 270637 },
           } },
-        { id = "a276.a98283", at = { zone = 11, x = 56.37, y = 40.4, r = 10 }, minLevel = 22, maxLevel = 29, targets = { friend = { 1244 } },
+        { id = "a276.a98283", at = { zone = 11, x = 56.37, y = 40.4, r = 10 }, minLevel = 25, maxLevel = 29, targets = { friend = { 1244 } },
           lines = {
             { kind = "accept", quest = 276, npc = 1244 },
             { kind = "accept", quest = 98283, npc = 1244 },
           } },
-        { id = "a98223", at = { zone = 11, x = 53.47, y = 54.54, r = 10 }, minLevel = 23, maxLevel = 39, items = { 280042 },
+        { id = "a98223", at = { zone = 11, x = 53.47, y = 54.54, r = 10 }, minLevel = 26, maxLevel = 39, items = { 280042 },
           lines = {
             { kind = "accept", quest = 98223, object = 671518 },
           } },
@@ -3366,7 +3366,7 @@ Noir.Route("alliance-highorder", {
             { kind = "getflight", node = 14, npc = 2432 },
             { kind = "fly", from = 14, to = 7 },
           } },
-        { id = "a294.a299.a98216.a98310.t305", at = { zone = 11, x = 38.18, y = 50.89, r = 10 }, minLevel = 24, items = { 279996, 280394 }, targets = { friend = { 1078, 1077, 1076 } },
+        { id = "a294.a299.a98216.a98310.t305", at = { zone = 11, x = 38.18, y = 50.89, r = 10 }, minLevel = 27, items = { 279996, 280394 }, targets = { friend = { 1078, 1077, 1076 } },
           lines = {
             { kind = "accept", quest = 294, npc = 1078 },
             { kind = "accept", quest = 299, at = { zone = 11, x = 38.81, y = 52.39, r = 10 }, npc = 1077 },
@@ -3406,7 +3406,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 98245, at = { zone = 11, x = 49.36, y = 42.13, r = 10 }, npc = 270637, skipIfMissing = true },
             { kind = "turnin", quest = 98291, at = { zone = 11, x = 49.36, y = 42.13, r = 10 }, npc = 270637, skipIfMissing = true },
           } },
-        { id = "t465.a474", at = { zone = 11, x = 47.46, y = 47.01, r = 10 }, minLevel = 23, items = { 3339 },
+        { id = "t465.a474", at = { zone = 11, x = 47.46, y = 47.01, r = 10 }, minLevel = 27, items = { 3339 },
           lines = {
             { kind = "turnin", quest = 465, object = 1609, skipIfMissing = true },
             { kind = "accept", quest = 474, object = 1609, ifDone = 465, requires = { 465 } },
@@ -3435,16 +3435,16 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 98216, at = { zone = 11, x = 38.81, y = 52.39, r = 10 }, npc = 1077 },
             { kind = "turnin", quest = 98310, at = { zone = 11, x = 38.81, y = 52.39, r = 10 }, npc = 1077 },
           } },
-        { id = "a98297", at = { zone = 11, x = 49.36, y = 42.13, r = 10 }, minLevel = 24, maxLevel = 42, targets = { friend = { 270637 } },
+        { id = "a98297", at = { zone = 11, x = 49.36, y = 42.13, r = 10 }, minLevel = 29, maxLevel = 42, targets = { friend = { 270637 } },
           lines = {
             { kind = "accept", quest = 98297, npc = 270637 },
           } },
-        { id = "t277.a275", at = { zone = 11, x = 56.37, y = 40.4, r = 10 }, minLevel = 20, targets = { friend = { 1244 } },
+        { id = "t277.a275", at = { zone = 11, x = 56.37, y = 40.4, r = 10 }, minLevel = 21, targets = { friend = { 1244 } },
           lines = {
             { kind = "turnin", quest = 277, npc = 1244, skipIfMissing = true },
             { kind = "accept", quest = 275, npc = 1244, ifDone = 277, requires = { 277 } },
           } },
-        { id = "a304", at = { zone = 11, x = 49.8, y = 18.26, r = 10 }, minLevel = 26, maxLevel = 42, targets = { friend = { 1071 } },
+        { id = "a304", at = { zone = 11, x = 49.8, y = 18.26, r = 10 }, minLevel = 29, maxLevel = 42, targets = { friend = { 1071 } },
           lines = {
             { kind = "accept", quest = 304, npc = 1071 },
           } },
@@ -3457,7 +3457,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 295, index = 1, npc = 1022 },
             { kind = "objective", quest = 295, index = 2, npc = 1023 },
           } },
-        { id = "t295.a296", at = { zone = 11, x = 38.18, y = 50.89, r = 10 }, minLevel = 22, targets = { friend = { 1078 } },
+        { id = "t295.a296", at = { zone = 11, x = 38.18, y = 50.89, r = 10 }, minLevel = 24, targets = { friend = { 1078 } },
           lines = {
             { kind = "turnin", quest = 295, npc = 1078 },
             { kind = "accept", quest = 296, npc = 1078, requires = { 295 } },
@@ -3543,7 +3543,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "hearth", to = { zone = 267, x = 51.17, y = 58.93 } },
           } },
-        { id = "a505", at = { zone = 267, x = 48.14, y = 59.11, r = 10 }, minLevel = 26, maxLevel = 41, targets = { friend = { 2276 } },
+        { id = "a505", at = { zone = 267, x = 48.14, y = 59.11, r = 10 }, minLevel = 28, maxLevel = 41, targets = { friend = { 2276 } },
           lines = {
             { kind = "accept", quest = 505, npc = 2276 },
           } },
@@ -3578,7 +3578,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "hearth", to = { zone = 267, x = 51.17, y = 58.93 } },
           } },
-        { id = "t564.t555.t536.a559", at = { zone = 267, x = 52.42, y = 55.96, r = 10 }, minLevel = 25, targets = { friend = { 2382, 2430, 2228 } },
+        { id = "t564.t555.t536.a559", at = { zone = 267, x = 52.42, y = 55.96, r = 10 }, minLevel = 27, targets = { friend = { 2382, 2430, 2228 } },
           lines = {
             { kind = "turnin", quest = 564, npc = 2382 },
             { kind = "turnin", quest = 555, at = { zone = 267, x = 51.89, y = 58.68, r = 10 }, npc = 2430 },
@@ -3602,7 +3602,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 505, npc = 2276, skipIfMissing = true },
           } },
-        { id = "t559.a560.t560.a561.t561.a562", at = { zone = 267, x = 51.46, y = 58.39, r = 10 }, minLevel = 25, items = { 3717 }, targets = { friend = { 2228, 2263 } },
+        { id = "t559.a560.t560.a561.t561.a562", at = { zone = 267, x = 51.46, y = 58.39, r = 10 }, minLevel = 27, items = { 3717 }, targets = { friend = { 2228, 2263 } },
           lines = {
             { kind = "turnin", quest = 559, npc = 2228 },
             { kind = "accept", quest = 560, npc = 2228, requires = { 559 } },
@@ -3642,7 +3642,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 4581, npc = 3845 },
           } },
-        { id = "a1035", at = { zone = 331, x = 37.37, y = 51.79, r = 10 }, minLevel = 20, maxLevel = 38, targets = { friend = { 3894 } },
+        { id = "a1035", at = { zone = 331, x = 37.37, y = 51.79, r = 10 }, minLevel = 25, maxLevel = 38, targets = { friend = { 3894 } },
           lines = {
             { kind = "accept", quest = 1035, npc = 3894, ifDone = 1034, requires = { 1034 } },
           } },
@@ -3650,7 +3650,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "sethearth", npc = 6738 },
           } },
-        { id = "a1022.a1021", at = { zone = 331, x = 22.23, y = 52.98, r = 10 }, minLevel = 26, maxLevel = 38, targets = { friend = { 3880, 3901 } },
+        { id = "a1022.a1021", at = { zone = 331, x = 22.23, y = 52.98, r = 10 }, minLevel = 27, maxLevel = 38, targets = { friend = { 3880, 3901 } },
           lines = {
             { kind = "accept", quest = 1022, npc = 3880 },
             { kind = "accept", quest = 1021, at = { zone = 331, x = 21.73, y = 53.34, r = 10 }, npc = 3901 },
@@ -3663,7 +3663,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 86757, npc = 3955 },
           } },
-        { id = "a1027", at = { zone = 331, x = 53.54, y = 46.22, r = 10 }, minLevel = 18, maxLevel = 36, targets = { friend = { 3916 } },
+        { id = "a1027", at = { zone = 331, x = 53.54, y = 46.22, r = 10 }, minLevel = 23, maxLevel = 36, targets = { friend = { 3916 } },
           lines = {
             { kind = "accept", quest = 1027, npc = 3916, ifDone = 1026, requires = { 1026 } },
           } },
@@ -3687,14 +3687,14 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 1035, npc = 3894, skipIfMissing = true },
           } },
-        { id = "a1011.t4581.a98417.a98418", at = { zone = 331, x = 85.24, y = 44.71, r = 10 }, minLevel = 24, items = { 12060 }, targets = { friend = { 3848, 221269 } },
+        { id = "a1011.t4581.a98417.a98418", at = { zone = 331, x = 85.24, y = 44.71, r = 10 }, minLevel = 25, items = { 12060 }, targets = { friend = { 3848, 221269 } },
           lines = {
             { kind = "accept", quest = 1011, npc = 3848 },
             { kind = "turnin", quest = 4581, npc = 3848, skipIfMissing = true },
             { kind = "accept", quest = 98417, at = { zone = 331, x = 86.24, y = 45.86, r = 10 }, npc = 221269 },
             { kind = "accept", quest = 98418, at = { zone = 331, x = 86.24, y = 45.86, r = 10 }, npc = 221269 },
           } },
-        { id = "o98418.t1021.a1031.o1031", at = { zone = 331, x = 78.27, y = 46.02, r = 40 }, minLevel = 26, targets = { enemy = { 3754, 3755, 3752, 3757, 4619 }, friend = { 3920 } },
+        { id = "o98418.t1021.a1031.o1031", at = { zone = 331, x = 78.27, y = 46.02, r = 40 }, minLevel = 27, targets = { enemy = { 3754, 3755, 3752, 3757, 4619 }, friend = { 3920 } },
           lines = {
             { kind = "objective", quest = 98418, index = 1, npc = 3754 },
             { kind = "objective", quest = 98418, index = 2, npc = 3755 },
@@ -3717,7 +3717,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 86757, index = 1, item = 279505, skipIfMissing = true },
             { kind = "objective", quest = 86757, index = 2, item = 279507, skipIfMissing = true },
           } },
-        { id = "t98417.t98418.t1011.a1012", at = { zone = 331, x = 86.24, y = 45.86, r = 10 }, minLevel = 24, targets = { friend = { 221269, 3848 } },
+        { id = "t98417.t98418.t1011.a1012", at = { zone = 331, x = 86.24, y = 45.86, r = 10 }, minLevel = 27, targets = { friend = { 221269, 3848 } },
           lines = {
             { kind = "turnin", quest = 98417, npc = 221269 },
             { kind = "turnin", quest = 98418, npc = 221269 },
@@ -3734,7 +3734,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "hearth", to = { zone = 331, x = 36.99, y = 49.22 } },
           } },
-        { id = "t1022.t1031.a1032", at = { zone = 331, x = 22.23, y = 52.98, r = 10 }, minLevel = 26, targets = { friend = { 3880, 3901 } },
+        { id = "t1022.t1031.a1032", at = { zone = 331, x = 22.23, y = 52.98, r = 10 }, minLevel = 27, targets = { friend = { 3880, 3901 } },
           lines = {
             { kind = "turnin", quest = 1022, npc = 3880, skipIfMissing = true },
             { kind = "turnin", quest = 1031, at = { zone = 331, x = 21.73, y = 53.34, r = 10 }, npc = 3901, skipIfMissing = true },
@@ -3748,17 +3748,17 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 1012, npc = 3848 },
           } },
-        { id = "t1027.a1028", at = { zone = 331, x = 53.54, y = 46.22, r = 10 }, minLevel = 18, items = { 5547 }, targets = { friend = { 3916 } },
+        { id = "t1027.a1028", at = { zone = 331, x = 53.54, y = 46.22, r = 10 }, minLevel = 23, items = { 5547 }, targets = { friend = { 3916 } },
           lines = {
             { kind = "turnin", quest = 1027, npc = 3916, skipIfMissing = true },
             { kind = "accept", quest = 1028, npc = 3916, ifDone = 1027, requires = { 1027 } },
           } },
-        { id = "t1028.a1055", at = { zone = 331, x = 56.35, y = 49.2, r = 10 }, minLevel = 18, items = { 5547 },
+        { id = "t1028.a1055", at = { zone = 331, x = 56.35, y = 49.2, r = 10 }, minLevel = 23, items = { 5547 },
           lines = {
             { kind = "turnin", quest = 1028, object = 19024, skipIfMissing = true },
             { kind = "accept", quest = 1055, object = 19024, ifDone = 1028, requires = { 1028 } },
           } },
-        { id = "t1055.a1029", at = { zone = 331, x = 53.54, y = 46.22, r = 10 }, minLevel = 18, items = { 5462 }, targets = { friend = { 3916 } },
+        { id = "t1055.a1029", at = { zone = 331, x = 53.54, y = 46.22, r = 10 }, minLevel = 23, items = { 5462 }, targets = { friend = { 3916 } },
           lines = {
             { kind = "turnin", quest = 1055, npc = 3916, skipIfMissing = true },
             { kind = "accept", quest = 1029, npc = 3916, ifDone = 1055, requires = { 1055 } },
@@ -3771,7 +3771,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 86757, npc = 3955, skipIfMissing = true },
           } },
-        { id = "t1029.a1030", at = { zone = 331, x = 36.62, y = 49.58, r = 10 }, minLevel = 18, items = { 5462 }, targets = { friend = { 3691 } },
+        { id = "t1029.a1030", at = { zone = 331, x = 36.62, y = 49.58, r = 10 }, minLevel = 23, items = { 5462 }, targets = { friend = { 3691 } },
           lines = {
             { kind = "turnin", quest = 1029, npc = 3691, skipIfMissing = true },
             { kind = "accept", quest = 1030, npc = 3691, ifDone = 1029, requires = { 1029 } },
@@ -3780,7 +3780,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 1032, npc = 3901, skipIfMissing = true },
           } },
-        { id = "t1030.a1045", at = { zone = 331, x = 50.84, y = 75.08, r = 10 }, minLevel = 18, items = { 5462 }, targets = { friend = { 3897 } },
+        { id = "t1030.a1045", at = { zone = 331, x = 50.84, y = 75.08, r = 10 }, minLevel = 25, items = { 5462 }, targets = { friend = { 3897 } },
           lines = {
             { kind = "turnin", quest = 1030, npc = 3897, skipIfMissing = true },
             { kind = "accept", quest = 1045, npc = 3897, ifDone = 1030, requires = { 1030 } },
@@ -3790,7 +3790,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 1045, index = 1, npc = 3696, skipIfMissing = true },
             { kind = "objective", quest = 1045, index = 2, npc = 3932, skipIfMissing = true },
           } },
-        { id = "t1045.a1046", at = { zone = 331, x = 50.84, y = 75.08, r = 10 }, minLevel = 18, items = { 5462 }, targets = { friend = { 3897 } },
+        { id = "t1045.a1046", at = { zone = 331, x = 50.84, y = 75.08, r = 10 }, minLevel = 25, items = { 5462 }, targets = { friend = { 3897 } },
           lines = {
             { kind = "turnin", quest = 1045, npc = 3897, skipIfMissing = true },
             { kind = "accept", quest = 1046, npc = 3897, ifDone = 1045, requires = { 1045 } },
@@ -3846,7 +3846,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 5741, npc = 11863 },
           } },
-        { id = "a6161", at = { zone = 405, x = 36.07, y = 30.41, r = 10 }, minLevel = 30, maxLevel = 44,
+        { id = "a6161", at = { zone = 405, x = 36.07, y = 30.41, r = 10 }, minLevel = 31, maxLevel = 44,
           lines = {
             { kind = "accept", quest = 6161, object = 177787 },
           } },
@@ -3911,7 +3911,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 1382, npc = 5397, skipIfMissing = true },
           } },
-        { id = "a5943", at = { zone = 405, x = 45.4, y = 75.29, r = 10 }, minLevel = 32, maxLevel = 46, targets = { friend = { 11626 } },
+        { id = "a5943", at = { zone = 405, x = 45.4, y = 75.29, r = 10 }, minLevel = 33, maxLevel = 46, targets = { friend = { 11626 } },
           lines = {
             { kind = "accept", quest = 5943, npc = 11626 },
           } },
@@ -4011,7 +4011,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 1104, npc = 4454, skipIfMissing = true },
             { kind = "turnin", quest = 1105, npc = 4453, skipIfMissing = true },
           } },
-        { id = "a1106", at = { zone = 400, x = 77.79, y = 77.27, r = 10 }, minLevel = 26, skip = { { kind = "notturnedin", quest = 1105 } }, items = { 5827 }, targets = { friend = { 4452, 4454, 4453 } },
+        { id = "a1106", at = { zone = 400, x = 77.79, y = 77.27, r = 10 }, minLevel = 30, skip = { { kind = "notturnedin", quest = 1105 } }, items = { 5827 }, targets = { friend = { 4452, 4454, 4453 } },
           lines = {
             { kind = "accept", quest = 1106, npc = 4454, ifDone = 1104, requires = { 1104, 1105 } },
           } },
@@ -4079,7 +4079,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 215, npc = 738 },
           } },
-        { id = "t5762.a583.t583.a194.a185.a190", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 28, items = { 14542 }, targets = { friend = { 715, 716, 717, 718 } },
+        { id = "t5762.a583.t583.a194.a185.a190", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 29, items = { 14542 }, targets = { friend = { 715, 716, 717, 718 } },
           lines = {
             { kind = "turnin", quest = 5762, npc = 715, skipIfMissing = true },
             { kind = "accept", quest = 583, npc = 716 },
@@ -4119,7 +4119,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 203, npc = 733, skipIfMissing = true },
             { kind = "turnin", quest = 204, npc = 733, skipIfMissing = true },
           } },
-        { id = "t190.a191.t185.a186.t194.a195", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, minLevel = 28, targets = { friend = { 718, 717, 715 } },
+        { id = "t190.a191.t185.a186.t194.a195", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, minLevel = 31, targets = { friend = { 718, 717, 715 } },
           lines = {
             { kind = "turnin", quest = 190, npc = 718 },
             { kind = "accept", quest = 191, npc = 718, requires = { 190 } },
@@ -4128,15 +4128,15 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 194, npc = 715 },
             { kind = "accept", quest = 195, npc = 715, requires = { 194 } },
           } },
-        { id = "a207", at = { zone = 33, x = 37.83, y = 3.56, r = 10 }, minLevel = 30, maxLevel = 46, skip = { { kind = "notturnedin", quest = 203 } }, targets = { friend = { 739, 733 } },
+        { id = "a207", at = { zone = 33, x = 37.83, y = 3.56, r = 10 }, minLevel = 33, maxLevel = 46, skip = { { kind = "notturnedin", quest = 203 } }, targets = { friend = { 739, 733 } },
           lines = {
             { kind = "accept", quest = 207, npc = 739, ifDone = 204, requires = { 203, 204 } },
           } },
-        { id = "a574", at = { zone = 33, x = 37.83, y = 3.56, r = 10 }, minLevel = 30, maxLevel = 46, skip = { { kind = "notturnedin", quest = 204 } }, targets = { friend = { 739, 733 } },
+        { id = "a574", at = { zone = 33, x = 37.83, y = 3.56, r = 10 }, minLevel = 33, maxLevel = 46, skip = { { kind = "notturnedin", quest = 204 } }, targets = { friend = { 739, 733 } },
           lines = {
             { kind = "accept", quest = 574, npc = 733, ifDone = 203, requires = { 203, 204 } },
           } },
-        { id = "a97047.t200.a328", at = { zone = 33, x = 44.2, y = 8, r = 10 }, minLevel = 30, items = { 2719 }, targets = { friend = { 218230 } },
+        { id = "a97047.t200.a328", at = { zone = 33, x = 44.2, y = 8, r = 10 }, minLevel = 33, items = { 2719 }, targets = { friend = { 218230 } },
           lines = {
             { kind = "accept", quest = 97047, npc = 218230 },
             { kind = "turnin", quest = 200, at = { zone = 33, x = 43.67, y = 9.37, r = 10 }, object = 287, skipIfMissing = true },
@@ -4152,7 +4152,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 97047, index = 1, item = 216616 },
             { kind = "objective", quest = 97047, index = 2, item = 216617 },
           } },
-        { id = "t328.a329", at = { zone = 33, x = 49.62, y = 7.56, r = 10 }, minLevel = 30, items = { 2719, 2720 },
+        { id = "t328.a329", at = { zone = 33, x = 49.62, y = 7.56, r = 10 }, minLevel = 32, items = { 2719, 2720 },
           lines = {
             { kind = "turnin", quest = 328, object = 288, skipIfMissing = true },
             { kind = "accept", quest = 329, object = 288, ifDone = 328, requires = { 328 } },
@@ -4176,7 +4176,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 191, index = 1, npc = 736 },
           } },
-        { id = "t191.a192.t186.a187.t195", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, minLevel = 28, targets = { friend = { 718, 717, 715 } },
+        { id = "t191.a192.t186.a187.t195", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, minLevel = 33, targets = { friend = { 718, 717, 715 } },
           lines = {
             { kind = "turnin", quest = 191, npc = 718 },
             { kind = "accept", quest = 192, npc = 718, requires = { 191 } },
@@ -4200,7 +4200,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 97047, npc = 218230 },
           } },
-        { id = "t329.t574.a330.t207.t330.a331.t331", at = { zone = 33, x = 38.04, y = 3.01, r = 10 }, minLevel = 30, items = { 2720 }, targets = { friend = { 469, 739, 1422 } },
+        { id = "t329.t574.a330.t207.t330.a331.t331", at = { zone = 33, x = 38.04, y = 3.01, r = 10 }, minLevel = 32, items = { 2720 }, targets = { friend = { 469, 739, 1422 } },
           lines = {
             { kind = "turnin", quest = 329, npc = 469, skipIfMissing = true },
             { kind = "turnin", quest = 574, npc = 469, skipIfMissing = true },
@@ -4210,7 +4210,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 331, npc = 1422, ifDone = 330, requires = { 330 } },
             { kind = "turnin", quest = 331, npc = 469, skipIfMissing = true },
           } },
-        { id = "t192.t187.a188", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, minLevel = 28, targets = { friend = { 718, 717 } },
+        { id = "t192.t187.a188", at = { zone = 33, x = 35.55, y = 10.55, r = 10 }, minLevel = 32, targets = { friend = { 718, 717 } },
           lines = {
             { kind = "turnin", quest = 192, npc = 718 },
             { kind = "turnin", quest = 187, npc = 717 },
@@ -4304,7 +4304,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 12, to = 19 },
           } },
-        { id = "t601.t577.a628", at = { zone = 33, x = 27.23, y = 76.87, r = 10 }, minLevel = 31, targets = { friend = { 2496, 2495 } },
+        { id = "t601.t577.a628", at = { zone = 33, x = 27.23, y = 76.87, r = 10 }, minLevel = 33, targets = { friend = { 2496, 2495 } },
           lines = {
             { kind = "turnin", quest = 601, npc = 2496 },
             { kind = "turnin", quest = 577, at = { zone = 33, x = 28.29, y = 77.59, r = 10 }, npc = 2495 },
@@ -4336,7 +4336,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 45, x = 45.73, y = 46.1, r = 20 } },
           } },
-        { id = "f16.a681.t634.a684.a691", at = { zone = 45, x = 45.73, y = 46.1, r = 10 }, minLevel = 30, targets = { friend = { 2700, 2788 } },
+        { id = "f16.a681.t634.a684.a691", at = { zone = 45, x = 45.73, y = 46.1, r = 10 }, minLevel = 34, targets = { friend = { 2700, 2788 } },
           lines = {
             { kind = "getflight", node = 16, npc = 2835 },
             { kind = "accept", quest = 681, at = { zone = 45, x = 45.83, y = 47.56, r = 10 }, npc = 2700 },
@@ -4344,7 +4344,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 684, at = { zone = 45, x = 46.04, y = 47.76, r = 10 }, object = 2713 },
             { kind = "accept", quest = 691, at = { zone = 45, x = 46.2, y = 47.75, r = 10 }, npc = 2788 },
           } },
-        { id = "t635.a642", at = { zone = 45, x = 62.5, y = 33.73, r = 10 }, minLevel = 30, items = { 4614 },
+        { id = "t635.a642", at = { zone = 45, x = 62.5, y = 33.73, r = 10 }, minLevel = 32, items = { 4614 },
           lines = {
             { kind = "turnin", quest = 635, object = 138492, skipIfMissing = true },
             { kind = "accept", quest = 642, object = 138492 },
@@ -4353,13 +4353,13 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 642, index = 1, item = 4435 },
           } },
-        { id = "o627.t642.a651", at = { zone = 45, x = 84.58, y = 31.55, r = 40 }, minLevel = 30,
+        { id = "o627.t642.a651", at = { zone = 45, x = 84.58, y = 31.55, r = 40 }, minLevel = 33,
           lines = {
             { kind = "objective", quest = 627, index = 1, item = 4278, skipIfMissing = true },
             { kind = "turnin", quest = 642, object = 2701 },
             { kind = "accept", quest = 651, object = 2701, requires = { 642 } },
           } },
-        { id = "a79678.t79678", at = { zone = 45, x = 57.53, y = 74.47, r = 10 }, minLevel = 26, targets = { friend = { 217300 } },
+        { id = "a79678.t79678", at = { zone = 45, x = 57.53, y = 74.47, r = 10 }, minLevel = 35, targets = { friend = { 217300 } },
           lines = {
             { kind = "accept", quest = 79678, npc = 217300 },
             { kind = "turnin", quest = 79678, npc = 217300 },
@@ -4370,7 +4370,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 691, index = 2, item = 4522 },
             { kind = "objective", quest = 691, index = 3, item = 5040 },
           } },
-        { id = "t659.a658", at = { zone = 45, x = 60.18, y = 53.85, r = 10 }, minLevel = 30, targets = { friend = { 2712 } },
+        { id = "t659.a658", at = { zone = 45, x = 60.18, y = 53.85, r = 10 }, minLevel = 31, targets = { friend = { 2712 } },
           lines = {
             { kind = "turnin", quest = 659, npc = 2712, skipIfMissing = true },
             { kind = "accept", quest = 658, npc = 2712, ifDone = 659, requires = { 659 } },
@@ -4379,18 +4379,18 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 658, index = 1, item = 4482, skipIfMissing = true },
           } },
-        { id = "t658.a657.t657.a660", at = { zone = 45, x = 60.18, y = 53.85, r = 10 }, minLevel = 30, targets = { friend = { 2712, 2713 } },
+        { id = "t658.a657.t657.a660", at = { zone = 45, x = 60.18, y = 53.85, r = 10 }, minLevel = 32, targets = { friend = { 2712, 2713 } },
           lines = {
             { kind = "turnin", quest = 658, npc = 2712, skipIfMissing = true },
             { kind = "accept", quest = 657, npc = 2712, ifDone = 658, requires = { 658 } },
             { kind = "turnin", quest = 657, npc = 2713, skipIfMissing = true },
             { kind = "accept", quest = 660, npc = 2713, ifDone = 657, requires = { 657 } },
           } },
-        { id = "a79677", at = { zone = 45, x = 57.53, y = 74.47, r = 10 }, minLevel = 26, maxLevel = 48, items = { 283389 }, targets = { friend = { 217300 } },
+        { id = "a79677", at = { zone = 45, x = 57.53, y = 74.47, r = 10 }, minLevel = 35, maxLevel = 48, items = { 283389 }, targets = { friend = { 217300 } },
           lines = {
             { kind = "accept", quest = 79677, npc = 217300 },
           } },
-        { id = "a79624", at = { zone = 45, x = 52.87, y = 75.9, r = 40 }, minLevel = 32, maxLevel = 48, items = { 213422 }, targets = { enemy = { 2566 } },
+        { id = "a79624", at = { zone = 45, x = 52.87, y = 75.9, r = 40 }, minLevel = 35, maxLevel = 48, items = { 213422 }, targets = { enemy = { 2566 } },
           lines = {
             { kind = "accept", quest = 79624, item = 213422, npc = 2566 },
           } },
@@ -4430,7 +4430,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 681, index = 1, npc = 2586 },
             { kind = "objective", quest = 681, index = 2, npc = 2589 },
           } },
-        { id = "o660.t660.a661", at = { zone = 45, x = 60.1, y = 53.83, r = 40 }, minLevel = 30, targets = { friend = { 2712 } },
+        { id = "o660.t660.a661", at = { zone = 45, x = 60.1, y = 53.83, r = 40 }, minLevel = 32, targets = { friend = { 2712 } },
           lines = {
             { kind = "objective", quest = 660, index = 1, skipIfMissing = true },
             { kind = "turnin", quest = 660, npc = 2712, skipIfMissing = true },
@@ -4444,7 +4444,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 79624, npc = 217300, skipIfMissing = true },
           } },
-        { id = "t691.a685.t681.t684.a682.a693", at = { zone = 45, x = 46.2, y = 47.75, r = 10 }, minLevel = 30, targets = { friend = { 2788, 2700, 2789 } },
+        { id = "t691.a685.t681.t684.a682.a693", at = { zone = 45, x = 46.2, y = 47.75, r = 10 }, minLevel = 35, targets = { friend = { 2788, 2700, 2789 } },
           lines = {
             { kind = "turnin", quest = 691, npc = 2788 },
             { kind = "accept", quest = 685, object = 2713 },
@@ -4457,7 +4457,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 651, object = 2702 },
           } },
-        { id = "a92872.t92872", at = { zone = 45, x = 28.98, y = 59.68, r = 10 }, minLevel = 32, items = { 278543 }, targets = { friend = { 2782 } },
+        { id = "a92872.t92872", at = { zone = 45, x = 28.98, y = 59.68, r = 10 }, minLevel = 33, items = { 278543 }, targets = { friend = { 2782 } },
           lines = {
             { kind = "accept", quest = 92872, npc = 2782 },
             { kind = "turnin", quest = 92872, npc = 2782 },
@@ -4490,7 +4490,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 668, at = { zone = 45, x = 32.28, y = 81.38, r = 10 }, npc = 2610 },
             { kind = "accept", quest = 669, at = { zone = 45, x = 32.28, y = 81.38, r = 10 }, npc = 2610, requires = { 668 } },
           } },
-        { id = "t682.t685.t693.a694", at = { zone = 45, x = 45.83, y = 47.56, r = 10 }, minLevel = 30, targets = { friend = { 2700, 2789 } },
+        { id = "t682.t685.t693.a694", at = { zone = 45, x = 45.83, y = 47.56, r = 10 }, minLevel = 34, targets = { friend = { 2700, 2789 } },
           lines = {
             { kind = "turnin", quest = 682, npc = 2700 },
             { kind = "turnin", quest = 685, npc = 2700 },
@@ -4501,7 +4501,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 694, index = 1, item = 4527 },
           } },
-        { id = "t694.a695.t695.a696", at = { zone = 45, x = 46.2, y = 47.75, r = 10 }, minLevel = 30, items = { 4529 }, targets = { friend = { 2788, 2789 } },
+        { id = "t694.a695.t695.a696", at = { zone = 45, x = 46.2, y = 47.75, r = 10 }, minLevel = 34, items = { 4529 }, targets = { friend = { 2788, 2789 } },
           lines = {
             { kind = "turnin", quest = 694, npc = 2788 },
             { kind = "accept", quest = 695, npc = 2788, requires = { 694 } },
@@ -4514,7 +4514,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 696, index = 2, item = 4531 },
             { kind = "objective", quest = 696, index = 3, item = 4532 },
           } },
-        { id = "t696.a697", at = { zone = 45, x = 46.65, y = 47.01, r = 10 }, minLevel = 30, items = { 4529, 4533 }, targets = { friend = { 2789 } },
+        { id = "t696.a697", at = { zone = 45, x = 46.65, y = 47.01, r = 10 }, minLevel = 34, items = { 4529, 4533 }, targets = { friend = { 2789 } },
           lines = {
             { kind = "turnin", quest = 696, npc = 2789 },
             { kind = "accept", quest = 697, npc = 2789, requires = { 696 } },
@@ -4542,7 +4542,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "train", level = 36, class = "ROGUE", npc = 1411 },
           } },
-        { id = "t627.a622.a600.t669.a606", at = { zone = 33, x = 26.95, y = 77.21, r = 10 }, minLevel = 32, items = { 1987, 4502 }, targets = { friend = { 773, 2498, 2487, 2501 } },
+        { id = "t627.a622.a600.t669.a606", at = { zone = 33, x = 26.95, y = 77.21, r = 10 }, minLevel = 36, items = { 1987, 4502 }, targets = { friend = { 773, 2498, 2487, 2501 } },
           lines = {
             { kind = "turnin", quest = 627, npc = 773, skipIfMissing = true },
             { kind = "accept", quest = 622, npc = 773, ifDone = 627, requires = { 627 } },
@@ -4567,12 +4567,12 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 600, index = 1, item = 3917, skipIfMissing = true },
           } },
-        { id = "a196.a193", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 28, maxLevel = 48, targets = { friend = { 715, 718 } },
+        { id = "a196.a193", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 36, maxLevel = 48, targets = { friend = { 715, 718 } },
           lines = {
             { kind = "accept", quest = 196, npc = 715, ifDone = 195, requires = { 195 } },
             { kind = "accept", quest = 193, npc = 718, ifDone = 192, requires = { 192 } },
           } },
-        { id = "a205.t622.a202", at = { zone = 33, x = 37.83, y = 3.56, r = 10 }, minLevel = 30, items = { 1987 }, targets = { friend = { 739, 770, 469 } },
+        { id = "a205.t622.a202", at = { zone = 33, x = 37.83, y = 3.56, r = 10 }, minLevel = 35, items = { 1987 }, targets = { friend = { 739, 770, 469 } },
           lines = {
             { kind = "accept", quest = 205, npc = 739, ifDone = 207, requires = { 207 } },
             { kind = "turnin", quest = 622, npc = 770, skipIfMissing = true },
@@ -4616,7 +4616,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 587, index = 1, item = 3910, skipIfMissing = true },
           } },
-        { id = "o587.t606.a607", at = { zone = 33, x = 27.43, y = 73.21, r = 40 }, minLevel = 30, items = { 3922 }, targets = { friend = { 2502 } },
+        { id = "o587.t606.a607", at = { zone = 33, x = 27.43, y = 73.21, r = 40 }, minLevel = 36, items = { 3922 }, targets = { friend = { 2502 } },
           lines = {
             { kind = "turnin", quest = 606, at = { zone = 33, x = 26.9, y = 73.59, r = 10 }, npc = 2502 },
             { kind = "accept", quest = 607, at = { zone = 33, x = 26.9, y = 73.59, r = 10 }, npc = 2502, requires = { 606 } },
@@ -4631,7 +4631,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 587, npc = 2488, skipIfMissing = true },
             { kind = "turnin", quest = 607, at = { zone = 33, x = 27.78, y = 77.07, r = 10 }, npc = 2501 },
           } },
-        { id = "a624", at = { zone = 33, x = 31.16, y = 89.05, r = 40 }, minLevel = 35, maxLevel = 51, items = { 4056 },
+        { id = "a624", at = { zone = 33, x = 31.16, y = 89.05, r = 40 }, minLevel = 38, maxLevel = 51, items = { 4056 },
           lines = {
             { kind = "accept", quest = 624, item = 4056, object = 2554 },
           } },
@@ -4706,7 +4706,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 719, npc = 2910 },
             { kind = "accept", quest = 721, npc = 2910, ifDone = 720, requires = { 720 } },
           } },
-        { id = "a703.a705.a2418.t1106.a1108", at = { zone = 3, x = 42.39, y = 52.93, r = 10 }, minLevel = 33, items = { 5827 }, targets = { friend = { 2817, 4618 } },
+        { id = "a703.a705.a2418.t1106.a1108", at = { zone = 3, x = 42.39, y = 52.93, r = 10 }, minLevel = 35, items = { 5827 }, targets = { friend = { 2817, 4618 } },
           lines = {
             { kind = "accept", quest = 703, npc = 2817 },
             { kind = "accept", quest = 705, npc = 2817 },
@@ -4714,7 +4714,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 1106, npc = 4618, skipIfMissing = true },
             { kind = "accept", quest = 1108, npc = 4618, ifDone = 1106, requires = { 1106 } },
           } },
-        { id = "a709", at = { zone = 3, x = 51.39, y = 76.87, r = 10 }, minLevel = 30, maxLevel = 48, targets = { friend = { 2785 } },
+        { id = "a709", at = { zone = 3, x = 51.39, y = 76.87, r = 10 }, minLevel = 35, maxLevel = 48, targets = { friend = { 2785 } },
           lines = {
             { kind = "accept", quest = 709, npc = 2785 },
           } },
@@ -4784,7 +4784,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 711, index = 1, item = 4627, skipIfMissing = true },
           } },
-        { id = "t711.a712", at = { zone = 3, x = 25.95, y = 44.87, r = 10 }, minLevel = 35, targets = { friend = { 2921 } },
+        { id = "t711.a712", at = { zone = 3, x = 25.95, y = 44.87, r = 10 }, minLevel = 37, targets = { friend = { 2921 } },
           lines = {
             { kind = "turnin", quest = 711, npc = 2921, skipIfMissing = true },
             { kind = "accept", quest = 712, npc = 2921, ifDone = 711, requires = { 711 } },
@@ -4856,7 +4856,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 705, index = 1, item = 4611, skipIfMissing = true },
           } },
-        { id = "a197", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 28, maxLevel = 51, targets = { friend = { 715 } },
+        { id = "a197", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 38, maxLevel = 51, targets = { friend = { 715 } },
           lines = {
             { kind = "accept", quest = 197, npc = 715, ifDone = 196, requires = { 196 } },
           } },
@@ -4868,7 +4868,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 197, npc = 715, skipIfMissing = true },
           } },
-        { id = "a208", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 28, skip = { { kind = "notturnedin", quest = 197 }, { kind = "notturnedin", quest = 188 } }, targets = { friend = { 715 } },
+        { id = "a208", at = { zone = 33, x = 35.66, y = 10.81, r = 10 }, minLevel = 38, skip = { { kind = "notturnedin", quest = 197 }, { kind = "notturnedin", quest = 188 } }, targets = { friend = { 715 } },
           lines = {
             { kind = "accept", quest = 208, npc = 715, ifDone = 193, requires = { 188, 193, 197 } },
           } },
@@ -4948,11 +4948,11 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 8, x = 26.74, y = 59.83, r = 20 } },
           } },
-        { id = "a1396", at = { zone = 8, x = 26.74, y = 59.83, r = 10 }, minLevel = 30, maxLevel = 45, targets = { friend = { 5476 } },
+        { id = "a1396", at = { zone = 8, x = 26.74, y = 59.83, r = 10 }, minLevel = 32, maxLevel = 45, targets = { friend = { 5476 } },
           lines = {
             { kind = "accept", quest = 1396, npc = 5476 },
           } },
-        { id = "t624.a625", at = { zone = 8, x = 22.87, y = 48.19, r = 10 }, minLevel = 35,
+        { id = "t624.a625", at = { zone = 8, x = 22.87, y = 48.19, r = 10 }, minLevel = 38,
           lines = {
             { kind = "turnin", quest = 624, object = 2553, skipIfMissing = true },
             { kind = "accept", quest = 625, object = 2553, ifDone = 624, requires = { 624 } },
@@ -4961,11 +4961,11 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 1389, npc = 1776 },
           } },
-        { id = "a1392", at = { zone = 8, x = 54.9, y = 34.1, r = 40 }, minLevel = 29, maxLevel = 47, items = { 6196 }, targets = { enemy = { 5477 } },
+        { id = "a1392", at = { zone = 8, x = 54.9, y = 34.1, r = 40 }, minLevel = 34, maxLevel = 47, items = { 6196 }, targets = { enemy = { 5477 } },
           lines = {
             { kind = "accept", quest = 1392, item = 6196, npc = 5477 },
           } },
-        { id = "a1393", at = { zone = 8, x = 65.47, y = 18.16, r = 10 }, minLevel = 30, maxLevel = 46, targets = { friend = { 5391 } },
+        { id = "a1393", at = { zone = 8, x = 65.47, y = 18.16, r = 10 }, minLevel = 33, maxLevel = 46, targets = { friend = { 5391 } },
           lines = {
             { kind = "accept", quest = 1393, npc = 5391 },
           } },
@@ -5001,7 +5001,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 1421, index = 1, item = 6170, skipIfMissing = true },
           } },
-        { id = "t1421.a1398", at = { zone = 8, x = 26.74, y = 59.83, r = 10 }, minLevel = 30, targets = { friend = { 5476 } },
+        { id = "t1421.a1398", at = { zone = 8, x = 26.74, y = 59.83, r = 10 }, minLevel = 37, targets = { friend = { 5476 } },
           lines = {
             { kind = "turnin", quest = 1421, npc = 5476, skipIfMissing = true },
             { kind = "accept", quest = 1398, npc = 5476, ifDone = 1421, requires = { 1421 } },
@@ -5055,7 +5055,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 81570, npc = 4792 },
             { kind = "accept", quest = 1219, object = 20985 },
           } },
-        { id = "a1222", at = { zone = 15, x = 46.88, y = 17.52, r = 10 }, minLevel = 30, maxLevel = 45, targets = { friend = { 4880 } },
+        { id = "a1222", at = { zone = 15, x = 46.88, y = 17.52, r = 10 }, minLevel = 32, maxLevel = 45, targets = { friend = { 4880 } },
           lines = {
             { kind = "accept", quest = 1222, npc = 4880 },
           } },
@@ -5063,7 +5063,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 1177, npc = 4503 },
           } },
-        { id = "a1284.a1252.a1253", at = { zone = 15, x = 29.7, y = 47.64, r = 10 }, minLevel = 30, maxLevel = 43, items = { 5950, 5919 },
+        { id = "a1284.a1252.a1253", at = { zone = 15, x = 29.7, y = 47.64, r = 10 }, minLevel = 35, maxLevel = 43, items = { 5950, 5919 },
           lines = {
             { kind = "accept", quest = 1284, object = 21015, ifDone = 1302, requires = { 1302 } },
             { kind = "accept", quest = 1252, object = 21042, ifDone = 1302, requires = { 1302 } },
@@ -5081,7 +5081,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 1204, index = 1, item = 5883, skipIfMissing = true },
           } },
-        { id = "t1219.t1252.t1253.t1284.a1259.a1319.t1259.a1285.t1285.a1286", at = { zone = 15, x = 66.73, y = 48.67, r = 10 }, minLevel = 30, items = { 5917, 5950, 5919 }, targets = { friend = { 4947, 4944, 4948 } },
+        { id = "t1219.t1252.t1253.t1284.a1259.a1319.t1259.a1285.t1285.a1286", at = { zone = 15, x = 66.73, y = 48.67, r = 10 }, minLevel = 35, items = { 5917, 5950, 5919 }, targets = { friend = { 4947, 4944, 4948 } },
           lines = {
             { kind = "turnin", quest = 1219, npc = 4947 },
             { kind = "turnin", quest = 1252, at = { zone = 15, x = 68.21, y = 48.62, r = 10 }, npc = 4944, skipIfMissing = true },
@@ -5107,7 +5107,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 1177, npc = 4503, skipIfMissing = true },
           } },
-        { id = "t1286.a1287", at = { zone = 15, x = 36.09, y = 54.31, r = 10 }, minLevel = 30, targets = { friend = { 5089 } },
+        { id = "t1286.a1287", at = { zone = 15, x = 36.09, y = 54.31, r = 10 }, minLevel = 33, targets = { friend = { 5089 } },
           lines = {
             { kind = "turnin", quest = 1286, npc = 5089, skipIfMissing = true },
             { kind = "accept", quest = 1287, npc = 5089, ifDone = 1286, requires = { 1286 } },
@@ -5320,7 +5320,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 261, npc = 1182 },
           } },
-        { id = "a93224", at = { zone = 405, x = 66.66, y = 10.93, r = 10 }, minLevel = 30, maxLevel = 48, targets = { friend = { 5396 } },
+        { id = "a93224", at = { zone = 405, x = 66.66, y = 10.93, r = 10 }, minLevel = 35, maxLevel = 48, targets = { friend = { 5396 } },
           lines = {
             { kind = "accept", quest = 93224, npc = 5396 },
           } },
@@ -5328,16 +5328,16 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "sethearth", npc = 11103 },
           } },
-        { id = "a5501", at = { zone = 405, x = 62.33, y = 38.99, r = 10 }, minLevel = 33, maxLevel = 47, targets = { friend = { 11438 } },
+        { id = "a5501", at = { zone = 405, x = 62.33, y = 38.99, r = 10 }, minLevel = 34, maxLevel = 47, targets = { friend = { 11438 } },
           lines = {
             { kind = "accept", quest = 5501, npc = 11438 },
           } },
-        { id = "a92743.t92743", at = { zone = 405, x = 74.97, y = 68.16, r = 10 }, minLevel = 30, targets = { friend = { 5398 } },
+        { id = "a92743.t92743", at = { zone = 405, x = 74.97, y = 68.16, r = 10 }, minLevel = 35, targets = { friend = { 5398 } },
           lines = {
             { kind = "accept", quest = 92743, npc = 5398 },
             { kind = "turnin", quest = 92743, npc = 5398 },
           } },
-        { id = "a96222", at = { zone = 405, x = 43.13, y = 78.16, r = 10 }, minLevel = 35, maxLevel = 50, targets = { friend = { 253066 } },
+        { id = "a96222", at = { zone = 405, x = 43.13, y = 78.16, r = 10 }, minLevel = 37, maxLevel = 50, targets = { friend = { 253066 } },
           lines = {
             { kind = "accept", quest = 96222, npc = 253066 },
           } },
@@ -5345,7 +5345,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 6134, npc = 6019 },
           } },
-        { id = "a79229", at = { zone = 405, x = 47.49, y = 54.67, r = 10 }, minLevel = 30, maxLevel = 48,
+        { id = "a79229", at = { zone = 405, x = 47.49, y = 54.67, r = 10 }, minLevel = 35, maxLevel = 48,
           lines = {
             { kind = "accept", quest = 79229, object = 417353 },
           } },
@@ -5396,7 +5396,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 261, npc = 1182, skipIfMissing = true },
           } },
-        { id = "a6027", at = { zone = 405, x = 38.88, y = 27.16, r = 10 }, minLevel = 30, maxLevel = 46, items = { 15766 }, targets = { friend = { 11863 } },
+        { id = "a6027", at = { zone = 405, x = 38.88, y = 27.16, r = 10 }, minLevel = 33, maxLevel = 46, items = { 15766 }, targets = { friend = { 11863 } },
           lines = {
             { kind = "accept", quest = 6027, npc = 11863, ifDone = 5741, requires = { 5741 } },
           } },
@@ -5448,17 +5448,17 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 41, to = 31 },
           } },
-        { id = "a4135", at = { zone = 357, x = 73.32, y = 56.31, r = 10 }, minLevel = 40, maxLevel = 54, items = { 11463 },
+        { id = "a4135", at = { zone = 357, x = 73.32, y = 56.31, r = 10 }, minLevel = 41, maxLevel = 54, items = { 11463 },
           lines = {
             { kind = "accept", quest = 4135, object = 164953, ifDone = 4131, requires = { 4131 } },
           } },
-        { id = "t4135.a4265.o4265", at = { zone = 357, x = 72.07, y = 63.72, r = 10 }, minLevel = 40, items = { 11463 },
+        { id = "t4135.a4265.o4265", at = { zone = 357, x = 72.07, y = 63.72, r = 10 }, minLevel = 41, items = { 11463 },
           lines = {
             { kind = "turnin", quest = 4135, object = 164954, skipIfMissing = true },
             { kind = "accept", quest = 4265, object = 164954, ifDone = 4135, requires = { 4135 } },
             { kind = "objective", quest = 4265, index = 1, skipIfMissing = true },
           } },
-        { id = "t4265.a4266", at = { zone = 357, x = 31.86, y = 45.13, r = 10 }, minLevel = 40, targets = { friend = { 7880 } },
+        { id = "t4265.a4266", at = { zone = 357, x = 31.86, y = 45.13, r = 10 }, minLevel = 41, targets = { friend = { 7880 } },
           lines = {
             { kind = "turnin", quest = 4265, npc = 7880, skipIfMissing = true },
             { kind = "accept", quest = 4266, npc = 7880, ifDone = 4265, requires = { 4265 } },
@@ -5467,7 +5467,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 4266, npc = 3936, skipIfMissing = true },
           } },
-        { id = "a2821", at = { zone = 357, x = 30.63, y = 42.71, r = 10 }, minLevel = 40, maxLevel = 54, targets = { friend = { 7852 } },
+        { id = "a2821", at = { zone = 357, x = 30.63, y = 42.71, r = 10 }, minLevel = 41, maxLevel = 54, targets = { friend = { 7852 } },
           lines = {
             { kind = "accept", quest = 2821, npc = 7852 },
           } },
@@ -5475,7 +5475,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 2821, index = 1, item = 8973, skipIfMissing = true },
           } },
-        { id = "a2969", at = { zone = 357, x = 65.94, y = 45.65, r = 10 }, minLevel = 38, maxLevel = 55, items = { 12301 }, targets = { friend = { 7956 } },
+        { id = "a2969", at = { zone = 357, x = 65.94, y = 45.65, r = 10 }, minLevel = 42, maxLevel = 55, items = { 12301 }, targets = { friend = { 7956 } },
           lines = {
             { kind = "accept", quest = 2969, npc = 7956 },
           } },
@@ -5549,7 +5549,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "hearth", to = { zone = 33, x = 27.04, y = 77.31 } },
           } },
-        { id = "t621.t608.t348.t609.a613", at = { zone = 33, x = 27.12, y = 77.21, r = 10 }, minLevel = 30, targets = { friend = { 2498, 2487, 2486, 2501 } },
+        { id = "t621.t608.t348.t609.a613", at = { zone = 33, x = 27.12, y = 77.21, r = 10 }, minLevel = 39, targets = { friend = { 2498, 2487, 2486, 2501 } },
           lines = {
             { kind = "turnin", quest = 621, npc = 2498 },
             { kind = "turnin", quest = 608, npc = 2487, skipIfMissing = true },
@@ -5561,7 +5561,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 613, index = 1, item = 3930, skipIfMissing = true },
           } },
-        { id = "a206", at = { zone = 33, x = 37.83, y = 3.56, r = 10 }, minLevel = 30, maxLevel = 54, skip = { { kind = "notturnedin", quest = 205 } }, targets = { friend = { 739 } },
+        { id = "a206", at = { zone = 33, x = 37.83, y = 3.56, r = 10 }, minLevel = 41, maxLevel = 54, skip = { { kind = "notturnedin", quest = 205 } }, targets = { friend = { 739 } },
           lines = {
             { kind = "accept", quest = 206, npc = 739, ifDone = 202, requires = { 202, 205 } },
           } },
@@ -5632,7 +5632,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 93963, npc = 1748, skipIfMissing = true },
             { kind = "turnin", quest = 98190, npc = 1748, skipIfMissing = true },
           } },
-        { id = "t337.a538", at = { zone = 1519, x = 77.07, y = 30.21, r = 10 }, minLevel = 20, items = { 2794 }, targets = { friend = { 1440 } },
+        { id = "t337.a538", at = { zone = 1519, x = 77.07, y = 30.21, r = 10 }, minLevel = 33, items = { 2794 }, targets = { friend = { 1440 } },
           lines = {
             { kind = "turnin", quest = 337, npc = 1440, skipIfMissing = true },
             { kind = "accept", quest = 538, npc = 1440, ifDone = 337, requires = { 337 } },
@@ -5666,7 +5666,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 6, to = 14 },
           } },
-        { id = "t538.a540.a522.t661.a500", at = { zone = 267, x = 50.57, y = 57.09, r = 10 }, minLevel = 30, items = { 3668 }, targets = { enemy = { 2434 }, friend = { 2277, 2711, 2263 } },
+        { id = "t538.a540.a522.t661.a500", at = { zone = 267, x = 50.57, y = 57.09, r = 10 }, minLevel = 33, items = { 3668 }, targets = { enemy = { 2434 }, friend = { 2277, 2711, 2263 } },
           lines = {
             { kind = "turnin", quest = 538, npc = 2277, skipIfMissing = true },
             { kind = "accept", quest = 540, npc = 2277, ifDone = 538, requires = { 538 } },
@@ -5674,7 +5674,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 661, at = { zone = 267, x = 50.35, y = 59.05, r = 10 }, npc = 2711, skipIfMissing = true },
             { kind = "accept", quest = 500, at = { zone = 267, x = 49.47, y = 58.73, r = 10 }, npc = 2263 },
           } },
-        { id = "t522.a523", at = { zone = 267, x = 48.14, y = 59.11, r = 10 }, minLevel = 30, items = { 3668 }, targets = { friend = { 2276 } },
+        { id = "t522.a523", at = { zone = 267, x = 48.14, y = 59.11, r = 10 }, minLevel = 35, items = { 3668 }, targets = { friend = { 2276 } },
           lines = {
             { kind = "turnin", quest = 522, npc = 2276 },
             { kind = "accept", quest = 523, npc = 2276, requires = { 522 } },
@@ -5705,7 +5705,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "transport", to = { zone = 15, x = 71.7, y = 56.6 }, mode = "boat", at = { zone = 11, x = 4.7, y = 63.7, r = 15 } },
           } },
-        { id = "t1947.a1948", at = { zone = 15, x = 46.06, y = 57.09, r = 10 }, when = { class = "MAGE" }, minLevel = 30, items = { 7516, 7273 }, targets = { friend = { 6546 } },
+        { id = "t1947.a1948", at = { zone = 15, x = 46.06, y = 57.09, r = 10 }, when = { class = "MAGE" }, minLevel = 35, items = { 7516, 7273 }, targets = { friend = { 6546 } },
           lines = {
             { kind = "turnin", quest = 1947, npc = 6546, skipIfMissing = true },
             { kind = "accept", quest = 1948, npc = 6546, ifDone = 1947, requires = { 1947 } },
@@ -5715,7 +5715,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 1948, index = 1, item = 1529, skipIfMissing = true },
             { kind = "objective", quest = 1948, index = 2, item = 7272, skipIfMissing = true },
           } },
-        { id = "t1948.a1949", at = { zone = 15, x = 46.06, y = 57.09, r = 10 }, when = { class = "MAGE" }, minLevel = 30, items = { 7516, 7273 }, targets = { friend = { 6546 } },
+        { id = "t1948.a1949", at = { zone = 15, x = 46.06, y = 57.09, r = 10 }, when = { class = "MAGE" }, minLevel = 33, items = { 7516, 7273 }, targets = { friend = { 6546 } },
           lines = {
             { kind = "turnin", quest = 1948, npc = 6546, skipIfMissing = true },
             { kind = "accept", quest = 1949, npc = 6546, ifDone = 1947, requires = { 1947 } },
@@ -5816,7 +5816,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 4450, npc = 5411, skipIfMissing = true },
           } },
-        { id = "a992", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 38, maxLevel = 54, items = { 8584 }, targets = { friend = { 7724 } },
+        { id = "a992", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 41, maxLevel = 54, items = { 8584 }, targets = { friend = { 7724 } },
           lines = {
             { kind = "accept", quest = 992, npc = 7724 },
           } },
@@ -5828,12 +5828,12 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 992, index = 1, item = 8585, skipIfMissing = true },
           } },
-        { id = "t992.a82", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 39, items = { 8584 }, targets = { friend = { 7724 } },
+        { id = "t992.a82", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 42, items = { 8584 }, targets = { friend = { 7724 } },
           lines = {
             { kind = "turnin", quest = 992, npc = 7724, skipIfMissing = true },
             { kind = "accept", quest = 82, npc = 7724, ifDone = 992, requires = { 992 } },
           } },
-        { id = "a2781.a97530", at = { zone = 440, x = 66.82, y = 22.29, r = 10 }, minLevel = 40, maxLevel = 54, targets = { friend = { 7882 } },
+        { id = "a2781.a97530", at = { zone = 440, x = 66.82, y = 22.29, r = 10 }, minLevel = 42, maxLevel = 54, targets = { friend = { 7882 } },
           lines = {
             { kind = "accept", quest = 2781, object = 142122 },
             { kind = "accept", quest = 97530, at = { zone = 440, x = 67.06, y = 23.89, r = 10 }, npc = 7882 },
@@ -5870,7 +5870,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 39, to = 41 },
           } },
-        { id = "a4267", at = { zone = 357, x = 30.28, y = 46.17, r = 10 }, minLevel = 40, maxLevel = 54, items = { 11466 }, targets = { friend = { 3936 } },
+        { id = "a4267", at = { zone = 357, x = 30.28, y = 46.17, r = 10 }, minLevel = 41, maxLevel = 54, items = { 11466 }, targets = { friend = { 3936 } },
           lines = {
             { kind = "accept", quest = 4267, npc = 3936, ifDone = 4266, requires = { 4266 } },
           } },
@@ -5878,7 +5878,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 2939, npc = 7764 },
           } },
-        { id = "a2970", at = { zone = 357, x = 65.95, y = 45.61, r = 10 }, minLevel = 38, maxLevel = 55, targets = { friend = { 7957 } },
+        { id = "a2970", at = { zone = 357, x = 65.95, y = 45.61, r = 10 }, minLevel = 42, maxLevel = 55, targets = { friend = { 7957 } },
           lines = {
             { kind = "accept", quest = 2970, npc = 7957, ifDone = 2969, requires = { 2969 } },
           } },
@@ -5888,7 +5888,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 2970, index = 2, npc = 7725, skipIfMissing = true },
             { kind = "objective", quest = 2970, index = 3, npc = 7727, skipIfMissing = true },
           } },
-        { id = "t2970.a2972", at = { zone = 357, x = 65.95, y = 45.61, r = 10 }, minLevel = 38, items = { 9368 }, targets = { friend = { 7957 } },
+        { id = "t2970.a2972", at = { zone = 357, x = 65.95, y = 45.61, r = 10 }, minLevel = 42, items = { 9368 }, targets = { friend = { 7957 } },
           lines = {
             { kind = "turnin", quest = 2970, npc = 7957, skipIfMissing = true },
             { kind = "accept", quest = 2972, npc = 7957, ifDone = 2970, requires = { 2970 } },
@@ -5901,12 +5901,12 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 16651, x = 35.7, y = 12.5, r = 20 } },
           } },
-        { id = "a92844.t92844", at = { zone = 16651, x = 35.7, y = 12.5, r = 10 }, minLevel = 30, targets = { friend = { 253136 } },
+        { id = "a92844.t92844", at = { zone = 16651, x = 35.7, y = 12.5, r = 10 }, minLevel = 37, targets = { friend = { 253136 } },
           lines = {
             { kind = "accept", quest = 92844, npc = 253136 },
             { kind = "turnin", quest = 92844, npc = 253136 },
           } },
-        { id = "a93037.t93037", at = { zone = 16651, x = 21.2, y = 23.2, r = 10 }, minLevel = 30, targets = { friend = { 253177 } },
+        { id = "a93037.t93037", at = { zone = 16651, x = 21.2, y = 23.2, r = 10 }, minLevel = 35, targets = { friend = { 253177 } },
           lines = {
             { kind = "accept", quest = 93037, npc = 253177 },
             { kind = "turnin", quest = 93037, npc = 253177 },
@@ -5931,7 +5931,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "getflight", node = 27, npc = 3838 },
           } },
-        { id = "t2939.a2940.t2940.a2941", at = { zone = 141, x = 55.41, y = 92.23, r = 10 }, minLevel = 42, items = { 9329 }, targets = { friend = { 7907 } },
+        { id = "t2939.a2940.t2940.a2941", at = { zone = 141, x = 55.41, y = 92.23, r = 10 }, minLevel = 43, items = { 9329 }, targets = { friend = { 7907 } },
           lines = {
             { kind = "turnin", quest = 2939, npc = 7907, skipIfMissing = true },
             { kind = "accept", quest = 2940, object = 142958, ifDone = 2939, requires = { 2939 } },
@@ -5987,7 +5987,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 39, to = 31 },
           } },
-        { id = "a3841", at = { zone = 357, x = 65.94, y = 45.65, r = 10 }, minLevel = 38, maxLevel = 55, items = { 11102 }, targets = { friend = { 7956 } },
+        { id = "a3841", at = { zone = 357, x = 65.94, y = 45.65, r = 10 }, minLevel = 42, maxLevel = 55, items = { 11102 }, targets = { friend = { 7956 } },
           lines = {
             { kind = "accept", quest = 3841, npc = 7956, ifDone = 2972, requires = { 2972 } },
           } },
@@ -6003,7 +6003,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 400, x = 77.79, y = 77.27, r = 20 } },
           } },
-        { id = "a1111.t3841", at = { zone = 400, x = 77.79, y = 77.27, r = 10 }, minLevel = 30, items = { 5799, 11102 }, targets = { friend = { 4452, 9238 } },
+        { id = "a1111.t3841", at = { zone = 400, x = 77.79, y = 77.27, r = 10 }, minLevel = 31, items = { 5799, 11102 }, targets = { friend = { 4452, 9238 } },
           lines = {
             { kind = "accept", quest = 1111, npc = 4452 },
             { kind = "turnin", quest = 3841, at = { zone = 400, x = 78.35, y = 74.72, r = 10 }, npc = 9238, skipIfMissing = true },
@@ -6012,7 +6012,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 1950, index = 1, npc = 6626, skipIfMissing = true },
           } },
-        { id = "a1178", at = { zone = 400, x = 80.18, y = 75.88, r = 10 }, minLevel = 29, maxLevel = 45, targets = { friend = { 4630 } },
+        { id = "a1178", at = { zone = 400, x = 80.18, y = 75.88, r = 10 }, minLevel = 32, maxLevel = 45, targets = { friend = { 4630 } },
           lines = {
             { kind = "accept", quest = 1178, npc = 4630, ifDone = 1176, requires = { 1176 } },
           } },
@@ -6028,7 +6028,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 1178, npc = 3391, skipIfMissing = true },
           } },
-        { id = "t1111.a1112", at = { zone = 17, x = 63.35, y = 38.45, r = 10 }, minLevel = 30, items = { 5799, 5800 }, targets = { friend = { 3453 } },
+        { id = "t1111.a1112", at = { zone = 17, x = 63.35, y = 38.45, r = 10 }, minLevel = 31, items = { 5799, 5800 }, targets = { friend = { 3453 } },
           lines = {
             { kind = "turnin", quest = 1111, npc = 3453 },
             { kind = "accept", quest = 1112, npc = 3453, requires = { 1111 } },
@@ -6041,7 +6041,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 400, x = 77.79, y = 77.27, r = 20 } },
           } },
-        { id = "t1112.a1114.t1114", at = { zone = 400, x = 77.79, y = 77.27, r = 10 }, minLevel = 30, items = { 5800, 5802 }, targets = { friend = { 4452, 4454 } },
+        { id = "t1112.a1114.t1114", at = { zone = 400, x = 77.79, y = 77.27, r = 10 }, minLevel = 31, items = { 5800, 5802 }, targets = { friend = { 4452, 4454 } },
           lines = {
             { kind = "turnin", quest = 1112, npc = 4452 },
             { kind = "accept", quest = 1114, npc = 4452, requires = { 1112 } },
@@ -6064,7 +6064,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 2500, npc = 1470 },
             { kind = "sethearth", at = { zone = 38, x = 35.53, y = 48.4, r = 10 }, npc = 6734 },
           } },
-        { id = "a738", at = { zone = 38, x = 65.93, y = 65.62, r = 10 }, minLevel = 30, maxLevel = 46, targets = { friend = { 1344 } },
+        { id = "a738", at = { zone = 38, x = 65.93, y = 65.62, r = 10 }, minLevel = 33, maxLevel = 46, targets = { friend = { 1344 } },
           lines = {
             { kind = "accept", quest = 738, npc = 1344 },
           } },
@@ -6102,7 +6102,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 7728, object = 179827 },
             { kind = "accept", quest = 7729, object = 179827 },
           } },
-        { id = "a3441.o3441.t3441.a3442", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 40, targets = { enemy = { 8479 }, friend = { 8479 } },
+        { id = "a3441.o3441.t3441.a3442", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 43, targets = { enemy = { 8479 }, friend = { 8479 } },
           lines = {
             { kind = "accept", quest = 3441, npc = 8479 },
             { kind = "objective", quest = 3441, index = 1, npc = 8479 },
@@ -6124,7 +6124,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 7728, index = 1, item = 18959, skipIfMissing = true },
             { kind = "objective", quest = 7728, index = 2, item = 18960, skipIfMissing = true },
           } },
-        { id = "t3442.a3443.o3443.t3443", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 40, targets = { enemy = { 5843, 5844, 5846, 8504, 5840, 8566 }, friend = { 8479 } },
+        { id = "t3442.a3443.o3443.t3443", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 43, targets = { enemy = { 5843, 5844, 5846, 8504, 5840, 8566 }, friend = { 8479 } },
           lines = {
             { kind = "turnin", quest = 3442, npc = 8479 },
             { kind = "accept", quest = 3443, npc = 8479, requires = { 3442 } },
@@ -6161,7 +6161,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 738, object = 2875, skipIfMissing = true },
           } },
-        { id = "a727", at = { zone = 3, x = 51.39, y = 76.87, r = 10 }, minLevel = 30, maxLevel = 48, items = { 4648 }, targets = { friend = { 2785 } },
+        { id = "a727", at = { zone = 3, x = 51.39, y = 76.87, r = 10 }, minLevel = 35, maxLevel = 48, items = { 4648 }, targets = { friend = { 2785 } },
           lines = {
             { kind = "accept", quest = 727, npc = 2785, ifDone = 709, requires = { 709 } },
           } },
@@ -6181,7 +6181,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 8, to = 16 },
           } },
-        { id = "a652", at = { zone = 45, x = 36.23, y = 57.38, r = 10 }, minLevel = 30, maxLevel = 50,
+        { id = "a652", at = { zone = 45, x = 36.23, y = 57.38, r = 10 }, minLevel = 37, maxLevel = 50,
           lines = {
             { kind = "accept", quest = 652, object = 2702, ifDone = 651, requires = { 651 } },
           } },
@@ -6189,7 +6189,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 652, index = 1, item = 4469, skipIfMissing = true },
           } },
-        { id = "t652.a653", at = { zone = 45, x = 36.08, y = 58.09, r = 10 }, minLevel = 30,
+        { id = "t652.a653", at = { zone = 45, x = 36.08, y = 58.09, r = 10 }, minLevel = 35,
           lines = {
             { kind = "turnin", quest = 652, object = 2688, skipIfMissing = true },
             { kind = "accept", quest = 653, object = 2688, ifDone = 652, requires = { 652 } },
@@ -6206,7 +6206,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 43, to = 14 },
           } },
-        { id = "a1712", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30, maxLevel = 48, items = { 6929, 4480, 4479, 4481 }, targets = { friend = { 6176 } },
+        { id = "a1712", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 35, maxLevel = 48, items = { 6929, 4480, 4479, 4481 }, targets = { friend = { 6176 } },
           lines = {
             { kind = "accept", quest = 1712, npc = 6176, ifDone = 1791, requires = { 1791 } },
           } },
@@ -6220,7 +6220,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 2988, npc = 5636 },
           } },
-        { id = "a2877.a2880", at = { zone = 47, x = 14.83, y = 44.57, r = 10 }, minLevel = 40, maxLevel = 53, targets = { friend = { 7884 } },
+        { id = "a2877.a2880", at = { zone = 47, x = 14.83, y = 44.57, r = 10 }, minLevel = 43, maxLevel = 53, targets = { friend = { 7884 } },
           lines = {
             { kind = "accept", quest = 2877, npc = 7884 },
             { kind = "accept", quest = 2880, npc = 7884 },
@@ -6262,7 +6262,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 2877, npc = 7884, skipIfMissing = true },
             { kind = "turnin", quest = 2880, npc = 7884, skipIfMissing = true },
           } },
-        { id = "t2988.a2989", at = { zone = 47, x = 9.75, y = 44.47, r = 10 }, minLevel = 40, targets = { friend = { 5636 } },
+        { id = "t2988.a2989", at = { zone = 47, x = 9.75, y = 44.47, r = 10 }, minLevel = 43, targets = { friend = { 5636 } },
           lines = {
             { kind = "turnin", quest = 2988, npc = 5636, skipIfMissing = true },
             { kind = "accept", quest = 2989, npc = 5636, ifDone = 2988, requires = { 2988 } },
@@ -6279,7 +6279,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 43, to = 14 },
           } },
-        { id = "a504.b@267", at = { zone = 267, x = 49.47, y = 58.73, r = 10 }, minLevel = 30, targets = { friend = { 2263 } },
+        { id = "a504.b@267", at = { zone = 267, x = 49.47, y = 58.73, r = 10 }, minLevel = 35, targets = { friend = { 2263 } },
           lines = {
             { kind = "accept", quest = 504, npc = 2263, ifDone = 500, requires = { 500 } },
             { kind = "sethearth", at = { zone = 267, x = 51.17, y = 58.93, r = 10 }, npc = 2352 },
@@ -6294,7 +6294,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 504, index = 1, npc = 2287, skipIfMissing = true },
           } },
-        { id = "t1712.a1713", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30, items = { 6929, 4480, 4479, 4481 }, targets = { friend = { 6176 } },
+        { id = "t1712.a1713", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 35, items = { 6929, 4480, 4479, 4481 }, targets = { friend = { 6176 } },
           lines = {
             { kind = "turnin", quest = 1712, npc = 6176, skipIfMissing = true },
             { kind = "accept", quest = 1713, npc = 6176, ifDone = 1712, requires = { 1712 } },
@@ -6303,7 +6303,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 1713, index = 1, item = 6894, skipIfMissing = true },
           } },
-        { id = "t1713.a1792.t1792", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 30, targets = { friend = { 6176 } },
+        { id = "t1713.a1792.t1792", at = { zone = 36, x = 80.5, y = 66.92, r = 10 }, when = { class = "WARRIOR" }, minLevel = 35, targets = { friend = { 6176 } },
           lines = {
             { kind = "turnin", quest = 1713, npc = 6176, skipIfMissing = true },
             { kind = "accept", quest = 1792, npc = 6176, ifDone = 1713, requires = { 1713 } },
@@ -6331,7 +6331,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "train", level = 44, class = "ROGUE", npc = 5166 },
           } },
-        { id = "t724.a725.t725.a726.t726.a762.a1360", at = { zone = 1537, x = 77.54, y = 11.82, r = 10 }, minLevel = 35, items = { 4635, 4622 }, targets = { friend = { 2916, 2918, 6294 } },
+        { id = "t724.a725.t725.a726.t726.a762.a1360", at = { zone = 1537, x = 77.54, y = 11.82, r = 10 }, minLevel = 39, items = { 4635, 4622 }, targets = { friend = { 2916, 2918, 6294 } },
           lines = {
             { kind = "turnin", quest = 724, npc = 2916, skipIfMissing = true },
             { kind = "accept", quest = 725, npc = 2916, ifDone = 724, requires = { 724 } },
@@ -6345,7 +6345,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "train", level = 44, class = "MAGE", npc = 5144 },
           } },
-        { id = "t653.t727.a687", at = { zone = 1537, x = 50.83, y = 5.62, r = 10 }, minLevel = 30, items = { 4648 }, targets = { friend = { 2786 } },
+        { id = "t653.t727.a687", at = { zone = 1537, x = 50.83, y = 5.62, r = 10 }, minLevel = 35, items = { 4648 }, targets = { friend = { 2786 } },
           lines = {
             { kind = "turnin", quest = 653, npc = 2786, skipIfMissing = true },
             { kind = "turnin", quest = 727, npc = 2786, skipIfMissing = true },
@@ -6382,7 +6382,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 32, to = 39 },
           } },
-        { id = "a10", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 39, maxLevel = 56, targets = { friend = { 7724 } },
+        { id = "a10", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 43, maxLevel = 56, targets = { friend = { 7724 } },
           lines = {
             { kind = "accept", quest = 10, npc = 7724, ifDone = 82, requires = { 82 } },
           } },
@@ -6402,7 +6402,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 3161, npc = 7771, skipIfMissing = true },
           } },
-        { id = "t10.a110.t110.a113.t113", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 39, items = { 8594 }, targets = { friend = { 7724, 5594 } },
+        { id = "t10.a110.t110.a113.t113", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 43, items = { 8594 }, targets = { friend = { 7724, 5594 } },
           lines = {
             { kind = "turnin", quest = 10, npc = 7724, skipIfMissing = true },
             { kind = "accept", quest = 110, npc = 7724, ifDone = 10, requires = { 10 } },
@@ -6460,7 +6460,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 39, to = 41 },
           } },
-        { id = "a7733.b@357", at = { zone = 357, x = 30.63, y = 42.71, r = 10 }, minLevel = 40, targets = { friend = { 7852 } },
+        { id = "a7733.b@357", at = { zone = 357, x = 30.63, y = 42.71, r = 10 }, minLevel = 43, targets = { friend = { 7852 } },
           lines = {
             { kind = "accept", quest = 7733, npc = 7852, ifDone = 2821, requires = { 2821 } },
             { kind = "sethearth", at = { zone = 357, x = 30.97, y = 43.49, r = 10 }, npc = 7736 },
@@ -6524,7 +6524,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 7724, npc = 14627 },
             { kind = "accept", quest = 7727, npc = 14627 },
           } },
-        { id = "a3368", at = { zone = 51, x = 74.45, y = 19.29, r = 10 }, minLevel = 40, maxLevel = 56, items = { 10443 },
+        { id = "a3368", at = { zone = 51, x = 74.45, y = 19.29, r = 10 }, minLevel = 43, maxLevel = 56, items = { 10443 },
           lines = {
             { kind = "accept", quest = 3368, object = 175704, ifDone = 3367, requires = { 3367 } },
           } },
@@ -6558,7 +6558,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 762, index = 1, item = 4621, skipIfMissing = true },
           } },
-        { id = "t687.a692", at = { zone = 3, x = 51.39, y = 76.87, r = 10 }, minLevel = 30, targets = { friend = { 2785 } },
+        { id = "t687.a692", at = { zone = 3, x = 51.39, y = 76.87, r = 10 }, minLevel = 36, targets = { friend = { 2785 } },
           lines = {
             { kind = "turnin", quest = 687, npc = 2785, skipIfMissing = true },
             { kind = "accept", quest = 692, npc = 2785, ifDone = 687, requires = { 687 } },
@@ -6605,11 +6605,11 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 2, to = 19 },
           } },
-        { id = "a8552", at = { zone = 33, x = 23.25, y = 72.1, r = 40 }, minLevel = 40, maxLevel = 58, items = { 3985 }, targets = { enemy = { 1493 } },
+        { id = "a8552", at = { zone = 33, x = 23.25, y = 72.1, r = 40 }, minLevel = 45, maxLevel = 58, items = { 3985 }, targets = { enemy = { 1493 } },
           lines = {
             { kind = "accept", quest = 8552, item = 3985, npc = 1493 },
           } },
-        { id = "t8552.a8551.a8553.t8553", at = { zone = 33, x = 26.69, y = 73.61, r = 10 }, minLevel = 40, items = { 3985 }, targets = { friend = { 2500, 2594 } },
+        { id = "t8552.a8551.a8553.t8553", at = { zone = 33, x = 26.69, y = 73.61, r = 10 }, minLevel = 45, items = { 3985 }, targets = { friend = { 2500, 2594 } },
           lines = {
             { kind = "turnin", quest = 8552, npc = 2500, skipIfMissing = true },
             { kind = "accept", quest = 8551, npc = 2500 },
@@ -6632,7 +6632,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "train", level = 46, class = "ROGUE", npc = 1411 },
           } },
-        { id = "t8551.a8554", at = { zone = 33, x = 26.69, y = 73.61, r = 10 }, minLevel = 40, targets = { friend = { 2500, 2594 } },
+        { id = "t8551.a8554", at = { zone = 33, x = 26.69, y = 73.61, r = 10 }, minLevel = 45, targets = { friend = { 2500, 2594 } },
           lines = {
             { kind = "turnin", quest = 8551, npc = 2500 },
             { kind = "accept", quest = 8554, npc = 2594, ifDone = 8553, requires = { 8553 } },
@@ -6713,7 +6713,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 6, to = 74 },
           } },
-        { id = "a3452", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 40, maxLevel = 58, targets = { friend = { 8479 } },
+        { id = "a3452", at = { zone = 51, x = 39.06, y = 38.99, r = 10 }, minLevel = 45, maxLevel = 58, targets = { friend = { 8479 } },
           lines = {
             { kind = "accept", quest = 3452, npc = 8479, ifDone = 3443, requires = { 3443 } },
           } },
@@ -6722,7 +6722,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 7722, npc = 14624 },
             { kind = "accept", quest = 7701, at = { zone = 51, x = 37.65, y = 26.47, r = 10 }, object = 179827 },
           } },
-        { id = "a3377.o3377.t3377", at = { zone = 51, x = 29.57, y = 26.29, r = 10 }, minLevel = 40, targets = { enemy = { 8436 }, friend = { 8436 } },
+        { id = "a3377.o3377.t3377", at = { zone = 51, x = 29.57, y = 26.29, r = 10 }, minLevel = 45, targets = { enemy = { 8436 }, friend = { 8436 } },
           lines = {
             { kind = "accept", quest = 3377, npc = 8436 },
             { kind = "objective", quest = 3377, index = 1, npc = 8436 },
@@ -6732,7 +6732,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 3452, index = 1, item = 10552, skipIfMissing = true },
           } },
-        { id = "o7722.o7701.t3452.a3453.o3453.t3453.a3454.t3454.a3462.t3462", at = { zone = 51, x = 40.45, y = 35.74, r = 40 }, minLevel = 40, targets = { enemy = { 14621, 8479 }, friend = { 8479, 8509 } },
+        { id = "o7722.o7701.t3452.a3453.o3453.t3453.a3454.t3454.a3462.t3462", at = { zone = 51, x = 40.45, y = 35.74, r = 40 }, minLevel = 45, targets = { enemy = { 14621, 8479 }, friend = { 8479, 8509 } },
           lines = {
             { kind = "objective", quest = 7722, index = 1, item = 18922, skipIfMissing = true },
             { kind = "objective", quest = 7701, index = 1, item = 18946, skipIfMissing = true },
@@ -6754,7 +6754,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 3, x = 61.94, y = 54.26, r = 20 } },
           } },
-        { id = "a717", at = { zone = 3, x = 61.94, y = 54.26, r = 10 }, minLevel = 40, maxLevel = 58, items = { 4640, 4843, 4844, 4845 }, targets = { friend = { 2888 } },
+        { id = "a717", at = { zone = 3, x = 61.94, y = 54.26, r = 10 }, minLevel = 45, maxLevel = 58, items = { 4640, 4843, 4844, 4845 }, targets = { friend = { 2888 } },
           lines = {
             { kind = "accept", quest = 717, npc = 2888, ifDone = 732, requires = { 732 } },
           } },
@@ -6781,7 +6781,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 3362, at = { zone = 440, x = 51.57, y = 26.76, r = 10 }, npc = 7876 },
             { kind = "sethearth", at = { zone = 440, x = 52.51, y = 27.91, r = 10 }, npc = 7733 },
           } },
-        { id = "a162", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 39, maxLevel = 57, items = { 8594 }, targets = { friend = { 7724 } },
+        { id = "a162", at = { zone = 440, x = 50.21, y = 27.48, r = 10 }, minLevel = 44, maxLevel = 57, items = { 8594 }, targets = { friend = { 7724 } },
           lines = {
             { kind = "accept", quest = 162, npc = 7724, ifDone = 113, requires = { 113 } },
           } },
@@ -6790,7 +6790,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 3362, index = 1, npc = 5490 },
             { kind = "objective", quest = 3362, index = 2, npc = 5485 },
           } },
-        { id = "a1560", at = { zone = 440, x = 30.32, y = 67.41, r = 10 }, minLevel = 40, maxLevel = 58, targets = { friend = { 5955 } },
+        { id = "a1560", at = { zone = 440, x = 30.32, y = 67.41, r = 10 }, minLevel = 45, maxLevel = 58, targets = { friend = { 5955 } },
           lines = {
             { kind = "accept", quest = 1560, npc = 5955 },
           } },
@@ -6971,7 +6971,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 7, to = 6 },
           } },
-        { id = "a3448", at = { zone = 1537, x = 77.54, y = 11.82, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 2916 } },
+        { id = "a3448", at = { zone = 1537, x = 77.54, y = 11.82, r = 10 }, minLevel = 47, maxLevel = 60, targets = { friend = { 2916 } },
           lines = {
             { kind = "accept", quest = 3448, npc = 2916 },
           } },
@@ -6987,7 +6987,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 6, to = 74 },
           } },
-        { id = "a3463", at = { zone = 51, x = 39.17, y = 39, r = 10 }, minLevel = 40, maxLevel = 60, items = { 10515 }, targets = { friend = { 8509 } },
+        { id = "a3463", at = { zone = 51, x = 39.17, y = 39, r = 10 }, minLevel = 47, maxLevel = 60, items = { 10515 }, targets = { friend = { 8509 } },
           lines = {
             { kind = "accept", quest = 3463, npc = 8509, ifDone = 3462, requires = { 3462 } },
           } },
@@ -6998,7 +6998,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 3463, index = 3, object = 149031, skipIfMissing = true },
             { kind = "objective", quest = 3463, index = 4, object = 149032, skipIfMissing = true },
           } },
-        { id = "t3463.a3481.t3481", at = { zone = 51, x = 39.17, y = 39, r = 10 }, minLevel = 40, items = { 10515 }, targets = { friend = { 8509 } },
+        { id = "t3463.a3481.t3481", at = { zone = 51, x = 39.17, y = 39, r = 10 }, minLevel = 45, items = { 10515 }, targets = { friend = { 8509 } },
           lines = {
             { kind = "turnin", quest = 3463, npc = 8509, skipIfMissing = true },
             { kind = "accept", quest = 3481, object = 149502, ifDone = 3463, requires = { 3463 } },
@@ -7016,7 +7016,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "getflight", node = 3276, npc = 257087 },
           } },
-        { id = "a95119.a95165.t95165", at = { zone = 16591, x = 79.36, y = 53.08, r = 10 }, minLevel = 38, items = { 268505 }, targets = { friend = { 259961 } },
+        { id = "a95119.a95165.t95165", at = { zone = 16591, x = 79.36, y = 53.08, r = 10 }, minLevel = 39, items = { 268505 }, targets = { friend = { 259961 } },
           lines = {
             { kind = "accept", quest = 95119, npc = 259961 },
             { kind = "accept", quest = 95165, npc = 259961 },
@@ -7039,11 +7039,11 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 3276, to = 19 },
           } },
-        { id = "a580", at = { zone = 33, x = 27.14, y = 77.45, r = 10 }, minLevel = 40, maxLevel = 58, targets = { friend = { 2491 } },
+        { id = "a580", at = { zone = 33, x = 27.14, y = 77.45, r = 10 }, minLevel = 45, maxLevel = 58, targets = { friend = { 2491 } },
           lines = {
             { kind = "accept", quest = 580, npc = 2491 },
           } },
-        { id = "a630", at = { zone = 33, x = 38.53, y = 80.58, r = 10 }, minLevel = 45, maxLevel = 59, targets = { friend = { 2634 } },
+        { id = "a630", at = { zone = 33, x = 38.53, y = 80.58, r = 10 }, minLevel = 46, maxLevel = 59, targets = { friend = { 2634 } },
           lines = {
             { kind = "accept", quest = 630, npc = 2634, ifDone = 594, requires = { 594 } },
           } },
@@ -7071,7 +7071,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 7, to = 43 },
           } },
-        { id = "a2990", at = { zone = 47, x = 9.75, y = 44.47, r = 10 }, minLevel = 40, maxLevel = 55, items = { 9468 }, targets = { friend = { 5636 } },
+        { id = "a2990", at = { zone = 47, x = 9.75, y = 44.47, r = 10 }, minLevel = 42, maxLevel = 55, items = { 9468 }, targets = { friend = { 5636 } },
           lines = {
             { kind = "accept", quest = 2990, npc = 5636, ifDone = 2989, requires = { 2989 } },
           } },
@@ -7261,7 +7261,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 7, to = 74 },
           } },
-        { id = "a3378", at = { zone = 51, x = 29.57, y = 26.29, r = 10 }, minLevel = 40, maxLevel = 58, targets = { friend = { 8436 } },
+        { id = "a3378", at = { zone = 51, x = 29.57, y = 26.29, r = 10 }, minLevel = 45, maxLevel = 58, targets = { friend = { 8436 } },
           lines = {
             { kind = "accept", quest = 3378, npc = 8436, ifDone = 3377, requires = { 3377 } },
           } },
@@ -7328,11 +7328,11 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 3, x = 50.89, y = 62.4, r = 20 } },
           } },
-        { id = "a739", at = { zone = 3, x = 50.89, y = 62.4, r = 10 }, minLevel = 30, maxLevel = 50,
+        { id = "a739", at = { zone = 3, x = 50.89, y = 62.4, r = 10 }, minLevel = 37, maxLevel = 50,
           lines = {
             { kind = "accept", quest = 739, object = 2875, ifDone = 738, requires = { 738 } },
           } },
-        { id = "a656", at = { zone = 3, x = 51.39, y = 76.87, r = 10 }, minLevel = 30, maxLevel = 58, items = { 4472 }, targets = { friend = { 2785 } },
+        { id = "a656", at = { zone = 3, x = 51.39, y = 76.87, r = 10 }, minLevel = 45, maxLevel = 58, items = { 4472 }, targets = { friend = { 2785 } },
           lines = {
             { kind = "accept", quest = 656, npc = 2785, ifDone = 692, requires = { 692 } },
           } },
@@ -7370,7 +7370,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "train", level = 48, class = "WARRIOR", npc = 5114 },
           } },
-        { id = "a2769", at = { zone = 1537, x = 67.92, y = 46.1, r = 10 }, minLevel = 40, maxLevel = 54, targets = { friend = { 6169 } },
+        { id = "a2769", at = { zone = 1537, x = 67.92, y = 46.1, r = 10 }, minLevel = 41, maxLevel = 54, targets = { friend = { 6169 } },
           lines = {
             { kind = "accept", quest = 2769, npc = 6169 },
           } },
@@ -7378,11 +7378,11 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 4512, npc = 9616 },
           } },
-        { id = "a735", at = { zone = 1537, x = 50.83, y = 5.62, r = 10 }, minLevel = 30, maxLevel = 52, items = { 4649, 4639 }, targets = { friend = { 2786 } },
+        { id = "a735", at = { zone = 1537, x = 50.83, y = 5.62, r = 10 }, minLevel = 39, maxLevel = 52, items = { 4649, 4639 }, targets = { friend = { 2786 } },
           lines = {
             { kind = "accept", quest = 735, npc = 2786, ifDone = 727, requires = { 727 } },
           } },
-        { id = "a3449.a2861", at = { zone = 1537, x = 30.96, y = 4.83, r = 10 }, minLevel = 45, maxLevel = 54, items = { 10445, 10444 }, targets = { friend = { 8507, 5144 } },
+        { id = "a3449.a2861", at = { zone = 1537, x = 30.96, y = 4.83, r = 10 }, minLevel = 47, maxLevel = 54, items = { 10445, 10444 }, targets = { friend = { 8507, 5144 } },
           lines = {
             { kind = "accept", quest = 3449, npc = 8507, ifDone = 3448, requires = { 3448 } },
             { kind = "accept", quest = 2861, at = { zone = 1537, x = 27.25, y = 8.3, r = 10 }, npc = 5144 },
@@ -7433,7 +7433,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 2861, npc = 6546, skipIfMissing = true },
           } },
-        { id = "a626", at = { zone = 15, x = 31.11, y = 66.14, r = 10 }, minLevel = 35, maxLevel = 59,
+        { id = "a626", at = { zone = 15, x = 31.11, y = 66.14, r = 10 }, minLevel = 46, maxLevel = 59,
           lines = {
             { kind = "accept", quest = 626, object = 2555, ifDone = 625, requires = { 625 } },
           } },
@@ -7460,7 +7460,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 3449, index = 3, item = 10565, skipIfMissing = true },
             { kind = "objective", quest = 3449, index = 4, item = 10566, skipIfMissing = true },
           } },
-        { id = "t3449.a3461", at = { zone = 16, x = 77.81, y = 91.4, r = 10 }, minLevel = 45, items = { 10445, 10444 }, targets = { friend = { 8392 } },
+        { id = "t3449.a3461", at = { zone = 16, x = 77.81, y = 91.4, r = 10 }, minLevel = 47, items = { 10445, 10444 }, targets = { friend = { 8392 } },
           lines = {
             { kind = "turnin", quest = 3449, npc = 8392, skipIfMissing = true },
             { kind = "accept", quest = 3461, npc = 8392, ifDone = 3449, requires = { 3449 } },
@@ -7493,7 +7493,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 43, to = 74 },
           } },
-        { id = "a3181", at = { zone = 51, x = 73.52, y = 82.31, r = 40 }, minLevel = 40, maxLevel = 56, items = { 10000, 10005 }, targets = { enemy = { 5833 } },
+        { id = "a3181", at = { zone = 51, x = 73.52, y = 82.31, r = 40 }, minLevel = 43, maxLevel = 56, items = { 10000, 10005 }, targets = { enemy = { 5833 } },
           lines = {
             { kind = "accept", quest = 3181, item = 10000, npc = 5833 },
           } },
@@ -7501,7 +7501,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 38, x = 18.18, y = 84.01, r = 20 } },
           } },
-        { id = "t3181.a3182", at = { zone = 38, x = 18.18, y = 84.01, r = 10 }, minLevel = 40, items = { 10005 }, targets = { friend = { 3836 } },
+        { id = "t3181.a3182", at = { zone = 38, x = 18.18, y = 84.01, r = 10 }, minLevel = 43, items = { 10005 }, targets = { friend = { 3836 } },
           lines = {
             { kind = "turnin", quest = 3181, npc = 3836, skipIfMissing = true },
             { kind = "accept", quest = 3182, npc = 3836, ifDone = 3181, requires = { 3181 } },
@@ -7510,7 +7510,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 8, to = 6 },
           } },
-        { id = "t3182.a3201", at = { zone = 1537, x = 71.5, y = 15.74, r = 10 }, minLevel = 40, items = { 10005, 10022 }, targets = { friend = { 8256 } },
+        { id = "t3182.a3201", at = { zone = 1537, x = 71.5, y = 15.74, r = 10 }, minLevel = 43, items = { 10005, 10022 }, targets = { friend = { 8256 } },
           lines = {
             { kind = "turnin", quest = 3182, npc = 8256, skipIfMissing = true },
             { kind = "accept", quest = 3201, npc = 8256, ifDone = 3182, requires = { 3182 } },
@@ -7602,7 +7602,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 80, to = 79 },
           } },
-        { id = "a4284", at = { zone = 490, x = 41.92, y = 2.7, r = 10 }, minLevel = 47, maxLevel = 60, targets = { friend = { 9117 } },
+        { id = "a4284", at = { zone = 490, x = 41.92, y = 2.7, r = 10 }, minLevel = 48, maxLevel = 60, targets = { friend = { 9117 } },
           lines = {
             { kind = "accept", quest = 4284, npc = 9117 },
           } },
@@ -7659,7 +7659,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 3881, npc = 9270, skipIfMissing = true },
           } },
-        { id = "t4284.a4285.a4287.a4288", at = { zone = 490, x = 41.92, y = 2.7, r = 10 }, minLevel = 47, targets = { friend = { 9117 } },
+        { id = "t4284.a4285.a4287.a4288", at = { zone = 490, x = 41.92, y = 2.7, r = 10 }, minLevel = 48, targets = { friend = { 9117 } },
           lines = {
             { kind = "turnin", quest = 4284, npc = 9117, skipIfMissing = true },
             { kind = "accept", quest = 4285, npc = 9117, ifDone = 4284, requires = { 4284 } },
@@ -7684,7 +7684,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 4287, npc = 9117, skipIfMissing = true },
             { kind = "turnin", quest = 4288, npc = 9117, skipIfMissing = true },
           } },
-        { id = "a4321", at = { zone = 490, x = 41.92, y = 2.7, r = 10 }, minLevel = 47, skip = { { kind = "notturnedin", quest = 4287 }, { kind = "notturnedin", quest = 4288 } }, targets = { friend = { 9117 } },
+        { id = "a4321", at = { zone = 490, x = 41.92, y = 2.7, r = 10 }, minLevel = 48, skip = { { kind = "notturnedin", quest = 4287 }, { kind = "notturnedin", quest = 4288 } }, targets = { friend = { 9117 } },
           lines = {
             { kind = "accept", quest = 4321, npc = 9117, ifDone = 4285, requires = { 4285, 4287, 4288 } },
           } },
@@ -7696,7 +7696,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 79, to = 64 },
           } },
-        { id = "a3601", at = { zone = 16, x = 53.45, y = 21.82, r = 10 }, minLevel = 47, maxLevel = 60, targets = { friend = { 8420 } },
+        { id = "a3601", at = { zone = 16, x = 53.45, y = 21.82, r = 10 }, minLevel = 48, maxLevel = 60, targets = { friend = { 8420 } },
           lines = {
             { kind = "accept", quest = 3601, npc = 8420 },
           } },
@@ -7707,7 +7707,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 3601, index = 3, item = 10722, skipIfMissing = true },
             { kind = "objective", quest = 3601, index = 4, item = 10718, skipIfMissing = true },
           } },
-        { id = "t3601.a5534", at = { zone = 16, x = 53.45, y = 21.82, r = 10 }, minLevel = 47, targets = { friend = { 8420 } },
+        { id = "t3601.a5534", at = { zone = 16, x = 53.45, y = 21.82, r = 10 }, minLevel = 48, targets = { friend = { 8420 } },
           lines = {
             { kind = "turnin", quest = 3601, npc = 8420, skipIfMissing = true },
             { kind = "accept", quest = 5534, npc = 8420, ifDone = 3601, requires = { 3601 } },
@@ -7877,7 +7877,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 2, to = 71 },
           } },
-        { id = "a3824.a4182", at = { zone = 46, x = 84.56, y = 68.68, r = 10 }, minLevel = 48, maxLevel = 60, targets = { friend = { 9177, 9562 } },
+        { id = "a3824.a4182", at = { zone = 46, x = 84.56, y = 68.68, r = 10 }, minLevel = 49, maxLevel = 60, targets = { friend = { 9177, 9562 } },
           lines = {
             { kind = "accept", quest = 3824, npc = 9177, ifDone = 3823, requires = { 3823 } },
             { kind = "accept", quest = 4182, at = { zone = 46, x = 85.82, y = 68.95, r = 10 }, npc = 9562 },
@@ -7943,7 +7943,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 361, x = 50.93, y = 85.01, r = 20 } },
           } },
-        { id = "a8462", at = { zone = 361, x = 50.93, y = 85.01, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 11554 } },
+        { id = "a8462", at = { zone = 361, x = 50.93, y = 85.01, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 11554 } },
           lines = {
             { kind = "accept", quest = 8462, npc = 11554, ifDone = 8460, requires = { 8460 } },
           } },
@@ -7959,7 +7959,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 4421, index = 3, npc = 7106, skipIfMissing = true },
             { kind = "objective", quest = 4421, index = 4, npc = 9454, skipIfMissing = true },
           } },
-        { id = "a5202", at = { zone = 361, x = 37.95, y = 50.91, r = 40 }, minLevel = 49, maxLevel = 60, items = { 13140 }, targets = { enemy = { 7118 } },
+        { id = "a5202", at = { zone = 361, x = 37.95, y = 50.91, r = 40 }, minLevel = 50, maxLevel = 60, items = { 13140 }, targets = { enemy = { 7118 } },
           lines = {
             { kind = "accept", quest = 5202, item = 13140, npc = 7118 },
           } },
@@ -7969,7 +7969,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 5156, index = 2, npc = 9879, skipIfMissing = true },
             { kind = "objective", quest = 5156, index = 3, skipIfMissing = true },
           } },
-        { id = "a8470", at = { zone = 361, x = 62.21, y = 8.73, r = 40 }, minLevel = 45, maxLevel = 60, items = { 20741 }, targets = { enemy = { 7157 } },
+        { id = "a8470", at = { zone = 361, x = 62.21, y = 8.73, r = 40 }, minLevel = 50, maxLevel = 60, items = { 20741 }, targets = { enemy = { 7157 } },
           lines = {
             { kind = "accept", quest = 8470, item = 20741, npc = 7157 },
           } },
@@ -7989,7 +7989,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 939, index = 1, item = 11674, skipIfMissing = true },
           } },
-        { id = "t5202.a5203", at = { zone = 361, x = 36.21, y = 55.47, r = 10 }, minLevel = 49, items = { 13140 }, targets = { friend = { 11016 } },
+        { id = "t5202.a5203", at = { zone = 361, x = 36.21, y = 55.47, r = 10 }, minLevel = 50, items = { 13140 }, targets = { friend = { 11016 } },
           lines = {
             { kind = "turnin", quest = 5202, npc = 11016, skipIfMissing = true },
             { kind = "accept", quest = 5203, npc = 11016, ifDone = 5202, requires = { 5202 } },
@@ -8025,7 +8025,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 39, to = 80 },
           } },
-        { id = "t5158.a5159", at = { zone = 17, x = 65.83, y = 43.78, r = 10 }, minLevel = 48, items = { 12907, 12906 }, targets = { friend = { 5901 } },
+        { id = "t5158.a5159", at = { zone = 17, x = 65.83, y = 43.78, r = 10 }, minLevel = 49, items = { 12907, 12906 }, targets = { friend = { 5901 } },
           lines = {
             { kind = "turnin", quest = 5158, npc = 5901, skipIfMissing = true },
             { kind = "accept", quest = 5159, npc = 5901, ifDone = 5158, requires = { 5158 } },
@@ -8110,7 +8110,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 8471, npc = 11558, skipIfMissing = true },
           } },
-        { id = "a8461", at = { zone = 361, x = 64.77, y = 8.13, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 15395 } },
+        { id = "a8461", at = { zone = 361, x = 64.77, y = 8.13, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 15395 } },
           lines = {
             { kind = "accept", quest = 8461, npc = 15395 },
           } },
@@ -8128,12 +8128,12 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 8461, npc = 15395, skipIfMissing = true },
           } },
-        { id = "t5159.a5165", at = { zone = 361, x = 51.21, y = 82.11, r = 10 }, minLevel = 48, items = { 12906 }, targets = { friend = { 10922 } },
+        { id = "t5159.a5165", at = { zone = 361, x = 51.21, y = 82.11, r = 10 }, minLevel = 50, items = { 12906 }, targets = { friend = { 10922 } },
           lines = {
             { kind = "turnin", quest = 5159, npc = 10922, skipIfMissing = true },
             { kind = "accept", quest = 5165, npc = 10922, ifDone = 5159, requires = { 5159 } },
           } },
-        { id = "a4101", at = { zone = 361, x = 54.15, y = 86.83, r = 10 }, minLevel = 48, maxLevel = 60, targets = { friend = { 9528 } },
+        { id = "a4101", at = { zone = 361, x = 54.15, y = 86.83, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 9528 } },
           lines = {
             { kind = "accept", quest = 4101, npc = 9528 },
           } },
@@ -8152,7 +8152,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 5165, npc = 10922, skipIfMissing = true },
           } },
-        { id = "t4101.a5882", at = { zone = 361, x = 54.15, y = 86.83, r = 10 }, minLevel = 48, targets = { friend = { 9528 } },
+        { id = "t4101.a5882", at = { zone = 361, x = 54.15, y = 86.83, r = 10 }, minLevel = 50, targets = { friend = { 9528 } },
           lines = {
             { kind = "turnin", quest = 4101, npc = 9528, skipIfMissing = true },
             { kind = "accept", quest = 5882, npc = 9528, ifDone = 4101, requires = { 4101 } },
@@ -8179,7 +8179,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 39, to = 79 },
           } },
-        { id = "a4501", at = { zone = 490, x = 43.53, y = 8.44, r = 10 }, minLevel = 49, maxLevel = 60,
+        { id = "a4501", at = { zone = 490, x = 43.53, y = 8.44, r = 10 }, minLevel = 50, maxLevel = 60,
           lines = {
             { kind = "accept", quest = 4501, object = 174682 },
           } },
@@ -8188,7 +8188,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 4501, index = 1, npc = 9166, skipIfMissing = true },
             { kind = "objective", quest = 4501, index = 2, npc = 9167, skipIfMissing = true },
           } },
-        { id = "a4289", at = { zone = 490, x = 71.64, y = 75.96, r = 10 }, minLevel = 47, maxLevel = 60, targets = { friend = { 9619 } },
+        { id = "a4289", at = { zone = 490, x = 71.64, y = 75.96, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 9619 } },
           lines = {
             { kind = "accept", quest = 4289, npc = 9619 },
           } },
@@ -8247,7 +8247,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "train", level = 50, class = "ROGUE", npc = 5166 },
           } },
-        { id = "t4512.a3371", at = { zone = 1537, x = 75.77, y = 23.38, r = 10 }, minLevel = 40, items = { 11912, 11914, 11948 }, targets = { friend = { 9616, 8256 } },
+        { id = "t4512.a3371", at = { zone = 1537, x = 75.77, y = 23.38, r = 10 }, minLevel = 50, items = { 11912, 11914, 11948 }, targets = { friend = { 9616, 8256 } },
           lines = {
             { kind = "turnin", quest = 4512, npc = 9616, skipIfMissing = true },
             { kind = "accept", quest = 3371, at = { zone = 1537, x = 71.5, y = 15.74, r = 10 }, npc = 8256, ifDone = 3368, requires = { 3368 } },
@@ -8432,7 +8432,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 28, x = 51.92, y = 28.06, r = 20 } },
           } },
-        { id = "a6004", at = { zone = 28, x = 51.92, y = 28.06, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 11610 } },
+        { id = "a6004", at = { zone = 28, x = 51.92, y = 28.06, r = 10 }, minLevel = 51, maxLevel = 60, targets = { friend = { 11610 } },
           lines = {
             { kind = "accept", quest = 6004, npc = 11610 },
           } },
@@ -8444,7 +8444,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 4971, npc = 10667 },
           } },
-        { id = "a5097.t5903.a5904", at = { zone = 28, x = 42.7, y = 84.03, r = 10 }, minLevel = 50, items = { 12815, 15042, 15044 }, targets = { friend = { 10838, 11616 } },
+        { id = "a5097.t5903.a5904", at = { zone = 28, x = 42.7, y = 84.03, r = 10 }, minLevel = 51, items = { 12815, 15042, 15044 }, targets = { friend = { 10838, 11616 } },
           lines = {
             { kind = "accept", quest = 5097, npc = 10838, ifDone = 5092, requires = { 5092 } },
             { kind = "turnin", quest = 5903, at = { zone = 28, x = 43.42, y = 84.83, r = 10 }, npc = 11616, skipIfMissing = true },
@@ -8493,7 +8493,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 4972, npc = 10667, skipIfMissing = true },
           } },
-        { id = "t5904.a6389", at = { zone = 28, x = 48.34, y = 31.99, r = 10 }, minLevel = 48, items = { 15044 },
+        { id = "t5904.a6389", at = { zone = 28, x = 48.34, y = 31.99, r = 10 }, minLevel = 50, items = { 15044 },
           lines = {
             { kind = "turnin", quest = 5904, object = 177491, skipIfMissing = true },
             { kind = "accept", quest = 6389, object = 177491, ifDone = 5904, requires = { 5904 } },
@@ -8510,12 +8510,12 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 66, to = 74 },
           } },
-        { id = "t3371.a3372", at = { zone = 51, x = 41.14, y = 25.56, r = 10 }, minLevel = 40, targets = { friend = { 8417 } },
+        { id = "t3371.a3372", at = { zone = 51, x = 41.14, y = 25.56, r = 10 }, minLevel = 47, targets = { friend = { 8417 } },
           lines = {
             { kind = "turnin", quest = 3371, npc = 8417, skipIfMissing = true },
             { kind = "accept", quest = 3372, npc = 8417, ifDone = 3371, requires = { 3371 } },
           } },
-        { id = "a81900", at = { zone = 51, x = 14.47, y = 36.4, r = 10 }, minLevel = 45, maxLevel = 60,
+        { id = "a81900", at = { zone = 51, x = 14.47, y = 36.4, r = 10 }, minLevel = 49, maxLevel = 60,
           lines = {
             { kind = "accept", quest = 81900, object = 441061 },
           } },
@@ -8531,7 +8531,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 74, to = 71 },
           } },
-        { id = "a4283", at = { zone = 46, x = 84.56, y = 68.68, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 9177 } },
+        { id = "a4283", at = { zone = 46, x = 84.56, y = 68.68, r = 10 }, minLevel = 51, maxLevel = 60, targets = { friend = { 9177 } },
           lines = {
             { kind = "accept", quest = 4283, npc = 9177 },
           } },
@@ -8560,17 +8560,17 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 71, to = 45 },
           } },
-        { id = "a2783", at = { zone = 4, x = 67.57, y = 19.29, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 7826 } },
+        { id = "a2783", at = { zone = 4, x = 67.57, y = 19.29, r = 10 }, minLevel = 52, maxLevel = 60, targets = { friend = { 7826 } },
           lines = {
             { kind = "accept", quest = 2783, npc = 7826 },
           } },
-        { id = "t81900.a81917.a81919", at = { zone = 4, x = 50.64, y = 14.3, r = 10 }, minLevel = 45, items = { 220216 }, targets = { friend = { 7506 } },
+        { id = "t81900.a81917.a81919", at = { zone = 4, x = 50.64, y = 14.3, r = 10 }, minLevel = 49, items = { 220216 }, targets = { friend = { 7506 } },
           lines = {
             { kind = "turnin", quest = 81900, npc = 7506, skipIfMissing = true },
             { kind = "accept", quest = 81917, npc = 7506 },
             { kind = "accept", quest = 81919, npc = 7506 },
           } },
-        { id = "a2521.a3501", at = { zone = 4, x = 51.98, y = 35.65, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 7363 } },
+        { id = "a2521.a3501", at = { zone = 4, x = 51.98, y = 35.65, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 7363 } },
           lines = {
             { kind = "accept", quest = 2521, npc = 7363 },
             { kind = "accept", quest = 3501, npc = 7363 },
@@ -8600,7 +8600,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 8417, npc = 7572, skipIfMissing = true },
             { kind = "accept", quest = 8423, npc = 7572 },
           } },
-        { id = "t2783.a2801.o2801.t2801.a2681", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, targets = { enemy = { 7572 }, friend = { 7572 } },
+        { id = "t2783.a2801.o2801.t2801.a2681", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 52, targets = { enemy = { 7572 }, friend = { 7572 } },
           lines = {
             { kind = "turnin", quest = 2783, npc = 7572, skipIfMissing = true },
             { kind = "accept", quest = 2801, npc = 7572, ifDone = 2783, requires = { 2783 } },
@@ -8628,7 +8628,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 8423, npc = 7572 },
             { kind = "accept", quest = 8424, npc = 7572, requires = { 8423 } },
           } },
-        { id = "t2681.a2702.t2702.a2701.t2701", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, targets = { friend = { 7572, 7750 } },
+        { id = "t2681.a2702.t2702.a2701.t2701", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 52, targets = { friend = { 7572, 7750 } },
           lines = {
             { kind = "turnin", quest = 2681, npc = 7572, skipIfMissing = true },
             { kind = "accept", quest = 2702, npc = 7572, ifDone = 2681, requires = { 2681 } },
@@ -8656,7 +8656,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 28, x = 51.92, y = 28.06, r = 20 } },
           } },
-        { id = "a6023", at = { zone = 28, x = 51.92, y = 28.06, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 11610 } },
+        { id = "a6023", at = { zone = 28, x = 51.92, y = 28.06, r = 10 }, minLevel = 52, maxLevel = 60, targets = { friend = { 11610 } },
           lines = {
             { kind = "accept", quest = 6023, npc = 11610, ifDone = 6004, requires = { 6004 } },
           } },
@@ -8669,7 +8669,7 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 6023, index = 1, npc = 11613, skipIfMissing = true },
             { kind = "objective", quest = 6023, index = 2, npc = 11611, skipIfMissing = true },
           } },
-        { id = "t6023.a6025", at = { zone = 28, x = 51.92, y = 28.06, r = 10 }, minLevel = 50, targets = { friend = { 11610 } },
+        { id = "t6023.a6025", at = { zone = 28, x = 51.92, y = 28.06, r = 10 }, minLevel = 53, targets = { friend = { 11610 } },
           lines = {
             { kind = "turnin", quest = 6023, npc = 11610, skipIfMissing = true },
             { kind = "accept", quest = 6025, npc = 11610, ifDone = 6023, requires = { 6023 } },
@@ -8686,7 +8686,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 66, to = 74 },
           } },
-        { id = "a3566.o3566", at = { zone = 51, x = 41.14, y = 25.56, r = 10 }, minLevel = 45, targets = { friend = { 8417 } },
+        { id = "a3566.o3566", at = { zone = 51, x = 41.14, y = 25.56, r = 10 }, minLevel = 47, targets = { friend = { 8417 } },
           lines = {
             { kind = "accept", quest = 3566, npc = 8417, ifDone = 3372, requires = { 3372 } },
           } },
@@ -8731,7 +8731,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 2, to = 19 },
           } },
-        { id = "a7810", at = { zone = 33, x = 30.52, y = 47.87, r = 40 }, maxLevel = 60, items = { 18706 },
+        { id = "a7810", at = { zone = 33, x = 30.52, y = 47.87, r = 40 }, minLevel = 50, maxLevel = 60, items = { 18706 },
           lines = {
             { kind = "accept", quest = 7810, item = 18706, object = 179697 },
           } },
@@ -8782,7 +8782,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 361, x = 64.77, y = 8.13, r = 20 } },
           } },
-        { id = "a8465", at = { zone = 361, x = 64.77, y = 8.13, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 15395 } },
+        { id = "a8465", at = { zone = 361, x = 64.77, y = 8.13, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 15395 } },
           lines = {
             { kind = "accept", quest = 8465, npc = 15395, ifDone = 8461, requires = { 8461 } },
           } },
@@ -8795,7 +8795,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 5249, npc = 10924 },
             { kind = "accept", quest = 5204, npc = 11019, ifDone = 5203, requires = { 5203 } },
           } },
-        { id = "o5204.t5204.a5385", at = { zone = 361, x = 38.3, y = 50.51, r = 40 }, minLevel = 49, items = { 13562 }, targets = { enemy = { 9518 }, friend = { 11020 } },
+        { id = "o5204.t5204.a5385", at = { zone = 361, x = 38.3, y = 50.51, r = 40 }, minLevel = 52, items = { 13562 }, targets = { enemy = { 9518 }, friend = { 11020 } },
           lines = {
             { kind = "objective", quest = 5204, index = 1, npc = 9518, skipIfMissing = true },
             { kind = "turnin", quest = 5204, npc = 11020, skipIfMissing = true },
@@ -9056,16 +9056,16 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 73, to = 52 },
           } },
-        { id = "a5123", at = { zone = 618, x = 69.56, y = 38.31, r = 40 }, minLevel = 52, maxLevel = 60, items = { 12842 }, targets = { enemy = { 10738 } },
+        { id = "a5123", at = { zone = 618, x = 69.56, y = 38.31, r = 40 }, minLevel = 54, maxLevel = 60, items = { 12842 }, targets = { enemy = { 10738 } },
           lines = {
             { kind = "accept", quest = 5123, item = 12842, npc = 10738, ifDone = 5087, requires = { 5087 } },
           } },
-        { id = "a6604.a977", at = { zone = 618, x = 61.12, y = 38.43, r = 10 }, minLevel = 53, maxLevel = 60, targets = { friend = { 11755, 10305 } },
+        { id = "a6604.a977", at = { zone = 618, x = 61.12, y = 38.43, r = 10 }, minLevel = 54, maxLevel = 60, targets = { friend = { 11755, 10305 } },
           lines = {
             { kind = "accept", quest = 6604, npc = 11755 },
             { kind = "accept", quest = 977, at = { zone = 618, x = 60.88, y = 37.62, r = 10 }, npc = 10305, ifDone = 3783, requires = { 3783 } },
           } },
-        { id = "t6604.a4861", at = { zone = 618, x = 52.14, y = 30.43, r = 10 }, minLevel = 53, targets = { friend = { 10301 } },
+        { id = "t6604.a4861", at = { zone = 618, x = 52.14, y = 30.43, r = 10 }, minLevel = 54, targets = { friend = { 10301 } },
           lines = {
             { kind = "turnin", quest = 6604, npc = 10301, skipIfMissing = true },
             { kind = "accept", quest = 4861, npc = 10301 },
@@ -9074,7 +9074,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 977, index = 1, item = 12367, skipIfMissing = true },
           } },
-        { id = "t977.a5163", at = { zone = 618, x = 60.88, y = 37.62, r = 10 }, minLevel = 52, items = { 12928 }, targets = { friend = { 10305 } },
+        { id = "t977.a5163", at = { zone = 618, x = 60.88, y = 37.62, r = 10 }, minLevel = 53, items = { 12928 }, targets = { friend = { 10305 } },
           lines = {
             { kind = "turnin", quest = 977, npc = 10305, skipIfMissing = true },
             { kind = "accept", quest = 5163, npc = 10305, ifDone = 977, requires = { 977 } },
@@ -9089,7 +9089,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 5163, npc = 10305, skipIfMissing = true },
           } },
-        { id = "t4861.a4863", at = { zone = 618, x = 58.99, y = 59.79, r = 10 }, minLevel = 53,
+        { id = "t4861.a4863", at = { zone = 618, x = 58.99, y = 59.79, r = 10 }, minLevel = 54,
           lines = {
             { kind = "turnin", quest = 4861, object = 175587 },
             { kind = "accept", quest = 4863, object = 175587, requires = { 4861 } },
@@ -9102,7 +9102,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 5123, npc = 9298, skipIfMissing = true },
           } },
-        { id = "a8464", at = { zone = 618, x = 27.73, y = 34.5, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 11556 } },
+        { id = "a8464", at = { zone = 618, x = 27.73, y = 34.5, r = 10 }, minLevel = 53, maxLevel = 60, targets = { friend = { 11556 } },
           lines = {
             { kind = "accept", quest = 8464, npc = 11556 },
           } },
@@ -9146,7 +9146,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 9063, npc = 9619, skipIfMissing = true },
             { kind = "accept", quest = 9051, npc = 9619, ifDone = 9052, requires = { 9052 } },
           } },
-        { id = "a4292", at = { zone = 490, x = 71.64, y = 75.96, r = 10 }, minLevel = 48, maxLevel = 60, items = { 11568, 11569, 11570 }, targets = { friend = { 9619 } },
+        { id = "a4292", at = { zone = 490, x = 71.64, y = 75.96, r = 10 }, minLevel = 51, maxLevel = 60, items = { 11568, 11569, 11570 }, targets = { friend = { 9619 } },
           lines = {
             { kind = "accept", quest = 4292, npc = 9619, ifDone = 4291, requires = { 4291 } },
           } },
@@ -9211,7 +9211,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 39, to = 52 },
           } },
-        { id = "a5128", at = { zone = 618, x = 31.27, y = 45.16, r = 10 }, minLevel = 52, maxLevel = 60, items = { 12842 }, targets = { friend = { 9298 } },
+        { id = "a5128", at = { zone = 618, x = 31.27, y = 45.16, r = 10 }, minLevel = 54, maxLevel = 60, items = { 12842 }, targets = { friend = { 9298 } },
           lines = {
             { kind = "accept", quest = 5128, npc = 9298, ifDone = 5123, requires = { 5123 } },
           } },
@@ -9219,7 +9219,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 361, x = 51.14, y = 81.75, r = 20 } },
           } },
-        { id = "t5128.a5242", at = { zone = 361, x = 51.14, y = 81.75, r = 10 }, minLevel = 48, items = { 12842 }, targets = { friend = { 10920, 10922 } },
+        { id = "t5128.a5242", at = { zone = 361, x = 51.14, y = 81.75, r = 10 }, minLevel = 53, items = { 12842 }, targets = { friend = { 10920, 10922 } },
           lines = {
             { kind = "turnin", quest = 5128, npc = 10920, skipIfMissing = true },
             { kind = "accept", quest = 5242, npc = 10922, ifDone = 5165, requires = { 5165 } },
@@ -9259,7 +9259,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 6606, npc = 11755 },
             { kind = "turnin", quest = 6606, at = { zone = 618, x = 61.92, y = 38.3, r = 10 }, npc = 10307 },
           } },
-        { id = "a4864.o4864", at = { zone = 618, x = 61.44, y = 60.68, r = 10 }, minLevel = 53, targets = { enemy = { 7452, 7453, 7454, 12140 } },
+        { id = "a4864.o4864", at = { zone = 618, x = 61.44, y = 60.68, r = 10 }, minLevel = 54, targets = { enemy = { 7452, 7453, 7454, 12140 } },
           lines = {
             { kind = "accept", quest = 4864, object = 175586, requires = { 4863 } },
             { kind = "objective", quest = 4864, index = 1, item = 12525 },
@@ -9269,7 +9269,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 4864, npc = 10301 },
           } },
-        { id = "a5121", at = { zone = 618, x = 31.27, y = 45.16, r = 10 }, minLevel = 52, maxLevel = 60, targets = { friend = { 9298 } },
+        { id = "a5121", at = { zone = 618, x = 31.27, y = 45.16, r = 10 }, minLevel = 54, maxLevel = 60, targets = { friend = { 9298 } },
           lines = {
             { kind = "accept", quest = 5121, npc = 9298, ifDone = 5087, requires = { 5087 } },
           } },
@@ -9289,7 +9289,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 39, to = 73 },
           } },
-        { id = "a9415.a8859", at = { zone = 1377, x = 50.68, y = 34.71, r = 10 }, minLevel = 51, maxLevel = 60, items = { 21533 }, targets = { friend = { 17082, 15797 } },
+        { id = "a9415.a8859", at = { zone = 1377, x = 50.68, y = 34.71, r = 10 }, minLevel = 55, maxLevel = 60, items = { 21533 }, targets = { friend = { 17082, 15797 } },
           lines = {
             { kind = "accept", quest = 9415, npc = 17082 },
             { kind = "accept", quest = 8859, at = { zone = 1377, x = 49.47, y = 37.3, r = 10 }, npc = 15797 },
@@ -9315,7 +9315,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 73, to = 80 },
           } },
-        { id = "a96339.t96339.a96383.t96383", at = { zone = 17, x = 62.05, y = 39.41, r = 10 }, targets = { friend = { 6791 } },
+        { id = "a96339.t96339.a96383.t96383", at = { zone = 17, x = 62.05, y = 39.41, r = 10 }, minLevel = 55, targets = { friend = { 6791 } },
           lines = {
             { kind = "accept", quest = 96339, npc = 6791 },
             { kind = "turnin", quest = 96339, npc = 6791 },
@@ -9393,7 +9393,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 5537, index = 1, item = 14619, skipIfMissing = true },
           } },
-        { id = "o5225.t5225.a5226", at = { zone = 28, x = 62.18, y = 59.06, r = 40 }, minLevel = 50, items = { 13189, 13193 }, targets = { enemy = { 11078 } },
+        { id = "o5225.t5225.a5226", at = { zone = 28, x = 62.18, y = 59.06, r = 40 }, minLevel = 53, items = { 13189, 13193 }, targets = { enemy = { 11078 } },
           lines = {
             { kind = "objective", quest = 5225, index = 1, item = 13196, skipIfMissing = true },
             { kind = "turnin", quest = 5225, object = 176392, skipIfMissing = true },
@@ -9403,7 +9403,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 5050, npc = 10778, skipIfMissing = true },
           } },
-        { id = "t5537.t5226.a5237.t5237", at = { zone = 28, x = 42.66, y = 83.77, r = 10 }, minLevel = 50, items = { 13193 }, targets = { friend = { 11056, 11053, 10838 } },
+        { id = "t5537.t5226.a5237.t5237", at = { zone = 28, x = 42.66, y = 83.77, r = 10 }, minLevel = 53, items = { 13193 }, targets = { friend = { 11056, 11053, 10838 } },
           lines = {
             { kind = "turnin", quest = 5537, npc = 11056, skipIfMissing = true },
             { kind = "turnin", quest = 5226, npc = 11053, skipIfMissing = true },
@@ -9456,7 +9456,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 5281, npc = 11140, skipIfMissing = true },
           } },
-        { id = "a5845", at = { zone = 139, x = 5.16, y = 35.57, r = 10 }, minLevel = 52, maxLevel = 60, targets = { friend = { 1855 } },
+        { id = "a5845", at = { zone = 139, x = 5.16, y = 35.57, r = 10 }, minLevel = 53, maxLevel = 60, targets = { friend = { 1855 } },
           lines = {
             { kind = "accept", quest = 5845, npc = 1855, ifDone = 5781, requires = { 5781 } },
           } },
@@ -9464,7 +9464,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 5845, index = 1, item = 14625, skipIfMissing = true },
           } },
-        { id = "t5845.a5846", at = { zone = 139, x = 5.16, y = 35.57, r = 10 }, minLevel = 52, targets = { friend = { 1855 } },
+        { id = "t5845.a5846", at = { zone = 139, x = 5.16, y = 35.57, r = 10 }, minLevel = 53, targets = { friend = { 1855 } },
           lines = {
             { kind = "turnin", quest = 5845, npc = 1855, skipIfMissing = true },
             { kind = "accept", quest = 5846, npc = 1855, ifDone = 5845, requires = { 5845 } },
@@ -9493,7 +9493,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 26, to = 28 },
           } },
-        { id = "a79090", at = { zone = 331, x = 42.48, y = 55.02, r = 40 }, minLevel = 18, maxLevel = 60, items = { 211814 }, targets = { enemy = { 212727 } },
+        { id = "a79090", at = { zone = 331, x = 42.48, y = 55.02, r = 40 }, minLevel = 55, maxLevel = 60, items = { 211814 }, targets = { enemy = { 212727 } },
           lines = {
             { kind = "accept", quest = 79090, item = 211814, npc = 212727 },
           } },
@@ -9592,7 +9592,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "objective", quest = 1126, index = 1, item = 17346, skipIfMissing = true },
           } },
-        { id = "a8279", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, minLevel = 54, maxLevel = 60, targets = { friend = { 15194 } },
+        { id = "a8279", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 15194 } },
           lines = {
             { kind = "accept", quest = 8279, npc = 15194, ifDone = 8285, requires = { 8285 } },
           } },
@@ -9604,7 +9604,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 8318, npc = 15306 },
           } },
-        { id = "a9419.o9419.t9419", at = { zone = 1377, x = 33.29, y = 51.06, r = 10 }, targets = { enemy = { 17090 }, friend = { 17080 } },
+        { id = "a9419.o9419.t9419", at = { zone = 1377, x = 33.29, y = 51.06, r = 10 }, minLevel = 55, targets = { enemy = { 17090 }, friend = { 17080 } },
           lines = {
             { kind = "accept", quest = 9419, npc = 17080 },
             { kind = "objective", quest = 9419, index = 1, npc = 17090 },
@@ -9624,7 +9624,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 8318, npc = 15306, skipIfMissing = true },
           } },
-        { id = "t8279.a8287.a8323", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, minLevel = 54, items = { 20405 }, targets = { friend = { 15194 } },
+        { id = "t8279.a8287.a8323", at = { zone = 1377, x = 67.19, y = 69.76, r = 10 }, minLevel = 55, items = { 20405 }, targets = { friend = { 15194 } },
           lines = {
             { kind = "turnin", quest = 8279, npc = 15194, skipIfMissing = true },
             { kind = "accept", quest = 8287, npc = 15194, ifDone = 8279, requires = { 8279 } },
@@ -9666,7 +9666,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 36, x = 11.65, y = 57.77, r = 20 } },
           } },
-        { id = "a99191.a99192", at = { zone = 36, x = 11.65, y = 57.77, r = 10 }, minLevel = 26, maxLevel = 60, targets = { friend = { 276170 } },
+        { id = "a99191.a99192", at = { zone = 36, x = 11.65, y = 57.77, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 276170 } },
           lines = {
             { kind = "accept", quest = 99191, npc = 276170 },
             { kind = "accept", quest = 99192, npc = 276170 },
@@ -9744,7 +9744,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 9664, npc = 17069 },
           } },
-        { id = "a6024", at = { zone = 139, x = 22.9, y = 72.96, r = 10 }, minLevel = 54, maxLevel = 60,
+        { id = "a6024", at = { zone = 139, x = 22.9, y = 72.96, r = 10 }, minLevel = 55, maxLevel = 60,
           lines = {
             { kind = "accept", quest = 6024, object = 177667 },
           } },
@@ -9768,7 +9768,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 8250, npc = 331 },
           } },
-        { id = "a7791", at = { zone = 1519, x = 53.93, y = 81.69, r = 10 }, minLevel = 12, maxLevel = 60, targets = { friend = { 14722 } },
+        { id = "a7791", at = { zone = 1519, x = 53.93, y = 81.69, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 14722 } },
           lines = {
             { kind = "accept", quest = 7791, npc = 14722 },
           } },
@@ -9796,7 +9796,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 4, to = 2 },
           } },
-        { id = "t7791.a7794", at = { zone = 1519, x = 53.93, y = 81.69, r = 10 }, minLevel = 40, targets = { friend = { 14722 } },
+        { id = "t7791.a7794", at = { zone = 1519, x = 53.93, y = 81.69, r = 10 }, minLevel = 55, targets = { friend = { 14722 } },
           lines = {
             { kind = "turnin", quest = 7791, npc = 14722, skipIfMissing = true },
             { kind = "accept", quest = 7794, npc = 14722 },
@@ -9904,7 +9904,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 8, x = 34.29, y = 66.14, r = 20 } },
           } },
-        { id = "a2721", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, maxLevel = 60, targets = { friend = { 7572 } },
+        { id = "a2721", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 53, maxLevel = 60, targets = { friend = { 7572 } },
           lines = {
             { kind = "accept", quest = 2721, npc = 7572, ifDone = 2701, requires = { 2701 } },
           } },
@@ -9918,7 +9918,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 4, x = 68.8, y = 31.07, r = 20 } },
           } },
-        { id = "t2721.a2743", at = { zone = 4, x = 68.8, y = 31.07, r = 10 }, minLevel = 45, targets = { friend = { 7729 } },
+        { id = "t2721.a2743", at = { zone = 4, x = 68.8, y = 31.07, r = 10 }, minLevel = 55, targets = { friend = { 7729 } },
           lines = {
             { kind = "turnin", quest = 2721, npc = 7729, skipIfMissing = true },
             { kind = "accept", quest = 2743, npc = 7729, ifDone = 2721, requires = { 2721 } },
@@ -9931,7 +9931,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 8, x = 34.29, y = 66.14, r = 20 } },
           } },
-        { id = "t2743.a2744", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, targets = { friend = { 7572 } },
+        { id = "t2743.a2744", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 55, targets = { friend = { 7572 } },
           lines = {
             { kind = "turnin", quest = 2743, npc = 7572, skipIfMissing = true },
             { kind = "accept", quest = 2744, npc = 7572, ifDone = 2743, requires = { 2743 } },
@@ -10002,7 +10002,7 @@ Noir.Route("alliance-highorder", {
             { kind = "turnin", quest = 8234, npc = 8379, skipIfMissing = true },
             { kind = "accept", quest = 8235, npc = 8379, ifDone = 8234, requires = { 8234 } },
           } },
-        { id = "o2744.t2744.a3141.o3141", at = { zone = 16, x = 60.82, y = 66.35, r = 40 }, minLevel = 45, targets = { enemy = { 7783 }, friend = { 7783 } },
+        { id = "o2744.t2744.a3141.o3141", at = { zone = 16, x = 60.82, y = 66.35, r = 40 }, minLevel = 52, targets = { enemy = { 7783 }, friend = { 7783 } },
           lines = {
             { kind = "objective", quest = 2744, index = 1, npc = 7783, skipIfMissing = true },
             { kind = "turnin", quest = 2744, npc = 7783, skipIfMissing = true },
@@ -10018,7 +10018,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 6804, npc = 13278 },
             { kind = "accept", quest = 6805, npc = 13278 },
           } },
-        { id = "t3141.a3508.t3508.a3509", at = { zone = 16, x = 60.82, y = 66.35, r = 10 }, minLevel = 45, targets = { friend = { 7783 } },
+        { id = "t3141.a3508.t3508.a3509", at = { zone = 16, x = 60.82, y = 66.35, r = 10 }, minLevel = 53, targets = { friend = { 7783 } },
           lines = {
             { kind = "turnin", quest = 3141, npc = 7783, skipIfMissing = true },
             { kind = "accept", quest = 3508, npc = 7783, ifDone = 3141, requires = { 3141 } },
@@ -10037,7 +10037,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 8235, npc = 8379, skipIfMissing = true },
           } },
-        { id = "t3509.a3510", at = { zone = 16, x = 77.13, y = 42.79, r = 10 }, minLevel = 45, targets = { friend = { 6134 } },
+        { id = "t3509.a3510", at = { zone = 16, x = 77.13, y = 42.79, r = 10 }, minLevel = 53, targets = { friend = { 6134 } },
           lines = {
             { kind = "turnin", quest = 3509, npc = 6134, skipIfMissing = true },
             { kind = "accept", quest = 3510, npc = 6134, ifDone = 3509, requires = { 3509 } },
@@ -10048,12 +10048,12 @@ Noir.Route("alliance-highorder", {
             { kind = "objective", quest = 3510, index = 2, item = 10598, skipIfMissing = true },
             { kind = "objective", quest = 3510, index = 3, item = 10600, skipIfMissing = true },
           } },
-        { id = "t3510.a3511", at = { zone = 16, x = 77.13, y = 42.79, r = 10 }, minLevel = 45, items = { 10610 }, targets = { friend = { 6134 } },
+        { id = "t3510.a3511", at = { zone = 16, x = 77.13, y = 42.79, r = 10 }, minLevel = 53, items = { 10610 }, targets = { friend = { 6134 } },
           lines = {
             { kind = "turnin", quest = 3510, npc = 6134, skipIfMissing = true },
             { kind = "accept", quest = 3511, npc = 6134, ifDone = 3510, requires = { 3510 } },
           } },
-        { id = "t3511.a3602", at = { zone = 16, x = 60.82, y = 66.35, r = 10 }, minLevel = 45, items = { 10610, 10834, 10831, 10832 }, targets = { friend = { 7783 } },
+        { id = "t3511.a3602", at = { zone = 16, x = 60.82, y = 66.35, r = 10 }, minLevel = 53, items = { 10610, 10834, 10831, 10832 }, targets = { friend = { 7783 } },
           lines = {
             { kind = "turnin", quest = 3511, npc = 7783, skipIfMissing = true },
             { kind = "accept", quest = 3602, npc = 7783, ifDone = 3511, requires = { 3511 } },
@@ -10270,7 +10270,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "turnin", quest = 6804, npc = 13278, skipIfMissing = true },
           } },
-        { id = "a3621", at = { zone = 16, x = 60.82, y = 66.35, r = 10 }, minLevel = 45, maxLevel = 60, items = { 10738 }, targets = { friend = { 7783 } },
+        { id = "a3621", at = { zone = 16, x = 60.82, y = 66.35, r = 10 }, minLevel = 53, maxLevel = 60, items = { 10738 }, targets = { friend = { 7783 } },
           lines = {
             { kind = "accept", quest = 3621, npc = 7783, ifDone = 3602, requires = { 3602 } },
           } },
@@ -10282,7 +10282,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "transport", to = { zone = 33, x = 25.7, y = 73.1 }, mode = "boat", at = { zone = 17, x = 63.8, y = 38.8, r = 15 } },
           } },
-        { id = "t3621.a3625.o3625.t3625.a3626", at = { zone = 33, x = 50.62, y = 20.48, r = 10 }, minLevel = 45, items = { 10738 }, targets = { enemy = { 7802 }, friend = { 7802 } },
+        { id = "t3621.a3625.o3625.t3625.a3626", at = { zone = 33, x = 50.62, y = 20.48, r = 10 }, minLevel = 53, items = { 10738 }, targets = { enemy = { 7802 }, friend = { 7802 } },
           lines = {
             { kind = "turnin", quest = 3621, npc = 7802, skipIfMissing = true },
             { kind = "accept", quest = 3625, npc = 7802, ifDone = 3621, requires = { 3621 } },
@@ -10302,7 +10302,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 8, x = 34.29, y = 66.14, r = 20 } },
           } },
-        { id = "t3626.a3627", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, targets = { friend = { 7572 } },
+        { id = "t3626.a3627", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 55, targets = { friend = { 7572 } },
           lines = {
             { kind = "turnin", quest = 3626, npc = 7572, skipIfMissing = true },
             { kind = "accept", quest = 3627, npc = 7572, ifDone = 3626, requires = { 3626 } },
@@ -10325,7 +10325,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 45, to = 71 },
           } },
-        { id = "a4183", at = { zone = 46, x = 85.82, y = 68.95, r = 10 }, minLevel = 48, maxLevel = 60, items = { 11366 }, targets = { friend = { 9562 } },
+        { id = "a4183", at = { zone = 46, x = 85.82, y = 68.95, r = 10 }, minLevel = 49, maxLevel = 60, items = { 11366 }, targets = { friend = { 9562 } },
           lines = {
             { kind = "accept", quest = 4183, npc = 9562, ifDone = 4182, requires = { 4182 } },
           } },
@@ -10337,7 +10337,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 71, to = 5 },
           } },
-        { id = "t4183.a4184", at = { zone = 44, x = 24.9, y = 44.45, r = 10 }, minLevel = 48, items = { 11366, 11367 }, targets = { friend = { 344 } },
+        { id = "t4183.a4184", at = { zone = 44, x = 24.9, y = 44.45, r = 10 }, minLevel = 49, items = { 11366, 11367 }, targets = { friend = { 344 } },
           lines = {
             { kind = "turnin", quest = 4183, npc = 344, skipIfMissing = true },
             { kind = "accept", quest = 4184, npc = 344, ifDone = 4183, requires = { 4183 } },
@@ -10346,7 +10346,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 5, to = 2 },
           } },
-        { id = "a7793", at = { zone = 1519, x = 53.93, y = 81.69, r = 10 }, minLevel = 26, maxLevel = 60, targets = { friend = { 14722 } },
+        { id = "a7793", at = { zone = 1519, x = 53.93, y = 81.69, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 14722 } },
           lines = {
             { kind = "accept", quest = 7793, npc = 14722 },
           } },
@@ -10358,7 +10358,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "train", level = 58, class = "WARRIOR", npc = 5480 },
           } },
-        { id = "t4184.a4185.o4185.t4185.a4186", at = { zone = 1519, x = 80.21, y = 38.35, r = 10 }, minLevel = 48, items = { 11367, 11368 }, targets = { enemy = { 1749 }, friend = { 1748 } },
+        { id = "t4184.a4185.o4185.t4185.a4186", at = { zone = 1519, x = 80.21, y = 38.35, r = 10 }, minLevel = 49, items = { 11367, 11368 }, targets = { enemy = { 1749 }, friend = { 1748 } },
           lines = {
             { kind = "turnin", quest = 4184, npc = 1748, skipIfMissing = true },
             { kind = "accept", quest = 4185, npc = 1748, ifDone = 4184, requires = { 4184 } },
@@ -10370,7 +10370,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 2, to = 5 },
           } },
-        { id = "t4186.a4223", at = { zone = 44, x = 24.9, y = 44.45, r = 10 }, minLevel = 48, items = { 11368 }, targets = { friend = { 344 } },
+        { id = "t4186.a4223", at = { zone = 44, x = 24.9, y = 44.45, r = 10 }, minLevel = 49, items = { 11368 }, targets = { friend = { 344 } },
           lines = {
             { kind = "turnin", quest = 4186, npc = 344, skipIfMissing = true },
             { kind = "accept", quest = 4223, npc = 344, ifDone = 4186, requires = { 4186 } },
@@ -10379,7 +10379,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 5, to = 71 },
           } },
-        { id = "t4223.a4224", at = { zone = 46, x = 84.74, y = 69.02, r = 10 }, minLevel = 48, targets = { friend = { 9560 } },
+        { id = "t4223.a4224", at = { zone = 46, x = 84.74, y = 69.02, r = 10 }, minLevel = 49, targets = { friend = { 9560 } },
           lines = {
             { kind = "turnin", quest = 4223, npc = 9560, skipIfMissing = true },
             { kind = "accept", quest = 4224, npc = 9560, ifDone = 4223, requires = { 4223 } },
@@ -10420,7 +10420,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 8, x = 34.29, y = 66.14, r = 20 } },
           } },
-        { id = "a3628", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 45, maxLevel = 60, items = { 10757 }, targets = { friend = { 7572 } },
+        { id = "a3628", at = { zone = 8, x = 34.29, y = 66.14, r = 10 }, minLevel = 55, maxLevel = 60, items = { 10757 }, targets = { friend = { 7572 } },
           lines = {
             { kind = "accept", quest = 3628, npc = 7572, ifDone = 3627, requires = { 3627 } },
           } },
@@ -10482,23 +10482,23 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 3701, npc = 8879, ifDone = 3702, requires = { 3702 } },
           } },
-        { id = "a7905", at = { zone = 1537, x = 29.65, y = 75.25, r = 10 }, minLevel = 6, maxLevel = 60, items = { 19338 }, targets = { friend = { 14842 } },
+        { id = "a7905", at = { zone = 1537, x = 29.65, y = 75.25, r = 10 }, minLevel = 55, maxLevel = 60, items = { 19338 }, targets = { friend = { 14842 } },
           lines = {
             { kind = "accept", quest = 7905, npc = 14842 },
           } },
-        { id = "a7802.a7803.a7804", at = { zone = 1537, x = 43.22, y = 31.57, r = 10 }, minLevel = 40, maxLevel = 60, targets = { friend = { 14723 } },
+        { id = "a7802.a7803.a7804", at = { zone = 1537, x = 43.22, y = 31.57, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 14723 } },
           lines = {
             { kind = "accept", quest = 7802, npc = 14723 },
             { kind = "accept", quest = 7803, npc = 14723 },
             { kind = "accept", quest = 7804, npc = 14723 },
           } },
-        { id = "a7807.a7808.a7809", at = { zone = 1537, x = 74.09, y = 48.22, r = 10 }, minLevel = 40, maxLevel = 60, targets = { friend = { 14724 } },
+        { id = "a7807.a7808.a7809", at = { zone = 1537, x = 74.09, y = 48.22, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 14724 } },
           lines = {
             { kind = "accept", quest = 7807, npc = 14724 },
             { kind = "accept", quest = 7808, npc = 14724 },
             { kind = "accept", quest = 7809, npc = 14724 },
           } },
-        { id = "a4513", at = { zone = 1537, x = 75.77, y = 23.38, r = 10 }, minLevel = 48, maxLevel = 60, items = { 11955, 11953 }, targets = { friend = { 9616 } },
+        { id = "a4513", at = { zone = 1537, x = 75.77, y = 23.38, r = 10 }, minLevel = 49, maxLevel = 60, items = { 11955, 11953 }, targets = { friend = { 9616 } },
           lines = {
             { kind = "accept", quest = 4513, npc = 9616, ifDone = 4512, requires = { 4512 } },
           } },
@@ -10627,7 +10627,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 79, to = 73 },
           } },
-        { id = "a8858.a8857", at = { zone = 1377, x = 49.55, y = 37.31, r = 10 }, minLevel = 51, maxLevel = 60, items = { 21535, 21534 }, targets = { friend = { 15799, 15798 } },
+        { id = "a8858.a8857", at = { zone = 1377, x = 49.55, y = 37.31, r = 10 }, minLevel = 55, maxLevel = 60, items = { 21535, 21534 }, targets = { friend = { 15799, 15798 } },
           lines = {
             { kind = "accept", quest = 8858, npc = 15799 },
             { kind = "accept", quest = 8857, npc = 15798 },
@@ -10692,7 +10692,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "goto", at = { zone = 1657, x = 64.02, y = 23, r = 20 } },
           } },
-        { id = "a7792.a7798.a7799", at = { zone = 1657, x = 64.02, y = 23, r = 10 }, minLevel = 40, maxLevel = 60, targets = { friend = { 14725 } },
+        { id = "a7792.a7798.a7799", at = { zone = 1657, x = 64.02, y = 23, r = 10 }, minLevel = 55, maxLevel = 60, targets = { friend = { 14725 } },
           lines = {
             { kind = "accept", quest = 7792, npc = 14725 },
             { kind = "accept", quest = 7798, npc = 14725 },
@@ -10775,7 +10775,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "accept", quest = 2641, npc = 7583, ifDone = 2606, requires = { 2606 } },
           } },
-        { id = "a2944.a2741", at = { zone = 440, x = 52.36, y = 26.91, r = 10 }, minLevel = 42, maxLevel = 56, items = { 9328 }, targets = { friend = { 7763 } },
+        { id = "a2944.a2741", at = { zone = 440, x = 52.36, y = 26.91, r = 10 }, minLevel = 55, maxLevel = 56, items = { 9328 }, targets = { friend = { 7763 } },
           lines = {
             { kind = "accept", quest = 2944, npc = 7763, ifDone = 2941, requires = { 2941 } },
             { kind = "accept", quest = 2741, object = 142071 },
@@ -10851,7 +10851,7 @@ Noir.Route("alliance-highorder", {
           lines = {
             { kind = "fly", from = 73, to = 80 },
           } },
-        { id = "a4502", at = { zone = 17, x = 62.45, y = 38.73, r = 10 }, minLevel = 49, maxLevel = 60, targets = { friend = { 8496 } },
+        { id = "a4502", at = { zone = 17, x = 62.45, y = 38.73, r = 10 }, minLevel = 50, maxLevel = 60, targets = { friend = { 8496 } },
           lines = {
             { kind = "accept", quest = 4502, npc = 8496 },
           } },
@@ -10917,7 +10917,7 @@ Noir.Route("alliance-highorder", {
             { kind = "accept", quest = 4442, npc = 9116, ifDone = 4441, requires = { 4441 } },
             { kind = "turnin", quest = 4442, npc = 9116, skipIfMissing = true },
           } },
-        { id = "a4261", at = { zone = 361, x = 49.57, y = 29.6, r = 10 }, minLevel = 49, maxLevel = 60, targets = { friend = { 9598 } },
+        { id = "a4261", at = { zone = 361, x = 49.57, y = 29.6, r = 10 }, minLevel = 51, maxLevel = 60, targets = { friend = { 9598 } },
           lines = {
             { kind = "accept", quest = 4261, npc = 9598, ifDone = 4442, requires = { 4442 } },
           } },
@@ -10994,6 +10994,10 @@ Noir.Route("alliance-highorder", {
         { id = "t8922", at = { zone = 440, x = 52.47, y = 27.23, r = 10 }, when = { class = "ROGUE" }, items = { 21985 }, targets = { friend = { 16014 } },
           lines = {
             { kind = "turnin", quest = 8922, npc = 16014, skipIfMissing = true },
+          } },
+        { id = "l60@1377", at = { zone = 1377, x = 72.07, y = 13.46 }, text = "Kill Twilight Flamereavers in the northeast of Silithus until you reach level 60.", targets = { enemy = { 15201 } },
+          lines = {
+            { kind = "grind", level = 60 },
           } },
       },
     },

@@ -9,20 +9,42 @@
 //                  hearth. A route in the old format has no legs, only places; it is given the fastest way travelPlan
 //                  finds between two places in a row, with every transport open to it, which flatters it
 //   walked yards   the walking part of that, through the passes between zones
+//   grind steps    only those the character needs: a grind step to a level the character already has when it comes
+//                  to it is passed as it comes (the engine does the same). It is no work in its zone, nobody walks
+//                  to it, and it is not counted. Every route that reaches the cap ends with one (planner/plan.js):
+//                  the last step, for a player who arrives at the end under the cap
 const { toPoint } = require("../lib/geo");
 const { ESTIMATES, walkYards, travelPlan } = require("../lib/travel");
 
 const WORK = new Set(["accept", "objective", "turnin", "grind", "sethearth"]);
 const zoneOfStep = (step) => (!WORK.has(step.action) ? undefined : step.at ? step.at.zone : step.zone);
 
-// The zones a route works in, in order, without repeats in a row.
-function zoneOrder(route, ch) {
+// Whether a step is a grind step to a level the character already has there (level: its level at the step's start).
+const passedGrind = (step, level) => step.action === "grind" && level !== undefined && Math.floor(level) >= step.level;
+// The level at the start of each step as the plan itself counted it (route.stats.levelAt: the step that reached each
+// level). A route without those numbers is at level 1 throughout: every grind step of it is needed.
+function planLevels(route) {
+  const reached = (route.stats && route.stats.levelAt) || [];
+  let level = 1;
+  return route.steps.map((_, i) => { while (reached[level + 1] !== undefined && reached[level + 1] < i) level++; return level; });
+}
+// The indices of the grind steps a character needs: those it comes to below their level. levels: the level at each
+// step (validateRoute(...).levels); without them, the plan's own.
+function neededGrinds(route, levels) {
+  const at = levels || planLevels(route);
+  return route.steps.map((s, i) => (s.action === "grind" && !passedGrind(s, at[i]) ? i : -1)).filter((i) => i >= 0);
+}
+
+// The zones a route works in, in order, without repeats in a row. levels (optional): the character's level at each
+// step; a grind step it passes is no work in its zone.
+function zoneOrder(route, ch, levels) {
   const zones = [];
-  for (const step of route.steps) {
-    if (ch && step.when && step.when.class !== undefined && step.when.class !== ch.cls) continue;
+  route.steps.forEach((step, i) => {
+    if (ch && step.when && step.when.class !== undefined && step.when.class !== ch.cls) return;
+    if (levels && passedGrind(step, levels[i])) return;
     const zone = zoneOfStep(step);
     if (zone !== undefined && zones[zones.length - 1] !== zone) zones.push(zone);
-  }
+  });
   return zones;
 }
 
@@ -30,7 +52,7 @@ function zoneOrder(route, ch) {
 // Returns { steps, zones, zoneChanges, seconds, yards, unreachable, byKind: { walk, fly, transport, hearth } }.
 // unreachable counts the places that could not be reached from the place before; they add no time.
 function measureRoute(db, graph, route, ch, levels) {
-  const out = { steps: 0, zones: zoneOrder(route, ch), zoneChanges: 0, seconds: 0, yards: 0, unreachable: 0, byKind: { walk: 0, fly: 0, transport: 0, hearth: 0 } };
+  const out = { steps: 0, zones: zoneOrder(route, ch, levels), zoneChanges: 0, seconds: 0, yards: 0, unreachable: 0, byKind: { walk: 0, fly: 0, transport: 0, hearth: 0 } };
   out.zoneChanges = Math.max(0, out.zones.length - 1);
   const speed = (level) => (level >= ESTIMATES.MOUNT_LEVEL ? ESTIMATES.MOUNT_SPEED : ESTIMATES.RUN_SPEED);
   const add = (kind, seconds) => { out.byKind[kind] += seconds; out.seconds += seconds; };
@@ -60,6 +82,7 @@ function measureRoute(db, graph, route, ch, levels) {
     if (step.when && step.when.class !== undefined && step.when.class !== ch.cls) return;
     out.steps++;
     const level = levels ? levels[i] : 1;
+    if (levels && passedGrind(step, level)) return; // passed as it comes: nobody walks to it
     const p = place(step.at);
     if (p) {
       if (pos && written) {
@@ -101,4 +124,4 @@ function measureRoute(db, graph, route, ch, levels) {
   return out;
 }
 
-module.exports = { measureRoute, zoneOrder };
+module.exports = { measureRoute, zoneOrder, neededGrinds, planLevels, passedGrind };

@@ -238,6 +238,10 @@ test("a whole character played by the real addon in the simulated world", () => 
   assert.deepStrictEqual([r.finished, r.stuck, r.cannot, r.unexplained, r.errors, r.slash, r.offScreen], [true, [], [], [], [], 0, []]);
   assert.deepStrictEqual([f.pace.YIELD, f.pace.YIELD_LATE, f.pace.YIELD_FROM, f.pace.YIELD_TO], [PACE.YIELD, PACE.YIELD_LATE, PACE.YIELD_FROM, PACE.YIELD_TO],
     "the world plays at the planner's pace, at every level");
+  // ... and a joiner's past grinds to the planner's gate (planner/tuning.js gateLevel; tools/test-lua/sim.lua)
+  const { CHOICES, gateLevel } = require("../planner/tuning");
+  assert.strictEqual(f.pace.GATE, CHOICES.HARD_TALK + CHOICES.BEHIND);
+  assert.strictEqual(gateLevel({ minLevel: 1, level: 20 }), 20 - f.pace.GATE);
   assert.strictEqual(r.level, 2);
   assert.strictEqual(passed(r), false, "a run that ends below level 60 fails");
   assert.strictEqual(passed({ ...r, level: 60 }), true);

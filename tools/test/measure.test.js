@@ -3,7 +3,7 @@ const test = require("node:test");
 const assert = require("node:assert");
 const { testWorld } = require("./world");
 const { ESTIMATES: E, walkSeconds } = require("../lib/travel");
-const { measureRoute, zoneOrder } = require("../planner/measure");
+const { measureRoute, zoneOrder, neededGrinds, planLevels } = require("../planner/measure");
 
 const M = (zone, x, y) => ({ zone, x, y });
 const near = (a, b) => Math.abs(a - b) <= 1;
@@ -77,4 +77,25 @@ test("a route in the old format gets the fastest way between its places, with ev
   assert.ok(m.byKind.walk > 0 && m.seconds > 320);
   assert.deepStrictEqual(m.zones, [500, 100, 400, 300]);
   assert.strictEqual(m.steps, 6);
+});
+test("a grind step the character passes is no work in its zone, nobody walks to it, and it is not a grind step the route needs", () => {
+  const w = testWorld(), graph = w.graph(), ch = w.human();
+  const steps = [{ action: "accept", quest: 1, at: M(100, 30, 50) }, { action: "grind", level: 3, at: M(200, 30, 50) }, { action: "turnin", quest: 1, at: M(100, 31, 50) }];
+  const route = { format: 2, steps };
+  // under the level the grind step is a visit to Eastland and back
+  const needed = measureRoute(w.db, graph, route, ch, [2, 2, 3]);
+  assert.deepStrictEqual([needed.zones, needed.zoneChanges, needed.steps], [[100, 200, 100], 2, 3]);
+  assert.deepStrictEqual(neededGrinds(route, [2, 2, 3]), [1]);
+  // at the level it is passed as it comes: one zone, ten yards from the accept to the hand-in
+  const passed = measureRoute(w.db, graph, route, ch, [3, 3, 3]);
+  assert.deepStrictEqual([passed.zones, passed.zoneChanges, passed.steps, passed.unreachable], [[100], 0, 3, 0]);
+  assert.ok(passed.yards <= 11 && needed.yards > passed.yards + 500, `${passed.yards} yards against ${needed.yards}`);
+  assert.deepStrictEqual(neededGrinds(route, [3, 3, 3]), []);
+  assert.deepStrictEqual(neededGrinds(route, [4, 4, 4]), [], "above the level too");
+  assert.deepStrictEqual([zoneOrder(route, ch), zoneOrder(route, ch, [3, 3, 3])], [[100, 200, 100], [100]], "without levels every grind step counts");
+  // without the validator's levels the plan's own decide (stats.levelAt: the step that reached each level)
+  assert.deepStrictEqual(planLevels({ steps: [{}, {}, {}, {}, {}], stats: { levelAt: [0, 0, 1, 1, 3] } }), [1, 1, 3, 3, 4]);
+  assert.deepStrictEqual(neededGrinds({ steps, stats: { levelAt: [0, 0, 0, 1] } }), [1], "the grind step is the one that reaches level 3");
+  assert.deepStrictEqual(neededGrinds({ steps, stats: { levelAt: [0, 0, 0, 0] } }), [], "level 3 was reached before it");
+  assert.deepStrictEqual(neededGrinds(route), [1], "a route without the plan's numbers needs every grind step");
 });

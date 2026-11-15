@@ -42,6 +42,7 @@
 //   - the step's place is the first action's, with the radius of its kind (RADIUS)
 const { toPoint, distance, spawnPoints } = require("../lib/geo");
 const { objectiveList, starterItems, sourceItems, prerequisites } = require("../lib/quests");
+const { gateLevel } = require("./tuning");
 const { grindTargets } = require("./grindspots");
 
 // Arrival radii in yards, by kind of place. zoneOnly is for a place the planner wrote as x = y = 0 (the zone, place
@@ -254,7 +255,7 @@ function makeStep(db, actions, handedIn, near) {
 
   // the highest level the step's accepted quests ask for
   let minLevel = 1;
-  for (const a of actions) if (a.action === "accept") minLevel = Math.max(minLevel, db.quests.get(a.quest).minLevel || 1);
+  for (const a of actions) if (a.action === "accept") minLevel = Math.max(minLevel, gateLevel(db.quests.get(a.quest)));
   if (minLevel > 1) step.minLevel = minLevel;
 
   // item buttons: starter items of the quests accepted here, then the usable items of every quest on the step

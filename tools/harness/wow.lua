@@ -2139,6 +2139,8 @@ function Client:buildGlobals()
     if unit == "npc" and c.npc and c.npc.item then return nil end -- a quest page an item opened: nobody is talked to
     if unit == "npc" and c.npc then
       if c.opts.oldGuid then return string.format("0xF13000%04X00%06X", c.npc.id, 0x1A2B3C) end
+      -- an object of the world that gives or takes a quest (its definition says object = true)
+      if c.npc.def and c.npc.def.object then return "GameObject-0-4444-0-55-" .. c.npc.id .. "-00001A2B3C" end
       return "Creature-0-4444-0-55-" .. c.npc.id .. "-00001A2B3C"
     end
     if unit == "target" and c.target then return "Creature-0-4444-0-55-" .. c.target .. "-00002B3C4D" end
@@ -3108,7 +3110,8 @@ end
 -- a single gossip option or a single quest is opened directly, anything more shows the gossip (or greeting) list.
 -- ---------------------------------------------------------------------------------------------------------------
 
--- Right-clicks an NPC. `def` overrides the world's definition.
+-- Right-clicks an NPC. `def` overrides the world's definition. A definition with object = true is an object of the
+-- world (a crate, a poster): UnitGUID("npc") is then a GameObject's.
 function Client:talkTo(id, def)
   def = def or (self.world.npcs and self.world.npcs[id])
   assert(def, "the mock world has no NPC " .. tostring(id))

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.0
+
+- **Quests instead of grinding.** The routes no longer send you to grind whole levels. In 0.5.0 every route had 10 to 13 grind steps, each a full level, though quests were there to be done; that was a fault in how the routes were built. Six of the ten routes now have no grind step at all, and the other four have one short one at the end of level 59 (about an hour at most).
+- **About 200 more quests in every route.** A route now does 850 to 935 quests on the way to 60 (650 to 700 before). The routes take WoW Forever's own new quests in the open world, quests started by an item that drops, and quests up to five levels below you, which still give full XP. Quests about to become too easy are done first.
+- **Quests started by an item.** Such a step reads "Kill <creature> until it drops <item>, then use it to accept <quest>", and changes to "Use <item> to accept <quest>" once the item is in your bags.
+- **Quests up to three levels above you** (four for a delivery), one more than in 0.5.0.
+- **Fewer trips across the sea.** The routes finish what they can on one continent before crossing. They change zone more often than in 0.5.0 (240 to 260 times a route), because quests spread over many zones replace the grinding.
+- **If you fall behind.** A step whose quest is more than five levels above you waits, and the guide shows "Grind to level N" first. Every route ends with a last step to level 60, which you never see when you are 60 already.
+- **Fixed: the wrong quest was picked at a quest giver** offering two quests when another quest of the same title is taken elsewhere on the next step.
+- **Fixed: installing mid-way** no longer puts you on a step across the sea for a quest you left out there.
+- **Fixed: a grind line could point at a zone on the other continent** (Humans at level 49).
+
 ## 0.5.0
 
 - **A realistic pace.** The routes used to expect you to level about twice as fast as players do, so you fell behind the guide within a few levels. Every route was rebuilt for the pace players really level at: about 140 to 165 quests by level 22, where 0.4.1 planned 80 to 100.

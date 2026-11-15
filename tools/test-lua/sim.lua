@@ -204,6 +204,56 @@ test("the world gives the planner's share of the estimated XP, and grind cards a
   eq(r.gatedAims, 0, "the arrow never aimed at a step under its level")
 end)
 
+test("a joiner's past grinds to the gate of a quest far above it before taking it, as the guide would have asked", function()
+  -- tools/sim_all.js passes pace.GATE = HARD_TALK + BEHIND (tools/planner/tuning.js gateLevel): a step that accepts a
+  -- quest more than that many levels above the player waits for the level, so the player the guide led here has it.
+  local function prepared(level, gate, questLevel)
+    local facts = sampleFacts("ROGUE")
+    facts.pace.GATE = gate
+    if questLevel then facts.quests[364].level = questLevel end
+    facts.flat = sampleFlat("ROGUE")
+    local p = Sim.prepareJoin(facts, level)
+    return { from = p.expectedFrom, level = p.server.level, xp = p.server.xp, at = facts.flat[p.expectedFrom] }
+  end
+  -- The Mindless Ones as a level 9 quest, offered to a character of level 1: its gate is level 4.
+  local gated = prepared(4, 5, 9)
+  eq({ gated.at.action, gated.at.quest }, { "accept", 364 }, "the past ends at the accept: the level was ground there")
+  eq({ gated.level, gated.xp }, { 4, 0 })
+  local free = prepared(4, nil, 9)
+  ok(free.from > gated.from, "without a gate the same character plays on for the level: action " .. tostring(free.from))
+  -- The grind stops at the level the joiner joins at: a joiner of level 3 is not made level 4 for it.
+  local capped = prepared(3, 5, 9)
+  eq({ capped.at.quest, capped.level }, { 364, 3 })
+  -- A quest within the gate of the player's level is not ground for: the sample as it is plays the same with a gate.
+  local plain, same = prepared(4, nil), prepared(4, 5)
+  eq({ same.from, same.level, same.xp }, { plain.from, plain.level, plain.xp })
+end)
+
+test("a joiner's past grinds to a step's level before doing it, never walking through a step under its level", function()
+  -- tools/sim_all.js tags every flattened action with its step's minLevel. The engine shows a grind line on a step
+  -- under its level, so the player the guide led here has the level; a past that walked on through such steps
+  -- (nothing offered, the moves made all the same) ended a continent away from the last thing it did.
+  local function prepared(level, minLevel)
+    local facts = sampleFacts("ROGUE")
+    facts.flat = sampleFlat("ROGUE")
+    for _, a in ipairs(facts.flat) do
+      if a.step == "t363.a364.a376" then a.minLevel = minLevel end
+    end
+    local p = Sim.prepareJoin(facts, level)
+    return { from = p.expectedFrom, level = p.server.level, at = facts.flat[p.expectedFrom] }
+  end
+  local held = prepared(4, 4)
+  eq({ held.at.step, held.at.action, held.level }, { "t363.a364.a376", "turnin", 4 }, "the level was ground at the step's first action")
+  local free = prepared(4, nil)
+  ok(free.from > held.from, "without a level on the step the same character plays on for the level: action " .. tostring(free.from))
+  -- The grind stops at the level the joiner joins at.
+  local capped = prepared(3, 4)
+  eq({ capped.at.step, capped.level }, { "t363.a364.a376", 3 })
+  -- A step at or under the player's level is not ground for.
+  local plain, same = prepared(4, nil), prepared(4, 1)
+  eq({ same.from, same.level }, { plain.from, plain.level })
+end)
+
 test("the player does not act on a card in the instant it appears: steps that pass by themselves are waited out", function()
   -- Found by the simulator's joiners: after a run of steps that passed by themselves, a flight on the other continent
   -- became the place at the very end of the player's wait. It was moot (the next move came back to where the player

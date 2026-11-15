@@ -304,7 +304,7 @@ test("a class step never shares a step with a shared one", () => {
   for (const s of out.steps) for (const l of s.lines) assert.strictEqual(l.when, undefined, "the step carries the condition, not its lines");
 });
 
-test("minLevel is the highest required level of the step's accepts", () => {
+test("minLevel is the highest gate of the step's accepts: the required level, or five under a quest far above it", () => {
   const w = testWorld();
   w.npc(10, 100, 30, 50); w.npc(11, 100, 50, 50); w.npc(20, 100, 60, 30, "");
   w.kill(1, 10, 20, 100, { requiredLevel: 3 }); w.kill(2, 10, 20, 100, { requiredLevel: 5 }); w.kill(3, 10, 20, 100, { requiredLevel: 1 });
@@ -317,6 +317,22 @@ test("minLevel is the highest required level of the step's accepts", () => {
   ]);
   assert.strictEqual(out.steps[0].minLevel, 5);
   assert.strictEqual(out.steps[1].minLevel, undefined, "a level 1 quest sets no minimum");
+  // the gate (planner/tuning.js gateLevel): a quest the game offers from level 1 but whose own level is far above
+  // it asks for the level HARD_TALK + BEHIND under the quest's, so a player levels behind is never sent to a red quest
+  w.kill(5, 10, 20, 100, { requiredLevel: 1, questLevel: 12 }); w.kill(6, 11, 20, 100, { requiredLevel: 1, questLevel: 6 });
+  w.kill(7, 11, 20, 100, { requiredLevel: 9, questLevel: 10 });
+  const gated = bundle(w, [
+    { action: "accept", quest: 2, at: M(100, 30, 50), npc: 10 },
+    { action: "accept", quest: 5, at: M(100, 30, 50), npc: 10 },
+    { action: "accept", quest: 6, at: M(100, 50, 50), npc: 11 },
+    { action: "accept", quest: 7, at: M(100, 50, 50), npc: 11 },
+    { action: "accept", quest: 6, at: M(100, 50, 50), npc: 11 },
+  ]);
+  assert.deepStrictEqual(gated.steps.map((s) => s.lines.map((l) => l.quest)), [[2, 5], [6, 7, 6]]);
+  assert.strictEqual(gated.steps[0].minLevel, 7, "level 12 less five, above the required level 5 of the quest beside it");
+  assert.strictEqual(gated.steps[1].minLevel, 9, "the required level where that is the higher: 9, not 10 less five");
+  const low = bundle(w, [{ action: "accept", quest: 6, at: M(100, 50, 50), npc: 11 }]);
+  assert.strictEqual(low.steps[0].minLevel, undefined, "a level 6 quest is within reach of level 1: no minimum");
 });
 
 test("accept lines require the quest's prerequisites that the route hands in before them", () => {

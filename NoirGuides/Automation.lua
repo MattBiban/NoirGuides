@@ -29,7 +29,8 @@
 --     keeps its quest eligible for the session. A quest is matched by ID; by title only where the client gives only
 --     titles, and only when the title belongs to exactly one entry and one quest that it can be: for a quest the
 --     NPC takes back one in the quest log (and no other quest in the log has the title), for a quest on offer one
---     that is neither in the log nor handed in. Parts of a chain share titles: a part handed in is never matched.
+--     that is neither in the log nor handed in. Parts of a chain share titles: a part handed in is never matched,
+--     and a title on offer is never taken for a quest whose accept line names another NPC or object than this one.
 --   * Dialogue list: a complete quest the guide hands in, then a quest it accepts, then an unfinished guide quest
 --     whose only objective is an objective line naming this NPC. Without any, the dialogue line for a fly line (once
 --     per step), a getflight line (at most every GETFLIGHT_SECONDS), a sethearth line or a train line on a card,
@@ -165,6 +166,22 @@ local function otherNpc(line)
   return id ~= nil and id ~= line.npc
 end
 
+-- True only when it is certain that the line's quest is not offered here: the line names an NPC and the player talks
+-- to another one or to an object, or it names an object and the player talks to an NPC or to another object.
+local function offeredElsewhere(line)
+  if type(line) ~= "table" then return false end
+  local guid = npcGuid()
+  if not guid then return false end
+  local kind, id = string.match(guid, "^(%a+)%-%d+%-%d+%-%d+%-%d+%-(%d+)%-")
+  id = tonumber(id)
+  if not id then return false end
+  local creature, object = kind == "Creature" or kind == "Vehicle", kind == "GameObject"
+  if not (creature or object) then return false end
+  if type(line.npc) == "number" then return object or id ~= line.npc end
+  if type(line.object) == "number" then return creature or id ~= line.object end
+  return false
+end
+
 -- ---------------------------------------------------------------------------------------------------------------
 -- What the steps on screen ask for
 -- ---------------------------------------------------------------------------------------------------------------
@@ -257,7 +274,9 @@ end
 -- which quests it can be at all (parts of a chain often share one title):
 --   "active"     a quest the NPC takes back: only one in the quest log, and none when the log holds another quest
 --                of that title that is not in `set` (the title may be that one's)
---   "available"  a quest on offer: never one in the quest log or handed in before
+--   "available"  a quest on offer: never one in the quest log or handed in before, and never one whose line names
+--                another NPC or object than the one the player talks to (a quest of the next step, at another
+--                place, may share its title with one this NPC offers that the guide does not ask for here)
 local function byTitle(set, title, kind)
   if type(title) ~= "string" or title == "" then return nil end
   local found, count = nil, 0
@@ -266,7 +285,7 @@ local function byTitle(set, title, kind)
     if kind == "active" then
       can = State.Quest(quest) ~= nil
     elseif kind == "available" then
-      can = State.Quest(quest) == nil and not State.IsDone(quest)
+      can = State.Quest(quest) == nil and not State.IsDone(quest) and not offeredElsewhere(set[quest])
     end
     if can and titleOf(quest) == title then
       found, count = quest, count + 1

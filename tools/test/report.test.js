@@ -35,6 +35,31 @@ test("a route's facts are counted from its steps and its measurement", () => {
   assert.deepStrictEqual(s.errors, []);
   assert.deepStrictEqual(s.classes, ["WARRIOR"]);
 });
+test("the last step to the cap is no grind step of the report, no visit and no travel, and the report says it is there", () => {
+  // this world reaches level 2 on quests; with 2 as the cap the route ends with the last step, which the plan passes
+  const { db, result } = built(2);
+  const route = result.route, last = route.steps[route.steps.length - 1];
+  assert.deepStrictEqual([last.action, last.level, result.validations[0].result.levels[route.steps.length - 1]], ["grind", 2, 2]);
+  const s = summarize(db, result);
+  assert.deepStrictEqual(s.grinds, [], "not a grind step the plan needs");
+  assert.strictEqual(s.lastStep, 2);
+  assert.strictEqual(s.visits.reduce((sum, v) => sum + v.steps, 0), route.steps.filter((x) => ["accept", "objective", "turnin", "grind", "sethearth"].includes(x.action)).length - 1, "no work in a zone");
+  const without = { ...result, route: { ...route, steps: route.steps.slice(0, -1) } };
+  const bare = summarize(db, without);
+  assert.deepStrictEqual([s.zoneChanges, s.travelSeconds, s.walkedYards, s.totalSeconds, s.visits], [bare.zoneChanges, bare.travelSeconds, bare.walkedYards, bare.totalSeconds, bare.visits]);
+  assert.strictEqual(bare.lastStep, undefined);
+  const md = reportMarkdown(db, [result], before(10, 100000));
+  assert.match(md, /Every route that reaches level 60 on quests ends with a last step to level 60 that a player on the plan never\nsees: /);
+  assert.match(md, /It is not counted as a grind step below\. A route that grinds the end of level 59 has that grind\nstep instead, and no second one\./);
+  assert.match(md, /\| At most 2 grind steps in any race \| yes \| most: 0 \|/);
+  assert.match(md, /\| Grind steps \| 0 \|\n\| Last step \| to level 2, passed on the plan \|/);
+  assert.match(md.split("\n").find((l) => l.startsWith("| Human | ")), /\| 30 \| 5 \| 1 \| 0 \| 2 \|$/, "grind steps after: none");
+  // with 3 as the cap the last level is ground: that grind step is counted, and no last step follows it
+  const ground = built(3);
+  const g = summarize(ground.db, ground.result);
+  assert.deepStrictEqual([g.grinds, g.lastStep], [[{ from: 2, to: 3 }], undefined]);
+  assert.match(reportMarkdown(ground.db, [ground.result], null), /\| Grind steps \| 1 \(level 2 to 3\) \|\n\| Last step \| none \|/);
+});
 test("the report sets the routes beside the baseline and says whether each acceptance line is met", () => {
   const { db, result } = built();
   const md = reportMarkdown(db, [result], before(10, 100000));

@@ -17,6 +17,7 @@ const CHOICES = Object.freeze({
                              // another quest needs it (planner/policy.js). Down to five levels below a quest still gives
                              // its whole reward (lib/xp.js questXp), and its fights are quick. It was 3: quests that give
                              // their whole reward were left out, in routes that ground whole levels
+  BEHIND: 1,                 // a player may be this many levels behind the plan before a step waits for the level (gateLevel)
   NEARBY: 1500,              // yards on foot: an objective over a zone border belongs to this zone when it is this close
                              // to one of the zone's quest places
   HUB_YARDS: 150,            // quest givers this close together are one hub: everything there is done in one stop
@@ -100,5 +101,9 @@ const CHOICES = Object.freeze({
   MAX_ITERATIONS: 200000,    // a guard against a planner bug that never finishes; real routes take a few thousand turns
 });
 // How many levels above the player a quest may be at this level: HARD or HARD_TALK, and START_HARD in the first levels.
+// The level a step that accepts the quest asks for: the game's own minimum, and no more than HARD_TALK + BEHIND levels
+// under the quest. The route itself takes a quest at most HARD_TALK above the player, so a player on the plan never
+// meets this; one who has fallen levels behind is shown a grind to it first, never a red quest.
+const gateLevel = (q) => Math.max(q.minLevel || 1, (q.level || 1) - CHOICES.HARD_TALK - CHOICES.BEHIND);
 const above = (level, kills) => Math.max(kills ? CHOICES.HARD : CHOICES.HARD_TALK, level < CHOICES.START_UNTIL ? CHOICES.START_HARD : 0);
-module.exports = { CHOICES, above };
+module.exports = { CHOICES, above, gateLevel };

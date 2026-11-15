@@ -13,7 +13,8 @@
 //                     grey before the step's minLevel or at the estimated level, zones without a name
 //   insertGrinds(steps, levelsByStep, classLevels) -> steps (a new list; classLevels optional, as above)
 //   regrindSections(sections, classes, levelOf) -> sections   the grinds again after steps were added to finished
-//       sections (levelOf(cls, step) -> { start, end } or undefined), by the same rules
+//       sections (levelOf(cls, step) -> { start, end } or undefined), by the same rules; a grind with no work step
+//       before it in its section opens the section, at the last work place of the section before
 //   stepLevels(actionLevels, origin, endLevel) -> levelsByStep
 //       from validateRoute(...).levels (the level at the start of each format 2 action) and bundleSteps' origin
 //
@@ -45,6 +46,7 @@
 //     first part, and a reminder step is never split (an error)
 const { questXp } = require("../lib/xp");
 const { prerequisites } = require("../lib/quests");
+const { gateLevel } = require("./tuning");
 const { stepId } = require("./bundle");
 
 const MIN_SECTION_WORK = 12;
@@ -82,7 +84,9 @@ function stepLevels(actionLevels, origin, endLevel) {
 // character lifts them all; a grind before a class step lifts only the classes it is for, each checked at its own
 // level (classLevels), or at the shared estimate when no class levels are given.
 const hasClassKey = (when) => !!when && (when.class !== undefined || when.notClass !== undefined);
-function grindsWithLevels(steps, levels, classLevels, usedIds) {
+// startPlace: where the player stands when the list begins (the last work place of the section before), for a grind
+// that no work step of the list comes before; without it such a grind has only the place of the step that needs it.
+function grindsWithLevels(steps, levels, classLevels, usedIds, startPlace) {
   if (levels.length !== steps.length) throw new Error(`${steps.length} steps and ${levels.length} levels`);
   const used = usedIds || new Set(steps.map((s) => s.id));
   const known = Object.keys(classLevels).sort();
@@ -127,7 +131,7 @@ function grindsWithLevels(steps, levels, classLevels, usedIds) {
     if (lifts !== undefined && !covered) {
       const last = anchor(when);
       const from = last >= 0 ? out[last] : step;
-      const place = from.at || (from.lines[0] && from.lines[0].at);
+      const place = last < 0 && startPlace ? startPlace : from.at || (from.lines[0] && from.lines[0].at);
       let id = `l${need}` + (place ? `@${place.zone}` : "");
       for (let n = 2; used.has(id); n++) id = `l${need}` + (place ? `@${place.zone}` : "") + `#${n}`;
       used.add(id);
@@ -166,8 +170,13 @@ function grindsWithLevels(steps, levels, classLevels, usedIds) {
 // { start, end } or undefined (the class does not play the step); the shared estimate is the lowest of the classes.
 function regrindSections(sections, classes, levelOf) {
   const used = new Set(sections.flatMap((s) => s.steps.map((x) => x.id)));
+  // where every character last worked before the section: a grind that opens a section is done there, before the way
+  // (never at the place of the step that needs the level, which may be across the sea)
+  let lastWork;
   return sections.map((section) => {
     const steps = section.steps;
+    const startPlace = lastWork;
+    for (const s of steps) if (!s.when && (isWork(s) || isGrind(s))) { const p = s.at || (s.lines[0] && s.lines[0].at); if (p) lastWork = p; }
     const own = {};
     for (const cls of classes) own[cls] = steps.map((s) => levelOf(cls, s));
     const shared = steps.map((_, i) => {
@@ -177,7 +186,7 @@ function regrindSections(sections, classes, levelOf) {
     });
     const classLevels = {};
     for (const cls of classes) classLevels[cls] = own[cls].map((l, i) => l || shared[i]);
-    return { ...section, steps: grindsWithLevels(steps.map(clone), shared, classLevels, used).steps };
+    return { ...section, steps: grindsWithLevels(steps.map(clone), shared, classLevels, used, startPlace).steps };
   });
 }
 
@@ -422,7 +431,7 @@ function isolateGated(db, steps) {
       const conditions = [...(skip ? clone(skip) : []), ...(p.skip || [])];
       if (conditions.length) part.skip = conditions;
       let min = 1;
-      for (const l of p.lines) if (l.kind === "accept") { const q = db.quests.get(l.quest); min = Math.max(min, (q && q.minLevel) || 1); }
+      for (const l of p.lines) if (l.kind === "accept") { const q = db.quests.get(l.quest); min = Math.max(min, q ? gateLevel(q) : 1); }
       if (min > 1) part.minLevel = min;
       const base = stepId(part);
       let id = base;

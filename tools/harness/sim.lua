@@ -53,7 +53,8 @@
 --   is registered as the race's route and the engine's data is filled from the facts), swap / afterLoad (Client.new
 --   options, for tests), beforeAction = function(client, n) (tests), maxActions.
 -- Sim.prepareJoin(facts, level) -> { server, expectedFrom, leftOut, to }
---   a player without the addon plays facts.flat in the simulated world until the level is at least `level`, leaving
+--   a player without the addon plays facts.flat in the simulated world until the level is at least `level` (grinding
+--   to a step's minLevel before doing the step, as the guide would have asked), leaving
 --   out every 7th accept whose quest is no prerequisite of a later route quest (and that quest's objectives and
 --   hand-in). For level 1 the player accepts the first quest only. server: the mock client's state to log in with;
 --   expectedFrom: the index of the last action played; to: the first action after it that is not done.
@@ -159,7 +160,8 @@ end
 --   npcs[id], objects[id] = { name, offers = { quest IDs }, ends = { quest IDs }, taxi = node, binder = "inn name" }
 --   items[id] = { name, quest }      the items that start a quest when used (left out when the route has none)
 --   taxi[node] = { name, continent = mapId, zone, x, y, npc }   where this faction's flight master stands
---   flat = { { action, quest, npc, object, node, from, to, at, level, section, step } }   the flattened route
+--   flat = { { action, quest, npc, object, node, from, to, at, level, section, step, minLevel } }   the flattened
+--                                    route; minLevel is the step's (left out when it has none)
 --   route = { format = 3, race, faction, sections }   only for runs that register their own route (opts.register)
 
 -- The objectives in the order of tools/lib/quests.js objectiveList: kills, objects, items, kill credits, the event.
@@ -403,6 +405,10 @@ function Sim.prepareJoin(facts, level, xpScale)
   local DO = {}
   function DO.accept(a, i)
     if c:findQuest(a.quest) or c.s.completed[a.quest] then return end
+    -- a step waits for the level when its quest is far above the player (tools/planner/tuning.js gateLevel): the
+    -- player the guide led here ground to it first
+    local gated = facts.quests[a.quest]
+    if gated and gated.level and facts.pace.GATE and gated.level - facts.pace.GATE > c.s.level then grindTo(c, gated.level - facts.pace.GATE, nil, level) end
     if not (needed[a.quest] and needed[a.quest] > i) then
       optional = optional + 1
       if optional % OPTIONAL_EVERY == 0 then
@@ -461,6 +467,9 @@ function Sim.prepareJoin(facts, level, xpScale)
       end
     else
       if c.s.level >= level then break end
+      -- a step under its level waits for it (the engine shows a grind line): the player the guide led here ground
+      -- to it before doing anything on the step, moves included, up to the level it joins at
+      if a.minLevel and a.minLevel > c.s.level then grindTo(c, a.minLevel, nil, level) end
       if a.at and a.action ~= "hearth" and a.action ~= "fly" then moveTo(a.at) end
       if DO[a.action] then DO[a.action](a, i) end
       expectedFrom = i
@@ -647,7 +656,12 @@ function Sim.play(facts, opts)
 
   local function whoFor(line)
     if line.npc and line.npc > 0 then return facts.npcs[line.npc], line.npc, "NPC" end
-    if line.object and line.object > 0 then return (facts.objects or {})[line.object], line.object, "object" end
+    if line.object and line.object > 0 then
+      -- the client names an object as one (UnitGUID("npc") is a GameObject), never as a creature
+      local def = (facts.objects or {})[line.object]
+      if def then def.object = true end
+      return def, line.object, "object"
+    end
     return nil
   end
 

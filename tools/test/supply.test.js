@@ -101,7 +101,10 @@ test("planned: letters waiting next door are fetched before any grind step, a si
   const { names, order, checked } = run(w, { maxLevel: 2 });
   assert.deepStrictEqual(checked.errors, []);
   assert.strictEqual(checked.endLevel, 2);
-  assert.ok(!names.includes("grind"), names.join(" "));
+  // no grind step but the last step to the cap, which the character passes: the level is made by the letters
+  assert.strictEqual(names.indexOf("grind"), names.length - 1, names.join(" "));
+  assert.strictEqual(checked.levels[names.length - 1], 2, "at the cap before the last step");
+  assert.strictEqual(checked.seconds, checked.clocks[names.length - 1], "which costs no time");
   assert.deepStrictEqual(order, [100, 200, 100]);
   for (const quest of [70, 71, 72]) assert.ok(names.indexOf("accept:" + quest) > names.indexOf("turnin:1") && names.includes("turnin:" + quest), `letter ${quest}`);
 

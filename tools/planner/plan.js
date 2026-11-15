@@ -388,6 +388,16 @@ function planRoute(db, ch, options = {}) {
     grindStep();
   }
 
+  // The last step: a player who reaches the end of the route under the cap (quests left out on the way) is told to
+  // grind the rest. On the plan the character is at the cap already and the step is passed as it comes. A route
+  // that grinds the end of its last level already has a grind step to the cap, and nothing after that step needs XP
+  // (what follows hands in what is left in the log): it gets no second one.
+  const tail = st.steps[st.steps.length - 1];
+  if (st.level >= maxLevel && st.pos && tail && !st.steps.some((s) => s.action === "grind" && s.level >= maxLevel)) {
+    const spot = grindSpots(db, maxLevel - 1).map((s) => ({ s, d: distance(st.pos, s.point) })).filter((e) => e.d < Infinity).sort((a, b) => a.d - b.d)[0];
+    st.steps.push({ action: "grind", level: maxLevel, at: spot ? spot.s.at : { zone: st.pos.zone, x: Math.round(st.pos.x * 100) / 100, y: Math.round(st.pos.y * 100) / 100 } });
+  }
+
   return { id, format: 2, race: ch.race, faction: ch.faction, steps: st.steps,
     stats: { quests: st.done.size, endLevel: st.level, levelAt: st.levelAt, seconds: Math.round(st.clock), links: [...st.links.values()].sort((a, b) => (a.id < b.id ? -1 : 1)) } };
 }

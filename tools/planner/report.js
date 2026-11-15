@@ -5,6 +5,7 @@
 const { leftBehind, MAX_LEFT_BEHIND } = require("./leftbehind");
 const { levelGap, MAX_ABOVE, MAX_BELOW_SHARE } = require("./levelgap");
 const { MAX_DANGEROUS_WALKS } = require("./danger");
+const { neededGrinds, planLevels, passedGrind } = require("./measure");
 const { CHOICES: C } = require("./tuning");
 const { PACE } = require("../lib/xp");
 const CURVE = [10, 20, 30, 40, 50, 60];
@@ -25,6 +26,10 @@ const MAX_TRAVEL_SHARE = 1.5;
 // Grind steps in a route. A grind step is the last resort: the rest of one level, written when no visit and no
 // errand is left for it. It was 20 (measured 10 to 13, most of them a whole level); measured now: none or one, the
 // last 2 to 16% of level 59.
+// Only the grind steps the plan needs are counted: those the planned character comes to below their level
+// (planner/measure.js neededGrinds). A route that reaches the cap on quests also ends with a last step to the cap
+// (planner/plan.js), for a player who arrives there under it; on the plan the character is at the cap already, the
+// step is passed as it comes and costs nothing, so it is no grind step here.
 const MAX_GRIND_STEPS = 2;
 
 const thousands = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -42,14 +47,18 @@ const percent = (before, after) => (before > 0 ? `${after <= before ? "-" : "+"}
 function summarize(db, { route: written, validations, measure, shared }) {
   const route = shared || written;
   const count = (action) => route.steps.filter((s) => s.action === action).length;
-  const grinds = route.steps.filter((s) => s.action === "grind").map((s) => ({ from: s.level - 1, to: s.level }));
+  // the grind steps the plan needs; one to a level the plan already has is passed as it comes (the last step)
+  const planned = planLevels(route);
+  const grinds = neededGrinds(route, planned).map((i) => ({ from: route.steps[i].level - 1, to: route.steps[i].level }));
+  const tail = route.steps[route.steps.length - 1];
+  const lastStep = !!tail && passedGrind(tail, planned[route.steps.length - 1]) ? tail.level : undefined;
   // the zones the route works in, in order, with the number of steps that do something there
   const visits = [];
-  for (const s of route.steps) {
-    if (!["accept", "objective", "turnin", "grind", "sethearth"].includes(s.action)) continue;
+  route.steps.forEach((s, i) => {
+    if (!["accept", "objective", "turnin", "grind", "sethearth"].includes(s.action) || passedGrind(s, planned[i])) return;
     if (!visits.length || visits[visits.length - 1].zone !== s.at.zone) visits.push({ zone: s.at.zone, steps: 0 });
     visits[visits.length - 1].steps++;
-  }
+  });
   const errors = [];
   const warnings = [];
   for (const { character, result } of validations) {
@@ -59,7 +68,7 @@ function summarize(db, { route: written, validations, measure, shared }) {
   return {
     steps: route.steps.length, quests: route.stats.quests, endLevel: Math.min(route.stats.endLevel, ...validations.map((v) => v.result.endLevel)),
     zoneChanges: measure.zoneChanges, travelSeconds: measure.seconds, walkedYards: measure.yards, unreachable: measure.unreachable, byKind: measure.byKind,
-    totalSeconds: route.stats.seconds, grinds, leftBehind: leftBehind(db, route),
+    totalSeconds: route.stats.seconds, grinds, lastStep, leftBehind: leftBehind(db, route),
     levelGap: validations.reduce((worst, v) => { const g = v.result.levels ? levelGap(db, written, v.result.levels, { cls: v.character.cls }) : null; return g && (!worst || g.above.length > worst.above.length || (g.above.length === worst.above.length && g.below.length > worst.below.length)) ? g : worst; }, null) || { above: [], below: [], steps: 0 },
     dangerous: validations.reduce((worst, v) => (v.danger && v.danger.length > worst.length ? v.danger.map((d) => ({ ...d, cls: v.character.cls })) : worst), []),
     visits: visits.map((v) => ({ name: zoneName(db, v.zone), steps: v.steps })),
@@ -214,6 +223,12 @@ function reportMarkdown(db, results, baseline) {
     "player at a usual pace is not behind the route. A grind step is the rest of one level and the last resort: it is",
     "written only when no zone has a quest left that the character can do at its level; a zone with a single quest is",
     "gone to first.",
+    "Every route that reaches level 60 on quests ends with a last step to level 60 that a player on the plan never",
+    "sees: the planned character is 60 when it comes to it, so the step is passed as it comes and costs no time. It",
+    "is there for a player who reaches the end of the route under 60 (quests left out on the way), who is told to",
+    "grind the rest. It is not counted as a grind step below. A route that grinds the end of level 59 has that grind",
+    "step instead, and no second one. A step that accepts a quest far above the player (more than HARD_TALK + BEHIND levels,",
+    "`tools/planner/tuning.js` gateLevel) likewise waits for the level, which a player on the plan has.",
     "A hand-in left behind is a step that moves the player more than LEAVE_YARDS while a quest ready to hand in waits",
     "within READY_YARDS of them (`tools/planner/leftbehind.js`, `tools/planner/tuning.js`).",
     "A dangerous walk is a walk through or inside an open zone whose creatures start more than DANGER_LEVELS above the",
@@ -232,7 +247,8 @@ function reportMarkdown(db, results, baseline) {
     out.push("  written. The old routes name no way at all, so each got the fastest way `tools/lib/travel.js` finds between two");
     out.push("  steps, with every transport open to it: the comparison errs in favour of the old routes.");
     out.push("- **Walked:** the yards of all that on foot, through the passes between zones; the old routes on the same way.");
-    out.push("- **Steps, quests, grind steps:** before, as the old report gave them.");
+    out.push("- **Steps, quests, grind steps:** before, as the old report gave them. After: the grind steps the plan needs, not");
+    out.push("  the last step to level 60.");
     out.push("");
     out.push("The baseline routes counted on the whole XP estimate.");
     out.push(`The routes now count on ${paceText()},`);
@@ -272,6 +288,7 @@ function reportMarkdown(db, results, baseline) {
     out.push(`| Transports taken | ${s.transports} |`);
     out.push(`| Hearthstone bound, used | ${s.binds}, ${s.hearths} |`);
     out.push(`| Grind steps | ${s.grinds.length}${s.grinds.length ? ` (${s.grinds.map((g) => `level ${g.from} to ${g.to}`).join(", ")})` : ""} |`);
+    out.push(`| Last step | ${s.lastStep !== undefined ? `to level ${s.lastStep}, passed on the plan` : "none"} |`);
     out.push(`| Unconfirmed transports used | ${s.links.length ? s.links.map((l) => `${l.name} (${l.kind}; not confirmed: ${l.assumed.join(", ")})`).join("; ") : "none"} |`);
     out.push(`| Hand-ins left behind | ${s.leftBehind.length ? s.leftBehind.map((b) => `step ${thousands(b.step + 1)} (quest ${b.quests.join(", ")})`).join("; ") : "none"} |`);
     out.push(`| Quests above the level allowed, far below the player's level | ${(s.levelGap || { above: [] }).above.length}, ${(s.levelGap || { below: [] }).below.length} of ${(s.levelGap || { steps: 0 }).steps} quest steps |`);

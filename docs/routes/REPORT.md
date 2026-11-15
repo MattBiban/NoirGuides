@@ -9,6 +9,12 @@ The planner counts on 60% of the estimated XP up to level 30, rising to 68% at l
 player at a usual pace is not behind the route. A grind step is the rest of one level and the last resort: it is
 written only when no zone has a quest left that the character can do at its level; a zone with a single quest is
 gone to first.
+Every route that reaches level 60 on quests ends with a last step to level 60 that a player on the plan never
+sees: the planned character is 60 when it comes to it, so the step is passed as it comes and costs no time. It
+is there for a player who reaches the end of the route under 60 (quests left out on the way), who is told to
+grind the rest. It is not counted as a grind step below. A route that grinds the end of level 59 has that grind
+step instead, and no second one. A step that accepts a quest far above the player (more than HARD_TALK + BEHIND levels,
+`tools/planner/tuning.js` gateLevel) likewise waits for the level, which a player on the plan has.
 A hand-in left behind is a step that moves the player more than LEAVE_YARDS while a quest ready to hand in waits
 within READY_YARDS of them (`tools/planner/leftbehind.js`, `tools/planner/tuning.js`).
 A dangerous walk is a walk through or inside an open zone whose creatures start more than DANGER_LEVELS above the
@@ -26,7 +32,8 @@ Before: the routes of commit `37a4f8c`, the last ones of the first planner, as `
   written. The old routes name no way at all, so each got the fastest way `tools/lib/travel.js` finds between two
   steps, with every transport open to it: the comparison errs in favour of the old routes.
 - **Walked:** the yards of all that on foot, through the passes between zones; the old routes on the same way.
-- **Steps, quests, grind steps:** before, as the old report gave them.
+- **Steps, quests, grind steps:** before, as the old report gave them. After: the grind steps the plan needs, not
+  the last step to level 60.
 
 The baseline routes counted on the whole XP estimate.
 The routes now count on 60% of the estimated XP up to level 30, rising to 68% at level 50,
@@ -38,15 +45,15 @@ says how far above the baseline a route may be.
 | Race | Zone changes | | | Travel time | | | Walked yards | | | Steps | | Quests | | Grind steps | | End level |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | | before | after | change | before | after | change | before | after | change | before | after | before | after | before | after | after |
-| Human | 214 | 236 | +10% | 44 h 29 min | 59 h 37 min | +34% | 936,223 | 1,153,394 | +23% | 2,154 | 2,912 | 766 | 935 | 0 | 0 | 60 |
+| Human | 214 | 236 | +10% | 44 h 29 min | 59 h 37 min | +34% | 936,223 | 1,153,394 | +23% | 2,154 | 2,913 | 766 | 935 | 0 | 0 | 60 |
 | Orc | 206 | 258 | +25% | 42 h 57 min | 57 h 29 min | +34% | 920,085 | 1,083,327 | +18% | 2,015 | 2,852 | 692 | 860 | 1 | 1 | 60 |
-| Dwarf | 217 | 251 | +16% | 45 h 44 min | 61 h 23 min | +34% | 957,169 | 1,167,666 | +22% | 2,221 | 2,936 | 794 | 933 | 0 | 0 | 60 |
-| NightElf | 203 | 246 | +21% | 47 h 02 min | 61 h 33 min | +31% | 1,007,696 | 1,154,782 | +15% | 2,230 | 2,816 | 795 | 885 | 0 | 0 | 60 |
-| Undead | 182 | 240 | +32% | 44 h 59 min | 57 h 24 min | +28% | 967,604 | 1,104,401 | +14% | 2,090 | 2,850 | 725 | 853 | 1 | 0 | 60 |
+| Dwarf | 217 | 251 | +16% | 45 h 44 min | 61 h 23 min | +34% | 957,169 | 1,167,666 | +22% | 2,221 | 2,937 | 794 | 933 | 0 | 0 | 60 |
+| NightElf | 203 | 246 | +21% | 47 h 02 min | 61 h 33 min | +31% | 1,007,696 | 1,154,782 | +15% | 2,230 | 2,817 | 795 | 885 | 0 | 0 | 60 |
+| Undead | 182 | 240 | +32% | 44 h 59 min | 57 h 24 min | +28% | 967,604 | 1,104,401 | +14% | 2,090 | 2,851 | 725 | 853 | 1 | 0 | 60 |
 | Tauren | 199 | 254 | +28% | 43 h 32 min | 58 h 20 min | +34% | 923,557 | 1,071,855 | +16% | 2,049 | 2,854 | 709 | 857 | 1 | 1 | 60 |
-| Gnome | 217 | 251 | +16% | 45 h 44 min | 61 h 23 min | +34% | 957,169 | 1,167,666 | +22% | 2,221 | 2,936 | 794 | 933 | 0 | 0 | 60 |
+| Gnome | 217 | 251 | +16% | 45 h 44 min | 61 h 23 min | +34% | 957,169 | 1,167,666 | +22% | 2,221 | 2,937 | 794 | 933 | 0 | 0 | 60 |
 | Troll | 206 | 241 | +17% | 42 h 57 min | 55 h 41 min | +30% | 920,085 | 1,047,206 | +14% | 2,015 | 2,806 | 692 | 854 | 1 | 1 | 60 |
-| HighOrder | 212 | 256 | +21% | 43 h 10 min | 61 h 33 min | +43% | 915,714 | 1,183,713 | +29% | 2,220 | 2,944 | 788 | 929 | 1 | 0 | 60 |
+| HighOrder | 212 | 256 | +21% | 43 h 10 min | 61 h 33 min | +43% | 915,714 | 1,183,713 | +29% | 2,220 | 2,945 | 788 | 929 | 1 | 0 | 60 |
 | Windshaper | 200 | 248 | +24% | 42 h 23 min | 57 h 52 min | +37% | 891,664 | 1,072,846 | +20% | 1,979 | 2,852 | 680 | 850 | 1 | 1 | 60 |
 
 ### Acceptance
@@ -85,12 +92,12 @@ what its class steps add to the shared route's numbers, which the race's section
 | Human | ROGUE | yes | 60 | 27 | 6 | 83 | 269 | +33 | 62 h 27 min | +2 h 51 min | 152 h 54 min |
 | Human | WARLOCK | yes | 60 | 22 | 23 | 69 | 256 | +20 | 61 h 26 min | +1 h 49 min | 151 h 51 min |
 | Human | WARRIOR | yes | 60 | 25 | 15 | 82 | 255 | +19 | 61 h 43 min | +2 h 07 min | 151 h 46 min |
-| Orc | HUNTER | yes | 60 | 11 | 5 | 28 | 258 | +0 | 57 h 52 min | +0 h 23 min | 149 h 05 min |
-| Orc | MAGE | yes | 60 | 16 | 7 | 48 | 270 | +12 | 58 h 54 min | +1 h 24 min | 151 h 08 min |
-| Orc | ROGUE | yes | 60 | 19 | 7 | 55 | 269 | +11 | 58 h 24 min | +0 h 55 min | 150 h 39 min |
-| Orc | SHAMAN | yes | 60 | 26 | 19 | 93 | 289 | +31 | 61 h 42 min | +4 h 13 min | 154 h 40 min |
-| Orc | WARLOCK | yes | 60 | 36 | 19 | 112 | 287 | +29 | 60 h 01 min | +2 h 32 min | 153 h 06 min |
-| Orc | WARRIOR | yes | 60 | 22 | 14 | 62 | 273 | +15 | 59 h 02 min | +1 h 32 min | 151 h 34 min |
+| Orc | HUNTER | yes | 60 | 11 | 5 | 28 | 257 | -1 | 57 h 52 min | +0 h 22 min | 149 h 04 min |
+| Orc | MAGE | yes | 60 | 16 | 7 | 48 | 269 | +11 | 58 h 53 min | +1 h 24 min | 151 h 07 min |
+| Orc | ROGUE | yes | 60 | 19 | 7 | 55 | 268 | +10 | 58 h 22 min | +0 h 53 min | 150 h 38 min |
+| Orc | SHAMAN | yes | 60 | 26 | 19 | 93 | 288 | +30 | 61 h 41 min | +4 h 12 min | 154 h 39 min |
+| Orc | WARLOCK | yes | 60 | 36 | 19 | 112 | 286 | +28 | 60 h 01 min | +2 h 31 min | 153 h 06 min |
+| Orc | WARRIOR | yes | 60 | 22 | 14 | 62 | 272 | +14 | 59 h 01 min | +1 h 32 min | 151 h 33 min |
 | Dwarf | HUNTER | yes | 60 | 10 | 9 | 25 | 252 | +1 | 61 h 37 min | +0 h 13 min | 150 h 17 min |
 | Dwarf | PALADIN | yes | 60 | 7 | 30 | 15 | 253 | +2 | 61 h 26 min | +0 h 02 min | 149 h 45 min |
 | Dwarf | PRIEST | yes | 60 | 9 | 10 | 23 | 253 | +2 | 61 h 36 min | +0 h 13 min | 150 h 08 min |
@@ -108,22 +115,22 @@ what its class steps add to the shared route's numbers, which the race's section
 | Undead | ROGUE | yes | 60 | 24 | 7 | 77 | 259 | +19 | 58 h 53 min | +1 h 29 min | 151 h 40 min |
 | Undead | WARLOCK | yes | 60 | 34 | 21 | 102 | 269 | +29 | 59 h 49 min | +2 h 25 min | 152 h 55 min |
 | Undead | WARRIOR | yes | 60 | 22 | 14 | 61 | 254 | +14 | 58 h 58 min | +1 h 33 min | 151 h 35 min |
-| Tauren | DRUID | yes | 60 | 19 | 10 | 54 | 265 | +11 | 59 h 37 min | +1 h 17 min | 151 h 16 min |
-| Tauren | HUNTER | yes | 60 | 11 | 5 | 28 | 260 | +6 | 59 h 07 min | +0 h 46 min | 150 h 14 min |
-| Tauren | SHAMAN | yes | 60 | 26 | 19 | 97 | 283 | +29 | 62 h 08 min | +3 h 48 min | 155 h 01 min |
-| Tauren | WARRIOR | yes | 60 | 22 | 14 | 60 | 267 | +13 | 60 h 00 min | +1 h 39 min | 152 h 27 min |
+| Tauren | DRUID | yes | 60 | 19 | 10 | 54 | 264 | +10 | 59 h 36 min | +1 h 16 min | 151 h 14 min |
+| Tauren | HUNTER | yes | 60 | 11 | 5 | 28 | 259 | +5 | 59 h 05 min | +0 h 45 min | 150 h 12 min |
+| Tauren | SHAMAN | yes | 60 | 26 | 19 | 97 | 282 | +28 | 62 h 07 min | +3 h 47 min | 154 h 59 min |
+| Tauren | WARRIOR | yes | 60 | 22 | 14 | 60 | 266 | +12 | 59 h 58 min | +1 h 38 min | 152 h 25 min |
 | Gnome | MAGE | yes | 60 | 22 | 8 | 75 | 274 | +23 | 63 h 29 min | +2 h 06 min | 153 h 29 min |
 | Gnome | PRIEST | yes | 60 | 6 | 8 | 15 | 251 | +0 | 61 h 29 min | +0 h 06 min | 150 h 00 min |
 | Gnome | ROGUE | yes | 60 | 27 | 6 | 80 | 283 | +32 | 64 h 08 min | +2 h 44 min | 154 h 18 min |
 | Gnome | WARLOCK | yes | 60 | 22 | 23 | 71 | 270 | +19 | 62 h 57 min | +1 h 33 min | 153 h 05 min |
 | Gnome | WARRIOR | yes | 60 | 25 | 15 | 84 | 269 | +18 | 63 h 29 min | +2 h 06 min | 153 h 15 min |
 | Troll | HUNTER | yes | 60 | 11 | 5 | 28 | 241 | +0 | 56 h 11 min | +0 h 29 min | 148 h 08 min |
-| Troll | MAGE | yes | 60 | 23 | 8 | 75 | 262 | +21 | 57 h 28 min | +1 h 47 min | 150 h 38 min |
+| Troll | MAGE | yes | 60 | 23 | 8 | 75 | 261 | +20 | 57 h 28 min | +1 h 46 min | 150 h 37 min |
 | Troll | PRIEST | yes | 60 | 10 | 8 | 26 | 243 | +2 | 55 h 57 min | +0 h 15 min | 147 h 51 min |
-| Troll | ROGUE | yes | 60 | 18 | 7 | 52 | 249 | +8 | 56 h 26 min | +0 h 44 min | 149 h 10 min |
-| Troll | SHAMAN | yes | 60 | 26 | 19 | 92 | 269 | +28 | 59 h 12 min | +3 h 31 min | 152 h 39 min |
-| Troll | WARLOCK | yes | 60 | 32 | 22 | 101 | 268 | +27 | 58 h 00 min | +2 h 18 min | 151 h 20 min |
-| Troll | WARRIOR | yes | 60 | 22 | 14 | 75 | 257 | +16 | 57 h 49 min | +2 h 07 min | 150 h 50 min |
+| Troll | ROGUE | yes | 60 | 18 | 7 | 52 | 248 | +7 | 56 h 25 min | +0 h 44 min | 149 h 09 min |
+| Troll | SHAMAN | yes | 60 | 26 | 19 | 92 | 268 | +27 | 59 h 11 min | +3 h 30 min | 152 h 38 min |
+| Troll | WARLOCK | yes | 60 | 32 | 22 | 101 | 267 | +26 | 57 h 59 min | +2 h 17 min | 151 h 19 min |
+| Troll | WARRIOR | yes | 60 | 22 | 14 | 75 | 256 | +15 | 57 h 48 min | +2 h 07 min | 150 h 49 min |
 | HighOrder | DRUID | yes | 60 | 11 | 11 | 32 | 259 | +3 | 62 h 02 min | +0 h 30 min | 151 h 18 min |
 | HighOrder | HUNTER | yes | 60 | 10 | 7 | 25 | 256 | +0 | 61 h 43 min | +0 h 10 min | 150 h 38 min |
 | HighOrder | MAGE | yes | 60 | 16 | 6 | 45 | 264 | +8 | 62 h 24 min | +0 h 51 min | 152 h 21 min |
@@ -131,16 +138,16 @@ what its class steps add to the shared route's numbers, which the race's section
 | HighOrder | WARRIOR | yes | 60 | 26 | 14 | 89 | 273 | +17 | 64 h 18 min | +2 h 45 min | 154 h 26 min |
 | Windshaper | DRUID | yes | 60 | 8 | 9 | 20 | 249 | +1 | 58 h 08 min | +0 h 15 min | 147 h 32 min |
 | Windshaper | HUNTER | yes | 60 | 11 | 3 | 28 | 249 | +1 | 58 h 16 min | +0 h 24 min | 147 h 46 min |
-| Windshaper | ROGUE | yes | 60 | 17 | 7 | 59 | 262 | +14 | 59 h 05 min | +1 h 13 min | 149 h 16 min |
-| Windshaper | SHAMAN | yes | 60 | 28 | 19 | 110 | 273 | +25 | 61 h 08 min | +3 h 15 min | 152 h 33 min |
-| Windshaper | WARRIOR | yes | 60 | 23 | 14 | 73 | 264 | +16 | 59 h 47 min | +1 h 55 min | 150 h 35 min |
+| Windshaper | ROGUE | yes | 60 | 17 | 7 | 59 | 261 | +13 | 59 h 04 min | +1 h 11 min | 149 h 14 min |
+| Windshaper | SHAMAN | yes | 60 | 28 | 19 | 110 | 272 | +24 | 61 h 06 min | +3 h 13 min | 152 h 32 min |
+| Windshaper | WARRIOR | yes | 60 | 23 | 14 | 73 | 263 | +15 | 59 h 45 min | +1 h 53 min | 150 h 34 min |
 
 ## Human (Alliance, `alliance-human`)
 
 | Fact | Value |
 | --- | --- |
 | Classes validated | HUNTER, MAGE, PALADIN, PRIEST, ROGUE, WARLOCK, WARRIOR |
-| Steps | 2,912 |
+| Steps | 2,913 |
 | Quests | 935 |
 | End level | 60 |
 | Zone changes | 236 (before: 214) |
@@ -151,6 +158,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | Transports taken | 56 |
 | Hearthstone bound, used | 32, 72 |
 | Grind steps | 0 |
+| Last step | to level 60, passed on the plan |
 | Unconfirmed transports used | Menethil Harbor to Auberdine (boat; not confirmed: route); Deeprun Tram (tram; not confirmed: route) |
 | Hand-ins left behind | none |
 | Quests above the level allowed, far below the player's level | 0, 90 of 1537 quest steps |
@@ -164,15 +172,15 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 3,265, 2,149 (66%) |
-| Steps in the route file | 2,409 |
+| Actions before bundling, steps after | 3,266, 2,150 (66%) |
+| Steps in the route file | 2,410 |
 | Sections | 59 |
 | Profession steps written | p164-2, p165-2, p171-2, p182-2, p197-2, p333-2, p186-2, p202-2, p393-2, p186-3, p165-3, p171-3, p182-3, p393-3, p164-3, p202-3, p186-4, p164-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-36-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-36-stranglethorn-vale; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-36-stranglethorn-vale; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section human-20-22-darkshore; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-36-stranglethorn-vale; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-36-stranglethorn-vale; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section human-20-22-darkshore; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-36-stranglethorn-vale; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-36-stranglethorn-vale |
 | Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 12, 16, 18, 22, 28, 30, 32, 39, 43, 46, 48, 50, 52, 54, 56, 58; MAGE: 2, 4, 6, 8, 10, 12, 14, 19, 25, 28, 39, 42, 46, 48, 50, 55, 58; PALADIN: 2, 4, 6, 8, 10, 12, 18, 25, 32, 38, 40, 42, 44, 46, 48, 50, 55, 58; PRIEST: 2, 4, 6, 8, 10, 12, 18, 22, 39, 43, 47, 51, 55, 58; ROGUE: 2, 4, 6, 8, 10, 12, 16, 18, 20, 22, 24, 28, 33, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58; WARLOCK: 2, 4, 6, 8, 10, 12, 16, 22, 28, 30, 32, 39, 43, 46, 48, 50, 52, 54, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 16, 18, 22, 24, 28, 30, 32, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58 |
 | Class trainer gaps | HUNTER 32 to 39: the cheapest trip to a trainer adds 362 seconds (at most 300); MAGE 28 to 39: the cheapest trip to a trainer adds 311 seconds (at most 300); PALADIN 18 to 25: the cheapest trip to a trainer adds 344 seconds (at most 300); PALADIN 25 to 32: the cheapest trip to a trainer adds 344 seconds (at most 300); PRIEST 22 to 39: the cheapest trip to a trainer adds 315 seconds (at most 300); WARLOCK 32 to 39: the cheapest trip to a trainer adds 338 seconds (at most 300) |
 | Planner notes | Human step a2241: quest 2241 gives XP only up to level 18, but the estimated level there is 20; with "skip content you outlevel" the step and its quest's later lines are skipped; Human step a1686: quest 1686 gives XP only up to level 18, but the estimated level there is 20; with "skip content you outlevel" the step and its quest's later lines are skipped |
-| Format 3 errors | 14 |
+| Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
@@ -234,24 +242,7 @@ what its class steps add to the shared route's numbers, which the race's section
 | human-56-56-western-plaguelands | 56 Western Plaguelands | 54 | 56-59 |
 | human-56-57-silithus | 56-57 Silithus | 61 | 56-60 |
 | human-57-58-azshara | 57-58 Azshara | 31 | 57-60 |
-| human-58-60-silithus | 58-60 Silithus | 215 | 58-60 |
-
-Format 3 errors:
-
-- HUNTER: section human-49-50-un-goro-crater step l49@490: grind is in zone 490 on another continent than the player (zone 38), with no flight, transport or hearth that got them there
-- HUNTER: section human-49-50-un-goro-crater step y8-7: fly is in zone 38 on another continent than the player (zone 490), with no flight, transport or hearth that got them there
-- MAGE: section human-49-50-un-goro-crater step l49@490: grind is in zone 490 on another continent than the player (zone 38), with no flight, transport or hearth that got them there
-- MAGE: section human-49-50-un-goro-crater step y8-7: fly is in zone 38 on another continent than the player (zone 490), with no flight, transport or hearth that got them there
-- PALADIN: section human-49-50-un-goro-crater step l49@490: grind is in zone 490 on another continent than the player (zone 38), with no flight, transport or hearth that got them there
-- PALADIN: section human-49-50-un-goro-crater step y8-7: fly is in zone 38 on another continent than the player (zone 490), with no flight, transport or hearth that got them there
-- PRIEST: section human-49-50-un-goro-crater step l49@490: grind is in zone 490 on another continent than the player (zone 38), with no flight, transport or hearth that got them there
-- PRIEST: section human-49-50-un-goro-crater step y8-7: fly is in zone 38 on another continent than the player (zone 490), with no flight, transport or hearth that got them there
-- ROGUE: section human-49-50-un-goro-crater step l49@490: grind is in zone 490 on another continent than the player (zone 38), with no flight, transport or hearth that got them there
-- ROGUE: section human-49-50-un-goro-crater step y8-7: fly is in zone 38 on another continent than the player (zone 490), with no flight, transport or hearth that got them there
-- WARLOCK: section human-49-50-un-goro-crater step l49@490: grind is in zone 490 on another continent than the player (zone 38), with no flight, transport or hearth that got them there
-- WARLOCK: section human-49-50-un-goro-crater step y8-7: fly is in zone 38 on another continent than the player (zone 490), with no flight, transport or hearth that got them there
-- WARRIOR: section human-49-50-un-goro-crater step l49@490: grind is in zone 490 on another continent than the player (zone 38), with no flight, transport or hearth that got them there
-- WARRIOR: section human-49-50-un-goro-crater step y8-7: fly is in zone 38 on another continent than the player (zone 490), with no flight, transport or hearth that got them there
+| human-58-60-silithus | 58-60 Silithus | 216 | 58-60 |
 
 ### Level curve
 
@@ -280,6 +271,7 @@ Format 3 errors:
 | Transports taken | 44 |
 | Hearthstone bound, used | 58, 73 |
 | Grind steps | 1 (level 59 to 60) |
+| Last step | none |
 | Unconfirmed transports used | none |
 | Hand-ins left behind | none |
 | Quests above the level allowed, far below the player's level | 1, 54 of 1490 quest steps |
@@ -381,7 +373,7 @@ Format 3 errors:
 | Fact | Value |
 | --- | --- |
 | Classes validated | HUNTER, PALADIN, PRIEST, ROGUE, SHAMAN, WARRIOR |
-| Steps | 2,936 |
+| Steps | 2,937 |
 | Quests | 933 |
 | End level | 60 |
 | Zone changes | 251 (before: 217) |
@@ -392,6 +384,7 @@ Format 3 errors:
 | Transports taken | 62 |
 | Hearthstone bound, used | 33, 75 |
 | Grind steps | 0 |
+| Last step | to level 60, passed on the plan |
 | Unconfirmed transports used | Menethil Harbor to Auberdine (boat; not confirmed: route); Deeprun Tram (tram; not confirmed: route) |
 | Hand-ins left behind | none |
 | Quests above the level allowed, far below the player's level | 0, 95 of 1532 quest steps |
@@ -405,8 +398,8 @@ Format 3 errors:
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 3,163, 2,105 (67%) |
-| Steps in the route file | 2,331 |
+| Actions before bundling, steps after | 3,164, 2,106 (67%) |
+| Steps in the route file | 2,332 |
 | Sections | 54 |
 | Profession steps written | p164-2, p165-2, p171-2, p182-2, p186-2, p197-2, p202-2, p333-2, p393-2, p186-3, p165-3, p171-3, p182-3, p393-3, p164-3, p202-3, p186-4, p164-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-36-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-36-stranglethorn-vale; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-36-stranglethorn-vale; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section dwarf-20-22-darkshore; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-36-stranglethorn-vale; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-36-stranglethorn-vale; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section dwarf-20-22-darkshore; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-36-stranglethorn-vale; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-36-stranglethorn-vale |
@@ -470,7 +463,7 @@ Format 3 errors:
 | dwarf-56-56-felwood | 56 Felwood | 44 | 56-59 |
 | dwarf-56-57-silithus | 56-57 Silithus | 81 | 56-60 |
 | dwarf-57-58-azshara | 57-58 Azshara | 27 | 57-60 |
-| dwarf-58-60-silithus | 58-60 Silithus | 215 | 58-60 |
+| dwarf-58-60-silithus | 58-60 Silithus | 216 | 58-60 |
 
 ### Level curve
 
@@ -488,7 +481,7 @@ Format 3 errors:
 | Fact | Value |
 | --- | --- |
 | Classes validated | DRUID, HUNTER, PRIEST, ROGUE, WARRIOR |
-| Steps | 2,816 |
+| Steps | 2,817 |
 | Quests | 885 |
 | End level | 60 |
 | Zone changes | 246 (before: 203) |
@@ -499,6 +492,7 @@ Format 3 errors:
 | Transports taken | 67 |
 | Hearthstone bound, used | 30, 70 |
 | Grind steps | 0 |
+| Last step | to level 60, passed on the plan |
 | Unconfirmed transports used | Menethil Harbor to Auberdine (boat; not confirmed: route); Deeprun Tram (tram; not confirmed: route) |
 | Hand-ins left behind | none |
 | Quests above the level allowed, far below the player's level | 0, 52 of 1448 quest steps |
@@ -512,8 +506,8 @@ Format 3 errors:
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 3,070, 2,037 (66%) |
-| Steps in the route file | 2,225 |
+| Actions before bundling, steps after | 3,071, 2,038 (66%) |
+| Steps in the route file | 2,226 |
 | Sections | 56 |
 | Profession steps written | p165-2, p171-2, p333-2, p164-2, p186-2, p197-2, p202-2, p164-3, p165-3, p171-3, p182-2, p182-3, p186-3, p197-3, p202-3, p333-3, p393-2, p393-3, p164-4, p186-4, p197-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-36-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-36-stranglethorn-vale; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-36-stranglethorn-vale; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-36-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-36-stranglethorn-vale; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-36-stranglethorn-vale |
@@ -579,7 +573,7 @@ Format 3 errors:
 | nightelf-56-56-western-plaguelands | 56 Western Plaguelands | 53 | 56-59 |
 | nightelf-56-57-silithus | 56-57 Silithus | 62 | 56-60 |
 | nightelf-57-58-azshara | 57-58 Azshara | 25 | 57-60 |
-| nightelf-58-60-silithus | 58-60 Silithus | 206 | 58-60 |
+| nightelf-58-60-silithus | 58-60 Silithus | 207 | 58-60 |
 
 ### Level curve
 
@@ -597,7 +591,7 @@ Format 3 errors:
 | Fact | Value |
 | --- | --- |
 | Classes validated | MAGE, PALADIN, PRIEST, ROGUE, WARLOCK, WARRIOR |
-| Steps | 2,850 |
+| Steps | 2,851 |
 | Quests | 853 |
 | End level | 60 |
 | Zone changes | 240 (before: 182) |
@@ -608,6 +602,7 @@ Format 3 errors:
 | Transports taken | 50 |
 | Hearthstone bound, used | 57, 74 |
 | Grind steps | 0 |
+| Last step | to level 60, passed on the plan |
 | Unconfirmed transports used | none |
 | Hand-ins left behind | step 104 (quest 356, 96895, 97558) |
 | Quests above the level allowed, far below the player's level | 2, 62 of 1476 quest steps |
@@ -621,8 +616,8 @@ Format 3 errors:
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 3,195, 2,131 (67%) |
-| Steps in the route file | 2,334 |
+| Actions before bundling, steps after | 3,196, 2,132 (67%) |
+| Steps in the route file | 2,335 |
 | Sections | 68 |
 | Profession steps written | p165-2, p171-2, p197-2, p333-2, p164-2, p202-2, p164-3, p165-3, p197-3, p333-3, p164-4, p182-4, p186-4, p202-4, p393-4, p171-4, p197-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section undead-34-35-stranglethorn-vale; Alchemy Expert (rank 3, level 20): no Horde trainer in a zone of the route within five sections of section undead-20-23-the-barrens; Herbalism Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section undead-08-13-tirisfal-glades; Herbalism Expert (rank 3, level 20): no Horde trainer in a zone of the route within five sections of section undead-20-23-the-barrens; Mining Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section undead-08-13-tirisfal-glades; Mining Expert (rank 3, level 20): no Horde trainer in a zone of the route within five sections of section undead-20-23-the-barrens; Engineering Expert (rank 3, level 20): no Horde trainer in a zone of the route within five sections of section undead-20-23-the-barrens; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section undead-34-35-stranglethorn-vale; Skinning Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section undead-08-13-tirisfal-glades; Skinning Expert (rank 3, level 20): no Horde trainer in a zone of the route within five sections of section undead-20-23-the-barrens |
@@ -700,7 +695,7 @@ Format 3 errors:
 | undead-57-57-winterspring | 57 Winterspring | 12 | 57-60 |
 | undead-57-58-silithus | 57-58 Silithus | 41 | 57-60 |
 | undead-58-58-orgrimmar | 58 Orgrimmar | 32 | 58-60 |
-| undead-58-60-azshara | 58-60 Azshara | 161 | 58-60 |
+| undead-58-60-azshara | 58-60 Azshara | 162 | 58-60 |
 
 ### Level curve
 
@@ -729,6 +724,7 @@ Format 3 errors:
 | Transports taken | 46 |
 | Hearthstone bound, used | 55, 78 |
 | Grind steps | 1 (level 59 to 60) |
+| Last step | none |
 | Unconfirmed transports used | none |
 | Hand-ins left behind | none |
 | Quests above the level allowed, far below the player's level | 2, 53 of 1456 quest steps |
@@ -835,7 +831,7 @@ Format 3 errors:
 | Fact | Value |
 | --- | --- |
 | Classes validated | MAGE, PRIEST, ROGUE, WARLOCK, WARRIOR |
-| Steps | 2,936 |
+| Steps | 2,937 |
 | Quests | 933 |
 | End level | 60 |
 | Zone changes | 251 (before: 217) |
@@ -846,6 +842,7 @@ Format 3 errors:
 | Transports taken | 62 |
 | Hearthstone bound, used | 33, 75 |
 | Grind steps | 0 |
+| Last step | to level 60, passed on the plan |
 | Unconfirmed transports used | Menethil Harbor to Auberdine (boat; not confirmed: route); Deeprun Tram (tram; not confirmed: route) |
 | Hand-ins left behind | none |
 | Quests above the level allowed, far below the player's level | 1, 88 of 1527 quest steps |
@@ -859,8 +856,8 @@ Format 3 errors:
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 3,261, 2,174 (67%) |
-| Steps in the route file | 2,371 |
+| Actions before bundling, steps after | 3,262, 2,175 (67%) |
+| Steps in the route file | 2,372 |
 | Sections | 55 |
 | Profession steps written | p164-2, p165-2, p171-2, p182-2, p186-2, p197-2, p202-2, p333-2, p393-2, p186-3, p165-3, p171-3, p182-3, p393-3, p164-3, p202-3, p186-4, p164-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-36-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-36-stranglethorn-vale; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-36-stranglethorn-vale; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section gnome-20-22-darkshore; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-36-stranglethorn-vale; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-36-stranglethorn-vale; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section gnome-20-22-darkshore; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-36-stranglethorn-vale; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-36-stranglethorn-vale |
@@ -925,7 +922,7 @@ Format 3 errors:
 | gnome-56-56-felwood | 56 Felwood | 42 | 56-59 |
 | gnome-56-57-silithus | 56-57 Silithus | 82 | 56-60 |
 | gnome-57-58-azshara | 57-58 Azshara | 28 | 57-60 |
-| gnome-58-60-silithus | 58-60 Silithus | 215 | 58-60 |
+| gnome-58-60-silithus | 58-60 Silithus | 216 | 58-60 |
 
 ### Level curve
 
@@ -954,6 +951,7 @@ Format 3 errors:
 | Transports taken | 45 |
 | Hearthstone bound, used | 53, 73 |
 | Grind steps | 1 (level 59 to 60) |
+| Last step | none |
 | Unconfirmed transports used | none |
 | Hand-ins left behind | none |
 | Quests above the level allowed, far below the player's level | 1, 45 of 1475 quest steps |
@@ -1056,7 +1054,7 @@ Format 3 errors:
 | Fact | Value |
 | --- | --- |
 | Classes validated | DRUID, HUNTER, MAGE, ROGUE, WARRIOR |
-| Steps | 2,944 |
+| Steps | 2,945 |
 | Quests | 929 |
 | End level | 60 |
 | Zone changes | 256 (before: 212) |
@@ -1067,6 +1065,7 @@ Format 3 errors:
 | Transports taken | 67 |
 | Hearthstone bound, used | 31, 72 |
 | Grind steps | 0 |
+| Last step | to level 60, passed on the plan |
 | Unconfirmed transports used | Menethil Harbor to Auberdine (boat; not confirmed: route); Skyborne Portal to Stormwind (portal; not confirmed: route, boarding, arrival); Skycutter from Zephras Isle to Dalaran (boat; not confirmed: boarding, arrival, kind); Deeprun Tram (tram; not confirmed: route) |
 | Hand-ins left behind | none |
 | Quests above the level allowed, far below the player's level | 0, 85 of 1534 quest steps |
@@ -1080,8 +1079,8 @@ Format 3 errors:
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 3,219, 2,116 (66%) |
-| Steps in the route file | 2,311 |
+| Actions before bundling, steps after | 3,220, 2,117 (66%) |
+| Steps in the route file | 2,312 |
 | Sections | 54 |
 | Profession steps written | p164-2, p165-2, p171-2, p182-2, p186-2, p197-2, p202-2, p333-2, p393-2, p182-3, p186-3, p165-3, p171-3, p393-3, p164-3, p202-3, p186-4, p164-4 |
 | Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-36-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-36-stranglethorn-vale; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-36-stranglethorn-vale; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-17-20-loch-modan; Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-36-stranglethorn-vale; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-36-stranglethorn-vale; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-17-20-loch-modan; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-36-stranglethorn-vale; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-36-stranglethorn-vale |
@@ -1145,7 +1144,7 @@ Format 3 errors:
 | highorder-56-56-western-plaguelands | 56 Western Plaguelands | 44 | 56-59 |
 | highorder-56-57-silithus | 56-57 Silithus | 84 | 56-60 |
 | highorder-57-58-azshara | 57-58 Azshara | 27 | 57-60 |
-| highorder-58-60-silithus | 58-60 Silithus | 216 | 58-60 |
+| highorder-58-60-silithus | 58-60 Silithus | 217 | 58-60 |
 
 ### Level curve
 
@@ -1174,6 +1173,7 @@ Format 3 errors:
 | Transports taken | 51 |
 | Hearthstone bound, used | 58, 69 |
 | Grind steps | 1 (level 59 to 60) |
+| Last step | none |
 | Unconfirmed transports used | Skycutter from Zephras Isle to Mulgore (boat; not confirmed: boarding, arrival, kind) |
 | Hand-ins left behind | none |
 | Quests above the level allowed, far below the player's level | 0, 23 of 1444 quest steps |
