@@ -27,7 +27,9 @@
 --   * Accept: quests of accept lines on the cards and on Progress.Lookahead(), not manual, not in the section's
 --     noAuto. Hand-in: quests of turnin lines on the cards, not manual, not in noAuto; a turnin line once on a card
 --     keeps its quest eligible for the session. A quest is matched by ID; by title only where the client gives only
---     titles, and only when the title belongs to exactly one entry and one quest.
+--     titles, and only when the title belongs to exactly one entry and one quest that it can be: for a quest the
+--     NPC takes back one in the quest log (and no other quest in the log has the title), for a quest on offer one
+--     that is neither in the log nor handed in. Parts of a chain share titles: a part handed in is never matched.
 --   * Dialogue list: a complete quest the guide hands in, then a quest it accepts, then an unfinished guide quest
 --     whose only objective is an objective line naming this NPC. Without any, the dialogue line for a fly line (once
 --     per step), a getflight line (at most every GETFLIGHT_SECONDS), a sethearth line or a train line on a card,
@@ -251,36 +253,52 @@ local function titleOf(quest)
   return nil
 end
 
--- The quest of `set` with this title, when exactly one has it.
-local function byTitle(set, title)
+-- The quest of `set` with this title, when exactly one has it. `kind` says where the title was read, and with it
+-- which quests it can be at all (parts of a chain often share one title):
+--   "active"     a quest the NPC takes back: only one in the quest log, and none when the log holds another quest
+--                of that title that is not in `set` (the title may be that one's)
+--   "available"  a quest on offer: never one in the quest log or handed in before
+local function byTitle(set, title, kind)
   if type(title) ~= "string" or title == "" then return nil end
   local found, count = nil, 0
   for quest in pairs(set) do
-    if titleOf(quest) == title then
+    local can = true
+    if kind == "active" then
+      can = State.Quest(quest) ~= nil
+    elseif kind == "available" then
+      can = State.Quest(quest) == nil and not State.IsDone(quest)
+    end
+    if can and titleOf(quest) == title then
       found, count = quest, count + 1
     end
   end
-  if count == 1 then return found end
-  return nil
+  if count ~= 1 then return nil end
+  if kind == "active" then
+    for quest, q in pairs(State.quests) do
+      if not set[quest] and q.title == title and State.Quest(quest) then return nil end
+    end
+  end
+  return found
 end
 
--- The quest of `set` an entry of a list ({ id, title }) is, or nil. A title only counts when no other entry of the
--- list carries it.
-local function entryQuest(entries, entry, set)
+-- The quest of `set` an entry of a list ({ id, title }) of that kind ("active" or "available") is, or nil. A title
+-- only counts when no other entry of the list carries it.
+local function entryQuest(entries, entry, set, kind)
   if type(entry.id) == "number" and entry.id > 0 then return set[entry.id] and entry.id or nil end
   local same = 0
   for i = 1, #entries do
     if entries[i].title == entry.title then same = same + 1 end
   end
   if same ~= 1 then return nil end
-  return byTitle(set, entry.title)
+  return byTitle(set, entry.title, kind)
 end
 
--- The quest of the quest page that is open, among `set` (by ID when the client gives one, else by title).
-local function dialogQuest(set)
+-- The quest of the quest page that is open, among `set` (by ID when the client gives one, else by title; `kind` as
+-- for byTitle: "available" for the page that offers a quest, "active" for the pages that take one back).
+local function dialogQuest(set, kind)
   local id = GetQuestID and GetQuestID()
   if type(id) == "number" and id > 0 then return id end
-  return byTitle(set, GetTitleText and GetTitleText())
+  return byTitle(set, GetTitleText and GetTitleText(), kind)
 end
 
 local function readyInLog(quest)
@@ -419,7 +437,7 @@ local function pickQuest(quests)
   local accepts, turnins, objectives = wanted()
   local active = quests("active")
   for i = 1, #active do
-    local quest = entryQuest(active, active[i], turnins)
+    local quest = entryQuest(active, active[i], turnins, "active")
     if quest then
       local ready = active[i].complete
       if ready == nil then ready = readyInLog(quest) end
@@ -431,7 +449,7 @@ local function pickQuest(quests)
   end
   local available = quests("available")
   for i = 1, #available do
-    if entryQuest(available, available[i], accepts) then
+    if entryQuest(available, available[i], accepts, "available") then
       available[i].pick()
       return true
     end
@@ -444,7 +462,7 @@ local function pickQuest(quests)
     if here and line.npc == here and q and #q.objectives == 1 and line.index == 1 then talkTo[line.quest] = line end
   end
   for i = 1, #active do
-    local quest = entryQuest(active, active[i], talkTo)
+    local quest = entryQuest(active, active[i], talkTo, "active")
     if quest and not readyInLog(quest) then
       active[i].pick()
       return true
@@ -629,7 +647,7 @@ local function onDetail()
   hideMarker()
   if t.ctrl or not Automation.Enabled("autoQuests") then return end
   local accepts = wanted()
-  local quest = dialogQuest(accepts)
+  local quest = dialogQuest(accepts, "available")
   if quest and accepts[quest] then
     if AcceptQuest then AcceptQuest() end
     -- The page closes by itself on most clients; where it stays open on the quest, it is closed.
@@ -644,7 +662,7 @@ local function onProgress()
   local t = begin()
   if t.ctrl or not Automation.Enabled("autoQuests") then return end
   local _, turnins = wanted()
-  local quest = dialogQuest(turnins)
+  local quest = dialogQuest(turnins, "active")
   if quest and turnins[quest] and CompleteQuest and IsQuestCompletable and IsQuestCompletable() then CompleteQuest() end
 end
 
@@ -652,7 +670,7 @@ local function onReward()
   local t = begin()
   hideMarker()
   local _, turnins = wanted()
-  local quest = dialogQuest(turnins)
+  local quest = dialogQuest(turnins, "active")
   local count = GetNumQuestChoices and GetNumQuestChoices() or 0
   local line = quest and turnins[quest]
   local auto = line and not t.ctrl and Automation.Enabled("autoQuests") and GetQuestReward
@@ -679,7 +697,7 @@ end
 local function onShare(_, _, title)
   if not Automation.Enabled("autoQuests") then return end
   local accepts = wanted()
-  if byTitle(accepts, title) and ConfirmAcceptQuest then
+  if byTitle(accepts, title, "available") and ConfirmAcceptQuest then
     ConfirmAcceptQuest()
     if StaticPopup_Hide then StaticPopup_Hide("QUEST_ACCEPT") end
   end
