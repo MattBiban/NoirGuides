@@ -182,11 +182,14 @@ test("the level at each step counts quest, objective and walking XP", () => {
   assert.deepStrictEqual(quiet.errors, []);
   assert.deepStrictEqual(wild.errors, []);
   const total = (r) => { let sum = r.xp; for (let level = 1; level < r.endLevel; level++) sum += [0, 400, 900, 1400][level]; return sum; };
-  assert.strictEqual(total(quiet), PACE.OBJECTIVE_KILLS * mobXp(1, 1) + 110);
-  // 600 yards out at level 1, 600 back at level 2 (the kills gave it): creatures of level 1 both times
+  // every gain is the planner's share of the estimate (PACE.YIELD)
+  const counted = (xp) => Math.round(xp * PACE.YIELD);
+  assert.strictEqual(total(quiet), counted(PACE.OBJECTIVE_KILLS * mobXp(1, 1)) + counted(110));
+  // 600 yards out and 600 back at level 1 (the quest's XP gives level 2): creatures of level 1 both times
   const band = { min: 1, max: 1, wild: true };
-  assert.strictEqual(total(wild), walkXp(600, band, 1) + PACE.OBJECTIVE_KILLS * mobXp(1, 1) + walkXp(600, band, 2) + 110);
-  assert.deepStrictEqual(wild.levels, [1, 1, 2]);
+  assert.strictEqual(total(wild), counted(walkXp(600, band, 1)) + counted(PACE.OBJECTIVE_KILLS * mobXp(1, 1)) + counted(walkXp(600, band, 1)) + counted(110));
+  assert.deepStrictEqual(wild.levels, [1, 1, 1]);
+  assert.strictEqual(wild.endLevel, 2);
 });
 test("replays when a quest is offered: its top level, a quest in the log that hides it, one that ends it, one that opens it, and exclusive quests", () => {
   const town = M(100, 30, 50);

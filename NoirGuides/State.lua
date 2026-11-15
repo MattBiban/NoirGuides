@@ -29,6 +29,7 @@
 --   State.taxiPick = { from, to, time }   the flight last picked on the flight map (nodes nil when not known)
 --   State.controlLost, State.flightStart  when control was last lost, and when that happened on a flight
 --   State.discoveredAt                when the "new flight path" message last arrived
+--   State.discoveredNode              the node that message was about, nil when it could not be told
 --   State.boundAt                     when the hearthstone was last bound
 --   State.levelAt[level]              when this session saw the character reach that level
 --   State.money                       the copper the character carries (GetMoney, kept up by PLAYER_MONEY)
@@ -432,6 +433,7 @@ local function flightDiscovered()
     end
   end
   State.discoveredAt = now()
+  State.discoveredNode = best
   if best then State.LearnFlight(best, "discovered") end
   Noir.Fire("NOIR_FLIGHT_DISCOVERED", best)
 end

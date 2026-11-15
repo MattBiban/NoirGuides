@@ -232,6 +232,114 @@ test("a gated step with an objective area of its own grinds there; with no area 
   ok(Noir)
 end)
 
+test("a hand-in whose objectives are on a deferred step is deferred with it", function()
+  -- Found by the simulator at a slow pace: an objective step shared by two quests waits for the level of the one
+  -- still to accept; the hand-in of the other quest came up with its objectives undone, and nothing on screen to do
+  -- them with.
+  local list = {
+    { id = "a9002", minLevel = 4, at = P(50, 50, 10), lines = { { kind = "accept", quest = 9002, npc = 1518 } } },
+    { id = "o1.o2", at = P(52, 50, 40), lines = { { kind = "objective", quest = 9001, index = 1, skipIfMissing = true },
+      { kind = "objective", quest = 9002, index = 1 } } },
+    { id = "t9001", at = P(50, 50, 10), lines = { { kind = "turnin", quest = 9001, npc = 1518, skipIfMissing = true } } },
+    { id = "o3", at = P(54, 50, 40), lines = { { kind = "objective", quest = 9003, index = 1 } } },
+  }
+  local c, _, P_ = play(list, "a9002", { log = { 9001, 9003 } })
+  eq(place(P_), "o3", "past the accept under its level, the objectives that need it and the hand-in that needs those")
+  eq(deferredIds(P_), { "a9002@4 gated", "o1.o2@4 gated", "t9001@4 gated" })
+  eq(kinds(P_), { "current o3" })
+  c:setLevel(4)
+  c:advance(0.5)
+  eq(kinds(P_), { "deferred a9002", "deferred o1.o2", "deferred t9001", "current o3" })
+end)
+
+test("a deferred accept that has come back holds the steps of its quest: they wait, they are not passed", function()
+  -- Found by the simulator at a slow pace: the accept came back at its level while the place stood on the flight
+  -- to the quest's objectives. With the quest not yet in the log the objectives counted as passed (skipIfMissing),
+  -- the flight as moot, and the hand-in came up with nothing done.
+  local list = {
+    { id = "a9002", minLevel = 4, at = P(50, 50, 10), lines = { { kind = "accept", quest = 9002, npc = 1518 } } },
+    { id = "o1", at = P(52, 50, 40), lines = { { kind = "objective", quest = 9001, index = 1 } } },
+    { id = "fly10", at = P(58.9, 51.9, 10), lines = { { kind = "fly", from = 384, to = 10 } } },
+    { id = "o2", at = { zone = 130, x = 50, y = 40, r = 40 }, lines = { { kind = "objective", quest = 9002, index = 1, skipIfMissing = true } } },
+    { id = "t9002", at = P(50, 50, 10), lines = { { kind = "turnin", quest = 9002, npc = 1518, skipIfMissing = true } } },
+  }
+  local c, Noir, P_ = play(list, "a9002", { log = { 9001 } })
+  eq(place(P_), "o1")
+  c:completeObjectives(9001)
+  c:advance(0.5)
+  eq(place(P_), "fly10")
+  eq(lastCard(P_).gated, true, "a flight is no work ahead: the grind card")
+  c:setLevel(4)
+  c:advance(1)
+  eq(kinds(P_), { "deferred a9002", "current fly10" }, "the flight still leads to the quest's objectives")
+  eq(Noir.Why.ForStep(TIRISFAL, "fly10"), nil)
+  eq(Noir.Why.ForStep(TIRISFAL, "o2"), nil)
+  c:acceptQuest(9002, Q(9002))
+  c:advance(1)
+  eq(kinds(P_), { "current fly10" })
+  -- The same with the place on the objective step itself: its line waits for the quest.
+  local direct = {
+    { id = "a9002", minLevel = 4, at = P(50, 50, 10), lines = { { kind = "accept", quest = 9002, npc = 1518 } } },
+    { id = "o1", at = P(52, 50, 40), lines = { { kind = "objective", quest = 9001, index = 1 } } },
+    { id = "o2", at = P(54, 50, 40), lines = { { kind = "objective", quest = 9002, index = 1, skipIfMissing = true } } },
+    { id = "far", at = P(80, 80, 10), lines = { { kind = "accept", quest = 9003, npc = 1519 } } },
+  }
+  local d, Noir2, P2 = play(direct, "a9002", { log = { 9001 } })
+  d:completeObjectives(9001)
+  d:advance(0.5)
+  d:setLevel(4)
+  d:advance(1)
+  eq(kinds(P2), { "deferred a9002", "current o2" })
+  eq(lastCard(P2).lines[1].state, "missing", "the objective waits for the quest the deferred card accepts")
+  eq(Noir2.Why.ForStep(TIRISFAL, "o2"), nil)
+  d:acceptQuest(9002, Q(9002))
+  d:advance(1)
+  eq(kinds(P2), { "current o2" })
+  eq(lastCard(P2).lines[1].state, "todo")
+end)
+
+test("the grind line says where to grind and how much XP is left, and follows the XP bar", function()
+  local list = {
+    { id = "o1", at = P(40, 50, 40), lines = { { kind = "objective", quest = 9001, index = 1 } } },
+    { id = "train4", minLevel = 4, at = P(50, 50, 10), lines = { { kind = "train", class = "MAGE", level = 4, npc = 2124 } } },
+    { id = "fly10", at = P(58.9, 51.9, 10), lines = { { kind = "fly", from = 384, to = 10 } } },
+  }
+  local c, Noir, P_ = play(list, "train4")
+  local function shown()
+    local cards = Noir.Window.Read().cards
+    return { lastCard(P_).lines[1].text, cards[#cards].lines[1].text }
+  end
+  eq(shown(), { "Grind to level 4 in Tirisfal Glades: 1,200 XP to go", "Grind to level 4 in Tirisfal Glades: 1,200 XP to go" },
+    "the zone of the field to grind in (never the trainer's), and all of level 3 to earn")
+  c:gainXP(350)
+  c:advance(0.5)
+  eq(shown(), { "Grind to level 4 in Tirisfal Glades: 850 XP to go", "Grind to level 4 in Tirisfal Glades: 850 XP to go" })
+  -- Two levels under the step: the client knows the XP of the current level only, so the level in between is named.
+  local low, _, P2 = play(list, "train4", { level = 2 })
+  eq(lastCard(P2).lines[1].text, "Grind to level 4 in Tirisfal Glades: 800 XP to level 3")
+  low:gainXP(800)
+  low:advance(0.5)
+  eq(lastCard(P2).lines[1].text, "Grind to level 4 in Tirisfal Glades: 1,200 XP to go")
+  -- No area to grind in: the line still counts down.
+  local bare = {
+    { id = "train4", minLevel = 4, at = P(50, 50, 10), lines = { { kind = "train", class = "MAGE", level = 4, npc = 2124 } } },
+    { id = "fly10", at = P(58.9, 51.9, 10), lines = { { kind = "fly", from = 384, to = 10 } } },
+  }
+  local _, _, P3 = play(bare, "train4")
+  eq(lastCard(P3).lines[1].text, "Grind to level 4: 1,200 XP to go")
+  -- A trainer in the city has no field in its own zone: the last field on the continent, in the zone the player came
+  -- from.
+  local city = {
+    { id = "o1", at = P(40, 50, 40), lines = { { kind = "objective", quest = 9001, index = 1 } } },
+    { id = "train4", minLevel = 4, at = { zone = 1497, x = 85, y = 10, r = 10 }, lines = { { kind = "train", class = "MAGE", level = 4, npc = 2124 } } },
+    { id = "fly10", at = { zone = 1497, x = 63.3, y = 48.5, r = 10 }, lines = { { kind = "fly", from = 11, to = 10 } } },
+  }
+  local _, Noir4, P4 = play(city, "train4")
+  eq(lastCard(P4).lines[1].line.at, { zone = 85, x = 40, y = 50 })
+  eq(lastCard(P4).lines[1].text, "Grind to level 4 in Tirisfal Glades: 1,200 XP to go")
+  eq(Noir4.Arrow.Target().grind, true)
+end)
+
 test("deferral never crosses the end of the section: the place holds there with a grind card", function()
   local list = {
     { id = "o1", at = P(40, 50, 40), lines = { { kind = "objective", quest = 9001, index = 1 } } },

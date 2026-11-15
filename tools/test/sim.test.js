@@ -6,7 +6,7 @@ const test = require("node:test");
 const assert = require("node:assert");
 const { testWorld, at } = require("./world");
 const { createVm } = require("../harness/vm");
-const { mobXp, questXp, walkXp, objectiveXp, XP_TO_LEVEL } = require("../lib/xp");
+const { PACE, gain, mobXp, questXp, walkXp, objectiveXp, XP_TO_LEVEL } = require("../lib/xp");
 const { emitRoute3 } = require("../planner/emit3");
 const { buildFacts, flattenFor, parseRoute, toLua, simulate, summarize, passed, joinerList } = require("../sim_all");
 
@@ -221,7 +221,13 @@ test("a whole character played by the real addon in the simulated world", () => 
   assert.ok(f.route, "the route is carried for registering");
   const r = simulate(f, { register: true });
   assert.deepStrictEqual([r.finished, r.stuck, r.cannot, r.unexplained, r.errors, r.slash, r.offScreen], [true, [], [], [], [], 0, []]);
-  assert.strictEqual(r.level, 2);
+  // The simulated world gives what the planner counts on (lib/xp.js gain, PACE.YIELD of the estimate): the eight
+  // kills of the objective, then the quest.
+  const planned = { level: 1, xp: 0 };
+  gain(planned, PACE.OBJECTIVE_KILLS * mobXp(1, 1));
+  gain(planned, questXp(1, planned.level));
+  assert.deepStrictEqual([r.level, r.xp], [planned.level, planned.xp]);
+  assert.strictEqual(f.pace.YIELD, PACE.YIELD);
   assert.strictEqual(passed(r), false, "a run that ends below level 60 fails");
   assert.strictEqual(passed({ ...r, level: 60 }), true);
   assert.strictEqual(passed({ ...r, level: 60, slash: 1 }), false, "a slash command fails the run");

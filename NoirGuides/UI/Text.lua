@@ -16,6 +16,7 @@
 --   Text.Distance(yards) -> "120 yd"
 --   Text.Money(copper) -> "1g 2s 3c": gold, silver and copper, the parts that are 0 left out ("1s 20c", "85c", "2g");
 --       "0c" for nothing
+--   Text.Number(n) -> "2,300": a whole number with its thousands apart
 --   Text.RANKS                     the names of the profession ranks 1 to 4
 local Noir = Noir
 local State = Noir.State
@@ -104,6 +105,17 @@ function Text.Money(copper)
   if silver > 0 then parts[#parts + 1] = silver .. "s" end
   if rest > 0 or #parts == 0 then parts[#parts + 1] = rest .. "c" end
   return table.concat(parts, " ")
+end
+
+function Text.Number(n)
+  local digits = string.format("%d", math.floor((tonumber(n) or 0) + 0.5))
+  local sign, rest = string.match(digits, "^(-?)(%d+)$")
+  local out = ""
+  while string.len(rest) > 3 do
+    out = "," .. string.sub(rest, -3) .. out
+    rest = string.sub(rest, 1, -4)
+  end
+  return sign .. rest .. out
 end
 
 function Text.StepTitle(step)
@@ -225,6 +237,10 @@ words.hearth = function(line)
   return builder().add("Hearth to " .. Text.ZoneName(line.to.zone)).done("hearth")
 end
 
+-- "Grind to level 14 in Westfall: 2,300 XP to go"; two or more levels under it, "... : 2,300 XP to level 13" (the
+-- client tells the XP of the current level only). The zone is that of the line's own place: the grind line of a step
+-- that waits for its level carries the area to grind in (Progress.lua), never the waiting step's place; a grind step
+-- of the route has its place on the step and says where in the step's text.
 words.grind = function(line)
   local b = builder()
   if line.percent and line.percent > 0 then
@@ -232,8 +248,14 @@ words.grind = function(line)
   else
     b.add("Grind to level " .. line.level)
   end
-  local have, need = Noir.Lines.GrindCounter(line)
-  if have then b.add(" " .. have .. "/" .. need) end
+  local place = line.at
+  if type(place) == "table" and place.zone then b.add(" in " .. Text.ZoneName(place.zone)) end
+  local left, first = Noir.Lines.GrindLeft(line)
+  if left and first then
+    b.add(": " .. Text.Number(left) .. " XP to level " .. first)
+  elseif left then
+    b.add(": " .. Text.Number(left) .. " XP to go")
+  end
   return b.done("xp")
 end
 

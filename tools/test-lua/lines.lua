@@ -306,6 +306,14 @@ test("getflight completes on a known node or the discovery message", function()
   eq(f.G.Noir.State.KnowsFlight(10), false, "the node could not be told")
   eq((check(FLines, fp, since)), "done", "the discovery message arrived during the step")
   eq((check(FLines, fp, f.now + 1)), "todo", "a message before the step does not count")
+  -- Found by the simulator: two flight point steps in a row. The message that told the first one says nothing of
+  -- the second, though that step comes on screen in the same moment.
+  local two, _, TLines = play({ zone = 85, x = 58, y = 51 })
+  local first, second = stepOf({ { kind = "getflight", node = 384 } }), stepOf({ { kind = "getflight", node = 10 } })
+  two:discoverFlight(384)
+  eq((check(TLines, first, two.now)), "done")
+  eq(two.G.Noir.State.discoveredNode, 384)
+  eq((check(TLines, second, two.now)), "todo", "the message was about Brill, not about the Sepulcher")
   -- Known before the addon saw it: the flight map tells.
   local k, _, KLines = play({ zone = 85, x = 58.9, y = 51.9 })
   k:knowFlight(10)
