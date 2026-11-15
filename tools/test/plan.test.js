@@ -16,6 +16,9 @@ const { leftBehind, MAX_LEFT_BEHIND } = require("../planner/leftbehind");
 const { levelGap, MAX_ABOVE, MAX_BELOW_SHARE } = require("../planner/levelgap");
 const { dangerousWalks, MAX_DANGEROUS_WALKS } = require("../planner/danger");
 const { MAX_ZONE_SHARE, MAX_TRAVEL_SHARE, MAX_GRIND_STEPS } = require("../planner/report");
+const { grindSpotAt } = require("../planner/grindspots");
+const { zoneLevels } = require("../lib/xp");
+const { CHOICES: C } = require("../planner/tuning");
 
 const human = () => { RACES.Human.startArea = 1000; return character("Human", "WARRIOR"); };
 const index = (route) => (action, quest) => route.steps.findIndex((s) => s.action === action && s.quest === quest);
@@ -321,6 +324,37 @@ test("pacing: a grind step bridges one level to the next quests, and the route s
   assert.strictEqual(route.stats.endLevel, 2, "quest 3 is seven levels on: no second grind step");
   assert.strictEqual(checked.endLevel, route.stats.endLevel);
 });
+test("a level is ground where creatures of the level stand, and the way there is part of the route", () => {
+  const world = () => {
+    const w = testWorld();
+    w.npc(10, 100, 30, 50); w.npc(20, 100, 40, 50, "");
+    w.kill(1, 10, 20, 100);                                      // short of level 2, as above
+    w.kill(2, 10, 20, 100, { requiredLevel: 2, questLevel: 2 });
+    return w;
+  };
+  // wolves of level 1 in Westland's south, and enough creatures there that Westland is open country
+  const near = world();
+  near.pack(50, 100, 30, 62, 1, 320); near.pack(51, 100, 80, 20, 1, 20); near.pack(52, 100, 32, 50, 4, 20);
+  const a = run(near, null, { maxLevel: 3 });
+  assert.deepStrictEqual(a.checked.errors, []);
+  assert.deepStrictEqual(a.route.steps.find((s) => s.action === "grind"), { action: "grind", level: 2, at: { zone: 100, x: 30, y: 62 } },
+    "the nearest wolves of the level: not the far ones, not the level 4 ones next to the giver");
+  assert.ok(a.at("accept", 2) > a.names.indexOf("grind"));
+  // none in Westland: the wolves are over the border in Eastland, and the walk there is a step of the route
+  const far = world();
+  far.npc(30, 200, 50, 50); far.kill(9, 30, 30, 200, { requiredLevel: 9, questLevel: 9 }); // Eastland has quests, none for now
+  far.pack(50, 200, 20, 50, 1, 320);
+  const b = run(far, null, { maxLevel: 3 });
+  assert.deepStrictEqual(b.checked.errors, []);
+  const ground = b.names.indexOf("grind");
+  assert.deepStrictEqual(b.route.steps[ground], { action: "grind", level: 2, at: { zone: 200, x: 20, y: 50 } });
+  const way = b.route.steps.slice(b.at("turnin", 1) + 1, ground);
+  assert.ok(way[0].action === "travel" && way[0].at.zone === 200, "into Eastland, as a step");
+  assert.ok(way.every((s) => s.action === "travel" || s.action === "getflight"), "nothing but the way (and a flight point beside it)");
+  assert.ok(b.at("turnin", 1) < ground && b.at("accept", 2) > ground, "and back for the quest the level opens");
+  assert.strictEqual(b.checked.endLevel, b.route.stats.endLevel);
+  assert.ok(Math.abs(b.checked.seconds - b.route.stats.seconds) <= 1, "the validator walks the same way in the same time");
+});
 test("a small visit is not worth a change of zone: it waits while the rest of the level is ground", () => {
   const { XP_TO_LEVEL, PACE, questXp } = require("../lib/xp");
   const { CHOICES } = require("../planner/tuning");
@@ -491,6 +525,18 @@ for (const race of Object.keys(RACES)) {
     assert.ok(grinds.length <= MAX_GRIND_STEPS, `${grinds.length} grind steps`);
     for (const i of grinds) assert.strictEqual(route.steps[i].level, checked.levels[i] + 1, `the grind step at ${i} ends the level it starts in`);
     for (const i of grinds) assert.notStrictEqual(route.steps[i + 1] && route.steps[i + 1].action, "grind");
+    // ... and each at a real place to grind (planner/grindspots.js): in open country, never a city, with at least
+    // GRIND_MIN_SPAWNS spawns of creatures of the level around it, none elite, none above the level by more than one
+    const bands = zoneLevels(db);
+    for (const i of grinds) {
+      const step = route.steps[i], level = step.level - 1;
+      const where = `the grind step to ${step.level} in ${db.areas.get(step.at.zone).name} (${step.at.x}, ${step.at.y})`;
+      assert.ok((bands.get(step.at.zone) || {}).wild, `${where} is not in open country`);
+      const spot = grindSpotAt(db, step.at, level);
+      assert.ok(spot.count >= C.GRIND_MIN_SPAWNS, `${where} has ${spot.count} spawns of the level around it`);
+      assert.ok(spot.min >= level - C.GRIND_BELOW && spot.max <= level + C.GRIND_ABOVE, `${where}: creatures of level ${spot.min} to ${spot.max} for a player of ${level}`);
+      for (const id of spot.npcs) { const npc = db.npcs.get(id); assert.ok(npc.name && !npc.friendly && !npc.rank, `${where}: ${npc.name}`); }
+    }
     // travel is format 2: every flight is learned first
     const learned = new Set();
     for (const s of route.steps) {

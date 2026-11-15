@@ -176,5 +176,5 @@ function sourceItems(q) {
 }
 // The quests that must be handed in first: all of `all`, any one of `any` (QuestieDB preQuestGroup, preQuestSingle).
 const prerequisites = (q) => ({ all: q.preAll.slice(), any: q.preAny.slice() });
-module.exports = { INSTANCE_AREAS, OPEN_WORLD, instanced, instanceBound, levelingQuests, startPoint, endPoint, objectivePoint, canAccept,
+module.exports = { INSTANCE_AREAS, OPEN_WORLD, ZEPHRAS_ISLE, instanced, instanceBound, levelingQuests, startPoint, endPoint, objectivePoint, canAccept,
   objectiveList, starterItems, sourceItems, prerequisites };

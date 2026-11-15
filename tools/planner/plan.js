@@ -4,7 +4,8 @@
 //   hub batching      at a hub everything is handed in and taken; the objectives are one loop; the hub is returned
 //                     to once, when all its quests are ready (planner/session.js orders the loop)
 //   cost-based        every way is costed in seconds by lib/travel.js travelPlan, and its legs become the steps
-//   pacing            XP and time come from lib/xp.js; a grind step bridges one level, never two in a row
+//   pacing            XP and time come from lib/xp.js; a grind step bridges one level, never two in a row, at a
+//                     place where creatures of the level stand (planner/grindspots.js)
 // The route's state changes in one place, emit(), from nothing but the step it is given: that is the rule the
 // validator replays on its own, so the two agree on position, level and clock at every step.
 const { zoneOf, toPoint, distance } = require("../lib/geo");
@@ -14,8 +15,9 @@ const { CHOICES: C } = require("./tuning");
 const { emptyGraph, plannerGraph, buildContext } = require("./context");
 const { makePolicy } = require("./policy");
 const { nextTask } = require("./session");
-const { bestZone, urgentZone } = require("./zonepick");
+const { bestZone, urgentZone, entryOf } = require("./zonepick");
 const { supplyZone } = require("./supply");
+const { grindSpots } = require("./grindspots");
 
 function planRoute(db, ch, options = {}) {
   const maxLevel = options.maxLevel || 60;
@@ -261,6 +263,54 @@ function planRoute(db, ch, options = {}) {
     else if (t.point.zone !== st.zone) st.hopped.add(t.point.zone);
   }
 
+  // ---- where a level is ground --------------------------------------------------------------------------------
+  // Where the route goes once the level is ground: on in this zone when the next level opens something here, else
+  // the zone the look-ahead picks then. { zone, point } or null (the last level, or nothing to go on to).
+  function afterLevel() {
+    if (st.level + 1 >= maxLevel) return null;
+    const kept = { level: st.level, xp: st.xp, barren: st.barren };
+    st.level++; st.xp = 0; st.barren = new Set();
+    const here = tasks(st.zone).filter((t) => t.kind !== "getflight" && !st.skip.has(key(t)));
+    let out = null;
+    if (here.length) out = { zone: st.zone, point: here.sort((a, b) => distance(st.pos, a.point) - distance(st.pos, b.point) || (key(a) < key(b) ? -1 : 1))[0].point };
+    else {
+      const zone = bestZone(view, { cap: maxLevel, ground: true }).zone;
+      const point = zone ? entryOf(view, st, zone, st.pos) : null;
+      if (point) out = { zone, point };
+    }
+    st.level = kept.level; st.xp = kept.xp; st.barren = kept.barren;
+    return out;
+  }
+  // The place the rest of the level is ground at (planner/grindspots.js), or null when the data has none.
+  //   - the zone the player stands in comes first: of its places, the one that takes the route least out of its way,
+  //     from here to the place and on to where the route goes after the level;
+  //   - a city, or a zone whose creatures are not of the level, has none: then the same is asked of the nearest
+  //     GRIND_LOOK places and of those in the zone the route goes to next. A place in a zone the route does not go
+  //     to next is a change of zone of its own (GRIND_ZONE_SECONDS).
+  // Measured on the ten routes against grinding where the player stands: with the first rule a route changes zone
+  // between 15 times less and 4 times more often; without it (the least way round, wherever the place is) Undead
+  // changes zone 27 times more often, over the limit of planner/report.js.
+  function grindSpot() {
+    const spots = grindSpots(db, st.level);
+    if (!spots.length) return null;
+    const next = afterLevel();
+    const nearest = (list, from) => list.map((s) => ({ s, d: distance(from, s.point) })).filter((e) => e.d < Infinity)
+      .sort((a, b) => a.d - b.d || a.s.at.zone - b.s.at.zone || a.s.at.x - b.s.at.x || a.s.at.y - b.s.at.y).slice(0, C.GRIND_LOOK).map((e) => e.s);
+    const local = nearest(spots.filter((s) => s.at.zone === st.pos.zone), st.pos);
+    const weighed = new Set(local.length ? local : nearest(spots, st.pos));
+    if (!local.length && next) for (const s of nearest(spots.filter((x) => x.at.zone === next.zone), next.point)) weighed.add(s);
+    if (!weighed.size) for (const s of spots.slice(0, C.GRIND_LOOK)) weighed.add(s); // none on this continent: the densest
+    const direct = next ? secondsAt(st.pos, next.point, st.level + 1) : Infinity;
+    let best = null;
+    for (const s of weighed) {
+      let cost = secondsAt(st.pos, s.point, st.level);
+      if (direct < Infinity) cost += secondsAt(s.point, next.point, st.level + 1) - direct;
+      if (s.at.zone !== st.pos.zone && !(next && s.at.zone === next.zone)) cost += C.GRIND_ZONE_SECONDS;
+      if (cost < Infinity && (!best || cost < best.cost || (cost === best.cost && s.count > best.s.count))) best = { s, cost };
+    }
+    return best && best.s;
+  }
+
   // ---- the route ----------------------------------------------------------------------------------------------
   // starting position: the giver of the lowest-level, lowest-ID quest in the starting zone
   const first = (byZone.get(st.zone) || []).slice().sort((a, b) => a.q.minLevel - b.q.minLevel || a.q.id - b.q.id)[0];
@@ -312,8 +362,17 @@ function planRoute(db, ch, options = {}) {
         continue;
       }
     }
+    // The rest of the level is ground where creatures of the level stand. The way there is part of the route: its
+    // legs are steps (a walk into the next zone too), the last walk is the grind step's own. Without such a place
+    // (a world without creature levels) the level is ground where the player stands.
+    const level = st.level, announce = st.announce;
+    const spot = grindSpot();
+    st.announce = true;
+    const there = !!spot && go(spot.point);
+    st.announce = announce;
+    if (st.level > level) continue; // the fights on the way there made the level
     st.grinds++;
-    emit({ action: "grind", level: st.level + 1, at: { zone: st.pos.zone, x: Math.round(st.pos.x * 100) / 100, y: Math.round(st.pos.y * 100) / 100 } });
+    emit({ action: "grind", level: st.level + 1, at: there ? spot.at : { zone: st.pos.zone, x: Math.round(st.pos.x * 100) / 100, y: Math.round(st.pos.y * 100) / 100 } });
     st.barren.clear();
     st.chosen = false;
   }
