@@ -43,7 +43,19 @@ function place(db, npcs, objects, faction) {
   }
   return null;
 }
-const startPoint = (db, q, faction) => place(db, q.starts.npcs, q.starts.objects, faction || null);
+// A quest started by an item: where the item is found (the creature or object that drops it, where most of them are).
+function itemStart(db, q) {
+  for (const id of q.starts.items) {
+    const item = db.items.get(id);
+    if (!item) continue;
+    let best = null;
+    for (const n of item.npcDrops || []) for (const p of places(db, "npc", n)) if (!instanced(db, p.point.zone) && (!best || p.count > best.count)) best = { ...p, npc: n };
+    for (const o of item.objectDrops || []) for (const p of places(db, "object", o)) if (!instanced(db, p.point.zone) && (!best || p.count > best.count)) best = { ...p, object: o };
+    if (best) { const { count, ...where } = best; return { ...where, item: id }; }
+  }
+  return null;
+}
+const startPoint = (db, q, faction) => place(db, q.starts.npcs, q.starts.objects, faction || null) || itemStart(db, q);
 const endPoint = (db, q, faction) => place(db, q.ends.npcs, q.ends.objects, faction || null);
 
 // ESTIMATES for choosing where an objective is done; they only rank places, nothing in a route shows them.
@@ -129,8 +141,6 @@ function levelingQuests(db, ch) {
   for (const q of db.quests.values()) {
     if (!eligible(q, ch) || q.repeatable || q.gated || q.classes) continue;
     if (q.sort < 0 || !q.zone || instanced(db, q.zone) || instanceBound(db, q)) continue;
-    if (!db.eraQuestIds.has(q.id) && zoneOf(db, q.zone) !== ZEPHRAS_ISLE) continue;
-    if (q.starts.items.length && !q.starts.npcs.length && !q.starts.objects.length) continue; // started by a drop
     if (!startPoint(db, q, ch.faction) || !endPoint(db, q, ch.faction) || unplaceable(db, q)) continue;
     out.push(q);
   }

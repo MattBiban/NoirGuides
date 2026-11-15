@@ -39,6 +39,7 @@ function validateRoute(db, route, ch, options = {}) {
     flights: new Set(), hearth: null, lastHearth: -Infinity, clock: 0, lastGrind: false };
   const speed = () => (state.level >= ESTIMATES.MOUNT_LEVEL ? ESTIMATES.MOUNT_SPEED : ESTIMATES.RUN_SPEED);
   const levels = [];
+  const xps = []; // the XP into the level at each step
   const clocks = [];
 
   if (route.format !== 2) errors.push(`the route is in format ${route.format === undefined ? 1 : route.format}; this validator reads format 2`);
@@ -67,6 +68,7 @@ function validateRoute(db, route, ch, options = {}) {
   route.steps.forEach((step, i) => {
     const err = (msg) => errors.push(`step ${i + 1}: ${msg}`);
     levels.push(state.level);
+    xps.push(state.xp);
     clocks.push(state.clock);
     const what = QUEST_ACTIONS.has(step.action) ? `${step.action} of quest ${step.quest}` : String(step.action);
 
@@ -250,7 +252,7 @@ function validateRoute(db, route, ch, options = {}) {
     errors.push(`the route ends with ${ids.length} quest${ids.length === 1 ? "" : "s"} in the log: ${ids.join(", ")}`);
   }
   if (state.level < MAX_LEVEL) warnings.push(`route ends at level ${state.level}`);
-  return { errors, warnings, endLevel: state.level, xp: state.xp, levels, clocks, seconds: state.clock };
+  return { errors, warnings, endLevel: state.level, xp: state.xp, levels, xps, clocks, seconds: state.clock };
 }
 
 module.exports = { validateRoute };

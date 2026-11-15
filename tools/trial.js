@@ -11,7 +11,7 @@ const raceArgs = process.argv.length > 2 ? process.argv.slice(2) : Object.keys(R
 const T = (p) => require(path.join(toolsDir, p));
 const { loadDb } = T("lib/db"); const { loadTravel } = T("lib/travel"); const { combos } = T("lib/characters");
 const { loadInns } = T("planner/context"); const { planRoute } = T("planner/plan"); const { validateRoute } = T("planner/validate");
-const { measureRoute } = T("planner/measure"); const { questXp, XP_TO_LEVEL } = T("lib/xp"); const { levelGap } = T("planner/levelgap"); const { dangerousWalks } = T("planner/danger");
+const { measureRoute } = T("planner/measure"); const { questXp, XP_TO_LEVEL, grindSeconds } = T("lib/xp"); const { levelGap } = T("planner/levelgap"); const { dangerousWalks } = T("planner/danger");
 const DATA = path.join(toolsDir, "data");
 const db = loadDb(DATA), graph = loadTravel(db, DATA), inns = loadInns(db, DATA), all = combos(DATA);
 const total = (lv) => XP_TO_LEVEL.slice(1, lv).reduce((a, b) => a + b, 0);
@@ -37,5 +37,5 @@ for (const race of raceArgs) {
     return `<${cap}: ${quests} quests (${Math.round(100 * qxp / total(cap))}% of XP), ${zc} zone changes, max log ${maxLog}, ${(obj / objRuns).toFixed(1)} obj/run, ${grinds} grinds`;
   };
   const g = levelGap(db, route, v.levels);
-  console.log(`${race}: end ${v.endLevel}, errors ${v.errors.length}, steps ${route.steps.length}, zone changes ${m.zoneChanges}, travel ${(m.seconds / 3600).toFixed(1)} h, grinds ${route.steps.filter((s) => s.action === "grind").length}, above ${g.above.length}, below ${g.below.length}/${g.steps}, dangerous walks ${dangerousWalks(db, graph, route, ch, v.levels).length} | ${at(22)} | ${at(40)} | ${at(61)} | ${Math.round((Date.now() - t0) / 1000)} s`);
+  console.log(`${race}: end ${v.endLevel}, errors ${v.errors.length}, steps ${route.steps.length}, zone changes ${m.zoneChanges}, travel ${(m.seconds / 3600).toFixed(1)} h, grinds ${route.steps.filter((s) => s.action === "grind").length} [${route.steps.map((s, k) => (s.action === "grind" ? `${v.levels[k]}:${Math.round(100 * (1 - v.xps[k] / XP_TO_LEVEL[v.levels[k]]))}%` : null)).filter(Boolean).join(" ")}] = ${route.steps.reduce((a, s, k) => a + (s.action === "grind" ? grindSeconds(v.levels[k], v.xps[k]) / 3600 : 0), 0).toFixed(1)} h, above ${g.above.length}, below ${g.below.length}/${g.steps}, dangerous walks ${dangerousWalks(db, graph, route, ch, v.levels).length} | ${at(22)} | ${at(40)} | ${at(61)} | ${Math.round((Date.now() - t0) / 1000)} s`);
 }

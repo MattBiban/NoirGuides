@@ -174,7 +174,16 @@ test("a joiner at the second sample section's level is placed there and plays on
 end)
 
 test("the world gives the planner's share of the estimated XP, and grind cards are counted with their places", function()
-  -- pace.YIELD (tools/lib/xp.js PACE.YIELD) scales every XP of the world, like --xp-scale: a prepared joiner needs
+  -- The share at a level (tools/lib/xp.js yieldAt): YIELD up to YIELD_FROM, YIELD_LATE from YIELD_TO, a straight
+  -- line between; the whole estimate for a world that names no share, and one share throughout for a world that
+  -- names no late one. tools/test/sim.test.js holds it against the planner's own numbers.
+  local pace = { YIELD = 0.6, YIELD_LATE = 0.68, YIELD_FROM = 30, YIELD_TO = 50 }
+  eq({ Sim.yieldAt(pace, 1), Sim.yieldAt(pace, 30), Sim.yieldAt(pace, 50), Sim.yieldAt(pace, 60) }, { 0.6, 0.6, 0.68, 0.68 })
+  ok(math.abs(Sim.yieldAt(pace, 40) - 0.64) < 1e-12, "halfway between at level 40: " .. tostring(Sim.yieldAt(pace, 40)))
+  ok(Sim.yieldAt(pace, 31) > 0.6 and Sim.yieldAt(pace, 49) < 0.68, "rising from level 30 to level 50")
+  eq({ Sim.yieldAt({}, 1), Sim.yieldAt({}, 60) }, { 1, 1 }, "no share named: the whole estimate")
+  eq({ Sim.yieldAt({ YIELD = 0.6 }, 1), Sim.yieldAt({ YIELD = 0.6 }, 60) }, { 0.6, 0.6 }, "no late share named: one share at every level")
+  -- The share scales every XP of the world at the level it is earned at, like --xp-scale: a prepared joiner needs
   -- more of the route to reach a level at a lower yield.
   local function playedTo(level, yield, scale)
     local facts = sampleFacts("ROGUE")

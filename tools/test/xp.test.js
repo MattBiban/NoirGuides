@@ -2,7 +2,7 @@
 const test = require("node:test");
 const assert = require("node:assert");
 const { fixtureDb } = require("./fixture");
-const { PACE, XP_TO_LEVEL, mobXp, questXp, objectiveXp, objectiveSeconds, walkXp, zoneLevels } = require("../lib/xp");
+const { PACE, XP_TO_LEVEL, yieldAt, gain, grindSeconds, mobXp, questXp, objectiveXp, objectiveSeconds, walkXp, zoneLevels } = require("../lib/xp");
 
 test("a kill gives the original game's XP: full at the player's level, more above, less below, none when grey", () => {
   assert.strictEqual(mobXp(10, 10), 95);
@@ -47,6 +47,41 @@ test("zone levels come from the quests filed under the zone, and wild from its h
   assert.strictEqual(levels.get(1000).wild, true);
   assert.strictEqual(levels.get(2000).wild, false);
   assert.strictEqual(levels.has(999), false);
+});
+test("the share of the estimate that is counted on rises from YIELD at level 30 to YIELD_LATE at level 50", () => {
+  assert.deepStrictEqual([PACE.YIELD, PACE.YIELD_LATE, PACE.YIELD_FROM, PACE.YIELD_TO], [0.6, 0.68, 30, 50]);
+  assert.deepStrictEqual([1, 30, 50, 60].map(yieldAt), [0.6, 0.6, 0.68, 0.68]);
+  assert.ok(Math.abs(yieldAt(40) - 0.64) < 1e-12, "halfway between at level 40");
+  for (let level = 2; level <= 60; level++) assert.ok(yieldAt(level) >= yieldAt(level - 1), `never less at level ${level}`);
+  // gain counts every XP at the share of the level it is earned at
+  const low = { level: 10, xp: 0 }, high = { level: 55, xp: 0 }, between = { level: 35, xp: 0 };
+  gain(low, 1000); gain(high, 1000); gain(between, 1000);
+  assert.deepStrictEqual([low.xp, between.xp, high.xp], [600, 620, 680]);
+  // ... and a level gained on the way is counted from what was earned, not earned again at the new share
+  const up = { level: 1, xp: 390 };
+  gain(up, 100);
+  assert.deepStrictEqual(up, { level: 2, xp: 50 });
+});
+test("a grind step takes the fights of the rest of the level, each counted at the share of its XP every gain is", () => {
+  // level 10: 7,600 XP to the next, 95 a kill, 57 of them counted
+  assert.strictEqual(grindSeconds(10, 0), Math.ceil(7600 / 57) * PACE.KILL_SECONDS);
+  assert.strictEqual(grindSeconds(10, 0), 134 * 30);
+  assert.strictEqual(grindSeconds(10, 7600 - 57), PACE.KILL_SECONDS, "one fight short of the level");
+  assert.strictEqual(grindSeconds(10, 7600 - 58), 2 * PACE.KILL_SECONDS);
+  assert.strictEqual(grindSeconds(10, 7600), 0);
+  assert.strictEqual(grindSeconds(10, 9000), 0, "never less than nothing");
+  // from level 50 a fight counts for more of its XP, so the same share of a level is fewer fights than the low share would make it
+  assert.strictEqual(grindSeconds(59, 0), Math.ceil(XP_TO_LEVEL[59] / Math.round(mobXp(59, 59) * PACE.YIELD_LATE)) * PACE.KILL_SECONDS);
+  assert.ok(grindSeconds(59, 0) < Math.ceil(XP_TO_LEVEL[59] / Math.round(mobXp(59, 59) * PACE.YIELD)) * PACE.KILL_SECONDS);
+  // the fights of a grind step are the fights gain needs for the level: that many reach it, one less does not
+  for (const level of [1, 10, 35, 59]) {
+    const fights = grindSeconds(level, 0) / PACE.KILL_SECONDS;
+    const state = { level, xp: 0 };
+    for (let n = 1; n < fights; n++) gain(state, mobXp(level, level));
+    assert.strictEqual(state.level, level, `level ${level}: one fight short`);
+    gain(state, mobXp(level, level));
+    assert.strictEqual(state.level, level + 1, `level ${level}: ${fights} fights`);
+  }
 });
 test("the estimates are in one place and each is a positive number", () => {
   assert.ok(Object.isFrozen(PACE));

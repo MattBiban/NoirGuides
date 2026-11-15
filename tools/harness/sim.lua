@@ -4,7 +4,9 @@
 --
 -- The scripted player reads Progress.Cards() only and does every open active line of every card, in card order:
 --   accept / turnin   walk to the line's place (else the step's) and talk to its NPC or object; the automation does
---                     the rest
+--                     the rest. An accept line that names an item (a quest started by an item found in the world):
+--                     walk there, kill the creature or loot the object until the item is in the bags, click the
+--                     item button that holds it; the quest's page opens and the automation accepts
 --   objective         walk there and finish the quest's objectives (the fights give their XP)
 --   collect           loot the item
 --   goto              walk there
@@ -39,7 +41,8 @@
 -- Sim.play(facts, opts) -> { race, class, join, stuck, cannot, unexplained, errors, slash, offScreen,
 --                            placement = { expectedFrom, landed, from, to, inside, passedSteps, landedAt }, level,
 --                            finished, shown, passed, manual, ticked, wizardClosed, grindCards, grindNoPlace,
---                            gatedAims, gatedAimSteps }
+--                            gatedAims, gatedAimSteps, itemStarts }
+--   itemStarts: the quests the player started from an item found in the world (nil when none);
 --   grindCards: times a grind card (a gated current card) appeared, grindNoPlace: how many of them had no place to
 --   grind at (no arrow); gatedAims: rounds in which the arrow aimed at a
 --   step whose minLevel is above the character's level (not at a grind place), with the first such in gatedAimSteps;
@@ -154,6 +157,7 @@ end
 --   quests[id] = { title, level, minLevel, maxLevel, pre, preAny, exclusive, closed, kills, objects, items, credits,
 --                  event }
 --   npcs[id], objects[id] = { name, offers = { quest IDs }, ends = { quest IDs }, taxi = node, binder = "inn name" }
+--   items[id] = { name, quest }      the items that start a quest when used (left out when the route has none)
 --   taxi[node] = { name, continent = mapId, zone, x, y, npc }   where this faction's flight master stands
 --   flat = { { action, quest, npc, object, node, from, to, at, level, section, step } }   the flattened route
 --   route = { format = 3, race, faction, sections }   only for runs that register their own route (opts.register)
@@ -212,9 +216,13 @@ function Sim.world(facts)
   for id, g in pairs(Sim.GREY) do
     items[id], qualities[id], prices[id] = g.name, 0, g.price
   end
+  local itemQuests = {}
+  for id, i in pairs(facts.items or {}) do
+    items[id], itemQuests[id] = i.name, i.quest
+  end
   return {
     maps = maps, taxi = taxi, quests = quests, npcs = npcs,
-    items = items, qualities = qualities, prices = prices,
+    items = items, qualities = qualities, prices = prices, itemQuests = itemQuests,
     spells = { [HEARTH_SPELL] = "Hearthstone", [ASTRAL_RECALL] = "Astral Recall" },
     itemSpells = { [HEARTHSTONE] = HEARTH_SPELL },
     stacks = { [HEARTHSTONE] = 1 },
@@ -245,6 +253,7 @@ local function fillData(Noir, facts)
   for id, o in pairs(facts.objects or {}) do Noir.Data.objects[id] = o.name end
   for area, z in pairs(facts.zones) do Noir.Data.zones[area] = { uiMap = z.uiMap, name = z.name, continent = z.continent } end
   for node, t in pairs(facts.taxi) do Noir.Data.flights[node] = { name = t.name, zone = t.zone, x = t.x, y = t.y } end
+  for id, i in pairs(facts.items or {}) do Noir.Data.items[id] = i.name end
   Noir.Data.items[HEARTHSTONE] = "Hearthstone"
 end
 
@@ -349,8 +358,17 @@ local function actionDone(c, a, leftOut)
   return false
 end
 
+-- The share of the estimated XP the world gives at a level: tools/lib/xp.js yieldAt, from the same constants.
+function Sim.yieldAt(pace, level)
+  local low, high = pace.YIELD or 1, pace.YIELD_LATE or pace.YIELD or 1
+  local from, to = pace.YIELD_FROM or 0, pace.YIELD_TO or 0
+  if high == low or to <= from or level <= from then return low end
+  if level >= to then return high end
+  return low + (high - low) * (level - from) / (to - from)
+end
+
 function Sim.prepareJoin(facts, level, xpScale)
-  local function sx(n) return round(n * (xpScale or 1) * (facts.pace.YIELD or 1)) end
+  local function sx(n, at) return round(n * (xpScale or 1) * Sim.yieldAt(facts.pace, at or 1)) end
   local world = Sim.world(facts)
   local flat = facts.flat or {}
   local start = startOf(facts)
@@ -369,7 +387,7 @@ function Sim.prepareJoin(facts, level, xpScale)
   local function moveTo(point)
     local zone = point and facts.zones[point.zone]
     if not zone then return end
-    if pos and pos.zone == point.zone then c:gainXP(sx(Sim.walkXp(yards(zone, pos, point), zone.band, c.s.level, facts.pace))) end
+    if pos and pos.zone == point.zone then c:gainXP(sx(Sim.walkXp(yards(zone, pos, point), zone.band, c.s.level, facts.pace), c.s.level)) end
     pos = { zone = point.zone, x = point.x, y = point.y }
     c.s.pos = { uiMap = zone.uiMap, x = point.x, y = point.y }
   end
@@ -404,13 +422,13 @@ function Sim.prepareJoin(facts, level, xpScale)
     if objectivesDone[a.quest] or not c:findQuest(a.quest) then return end
     objectivesDone[a.quest] = true
     finishObjectives(a.quest)
-    c:gainXP(sx(Sim.objectiveXp(facts.quests[a.quest] or {}, c.s.level, facts.pace)))
+    c:gainXP(sx(Sim.objectiveXp(facts.quests[a.quest] or {}, c.s.level, facts.pace), c.s.level))
   end
   function DO.turnin(a)
     if not c:findQuest(a.quest) then return end
     finishObjectives(a.quest)
     local quest = facts.quests[a.quest] or {}
-    c:turnInQuest(a.quest, sx(Sim.questXp(quest.level or 1, c.s.level)))
+    c:turnInQuest(a.quest, sx(Sim.questXp(quest.level or 1, c.s.level), c.s.level))
     c.s.money = c.s.money + Sim.TURNIN_COPPER
   end
   function DO.getflight(a) c.s.flights[a.node] = true end
@@ -503,7 +521,7 @@ function Sim.play(facts, opts)
   local capturing, landed = true, nil
 
   local prepared = opts.join and Sim.prepareJoin(facts, opts.join, opts.xpScale) or nil
-  local function sx(n) return round(n * (opts.xpScale or 1) * (facts.pace.YIELD or 1)) end
+  local function sx(n, at) return round(n * (opts.xpScale or 1) * Sim.yieldAt(facts.pace, at or 1)) end
   local start = startOf(facts)
   local startZone = start and facts.zones[start.zone]
   local clientOpts = {
@@ -621,7 +639,7 @@ function Sim.play(facts, opts)
       cannot(step, string.format("%s is in %s, on another continent than the character (in %s), who cannot walk there",
         label(step), zone.name, here.name))
     elseif here and pos.zone == point.zone then
-      c:gainXP(sx(Sim.walkXp(yards(zone, pos, point), zone.band, c.s.level, facts.pace)))
+      c:gainXP(sx(Sim.walkXp(yards(zone, pos, point), zone.band, c.s.level, facts.pace), c.s.level))
     end
     c:moveTo({ uiMap = zone.uiMap, x = point.x, y = point.y })
     pos = { zone = point.zone, x = point.x, y = point.y }
@@ -663,9 +681,46 @@ function Sim.play(facts, opts)
 
   local objectivesDone = {}
   local ACT = {}
+  local itemRowButton -- defined with the hearth line, below
+
+  -- A quest started by an item found in the world: the line's npc or object is what drops the item. The player kills
+  -- or loots there until the item is in the bags, then clicks the item button that holds it; the quest's page opens
+  -- and the automation accepts (a quest the guide leaves to the player is accepted on the page by hand).
+  local function acceptFromItem(line, step)
+    local item = line.item
+    if c:itemCount(item) == 0 then c:giveItem(item, 1) end
+    c:advance(0.3, 0.1)
+    local button = itemRowButton(function(kind, value) return kind == "item" and value == "item:" .. item end)
+    if not button then return "no item button holds item " .. item .. ", which starts quest " .. line.quest end
+    local good, why = c:offerable(line.quest)
+    local used = c:secureClick(button)
+    c:advance(0.3, 0.1)
+    if c.dialog and c.dialog.quest == line.quest and not c:findQuest(line.quest) then
+      local section = Noir.Guide.Section(P.Place() or "")
+      local noAuto = false
+      for _, q in ipairs(section and section.noAuto or {}) do if q == line.quest then noAuto = true end end
+      if line.manual or noAuto then
+        c.G.AcceptQuest()
+        if c:findQuest(line.quest) then
+          result.manual[#result.manual + 1] = { n = step.n, label = label(step), reason = "the guide leaves this accept to the player" }
+        end
+      end
+    end
+    c:closeNpc()
+    if c:findQuest(line.quest) then
+      result.itemStarts = (result.itemStarts or 0) + 1
+      return nil
+    end
+    if world.itemQuests[item] ~= line.quest then return "item " .. item .. " does not start quest " .. line.quest end
+    if not good then return "quest " .. line.quest .. " is not offered: " .. why end
+    if not used then return "the button of item " .. item .. " did nothing" end
+    if #c.s.quests >= 20 then return "the quest log is full" end
+    return "the automation did not accept quest " .. line.quest
+  end
 
   function ACT.accept(line, step)
     if c:findQuest(line.quest) or c.s.completed[line.quest] then return nil end
+    if line.item then return acceptFromItem(line, step) end
     local def, id, kind = whoFor(line)
     if not def then return "the line names no NPC or object that offers quest " .. line.quest end
     local good, why = c:offerable(line.quest)
@@ -705,7 +760,7 @@ function Sim.play(facts, opts)
     if not objectivesDone[line.quest] then
       objectivesDone[line.quest] = true
       c:completeObjectives(line.quest)
-      c:gainXP(sx(Sim.objectiveXp(facts.quests[line.quest] or {}, c.s.level, facts.pace)))
+      c:gainXP(sx(Sim.objectiveXp(facts.quests[line.quest] or {}, c.s.level, facts.pace), c.s.level))
       dropGrey(c)
     end
     return nil
@@ -718,7 +773,7 @@ function Sim.play(facts, opts)
     local q = c:findQuest(line.quest)
     if not q then return "quest " .. line.quest .. " is not in the quest log" end
     local quest = facts.quests[line.quest] or {}
-    if world.quests[line.quest] then world.quests[line.quest].xp = sx(Sim.questXp(quest.level or 1, c.s.level)) end
+    if world.quests[line.quest] then world.quests[line.quest].xp = sx(Sim.questXp(quest.level or 1, c.s.level), c.s.level) end
     local calls = #c.calls
     talk(id, def)
     if opts.trace and not c.s.completed[line.quest] then
@@ -798,8 +853,9 @@ function Sim.play(facts, opts)
     return nil
   end
 
-  -- The item button that holds the Hearthstone (or Astral Recall): a shown secure button of the item row.
-  local function hearthButton()
+  -- The shown secure button of the item row that holds(kind, value) picks: kind is the button's "type" attribute and
+  -- value its attribute of that name.
+  function itemRowButton(holds)
     local row = Noir.Buttons and Noir.Buttons.items
     local found
     local function search(frame)
@@ -807,8 +863,7 @@ function Sim.play(facts, opts)
         if found then return end
         if child.__protected and child:IsVisible() then
           local kind = child:GetAttribute("type")
-          if (kind == "item" and child:GetAttribute("item") == "item:" .. HEARTHSTONE)
-            or (kind == "spell" and tonumber(child:GetAttribute("spell")) == ASTRAL_RECALL) then
+          if kind and holds(kind, child:GetAttribute(kind)) then
             found = child
             return
           end
@@ -818,6 +873,13 @@ function Sim.play(facts, opts)
     end
     if row then search(row) end
     return found
+  end
+
+  -- The item button that holds the Hearthstone (or Astral Recall).
+  local function hearthButton()
+    return itemRowButton(function(kind, value)
+      return (kind == "item" and value == "item:" .. HEARTHSTONE) or (kind == "spell" and tonumber(value) == ASTRAL_RECALL)
+    end)
   end
 
   function ACT.hearth()

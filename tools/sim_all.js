@@ -137,6 +137,14 @@ function buildFacts(db, graph, inns, route3, ch, options = {}) {
     if (s.npc) entry(npcs, db.npcs, s.npc);
     if (s.object) entry(objects, db.objects, s.object);
   }
+  // The items that start a quest of the route when used (an accept action that names an item; its npc or object
+  // drops the item and offers nothing).
+  const items = {};
+  for (const s of mine) {
+    if (s.action !== "accept" || s.item === undefined) continue;
+    const e = db.items.get(s.item);
+    items[s.item] = { name: (e && e.name) || `Item ${s.item}`, quest: s.quest };
+  }
   const taxi = {};
   for (const node of [...graph.nodes.values()].sort((a, b) => a.id - b.id)) {
     if (!node.factions.includes(ch.faction)) continue;
@@ -193,9 +201,10 @@ function buildFacts(db, graph, inns, route3, ch, options = {}) {
   const first = route3.sections.length && chainOf(route3, ch).flatMap((s) => s.steps).find((s) => applies(s.when, ch) && s.at && zones[s.at.zone]);
   const facts = {
     race: ch.race, class: ch.cls, start: first ? { ...first.at } : undefined,
-    xpToLevel, pace: { OBJECTIVE_KILLS: PACE.OBJECTIVE_KILLS, ITEM_KILL_FACTOR: PACE.ITEM_KILL_FACTOR, INCIDENTAL_YARDS: PACE.INCIDENTAL_YARDS, YIELD: PACE.YIELD },
+    xpToLevel, pace: { OBJECTIVE_KILLS: PACE.OBJECTIVE_KILLS, ITEM_KILL_FACTOR: PACE.ITEM_KILL_FACTOR, INCIDENTAL_YARDS: PACE.INCIDENTAL_YARDS, YIELD: PACE.YIELD, YIELD_LATE: PACE.YIELD_LATE, YIELD_FROM: PACE.YIELD_FROM, YIELD_TO: PACE.YIELD_TO },
     continents, zones, quests, npcs, objects, taxi, flat: mine,
   };
+  if (Object.keys(items).length) facts.items = items;
   if (professions.length) {
     facts.professions = professions.slice();
     facts.professionNames = {};

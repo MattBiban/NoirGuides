@@ -4,7 +4,7 @@ const assert = require("node:assert");
 const { fixtureDb } = require("./fixture");
 const { testWorld } = require("./world");
 const { character, RACES } = require("../lib/characters");
-const { PACE, mobXp, walkXp } = require("../lib/xp");
+const { PACE, yieldAt, mobXp, questXp, walkXp, grindSeconds } = require("../lib/xp");
 const { validateRoute } = require("../planner/validate");
 
 RACES.Human.startArea = 1000;
@@ -178,13 +178,14 @@ test("the level at each step counts quest, objective and walking XP", () => {
     { action: "turnin", quest: 5, at: M(100, 30, 50), npc: 10 },
   ];
   // two kinds of creature to kill: the fights alone reach level 2, at the share of the estimate that is counted
-  // (lib/xp.js YIELD, applied to every gain)
+  // (lib/xp.js yieldAt, applied to every gain: YIELD at these levels)
   const two = { objectives: [[[20, null, 0], [21, null, 0]]] };
   const quiet = check(steps, null, (w) => { w.npc(20, 100, 90, 50, ""); w.npc(21, 100, 90, 50, ""); w.kill(5, 10, 20, 100, two); });
   const wild = check(steps, null, (w) => { w.herd(20, 100, 90, 50); w.npc(21, 100, 90, 50, ""); w.kill(5, 10, 20, 100, two); });
   assert.deepStrictEqual(quiet.errors, []);
   assert.deepStrictEqual(wild.errors, []);
   const total = (r) => { let sum = r.xp; for (let level = 1; level < r.endLevel; level++) sum += [0, 400, 900, 1400][level]; return sum; };
+  assert.deepStrictEqual([yieldAt(1), yieldAt(2)], [PACE.YIELD, PACE.YIELD]);
   const counted = (xp) => Math.round(xp * PACE.YIELD);
   const kills = 2 * PACE.OBJECTIVE_KILLS * mobXp(1, 1);
   assert.strictEqual(total(quiet), counted(kills) + counted(110));
@@ -194,6 +195,30 @@ test("the level at each step counts quest, objective and walking XP", () => {
   assert.notStrictEqual(walkXp(600, band, 1), walkXp(600, band, 2));
   assert.strictEqual(total(wild), counted(walkXp(600, band, 1)) + counted(kills) + counted(walkXp(600, band, 2)) + counted(110));
   assert.deepStrictEqual(wild.levels, [1, 1, 2]);
+  assert.deepStrictEqual(quiet.xps, [0, 0, counted(kills) - 400], "the XP into the level before each step");
+});
+test("XP is counted at the share of the level it is earned at: more of it from level 30 on, most from level 50", () => {
+  // the same hand-in of a quest of the player's level, after grind steps to that level (a walk between each two, so
+  // that no two follow each other)
+  const town = M(100, 30, 50);
+  const handIn = (level) => {
+    const steps = [];
+    for (let to = 2; to <= level; to++) steps.push({ action: "grind", level: to, at: town }, { action: "travel", at: town });
+    steps.push({ action: "accept", quest: 5, at: town, npc: 10 }, { action: "turnin", quest: 5, at: town, npc: 10 });
+    const r = check(steps, null, (w) => w.errand(5, 10, 10, 100, { requiredLevel: level, questLevel: level }));
+    assert.deepStrictEqual(r.errors, [], `level ${level}`);
+    assert.deepStrictEqual([r.levels[r.levels.length - 1], r.endLevel], [level, level]);
+    return r.xp;
+  };
+  for (const level of [20, 30, 40, 50, 59]) assert.strictEqual(handIn(level), Math.round(questXp(level, level) * yieldAt(level)), `level ${level}`);
+  assert.strictEqual(handIn(30), Math.round(questXp(30, 30) * PACE.YIELD));
+  assert.strictEqual(handIn(50), Math.round(questXp(50, 50) * PACE.YIELD_LATE));
+  assert.ok(handIn(40) > Math.round(questXp(40, 40) * PACE.YIELD) && handIn(40) < Math.round(questXp(40, 40) * PACE.YIELD_LATE));
+  // the time of a grind step is counted with the same share (lib/xp.js grindSeconds)
+  const ground = (level) => { const r = check([{ action: "grind", level: 2, at: town }, { action: "travel", at: town }].concat(level > 2 ? [{ action: "grind", level: 3, at: town }] : [])); return r.seconds; };
+  assert.strictEqual(ground(2), grindSeconds(1, 0));
+  assert.strictEqual(ground(3), grindSeconds(1, 0) + grindSeconds(2, 0));
+  assert.strictEqual(grindSeconds(1, 0), Math.ceil(400 / Math.round(mobXp(1, 1) * PACE.YIELD)) * PACE.KILL_SECONDS);
 });
 test("replays when a quest is offered: its top level, a quest in the log that hides it, one that ends it, one that opens it, and exclusive quests", () => {
   const town = M(100, 30, 50);

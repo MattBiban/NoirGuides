@@ -160,15 +160,28 @@ test("zone commitment: a zone is finished before the next one is entered", () =>
   assert.deepStrictEqual(route.steps[travel].at.zone, 200);
   assert.strictEqual(route.steps.filter((s) => s.action === "travel").length, 1);
 });
-test("a quest that needs a trip to another zone and back is left alone", () => {
-  const w = testWorld();
-  town(w);
-  w.npc(40, 400, 60, 30, "");
-  w.kill(8, 10, 40, 100); // given and handed in in Westland, fought overseas in Farshore
-  const { at, order, checked } = run(w, null, { maxLevel: 4 });
+test("a quest that needs a trip to another zone and back is left alone until the only other thing to do is grind", () => {
+  const world = () => {
+    const w = testWorld();
+    town(w);
+    w.npc(40, 400, 60, 30, "");
+    w.kill(8, 10, 40, 100); // given and handed in in Westland, fought overseas in Farshore
+    return w;
+  };
+  // the town's three quests reach level 2: with the cap there the route is done, and the trip is never made
+  const done = run(world(), null, { maxLevel: 2 });
+  assert.deepStrictEqual(done.checked.errors, []);
+  assert.strictEqual(done.checked.endLevel, 2);
+  assert.strictEqual(done.at("accept", 8), -1, "not taken with the town's quests, though its giver is one of theirs");
+  assert.deepStrictEqual(done.order, [100]);
+  // with the cap further on nothing else is left at level 2, and the trip comes before any grind step (an errand,
+  // planner/supply.js): the quest is taken when the town is finished, not with the town's quests
+  const { at, order, checked, names } = run(world(), null, { maxLevel: 4 });
   assert.deepStrictEqual(checked.errors, []);
-  assert.strictEqual(at("accept", 8), -1);
-  assert.deepStrictEqual(order, [100]);
+  for (const quest of [1, 2, 3]) assert.ok(at("accept", 8) > at("turnin", quest), `quest 8 waits for the hand-in of quest ${quest}`);
+  assert.ok(at("accept", 8) < at("objective", 8) && at("objective", 8) < at("turnin", 8), names.join(" "));
+  assert.deepStrictEqual(order, [100, 400, 100], "out to Farshore and back");
+  assert.ok(!names.includes("grind"), "the fights of a quest, not of a grind step: " + names.join(" "));
 });
 test("cost-based choice: the next zone is the one that takes less time to reach, not the one nearer in a straight line", () => {
   // Northland (700) lies north of Westland. Eastland's pass is moved to Westland's far corner: Eastland's quest is
@@ -310,19 +323,39 @@ test("the hearthstone is bound at a hub's inn when that saves time, and used to 
   near.npc(10, 100, 22, 52); near.npc(20, 100, 25, 52, ""); near.kill(1, 10, 20, 100);
   assert.ok(!run(near, null, { maxLevel: 4 }).names.includes("sethearth"));
 });
-test("pacing: a grind step bridges one level to the next quests, and the route stops rather than grind two", () => {
-  const w = testWorld();
-  w.npc(10, 100, 30, 50); w.npc(20, 100, 40, 50, "");
-  w.kill(1, 10, 20, 100);                                    // 400 XP of kills and 110 of reward, 306 of it counted
-                                                             // (lib/xp.js YIELD): short of level 2
-  w.kill(2, 10, 20, 100, { requiredLevel: 2, questLevel: 2 }); // opens a level later
-  w.kill(3, 10, 20, 100, { requiredLevel: 9, questLevel: 9 }); // out of reach
-  const { names, route, checked } = run(w, null, { maxLevel: 10 });
-  assert.deepStrictEqual(checked.errors, []);
-  assert.deepStrictEqual(names.filter((n) => n !== "getflight:1"), ["accept:1", "objective:1", "turnin:1", "grind", "accept:2", "objective:2", "turnin:2"]);
-  assert.deepStrictEqual(route.steps.find((s) => s.action === "grind"), { action: "grind", level: 2, at: { zone: 100, x: 30, y: 50 } });
-  assert.strictEqual(route.stats.endLevel, 2, "quest 3 is seven levels on: no second grind step");
-  assert.strictEqual(checked.endLevel, route.stats.endLevel);
+test("pacing: a grind step bridges one level to the next quests, and the route goes on to the cap while a later level opens any", () => {
+  const world = (third) => {
+    const w = testWorld();
+    w.npc(10, 100, 30, 50); w.npc(20, 100, 40, 50, "");
+    w.kill(1, 10, 20, 100);                                    // 400 XP of kills and 110 of reward, 306 of it counted
+                                                               // (lib/xp.js yieldAt): short of level 2
+    w.kill(2, 10, 20, 100, { requiredLevel: 2, questLevel: 2 }); // opens a level later, and is short of level 3
+    if (third) w.kill(3, 10, 20, 100, { requiredLevel: third, questLevel: third });
+    return w;
+  };
+  const shown = (r) => r.names.filter((n) => n !== "getflight:1");
+  // a quest for every level: each is followed by the grind step to the next, and the last level is ground to the cap
+  const each = run(world(3), null, { maxLevel: 4 });
+  assert.deepStrictEqual(each.checked.errors, []);
+  assert.deepStrictEqual(shown(each), ["accept:1", "objective:1", "turnin:1", "grind", "accept:2", "objective:2", "turnin:2", "grind", "accept:3", "objective:3", "turnin:3", "grind"]);
+  assert.deepStrictEqual(each.route.steps.find((s) => s.action === "grind"), { action: "grind", level: 2, at: { zone: 100, x: 30, y: 50 } });
+  assert.deepStrictEqual(each.route.steps.filter((s) => s.action === "grind").map((s) => s.level), [2, 3, 4], "each the rest of one level");
+  assert.deepStrictEqual([each.route.stats.endLevel, each.checked.endLevel], [4, 4]);
+  // no quest at any later level: nothing to grind towards, and the route ends where its quests end
+  const none = run(world(0), null, { maxLevel: 10 });
+  assert.deepStrictEqual(none.checked.errors, []);
+  assert.deepStrictEqual(shown(none), ["accept:1", "objective:1", "turnin:1", "grind", "accept:2", "objective:2", "turnin:2"]);
+  assert.deepStrictEqual([none.route.stats.endLevel, none.checked.endLevel], [2, 2]);
+  // the next quest seven levels on: the route does not end short of the cap. It grinds a level a step to the quest
+  // and does it. That is six grind steps after a grind step, and the validator reports every one of them: a world
+  // with such a hole in its quests does not give a route that is accepted
+  const hole = run(world(9), null, { maxLevel: 10 });
+  assert.deepStrictEqual(shown(hole), ["accept:1", "objective:1", "turnin:1", "grind", "accept:2", "objective:2", "turnin:2",
+    "grind", "grind", "grind", "grind", "grind", "grind", "grind", "accept:3", "objective:3", "turnin:3", "grind"]);
+  assert.deepStrictEqual(hole.route.steps.filter((s) => s.action === "grind").map((s) => s.level), [2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  assert.deepStrictEqual([hole.route.stats.endLevel, hole.checked.endLevel], [10, 10]);
+  assert.strictEqual(hole.checked.errors.length, 6);
+  for (const e of hole.checked.errors) assert.match(e, /^step \d+: two grind steps in a row/);
 });
 test("a level is ground where creatures of the level stand, and the way there is part of the route", () => {
   const world = () => {
@@ -356,14 +389,11 @@ test("a level is ground where creatures of the level stand, and the way there is
   assert.strictEqual(b.checked.endLevel, b.route.stats.endLevel);
   assert.ok(Math.abs(b.checked.seconds - b.route.stats.seconds) <= 1, "the validator walks the same way in the same time");
 });
-test("a small visit is not worth a change of zone: it waits while the rest of the level is ground", () => {
-  const { XP_TO_LEVEL, PACE, questXp } = require("../lib/xp");
+test("a small visit is made rather than a level ground: grinding is the last resort", () => {
+  const { XP_TO_LEVEL, yieldAt, questXp } = require("../lib/xp");
   const { CHOICES } = require("../planner/tuning");
-  // One errand at level 2 is a small visit (planner/zonepick.js rule 3), and too small for the errand before a grind
-  // step as well (planner/supply.js). At level 1 it would not be: an errand there is 66 of the level's 400 XP, over
-  // SUPPLY_MIN_SHARE, and is gone for before the grind step.
-  const counted = questXp(2, 2) * PACE.YIELD;
-  assert.ok(counted < CHOICES.MIN_VISIT * XP_TO_LEVEL[2] && counted < CHOICES.SUPPLY_MIN_SHARE * XP_TO_LEVEL[2]);
+  // One errand at level 2 is a small visit (planner/zonepick.js rule 3): far under MIN_VISIT of the level.
+  assert.ok(questXp(2, 2) * yieldAt(2) < CHOICES.MIN_VISIT * XP_TO_LEVEL[2]);
   const world = () => {
     const w = testWorld();
     w.npc(10, 100, 30, 50); w.npc(20, 100, 40, 50, ""); w.npc(21, 100, 40, 52, "");
@@ -372,29 +402,42 @@ test("a small visit is not worth a change of zone: it waits while the rest of th
     w.errand(5, 30, 31, 200, { requiredLevel: 2, questLevel: 2 });             // all Eastland has: one errand
     return w;
   };
-  const shown = (r) => r.names.filter((n) => !/^(getflight|travel|accept|objective)/.test(n));
-  // Westland leaves level 2 open by more than the errand gives: the errand does not reach level 3, so the level is
-  // ground where the player stands, and the errand is done after it (never two grind steps in a row)
+  const shown = (r) => r.names.filter((n) => !/^(getflight|travel|transport|fly|accept|objective)/.test(n));
+  // Westland leaves level 2 open by far more than the errand gives. The errand is done all the same (rule 4): the
+  // way east for one quest, not a grind step first. Nothing opens after it, so the route ends there without one.
   const short = run(world(), null, { maxLevel: 4 });
   assert.deepStrictEqual(short.checked.errors, []);
-  assert.deepStrictEqual(shown(short), ["turnin:1", "turnin:2", "grind", "turnin:5", "grind"]);
+  assert.deepStrictEqual(shown(short), ["turnin:1", "turnin:2", "turnin:5"]);
+  assert.deepStrictEqual(short.order, [100, 200]);
   assert.strictEqual(short.route.stats.levelAt[2], short.at("objective", 2));
-  assert.deepStrictEqual(short.route.steps.find((s) => s.action === "grind"), { action: "grind", level: 3, at: { zone: 100, x: 30, y: 50 } }, "ground in Westland, before the way east");
-  // with enough in Westland that the errand reaches level 3, the small visit is made (rule 4) and no grind step is needed
+  assert.strictEqual(short.checked.endLevel, 2, "the errand does not reach level 3, and no level opens anything more");
+  // with a quest waiting at level 3 the route goes on: the small visit first, and it reaches level 3 without a grind
+  // step; only the last level, with no quest left anywhere, is ground
   const w = world();
   for (const quest of [11, 12, 13, 14, 15, 16]) w.errand(quest, 10, 10, 100, { requiredLevel: 2, questLevel: 2 });
   w.npc(11, 100, 31, 50); w.errand(4, 11, 11, 100, { requiredLevel: 3, questLevel: 3 }); // something to do at level 3
   const enough = run(w, null, { maxLevel: 4 });
   assert.deepStrictEqual(enough.checked.errors, []);
-  const first = enough.names.indexOf("grind");
-  assert.ok(enough.at("turnin", 5) >= 0 && (first < 0 || enough.at("turnin", 5) < first), "the errand is done before any grind step");
-  assert.strictEqual(enough.route.stats.levelAt[3], enough.at("turnin", 5), "and it is the step that reaches level 3");
+  assert.strictEqual(enough.route.stats.levelAt[3], enough.at("turnin", 5), "the errand is the step that reaches level 3");
+  assert.deepStrictEqual(enough.names.filter((n) => n === "grind"), ["grind"]);
+  assert.ok(enough.names.indexOf("grind") > enough.at("turnin", 4), "the one grind step comes when every quest is done: " + enough.names.join(" "));
+  assert.strictEqual(enough.checked.endLevel, 4);
+  // a visit that is a real piece of the level comes before the small one, though it is over the sea and the small
+  // one next door (rule 3); the small one is still made after it, before the grind step of the last level
+  const both = world();
+  both.npc(50, 400, 50, 12); both.npc(51, 400, 52, 14, ""); both.npc(52, 400, 54, 14, ""); both.npc(53, 400, 56, 14, "");
+  for (const [quest, mob] of [[60, 51], [61, 52], [62, 53]]) both.kill(quest, 50, mob, 400, { requiredLevel: 2, questLevel: 2 });
+  const far = run(both, null, { maxLevel: 4 });
+  assert.deepStrictEqual(far.checked.errors, []);
+  assert.deepStrictEqual(far.order, [100, 400, 200]);
+  assert.deepStrictEqual(shown(far), ["turnin:1", "turnin:2", "turnin:60", "turnin:61", "turnin:62", "turnin:5", "grind"]);
+  assert.strictEqual(far.checked.endLevel, 4);
 });
 test("the last level may be ground, and the route ends there", () => {
   const w = testWorld();
   w.npc(10, 100, 30, 50); w.npc(20, 100, 40, 50, "");
   w.kill(1, 10, 20, 100);
-  const { names, route } = run(w, null, { maxLevel: 2 }); // the quest leaves level 1 open (lib/xp.js YIELD)
+  const { names, route } = run(w, null, { maxLevel: 2 }); // the quest leaves level 1 open (lib/xp.js yieldAt)
   assert.deepStrictEqual(names.filter((n) => n !== "getflight:1"), ["accept:1", "objective:1", "turnin:1", "grind"]);
   assert.strictEqual(route.stats.endLevel, 2);
 });
@@ -428,6 +471,30 @@ test("off the isle: the quest the transport asks for is taken, the isle is finis
   const boat = route.steps.findIndex((s) => s.action === "transport");
   assert.ok(at("accept", 77) < boat && at("turnin", 72) < boat && boat < at("turnin", 77));
   assert.deepStrictEqual(route.stats.links.map((l) => [l.id, l.assumed]), [["sky", ["route", "boarding"]]]);
+});
+test("the level gap: a quest with fights may be HARD levels above the player, one without HARD_TALK, and far below is more than EASY", () => {
+  const w = testWorld();
+  w.npc(10, 100, 30, 50); w.npc(20, 100, 40, 50, "");
+  const at = { zone: 100, x: 30, y: 50 };
+  for (const level of [1, 5, 6]) {
+    w.kill(100 + level, 10, 20, 100, { questLevel: level });
+    w.errand(200 + level, 10, 10, 100, { questLevel: level });
+  }
+  const gapAt = (level, quest, action = "accept") => {
+    const g = levelGap(w.db, { steps: [{ action, quest, at, npc: 10 }, { action: "turnin", quest, at, npc: 10 }] }, [level, level]);
+    assert.strictEqual(g.steps, 1, "accepts and objectives are looked at, hand-ins are not");
+    return g.above.length ? "above" : g.below.length ? "below" : "fine";
+  };
+  // a level 5 quest for a level 1 player: one level too far with fights, just allowed without; a level 6 one is too far for both
+  assert.deepStrictEqual([1 + C.HARD, 1 + C.HARD_TALK], [4, 5]);
+  assert.deepStrictEqual([gapAt(1, 105), gapAt(1, 205), gapAt(1, 106), gapAt(1, 206)], ["above", "fine", "above", "above"]);
+  assert.deepStrictEqual([gapAt(2, 105), gapAt(2, 105, "objective"), gapAt(2, 206), gapAt(3, 106)], ["fine", "fine", "fine", "fine"]);
+  assert.deepStrictEqual(levelGap(w.db, { steps: [{ action: "accept", quest: 105, at, npc: 10 }] }, [1]).above, [{ step: 0, quest: 105, questLevel: 5, level: 1 }]);
+  // a level 1 quest is far below a player of level 7, not one of level 6
+  assert.deepStrictEqual([gapAt(1 + C.EASY, 101), gapAt(2 + C.EASY, 101), gapAt(2 + C.EASY, 201)], ["fine", "below", "below"]);
+  // another class's steps are not this class's
+  const mixed = { steps: [{ action: "accept", quest: 106, at, npc: 10, when: { class: "ROGUE" } }, { action: "accept", quest: 205, at, npc: 10 }] };
+  assert.deepStrictEqual([levelGap(w.db, mixed, [1, 1], { cls: "WARRIOR" }).above.length, levelGap(w.db, mixed, [1, 1], { cls: "ROGUE" }).above.length], [0, 1]);
 });
 
 const DATA = path.join(__dirname, "..", "data");
@@ -492,7 +559,7 @@ test("real data: a High Order character takes the Skyborne Portal from Dalaran t
   assert.ok(h("turnin", 95350) > h("turnin", 95349) && h("turnin", 98024) > h("turnin", 95350));
 });
 for (const race of Object.keys(RACES)) {
-  test(`real data: the ${race} route reaches 60 with no errors, an empty log, and fewer zone changes than the baseline`, { skip: !real }, () => {
+  test(`real data: the ${race} route reaches 60 on quests with no errors and an empty log, within the accepted price in zone changes and travel`, { skip: !real }, () => {
     const { ch, route, checked } = realRoute(race);
     const { graph, db } = realWorld();
     const { measureRoute } = require("../planner/measure");
@@ -501,17 +568,23 @@ for (const race of Object.keys(RACES)) {
     assert.strictEqual(checked.endLevel, 60);
     assert.strictEqual(route.stats.endLevel, 60);
     const m = measureRoute(db, graph, route, ch, checked.levels);
-    // The limits are planner/report.js's, and the reasons are there: the routes count on 60% of the estimated XP
-    // (lib/xp.js YIELD) and do about 70% more quests than the baseline routes did.
-    assert.strictEqual(MAX_ZONE_SHARE, 0.9);
+    // The limits are planner/report.js's, and the reasons are there: the routes count on 60 to 68% of the estimated
+    // XP (lib/xp.js yieldAt) and do quests instead of grinding, so they change zone more often than the baseline
+    // routes did and are longer on the way. That is the accepted price; the limits are how high it may go.
+    assert.strictEqual(MAX_ZONE_SHARE, 1.4);
     assert.ok(m.zoneChanges <= baseline.zoneChanges * MAX_ZONE_SHARE, `${m.zoneChanges} zone changes against ${baseline.zoneChanges}: over ${MAX_ZONE_SHARE * 100}% of the baseline`);
-    // a smooth run: no quest above the player's level from level 10 (up to two above before it, in the starting
-    // zone: planner/tuning.js START_HARD), few far below it (planner/levelgap.js)
+    // quests that can be played: none further above the player than HARD levels (HARD_TALK without fights:
+    // planner/tuning.js), few far below it (planner/levelgap.js). The shared route has none above at all; MAX_ABOVE
+    // is the room of a class layered onto it
+    assert.deepStrictEqual([C.HARD, C.HARD_TALK, C.EASY], [3, 4, 5]);
     const gap = levelGap(db, route, checked.levels);
     assert.ok(gap.above.length === 0 && MAX_ABOVE <= 2, `${gap.above.length} quests above the level: ${JSON.stringify(gap.above.slice(0, 5))}`);
+    assert.strictEqual(MAX_BELOW_SHARE, 0.1);
     assert.ok(gap.below.length <= gap.steps * MAX_BELOW_SHARE, `${gap.below.length} of ${gap.steps} quest steps far below the level`);
-    assert.strictEqual(MAX_TRAVEL_SHARE, 1.25);
+    assert.strictEqual(MAX_TRAVEL_SHARE, 1.5);
     assert.ok(m.seconds <= baseline.travelSeconds * MAX_TRAVEL_SHARE, `${m.seconds} s of travel against ${baseline.travelSeconds}: over ${MAX_TRAVEL_SHARE * 100}% of the baseline`);
+    // the price buys quests: more of them than the baseline route did
+    assert.ok(route.stats.quests > baseline.quests, `${route.stats.quests} quests against the baseline's ${baseline.quests}`);
     assert.strictEqual(m.unreachable, 0);
     // no hand-in that is ready is walked away from (planner/leftbehind.js; the threshold is explained there)
     const behind = leftBehind(db, route);
@@ -520,10 +593,11 @@ for (const race of Object.keys(RACES)) {
     const unsafe = dangerousWalks(db, graph, route, ch, checked.levels);
     assert.strictEqual(MAX_DANGEROUS_WALKS, 0);
     assert.deepStrictEqual(unsafe.slice(0, 5), [], `${unsafe.length} dangerous walks`);
-    // grind steps are short: each the rest of one level, never two in a row, at most twenty in a whole route
+    // grinding is the last resort: at most two grind steps in a whole route (measured: none or one, the end of
+    // level 59), each the rest of one level, never two in a row
     const grinds = route.steps.map((s, i) => (s.action === "grind" ? i : -1)).filter((i) => i >= 0);
-    assert.strictEqual(MAX_GRIND_STEPS, 20);
-    assert.ok(grinds.length <= MAX_GRIND_STEPS, `${grinds.length} grind steps`);
+    assert.strictEqual(MAX_GRIND_STEPS, 2);
+    assert.ok(grinds.length <= MAX_GRIND_STEPS, `${grinds.length} grind steps: ${grinds.map((i) => `to ${route.steps[i].level}`).join(", ")}`);
     for (const i of grinds) assert.strictEqual(route.steps[i].level, checked.levels[i] + 1, `the grind step at ${i} ends the level it starts in`);
     for (const i of grinds) assert.notStrictEqual(route.steps[i + 1] && route.steps[i + 1].action, "grind");
     // ... and each at a real place to grind (planner/grindspots.js): in open country, never a city, with at least
