@@ -9,6 +9,8 @@ is not behind the route. A grind step is the rest of one level: the quests left 
 zone, and wait until they are.
 A hand-in left behind is a step that moves the player more than LEAVE_YARDS while a quest ready to hand in waits
 within READY_YARDS of them (`tools/planner/leftbehind.js`, `tools/planner/tuning.js`).
+A dangerous walk is a walk through or inside an open zone whose creatures start more than DANGER_LEVELS above the
+player's level there (`tools/planner/danger.js`); flying over it or standing where a boat arrives is none.
 
 ## Before and after
 
@@ -31,29 +33,30 @@ fewer zone changes than it by a smaller margin than before.
 | Race | Zone changes | | | Travel time | | | Walked yards | | | Steps | | Quests | | Grind steps | | End level |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | | before | after | change | before | after | change | before | after | change | before | after | before | after | before | after | after |
-| Human | 214 | 140 | -35% | 44 h 29 min | 51 h 29 min | +16% | 936,223 | 931,968 | -0% | 2,154 | 2,314 | 766 | 710 | 0 | 14 | 60 |
-| Orc | 206 | 166 | -19% | 42 h 57 min | 49 h 27 min | +15% | 920,085 | 866,508 | -6% | 2,015 | 2,306 | 692 | 655 | 1 | 15 | 60 |
-| Dwarf | 217 | 149 | -31% | 45 h 44 min | 53 h 44 min | +17% | 957,169 | 953,859 | -0% | 2,221 | 2,389 | 794 | 742 | 0 | 13 | 60 |
-| NightElf | 203 | 150 | -26% | 47 h 02 min | 53 h 01 min | +13% | 1,007,696 | 941,762 | -7% | 2,230 | 2,365 | 795 | 732 | 0 | 13 | 60 |
-| Undead | 182 | 160 | -12% | 44 h 59 min | 46 h 43 min | +4% | 967,604 | 836,877 | -14% | 2,090 | 2,240 | 725 | 641 | 1 | 16 | 60 |
-| Tauren | 199 | 176 | -12% | 43 h 32 min | 50 h 56 min | +17% | 923,557 | 871,072 | -6% | 2,049 | 2,361 | 709 | 667 | 1 | 14 | 60 |
-| Gnome | 217 | 149 | -31% | 45 h 44 min | 53 h 44 min | +17% | 957,169 | 953,859 | -0% | 2,221 | 2,389 | 794 | 742 | 0 | 13 | 60 |
-| Troll | 206 | 166 | -19% | 42 h 57 min | 49 h 27 min | +15% | 920,085 | 866,508 | -6% | 2,015 | 2,306 | 692 | 655 | 1 | 15 | 60 |
-| HighOrder | 212 | 146 | -31% | 43 h 10 min | 50 h 42 min | +17% | 915,714 | 908,518 | -1% | 2,220 | 2,321 | 788 | 714 | 1 | 13 | 60 |
-| Windshaper | 200 | 160 | -20% | 42 h 23 min | 48 h 57 min | +15% | 891,664 | 848,064 | -5% | 1,979 | 2,347 | 680 | 669 | 1 | 15 | 60 |
+| Human | 214 | 135 | -37% | 44 h 29 min | 49 h 56 min | +12% | 936,223 | 924,418 | -1% | 2,154 | 2,239 | 766 | 699 | 0 | 13 | 60 |
+| Orc | 206 | 156 | -24% | 42 h 57 min | 49 h 53 min | +16% | 920,085 | 880,953 | -4% | 2,015 | 2,250 | 692 | 650 | 1 | 12 | 60 |
+| Dwarf | 217 | 136 | -37% | 45 h 44 min | 50 h 39 min | +11% | 957,169 | 932,909 | -3% | 2,221 | 2,263 | 794 | 709 | 0 | 12 | 60 |
+| NightElf | 203 | 124 | -39% | 47 h 02 min | 51 h 36 min | +10% | 1,007,696 | 947,313 | -6% | 2,230 | 2,211 | 795 | 688 | 0 | 12 | 60 |
+| Undead | 182 | 145 | -20% | 44 h 59 min | 47 h 50 min | +6% | 967,604 | 864,432 | -11% | 2,090 | 2,190 | 725 | 638 | 1 | 12 | 60 |
+| Tauren | 199 | 150 | -25% | 43 h 32 min | 48 h 21 min | +11% | 923,557 | 880,061 | -5% | 2,049 | 2,205 | 709 | 648 | 1 | 12 | 60 |
+| Gnome | 217 | 136 | -37% | 45 h 44 min | 50 h 39 min | +11% | 957,169 | 932,909 | -3% | 2,221 | 2,263 | 794 | 709 | 0 | 12 | 60 |
+| Troll | 206 | 156 | -24% | 42 h 57 min | 49 h 53 min | +16% | 920,085 | 880,953 | -4% | 2,015 | 2,250 | 692 | 650 | 1 | 12 | 60 |
+| HighOrder | 212 | 140 | -34% | 43 h 10 min | 49 h 24 min | +14% | 915,714 | 932,292 | +2% | 2,220 | 2,310 | 788 | 728 | 1 | 10 | 60 |
+| Windshaper | 200 | 160 | -20% | 42 h 23 min | 49 h 24 min | +17% | 891,664 | 887,528 | -0% | 1,979 | 2,329 | 680 | 687 | 1 | 10 | 60 |
 
 ### Acceptance
 
 | Asked | Met | Evidence |
 | --- | --- | --- |
-| Zone changes at most 90% of the baseline for every race | yes | least saved: Tauren, 199 to 176 (-12%) |
-| Travel time at most 125% of the baseline for every race | yes | most: Dwarf, 45 h 44 min to 53 h 44 min (+17%) |
+| Zone changes at most 90% of the baseline for every race | yes | least saved: Windshaper, 200 to 160 (-20%) |
+| Travel time at most 125% of the baseline for every race | yes | most: Windshaper, 42 h 23 min to 49 h 24 min (+17%) |
 | No validator errors | yes | 0 errors |
 | Every race reaches level 60 | yes | all at 60 |
-| At most 2 hand-ins left behind in any race | yes | 1 in all |
-| No quest above the player's level from level 10 in any race (up to 2 above before it) | yes | none above |
+| At most 2 hand-ins left behind in any race | yes | 2 in all |
+| No quest more than 2 levels above the player in any race (3 for a quest without fights) | yes | none above |
 | At most 25% of quest steps far below the level in any race | yes | most: 11% |
-| At most 20 grind steps in any race | yes | most: 16 |
+| No walk through a zone whose creatures start more than 5 levels above the player, for any class of any race | yes | none |
+| At most 20 grind steps in any race | yes | most: 13 |
 | Characters valid and at level 60 | yes | 56 of 56 |
 
 ## Characters
@@ -70,84 +73,85 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Race | Class | Valid | End level | Class quests layered | Left out | Class steps | Zone changes | Added | Travel time | Added | Whole route, estimated |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Human | HUNTER | yes | 60 | 3 | 9 | 13 | 142 | +2 | 52 h 04 min | +0 h 35 min | 164 h 16 min |
-| Human | MAGE | yes | 60 | 21 | 9 | 68 | 163 | +23 | 53 h 07 min | +1 h 37 min | 165 h 58 min |
-| Human | PALADIN | yes | 60 | 6 | 30 | 14 | 145 | +5 | 51 h 44 min | +0 h 14 min | 163 h 54 min |
-| Human | PRIEST | yes | 60 | 7 | 10 | 20 | 143 | +3 | 51 h 52 min | +0 h 23 min | 164 h 08 min |
-| Human | ROGUE | yes | 60 | 26 | 7 | 71 | 168 | +28 | 53 h 37 min | +2 h 08 min | 166 h 53 min |
-| Human | WARLOCK | yes | 60 | 24 | 21 | 80 | 164 | +24 | 53 h 20 min | +1 h 51 min | 165 h 29 min |
-| Human | WARRIOR | yes | 60 | 24 | 16 | 77 | 164 | +24 | 53 h 07 min | +1 h 38 min | 165 h 59 min |
-| Orc | HUNTER | yes | 60 | 10 | 6 | 27 | 170 | +4 | 50 h 07 min | +0 h 40 min | 166 h 33 min |
-| Orc | MAGE | yes | 60 | 15 | 8 | 49 | 179 | +13 | 50 h 34 min | +1 h 07 min | 167 h 18 min |
-| Orc | ROGUE | yes | 60 | 18 | 8 | 62 | 181 | +15 | 51 h 11 min | +1 h 44 min | 168 h 00 min |
-| Orc | SHAMAN | yes | 60 | 25 | 20 | 95 | 190 | +24 | 54 h 26 min | +4 h 58 min | 171 h 38 min |
-| Orc | WARLOCK | yes | 60 | 29 | 26 | 95 | 189 | +23 | 51 h 46 min | +2 h 18 min | 168 h 32 min |
-| Orc | WARRIOR | yes | 60 | 21 | 15 | 56 | 175 | +9 | 50 h 17 min | +0 h 50 min | 167 h 07 min |
-| Dwarf | HUNTER | yes | 60 | 9 | 10 | 23 | 151 | +2 | 54 h 04 min | +0 h 21 min | 165 h 27 min |
-| Dwarf | PALADIN | yes | 60 | 6 | 31 | 14 | 151 | +2 | 53 h 50 min | +0 h 06 min | 165 h 00 min |
-| Dwarf | PRIEST | yes | 60 | 8 | 11 | 22 | 153 | +4 | 54 h 05 min | +0 h 22 min | 165 h 20 min |
-| Dwarf | ROGUE | yes | 60 | 26 | 7 | 83 | 180 | +31 | 56 h 03 min | +2 h 20 min | 168 h 19 min |
-| Dwarf | SHAMAN | yes | 60 | 0 | 21 | 0 | 149 | +0 | 53 h 44 min | +0 h 00 min | 165 h 06 min |
-| Dwarf | WARRIOR | yes | 60 | 24 | 16 | 78 | 172 | +23 | 55 h 09 min | +1 h 25 min | 166 h 46 min |
-| NightElf | DRUID | yes | 60 | 17 | 12 | 52 | 164 | +14 | 54 h 47 min | +1 h 46 min | 165 h 51 min |
-| NightElf | HUNTER | yes | 60 | 9 | 12 | 23 | 152 | +2 | 53 h 29 min | +0 h 28 min | 164 h 16 min |
-| NightElf | PRIEST | yes | 60 | 8 | 12 | 21 | 156 | +6 | 53 h 41 min | +0 h 40 min | 164 h 20 min |
-| NightElf | ROGUE | yes | 60 | 26 | 7 | 83 | 180 | +30 | 55 h 29 min | +2 h 27 min | 167 h 10 min |
-| NightElf | WARRIOR | yes | 60 | 24 | 16 | 78 | 173 | +23 | 54 h 27 min | +1 h 25 min | 165 h 29 min |
-| Undead | MAGE | yes | 60 | 22 | 9 | 67 | 179 | +19 | 48 h 10 min | +1 h 27 min | 164 h 35 min |
-| Undead | PALADIN | yes | 60 | 1 | 31 | 4 | 162 | +2 | 46 h 57 min | +0 h 14 min | 163 h 09 min |
-| Undead | PRIEST | yes | 60 | 9 | 9 | 25 | 165 | +5 | 47 h 12 min | +0 h 29 min | 163 h 19 min |
-| Undead | ROGUE | yes | 60 | 23 | 8 | 71 | 182 | +22 | 48 h 18 min | +1 h 35 min | 165 h 00 min |
-| Undead | WARLOCK | yes | 60 | 27 | 28 | 86 | 181 | +21 | 48 h 56 min | +2 h 13 min | 165 h 57 min |
-| Undead | WARRIOR | yes | 60 | 21 | 15 | 58 | 169 | +9 | 47 h 46 min | +1 h 03 min | 164 h 26 min |
-| Tauren | DRUID | yes | 60 | 18 | 11 | 54 | 193 | +17 | 53 h 52 min | +2 h 56 min | 171 h 20 min |
-| Tauren | HUNTER | yes | 60 | 10 | 6 | 31 | 184 | +8 | 51 h 56 min | +0 h 59 min | 169 h 03 min |
-| Tauren | SHAMAN | yes | 60 | 25 | 20 | 84 | 201 | +25 | 55 h 23 min | +4 h 27 min | 173 h 21 min |
-| Tauren | WARRIOR | yes | 60 | 21 | 15 | 54 | 185 | +9 | 52 h 00 min | +1 h 04 min | 169 h 33 min |
-| Gnome | MAGE | yes | 60 | 21 | 9 | 66 | 173 | +24 | 55 h 10 min | +1 h 26 min | 166 h 58 min |
-| Gnome | PRIEST | yes | 60 | 5 | 9 | 14 | 151 | +2 | 53 h 58 min | +0 h 15 min | 165 h 15 min |
-| Gnome | ROGUE | yes | 60 | 26 | 7 | 83 | 180 | +31 | 56 h 03 min | +2 h 20 min | 168 h 19 min |
-| Gnome | WARLOCK | yes | 60 | 24 | 21 | 77 | 169 | +20 | 55 h 10 min | +1 h 27 min | 166 h 18 min |
-| Gnome | WARRIOR | yes | 60 | 24 | 16 | 78 | 172 | +23 | 55 h 09 min | +1 h 25 min | 166 h 46 min |
-| Troll | HUNTER | yes | 60 | 10 | 6 | 27 | 170 | +4 | 50 h 07 min | +0 h 40 min | 166 h 33 min |
-| Troll | MAGE | yes | 60 | 22 | 9 | 69 | 184 | +18 | 50 h 45 min | +1 h 18 min | 167 h 33 min |
-| Troll | PRIEST | yes | 60 | 9 | 9 | 23 | 169 | +3 | 49 h 43 min | +0 h 15 min | 166 h 06 min |
-| Troll | ROGUE | yes | 60 | 17 | 8 | 60 | 180 | +14 | 51 h 05 min | +1 h 38 min | 167 h 55 min |
-| Troll | SHAMAN | yes | 60 | 25 | 20 | 95 | 190 | +24 | 54 h 26 min | +4 h 58 min | 171 h 38 min |
-| Troll | WARLOCK | yes | 60 | 27 | 27 | 90 | 188 | +22 | 51 h 43 min | +2 h 16 min | 168 h 24 min |
-| Troll | WARRIOR | yes | 60 | 21 | 15 | 56 | 175 | +9 | 50 h 17 min | +0 h 50 min | 167 h 07 min |
-| HighOrder | DRUID | yes | 60 | 10 | 12 | 36 | 154 | +8 | 52 h 46 min | +2 h 04 min | 164 h 12 min |
-| HighOrder | HUNTER | yes | 60 | 9 | 8 | 26 | 148 | +2 | 51 h 24 min | +0 h 42 min | 162 h 35 min |
-| HighOrder | MAGE | yes | 60 | 15 | 7 | 42 | 158 | +12 | 51 h 44 min | +1 h 02 min | 163 h 13 min |
-| HighOrder | ROGUE | yes | 60 | 26 | 7 | 88 | 180 | +34 | 54 h 06 min | +3 h 24 min | 166 h 17 min |
-| HighOrder | WARRIOR | yes | 60 | 25 | 15 | 94 | 169 | +23 | 53 h 13 min | +2 h 31 min | 164 h 51 min |
-| Windshaper | DRUID | yes | 60 | 7 | 10 | 19 | 162 | +2 | 49 h 15 min | +0 h 18 min | 165 h 13 min |
-| Windshaper | HUNTER | yes | 60 | 10 | 4 | 27 | 162 | +2 | 49 h 26 min | +0 h 29 min | 165 h 24 min |
-| Windshaper | ROGUE | yes | 60 | 16 | 8 | 56 | 175 | +15 | 50 h 41 min | +1 h 44 min | 166 h 56 min |
-| Windshaper | SHAMAN | yes | 60 | 27 | 20 | 83 | 180 | +20 | 51 h 09 min | +2 h 12 min | 168 h 05 min |
-| Windshaper | WARRIOR | yes | 60 | 22 | 15 | 64 | 176 | +16 | 50 h 25 min | +1 h 28 min | 166 h 54 min |
+| Human | HUNTER | yes | 60 | 4 | 8 | 11 | 136 | +1 | 50 h 17 min | +0 h 21 min | 156 h 53 min |
+| Human | MAGE | yes | 60 | 22 | 8 | 72 | 153 | +18 | 51 h 44 min | +1 h 47 min | 158 h 53 min |
+| Human | PALADIN | yes | 60 | 7 | 29 | 17 | 139 | +4 | 50 h 08 min | +0 h 12 min | 156 h 45 min |
+| Human | PRIEST | yes | 60 | 8 | 9 | 21 | 137 | +2 | 50 h 16 min | +0 h 20 min | 156 h 58 min |
+| Human | ROGUE | yes | 60 | 27 | 6 | 84 | 165 | +30 | 51 h 57 min | +2 h 01 min | 159 h 58 min |
+| Human | WARLOCK | yes | 60 | 22 | 23 | 64 | 157 | +22 | 51 h 23 min | +1 h 27 min | 158 h 22 min |
+| Human | WARRIOR | yes | 60 | 25 | 15 | 75 | 162 | +27 | 51 h 38 min | +1 h 42 min | 158 h 59 min |
+| Orc | HUNTER | yes | 60 | 11 | 5 | 30 | 160 | +4 | 50 h 34 min | +0 h 41 min | 159 h 30 min |
+| Orc | MAGE | yes | 60 | 16 | 7 | 50 | 168 | +12 | 51 h 21 min | +1 h 28 min | 160 h 36 min |
+| Orc | ROGUE | yes | 60 | 19 | 7 | 55 | 173 | +17 | 50 h 54 min | +1 h 01 min | 159 h 54 min |
+| Orc | SHAMAN | yes | 60 | 26 | 19 | 80 | 180 | +24 | 52 h 30 min | +2 h 37 min | 162 h 10 min |
+| Orc | WARLOCK | yes | 60 | 30 | 25 | 88 | 182 | +26 | 51 h 35 min | +1 h 41 min | 160 h 49 min |
+| Orc | WARRIOR | yes | 60 | 22 | 14 | 63 | 169 | +13 | 51 h 10 min | +1 h 17 min | 160 h 38 min |
+| Dwarf | HUNTER | yes | 60 | 10 | 9 | 25 | 138 | +2 | 50 h 55 min | +0 h 16 min | 156 h 39 min |
+| Dwarf | PALADIN | yes | 60 | 7 | 30 | 16 | 140 | +4 | 50 h 48 min | +0 h 09 min | 156 h 20 min |
+| Dwarf | PRIEST | yes | 60 | 9 | 10 | 25 | 143 | +7 | 51 h 06 min | +0 h 27 min | 156 h 50 min |
+| Dwarf | ROGUE | yes | 60 | 27 | 6 | 79 | 168 | +32 | 52 h 28 min | +1 h 49 min | 159 h 28 min |
+| Dwarf | SHAMAN | yes | 60 | 0 | 21 | 0 | 136 | +0 | 50 h 39 min | +0 h 00 min | 156 h 30 min |
+| Dwarf | WARRIOR | yes | 60 | 25 | 15 | 86 | 161 | +25 | 52 h 44 min | +2 h 05 min | 158 h 57 min |
+| NightElf | DRUID | yes | 60 | 18 | 11 | 54 | 132 | +8 | 52 h 38 min | +1 h 03 min | 157 h 16 min |
+| NightElf | HUNTER | yes | 60 | 10 | 11 | 25 | 126 | +2 | 52 h 09 min | +0 h 33 min | 155 h 55 min |
+| NightElf | PRIEST | yes | 60 | 9 | 11 | 24 | 130 | +6 | 52 h 04 min | +0 h 28 min | 155 h 56 min |
+| NightElf | ROGUE | yes | 60 | 27 | 6 | 83 | 157 | +33 | 54 h 04 min | +2 h 29 min | 158 h 59 min |
+| NightElf | WARRIOR | yes | 60 | 25 | 15 | 71 | 148 | +24 | 53 h 15 min | +1 h 39 min | 157 h 37 min |
+| Undead | MAGE | yes | 60 | 23 | 8 | 79 | 170 | +25 | 50 h 06 min | +2 h 16 min | 158 h 20 min |
+| Undead | PALADIN | yes | 60 | 1 | 31 | 4 | 147 | +2 | 48 h 04 min | +0 h 14 min | 156 h 16 min |
+| Undead | PRIEST | yes | 60 | 10 | 8 | 26 | 150 | +5 | 48 h 15 min | +0 h 26 min | 156 h 13 min |
+| Undead | ROGUE | yes | 60 | 24 | 7 | 71 | 166 | +21 | 49 h 24 min | +1 h 34 min | 157 h 59 min |
+| Undead | WARLOCK | yes | 60 | 30 | 25 | 88 | 176 | +31 | 49 h 52 min | +2 h 03 min | 158 h 10 min |
+| Undead | WARRIOR | yes | 60 | 22 | 14 | 63 | 156 | +11 | 49 h 08 min | +1 h 18 min | 157 h 31 min |
+| Tauren | DRUID | yes | 60 | 19 | 10 | 60 | 164 | +14 | 49 h 45 min | +1 h 24 min | 159 h 33 min |
+| Tauren | HUNTER | yes | 60 | 11 | 5 | 30 | 156 | +6 | 49 h 19 min | +0 h 59 min | 158 h 21 min |
+| Tauren | SHAMAN | yes | 60 | 26 | 19 | 73 | 177 | +27 | 51 h 03 min | +2 h 42 min | 161 h 03 min |
+| Tauren | WARRIOR | yes | 60 | 22 | 14 | 61 | 163 | +13 | 49 h 47 min | +1 h 26 min | 159 h 14 min |
+| Gnome | MAGE | yes | 60 | 22 | 8 | 70 | 159 | +23 | 52 h 17 min | +1 h 38 min | 158 h 40 min |
+| Gnome | PRIEST | yes | 60 | 6 | 8 | 18 | 140 | +4 | 51 h 01 min | +0 h 22 min | 156 h 45 min |
+| Gnome | ROGUE | yes | 60 | 27 | 6 | 79 | 168 | +32 | 52 h 28 min | +1 h 49 min | 159 h 28 min |
+| Gnome | WARLOCK | yes | 60 | 22 | 23 | 77 | 159 | +23 | 52 h 47 min | +2 h 08 min | 158 h 29 min |
+| Gnome | WARRIOR | yes | 60 | 25 | 15 | 86 | 161 | +25 | 52 h 44 min | +2 h 05 min | 158 h 57 min |
+| Troll | HUNTER | yes | 60 | 11 | 5 | 30 | 160 | +4 | 50 h 34 min | +0 h 41 min | 159 h 30 min |
+| Troll | MAGE | yes | 60 | 23 | 8 | 77 | 175 | +19 | 51 h 37 min | +1 h 44 min | 160 h 49 min |
+| Troll | PRIEST | yes | 60 | 10 | 8 | 25 | 159 | +3 | 50 h 08 min | +0 h 15 min | 159 h 02 min |
+| Troll | ROGUE | yes | 60 | 18 | 7 | 52 | 171 | +15 | 50 h 50 min | +0 h 57 min | 159 h 52 min |
+| Troll | SHAMAN | yes | 60 | 26 | 19 | 80 | 180 | +24 | 52 h 30 min | +2 h 37 min | 162 h 10 min |
+| Troll | WARLOCK | yes | 60 | 28 | 26 | 83 | 179 | +23 | 51 h 26 min | +1 h 32 min | 160 h 34 min |
+| Troll | WARRIOR | yes | 60 | 22 | 14 | 63 | 169 | +13 | 51 h 10 min | +1 h 17 min | 160 h 38 min |
+| HighOrder | DRUID | yes | 60 | 11 | 11 | 31 | 143 | +3 | 49 h 50 min | +0 h 27 min | 156 h 32 min |
+| HighOrder | HUNTER | yes | 60 | 10 | 7 | 27 | 142 | +2 | 49 h 51 min | +0 h 27 min | 156 h 03 min |
+| HighOrder | MAGE | yes | 60 | 16 | 6 | 48 | 149 | +9 | 50 h 34 min | +1 h 10 min | 156 h 59 min |
+| HighOrder | ROGUE | yes | 60 | 27 | 6 | 85 | 175 | +35 | 52 h 06 min | +2 h 42 min | 159 h 20 min |
+| HighOrder | WARRIOR | yes | 60 | 26 | 14 | 86 | 161 | +21 | 51 h 26 min | +2 h 02 min | 158 h 13 min |
+| Windshaper | DRUID | yes | 60 | 8 | 9 | 20 | 162 | +2 | 49 h 39 min | +0 h 15 min | 158 h 59 min |
+| Windshaper | HUNTER | yes | 60 | 11 | 3 | 31 | 164 | +4 | 49 h 55 min | +0 h 31 min | 159 h 15 min |
+| Windshaper | ROGUE | yes | 60 | 17 | 7 | 50 | 175 | +15 | 50 h 36 min | +1 h 12 min | 160 h 08 min |
+| Windshaper | SHAMAN | yes | 60 | 28 | 19 | 85 | 175 | +15 | 51 h 20 min | +1 h 56 min | 161 h 51 min |
+| Windshaper | WARRIOR | yes | 60 | 23 | 14 | 68 | 177 | +17 | 51 h 16 min | +1 h 52 min | 161 h 13 min |
 
 ## Human (Alliance, `alliance-human`)
 
 | Fact | Value |
 | --- | --- |
 | Classes validated | HUNTER, MAGE, PALADIN, PRIEST, ROGUE, WARLOCK, WARRIOR |
-| Steps | 2,314 |
-| Quests | 710 |
+| Steps | 2,239 |
+| Quests | 699 |
 | End level | 60 |
-| Zone changes | 140 (before: 214) |
-| Travel time | 51 h 29 min: on foot 39 h 09 min, in the air 9 h 11 min, on transports 2 h 55 min, hearthstone 0 h 15 min (before: 44 h 29 min) |
-| Walked | 931,968 yards (before: 936,223) |
-| Whole route, estimated | 163 h 54 min |
-| Flight points learned, flights taken | 32, 160 |
-| Transports taken | 52 |
-| Hearthstone bound, used | 40, 61 |
-| Grind steps | 14 (level 29 to 30, level 34 to 35, level 42 to 43, level 44 to 45, level 46 to 47, level 47 to 48, level 49 to 50, level 51 to 52, level 52 to 53, level 54 to 55, level 56 to 57, level 57 to 58, level 58 to 59, level 59 to 60) |
+| Zone changes | 135 (before: 214) |
+| Travel time | 49 h 56 min: on foot 37 h 54 min, in the air 9 h 11 min, on transports 2 h 36 min, hearthstone 0 h 15 min (before: 44 h 29 min) |
+| Walked | 924,418 yards (before: 936,223) |
+| Whole route, estimated | 156 h 53 min |
+| Flight points learned, flights taken | 32, 136 |
+| Transports taken | 47 |
+| Hearthstone bound, used | 37, 61 |
+| Grind steps | 13 (level 40 to 41, level 44 to 45, level 45 to 46, level 47 to 48, level 49 to 50, level 50 to 51, level 51 to 52, level 52 to 53, level 54 to 55, level 55 to 56, level 56 to 57, level 57 to 58, level 59 to 60) |
 | Unconfirmed transports used | Menethil Harbor to Auberdine (boat; not confirmed: route); Deeprun Tram (tram; not confirmed: route) |
 | Hand-ins left behind | none |
-| Quests above the level allowed, far below the player's level | 0, 101 of 1192 quest steps |
-| Zones in order (steps there) | Elwynn Forest (104), Dun Morogh (52), Teldrassil (67), Darkshore (68), Westfall (37), Loch Modan (45), Darkshore (75), Redridge Mountains (24), Loch Modan (15), Ashenvale (35), Stonetalon Mountains (15), Ashenvale (1), Wetlands (27), Duskwood (43), Westfall (1), Duskwood (18), Redridge Mountains (19), Wetlands (19), Ashenvale (17), Darkshore (1), Ashenvale (1), Stonetalon Mountains (5), Ashenvale (14), Duskwood (11), Stormwind City (10), Dun Morogh (4), Wetlands (9), Duskwood (6), Stormwind City (8), Ironforge (1), Wetlands (1), Ashenvale (18), Duskwood (31), Thousand Needles (13), Stranglethorn Vale (13), Hillsbrad Foothills (18), Wetlands (19), Arathi Highlands (1), Wetlands (1), Stormwind City (13), Stranglethorn Vale (17), Ashenvale (11), Desolace (19), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (5), Stranglethorn Vale (19), Duskwood (12), Dustwallow Marsh (14), Desolace (10), Thousand Needles (4), Arathi Highlands (14), Badlands (11), Hillsbrad Foothills (3), Alterac Mountains (2), Hillsbrad Foothills (2), Wetlands (4), Stranglethorn Vale (10), Desolace (3), Swamp of Sorrows (9), Stranglethorn Vale (21), Dustwallow Marsh (7), Stormwind City (3), Wetlands (7), Badlands (4), Arathi Highlands (12), Stranglethorn Vale (14), Dustwallow Marsh (15), Alterac Mountains (4), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (1), Desolace (19), Arathi Highlands (14), Ironforge (2), Desolace (14), Badlands (24), Stranglethorn Vale (18), Arathi Highlands (19), Stranglethorn Vale (22), Dustwallow Marsh (10), Desolace (7), Ironforge (3), Hillsbrad Foothills (5), Alterac Mountains (2), Hillsbrad Foothills (2), Loch Modan (3), Badlands (1), Loch Modan (5), Stranglethorn Vale (19), Badlands (9), Arathi Highlands (4), Ironforge (9), Badlands (6), Swamp of Sorrows (3), Feralas (31), Stranglethorn Vale (18), Tanaris (23), Searing Gorge (3), Ironforge (1), Badlands (3), The Hinterlands (7), Tanaris (23), Feralas (27), Searing Gorge (18), Stranglethorn Vale (7), Azshara (6), Searing Gorge (32), Blasted Lands (15), Teldrassil (6), Tanaris (19), The Hinterlands (9), Felwood (12), Un'Goro Crater (39), Azshara (6), Western Plaguelands (12), Burning Steppes (23), Felwood (21), Western Plaguelands (20), Un'Goro Crater (18), Silithus (6), Eastern Plaguelands (9), Ironforge (7), Searing Gorge (11), Western Plaguelands (17), Winterspring (15), Eastern Plaguelands (22), Silithus (19), Winterspring (18), Western Plaguelands (18), Thousand Needles (1), The Barrens (1), Westfall (2), Stormwind City (1), Elwynn Forest (1), Redridge Mountains (1), Ironforge (1), Teldrassil (2), Darnassus (1), Stonetalon Mountains (1), Stormwind City (1) |
-| Class quests left out | HUNTER: 8377 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 92479 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94792 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94793 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94863 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94864 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); MAGE: 1879 (an exclusive quest is taken instead), 1880 (an exclusive quest is taken instead), 1952 (it needs quest 1951 first, which no step of this route can take), 1957 (it needs one of quests 1956 first, which no step of this route can take), 1958 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8381 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 97286 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PALADIN: 1643 (it needs one of quests 1642 first, which no step of this route can take), 1644 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1650 (it needs one of quests 1649 first, which no step of this route can take), 1651 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1652 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1653 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1780 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1781 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1786 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1787 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1788 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1806 (it needs one of quests 1654 first, which no step of this route can take), 3681 (an exclusive quest is taken instead), 4485 (an exclusive quest is taken instead), 4486 (an exclusive quest is taken instead), 8376 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78088 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78089 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78090 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78091 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78092 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78093 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79939 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79940 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 81764 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 81765 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 81790 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 84150 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PRIEST: 5677 (an exclusive quest is taken instead), 5678 (an exclusive quest is taken instead), 8379 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 94773 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94774 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94775 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94776 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94777 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); ROGUE: 8378 (it needs one of quests 8315 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARLOCK: 1599 (an exclusive quest is taken instead), 1688 (an exclusive quest is taken instead), 1716 (an exclusive quest is taken instead), 1738 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4488 (an exclusive quest is taken instead), 4736 (an exclusive quest is taken instead), 4781 (it needs one of quests 1796 first, which no step of this route can take), 4782 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4783 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4784 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4786 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4963 (an exclusive quest is taken instead), 4964 (it needs quest -4962 first, which no step of this route can take), 4965 (an exclusive quest is taken instead), 4975 (an exclusive quest is taken instead), 8381 (it needs one of quests 8315 first, which no step of this route can take), 8419 (an exclusive quest is taken instead), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 65602 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 65603 (the route never offers it (a prerequisite, an exclusive quest or its level cap)); WARRIOR: 1638 (an exclusive quest is taken instead), 1678 (an exclusive quest is taken instead), 1679 (an exclusive quest is taken instead), 1683 (an exclusive quest is taken instead), 1684 (an exclusive quest is taken instead), 1700 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1705 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1706 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1708 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1709 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1710 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1711 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1782 (it needs one of quests 1701 first, which no step of this route can take), 8316 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take) |
+| Quests above the level allowed, far below the player's level | 0, 124 of 1170 quest steps |
+| Walks through dangerous zones | none |
+| Zones in order (steps there) | Elwynn Forest (104), Dun Morogh (56), Loch Modan (1), Westfall (36), Loch Modan (49), Redridge Mountains (20), Westfall (10), Redridge Mountains (4), Loch Modan (11), Ironforge (4), Loch Modan (10), Darkshore (108), Duskwood (56), Westfall (1), Duskwood (6), Redridge Mountains (28), Wetlands (48), Duskwood (16), Ashenvale (1), Stonetalon Mountains (16), Ashenvale (77), Darkshore (1), Ashenvale (2), Duskwood (29), Thousand Needles (13), Wetlands (21), Arathi Highlands (1), Wetlands (1), Ashenvale (11), Desolace (22), Hillsbrad Foothills (6), Alterac Mountains (1), Hillsbrad Foothills (14), Stranglethorn Vale (37), Dustwallow Marsh (15), Duskwood (12), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (2), Stranglethorn Vale (10), Stormwind City (15), Wetlands (12), Arathi Highlands (17), Stranglethorn Vale (5), Duskwood (1), Stranglethorn Vale (19), Desolace (13), Badlands (13), Swamp of Sorrows (12), Dustwallow Marsh (7), Stranglethorn Vale (18), Arathi Highlands (11), Stormwind City (5), Desolace (17), Arathi Highlands (17), Dustwallow Marsh (14), Badlands (20), Stranglethorn Vale (16), Arathi Highlands (16), Stranglethorn Vale (21), Ironforge (2), Desolace (21), Loch Modan (4), Badlands (1), Loch Modan (4), Feralas (10), Thousand Needles (3), Stranglethorn Vale (20), The Barrens (2), Feralas (11), Ironforge (2), Badlands (16), Hillsbrad Foothills (3), Alterac Mountains (1), Hillsbrad Foothills (1), Alterac Mountains (4), Hillsbrad Foothills (2), Stranglethorn Vale (20), Ironforge (2), Arathi Highlands (9), Dustwallow Marsh (1), Tanaris (12), Thousand Needles (5), Feralas (17), Tanaris (14), Stranglethorn Vale (8), Ironforge (11), Badlands (9), The Hinterlands (16), Searing Gorge (23), Feralas (21), Tanaris (37), Searing Gorge (28), Blasted Lands (16), Azshara (6), Stranglethorn Vale (7), Un'Goro Crater (17), Felwood (9), Burning Steppes (9), Alterac Mountains (1), Ironforge (8), Un'Goro Crater (24), Azshara (7), Western Plaguelands (21), Burning Steppes (13), Felwood (21), Un'Goro Crater (18), Blasted Lands (6), Western Plaguelands (13), Eastern Plaguelands (21), Western Plaguelands (15), Ironforge (1), Stormwind City (6), Darnassus (8), Winterspring (12), Tanaris (1), Silithus (22), Winterspring (30), Silithus (34), Western Plaguelands (25), Tanaris (2), Un'Goro Crater (1), Tanaris (1), Eastern Plaguelands (19), Western Plaguelands (1), Loch Modan (1), Dun Morogh (1), Stormwind City (1), Duskwood (2), Stormwind City (1), Dustwallow Marsh (1), Thousand Needles (1), Un'Goro Crater (1), Feralas (1), Darnassus (1), Moonglade (1) |
+| Class quests left out | HUNTER: 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 92479 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94792 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94793 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94863 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94864 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); MAGE: 1861 (an exclusive quest is taken instead), 1880 (an exclusive quest is taken instead), 1952 (it needs quest 1951 first, which no step of this route can take), 1957 (it needs one of quests 1956 first, which no step of this route can take), 1958 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 97286 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PALADIN: 1643 (it needs one of quests 1642 first, which no step of this route can take), 1644 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1650 (it needs one of quests 1649 first, which no step of this route can take), 1651 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1652 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1653 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1780 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1781 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1786 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1787 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1788 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1806 (it needs one of quests 1654 first, which no step of this route can take), 2998 (an exclusive quest is taken instead), 4485 (an exclusive quest is taken instead), 4486 (an exclusive quest is taken instead), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78088 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78089 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78090 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78091 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78092 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78093 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79939 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79940 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 81764 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 81765 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 81790 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 84150 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PRIEST: 5677 (an exclusive quest is taken instead), 5678 (an exclusive quest is taken instead), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 94773 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94774 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94775 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94776 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94777 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); ROGUE: 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARLOCK: 397 (it needs one of quests 336 first, which no step of this route can take), 1599 (an exclusive quest is taken instead), 1688 (an exclusive quest is taken instead), 1716 (an exclusive quest is taken instead), 1738 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4487 (an exclusive quest is taken instead), 4736 (an exclusive quest is taken instead), 4781 (it needs one of quests 1796 first, which no step of this route can take), 4782 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4783 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4784 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4786 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4961 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4962 (an exclusive quest is taken instead), 4964 (an exclusive quest is taken instead), 4968 (an exclusive quest is taken instead), 4975 (it needs quest -4963 first, which no step of this route can take), 4976 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8419 (an exclusive quest is taken instead), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 65602 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 65603 (the route never offers it (a prerequisite, an exclusive quest or its level cap)); WARRIOR: 1638 (an exclusive quest is taken instead), 1678 (an exclusive quest is taken instead), 1679 (an exclusive quest is taken instead), 1683 (an exclusive quest is taken instead), 1684 (an exclusive quest is taken instead), 1700 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1705 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1706 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1708 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1709 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1710 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1711 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1782 (it needs one of quests 1701 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take) |
 | Errors | 0 |
 | Warnings | none |
 
@@ -155,119 +159,126 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,657, 1,880 (71%) |
-| Steps in the route file | 2,135 |
-| Sections | 68 |
-| Profession steps written | p164-2, p165-2, p171-2, p182-2, p186-2, p197-2, p202-2, p333-2, p393-2, p186-3, p182-3, p393-3, p165-3, p171-3, p186-4, p164-4, p197-4, p171-4, p333-4, p182-4 |
-| Profession ranks without a step | Blacksmithing Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section human-18-20-darkshore; Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-35-stranglethorn-vale; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section human-18-20-darkshore; Engineering Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section human-18-20-darkshore; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-35-stranglethorn-vale; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section human-18-20-darkshore; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-35-stranglethorn-vale |
-| Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 12, 16, 20, 25, 28, 30, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58; MAGE: 2, 4, 6, 8, 10, 14, 20, 24, 26, 28, 30, 32, 34, 36, 40, 42, 46, 50, 54, 58; PALADIN: 2, 4, 6, 8, 10, 14, 25, 28, 30, 34, 36, 38, 40, 42, 46, 48, 52, 54, 56, 58; PRIEST: 2, 4, 6, 8, 10, 12, 20, 25, 28, 30, 34, 40, 42, 46, 50, 54, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 24, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 50, 54, 58; WARLOCK: 2, 4, 6, 8, 10, 14, 21, 24, 26, 28, 30, 34, 36, 38, 40, 42, 44, 48, 52, 54, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 21, 25, 28, 30, 34, 36, 38, 40, 42, 44, 46, 48, 52, 54, 56, 58 |
-| Class trainer gaps | PALADIN 14 to 25: the cheapest trip to a trainer adds 333 seconds (at most 300); PRIEST 12 to 20: the cheapest trip to a trainer adds 325 seconds (at most 300); WARLOCK 14 to 21: the cheapest trip to a trainer adds 302 seconds (at most 300); WARRIOR 14 to 21: the cheapest trip to a trainer adds 303 seconds (at most 300) |
-| Planner notes | none |
+| Actions before bundling, steps after | 2,583, 1,784 (69%) |
+| Steps in the route file | 2,027 |
+| Sections | 74 |
+| Profession steps written | p164-2, p165-2, p171-2, p182-2, p186-2, p197-2, p202-2, p333-2, p393-2, p182-3, p164-3, p186-3, p202-3, p393-3, p165-3, p171-3, p164-4, p197-4, p186-4, p182-4, p393-4 |
+| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-35-desolace; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-35-desolace; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section human-20-21-darkshore; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-35-desolace; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section human-20-21-darkshore; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-35-desolace |
+| Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 12, 14, 16, 26, 32, 34, 38, 40, 42, 44, 48, 52, 54, 59; MAGE: 2, 4, 6, 8, 10, 12, 14, 16, 28, 30, 32, 34, 38, 40, 42, 47, 51, 57; PALADIN: 2, 4, 6, 8, 10, 12, 14, 30, 32, 34, 36, 38, 40, 42, 44, 48, 52, 57; PRIEST: 2, 4, 6, 8, 10, 14, 22, 32, 34, 40, 42, 47, 51, 57; ROGUE: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 24, 28, 30, 32, 34, 36, 38, 40, 42, 47, 51, 57; WARLOCK: 2, 4, 6, 8, 10, 12, 16, 22, 32, 34, 36, 38, 40, 42, 47, 51, 57; WARRIOR: 2, 4, 6, 8, 10, 12, 16, 18, 22, 24, 28, 30, 32, 34, 36, 38, 40, 42, 44, 48, 52, 57 |
+| Class trainer gaps | HUNTER 16 to 26: the cheapest trip to a trainer adds 302 seconds (at most 300); MAGE 16 to 28: the cheapest trip to a trainer adds 313 seconds (at most 300); PALADIN 14 to 30: the cheapest trip to a trainer adds 310 seconds (at most 300); PRIEST 14 to 22: the cheapest trip to a trainer adds 323 seconds (at most 300); PRIEST 22 to 32: the cheapest trip to a trainer adds 303 seconds (at most 300); WARLOCK 22 to 32: the cheapest trip to a trainer adds 302 seconds (at most 300) |
+| Planner notes | Human step a2241: quest 2241 gives XP only up to level 18, but the estimated level there is 20; with "skip content you outlevel" the step and its quest's later lines are skipped; Human step a1686: quest 1686 gives XP only up to level 18, but the estimated level there is 20; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| human-01-10-elwynn-forest | 1-10 Elwynn Forest | 131 | 1-13 |
-| human-10-11-dun-morogh | 10-11 Dun Morogh | 53 | 10-14 |
-| human-11-13-teldrassil | 11-13 Teldrassil | 61 | 11-16 |
-| human-13-15-darkshore | 13-15 Darkshore | 72 | 13-18 |
-| human-15-17-westfall | 15-17 Westfall | 30 | 15-20 |
-| human-17-18-loch-modan | 17-18 Loch Modan | 35 | 17-21 |
-| human-18-20-darkshore | 18-20 Darkshore | 32 | 18-23 |
-| human-20-21-darkshore | 20-21 Darkshore | 38 | 20-24 |
-| human-21-22-redridge-mountains | 21-22 Redridge Mountains | 38 | 21-25 |
-| human-22-22-loch-modan | 22 Loch Modan | 8 | 22-25 |
-| human-22-23-ashenvale | 22-23 Ashenvale | 29 | 22-26 |
-| human-23-23-stonetalon-mountains | 23 Stonetalon Mountains | 11 | 23-26 |
-| human-23-24-wetlands | 23-24 Wetlands | 28 | 23-27 |
-| human-24-26-duskwood | 24-26 Duskwood | 74 | 24-29 |
-| human-26-26-redridge-mountains | 26 Redridge Mountains | 20 | 26-29 |
-| human-26-27-wetlands | 26-27 Wetlands | 15 | 26-30 |
-| human-27-28-ashenvale | 27-28 Ashenvale | 37 | 27-31 |
-| human-28-28-duskwood | 28 Duskwood | 15 | 28-31 |
-| human-28-30-stormwind-city | 28-30 Stormwind City | 60 | 28-33 |
-| human-30-30-ashenvale | 30 Ashenvale | 20 | 30-33 |
-| human-30-31-duskwood | 30-31 Duskwood | 21 | 30-34 |
-| human-31-31-thousand-needles | 31 Thousand Needles | 11 | 31-34 |
-| human-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 13 | 31-34 |
-| human-31-32-hillsbrad-foothills | 31-32 Hillsbrad Foothills | 12 | 31-35 |
-| human-32-32-wetlands | 32 Wetlands | 20 | 32-35 |
-| human-32-32-stormwind-city | 32 Stormwind City | 17 | 32-35 |
-| human-32-33-stranglethorn-vale | 32-33 Stranglethorn Vale | 26 | 32-36 |
-| human-33-33-ashenvale | 33 Ashenvale | 15 | 33-36 |
-| human-33-34-desolace | 33-34 Desolace | 28 | 33-37 |
-| human-34-35-stranglethorn-vale | 34-35 Stranglethorn Vale | 33 | 34-38 |
-| human-35-35-duskwood | 35 Duskwood | 27 | 35-38 |
-| human-35-35-dustwallow-marsh | 35 Dustwallow Marsh | 61 | 35-38 |
-| human-35-36-arathi-highlands | 35-36 Arathi Highlands | 11 | 35-39 |
-| human-36-37-badlands | 36-37 Badlands | 57 | 36-40 |
-| human-37-37-stranglethorn-vale | 37 Stranglethorn Vale | 46 | 37-40 |
-| human-37-38-arathi-highlands | 37-38 Arathi Highlands | 13 | 37-41 |
-| human-38-38-stranglethorn-vale | 38 Stranglethorn Vale | 21 | 38-41 |
-| human-38-38-dustwallow-marsh | 38 Dustwallow Marsh | 21 | 38-41 |
-| human-38-39-desolace | 38-39 Desolace | 21 | 38-42 |
-| human-39-39-arathi-highlands | 39 Arathi Highlands | 15 | 39-42 |
-| human-39-39-desolace | 39 Desolace | 10 | 39-42 |
-| human-39-40-badlands | 39-40 Badlands | 22 | 39-43 |
-| human-40-40-stranglethorn-vale | 40 Stranglethorn Vale | 19 | 40-43 |
-| human-40-41-arathi-highlands | 40-41 Arathi Highlands | 13 | 40-44 |
-| human-41-43-stranglethorn-vale | 41-43 Stranglethorn Vale | 101 | 41-46 |
-| human-43-43-ironforge | 43 Ironforge | 37 | 43-46 |
-| human-43-45-feralas | 43-45 Feralas | 21 | 43-48 |
-| human-45-45-stranglethorn-vale | 45 Stranglethorn Vale | 12 | 45-48 |
-| human-45-48-tanaris | 45-48 Tanaris | 87 | 45-51 |
-| human-48-48-feralas | 48 Feralas | 21 | 48-51 |
-| human-48-50-searing-gorge | 48-50 Searing Gorge | 44 | 48-53 |
-| human-50-50-searing-gorge | 50 Searing Gorge | 6 | 50-53 |
-| human-50-50-blasted-lands | 50 Blasted Lands | 8 | 50-53 |
-| human-50-50-tanaris | 50 Tanaris | 32 | 50-53 |
-| human-50-53-felwood | 50-53 Felwood | 26 | 50-56 |
-| human-53-53-un-goro-crater | 53 Un'Goro Crater | 45 | 53-56 |
-| human-53-53-western-plaguelands | 53 Western Plaguelands | 9 | 53-56 |
-| human-53-54-burning-steppes | 53-54 Burning Steppes | 15 | 53-57 |
-| human-54-55-felwood | 54-55 Felwood | 26 | 54-58 |
-| human-55-55-western-plaguelands | 55 Western Plaguelands | 14 | 55-58 |
-| human-55-56-un-goro-crater | 55-56 Un'Goro Crater | 73 | 55-59 |
-| human-56-56-western-plaguelands | 56 Western Plaguelands | 17 | 56-59 |
-| human-56-56-winterspring | 56 Winterspring | 17 | 56-59 |
-| human-56-56-azshara | 56 Azshara | 29 | 56-59 |
-| human-56-58-eastern-plaguelands | 56-58 Eastern Plaguelands | 17 | 56-60 |
-| human-58-59-silithus | 58-59 Silithus | 21 | 58-60 |
-| human-59-59-winterspring | 59 Winterspring | 20 | 59-60 |
-| human-59-60-western-plaguelands | 59-60 Western Plaguelands | 77 | 59-60 |
+| human-01-10-elwynn-forest | 1-10 Elwynn Forest | 134 | 1-13 |
+| human-10-12-dun-morogh | 10-12 Dun Morogh | 59 | 10-15 |
+| human-12-14-westfall | 12-14 Westfall | 36 | 12-17 |
+| human-14-16-loch-modan | 14-16 Loch Modan | 54 | 14-19 |
+| human-16-17-redridge-mountains | 16-17 Redridge Mountains | 21 | 16-20 |
+| human-17-18-westfall | 17-18 Westfall | 19 | 17-21 |
+| human-18-19-loch-modan | 18-19 Loch Modan | 23 | 18-22 |
+| human-19-20-darkshore | 19-20 Darkshore | 34 | 19-23 |
+| human-20-21-darkshore | 20-21 Darkshore | 80 | 20-24 |
+| human-21-23-duskwood | 21-23 Duskwood | 45 | 21-26 |
+| human-23-24-redridge-mountains | 23-24 Redridge Mountains | 24 | 23-27 |
+| human-24-25-wetlands | 24-25 Wetlands | 48 | 24-28 |
+| human-25-26-duskwood | 25-26 Duskwood | 28 | 25-29 |
+| human-26-26-stonetalon-mountains | 26 Stonetalon Mountains | 11 | 26-29 |
+| human-26-28-ashenvale | 26-28 Ashenvale | 57 | 26-31 |
+| human-28-29-duskwood | 28-29 Duskwood | 16 | 28-32 |
+| human-29-29-stormwind-city | 29 Stormwind City | 11 | 29-32 |
+| human-29-29-thousand-needles | 29 Thousand Needles | 20 | 29-32 |
+| human-29-30-wetlands | 29-30 Wetlands | 9 | 29-33 |
+| human-30-30-wetlands | 30 Wetlands | 9 | 30-33 |
+| human-30-30-ashenvale | 30 Ashenvale | 11 | 30-33 |
+| human-30-31-desolace | 30-31 Desolace | 30 | 30-34 |
+| human-31-31-hillsbrad-foothills | 31 Hillsbrad Foothills | 11 | 31-34 |
+| human-31-32-stranglethorn-vale | 31-32 Stranglethorn Vale | 27 | 31-35 |
+| human-32-32-dustwallow-marsh | 32 Dustwallow Marsh | 15 | 32-35 |
+| human-32-33-duskwood | 32-33 Duskwood | 36 | 32-36 |
+| human-33-33-stormwind-city | 33 Stormwind City | 23 | 33-36 |
+| human-33-34-wetlands | 33-34 Wetlands | 8 | 33-37 |
+| human-34-34-arathi-highlands | 34 Arathi Highlands | 14 | 34-37 |
+| human-34-34-stranglethorn-vale | 34 Stranglethorn Vale | 18 | 34-37 |
+| human-34-35-desolace | 34-35 Desolace | 30 | 34-38 |
+| human-35-35-badlands | 35 Badlands | 14 | 35-38 |
+| human-35-35-swamp-of-sorrows | 35 Swamp of Sorrows | 28 | 35-38 |
+| human-35-36-stranglethorn-vale | 35-36 Stranglethorn Vale | 21 | 35-39 |
+| human-36-36-arathi-highlands | 36 Arathi Highlands | 24 | 36-39 |
+| human-36-37-desolace | 36-37 Desolace | 20 | 36-40 |
+| human-37-37-arathi-highlands | 37 Arathi Highlands | 12 | 37-40 |
+| human-37-37-dustwallow-marsh | 37 Dustwallow Marsh | 11 | 37-40 |
+| human-37-38-badlands | 37-38 Badlands | 20 | 37-41 |
+| human-38-38-stranglethorn-vale | 38 Stranglethorn Vale | 17 | 38-41 |
+| human-38-39-arathi-highlands | 38-39 Arathi Highlands | 9 | 38-42 |
+| human-39-39-stranglethorn-vale | 39 Stranglethorn Vale | 32 | 39-42 |
+| human-39-40-desolace | 39-40 Desolace | 22 | 39-43 |
+| human-40-40-feralas | 40 Feralas | 22 | 40-43 |
+| human-40-41-stranglethorn-vale | 40-41 Stranglethorn Vale | 39 | 40-44 |
+| human-41-42-badlands | 41-42 Badlands | 28 | 41-45 |
+| human-42-42-stranglethorn-vale | 42 Stranglethorn Vale | 24 | 42-45 |
+| human-42-42-tanaris | 42 Tanaris | 23 | 42-45 |
+| human-42-43-feralas | 42-43 Feralas | 10 | 42-46 |
+| human-43-43-tanaris | 43 Tanaris | 19 | 43-46 |
+| human-43-46-the-hinterlands | 43-46 The Hinterlands | 66 | 43-49 |
+| human-46-46-searing-gorge | 46 Searing Gorge | 13 | 46-49 |
+| human-46-46-feralas | 46 Feralas | 21 | 46-49 |
+| human-46-48-tanaris | 46-48 Tanaris | 27 | 46-51 |
+| human-48-48-searing-gorge | 48 Searing Gorge | 26 | 48-51 |
+| human-48-50-blasted-lands | 48-50 Blasted Lands | 36 | 48-53 |
+| human-50-50-un-goro-crater | 50 Un'Goro Crater | 14 | 50-53 |
+| human-50-50-felwood | 50 Felwood | 32 | 50-53 |
+| human-50-51-un-goro-crater | 50-51 Un'Goro Crater | 22 | 50-54 |
+| human-51-52-azshara | 51-52 Azshara | 27 | 51-55 |
+| human-52-52-western-plaguelands | 52 Western Plaguelands | 12 | 52-55 |
+| human-52-53-burning-steppes | 52-53 Burning Steppes | 9 | 52-56 |
+| human-53-53-felwood | 53 Felwood | 22 | 53-56 |
+| human-53-53-un-goro-crater | 53 Un'Goro Crater | 27 | 53-56 |
+| human-53-53-western-plaguelands | 53 Western Plaguelands | 18 | 53-56 |
+| human-53-54-eastern-plaguelands | 53-54 Eastern Plaguelands | 18 | 53-57 |
+| human-54-54-western-plaguelands | 54 Western Plaguelands | 49 | 54-57 |
+| human-54-55-winterspring | 54-55 Winterspring | 11 | 54-58 |
+| human-55-55-azshara | 55 Azshara | 19 | 55-58 |
+| human-55-56-silithus | 55-56 Silithus | 17 | 55-59 |
+| human-56-58-winterspring | 56-58 Winterspring | 36 | 56-60 |
+| human-58-58-silithus | 58 Silithus | 33 | 58-60 |
+| human-58-58-western-plaguelands | 58 Western Plaguelands | 38 | 58-60 |
+| human-58-60-eastern-plaguelands | 58-60 Eastern Plaguelands | 78 | 58-60 |
 
 ### Level curve
 
 | Level | Reached at step |
 | --- | --- |
-| 10 | 104 |
-| 20 | 436 |
-| 30 | 835 |
-| 40 | 1,421 |
-| 50 | 1,847 |
-| 60 | 2,277 |
+| 10 | 106 |
+| 20 | 389 |
+| 30 | 792 |
+| 40 | 1,344 |
+| 50 | 1,759 |
+| 60 | 2,201 |
 
 ## Orc (Horde, `horde-orc`)
 
 | Fact | Value |
 | --- | --- |
 | Classes validated | HUNTER, MAGE, ROGUE, SHAMAN, WARLOCK, WARRIOR |
-| Steps | 2,306 |
-| Quests | 655 |
+| Steps | 2,250 |
+| Quests | 650 |
 | End level | 60 |
-| Zone changes | 166 (before: 206) |
-| Travel time | 49 h 27 min: on foot 35 h 25 min, in the air 10 h 41 min, on transports 3 h 06 min, hearthstone 0 h 16 min (before: 42 h 57 min) |
-| Walked | 866,508 yards (before: 920,085) |
-| Whole route, estimated | 165 h 54 min |
-| Flight points learned, flights taken | 31, 185 |
-| Transports taken | 48 |
-| Hearthstone bound, used | 66, 64 |
-| Grind steps | 15 (level 23 to 24, level 28 to 29, level 29 to 30, level 32 to 33, level 34 to 35, level 39 to 40, level 44 to 45, level 46 to 47, level 47 to 48, level 49 to 50, level 52 to 53, level 54 to 55, level 56 to 57, level 57 to 58, level 59 to 60) |
+| Zone changes | 156 (before: 206) |
+| Travel time | 49 h 53 min: on foot 36 h 07 min, in the air 10 h 25 min, on transports 3 h 04 min, hearthstone 0 h 17 min (before: 42 h 57 min) |
+| Walked | 880,953 yards (before: 920,085) |
+| Whole route, estimated | 158 h 58 min |
+| Flight points learned, flights taken | 30, 166 |
+| Transports taken | 47 |
+| Hearthstone bound, used | 59, 69 |
+| Grind steps | 12 (level 27 to 28, level 37 to 38, level 44 to 45, level 45 to 46, level 49 to 50, level 51 to 52, level 52 to 53, level 53 to 54, level 55 to 56, level 56 to 57, level 57 to 58, level 59 to 60) |
 | Unconfirmed transports used | none |
-| Hand-ins left behind | none |
-| Quests above the level allowed, far below the player's level | 0, 86 of 1165 quest steps |
-| Zones in order (steps there) | Durotar (65), Orgrimmar (1), Durotar (1), The Barrens (1), Durotar (1), Mulgore (49), Tirisfal Glades (61), Silverpine Forest (45), The Barrens (118), Stonetalon Mountains (1), The Barrens (1), Stonetalon Mountains (11), Westfall (9), The Barrens (34), Stonetalon Mountains (1), The Barrens (1), Stonetalon Mountains (20), Silverpine Forest (19), Hillsbrad Foothills (15), The Barrens (16), Ashenvale (19), Hillsbrad Foothills (4), Alterac Mountains (1), Hillsbrad Foothills (10), The Barrens (7), Stonetalon Mountains (14), Thousand Needles (13), Stonetalon Mountains (9), The Barrens (12), Ashenvale (13), Hillsbrad Foothills (7), Thousand Needles (6), Hillsbrad Foothills (12), Undercity (1), Thousand Needles (32), The Barrens (7), Thousand Needles (1), The Barrens (1), Stonetalon Mountains (5), Thunder Bluff (5), Thousand Needles (9), Stranglethorn Vale (13), Undercity (1), Hillsbrad Foothills (14), Orgrimmar (3), Thunder Bluff (2), Ashenvale (1), Thunder Bluff (2), Thousand Needles (9), Desolace (17), Hillsbrad Foothills (6), Alterac Mountains (2), Hillsbrad Foothills (6), Arathi Highlands (18), Stranglethorn Vale (27), Dustwallow Marsh (16), Desolace (14), Orgrimmar (2), Swamp of Sorrows (4), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (1), Alterac Mountains (2), Hillsbrad Foothills (2), Stranglethorn Vale (17), Desolace (7), Thousand Needles (4), Dustwallow Marsh (4), The Barrens (4), Orgrimmar (2), Thousand Needles (8), Stranglethorn Vale (1), Badlands (8), Stranglethorn Vale (19), Arathi Highlands (17), Dustwallow Marsh (12), Desolace (17), Arathi Highlands (7), Stranglethorn Vale (12), The Barrens (1), Thousand Needles (2), The Barrens (2), Swamp of Sorrows (4), Stranglethorn Vale (14), Badlands (19), Arathi Highlands (33), Stranglethorn Vale (36), Hillsbrad Foothills (4), Alterac Mountains (2), Hillsbrad Foothills (2), Desolace (9), Thousand Needles (9), Stranglethorn Vale (12), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (1), Arathi Highlands (15), Alterac Mountains (2), Badlands (12), Swamp of Sorrows (1), Duskwood (2), Swamp of Sorrows (9), Stranglethorn Vale (12), Dustwallow Marsh (15), Feralas (16), Badlands (3), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (1), Stranglethorn Vale (21), Tanaris (21), Feralas (15), Orgrimmar (4), Swamp of Sorrows (14), Searing Gorge (5), Stranglethorn Vale (17), Undercity (9), Tanaris (30), Feralas (20), The Hinterlands (30), Searing Gorge (41), Blasted Lands (15), Feralas (25), Undercity (1), The Hinterlands (29), Un'Goro Crater (6), Tanaris (17), Felwood (9), Orgrimmar (3), Swamp of Sorrows (7), Badlands (8), Azshara (13), Un'Goro Crater (33), Searing Gorge (5), Burning Steppes (7), Undercity (6), Tirisfal Glades (2), Western Plaguelands (1), Tirisfal Glades (4), Azshara (5), Felwood (23), Silithus (6), Un'Goro Crater (19), Western Plaguelands (17), Undercity (11), Eastern Plaguelands (26), Swamp of Sorrows (7), Blasted Lands (1), Swamp of Sorrows (7), Winterspring (28), Tirisfal Glades (3), Western Plaguelands (1), Tirisfal Glades (3), Eastern Plaguelands (7), Western Plaguelands (23), Blasted Lands (7), Orgrimmar (4), Azshara (7), Thunder Bluff (3), Tanaris (3), Un'Goro Crater (1), Tanaris (1), Silithus (20), Dustwallow Marsh (1), Stonetalon Mountains (1), Stranglethorn Vale (1), Arathi Highlands (2) |
-| Class quests left out | HUNTER: 6068 (an exclusive quest is taken instead), 6069 (an exclusive quest is taken instead), 8377 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); MAGE: 1952 (it needs quest 1951 first, which no step of this route can take), 1957 (it needs one of quests 1956 first, which no step of this route can take), 1958 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8381 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 97286 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98576 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); ROGUE: 2378 (an exclusive quest is taken instead), 8378 (it needs one of quests 8315 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); SHAMAN: 1519 (an exclusive quest is taken instead), 1522 (an exclusive quest is taken instead), 1523 (an exclusive quest is taken instead), 1529 (an exclusive quest is taken instead), 1531 (an exclusive quest is taken instead), 2983 (an exclusive quest is taken instead), 2985 (an exclusive quest is taken instead), 2986 (an exclusive quest is taken instead), 8380 (it needs one of quests 8315 first, which no step of this route can take), 8410 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 79358 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79361 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79362 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79363 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79364 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79365 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79366 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79442 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARLOCK: 1470 (an exclusive quest is taken instead), 1507 (an exclusive quest is taken instead), 1508 (an exclusive quest is taken instead), 1509 (an exclusive quest is taken instead), 1510 (an exclusive quest is taken instead), 1511 (an exclusive quest is taken instead), 1512 (an exclusive quest is taken instead), 1515 (an exclusive quest is taken instead), 3631 (an exclusive quest is taken instead), 4739 (an exclusive quest is taken instead), 4781 (it needs one of quests 1796 first, which no step of this route can take), 4782 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4783 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4784 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4786 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4963 (an exclusive quest is taken instead), 4964 (it needs quest -4962 first, which no step of this route can take), 4969 (an exclusive quest is taken instead), 4975 (an exclusive quest is taken instead), 8381 (it needs one of quests 8315 first, which no step of this route can take), 8420 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 65601 (an exclusive quest is taken instead), 65604 (an exclusive quest is taken instead), 65610 (an exclusive quest is taken instead); WARRIOR: 1498 (an exclusive quest is taken instead), 1505 (an exclusive quest is taken instead), 1839 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1840 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1841 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1842 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1843 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1844 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1845 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1846 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1847 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1848 (it needs one of quests 1838 first, which no step of this route can take), 8316 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take) |
+| Hand-ins left behind | step 181 (quest 438) |
+| Quests above the level allowed, far below the player's level | 0, 55 of 1155 quest steps |
+| Walks through dangerous zones | none |
+| Zones in order (steps there) | Durotar (65), Orgrimmar (1), Durotar (1), The Barrens (1), Durotar (1), Tirisfal Glades (72), Silverpine Forest (52), The Barrens (151), Stonetalon Mountains (1), The Barrens (1), Stonetalon Mountains (32), Silverpine Forest (12), Hillsbrad Foothills (16), Ashenvale (28), The Barrens (27), Thousand Needles (10), Stonetalon Mountains (25), Ashenvale (9), Hillsbrad Foothills (11), Thousand Needles (23), Hillsbrad Foothills (10), Alterac Mountains (1), Hillsbrad Foothills (12), Undercity (1), The Barrens (10), Thousand Needles (1), The Barrens (1), Thousand Needles (21), Thunder Bluff (3), Thousand Needles (3), Stonetalon Mountains (1), Desolace (5), Thousand Needles (1), Hillsbrad Foothills (3), Arathi Highlands (6), Undercity (2), Hillsbrad Foothills (8), The Barrens (3), Orgrimmar (5), Thousand Needles (1), Desolace (16), Hillsbrad Foothills (4), Alterac Mountains (2), Hillsbrad Foothills (6), Stranglethorn Vale (29), Arathi Highlands (13), Hillsbrad Foothills (3), Alterac Mountains (1), Hillsbrad Foothills (1), Alterac Mountains (1), Hillsbrad Foothills (1), Dustwallow Marsh (17), Desolace (13), Stranglethorn Vale (11), Thousand Needles (7), Stranglethorn Vale (12), Desolace (9), Thousand Needles (4), Dustwallow Marsh (7), Orgrimmar (2), The Barrens (5), Stranglethorn Vale (30), Arathi Highlands (17), Badlands (7), Desolace (19), Thousand Needles (8), Stranglethorn Vale (12), Arathi Highlands (10), Badlands (22), Arathi Highlands (27), Stranglethorn Vale (40), Hillsbrad Foothills (4), Alterac Mountains (2), Hillsbrad Foothills (2), Dustwallow Marsh (8), Swamp of Sorrows (11), Arathi Highlands (17), Badlands (11), Stranglethorn Vale (13), Thousand Needles (7), Dustwallow Marsh (15), Feralas (16), Stranglethorn Vale (13), Swamp of Sorrows (14), Stranglethorn Vale (18), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (1), Desolace (6), Thousand Needles (4), Tanaris (24), Orgrimmar (2), Feralas (16), Orgrimmar (1), Undercity (7), Badlands (6), Dustwallow Marsh (8), Orgrimmar (3), Stranglethorn Vale (30), Undercity (2), The Hinterlands (29), Feralas (16), Stranglethorn Vale (1), Searing Gorge (29), Tanaris (33), Azshara (6), The Hinterlands (18), Blasted Lands (15), Swamp of Sorrows (11), Feralas (7), Searing Gorge (21), Tanaris (9), Orgrimmar (6), The Hinterlands (21), Tanaris (1), Un'Goro Crater (17), Feralas (8), Orgrimmar (2), Undercity (10), Azshara (9), Felwood (13), Feralas (1), Un'Goro Crater (34), Azshara (7), Felwood (20), Un'Goro Crater (13), Western Plaguelands (24), Eastern Plaguelands (21), Undercity (9), Winterspring (16), Tirisfal Glades (3), Western Plaguelands (1), Tirisfal Glades (4), Silithus (29), Winterspring (15), Swamp of Sorrows (7), Blasted Lands (1), Swamp of Sorrows (5), Eastern Plaguelands (2), Swamp of Sorrows (1), Eastern Plaguelands (21), Silithus (29), Tirisfal Glades (1), Western Plaguelands (1), Tirisfal Glades (3), Western Plaguelands (9), Blasted Lands (7), Western Plaguelands (1), Alterac Mountains (3), Hillsbrad Foothills (1), Undercity (1), The Hinterlands (2), Feralas (1), Thunder Bluff (4), The Barrens (1), Undercity (1), Arathi Highlands (1) |
+| Class quests left out | HUNTER: 6068 (an exclusive quest is taken instead), 6070 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); MAGE: 1952 (it needs quest 1951 first, which no step of this route can take), 1957 (it needs one of quests 1956 first, which no step of this route can take), 1958 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 97286 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98576 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); ROGUE: 2378 (an exclusive quest is taken instead), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); SHAMAN: 1519 (an exclusive quest is taken instead), 1522 (an exclusive quest is taken instead), 1523 (an exclusive quest is taken instead), 1529 (an exclusive quest is taken instead), 1531 (an exclusive quest is taken instead), 2984 (an exclusive quest is taken instead), 2985 (an exclusive quest is taken instead), 2986 (an exclusive quest is taken instead), 8410 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 79358 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79361 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79362 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79363 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79364 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79365 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79366 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79442 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARLOCK: 1470 (an exclusive quest is taken instead), 1507 (an exclusive quest is taken instead), 1508 (an exclusive quest is taken instead), 1509 (an exclusive quest is taken instead), 1510 (an exclusive quest is taken instead), 1511 (an exclusive quest is taken instead), 1512 (an exclusive quest is taken instead), 1515 (an exclusive quest is taken instead), 4489 (an exclusive quest is taken instead), 4739 (an exclusive quest is taken instead), 4781 (it needs one of quests 1796 first, which no step of this route can take), 4782 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4783 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4784 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4786 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4963 (an exclusive quest is taken instead), 4964 (it needs quest -4962 first, which no step of this route can take), 4967 (an exclusive quest is taken instead), 4975 (an exclusive quest is taken instead), 8419 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 65601 (an exclusive quest is taken instead), 65604 (an exclusive quest is taken instead), 65610 (an exclusive quest is taken instead); WARRIOR: 1498 (an exclusive quest is taken instead), 1505 (an exclusive quest is taken instead), 1839 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1840 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1841 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1842 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1843 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1844 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1845 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1846 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1847 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1848 (it needs one of quests 1838 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take) |
 | Errors | 0 |
 | Warnings | none |
 
@@ -275,119 +286,121 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,690, 1,897 (71%) |
-| Steps in the route file | 2,135 |
-| Sections | 68 |
-| Profession steps written | p165-2, p202-2, p164-2, p171-2, p182-2, p186-2, p197-2, p333-2, p393-2, p164-3, p165-3, p171-3, p197-3, p182-3, p186-3, p202-3, p393-3, p333-3, p164-4, p171-4, p182-4, p186-4, p393-4, p197-4, p202-4 |
-| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section orc-34-35-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section orc-34-35-stranglethorn-vale |
-| Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 14, 18, 23, 28, 30, 32, 34, 36, 38, 40, 42, 44, 48, 50, 52, 56; MAGE: 2, 4, 6, 8, 10, 12, 14, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 40, 42, 44, 46, 48, 50, 52, 54, 56; ROGUE: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58; SHAMAN: 2, 4, 6, 8, 10, 14, 18, 22, 24, 26, 28, 30, 34, 36, 40, 42, 44, 46, 48, 50, 52, 56, 58; WARLOCK: 2, 4, 6, 8, 10, 12, 14, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 20, 22, 24, 26, 28, 30, 32, 34, 36, 40, 42, 44, 46, 48, 50, 52, 54, 56 |
-| Class trainer gaps | none |
-| Planner notes | none |
+| Actions before bundling, steps after | 2,616, 1,834 (70%) |
+| Steps in the route file | 2,053 |
+| Sections | 69 |
+| Profession steps written | p165-2, p171-2, p197-2, p333-2, p164-2, p202-2, p333-3, p164-3, p165-3, p197-3, p171-3, p182-3, p186-3, p202-3, p393-3, p164-4, p171-4, p182-4, p186-4, p197-4, p393-4, p202-4 |
+| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section orc-34-36-stranglethorn-vale; Herbalism Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section orc-09-13-tirisfal-glades; Mining Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section orc-09-13-tirisfal-glades; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section orc-34-36-stranglethorn-vale; Skinning Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section orc-09-13-tirisfal-glades |
+| Class trainer visits | HUNTER: 2, 4, 6, 8, 12, 14, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 56, 58; MAGE: 2, 4, 6, 8, 10, 12, 14, 20, 24, 26, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 52, 56, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 16, 20, 25, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 52, 56, 58; SHAMAN: 2, 4, 6, 8, 14, 20, 25, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 52, 56, 58; WARLOCK: 2, 4, 6, 8, 10, 12, 14, 18, 20, 24, 26, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 52, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 20, 22, 24, 26, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 52, 54, 56, 58 |
+| Class trainer gaps | HUNTER 14 to 28: the cheapest trip to a trainer adds 377 seconds (at most 300); HUNTER 48 to 56: the cheapest trip to a trainer adds 341 seconds (at most 300) |
+| Planner notes | Orc step a1520: quest 1520 gives XP only up to level 12, but the estimated level there is 29; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| orc-01-10-durotar | 1-10 Durotar | 124 | 1-13 |
-| orc-10-11-mulgore | 10-11 Mulgore | 45 | 10-14 |
-| orc-11-11-durotar | 11 Durotar | 27 | 11-14 |
-| orc-11-14-tirisfal-glades | 11-14 Tirisfal Glades | 55 | 11-17 |
-| orc-14-15-silverpine-forest | 14-15 Silverpine Forest | 33 | 14-18 |
-| orc-15-19-the-barrens | 15-19 The Barrens | 108 | 15-22 |
-| orc-19-19-stonetalon-mountains | 19 Stonetalon Mountains | 15 | 19-22 |
-| orc-19-20-westfall | 19-20 Westfall | 29 | 19-23 |
-| orc-20-21-the-barrens | 20-21 The Barrens | 50 | 20-24 |
-| orc-21-22-stonetalon-mountains | 21-22 Stonetalon Mountains | 22 | 21-25 |
-| orc-22-22-silverpine-forest | 22 Silverpine Forest | 15 | 22-25 |
-| orc-22-23-hillsbrad-foothills | 22-23 Hillsbrad Foothills | 10 | 22-26 |
-| orc-23-24-the-barrens | 23-24 The Barrens | 39 | 23-27 |
-| orc-24-25-ashenvale | 24-25 Ashenvale | 34 | 24-28 |
-| orc-25-25-the-barrens | 25 The Barrens | 21 | 25-28 |
-| orc-25-25-stonetalon-mountains | 25 Stonetalon Mountains | 13 | 25-28 |
-| orc-25-26-thousand-needles | 25-26 Thousand Needles | 12 | 25-29 |
-| orc-26-26-stonetalon-mountains | 26 Stonetalon Mountains | 10 | 26-29 |
-| orc-26-27-the-barrens | 26-27 The Barrens | 14 | 26-30 |
-| orc-27-27-ashenvale | 27 Ashenvale | 15 | 27-30 |
-| orc-27-29-hillsbrad-foothills | 27-29 Hillsbrad Foothills | 71 | 27-32 |
-| orc-29-30-thousand-needles | 29-30 Thousand Needles | 21 | 29-33 |
-| orc-30-31-thousand-needles | 30-31 Thousand Needles | 59 | 30-34 |
-| orc-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 16 | 31-34 |
-| orc-31-33-hillsbrad-foothills | 31-33 Hillsbrad Foothills | 47 | 31-36 |
-| orc-33-33-desolace | 33 Desolace | 30 | 33-36 |
-| orc-33-34-arathi-highlands | 33-34 Arathi Highlands | 17 | 33-37 |
-| orc-34-35-stranglethorn-vale | 34-35 Stranglethorn Vale | 32 | 34-38 |
-| orc-35-35-dustwallow-marsh | 35 Dustwallow Marsh | 12 | 35-38 |
-| orc-35-36-desolace | 35-36 Desolace | 67 | 35-39 |
-| orc-36-37-stranglethorn-vale | 36-37 Stranglethorn Vale | 88 | 36-40 |
-| orc-37-37-arathi-highlands | 37 Arathi Highlands | 10 | 37-40 |
-| orc-37-37-dustwallow-marsh | 37 Dustwallow Marsh | 14 | 37-40 |
-| orc-37-38-desolace | 37-38 Desolace | 28 | 37-41 |
-| orc-38-40-stranglethorn-vale | 38-40 Stranglethorn Vale | 46 | 38-43 |
-| orc-40-40-badlands | 40 Badlands | 17 | 40-43 |
-| orc-40-41-arathi-highlands | 40-41 Arathi Highlands | 20 | 40-44 |
-| orc-41-42-stranglethorn-vale | 41-42 Stranglethorn Vale | 87 | 41-45 |
-| orc-42-42-arathi-highlands | 42 Arathi Highlands | 14 | 42-45 |
-| orc-42-43-badlands | 42-43 Badlands | 33 | 42-46 |
-| orc-43-43-stranglethorn-vale | 43 Stranglethorn Vale | 13 | 43-46 |
-| orc-43-43-dustwallow-marsh | 43 Dustwallow Marsh | 17 | 43-46 |
-| orc-43-44-feralas | 43-44 Feralas | 26 | 43-47 |
-| orc-44-45-stranglethorn-vale | 44-45 Stranglethorn Vale | 24 | 44-48 |
-| orc-45-45-tanaris | 45 Tanaris | 45 | 45-48 |
-| orc-45-46-swamp-of-sorrows | 45-46 Swamp of Sorrows | 16 | 45-49 |
-| orc-46-47-stranglethorn-vale | 46-47 Stranglethorn Vale | 31 | 46-50 |
-| orc-47-48-tanaris | 47-48 Tanaris | 27 | 47-51 |
-| orc-48-48-feralas | 48 Feralas | 15 | 48-51 |
-| orc-48-48-the-hinterlands | 48 The Hinterlands | 23 | 48-51 |
-| orc-48-50-searing-gorge | 48-50 Searing Gorge | 14 | 48-53 |
-| orc-50-50-searing-gorge | 50 Searing Gorge | 5 | 50-53 |
-| orc-50-50-blasted-lands | 50 Blasted Lands | 6 | 50-53 |
-| orc-50-50-feralas | 50 Feralas | 37 | 50-53 |
-| orc-50-51-the-hinterlands | 50-51 The Hinterlands | 30 | 50-54 |
-| orc-51-51-tanaris | 51 Tanaris | 15 | 51-54 |
-| orc-51-53-felwood | 51-53 Felwood | 38 | 51-56 |
-| orc-53-53-azshara | 53 Azshara | 17 | 53-56 |
-| orc-53-53-un-goro-crater | 53 Un'Goro Crater | 50 | 53-56 |
-| orc-53-55-azshara | 53-55 Azshara | 15 | 53-58 |
-| orc-55-55-felwood | 55 Felwood | 26 | 55-58 |
-| orc-55-55-un-goro-crater | 55 Un'Goro Crater | 20 | 55-58 |
-| orc-55-55-western-plaguelands | 55 Western Plaguelands | 19 | 55-58 |
-| orc-55-58-eastern-plaguelands | 55-58 Eastern Plaguelands | 47 | 55-60 |
-| orc-58-58-winterspring | 58 Winterspring | 42 | 58-60 |
-| orc-58-58-western-plaguelands | 58 Western Plaguelands | 36 | 58-60 |
-| orc-58-59-azshara | 58-59 Azshara | 19 | 58-60 |
-| orc-59-60-silithus | 59-60 Silithus | 42 | 59-60 |
+| orc-01-09-durotar | 1-9 Durotar | 102 | 1-12 |
+| orc-09-13-tirisfal-glades | 9-13 Tirisfal Glades | 71 | 9-16 |
+| orc-13-14-silverpine-forest | 13-14 Silverpine Forest | 30 | 13-17 |
+| orc-14-14-durotar | 14 Durotar | 21 | 14-17 |
+| orc-14-20-the-barrens | 14-20 The Barrens | 125 | 14-23 |
+| orc-20-20-the-barrens | 20 The Barrens | 24 | 20-23 |
+| orc-20-21-stonetalon-mountains | 20-21 Stonetalon Mountains | 43 | 20-24 |
+| orc-21-21-silverpine-forest | 21 Silverpine Forest | 11 | 21-24 |
+| orc-21-22-hillsbrad-foothills | 21-22 Hillsbrad Foothills | 28 | 21-25 |
+| orc-22-23-ashenvale | 22-23 Ashenvale | 33 | 22-26 |
+| orc-23-24-the-barrens | 23-24 The Barrens | 29 | 23-27 |
+| orc-24-24-thousand-needles | 24 Thousand Needles | 10 | 24-27 |
+| orc-24-25-stonetalon-mountains | 24-25 Stonetalon Mountains | 27 | 24-28 |
+| orc-25-26-ashenvale | 25-26 Ashenvale | 25 | 25-29 |
+| orc-26-26-hillsbrad-foothills | 26 Hillsbrad Foothills | 11 | 26-29 |
+| orc-26-28-thousand-needles | 26-28 Thousand Needles | 22 | 26-31 |
+| orc-28-29-hillsbrad-foothills | 28-29 Hillsbrad Foothills | 59 | 28-32 |
+| orc-29-29-thousand-needles | 29 Thousand Needles | 30 | 29-32 |
+| orc-29-30-hillsbrad-foothills | 29-30 Hillsbrad Foothills | 57 | 29-33 |
+| orc-30-31-desolace | 30-31 Desolace | 25 | 30-34 |
+| orc-31-32-stranglethorn-vale | 31-32 Stranglethorn Vale | 25 | 31-35 |
+| orc-32-32-arathi-highlands | 32 Arathi Highlands | 25 | 32-35 |
+| orc-32-33-dustwallow-marsh | 32-33 Dustwallow Marsh | 10 | 32-36 |
+| orc-33-34-desolace | 33-34 Desolace | 40 | 33-37 |
+| orc-34-34-stranglethorn-vale | 34 Stranglethorn Vale | 16 | 34-37 |
+| orc-34-34-desolace | 34 Desolace | 34 | 34-37 |
+| orc-34-34-the-barrens | 34 The Barrens | 5 | 34-37 |
+| orc-34-36-stranglethorn-vale | 34-36 Stranglethorn Vale | 71 | 34-39 |
+| orc-36-36-desolace | 36 Desolace | 29 | 36-39 |
+| orc-36-36-stranglethorn-vale | 36 Stranglethorn Vale | 16 | 36-39 |
+| orc-36-37-arathi-highlands | 36-37 Arathi Highlands | 8 | 36-40 |
+| orc-37-38-badlands | 37-38 Badlands | 22 | 37-41 |
+| orc-38-38-arathi-highlands | 38 Arathi Highlands | 13 | 38-41 |
+| orc-38-40-stranglethorn-vale | 38-40 Stranglethorn Vale | 69 | 38-43 |
+| orc-40-40-arathi-highlands | 40 Arathi Highlands | 12 | 40-43 |
+| orc-40-40-badlands | 40 Badlands | 10 | 40-43 |
+| orc-40-40-stranglethorn-vale | 40 Stranglethorn Vale | 22 | 40-43 |
+| orc-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 8 | 40-44 |
+| orc-41-41-feralas | 41 Feralas | 12 | 41-44 |
+| orc-41-41-stranglethorn-vale | 41 Stranglethorn Vale | 13 | 41-44 |
+| orc-41-42-swamp-of-sorrows | 41-42 Swamp of Sorrows | 15 | 41-45 |
+| orc-42-42-stranglethorn-vale | 42 Stranglethorn Vale | 47 | 42-45 |
+| orc-42-43-tanaris | 42-43 Tanaris | 17 | 42-46 |
+| orc-43-43-feralas | 43 Feralas | 36 | 43-46 |
+| orc-43-43-dustwallow-marsh | 43 Dustwallow Marsh | 31 | 43-46 |
+| orc-43-46-stranglethorn-vale | 43-46 Stranglethorn Vale | 35 | 43-49 |
+| orc-46-46-the-hinterlands | 46 The Hinterlands | 19 | 46-49 |
+| orc-46-46-feralas | 46 Feralas | 25 | 46-49 |
+| orc-46-47-searing-gorge | 46-47 Searing Gorge | 17 | 46-50 |
+| orc-47-47-tanaris | 47 Tanaris | 29 | 47-50 |
+| orc-47-48-the-hinterlands | 47-48 The Hinterlands | 18 | 47-51 |
+| orc-48-48-blasted-lands | 48 Blasted Lands | 6 | 48-51 |
+| orc-48-48-swamp-of-sorrows | 48 Swamp of Sorrows | 23 | 48-51 |
+| orc-48-49-searing-gorge | 48-49 Searing Gorge | 33 | 48-52 |
+| orc-49-50-the-hinterlands | 49-50 The Hinterlands | 22 | 49-53 |
+| orc-50-50-un-goro-crater | 50 Un'Goro Crater | 39 | 50-53 |
+| orc-50-50-azshara | 50 Azshara | 12 | 50-53 |
+| orc-50-51-felwood | 50-51 Felwood | 16 | 50-54 |
+| orc-51-52-un-goro-crater | 51-52 Un'Goro Crater | 26 | 51-55 |
+| orc-52-53-azshara | 52-53 Azshara | 17 | 52-56 |
+| orc-53-53-felwood | 53 Felwood | 28 | 53-56 |
+| orc-53-54-un-goro-crater | 53-54 Un'Goro Crater | 26 | 53-57 |
+| orc-54-54-western-plaguelands | 54 Western Plaguelands | 14 | 54-57 |
+| orc-54-54-eastern-plaguelands | 54 Eastern Plaguelands | 28 | 54-57 |
+| orc-54-55-winterspring | 54-55 Winterspring | 31 | 54-58 |
+| orc-55-57-silithus | 55-57 Silithus | 24 | 55-60 |
+| orc-57-58-winterspring | 57-58 Winterspring | 48 | 57-60 |
+| orc-58-58-eastern-plaguelands | 58 Eastern Plaguelands | 31 | 58-60 |
+| orc-58-60-silithus | 58-60 Silithus | 97 | 58-60 |
 
 ### Level curve
 
 | Level | Reached at step |
 | --- | --- |
-| 10 | 85 |
-| 20 | 401 |
-| 30 | 741 |
-| 40 | 1,246 |
-| 50 | 1,770 |
-| 60 | 2,296 |
+| 10 | 86 |
+| 20 | 364 |
+| 30 | 708 |
+| 40 | 1,234 |
+| 50 | 1,802 |
+| 60 | 2,220 |
 
 ## Dwarf (Alliance, `alliance-dwarf`)
 
 | Fact | Value |
 | --- | --- |
 | Classes validated | HUNTER, PALADIN, PRIEST, ROGUE, SHAMAN, WARRIOR |
-| Steps | 2,389 |
-| Quests | 742 |
+| Steps | 2,263 |
+| Quests | 709 |
 | End level | 60 |
-| Zone changes | 149 (before: 217) |
-| Travel time | 53 h 44 min: on foot 40 h 00 min, in the air 10 h 12 min, on transports 3 h 17 min, hearthstone 0 h 15 min (before: 45 h 44 min) |
-| Walked | 953,859 yards (before: 957,169) |
-| Whole route, estimated | 165 h 06 min |
-| Flight points learned, flights taken | 32, 162 |
-| Transports taken | 61 |
-| Hearthstone bound, used | 39, 61 |
-| Grind steps | 13 (level 29 to 30, level 34 to 35, level 42 to 43, level 44 to 45, level 46 to 47, level 47 to 48, level 49 to 50, level 51 to 52, level 52 to 53, level 54 to 55, level 56 to 57, level 57 to 58, level 59 to 60) |
+| Zone changes | 136 (before: 217) |
+| Travel time | 50 h 39 min: on foot 38 h 24 min, in the air 9 h 05 min, on transports 2 h 53 min, hearthstone 0 h 16 min (before: 45 h 44 min) |
+| Walked | 932,909 yards (before: 957,169) |
+| Whole route, estimated | 156 h 30 min |
+| Flight points learned, flights taken | 32, 139 |
+| Transports taken | 51 |
+| Hearthstone bound, used | 36, 65 |
+| Grind steps | 12 (level 42 to 43, level 44 to 45, level 45 to 46, level 47 to 48, level 49 to 50, level 51 to 52, level 53 to 54, level 54 to 55, level 55 to 56, level 57 to 58, level 58 to 59, level 59 to 60) |
 | Unconfirmed transports used | Menethil Harbor to Auberdine (boat; not confirmed: route); Deeprun Tram (tram; not confirmed: route) |
 | Hand-ins left behind | none |
-| Quests above the level allowed, far below the player's level | 2, 115 of 1206 quest steps |
-| Zones in order (steps there) | Dun Morogh (81), Teldrassil (87), Elwynn Forest (63), Westfall (31), Darkshore (112), Loch Modan (45), Darkshore (32), Redridge Mountains (24), Ashenvale (33), Wetlands (16), Loch Modan (20), Stonetalon Mountains (16), Ashenvale (12), Darkshore (1), Ashenvale (1), Duskwood (43), Westfall (1), Duskwood (18), Wetlands (26), Redridge Mountains (19), Wetlands (6), Ashenvale (9), Duskwood (11), Ashenvale (14), Stormwind City (10), Stonetalon Mountains (6), Wetlands (9), Duskwood (6), Stormwind City (9), Ironforge (1), Wetlands (1), Ashenvale (18), Duskwood (31), Thousand Needles (13), Stranglethorn Vale (13), Hillsbrad Foothills (18), Wetlands (19), Arathi Highlands (1), Wetlands (1), Stormwind City (13), Stranglethorn Vale (17), Ashenvale (11), Desolace (19), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (5), Stranglethorn Vale (19), Duskwood (12), Dustwallow Marsh (14), Desolace (10), Thousand Needles (4), Arathi Highlands (14), Badlands (11), Hillsbrad Foothills (3), Alterac Mountains (2), Hillsbrad Foothills (2), Wetlands (4), Stranglethorn Vale (10), Desolace (3), Swamp of Sorrows (9), Stranglethorn Vale (21), Dustwallow Marsh (7), Stormwind City (3), Wetlands (7), Badlands (4), Arathi Highlands (12), Stranglethorn Vale (14), Dustwallow Marsh (15), Alterac Mountains (4), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (1), Desolace (19), Arathi Highlands (14), Ironforge (2), Desolace (14), Badlands (24), Stranglethorn Vale (18), Arathi Highlands (19), Stranglethorn Vale (22), Dustwallow Marsh (10), Desolace (7), Ironforge (3), Hillsbrad Foothills (5), Alterac Mountains (2), Hillsbrad Foothills (2), Loch Modan (3), Badlands (1), Loch Modan (4), Arathi Highlands (6), Stranglethorn Vale (19), Ironforge (3), Badlands (12), Stormwind City (4), Ironforge (1), Swamp of Sorrows (5), Feralas (13), Tanaris (24), Stranglethorn Vale (16), Badlands (5), Ironforge (6), Stormwind City (2), The Hinterlands (11), Feralas (48), Searing Gorge (23), Tanaris (23), Azshara (6), Stranglethorn Vale (9), Blasted Lands (16), Searing Gorge (30), Teldrassil (6), Tanaris (20), Darnassus (9), Un'Goro Crater (40), Azshara (6), Western Plaguelands (13), Burning Steppes (21), Felwood (31), Western Plaguelands (22), Silithus (6), Un'Goro Crater (19), Eastern Plaguelands (11), Blasted Lands (6), Western Plaguelands (32), Eastern Plaguelands (20), Tanaris (1), Winterspring (25), Silithus (13), Darnassus (10), Tanaris (5), Un'Goro Crater (1), Tanaris (1), Un'Goro Crater (4), Ironforge (5), Stormwind City (3), Searing Gorge (5), Western Plaguelands (12), Moonglade (2), Burning Steppes (5), Winterspring (14), Silithus (1), The Barrens (1), Westfall (2), Stormwind City (1), Elwynn Forest (1), Redridge Mountains (1), The Hinterlands (3), Tanaris (1), Teldrassil (2), Eastern Plaguelands (1) |
-| Class quests left out | HUNTER: 6074 (an exclusive quest is taken instead), 6076 (an exclusive quest is taken instead), 8377 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94792 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94793 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94863 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94864 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PALADIN: 1647 (it needs one of quests 1646 first, which no step of this route can take), 1648 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1650 (it needs one of quests 1649 first, which no step of this route can take), 1651 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1652 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1653 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1778 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1779 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1783 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1784 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1785 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1806 (it needs one of quests 1654 first, which no step of this route can take), 2997 (an exclusive quest is taken instead), 3000 (an exclusive quest is taken instead), 4485 (an exclusive quest is taken instead), 4486 (an exclusive quest is taken instead), 8376 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78088 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78089 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78090 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78091 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78092 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78093 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79939 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79940 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 81764 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 81765 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 81790 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 84150 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PRIEST: 5635 (an exclusive quest is taken instead), 5636 (an exclusive quest is taken instead), 5637 (an exclusive quest is taken instead), 5638 (an exclusive quest is taken instead), 5639 (an exclusive quest is taken instead), 5640 (an exclusive quest is taken instead), 5645 (an exclusive quest is taken instead), 5647 (an exclusive quest is taken instead), 8379 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take); ROGUE: 8378 (it needs one of quests 8315 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); SHAMAN: 79358 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94373 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94374 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94375 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94449 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94465 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94466 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94467 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94468 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94494 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94495 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94501 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94502 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94503 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94505 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94616 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94789 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96016 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96135 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96243 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98581 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARRIOR: 1638 (an exclusive quest is taken instead), 1678 (an exclusive quest is taken instead), 1679 (an exclusive quest is taken instead), 1683 (an exclusive quest is taken instead), 1684 (an exclusive quest is taken instead), 1704 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1705 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1706 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1708 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1709 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1710 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1711 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1782 (it needs one of quests 1701 first, which no step of this route can take), 8316 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take) |
+| Quests above the level allowed, far below the player's level | 0, 129 of 1181 quest steps |
+| Walks through dangerous zones | none |
+| Zones in order (steps there) | Dun Morogh (81), Loch Modan (15), Elwynn Forest (66), Dun Morogh (6), Westfall (34), Loch Modan (37), Redridge Mountains (20), Westfall (10), Redridge Mountains (4), Loch Modan (12), Ironforge (7), Loch Modan (10), Darkshore (108), Duskwood (56), Westfall (1), Duskwood (6), Redridge Mountains (28), Wetlands (48), Duskwood (16), Ashenvale (1), Stonetalon Mountains (16), Ashenvale (77), Darkshore (1), Ashenvale (2), Duskwood (29), Thousand Needles (13), Wetlands (21), Arathi Highlands (1), Wetlands (1), Ashenvale (11), Hillsbrad Foothills (10), Alterac Mountains (1), Hillsbrad Foothills (10), Stranglethorn Vale (29), Desolace (29), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (1), Dustwallow Marsh (15), Stranglethorn Vale (18), Stormwind City (12), Duskwood (17), Stranglethorn Vale (25), Hillsbrad Foothills (3), Alterac Mountains (1), Hillsbrad Foothills (1), Arathi Highlands (23), Badlands (13), Swamp of Sorrows (12), Dustwallow Marsh (6), Desolace (12), Stranglethorn Vale (19), Wetlands (4), Stormwind City (4), Arathi Highlands (20), Dustwallow Marsh (16), Desolace (10), Badlands (20), Stranglethorn Vale (16), Arathi Highlands (16), Stranglethorn Vale (21), Ironforge (2), Desolace (21), Loch Modan (4), Badlands (1), Loch Modan (4), Feralas (10), Thousand Needles (3), Badlands (14), Ironforge (8), Stranglethorn Vale (8), The Barrens (4), Thousand Needles (9), Stranglethorn Vale (21), Feralas (11), Dustwallow Marsh (1), Hillsbrad Foothills (1), Alterac Mountains (4), Hillsbrad Foothills (2), Arathi Highlands (9), Stranglethorn Vale (26), Tanaris (24), Feralas (17), Badlands (8), Searing Gorge (9), Feralas (24), Tanaris (24), Searing Gorge (15), Teldrassil (5), Tanaris (1), Stranglethorn Vale (6), Blasted Lands (16), Searing Gorge (30), Darnassus (7), The Hinterlands (15), Un'Goro Crater (18), Burning Steppes (9), Darnassus (5), Tanaris (18), Feralas (8), Felwood (9), Un'Goro Crater (23), Azshara (7), Western Plaguelands (21), Felwood (11), Burning Steppes (12), Ironforge (9), Searing Gorge (11), Tanaris (3), Un'Goro Crater (1), Tanaris (1), Un'Goro Crater (18), Western Plaguelands (29), Eastern Plaguelands (25), Silithus (22), Winterspring (25), Western Plaguelands (18), Blasted Lands (8), Swamp of Sorrows (6), Blasted Lands (1), Swamp of Sorrows (6), Felwood (9), Eastern Plaguelands (13), Silithus (35), Winterspring (12), The Barrens (1), Stranglethorn Vale (1), Stormwind City (2), Ironforge (1), Loch Modan (1), The Hinterlands (2), Alterac Mountains (1), Ironforge (1), Teldrassil (1), Tanaris (2), Thousand Needles (2), Blasted Lands (1) |
+| Class quests left out | HUNTER: 6074 (an exclusive quest is taken instead), 6075 (an exclusive quest is taken instead), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94792 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94793 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94863 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94864 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PALADIN: 1647 (it needs one of quests 1646 first, which no step of this route can take), 1648 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1650 (it needs one of quests 1649 first, which no step of this route can take), 1651 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1652 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1653 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1778 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1779 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1783 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1784 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1785 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1806 (it needs one of quests 1654 first, which no step of this route can take), 2997 (an exclusive quest is taken instead), 3000 (an exclusive quest is taken instead), 4485 (an exclusive quest is taken instead), 4486 (an exclusive quest is taken instead), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78088 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78089 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78090 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78091 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78092 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78093 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79939 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79940 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 81764 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 81765 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 81790 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 84150 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PRIEST: 5635 (an exclusive quest is taken instead), 5636 (an exclusive quest is taken instead), 5637 (an exclusive quest is taken instead), 5638 (an exclusive quest is taken instead), 5639 (an exclusive quest is taken instead), 5640 (an exclusive quest is taken instead), 5645 (an exclusive quest is taken instead), 5647 (an exclusive quest is taken instead), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take); ROGUE: 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); SHAMAN: 79358 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94373 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94374 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94375 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94449 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94465 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94466 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94467 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94468 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94494 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94495 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94501 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94502 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94503 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94505 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94616 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94789 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96016 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96135 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96243 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98581 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARRIOR: 1638 (an exclusive quest is taken instead), 1678 (an exclusive quest is taken instead), 1679 (an exclusive quest is taken instead), 1683 (an exclusive quest is taken instead), 1684 (an exclusive quest is taken instead), 1704 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1705 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1706 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1708 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1709 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1710 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1711 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1782 (it needs one of quests 1701 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take) |
 | Errors | 0 |
 | Warnings | none |
 
@@ -395,121 +408,126 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,609, 1,842 (71%) |
-| Steps in the route file | 2,081 |
-| Sections | 70 |
-| Profession steps written | p165-2, p171-2, p333-2, p164-2, p182-2, p186-2, p197-2, p202-2, p393-2, p186-3, p182-3, p393-3, p165-3, p171-3, p186-4, p164-4, p197-4, p171-4, p333-4, p182-4 |
-| Profession ranks without a step | Blacksmithing Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section dwarf-19-21-darkshore; Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-stranglethorn-vale; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section dwarf-19-21-darkshore; Engineering Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section dwarf-19-21-darkshore; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-stranglethorn-vale; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section dwarf-19-21-darkshore; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-stranglethorn-vale |
-| Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 12, 18, 22, 26, 28, 30, 35, 39, 42, 44, 48, 50, 52, 54, 56, 58; PALADIN: 2, 4, 6, 10, 12, 22, 26, 28, 30, 34, 36, 40, 42, 44, 48, 52, 54, 56, 58; PRIEST: 2, 4, 6, 8, 10, 12, 20, 25, 28, 30, 36, 40, 42, 44, 48, 50, 52, 56, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 50, 52, 56, 58; SHAMAN: 2, 4, 6, 10, 14, 18, 22, 26, 28, 32, 36, 38, 40, 42, 44, 49, 54, 56; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 18, 22, 27, 30, 34, 36, 38, 40, 42, 44, 48, 50, 52, 54, 56, 58 |
-| Class trainer gaps | PALADIN 12 to 22: the cheapest trip to a trainer adds 315 seconds (at most 300); PRIEST 12 to 20: the cheapest trip to a trainer adds 328 seconds (at most 300) |
-| Planner notes | none |
+| Actions before bundling, steps after | 2,494, 1,722 (69%) |
+| Steps in the route file | 1,958 |
+| Sections | 74 |
+| Profession steps written | p164-2, p165-2, p171-2, p182-2, p186-2, p197-2, p202-2, p333-2, p393-2, p186-3, p182-3, p164-3, p202-3, p393-3, p165-3, p171-3, p182-4, p197-4, p164-4, p186-4, p393-4 |
+| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-arathi-highlands; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-arathi-highlands; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section dwarf-20-21-darkshore; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-arathi-highlands; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section dwarf-20-21-darkshore; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-arathi-highlands |
+| Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 12, 14, 16, 18, 26, 30, 32, 34, 38, 42, 47, 51, 55, 59; PALADIN: 2, 4, 6, 8, 10, 16, 30, 32, 34, 36, 38, 40, 45, 48, 50, 55, 58; PRIEST: 2, 4, 6, 8, 10, 16, 24, 30, 32, 34, 38, 42, 47, 51, 55, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 18, 20, 24, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 55, 58; SHAMAN: 2, 4, 6, 8, 13, 17, 23, 27, 31, 35, 38, 42, 47, 51, 55, 58; WARRIOR: 2, 4, 6, 8, 10, 14, 18, 22, 24, 28, 30, 32, 34, 36, 38, 40, 45, 48, 50, 55, 58 |
+| Class trainer gaps | HUNTER 18 to 26: the cheapest trip to a trainer adds 302 seconds (at most 300); PALADIN 16 to 30: the cheapest trip to a trainer adds 310 seconds (at most 300); PRIEST 16 to 24: the cheapest trip to a trainer adds 323 seconds (at most 300) |
+| Planner notes | Dwarf step a2241: quest 2241 gives XP only up to level 18, but the estimated level there is 20; with "skip content you outlevel" the step and its quest's later lines are skipped; Dwarf step a1686: quest 1686 gives XP only up to level 18, but the estimated level there is 20; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| dwarf-01-09-dun-morogh | 1-9 Dun Morogh | 81 | 1-12 |
-| dwarf-09-12-teldrassil | 9-12 Teldrassil | 94 | 9-15 |
-| dwarf-12-12-dun-morogh | 12 Dun Morogh | 36 | 12-15 |
-| dwarf-12-13-elwynn-forest | 12-13 Elwynn Forest | 52 | 12-16 |
-| dwarf-13-15-westfall | 13-15 Westfall | 50 | 13-18 |
-| dwarf-15-18-darkshore | 15-18 Darkshore | 76 | 15-21 |
+| dwarf-01-09-dun-morogh | 1-9 Dun Morogh | 82 | 1-12 |
+| dwarf-09-10-loch-modan | 9-10 Loch Modan | 36 | 9-13 |
+| dwarf-10-12-elwynn-forest | 10-12 Elwynn Forest | 49 | 10-15 |
+| dwarf-12-12-stormwind-city | 12 Stormwind City | 8 | 12-15 |
+| dwarf-12-13-dun-morogh | 12-13 Dun Morogh | 22 | 12-16 |
+| dwarf-13-15-westfall | 13-15 Westfall | 42 | 13-18 |
+| dwarf-15-16-loch-modan | 15-16 Loch Modan | 34 | 15-19 |
+| dwarf-16-17-redridge-mountains | 16-17 Redridge Mountains | 17 | 16-20 |
+| dwarf-17-18-westfall | 17-18 Westfall | 16 | 17-21 |
 | dwarf-18-19-loch-modan | 18-19 Loch Modan | 38 | 18-22 |
-| dwarf-19-21-darkshore | 19-21 Darkshore | 44 | 19-24 |
-| dwarf-21-21-redridge-mountains | 21 Redridge Mountains | 23 | 21-24 |
-| dwarf-21-22-ashenvale | 21-22 Ashenvale | 26 | 21-25 |
-| dwarf-22-23-wetlands | 22-23 Wetlands | 26 | 22-26 |
-| dwarf-23-23-loch-modan | 23 Loch Modan | 12 | 23-26 |
-| dwarf-23-24-stonetalon-mountains | 23-24 Stonetalon Mountains | 17 | 23-27 |
-| dwarf-24-24-ashenvale | 24 Ashenvale | 22 | 24-27 |
-| dwarf-24-26-duskwood | 24-26 Duskwood | 57 | 24-29 |
-| dwarf-26-26-wetlands | 26 Wetlands | 21 | 26-29 |
-| dwarf-26-27-redridge-mountains | 26-27 Redridge Mountains | 44 | 26-30 |
-| dwarf-27-28-duskwood | 27-28 Duskwood | 21 | 27-31 |
-| dwarf-28-28-ashenvale | 28 Ashenvale | 13 | 28-31 |
-| dwarf-28-30-stormwind-city | 28-30 Stormwind City | 57 | 28-33 |
-| dwarf-30-30-ashenvale | 30 Ashenvale | 19 | 30-33 |
-| dwarf-30-31-duskwood | 30-31 Duskwood | 22 | 30-34 |
-| dwarf-31-31-thousand-needles | 31 Thousand Needles | 11 | 31-34 |
-| dwarf-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 13 | 31-34 |
-| dwarf-31-32-hillsbrad-foothills | 31-32 Hillsbrad Foothills | 12 | 31-35 |
-| dwarf-32-32-wetlands | 32 Wetlands | 20 | 32-35 |
-| dwarf-32-32-stormwind-city | 32 Stormwind City | 12 | 32-35 |
-| dwarf-32-33-stranglethorn-vale | 32-33 Stranglethorn Vale | 18 | 32-36 |
-| dwarf-33-33-ashenvale | 33 Ashenvale | 17 | 33-36 |
-| dwarf-33-34-desolace | 33-34 Desolace | 34 | 33-37 |
-| dwarf-34-35-stranglethorn-vale | 34-35 Stranglethorn Vale | 29 | 34-38 |
-| dwarf-35-35-duskwood | 35 Duskwood | 15 | 35-38 |
-| dwarf-35-35-dustwallow-marsh | 35 Dustwallow Marsh | 35 | 35-38 |
-| dwarf-35-36-arathi-highlands | 35-36 Arathi Highlands | 13 | 35-39 |
-| dwarf-36-37-badlands | 36-37 Badlands | 60 | 36-40 |
-| dwarf-37-37-stranglethorn-vale | 37 Stranglethorn Vale | 44 | 37-40 |
-| dwarf-37-38-arathi-highlands | 37-38 Arathi Highlands | 13 | 37-41 |
-| dwarf-38-38-stranglethorn-vale | 38 Stranglethorn Vale | 19 | 38-41 |
-| dwarf-38-38-dustwallow-marsh | 38 Dustwallow Marsh | 22 | 38-41 |
-| dwarf-38-39-desolace | 38-39 Desolace | 21 | 38-42 |
-| dwarf-39-39-arathi-highlands | 39 Arathi Highlands | 15 | 39-42 |
-| dwarf-39-39-desolace | 39 Desolace | 10 | 39-42 |
-| dwarf-39-40-badlands | 39-40 Badlands | 22 | 39-43 |
-| dwarf-40-40-stranglethorn-vale | 40 Stranglethorn Vale | 18 | 40-43 |
-| dwarf-40-41-arathi-highlands | 40-41 Arathi Highlands | 14 | 40-44 |
-| dwarf-41-43-stranglethorn-vale | 41-43 Stranglethorn Vale | 89 | 41-46 |
-| dwarf-43-43-badlands | 43 Badlands | 29 | 43-46 |
-| dwarf-43-43-feralas | 43 Feralas | 12 | 43-46 |
-| dwarf-43-45-tanaris | 43-45 Tanaris | 16 | 43-48 |
-| dwarf-45-45-stranglethorn-vale | 45 Stranglethorn Vale | 39 | 45-48 |
-| dwarf-45-45-the-hinterlands | 45 The Hinterlands | 8 | 45-48 |
-| dwarf-45-48-feralas | 45-48 Feralas | 37 | 45-51 |
-| dwarf-48-48-searing-gorge | 48 Searing Gorge | 15 | 48-51 |
-| dwarf-48-50-tanaris | 48-50 Tanaris | 50 | 48-53 |
-| dwarf-50-50-blasted-lands | 50 Blasted Lands | 7 | 50-53 |
-| dwarf-50-50-searing-gorge | 50 Searing Gorge | 25 | 50-53 |
-| dwarf-50-53-tanaris | 50-53 Tanaris | 26 | 50-56 |
-| dwarf-53-53-un-goro-crater | 53 Un'Goro Crater | 35 | 53-56 |
-| dwarf-53-53-azshara | 53 Azshara | 12 | 53-56 |
-| dwarf-53-53-western-plaguelands | 53 Western Plaguelands | 10 | 53-56 |
-| dwarf-53-54-burning-steppes | 53-54 Burning Steppes | 30 | 53-57 |
-| dwarf-54-55-felwood | 54-55 Felwood | 25 | 54-58 |
-| dwarf-55-55-western-plaguelands | 55 Western Plaguelands | 30 | 55-58 |
-| dwarf-55-55-un-goro-crater | 55 Un'Goro Crater | 48 | 55-58 |
-| dwarf-55-57-western-plaguelands | 55-57 Western Plaguelands | 33 | 55-60 |
-| dwarf-57-58-eastern-plaguelands | 57-58 Eastern Plaguelands | 16 | 57-60 |
-| dwarf-58-58-winterspring | 58 Winterspring | 22 | 58-60 |
-| dwarf-58-58-silithus | 58 Silithus | 48 | 58-60 |
-| dwarf-58-59-western-plaguelands | 58-59 Western Plaguelands | 20 | 58-60 |
-| dwarf-59-60-winterspring | 59-60 Winterspring | 61 | 59-60 |
+| dwarf-19-20-darkshore | 19-20 Darkshore | 33 | 19-23 |
+| dwarf-20-21-darkshore | 20-21 Darkshore | 67 | 20-24 |
+| dwarf-21-23-duskwood | 21-23 Duskwood | 56 | 21-26 |
+| dwarf-23-24-redridge-mountains | 23-24 Redridge Mountains | 25 | 23-27 |
+| dwarf-24-25-wetlands | 24-25 Wetlands | 49 | 24-28 |
+| dwarf-25-26-duskwood | 25-26 Duskwood | 28 | 25-29 |
+| dwarf-26-26-stonetalon-mountains | 26 Stonetalon Mountains | 11 | 26-29 |
+| dwarf-26-28-ashenvale | 26-28 Ashenvale | 57 | 26-31 |
+| dwarf-28-29-duskwood | 28-29 Duskwood | 19 | 28-32 |
+| dwarf-29-29-stormwind-city | 29 Stormwind City | 11 | 29-32 |
+| dwarf-29-29-thousand-needles | 29 Thousand Needles | 14 | 29-32 |
+| dwarf-29-30-wetlands | 29-30 Wetlands | 10 | 29-33 |
+| dwarf-30-30-wetlands | 30 Wetlands | 10 | 30-33 |
+| dwarf-30-30-ashenvale | 30 Ashenvale | 11 | 30-33 |
+| dwarf-30-31-hillsbrad-foothills | 30-31 Hillsbrad Foothills | 14 | 30-34 |
+| dwarf-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 32 | 31-34 |
+| dwarf-31-32-desolace | 31-32 Desolace | 45 | 31-35 |
+| dwarf-32-33-dustwallow-marsh | 32-33 Dustwallow Marsh | 14 | 32-36 |
+| dwarf-33-33-stranglethorn-vale | 33 Stranglethorn Vale | 18 | 33-36 |
+| dwarf-33-33-stormwind-city | 33 Stormwind City | 12 | 33-36 |
+| dwarf-33-34-duskwood | 33-34 Duskwood | 19 | 33-37 |
+| dwarf-34-34-stranglethorn-vale | 34 Stranglethorn Vale | 23 | 34-37 |
+| dwarf-34-35-arathi-highlands | 34-35 Arathi Highlands | 18 | 34-38 |
+| dwarf-35-35-badlands | 35 Badlands | 13 | 35-38 |
+| dwarf-35-35-swamp-of-sorrows | 35 Swamp of Sorrows | 33 | 35-38 |
+| dwarf-35-36-desolace | 35-36 Desolace | 16 | 35-39 |
+| dwarf-36-36-stranglethorn-vale | 36 Stranglethorn Vale | 39 | 36-39 |
+| dwarf-36-37-arathi-highlands | 36-37 Arathi Highlands | 15 | 36-40 |
+| dwarf-37-37-dustwallow-marsh | 37 Dustwallow Marsh | 22 | 37-40 |
+| dwarf-37-38-badlands | 37-38 Badlands | 21 | 37-41 |
+| dwarf-38-38-stranglethorn-vale | 38 Stranglethorn Vale | 16 | 38-41 |
+| dwarf-38-39-arathi-highlands | 38-39 Arathi Highlands | 11 | 38-42 |
+| dwarf-39-39-stranglethorn-vale | 39 Stranglethorn Vale | 24 | 39-42 |
+| dwarf-39-40-desolace | 39-40 Desolace | 23 | 39-43 |
+| dwarf-40-40-feralas | 40 Feralas | 19 | 40-43 |
+| dwarf-40-41-badlands | 40-41 Badlands | 43 | 40-44 |
+| dwarf-41-43-stranglethorn-vale | 41-43 Stranglethorn Vale | 68 | 41-46 |
+| dwarf-43-43-tanaris | 43 Tanaris | 13 | 43-46 |
+| dwarf-43-45-feralas | 43-45 Feralas | 33 | 43-48 |
+| dwarf-45-45-searing-gorge | 45 Searing Gorge | 5 | 45-48 |
+| dwarf-45-46-feralas | 45-46 Feralas | 23 | 45-49 |
+| dwarf-46-46-tanaris | 46 Tanaris | 18 | 46-49 |
+| dwarf-46-47-searing-gorge | 46-47 Searing Gorge | 32 | 46-50 |
+| dwarf-47-48-blasted-lands | 47-48 Blasted Lands | 6 | 47-51 |
+| dwarf-48-48-searing-gorge | 48 Searing Gorge | 32 | 48-51 |
+| dwarf-48-50-the-hinterlands | 48-50 The Hinterlands | 16 | 48-53 |
+| dwarf-50-50-un-goro-crater | 50 Un'Goro Crater | 35 | 50-53 |
+| dwarf-50-50-tanaris | 50 Tanaris | 25 | 50-53 |
+| dwarf-50-50-felwood | 50 Felwood | 10 | 50-53 |
+| dwarf-50-51-un-goro-crater | 50-51 Un'Goro Crater | 22 | 50-54 |
+| dwarf-51-52-azshara | 51-52 Azshara | 29 | 51-55 |
+| dwarf-52-52-western-plaguelands | 52 Western Plaguelands | 12 | 52-55 |
+| dwarf-52-52-felwood | 52 Felwood | 12 | 52-55 |
+| dwarf-52-52-burning-steppes | 52 Burning Steppes | 21 | 52-55 |
+| dwarf-52-52-searing-gorge | 52 Searing Gorge | 21 | 52-55 |
+| dwarf-52-53-un-goro-crater | 52-53 Un'Goro Crater | 15 | 52-56 |
+| dwarf-53-54-western-plaguelands | 53-54 Western Plaguelands | 29 | 53-57 |
+| dwarf-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 22 | 54-58 |
+| dwarf-55-56-silithus | 55-56 Silithus | 18 | 55-59 |
+| dwarf-56-56-winterspring | 56 Winterspring | 27 | 56-59 |
+| dwarf-56-56-western-plaguelands | 56 Western Plaguelands | 71 | 56-59 |
+| dwarf-56-58-eastern-plaguelands | 56-58 Eastern Plaguelands | 14 | 56-60 |
+| dwarf-58-59-silithus | 58-59 Silithus | 35 | 58-60 |
+| dwarf-59-60-winterspring | 59-60 Winterspring | 59 | 59-60 |
 
 ### Level curve
 
 | Level | Reached at step |
 | --- | --- |
-| 10 | 108 |
-| 20 | 454 |
-| 30 | 854 |
-| 40 | 1,442 |
-| 50 | 1,862 |
-| 60 | 2,358 |
+| 10 | 88 |
+| 20 | 385 |
+| 30 | 791 |
+| 40 | 1,338 |
+| 50 | 1,750 |
+| 60 | 2,226 |
 
 ## NightElf (Alliance, `alliance-nightelf`)
 
 | Fact | Value |
 | --- | --- |
 | Classes validated | DRUID, HUNTER, PRIEST, ROGUE, WARRIOR |
-| Steps | 2,365 |
-| Quests | 732 |
+| Steps | 2,211 |
+| Quests | 688 |
 | End level | 60 |
-| Zone changes | 150 (before: 203) |
-| Travel time | 53 h 01 min: on foot 39 h 24 min, in the air 10 h 12 min, on transports 3 h 10 min, hearthstone 0 h 16 min (before: 47 h 02 min) |
-| Walked | 941,762 yards (before: 1,007,696) |
-| Whole route, estimated | 163 h 49 min |
-| Flight points learned, flights taken | 32, 162 |
-| Transports taken | 59 |
-| Hearthstone bound, used | 39, 63 |
-| Grind steps | 13 (level 29 to 30, level 34 to 35, level 42 to 43, level 44 to 45, level 46 to 47, level 47 to 48, level 49 to 50, level 51 to 52, level 52 to 53, level 54 to 55, level 56 to 57, level 57 to 58, level 59 to 60) |
+| Zone changes | 124 (before: 203) |
+| Travel time | 51 h 36 min: on foot 39 h 08 min, in the air 9 h 12 min, on transports 3 h 01 min, hearthstone 0 h 16 min (before: 47 h 02 min) |
+| Walked | 947,313 yards (before: 1,007,696) |
+| Whole route, estimated | 155 h 40 min |
+| Flight points learned, flights taken | 31, 140 |
+| Transports taken | 52 |
+| Hearthstone bound, used | 38, 64 |
+| Grind steps | 12 (level 14 to 15, level 42 to 43, level 44 to 45, level 45 to 46, level 47 to 48, level 49 to 50, level 50 to 51, level 52 to 53, level 55 to 56, level 56 to 57, level 57 to 58, level 59 to 60) |
 | Unconfirmed transports used | Menethil Harbor to Auberdine (boat; not confirmed: route); Deeprun Tram (tram; not confirmed: route) |
 | Hand-ins left behind | none |
-| Quests above the level allowed, far below the player's level | 0, 133 of 1215 quest steps |
-| Zones in order (steps there) | Teldrassil (96), Darkshore (1), Dun Morogh (54), Elwynn Forest (60), Westfall (29), Darkshore (112), Loch Modan (43), Darkshore (32), Redridge Mountains (24), Ashenvale (33), Wetlands (16), Loch Modan (20), Stonetalon Mountains (16), Ashenvale (12), Darkshore (1), Ashenvale (1), Duskwood (43), Westfall (1), Duskwood (18), Wetlands (26), Redridge Mountains (19), Wetlands (6), Ashenvale (9), Duskwood (11), Ashenvale (14), Stormwind City (10), Stonetalon Mountains (6), Wetlands (9), Duskwood (6), Stormwind City (9), Ironforge (1), Wetlands (1), Ashenvale (18), Duskwood (31), Thousand Needles (13), Stranglethorn Vale (13), Hillsbrad Foothills (18), Wetlands (19), Arathi Highlands (1), Wetlands (1), Stormwind City (13), Stranglethorn Vale (17), Ashenvale (11), Desolace (19), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (5), Stranglethorn Vale (19), Duskwood (12), Dustwallow Marsh (14), Desolace (10), Thousand Needles (4), Arathi Highlands (14), Badlands (11), Hillsbrad Foothills (3), Alterac Mountains (2), Hillsbrad Foothills (2), Wetlands (4), Stranglethorn Vale (10), Desolace (3), Swamp of Sorrows (9), Stranglethorn Vale (21), Dustwallow Marsh (7), Stormwind City (3), Wetlands (7), Badlands (4), Arathi Highlands (12), Stranglethorn Vale (14), Dustwallow Marsh (15), Alterac Mountains (4), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (1), Desolace (19), Arathi Highlands (14), Ironforge (2), Desolace (14), Badlands (24), Stranglethorn Vale (18), Arathi Highlands (19), Stranglethorn Vale (22), Dustwallow Marsh (10), Desolace (7), Ironforge (3), Hillsbrad Foothills (5), Alterac Mountains (2), Hillsbrad Foothills (2), Loch Modan (3), Badlands (1), Loch Modan (4), Arathi Highlands (6), Stranglethorn Vale (19), Ironforge (3), Badlands (12), Stormwind City (4), Ironforge (1), Swamp of Sorrows (5), Feralas (13), Tanaris (24), Stranglethorn Vale (16), Badlands (5), Ironforge (6), Stormwind City (2), The Hinterlands (11), Feralas (48), Searing Gorge (23), Tanaris (23), Azshara (6), Stranglethorn Vale (9), Blasted Lands (16), Searing Gorge (30), Teldrassil (6), Tanaris (20), Darnassus (9), Un'Goro Crater (40), Azshara (6), Western Plaguelands (13), Burning Steppes (21), Felwood (31), Western Plaguelands (22), Silithus (6), Un'Goro Crater (19), Eastern Plaguelands (11), Blasted Lands (6), Western Plaguelands (32), Eastern Plaguelands (20), Tanaris (1), Winterspring (25), Silithus (13), Darnassus (10), Tanaris (5), Un'Goro Crater (1), Tanaris (1), Un'Goro Crater (4), Ironforge (5), Stormwind City (3), Searing Gorge (5), Western Plaguelands (12), Moonglade (2), Burning Steppes (5), Winterspring (14), Silithus (1), The Barrens (1), Westfall (2), Stormwind City (1), Elwynn Forest (1), Redridge Mountains (1), The Hinterlands (3), Tanaris (1), Teldrassil (2), Eastern Plaguelands (1) |
-| Class quests left out | DRUID: 5924 (an exclusive quest is taken instead), 5925 (an exclusive quest is taken instead), 8382 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 81924 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 84147 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98393 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98394 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98396 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98397 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98731 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); HUNTER: 6071 (an exclusive quest is taken instead), 6073 (an exclusive quest is taken instead), 6721 (an exclusive quest is taken instead), 6722 (an exclusive quest is taken instead), 8377 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94792 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94793 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94863 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94864 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PRIEST: 5627 (an exclusive quest is taken instead), 5628 (an exclusive quest is taken instead), 5630 (an exclusive quest is taken instead), 5631 (an exclusive quest is taken instead), 5632 (an exclusive quest is taken instead), 5633 (an exclusive quest is taken instead), 5673 (an exclusive quest is taken instead), 5674 (an exclusive quest is taken instead), 5675 (an exclusive quest is taken instead), 8379 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take); ROGUE: 8378 (it needs one of quests 8315 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARRIOR: 1638 (an exclusive quest is taken instead), 1678 (an exclusive quest is taken instead), 1679 (an exclusive quest is taken instead), 1683 (an exclusive quest is taken instead), 1684 (an exclusive quest is taken instead), 1703 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1705 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1706 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1708 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1709 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1710 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1711 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1782 (it needs one of quests 1701 first, which no step of this route can take), 8316 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take) |
+| Quests above the level allowed, far below the player's level | 0, 79 of 1155 quest steps |
+| Walks through dangerous zones | none |
+| Zones in order (steps there) | Teldrassil (104), Darkshore (122), The Barrens (36), Darkshore (27), Loch Modan (48), Ashenvale (36), Redridge Mountains (34), Duskwood (59), Westfall (1), Duskwood (6), Wetlands (51), Stonetalon Mountains (18), Duskwood (14), Ashenvale (49), Darkshore (1), Ashenvale (2), Duskwood (26), Thousand Needles (13), Wetlands (13), Ashenvale (11), Hillsbrad Foothills (18), Desolace (22), Stranglethorn Vale (37), Hillsbrad Foothills (6), Alterac Mountains (1), Hillsbrad Foothills (1), Alterac Mountains (1), Hillsbrad Foothills (1), Dustwallow Marsh (14), Duskwood (14), Stranglethorn Vale (10), Stormwind City (12), Wetlands (13), Arathi Highlands (1), Wetlands (2), Duskwood (7), Arathi Highlands (16), Stranglethorn Vale (25), Desolace (13), Badlands (13), Swamp of Sorrows (12), Dustwallow Marsh (8), Stranglethorn Vale (18), Arathi Highlands (11), Stormwind City (12), Desolace (17), Arathi Highlands (17), Dustwallow Marsh (14), Badlands (20), Stranglethorn Vale (16), Arathi Highlands (16), Stranglethorn Vale (21), Alterac Mountains (4), Hillsbrad Foothills (6), Alterac Mountains (2), Hillsbrad Foothills (2), Ironforge (4), Desolace (19), Stranglethorn Vale (14), Hillsbrad Foothills (5), Alterac Mountains (2), Hillsbrad Foothills (2), Loch Modan (4), Badlands (1), Loch Modan (4), Badlands (9), Feralas (21), Stranglethorn Vale (13), Arathi Highlands (8), Ironforge (9), Badlands (13), Stranglethorn Vale (18), Tanaris (24), Feralas (42), Tanaris (22), Searing Gorge (21), Teldrassil (6), Darnassus (8), Tanaris (1), Searing Gorge (12), Tanaris (20), Searing Gorge (21), Blasted Lands (15), Stranglethorn Vale (8), The Hinterlands (19), Tanaris (1), Un'Goro Crater (17), Felwood (9), Burning Steppes (9), Ironforge (6), Un'Goro Crater (24), Azshara (6), Western Plaguelands (12), Teldrassil (2), Darnassus (5), Feralas (5), Tanaris (9), Un'Goro Crater (1), Tanaris (1), Un'Goro Crater (1), Western Plaguelands (23), Un'Goro Crater (19), Felwood (22), Eastern Plaguelands (24), Western Plaguelands (20), Burning Steppes (16), Winterspring (15), Blasted Lands (8), Stranglethorn Vale (1), Silithus (22), Winterspring (31), Silithus (34), Eastern Plaguelands (17), Western Plaguelands (24), Alterac Mountains (1), Ironforge (2), Loch Modan (1), Dun Morogh (1), Stormwind City (1), Westfall (1), Swamp of Sorrows (1), Burning Steppes (1), The Barrens (2), Tanaris (1), Darnassus (1) |
+| Class quests left out | DRUID: 5924 (an exclusive quest is taken instead), 5925 (an exclusive quest is taken instead), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 81924 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 84147 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98393 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98394 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98396 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98397 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98731 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); HUNTER: 6071 (an exclusive quest is taken instead), 6073 (an exclusive quest is taken instead), 6721 (an exclusive quest is taken instead), 6722 (an exclusive quest is taken instead), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94792 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94793 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94863 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94864 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PRIEST: 5627 (an exclusive quest is taken instead), 5628 (an exclusive quest is taken instead), 5630 (an exclusive quest is taken instead), 5631 (an exclusive quest is taken instead), 5632 (an exclusive quest is taken instead), 5633 (an exclusive quest is taken instead), 5673 (an exclusive quest is taken instead), 5674 (an exclusive quest is taken instead), 5675 (an exclusive quest is taken instead), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take); ROGUE: 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARRIOR: 1638 (an exclusive quest is taken instead), 1639 (an exclusive quest is taken instead), 1678 (an exclusive quest is taken instead), 1679 (an exclusive quest is taken instead), 1684 (an exclusive quest is taken instead), 1703 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1705 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1706 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1708 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1709 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1710 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1711 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1782 (it needs one of quests 1701 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take) |
 | Errors | 0 |
 | Warnings | none |
 
@@ -517,121 +535,122 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,622, 1,848 (70%) |
-| Steps in the route file | 2,035 |
+| Actions before bundling, steps after | 2,468, 1,709 (69%) |
+| Steps in the route file | 1,874 |
 | Sections | 70 |
-| Profession steps written | p165-2, p171-2, p333-2, p164-2, p186-2, p197-2, p202-2, p182-2, p393-2, p186-3, p182-3, p393-3, p165-3, p171-3, p186-4, p164-4, p197-4, p171-4, p333-4, p182-4 |
-| Profession ranks without a step | Blacksmithing Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section nightelf-20-20-moonglade; Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-stranglethorn-vale; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section nightelf-20-20-moonglade; Engineering Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section nightelf-20-20-moonglade; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-stranglethorn-vale; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section nightelf-20-20-moonglade; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-stranglethorn-vale |
-| Class trainer visits | DRUID: 2, 4, 6, 8, 14, 18, 20, 27, 30, 42, 51, 54, 56; HUNTER: 2, 4, 6, 8, 10, 12, 18, 22, 26, 28, 30, 35, 39, 42, 44, 48, 50, 52, 54, 56, 58; PRIEST: 2, 4, 6, 8, 10, 12, 18, 22, 26, 28, 30, 36, 40, 42, 44, 48, 50, 52, 56, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 18, 20, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 50, 52, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 18, 22, 27, 30, 34, 36, 38, 40, 42, 44, 48, 50, 52, 54, 56, 58 |
-| Class trainer gaps | DRUID 20 to 27: the cheapest trip to a trainer adds 306 seconds (at most 300); DRUID 30 to 42: the cheapest trip to a trainer adds 344 seconds (at most 300); DRUID 42 to 51: the cheapest trip to a trainer adds 302 seconds (at most 300) |
-| Planner notes | none |
+| Profession steps written | p165-2, p171-2, p333-2, p164-2, p186-2, p197-2, p202-2, p182-2, p186-3, p164-3, p165-3, p171-3, p182-3, p197-3, p202-3, p333-3, p393-3, p164-4, p186-4, p197-4 |
+| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-desolace; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-desolace; Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-desolace; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-desolace; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-desolace; Skinning Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within five sections of section nightelf-01-10-teldrassil; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-desolace |
+| Class trainer visits | DRUID: 2, 4, 6, 8, 20, 32, 34, 45, 49, 52, 54, 58; HUNTER: 2, 4, 6, 8, 10, 18, 20, 26, 32, 34, 38, 40, 45, 48, 50, 52, 54, 58; PRIEST: 2, 4, 6, 8, 20, 32, 34, 40, 45, 49, 53, 57; ROGUE: 2, 4, 6, 8, 16, 18, 20, 22, 24, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 54, 58; WARRIOR: 2, 4, 6, 8, 14, 18, 20, 25, 31, 34, 36, 38, 40, 45, 48, 50, 52, 57 |
+| Class trainer gaps | DRUID 8 to 20: the cheapest trip to a trainer adds 452 seconds (at most 300); DRUID 20 to 32: the cheapest trip to a trainer adds 367 seconds (at most 300); DRUID 34 to 45: the cheapest trip to a trainer adds 348 seconds (at most 300); HUNTER 10 to 18: the cheapest trip to a trainer adds 458 seconds (at most 300); PRIEST 8 to 20: the cheapest trip to a trainer adds 390 seconds (at most 300); PRIEST 20 to 32: the cheapest trip to a trainer adds 303 seconds (at most 300); ROGUE 8 to 16: the cheapest trip to a trainer adds 591 seconds (at most 300) |
+| Planner notes | NightElf step a2205: quest 2205 gives XP only up to level 18, but the estimated level there is 19; with "skip content you outlevel" the step and its quest's later lines are skipped; NightElf step a2218: quest 2218 gives XP only up to level 18, but the estimated level there is 19; with "skip content you outlevel" the step and its quest's later lines are skipped; NightElf step a1680: quest 1680 gives XP only up to level 19, but the estimated level there is 21; with "skip content you outlevel" the step and its quest's later lines are skipped; NightElf step a5921.a6121.a26: quest 5921 gives XP only up to level 18, but the estimated level there is 47; with "skip content you outlevel" the step and its quest's later lines are skipped; NightElf step a5061: quest 5061 gives XP only up to level 24, but the estimated level there is 50; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| nightelf-01-10-teldrassil | 1-10 Teldrassil | 130 | 1-13 |
-| nightelf-10-12-dun-morogh | 10-12 Dun Morogh | 60 | 10-15 |
-| nightelf-12-13-elwynn-forest | 12-13 Elwynn Forest | 47 | 12-16 |
-| nightelf-13-15-westfall | 13-15 Westfall | 53 | 13-18 |
-| nightelf-15-18-darkshore | 15-18 Darkshore | 84 | 15-21 |
-| nightelf-18-20-loch-modan | 18-20 Loch Modan | 52 | 18-23 |
-| nightelf-20-20-moonglade | 20 Moonglade | 13 | 20-23 |
-| nightelf-20-21-darkshore | 20-21 Darkshore | 27 | 20-24 |
-| nightelf-21-21-redridge-mountains | 21 Redridge Mountains | 23 | 21-24 |
-| nightelf-21-22-ashenvale | 21-22 Ashenvale | 26 | 21-25 |
-| nightelf-22-23-wetlands | 22-23 Wetlands | 23 | 22-26 |
-| nightelf-23-23-loch-modan | 23 Loch Modan | 12 | 23-26 |
-| nightelf-23-24-stonetalon-mountains | 23-24 Stonetalon Mountains | 17 | 23-27 |
-| nightelf-24-24-ashenvale | 24 Ashenvale | 22 | 24-27 |
-| nightelf-24-26-duskwood | 24-26 Duskwood | 53 | 24-29 |
-| nightelf-26-26-wetlands | 26 Wetlands | 21 | 26-29 |
-| nightelf-26-27-redridge-mountains | 26-27 Redridge Mountains | 41 | 26-30 |
-| nightelf-27-28-duskwood | 27-28 Duskwood | 21 | 27-31 |
-| nightelf-28-28-ashenvale | 28 Ashenvale | 13 | 28-31 |
-| nightelf-28-30-stormwind-city | 28-30 Stormwind City | 56 | 28-33 |
-| nightelf-30-30-ashenvale | 30 Ashenvale | 19 | 30-33 |
-| nightelf-30-31-duskwood | 30-31 Duskwood | 22 | 30-34 |
-| nightelf-31-31-thousand-needles | 31 Thousand Needles | 11 | 31-34 |
-| nightelf-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 13 | 31-34 |
-| nightelf-31-32-hillsbrad-foothills | 31-32 Hillsbrad Foothills | 12 | 31-35 |
-| nightelf-32-32-wetlands | 32 Wetlands | 20 | 32-35 |
-| nightelf-32-32-stormwind-city | 32 Stormwind City | 12 | 32-35 |
-| nightelf-32-33-stranglethorn-vale | 32-33 Stranglethorn Vale | 18 | 32-36 |
-| nightelf-33-33-ashenvale | 33 Ashenvale | 17 | 33-36 |
-| nightelf-33-34-desolace | 33-34 Desolace | 31 | 33-37 |
-| nightelf-34-35-stranglethorn-vale | 34-35 Stranglethorn Vale | 29 | 34-38 |
-| nightelf-35-35-duskwood | 35 Duskwood | 15 | 35-38 |
-| nightelf-35-35-dustwallow-marsh | 35 Dustwallow Marsh | 32 | 35-38 |
-| nightelf-35-36-arathi-highlands | 35-36 Arathi Highlands | 13 | 35-39 |
-| nightelf-36-37-badlands | 36-37 Badlands | 60 | 36-40 |
-| nightelf-37-37-stranglethorn-vale | 37 Stranglethorn Vale | 42 | 37-40 |
-| nightelf-37-38-arathi-highlands | 37-38 Arathi Highlands | 13 | 37-41 |
-| nightelf-38-38-stranglethorn-vale | 38 Stranglethorn Vale | 19 | 38-41 |
-| nightelf-38-38-dustwallow-marsh | 38 Dustwallow Marsh | 22 | 38-41 |
-| nightelf-38-39-desolace | 38-39 Desolace | 21 | 38-42 |
-| nightelf-39-39-arathi-highlands | 39 Arathi Highlands | 14 | 39-42 |
-| nightelf-39-39-desolace | 39 Desolace | 10 | 39-42 |
-| nightelf-39-40-badlands | 39-40 Badlands | 22 | 39-43 |
-| nightelf-40-40-stranglethorn-vale | 40 Stranglethorn Vale | 18 | 40-43 |
-| nightelf-40-41-arathi-highlands | 40-41 Arathi Highlands | 14 | 40-44 |
-| nightelf-41-43-stranglethorn-vale | 41-43 Stranglethorn Vale | 83 | 41-46 |
-| nightelf-43-43-badlands | 43 Badlands | 29 | 43-46 |
-| nightelf-43-43-feralas | 43 Feralas | 12 | 43-46 |
-| nightelf-43-45-tanaris | 43-45 Tanaris | 16 | 43-48 |
-| nightelf-45-45-stranglethorn-vale | 45 Stranglethorn Vale | 37 | 45-48 |
-| nightelf-45-45-the-hinterlands | 45 The Hinterlands | 8 | 45-48 |
-| nightelf-45-48-feralas | 45-48 Feralas | 37 | 45-51 |
-| nightelf-48-48-searing-gorge | 48 Searing Gorge | 15 | 48-51 |
-| nightelf-48-50-tanaris | 48-50 Tanaris | 46 | 48-53 |
-| nightelf-50-50-blasted-lands | 50 Blasted Lands | 7 | 50-53 |
-| nightelf-50-50-searing-gorge | 50 Searing Gorge | 22 | 50-53 |
-| nightelf-50-53-tanaris | 50-53 Tanaris | 28 | 50-56 |
-| nightelf-53-53-un-goro-crater | 53 Un'Goro Crater | 36 | 53-56 |
-| nightelf-53-53-azshara | 53 Azshara | 12 | 53-56 |
-| nightelf-53-53-western-plaguelands | 53 Western Plaguelands | 9 | 53-56 |
-| nightelf-53-54-burning-steppes | 53-54 Burning Steppes | 28 | 53-57 |
-| nightelf-54-55-felwood | 54-55 Felwood | 26 | 54-58 |
-| nightelf-55-55-western-plaguelands | 55 Western Plaguelands | 26 | 55-58 |
-| nightelf-55-55-un-goro-crater | 55 Un'Goro Crater | 51 | 55-58 |
-| nightelf-55-57-western-plaguelands | 55-57 Western Plaguelands | 29 | 55-60 |
-| nightelf-57-58-eastern-plaguelands | 57-58 Eastern Plaguelands | 16 | 57-60 |
-| nightelf-58-58-winterspring | 58 Winterspring | 22 | 58-60 |
-| nightelf-58-58-silithus | 58 Silithus | 47 | 58-60 |
-| nightelf-58-59-western-plaguelands | 58-59 Western Plaguelands | 20 | 58-60 |
-| nightelf-59-60-winterspring | 59-60 Winterspring | 60 | 59-60 |
+| nightelf-01-10-teldrassil | 1-10 Teldrassil | 129 | 1-13 |
+| nightelf-10-16-darkshore | 10-16 Darkshore | 101 | 10-19 |
+| nightelf-16-18-the-barrens | 16-18 The Barrens | 27 | 16-21 |
+| nightelf-18-19-darkshore | 18-19 Darkshore | 25 | 18-22 |
+| nightelf-19-20-loch-modan | 19-20 Loch Modan | 64 | 19-23 |
+| nightelf-20-21-ashenvale | 20-21 Ashenvale | 66 | 20-24 |
+| nightelf-21-22-redridge-mountains | 21-22 Redridge Mountains | 42 | 21-25 |
+| nightelf-22-24-duskwood | 22-24 Duskwood | 30 | 22-27 |
+| nightelf-24-24-stormwind-city | 24 Stormwind City | 14 | 24-27 |
+| nightelf-24-26-wetlands | 24-26 Wetlands | 35 | 24-29 |
+| nightelf-26-26-stonetalon-mountains | 26 Stonetalon Mountains | 15 | 26-29 |
+| nightelf-26-27-duskwood | 26-27 Duskwood | 21 | 26-30 |
+| nightelf-27-28-ashenvale | 27-28 Ashenvale | 44 | 27-31 |
+| nightelf-28-29-duskwood | 28-29 Duskwood | 21 | 28-32 |
+| nightelf-29-29-thousand-needles | 29 Thousand Needles | 11 | 29-32 |
+| nightelf-29-29-wetlands | 29 Wetlands | 12 | 29-32 |
+| nightelf-29-30-ashenvale | 29-30 Ashenvale | 11 | 29-33 |
+| nightelf-30-30-hillsbrad-foothills | 30 Hillsbrad Foothills | 13 | 30-33 |
+| nightelf-30-31-desolace | 30-31 Desolace | 21 | 30-34 |
+| nightelf-31-32-stranglethorn-vale | 31-32 Stranglethorn Vale | 47 | 31-35 |
+| nightelf-32-32-dustwallow-marsh | 32 Dustwallow Marsh | 11 | 32-35 |
+| nightelf-32-33-duskwood | 32-33 Duskwood | 31 | 32-36 |
+| nightelf-33-33-stormwind-city | 33 Stormwind City | 13 | 33-36 |
+| nightelf-33-33-wetlands | 33 Wetlands | 18 | 33-36 |
+| nightelf-33-34-arathi-highlands | 33-34 Arathi Highlands | 10 | 33-37 |
+| nightelf-34-34-stranglethorn-vale | 34 Stranglethorn Vale | 21 | 34-37 |
+| nightelf-34-35-desolace | 34-35 Desolace | 19 | 34-38 |
+| nightelf-35-35-badlands | 35 Badlands | 15 | 35-38 |
+| nightelf-35-35-swamp-of-sorrows | 35 Swamp of Sorrows | 29 | 35-38 |
+| nightelf-35-36-stranglethorn-vale | 35-36 Stranglethorn Vale | 21 | 35-39 |
+| nightelf-36-36-arathi-highlands | 36 Arathi Highlands | 11 | 36-39 |
+| nightelf-36-36-stormwind-city | 36 Stormwind City | 14 | 36-39 |
+| nightelf-36-37-desolace | 36-37 Desolace | 20 | 36-40 |
+| nightelf-37-37-arathi-highlands | 37 Arathi Highlands | 12 | 37-40 |
+| nightelf-37-37-dustwallow-marsh | 37 Dustwallow Marsh | 9 | 37-40 |
+| nightelf-37-38-badlands | 37-38 Badlands | 19 | 37-41 |
+| nightelf-38-38-stranglethorn-vale | 38 Stranglethorn Vale | 16 | 38-41 |
+| nightelf-38-39-arathi-highlands | 38-39 Arathi Highlands | 9 | 38-42 |
+| nightelf-39-39-stranglethorn-vale | 39 Stranglethorn Vale | 36 | 39-42 |
+| nightelf-39-40-desolace | 39-40 Desolace | 17 | 39-43 |
+| nightelf-40-40-stranglethorn-vale | 40 Stranglethorn Vale | 44 | 40-43 |
+| nightelf-40-41-feralas | 40-41 Feralas | 16 | 40-44 |
+| nightelf-41-41-stranglethorn-vale | 41 Stranglethorn Vale | 26 | 41-44 |
+| nightelf-41-43-badlands | 41-43 Badlands | 16 | 41-46 |
+| nightelf-43-43-stranglethorn-vale | 43 Stranglethorn Vale | 12 | 43-46 |
+| nightelf-43-43-tanaris | 43 Tanaris | 15 | 43-46 |
+| nightelf-43-46-feralas | 43-46 Feralas | 34 | 43-49 |
+| nightelf-46-46-tanaris | 46 Tanaris | 17 | 46-49 |
+| nightelf-46-47-searing-gorge | 46-47 Searing Gorge | 53 | 46-50 |
+| nightelf-47-48-tanaris | 47-48 Tanaris | 19 | 47-51 |
+| nightelf-48-48-searing-gorge | 48 Searing Gorge | 9 | 48-51 |
+| nightelf-48-48-blasted-lands | 48 Blasted Lands | 17 | 48-51 |
+| nightelf-48-50-the-hinterlands | 48-50 The Hinterlands | 30 | 48-53 |
+| nightelf-50-50-un-goro-crater | 50 Un'Goro Crater | 12 | 50-53 |
+| nightelf-50-50-felwood | 50 Felwood | 13 | 50-53 |
+| nightelf-50-50-moonglade | 50 Moonglade | 39 | 50-53 |
+| nightelf-50-51-un-goro-crater | 50-51 Un'Goro Crater | 22 | 50-54 |
+| nightelf-51-51-azshara | 51 Azshara | 19 | 51-54 |
+| nightelf-51-53-western-plaguelands | 51-53 Western Plaguelands | 49 | 51-56 |
+| nightelf-53-53-un-goro-crater | 53 Un'Goro Crater | 28 | 53-56 |
+| nightelf-53-53-felwood | 53 Felwood | 19 | 53-56 |
+| nightelf-53-54-eastern-plaguelands | 53-54 Eastern Plaguelands | 25 | 53-57 |
+| nightelf-54-54-western-plaguelands | 54 Western Plaguelands | 17 | 54-57 |
+| nightelf-54-54-burning-steppes | 54 Burning Steppes | 11 | 54-57 |
+| nightelf-54-55-winterspring | 54-55 Winterspring | 43 | 54-58 |
+| nightelf-55-56-silithus | 55-56 Silithus | 17 | 55-59 |
+| nightelf-56-58-winterspring | 56-58 Winterspring | 35 | 56-60 |
+| nightelf-58-58-silithus | 58 Silithus | 31 | 58-60 |
+| nightelf-58-58-eastern-plaguelands | 58 Eastern Plaguelands | 24 | 58-60 |
+| nightelf-58-60-western-plaguelands | 58-60 Western Plaguelands | 62 | 58-60 |
 
 ### Level curve
 
 | Level | Reached at step |
 | --- | --- |
-| 10 | 87 |
-| 20 | 430 |
-| 30 | 830 |
-| 40 | 1,418 |
-| 50 | 1,838 |
-| 60 | 2,334 |
+| 10 | 90 |
+| 20 | 347 |
+| 30 | 736 |
+| 40 | 1,298 |
+| 50 | 1,715 |
+| 60 | 2,177 |
 
 ## Undead (Horde, `horde-undead`)
 
 | Fact | Value |
 | --- | --- |
 | Classes validated | MAGE, PALADIN, PRIEST, ROGUE, WARLOCK, WARRIOR |
-| Steps | 2,240 |
-| Quests | 641 |
+| Steps | 2,190 |
+| Quests | 638 |
 | End level | 60 |
-| Zone changes | 160 (before: 182) |
-| Travel time | 46 h 43 min: on foot 34 h 10 min, in the air 9 h 20 min, on transports 2 h 56 min, hearthstone 0 h 17 min (before: 44 h 59 min) |
-| Walked | 836,877 yards (before: 967,604) |
-| Whole route, estimated | 162 h 52 min |
-| Flight points learned, flights taken | 31, 166 |
-| Transports taken | 46 |
-| Hearthstone bound, used | 61, 66 |
-| Grind steps | 16 (level 23 to 24, level 28 to 29, level 29 to 30, level 32 to 33, level 34 to 35, level 36 to 37, level 39 to 40, level 44 to 45, level 46 to 47, level 47 to 48, level 49 to 50, level 52 to 53, level 54 to 55, level 56 to 57, level 58 to 59, level 59 to 60) |
+| Zone changes | 145 (before: 182) |
+| Travel time | 47 h 50 min: on foot 35 h 26 min, in the air 9 h 39 min, on transports 2 h 27 min, hearthstone 0 h 17 min (before: 44 h 59 min) |
+| Walked | 864,432 yards (before: 967,604) |
+| Whole route, estimated | 156 h 00 min |
+| Flight points learned, flights taken | 31, 162 |
+| Transports taken | 37 |
+| Hearthstone bound, used | 59, 67 |
+| Grind steps | 12 (level 27 to 28, level 37 to 38, level 44 to 45, level 45 to 46, level 47 to 48, level 51 to 52, level 52 to 53, level 53 to 54, level 55 to 56, level 56 to 57, level 57 to 58, level 59 to 60) |
 | Unconfirmed transports used | none |
 | Hand-ins left behind | none |
-| Quests above the level allowed, far below the player's level | 0, 71 of 1145 quest steps |
-| Zones in order (steps there) | Tirisfal Glades (99), Durotar (48), Orgrimmar (2), Durotar (1), The Barrens (2), Durotar (1), Tirisfal Glades (7), Silverpine Forest (38), The Barrens (83), Silverpine Forest (21), The Barrens (36), Stonetalon Mountains (1), The Barrens (1), Westfall (9), The Barrens (23), Stonetalon Mountains (1), The Barrens (8), Stonetalon Mountains (29), The Barrens (9), Hillsbrad Foothills (14), Silverpine Forest (12), Undercity (1), Tirisfal Glades (1), Ashenvale (18), The Barrens (8), Stonetalon Mountains (14), The Barrens (7), Undercity (1), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (16), Stonetalon Mountains (10), The Barrens (11), Ashenvale (13), Thousand Needles (17), Hillsbrad Foothills (12), Undercity (1), Thousand Needles (34), The Barrens (7), Thousand Needles (1), The Barrens (1), Stonetalon Mountains (5), Thunder Bluff (3), Orgrimmar (3), Thousand Needles (8), Stranglethorn Vale (13), Undercity (1), Hillsbrad Foothills (14), Stonetalon Mountains (3), Ashenvale (2), Stonetalon Mountains (10), Desolace (17), Hillsbrad Foothills (6), Alterac Mountains (2), Hillsbrad Foothills (6), Arathi Highlands (18), Undercity (2), Stranglethorn Vale (27), Dustwallow Marsh (16), Thousand Needles (5), Hillsbrad Foothills (4), Alterac Mountains (1), Hillsbrad Foothills (1), Alterac Mountains (2), Hillsbrad Foothills (2), Desolace (21), Stranglethorn Vale (31), Arathi Highlands (17), Badlands (7), Dustwallow Marsh (14), Desolace (16), Orgrimmar (2), Stranglethorn Vale (16), Swamp of Sorrows (7), Badlands (2), Arathi Highlands (37), Badlands (18), Stranglethorn Vale (40), Hillsbrad Foothills (4), Alterac Mountains (2), Hillsbrad Foothills (2), Desolace (9), Hillsbrad Foothills (1), Alterac Mountains (1), Hillsbrad Foothills (1), Stranglethorn Vale (13), Arathi Highlands (18), Badlands (15), Swamp of Sorrows (7), Thousand Needles (7), The Barrens (4), Stranglethorn Vale (20), Dustwallow Marsh (15), Feralas (16), Thousand Needles (7), Tanaris (9), Stranglethorn Vale (22), Swamp of Sorrows (18), Undercity (1), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (2), Undercity (6), Alterac Mountains (3), Tanaris (14), Feralas (17), Stranglethorn Vale (18), Searing Gorge (5), Tanaris (26), Undercity (1), The Hinterlands (30), Searing Gorge (15), Stranglethorn Vale (1), Orgrimmar (1), Azshara (6), Feralas (23), Orgrimmar (3), Blasted Lands (15), Searing Gorge (25), The Hinterlands (31), Hillsbrad Foothills (1), Undercity (1), Felwood (9), Orgrimmar (6), Feralas (6), Tanaris (16), The Hinterlands (7), Tanaris (1), Feralas (17), Un'Goro Crater (39), Azshara (15), Badlands (8), Burning Steppes (7), Felwood (26), Winterspring (1), Un'Goro Crater (21), Tirisfal Glades (5), Western Plaguelands (1), Tirisfal Glades (4), Western Plaguelands (15), Eastern Plaguelands (11), Blasted Lands (6), Swamp of Sorrows (10), Tirisfal Glades (5), Western Plaguelands (1), Tirisfal Glades (4), Western Plaguelands (19), Eastern Plaguelands (15), Swamp of Sorrows (4), Blasted Lands (1), Swamp of Sorrows (5), Undercity (11), Thunder Bluff (4), The Barrens (3), Silithus (13), Winterspring (30), Felwood (9), Orgrimmar (2), Searing Gorge (1), Un'Goro Crater (1), Eastern Plaguelands (1) |
-| Class quests left out | MAGE: 1883 (an exclusive quest is taken instead), 1884 (an exclusive quest is taken instead), 1952 (it needs quest 1951 first, which no step of this route can take), 1957 (it needs one of quests 1956 first, which no step of this route can take), 1958 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8381 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 97286 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PALADIN: 90902 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91208 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91209 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91282 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91285 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91294 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91316 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91317 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91858 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91859 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91860 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91861 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91862 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94427 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94434 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94435 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94436 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94438 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94440 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94441 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94971 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95034 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95042 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95111 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95125 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95126 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95140 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95803 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96204 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 97022 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98601 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PRIEST: 5644 (an exclusive quest is taken instead), 5646 (an exclusive quest is taken instead), 5658 (an exclusive quest is taken instead), 5660 (an exclusive quest is taken instead), 5661 (an exclusive quest is taken instead), 5663 (an exclusive quest is taken instead), 8379 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take); ROGUE: 2380 (an exclusive quest is taken instead), 8378 (it needs one of quests 8315 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARLOCK: 1485 (an exclusive quest is taken instead), 1507 (an exclusive quest is taken instead), 1508 (an exclusive quest is taken instead), 1509 (an exclusive quest is taken instead), 1510 (an exclusive quest is taken instead), 1511 (an exclusive quest is taken instead), 1512 (an exclusive quest is taken instead), 1515 (an exclusive quest is taken instead), 3631 (an exclusive quest is taken instead), 4737 (an exclusive quest is taken instead), 4781 (it needs one of quests 1796 first, which no step of this route can take), 4782 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4783 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4784 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4786 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4961 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4962 (an exclusive quest is taken instead), 4964 (an exclusive quest is taken instead), 4967 (an exclusive quest is taken instead), 4975 (it needs quest -4963 first, which no step of this route can take), 4976 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8381 (it needs one of quests 8315 first, which no step of this route can take), 8420 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 65601 (an exclusive quest is taken instead), 65604 (an exclusive quest is taken instead), 65610 (an exclusive quest is taken instead); WARRIOR: 1498 (an exclusive quest is taken instead), 1505 (an exclusive quest is taken instead), 1839 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1840 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1841 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1842 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1843 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1844 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1845 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1846 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1847 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1848 (it needs one of quests 1838 first, which no step of this route can take), 8316 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take) |
+| Quests above the level allowed, far below the player's level | 0, 44 of 1140 quest steps |
+| Walks through dangerous zones | none |
+| Zones in order (steps there) | Tirisfal Glades (105), Silverpine Forest (51), The Barrens (147), Stonetalon Mountains (1), The Barrens (1), Stonetalon Mountains (29), The Barrens (16), Stonetalon Mountains (1), The Barrens (1), Silverpine Forest (15), Ashenvale (24), Hillsbrad Foothills (12), Stonetalon Mountains (15), The Barrens (19), Stonetalon Mountains (15), Thousand Needles (14), Ashenvale (13), Hillsbrad Foothills (12), Thousand Needles (10), The Barrens (3), Thousand Needles (9), Hillsbrad Foothills (14), Alterac Mountains (1), Hillsbrad Foothills (8), Undercity (1), Thousand Needles (23), Desolace (1), Stonetalon Mountains (3), Ashenvale (2), Stonetalon Mountains (9), Hillsbrad Foothills (3), Arathi Highlands (6), Undercity (3), Hillsbrad Foothills (8), The Barrens (9), Thousand Needles (1), The Barrens (1), Orgrimmar (5), Desolace (20), Stranglethorn Vale (23), Hillsbrad Foothills (10), Alterac Mountains (1), Hillsbrad Foothills (1), Alterac Mountains (2), Hillsbrad Foothills (2), Arathi Highlands (13), Thousand Needles (4), Dustwallow Marsh (17), Desolace (13), Stranglethorn Vale (17), Thousand Needles (4), Stranglethorn Vale (12), Desolace (9), Thunder Bluff (3), Thousand Needles (5), Dustwallow Marsh (7), The Barrens (5), Stranglethorn Vale (26), Arathi Highlands (17), Badlands (7), Desolace (19), Thousand Needles (8), Stranglethorn Vale (12), Arathi Highlands (10), Badlands (22), Arathi Highlands (27), Stranglethorn Vale (40), Hillsbrad Foothills (4), Alterac Mountains (2), Hillsbrad Foothills (2), Dustwallow Marsh (8), Swamp of Sorrows (11), Arathi Highlands (17), Badlands (11), Stranglethorn Vale (13), Thousand Needles (7), Dustwallow Marsh (16), Feralas (16), Stranglethorn Vale (13), Swamp of Sorrows (14), Stranglethorn Vale (18), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (1), Orgrimmar (2), Desolace (6), Thousand Needles (4), Tanaris (24), Orgrimmar (5), Feralas (16), Orgrimmar (1), Alterac Mountains (3), Hillsbrad Foothills (1), Stranglethorn Vale (11), Hillsbrad Foothills (3), Alterac Mountains (1), Hillsbrad Foothills (2), Undercity (8), Searing Gorge (5), Stranglethorn Vale (19), Tanaris (27), Feralas (17), Orgrimmar (3), The Hinterlands (29), Searing Gorge (41), Blasted Lands (15), The Hinterlands (17), Swamp of Sorrows (11), Badlands (11), Stranglethorn Vale (1), Orgrimmar (6), Feralas (12), Undercity (1), The Hinterlands (20), Feralas (15), Azshara (15), Un'Goro Crater (16), Tanaris (15), Felwood (12), Undercity (6), Un'Goro Crater (24), Azshara (7), Felwood (21), Un'Goro Crater (22), Western Plaguelands (24), Eastern Plaguelands (21), Burning Steppes (8), Winterspring (16), Swamp of Sorrows (7), Blasted Lands (1), Swamp of Sorrows (5), Silithus (22), Winterspring (27), Silithus (34), Eastern Plaguelands (21), Tirisfal Glades (2), Western Plaguelands (1), Tirisfal Glades (3), Western Plaguelands (1), Alterac Mountains (2), Hillsbrad Foothills (1), Arathi Highlands (3), Orgrimmar (2), The Barrens (1), Thunder Bluff (3), Dustwallow Marsh (1) |
+| Class quests left out | MAGE: 1883 (an exclusive quest is taken instead), 1884 (an exclusive quest is taken instead), 1952 (it needs quest 1951 first, which no step of this route can take), 1957 (it needs one of quests 1956 first, which no step of this route can take), 1958 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 97286 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PALADIN: 90902 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91208 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91209 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91282 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91285 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91294 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91316 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91317 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91858 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91859 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91860 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91861 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 91862 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94427 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94434 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94435 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94436 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94438 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94440 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94441 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94971 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95034 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95042 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95111 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95125 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95126 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95140 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 95803 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96204 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 97022 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98601 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PRIEST: 5644 (an exclusive quest is taken instead), 5646 (an exclusive quest is taken instead), 5660 (an exclusive quest is taken instead), 5661 (an exclusive quest is taken instead), 5662 (an exclusive quest is taken instead), 5663 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take); ROGUE: 2380 (an exclusive quest is taken instead), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARLOCK: 1485 (an exclusive quest is taken instead), 1507 (an exclusive quest is taken instead), 1508 (an exclusive quest is taken instead), 1509 (an exclusive quest is taken instead), 1510 (an exclusive quest is taken instead), 1511 (an exclusive quest is taken instead), 1512 (an exclusive quest is taken instead), 1515 (an exclusive quest is taken instead), 3631 (an exclusive quest is taken instead), 4737 (an exclusive quest is taken instead), 4781 (it needs one of quests 1796 first, which no step of this route can take), 4782 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4783 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4784 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4786 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4963 (an exclusive quest is taken instead), 4964 (it needs quest -4962 first, which no step of this route can take), 4967 (an exclusive quest is taken instead), 4975 (an exclusive quest is taken instead), 8420 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 65601 (an exclusive quest is taken instead), 65604 (an exclusive quest is taken instead), 65610 (an exclusive quest is taken instead); WARRIOR: 1498 (an exclusive quest is taken instead), 1505 (an exclusive quest is taken instead), 1839 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1840 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1841 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1842 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1843 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1844 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1845 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1846 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1847 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1848 (it needs one of quests 1838 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take) |
 | Errors | 0 |
 | Warnings | none |
 
@@ -639,125 +658,125 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,551, 1,784 (70%) |
-| Steps in the route file | 2,002 |
-| Sections | 74 |
-| Profession steps written | p165-2, p171-2, p197-2, p333-2, p182-2, p186-2, p393-2, p164-2, p202-2, p164-3, p165-3, p171-3, p197-3, p333-3, p182-3, p186-3, p202-3, p393-3, p164-4, p202-4, p171-4, p182-4, p186-4, p393-4, p197-4 |
-| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section undead-34-35-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section undead-34-35-stranglethorn-vale |
-| Class trainer visits | MAGE: 2, 4, 6, 8, 10, 12, 14, 16, 18, 22, 24, 28, 30, 32, 34, 36, 40, 42, 44, 46, 50, 52, 56; PALADIN: 2, 4, 6, 8, 10, 12, 16, 20, 22, 24, 26, 28, 30, 32, 34, 36, 40, 44, 46, 50, 56; PRIEST: 2, 4, 6, 8, 10, 12, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 40, 42, 44, 46, 50, 52, 56; ROGUE: 2, 4, 6, 8, 10, 12, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 40, 42, 44, 46, 48, 50, 52, 56, 58; WARLOCK: 2, 4, 6, 8, 10, 12, 14, 16, 18, 23, 27, 30, 32, 34, 36, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 16, 20, 22, 24, 26, 28, 30, 32, 34, 36, 40, 42, 44, 46, 48, 50, 54, 56 |
-| Class trainer gaps | none |
-| Planner notes | Undead step a782.a3821: quest 782 gives XP only up to level 51, but the estimated level there is 53; with "skip content you outlevel" the step and its quest's later lines are skipped |
+| Actions before bundling, steps after | 2,521, 1,734 (69%) |
+| Steps in the route file | 1,943 |
+| Sections | 73 |
+| Profession steps written | p165-2, p171-2, p197-2, p333-2, p164-2, p202-2, p333-3, p164-3, p165-3, p197-3, p171-3, p182-3, p186-3, p202-3, p393-3, p164-4, p171-4, p182-4, p186-4, p197-4, p393-4, p202-4 |
+| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section undead-34-36-stranglethorn-vale; Herbalism Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section undead-09-11-tirisfal-glades; Mining Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section undead-09-11-tirisfal-glades; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section undead-34-36-stranglethorn-vale; Skinning Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section undead-09-11-tirisfal-glades |
+| Class trainer visits | MAGE: 2, 4, 6, 8, 10, 12, 14, 20, 22, 27, 30, 32, 34, 38, 40, 42, 48, 57; PALADIN: 2, 4, 6, 8, 10, 12, 20, 22, 24, 26, 28, 30, 32, 34, 38, 40, 42, 44, 48, 56, 58; PRIEST: 2, 4, 6, 8, 10, 12, 20, 22, 24, 26, 28, 30, 32, 34, 38, 40, 42, 44, 48, 56, 58; ROGUE: 2, 4, 6, 8, 10, 12, 16, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 48, 53, 56, 58; WARLOCK: 2, 4, 6, 8, 10, 12, 16, 20, 22, 27, 30, 32, 34, 38, 40, 42, 44, 46, 48, 54, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 20, 22, 24, 26, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 52, 54, 56, 58 |
+| Class trainer gaps | MAGE 48 to 57: the cheapest trip to a trainer adds 301 seconds (at most 300); PALADIN 12 to 20: the cheapest trip to a trainer adds 567 seconds (at most 300); PALADIN 48 to 56: the cheapest trip to a trainer adds 399 seconds (at most 300); PRIEST 12 to 20: the cheapest trip to a trainer adds 418 seconds (at most 300); PRIEST 48 to 56: the cheapest trip to a trainer adds 305 seconds (at most 300); WARRIOR 12 to 20: the cheapest trip to a trainer adds 571 seconds (at most 300) |
+| Planner notes | none |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| undead-01-09-tirisfal-glades | 1-9 Tirisfal Glades | 70 | 1-12 |
+| undead-01-09-tirisfal-glades | 1-9 Tirisfal Glades | 69 | 1-12 |
 | undead-09-09-durotar | 9 Durotar | 27 | 9-12 |
-| undead-09-11-tirisfal-glades | 9-11 Tirisfal Glades | 39 | 9-14 |
-| undead-11-13-durotar | 11-13 Durotar | 55 | 11-16 |
-| undead-13-13-tirisfal-glades | 13 Tirisfal Glades | 17 | 13-16 |
-| undead-13-14-silverpine-forest | 13-14 Silverpine Forest | 29 | 13-17 |
-| undead-14-17-the-barrens | 14-17 The Barrens | 76 | 14-20 |
-| undead-17-18-silverpine-forest | 17-18 Silverpine Forest | 19 | 17-21 |
-| undead-18-18-undercity | 18 Undercity | 14 | 18-21 |
-| undead-18-19-the-barrens | 18-19 The Barrens | 42 | 18-22 |
-| undead-19-20-westfall | 19-20 Westfall | 24 | 19-23 |
-| undead-20-21-the-barrens | 20-21 The Barrens | 39 | 20-24 |
-| undead-21-22-stonetalon-mountains | 21-22 Stonetalon Mountains | 40 | 21-25 |
-| undead-22-22-hillsbrad-foothills | 22 Hillsbrad Foothills | 17 | 22-25 |
-| undead-22-24-silverpine-forest | 22-24 Silverpine Forest | 35 | 22-27 |
-| undead-24-24-ashenvale | 24 Ashenvale | 26 | 24-27 |
-| undead-24-25-stonetalon-mountains | 24-25 Stonetalon Mountains | 13 | 24-28 |
-| undead-25-25-the-barrens | 25 The Barrens | 42 | 25-28 |
-| undead-25-26-hillsbrad-foothills | 25-26 Hillsbrad Foothills | 12 | 25-29 |
-| undead-26-26-stonetalon-mountains | 26 Stonetalon Mountains | 14 | 26-29 |
-| undead-26-27-the-barrens | 26-27 The Barrens | 12 | 26-30 |
-| undead-27-27-ashenvale | 27 Ashenvale | 15 | 27-30 |
-| undead-27-28-thousand-needles | 27-28 Thousand Needles | 15 | 27-31 |
-| undead-28-29-hillsbrad-foothills | 28-29 Hillsbrad Foothills | 20 | 28-32 |
-| undead-29-30-thousand-needles | 29-30 Thousand Needles | 20 | 29-33 |
-| undead-30-31-thousand-needles | 30-31 Thousand Needles | 58 | 30-34 |
-| undead-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 17 | 31-34 |
-| undead-31-31-hillsbrad-foothills | 31 Hillsbrad Foothills | 33 | 31-34 |
-| undead-31-33-stonetalon-mountains | 31-33 Stonetalon Mountains | 5 | 31-36 |
-| undead-33-33-desolace | 33 Desolace | 22 | 33-36 |
-| undead-33-34-arathi-highlands | 33-34 Arathi Highlands | 21 | 33-37 |
-| undead-34-35-stranglethorn-vale | 34-35 Stranglethorn Vale | 32 | 34-38 |
-| undead-35-35-dustwallow-marsh | 35 Dustwallow Marsh | 63 | 35-38 |
-| undead-35-36-desolace | 35-36 Desolace | 24 | 35-39 |
-| undead-36-37-stranglethorn-vale | 36-37 Stranglethorn Vale | 29 | 36-40 |
-| undead-37-37-arathi-highlands | 37 Arathi Highlands | 20 | 37-40 |
-| undead-37-38-dustwallow-marsh | 37-38 Dustwallow Marsh | 15 | 37-41 |
-| undead-38-38-desolace | 38 Desolace | 20 | 38-41 |
-| undead-38-38-stranglethorn-vale | 38 Stranglethorn Vale | 28 | 38-41 |
-| undead-38-40-arathi-highlands | 38-40 Arathi Highlands | 22 | 38-43 |
-| undead-40-40-badlands | 40 Badlands | 16 | 40-43 |
-| undead-40-42-stranglethorn-vale | 40-42 Stranglethorn Vale | 84 | 40-45 |
-| undead-42-42-arathi-highlands | 42 Arathi Highlands | 13 | 42-45 |
-| undead-42-42-badlands | 42 Badlands | 37 | 42-45 |
-| undead-42-43-stranglethorn-vale | 42-43 Stranglethorn Vale | 16 | 42-46 |
-| undead-43-43-dustwallow-marsh | 43 Dustwallow Marsh | 19 | 43-46 |
-| undead-43-43-feralas | 43 Feralas | 19 | 43-46 |
-| undead-43-44-tanaris | 43-44 Tanaris | 7 | 43-47 |
-| undead-44-45-stranglethorn-vale | 44-45 Stranglethorn Vale | 20 | 44-48 |
-| undead-45-45-swamp-of-sorrows | 45 Swamp of Sorrows | 35 | 45-48 |
-| undead-45-46-feralas | 45-46 Feralas | 36 | 45-49 |
-| undead-46-46-stranglethorn-vale | 46 Stranglethorn Vale | 24 | 46-49 |
-| undead-46-48-tanaris | 46-48 Tanaris | 32 | 46-51 |
-| undead-48-48-the-hinterlands | 48 The Hinterlands | 20 | 48-51 |
-| undead-48-48-searing-gorge | 48 Searing Gorge | 23 | 48-51 |
-| undead-48-50-feralas | 48-50 Feralas | 14 | 48-53 |
-| undead-50-50-feralas | 50 Feralas | 15 | 50-53 |
-| undead-50-50-blasted-lands | 50 Blasted Lands | 8 | 50-53 |
-| undead-50-50-searing-gorge | 50 Searing Gorge | 10 | 50-53 |
-| undead-50-51-the-hinterlands | 50-51 The Hinterlands | 29 | 50-54 |
-| undead-51-51-felwood | 51 Felwood | 25 | 51-54 |
-| undead-51-51-tanaris | 51 Tanaris | 24 | 51-54 |
-| undead-51-53-feralas | 51-53 Feralas | 14 | 51-56 |
-| undead-53-53-un-goro-crater | 53 Un'Goro Crater | 29 | 53-56 |
-| undead-53-53-azshara | 53 Azshara | 38 | 53-56 |
-| undead-53-55-felwood | 53-55 Felwood | 31 | 53-58 |
-| undead-55-55-un-goro-crater | 55 Un'Goro Crater | 52 | 55-58 |
-| undead-55-57-swamp-of-sorrows | 55-57 Swamp of Sorrows | 15 | 55-60 |
-| undead-57-57-western-plaguelands | 57 Western Plaguelands | 15 | 57-60 |
-| undead-57-57-eastern-plaguelands | 57 Eastern Plaguelands | 43 | 57-60 |
-| undead-57-57-silithus | 57 Silithus | 18 | 57-60 |
-| undead-57-57-azshara | 57 Azshara | 15 | 57-60 |
-| undead-57-59-winterspring | 57-59 Winterspring | 23 | 57-60 |
-| undead-59-60-felwood | 59-60 Felwood | 42 | 59-60 |
+| undead-09-11-tirisfal-glades | 9-11 Tirisfal Glades | 50 | 9-14 |
+| undead-11-13-silverpine-forest | 11-13 Silverpine Forest | 50 | 11-16 |
+| undead-13-19-the-barrens | 13-19 The Barrens | 134 | 13-22 |
+| undead-19-20-stonetalon-mountains | 19-20 Stonetalon Mountains | 15 | 19-23 |
+| undead-20-20-stonetalon-mountains | 20 Stonetalon Mountains | 11 | 20-23 |
+| undead-20-21-the-barrens | 20-21 The Barrens | 42 | 20-24 |
+| undead-21-22-silverpine-forest | 21-22 Silverpine Forest | 47 | 21-25 |
+| undead-22-22-ashenvale | 22 Ashenvale | 12 | 22-25 |
+| undead-22-22-hillsbrad-foothills | 22 Hillsbrad Foothills | 19 | 22-25 |
+| undead-22-23-stonetalon-mountains | 22-23 Stonetalon Mountains | 15 | 22-26 |
+| undead-23-24-the-barrens | 23-24 The Barrens | 24 | 23-27 |
+| undead-24-25-stonetalon-mountains | 24-25 Stonetalon Mountains | 21 | 24-28 |
+| undead-25-25-thousand-needles | 25 Thousand Needles | 12 | 25-28 |
+| undead-25-26-ashenvale | 25-26 Ashenvale | 15 | 25-29 |
+| undead-26-26-hillsbrad-foothills | 26 Hillsbrad Foothills | 13 | 26-29 |
+| undead-26-28-thousand-needles | 26-28 Thousand Needles | 22 | 26-31 |
+| undead-28-28-hillsbrad-foothills | 28 Hillsbrad Foothills | 30 | 28-31 |
+| undead-28-30-thousand-needles | 28-30 Thousand Needles | 33 | 28-33 |
+| undead-30-30-hillsbrad-foothills | 30 Hillsbrad Foothills | 43 | 30-33 |
+| undead-30-31-desolace | 30-31 Desolace | 14 | 30-34 |
+| undead-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 37 | 31-34 |
+| undead-31-32-hillsbrad-foothills | 31-32 Hillsbrad Foothills | 21 | 31-35 |
+| undead-32-32-arathi-highlands | 32 Arathi Highlands | 19 | 32-35 |
+| undead-32-33-dustwallow-marsh | 32-33 Dustwallow Marsh | 10 | 32-36 |
+| undead-33-33-desolace | 33 Desolace | 14 | 33-36 |
+| undead-33-34-stranglethorn-vale | 33-34 Stranglethorn Vale | 42 | 33-37 |
+| undead-34-34-desolace | 34 Desolace | 35 | 34-37 |
+| undead-34-34-the-barrens | 34 The Barrens | 6 | 34-37 |
+| undead-34-36-stranglethorn-vale | 34-36 Stranglethorn Vale | 72 | 34-39 |
+| undead-36-36-desolace | 36 Desolace | 28 | 36-39 |
+| undead-36-36-stranglethorn-vale | 36 Stranglethorn Vale | 16 | 36-39 |
+| undead-36-37-arathi-highlands | 36-37 Arathi Highlands | 8 | 36-40 |
+| undead-37-38-badlands | 37-38 Badlands | 22 | 37-41 |
+| undead-38-38-arathi-highlands | 38 Arathi Highlands | 13 | 38-41 |
+| undead-38-40-stranglethorn-vale | 38-40 Stranglethorn Vale | 69 | 38-43 |
+| undead-40-40-arathi-highlands | 40 Arathi Highlands | 12 | 40-43 |
+| undead-40-40-badlands | 40 Badlands | 10 | 40-43 |
+| undead-40-40-stranglethorn-vale | 40 Stranglethorn Vale | 22 | 40-43 |
+| undead-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 8 | 40-44 |
+| undead-41-41-feralas | 41 Feralas | 12 | 41-44 |
+| undead-41-41-stranglethorn-vale | 41 Stranglethorn Vale | 13 | 41-44 |
+| undead-41-42-swamp-of-sorrows | 41-42 Swamp of Sorrows | 13 | 41-45 |
+| undead-42-42-stranglethorn-vale | 42 Stranglethorn Vale | 46 | 42-45 |
+| undead-42-43-tanaris | 42-43 Tanaris | 55 | 42-46 |
+| undead-43-45-stranglethorn-vale | 43-45 Stranglethorn Vale | 58 | 43-48 |
+| undead-45-46-tanaris | 45-46 Tanaris | 26 | 45-49 |
+| undead-46-46-feralas | 46 Feralas | 19 | 46-49 |
+| undead-46-46-the-hinterlands | 46 The Hinterlands | 24 | 46-49 |
+| undead-46-48-searing-gorge | 46-48 Searing Gorge | 17 | 46-51 |
+| undead-48-48-blasted-lands | 48 Blasted Lands | 6 | 48-51 |
+| undead-48-48-the-hinterlands | 48 The Hinterlands | 11 | 48-51 |
+| undead-48-49-swamp-of-sorrows | 48-49 Swamp of Sorrows | 10 | 48-52 |
+| undead-49-49-badlands | 49 Badlands | 20 | 49-52 |
+| undead-49-49-feralas | 49 Feralas | 17 | 49-52 |
+| undead-49-49-the-hinterlands | 49 The Hinterlands | 15 | 49-52 |
+| undead-49-49-feralas-2 | 49 Feralas | 12 | 49-52 |
+| undead-49-50-azshara | 49-50 Azshara | 18 | 49-53 |
+| undead-50-50-un-goro-crater | 50 Un'Goro Crater | 15 | 50-53 |
+| undead-50-50-tanaris | 50 Tanaris | 12 | 50-53 |
+| undead-50-51-felwood | 50-51 Felwood | 23 | 50-54 |
+| undead-51-51-un-goro-crater | 51 Un'Goro Crater | 22 | 51-54 |
+| undead-51-52-azshara | 51-52 Azshara | 17 | 51-55 |
+| undead-52-53-felwood | 52-53 Felwood | 18 | 52-56 |
+| undead-53-54-un-goro-crater | 53-54 Un'Goro Crater | 28 | 53-57 |
+| undead-54-54-western-plaguelands | 54 Western Plaguelands | 14 | 54-57 |
+| undead-54-54-eastern-plaguelands | 54 Eastern Plaguelands | 31 | 54-57 |
+| undead-54-55-winterspring | 54-55 Winterspring | 39 | 54-58 |
+| undead-55-56-silithus | 55-56 Silithus | 18 | 55-59 |
+| undead-56-58-winterspring | 56-58 Winterspring | 31 | 56-60 |
+| undead-58-58-silithus | 58 Silithus | 32 | 58-60 |
+| undead-58-60-eastern-plaguelands | 58-60 Eastern Plaguelands | 69 | 58-60 |
 
 ### Level curve
 
 | Level | Reached at step |
 | --- | --- |
 | 10 | 83 |
-| 20 | 399 |
-| 30 | 733 |
-| 40 | 1,165 |
-| 50 | 1,700 |
-| 60 | 2,224 |
+| 20 | 349 |
+| 30 | 685 |
+| 40 | 1,210 |
+| 50 | 1,774 |
+| 60 | 2,166 |
 
 ## Tauren (Horde, `horde-tauren`)
 
 | Fact | Value |
 | --- | --- |
 | Classes validated | DRUID, HUNTER, SHAMAN, WARRIOR |
-| Steps | 2,361 |
-| Quests | 667 |
+| Steps | 2,205 |
+| Quests | 648 |
 | End level | 60 |
-| Zone changes | 176 (before: 199) |
-| Travel time | 50 h 56 min: on foot 35 h 48 min, in the air 11 h 39 min, on transports 3 h 13 min, hearthstone 0 h 17 min (before: 43 h 32 min) |
-| Walked | 871,072 yards (before: 923,557) |
-| Whole route, estimated | 168 h 02 min |
-| Flight points learned, flights taken | 31, 202 |
-| Transports taken | 50 |
-| Hearthstone bound, used | 62, 67 |
-| Grind steps | 14 (level 28 to 29, level 29 to 30, level 32 to 33, level 34 to 35, level 39 to 40, level 44 to 45, level 46 to 47, level 47 to 48, level 49 to 50, level 52 to 53, level 54 to 55, level 56 to 57, level 58 to 59, level 59 to 60) |
+| Zone changes | 150 (before: 199) |
+| Travel time | 48 h 21 min: on foot 36 h 13 min, in the air 9 h 28 min, on transports 2 h 24 min, hearthstone 0 h 17 min (before: 43 h 32 min) |
+| Walked | 880,061 yards (before: 923,557) |
+| Whole route, estimated | 157 h 29 min |
+| Flight points learned, flights taken | 31, 156 |
+| Transports taken | 36 |
+| Hearthstone bound, used | 59, 66 |
+| Grind steps | 12 (level 27 to 28, level 37 to 38, level 44 to 45, level 45 to 46, level 47 to 48, level 51 to 52, level 52 to 53, level 53 to 54, level 55 to 56, level 56 to 57, level 57 to 58, level 59 to 60) |
 | Unconfirmed transports used | none |
 | Hand-ins left behind | none |
-| Quests above the level allowed, far below the player's level | 0, 95 of 1182 quest steps |
-| Zones in order (steps there) | Mulgore (79), Durotar (57), Orgrimmar (2), Durotar (1), The Barrens (2), Durotar (1), Tirisfal Glades (58), Silverpine Forest (45), The Barrens (117), Stonetalon Mountains (1), The Barrens (1), Westfall (9), The Barrens (30), Stonetalon Mountains (1), The Barrens (1), Stonetalon Mountains (29), Silverpine Forest (19), Hillsbrad Foothills (15), The Barrens (14), Thunder Bluff (4), Stonetalon Mountains (3), Hillsbrad Foothills (6), Thunder Bluff (1), Ashenvale (21), Hillsbrad Foothills (3), Alterac Mountains (1), Hillsbrad Foothills (4), The Barrens (10), Stonetalon Mountains (11), Ashenvale (4), Thousand Needles (5), Hillsbrad Foothills (13), Stonetalon Mountains (10), The Barrens (12), Ashenvale (9), Thousand Needles (10), Thunder Bluff (2), Ashenvale (1), Hillsbrad Foothills (11), Undercity (1), Thousand Needles (37), The Barrens (7), Thousand Needles (1), The Barrens (1), Thunder Bluff (4), Stonetalon Mountains (6), Thousand Needles (12), Stranglethorn Vale (13), Undercity (1), Hillsbrad Foothills (14), Orgrimmar (3), Desolace (18), Hillsbrad Foothills (5), Alterac Mountains (2), Hillsbrad Foothills (6), Thousand Needles (3), Arathi Highlands (18), Stranglethorn Vale (27), Dustwallow Marsh (16), Desolace (14), Orgrimmar (2), Swamp of Sorrows (4), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (1), Alterac Mountains (2), Hillsbrad Foothills (2), Stranglethorn Vale (17), Desolace (7), Thousand Needles (4), Dustwallow Marsh (4), The Barrens (4), Orgrimmar (2), Thousand Needles (8), Stranglethorn Vale (1), Badlands (8), Stranglethorn Vale (19), Arathi Highlands (17), Dustwallow Marsh (12), Desolace (17), Arathi Highlands (7), Stranglethorn Vale (12), The Barrens (1), Thousand Needles (2), The Barrens (2), Swamp of Sorrows (4), Stranglethorn Vale (14), Badlands (19), Arathi Highlands (33), Stranglethorn Vale (36), Hillsbrad Foothills (4), Alterac Mountains (2), Hillsbrad Foothills (2), Desolace (9), Thousand Needles (9), Stranglethorn Vale (12), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (1), Arathi Highlands (15), Alterac Mountains (2), Badlands (12), Swamp of Sorrows (1), Duskwood (2), Swamp of Sorrows (9), Stranglethorn Vale (12), Dustwallow Marsh (15), Feralas (16), Badlands (3), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (1), Stranglethorn Vale (21), Tanaris (21), Feralas (15), Orgrimmar (4), Swamp of Sorrows (14), Searing Gorge (5), Stranglethorn Vale (17), Undercity (9), Tanaris (30), Feralas (20), The Hinterlands (30), Searing Gorge (41), Blasted Lands (15), Feralas (25), Undercity (1), The Hinterlands (29), Un'Goro Crater (6), Tanaris (17), Felwood (9), Orgrimmar (3), Swamp of Sorrows (7), Badlands (8), Azshara (13), Un'Goro Crater (33), Searing Gorge (5), Burning Steppes (7), Undercity (6), Tirisfal Glades (2), Western Plaguelands (1), Tirisfal Glades (4), Azshara (5), Felwood (23), Un'Goro Crater (19), Blasted Lands (6), Western Plaguelands (17), Undercity (11), Eastern Plaguelands (26), Silithus (13), Tirisfal Glades (4), Western Plaguelands (1), Tirisfal Glades (3), Western Plaguelands (20), Tirisfal Glades (3), Western Plaguelands (1), Tirisfal Glades (2), Swamp of Sorrows (7), Blasted Lands (1), Swamp of Sorrows (5), Burning Steppes (4), Thunder Bluff (5), Winterspring (35), Silithus (13), Un'Goro Crater (1), Tanaris (1), Dustwallow Marsh (1), Orgrimmar (1), Felwood (1), Moonglade (1), Thunder Bluff (1), Stranglethorn Vale (1), Burning Steppes (1), Arathi Highlands (2), Western Plaguelands (2), Eastern Plaguelands (1), Tirisfal Glades (1) |
-| Class quests left out | DRUID: 5927 (an exclusive quest is taken instead), 5928 (an exclusive quest is taken instead), 8382 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 81924 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98340 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98342 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98362 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98405 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98739 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); HUNTER: 6066 (an exclusive quest is taken instead), 6067 (an exclusive quest is taken instead), 8377 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); SHAMAN: 1519 (an exclusive quest is taken instead), 1522 (an exclusive quest is taken instead), 1523 (an exclusive quest is taken instead), 1529 (an exclusive quest is taken instead), 1531 (an exclusive quest is taken instead), 2983 (an exclusive quest is taken instead), 2985 (an exclusive quest is taken instead), 2986 (an exclusive quest is taken instead), 8380 (it needs one of quests 8315 first, which no step of this route can take), 8410 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 79358 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79361 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79362 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79363 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79364 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79365 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79366 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79442 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARRIOR: 1498 (an exclusive quest is taken instead), 1505 (an exclusive quest is taken instead), 1839 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1840 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1841 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1842 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1843 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1844 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1845 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1846 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1847 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1848 (it needs one of quests 1838 first, which no step of this route can take), 8316 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take) |
+| Quests above the level allowed, far below the player's level | 0, 64 of 1148 quest steps |
+| Walks through dangerous zones | none |
+| Zones in order (steps there) | Mulgore (82), Durotar (54), The Barrens (2), Durotar (1), Orgrimmar (2), Durotar (1), Silverpine Forest (51), The Barrens (157), Stonetalon Mountains (1), The Barrens (1), Stonetalon Mountains (32), The Barrens (11), Stonetalon Mountains (1), The Barrens (1), Ashenvale (24), Silverpine Forest (1), Hillsbrad Foothills (11), Stonetalon Mountains (11), The Barrens (19), Stonetalon Mountains (15), Thousand Needles (14), Ashenvale (13), Hillsbrad Foothills (12), Thousand Needles (10), The Barrens (3), Thousand Needles (9), Hillsbrad Foothills (14), Alterac Mountains (1), Hillsbrad Foothills (8), Undercity (1), Thousand Needles (23), Desolace (1), Stonetalon Mountains (3), Ashenvale (2), Stonetalon Mountains (9), Hillsbrad Foothills (3), Arathi Highlands (6), Undercity (3), Hillsbrad Foothills (8), The Barrens (9), Thousand Needles (1), The Barrens (1), Orgrimmar (5), Desolace (20), Stranglethorn Vale (23), Hillsbrad Foothills (10), Alterac Mountains (1), Hillsbrad Foothills (1), Alterac Mountains (2), Hillsbrad Foothills (2), Arathi Highlands (13), Thousand Needles (4), Dustwallow Marsh (17), Desolace (13), Stranglethorn Vale (17), Thousand Needles (4), Stranglethorn Vale (12), Desolace (9), Thunder Bluff (3), Thousand Needles (5), Dustwallow Marsh (7), The Barrens (5), Stranglethorn Vale (26), Arathi Highlands (17), Badlands (7), Desolace (19), Thousand Needles (8), Stranglethorn Vale (12), Arathi Highlands (10), Badlands (22), Arathi Highlands (27), Stranglethorn Vale (40), Hillsbrad Foothills (4), Alterac Mountains (2), Hillsbrad Foothills (2), Dustwallow Marsh (8), Swamp of Sorrows (11), Arathi Highlands (17), Badlands (11), Stranglethorn Vale (13), Thousand Needles (7), Dustwallow Marsh (16), Feralas (16), Stranglethorn Vale (13), Swamp of Sorrows (14), Stranglethorn Vale (18), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (1), Orgrimmar (2), Desolace (6), Thousand Needles (4), Tanaris (24), Orgrimmar (5), Feralas (16), Orgrimmar (1), Alterac Mountains (3), Hillsbrad Foothills (1), Stranglethorn Vale (11), Hillsbrad Foothills (3), Alterac Mountains (1), Hillsbrad Foothills (2), Undercity (8), Searing Gorge (5), Stranglethorn Vale (19), Tanaris (27), Feralas (17), Orgrimmar (3), The Hinterlands (29), Searing Gorge (41), Blasted Lands (15), The Hinterlands (17), Swamp of Sorrows (11), Badlands (11), Stranglethorn Vale (1), Orgrimmar (6), Feralas (12), Undercity (1), The Hinterlands (20), Feralas (15), Azshara (15), Un'Goro Crater (16), Tanaris (15), Felwood (12), Undercity (6), Un'Goro Crater (24), Azshara (7), Felwood (21), Un'Goro Crater (22), Western Plaguelands (24), Eastern Plaguelands (21), Burning Steppes (8), Winterspring (16), Swamp of Sorrows (7), Blasted Lands (1), Swamp of Sorrows (5), Silithus (22), Winterspring (27), Silithus (34), Eastern Plaguelands (21), Tirisfal Glades (2), Western Plaguelands (1), Tirisfal Glades (3), Western Plaguelands (1), Alterac Mountains (2), Hillsbrad Foothills (1), Arathi Highlands (3), Orgrimmar (2), The Barrens (1), Thunder Bluff (3), Dustwallow Marsh (1) |
+| Class quests left out | DRUID: 5926 (an exclusive quest is taken instead), 5928 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 81924 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98340 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98342 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98362 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98405 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98739 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); HUNTER: 6065 (an exclusive quest is taken instead), 6066 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); SHAMAN: 1519 (an exclusive quest is taken instead), 1522 (an exclusive quest is taken instead), 1523 (an exclusive quest is taken instead), 1529 (an exclusive quest is taken instead), 1532 (an exclusive quest is taken instead), 2984 (an exclusive quest is taken instead), 2985 (an exclusive quest is taken instead), 2986 (an exclusive quest is taken instead), 8410 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 79358 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79361 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79362 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79363 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79364 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79365 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79366 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79442 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARRIOR: 1498 (an exclusive quest is taken instead), 1505 (an exclusive quest is taken instead), 1839 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1840 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1841 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1842 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1843 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1844 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1845 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1846 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1847 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1848 (it needs one of quests 1838 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take) |
 | Errors | 0 |
 | Warnings | none |
 
@@ -765,118 +784,124 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,584, 1,821 (70%) |
-| Steps in the route file | 1,986 |
-| Sections | 67 |
-| Profession steps written | p171-2, p182-2, p186-2, p333-2, p393-2, p164-2, p165-2, p197-2, p202-2, p164-3, p165-3, p171-3, p197-3, p333-3, p182-3, p186-3, p202-3, p393-3, p164-4, p171-4, p182-4, p186-4, p393-4, p197-4, p202-4 |
-| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section tauren-34-35-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section tauren-34-35-stranglethorn-vale |
-| Class trainer visits | DRUID: 2, 4, 6, 8, 10, 14, 18, 20, 22, 26, 28, 42, 44, 46, 48, 54, 56, 58; HUNTER: 2, 4, 6, 8, 10, 18, 22, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 48, 50, 52, 54, 56, 58; SHAMAN: 2, 4, 6, 8, 10, 14, 18, 22, 24, 26, 28, 30, 32, 34, 36, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 20, 22, 24, 26, 28, 30, 32, 34, 36, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58 |
-| Class trainer gaps | DRUID 28 to 42: the cheapest trip to a trainer adds 412 seconds (at most 300); HUNTER 10 to 18: the cheapest trip to a trainer adds 311 seconds (at most 300) |
-| Planner notes | none |
+| Actions before bundling, steps after | 2,429, 1,684 (69%) |
+| Steps in the route file | 1,835 |
+| Sections | 72 |
+| Profession steps written | p165-2, p202-2, p182-2, p186-2, p197-2, p393-2, p164-2, p171-2, p333-2, p333-3, p164-3, p165-3, p197-3, p171-3, p182-3, p186-3, p202-3, p393-3, p164-4, p171-4, p182-4, p186-4, p197-4, p393-4, p202-4 |
+| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section tauren-34-36-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section tauren-34-36-stranglethorn-vale |
+| Class trainer visits | DRUID: 2, 4, 6, 8, 14, 32, 40, 42, 44, 48, 52, 56, 58; HUNTER: 2, 4, 6, 8, 10, 14, 29, 32, 34, 38, 40, 42, 44, 46, 48, 52, 58; SHAMAN: 2, 4, 6, 8, 10, 12, 19, 24, 26, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 54, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 20, 24, 26, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 52, 54, 56, 58 |
+| Class trainer gaps | DRUID 14 to 32: the cheapest trip to a trainer adds 331 seconds (at most 300); DRUID 32 to 40: the cheapest trip to a trainer adds 534 seconds (at most 300); HUNTER 14 to 29: the cheapest trip to a trainer adds 311 seconds (at most 300); SHAMAN 12 to 19: the cheapest trip to a trainer adds 323 seconds (at most 300) |
+| Planner notes | Tauren step a5922.a27: quest 5922 gives XP only up to level 18, but the estimated level there is 34; with "skip content you outlevel" the step and its quest's later lines are skipped; Tauren step a28: quest 28 gives XP only up to level 24, but the estimated level there is 50; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| tauren-01-06-mulgore | 1-6 Mulgore | 35 | 1-9 |
-| tauren-06-06-durotar | 6 Durotar | 16 | 6-9 |
-| tauren-06-10-mulgore | 6-10 Mulgore | 78 | 6-13 |
-| tauren-10-12-durotar | 10-12 Durotar | 56 | 10-15 |
-| tauren-12-14-tirisfal-glades | 12-14 Tirisfal Glades | 42 | 12-17 |
-| tauren-14-16-silverpine-forest | 14-16 Silverpine Forest | 35 | 14-19 |
-| tauren-16-19-the-barrens | 16-19 The Barrens | 103 | 16-22 |
-| tauren-19-20-westfall | 19-20 Westfall | 25 | 19-23 |
-| tauren-20-21-the-barrens | 20-21 The Barrens | 35 | 20-24 |
-| tauren-21-22-stonetalon-mountains | 21-22 Stonetalon Mountains | 36 | 21-25 |
-| tauren-22-22-silverpine-forest | 22 Silverpine Forest | 24 | 22-25 |
-| tauren-22-23-hillsbrad-foothills | 22-23 Hillsbrad Foothills | 8 | 22-26 |
-| tauren-23-23-the-barrens | 23 The Barrens | 48 | 23-26 |
-| tauren-23-24-ashenvale | 23-24 Ashenvale | 28 | 23-27 |
-| tauren-24-25-the-barrens | 24-25 The Barrens | 22 | 24-28 |
-| tauren-25-25-stonetalon-mountains | 25 Stonetalon Mountains | 22 | 25-28 |
-| tauren-25-26-hillsbrad-foothills | 25-26 Hillsbrad Foothills | 15 | 25-29 |
-| tauren-26-26-stonetalon-mountains | 26 Stonetalon Mountains | 15 | 26-29 |
-| tauren-26-27-the-barrens | 26-27 The Barrens | 15 | 26-30 |
-| tauren-27-28-ashenvale | 27-28 Ashenvale | 44 | 27-31 |
-| tauren-28-28-hillsbrad-foothills | 28 Hillsbrad Foothills | 35 | 28-31 |
-| tauren-28-30-thousand-needles | 28-30 Thousand Needles | 14 | 28-33 |
-| tauren-30-31-thousand-needles | 30-31 Thousand Needles | 63 | 30-34 |
-| tauren-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 16 | 31-34 |
-| tauren-31-31-hillsbrad-foothills | 31 Hillsbrad Foothills | 16 | 31-34 |
-| tauren-31-33-desolace | 31-33 Desolace | 37 | 31-36 |
-| tauren-33-34-arathi-highlands | 33-34 Arathi Highlands | 14 | 33-37 |
-| tauren-34-35-stranglethorn-vale | 34-35 Stranglethorn Vale | 30 | 34-38 |
-| tauren-35-35-dustwallow-marsh | 35 Dustwallow Marsh | 12 | 35-38 |
-| tauren-35-36-desolace | 35-36 Desolace | 47 | 35-39 |
-| tauren-36-37-stranglethorn-vale | 36-37 Stranglethorn Vale | 86 | 36-40 |
-| tauren-37-37-arathi-highlands | 37 Arathi Highlands | 10 | 37-40 |
-| tauren-37-37-dustwallow-marsh | 37 Dustwallow Marsh | 13 | 37-40 |
-| tauren-37-38-desolace | 37-38 Desolace | 28 | 37-41 |
-| tauren-38-40-stranglethorn-vale | 38-40 Stranglethorn Vale | 43 | 38-43 |
-| tauren-40-40-badlands | 40 Badlands | 17 | 40-43 |
-| tauren-40-41-arathi-highlands | 40-41 Arathi Highlands | 18 | 40-44 |
-| tauren-41-42-stranglethorn-vale | 41-42 Stranglethorn Vale | 82 | 41-45 |
-| tauren-42-42-arathi-highlands | 42 Arathi Highlands | 14 | 42-45 |
-| tauren-42-43-badlands | 42-43 Badlands | 31 | 42-46 |
-| tauren-43-43-stranglethorn-vale | 43 Stranglethorn Vale | 12 | 43-46 |
-| tauren-43-43-dustwallow-marsh | 43 Dustwallow Marsh | 11 | 43-46 |
-| tauren-43-44-feralas | 43-44 Feralas | 25 | 43-47 |
-| tauren-44-45-stranglethorn-vale | 44-45 Stranglethorn Vale | 21 | 44-48 |
-| tauren-45-45-tanaris | 45 Tanaris | 12 | 45-48 |
-| tauren-45-45-feralas | 45 Feralas | 19 | 45-48 |
-| tauren-45-46-swamp-of-sorrows | 45-46 Swamp of Sorrows | 16 | 45-49 |
-| tauren-46-47-stranglethorn-vale | 46-47 Stranglethorn Vale | 27 | 46-50 |
-| tauren-47-48-tanaris | 47-48 Tanaris | 27 | 47-51 |
-| tauren-48-48-feralas | 48 Feralas | 16 | 48-51 |
-| tauren-48-48-the-hinterlands | 48 The Hinterlands | 23 | 48-51 |
-| tauren-48-50-searing-gorge | 48-50 Searing Gorge | 14 | 48-53 |
-| tauren-50-50-searing-gorge | 50 Searing Gorge | 5 | 50-53 |
-| tauren-50-50-blasted-lands | 50 Blasted Lands | 6 | 50-53 |
-| tauren-50-50-feralas | 50 Feralas | 35 | 50-53 |
-| tauren-50-51-the-hinterlands | 50-51 The Hinterlands | 29 | 50-54 |
-| tauren-51-51-tanaris | 51 Tanaris | 15 | 51-54 |
-| tauren-51-53-felwood | 51-53 Felwood | 31 | 51-56 |
-| tauren-53-53-azshara | 53 Azshara | 17 | 53-56 |
-| tauren-53-55-un-goro-crater | 53-55 Un'Goro Crater | 53 | 53-58 |
-| tauren-55-55-felwood | 55 Felwood | 21 | 55-58 |
-| tauren-55-55-un-goro-crater | 55 Un'Goro Crater | 42 | 55-58 |
-| tauren-55-57-eastern-plaguelands | 55-57 Eastern Plaguelands | 23 | 55-60 |
-| tauren-57-57-silithus | 57 Silithus | 28 | 57-60 |
-| tauren-57-57-western-plaguelands | 57 Western Plaguelands | 44 | 57-60 |
-| tauren-57-59-winterspring | 57-59 Winterspring | 38 | 57-60 |
-| tauren-59-60-silithus | 59-60 Silithus | 48 | 59-60 |
+| tauren-01-09-mulgore | 1-9 Mulgore | 55 | 1-12 |
+| tauren-09-09-durotar | 9 Durotar | 17 | 9-12 |
+| tauren-09-10-mulgore | 9-10 Mulgore | 29 | 9-13 |
+| tauren-10-12-durotar | 10-12 Durotar | 65 | 10-15 |
+| tauren-12-12-tirisfal-glades | 12 Tirisfal Glades | 9 | 12-15 |
+| tauren-12-14-silverpine-forest | 12-14 Silverpine Forest | 31 | 12-17 |
+| tauren-14-20-the-barrens | 14-20 The Barrens | 120 | 14-23 |
+| tauren-20-20-the-barrens | 20 The Barrens | 29 | 20-23 |
+| tauren-20-21-stonetalon-mountains | 20-21 Stonetalon Mountains | 44 | 20-24 |
+| tauren-21-22-ashenvale | 21-22 Ashenvale | 32 | 21-25 |
+| tauren-22-23-hillsbrad-foothills | 22-23 Hillsbrad Foothills | 6 | 22-26 |
+| tauren-23-23-stonetalon-mountains | 23 Stonetalon Mountains | 11 | 23-26 |
+| tauren-23-24-the-barrens | 23-24 The Barrens | 24 | 23-27 |
+| tauren-24-25-stonetalon-mountains | 24-25 Stonetalon Mountains | 24 | 24-28 |
+| tauren-25-25-thousand-needles | 25 Thousand Needles | 12 | 25-28 |
+| tauren-25-26-ashenvale | 25-26 Ashenvale | 18 | 25-29 |
+| tauren-26-26-hillsbrad-foothills | 26 Hillsbrad Foothills | 11 | 26-29 |
+| tauren-26-28-thousand-needles | 26-28 Thousand Needles | 30 | 26-31 |
+| tauren-28-28-hillsbrad-foothills | 28 Hillsbrad Foothills | 29 | 28-31 |
+| tauren-28-30-thousand-needles | 28-30 Thousand Needles | 32 | 28-33 |
+| tauren-30-30-hillsbrad-foothills | 30 Hillsbrad Foothills | 41 | 30-33 |
+| tauren-30-31-desolace | 30-31 Desolace | 15 | 30-34 |
+| tauren-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 17 | 31-34 |
+| tauren-31-32-hillsbrad-foothills | 31-32 Hillsbrad Foothills | 38 | 31-35 |
+| tauren-32-33-dustwallow-marsh | 32-33 Dustwallow Marsh | 10 | 32-36 |
+| tauren-33-33-desolace | 33 Desolace | 14 | 33-36 |
+| tauren-33-34-stranglethorn-vale | 33-34 Stranglethorn Vale | 39 | 33-37 |
+| tauren-34-34-desolace | 34 Desolace | 43 | 34-37 |
+| tauren-34-36-stranglethorn-vale | 34-36 Stranglethorn Vale | 58 | 34-39 |
+| tauren-36-36-desolace | 36 Desolace | 28 | 36-39 |
+| tauren-36-36-stranglethorn-vale | 36 Stranglethorn Vale | 16 | 36-39 |
+| tauren-36-37-arathi-highlands | 36-37 Arathi Highlands | 8 | 36-40 |
+| tauren-37-38-badlands | 37-38 Badlands | 22 | 37-41 |
+| tauren-38-38-arathi-highlands | 38 Arathi Highlands | 13 | 38-41 |
+| tauren-38-40-stranglethorn-vale | 38-40 Stranglethorn Vale | 64 | 38-43 |
+| tauren-40-40-arathi-highlands | 40 Arathi Highlands | 12 | 40-43 |
+| tauren-40-40-badlands | 40 Badlands | 10 | 40-43 |
+| tauren-40-40-stranglethorn-vale | 40 Stranglethorn Vale | 21 | 40-43 |
+| tauren-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 8 | 40-44 |
+| tauren-41-41-feralas | 41 Feralas | 13 | 41-44 |
+| tauren-41-41-stranglethorn-vale | 41 Stranglethorn Vale | 12 | 41-44 |
+| tauren-41-42-swamp-of-sorrows | 41-42 Swamp of Sorrows | 14 | 41-45 |
+| tauren-42-42-stranglethorn-vale | 42 Stranglethorn Vale | 37 | 42-45 |
+| tauren-42-43-tanaris | 42-43 Tanaris | 19 | 42-46 |
+| tauren-43-43-feralas | 43 Feralas | 24 | 43-46 |
+| tauren-43-45-stranglethorn-vale | 43-45 Stranglethorn Vale | 53 | 43-48 |
+| tauren-45-46-tanaris | 45-46 Tanaris | 20 | 45-49 |
+| tauren-46-46-feralas | 46 Feralas | 21 | 46-49 |
+| tauren-46-46-the-hinterlands | 46 The Hinterlands | 22 | 46-49 |
+| tauren-46-48-searing-gorge | 46-48 Searing Gorge | 17 | 46-51 |
+| tauren-48-48-blasted-lands | 48 Blasted Lands | 6 | 48-51 |
+| tauren-48-48-the-hinterlands | 48 The Hinterlands | 11 | 48-51 |
+| tauren-48-49-swamp-of-sorrows | 48-49 Swamp of Sorrows | 11 | 48-52 |
+| tauren-49-49-badlands | 49 Badlands | 20 | 49-52 |
+| tauren-49-49-feralas | 49 Feralas | 16 | 49-52 |
+| tauren-49-49-the-hinterlands | 49 The Hinterlands | 15 | 49-52 |
+| tauren-49-49-feralas-2 | 49 Feralas | 12 | 49-52 |
+| tauren-49-50-azshara | 49-50 Azshara | 15 | 49-53 |
+| tauren-50-50-un-goro-crater | 50 Un'Goro Crater | 15 | 50-53 |
+| tauren-50-50-tanaris | 50 Tanaris | 12 | 50-53 |
+| tauren-50-51-felwood | 50-51 Felwood | 40 | 50-54 |
+| tauren-51-51-un-goro-crater | 51 Un'Goro Crater | 23 | 51-54 |
+| tauren-51-52-azshara | 51-52 Azshara | 12 | 51-55 |
+| tauren-52-53-felwood | 52-53 Felwood | 21 | 52-56 |
+| tauren-53-54-un-goro-crater | 53-54 Un'Goro Crater | 34 | 53-57 |
+| tauren-54-54-western-plaguelands | 54 Western Plaguelands | 16 | 54-57 |
+| tauren-54-54-eastern-plaguelands | 54 Eastern Plaguelands | 25 | 54-57 |
+| tauren-54-55-winterspring | 54-55 Winterspring | 38 | 54-58 |
+| tauren-55-56-silithus | 55-56 Silithus | 18 | 55-59 |
+| tauren-56-58-winterspring | 56-58 Winterspring | 27 | 56-60 |
+| tauren-58-58-silithus | 58 Silithus | 31 | 58-60 |
+| tauren-58-60-eastern-plaguelands | 58-60 Eastern Plaguelands | 60 | 58-60 |
 
 ### Level curve
 
 | Level | Reached at step |
 | --- | --- |
-| 10 | 83 |
-| 20 | 413 |
-| 30 | 795 |
-| 40 | 1,286 |
-| 50 | 1,810 |
-| 60 | 2,330 |
+| 10 | 84 |
+| 20 | 372 |
+| 30 | 702 |
+| 40 | 1,225 |
+| 50 | 1,789 |
+| 60 | 2,181 |
 
 ## Gnome (Alliance, `alliance-gnome`)
 
 | Fact | Value |
 | --- | --- |
 | Classes validated | MAGE, PRIEST, ROGUE, WARLOCK, WARRIOR |
-| Steps | 2,389 |
-| Quests | 742 |
+| Steps | 2,263 |
+| Quests | 709 |
 | End level | 60 |
-| Zone changes | 149 (before: 217) |
-| Travel time | 53 h 44 min: on foot 40 h 00 min, in the air 10 h 12 min, on transports 3 h 17 min, hearthstone 0 h 15 min (before: 45 h 44 min) |
-| Walked | 953,859 yards (before: 957,169) |
-| Whole route, estimated | 165 h 06 min |
-| Flight points learned, flights taken | 32, 162 |
-| Transports taken | 61 |
-| Hearthstone bound, used | 39, 61 |
-| Grind steps | 13 (level 29 to 30, level 34 to 35, level 42 to 43, level 44 to 45, level 46 to 47, level 47 to 48, level 49 to 50, level 51 to 52, level 52 to 53, level 54 to 55, level 56 to 57, level 57 to 58, level 59 to 60) |
+| Zone changes | 136 (before: 217) |
+| Travel time | 50 h 39 min: on foot 38 h 24 min, in the air 9 h 05 min, on transports 2 h 53 min, hearthstone 0 h 16 min (before: 45 h 44 min) |
+| Walked | 932,909 yards (before: 957,169) |
+| Whole route, estimated | 156 h 30 min |
+| Flight points learned, flights taken | 32, 139 |
+| Transports taken | 51 |
+| Hearthstone bound, used | 36, 65 |
+| Grind steps | 12 (level 42 to 43, level 44 to 45, level 45 to 46, level 47 to 48, level 49 to 50, level 51 to 52, level 53 to 54, level 54 to 55, level 55 to 56, level 57 to 58, level 58 to 59, level 59 to 60) |
 | Unconfirmed transports used | Menethil Harbor to Auberdine (boat; not confirmed: route); Deeprun Tram (tram; not confirmed: route) |
 | Hand-ins left behind | none |
-| Quests above the level allowed, far below the player's level | 2, 131 of 1230 quest steps |
-| Zones in order (steps there) | Dun Morogh (81), Teldrassil (87), Elwynn Forest (63), Westfall (31), Darkshore (112), Loch Modan (45), Darkshore (32), Redridge Mountains (24), Ashenvale (33), Wetlands (16), Loch Modan (20), Stonetalon Mountains (16), Ashenvale (12), Darkshore (1), Ashenvale (1), Duskwood (43), Westfall (1), Duskwood (18), Wetlands (26), Redridge Mountains (19), Wetlands (6), Ashenvale (9), Duskwood (11), Ashenvale (14), Stormwind City (10), Stonetalon Mountains (6), Wetlands (9), Duskwood (6), Stormwind City (9), Ironforge (1), Wetlands (1), Ashenvale (18), Duskwood (31), Thousand Needles (13), Stranglethorn Vale (13), Hillsbrad Foothills (18), Wetlands (19), Arathi Highlands (1), Wetlands (1), Stormwind City (13), Stranglethorn Vale (17), Ashenvale (11), Desolace (19), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (5), Stranglethorn Vale (19), Duskwood (12), Dustwallow Marsh (14), Desolace (10), Thousand Needles (4), Arathi Highlands (14), Badlands (11), Hillsbrad Foothills (3), Alterac Mountains (2), Hillsbrad Foothills (2), Wetlands (4), Stranglethorn Vale (10), Desolace (3), Swamp of Sorrows (9), Stranglethorn Vale (21), Dustwallow Marsh (7), Stormwind City (3), Wetlands (7), Badlands (4), Arathi Highlands (12), Stranglethorn Vale (14), Dustwallow Marsh (15), Alterac Mountains (4), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (1), Desolace (19), Arathi Highlands (14), Ironforge (2), Desolace (14), Badlands (24), Stranglethorn Vale (18), Arathi Highlands (19), Stranglethorn Vale (22), Dustwallow Marsh (10), Desolace (7), Ironforge (3), Hillsbrad Foothills (5), Alterac Mountains (2), Hillsbrad Foothills (2), Loch Modan (3), Badlands (1), Loch Modan (4), Arathi Highlands (6), Stranglethorn Vale (19), Ironforge (3), Badlands (12), Stormwind City (4), Ironforge (1), Swamp of Sorrows (5), Feralas (13), Tanaris (24), Stranglethorn Vale (16), Badlands (5), Ironforge (6), Stormwind City (2), The Hinterlands (11), Feralas (48), Searing Gorge (23), Tanaris (23), Azshara (6), Stranglethorn Vale (9), Blasted Lands (16), Searing Gorge (30), Teldrassil (6), Tanaris (20), Darnassus (9), Un'Goro Crater (40), Azshara (6), Western Plaguelands (13), Burning Steppes (21), Felwood (31), Western Plaguelands (22), Silithus (6), Un'Goro Crater (19), Eastern Plaguelands (11), Blasted Lands (6), Western Plaguelands (32), Eastern Plaguelands (20), Tanaris (1), Winterspring (25), Silithus (13), Darnassus (10), Tanaris (5), Un'Goro Crater (1), Tanaris (1), Un'Goro Crater (4), Ironforge (5), Stormwind City (3), Searing Gorge (5), Western Plaguelands (12), Moonglade (2), Burning Steppes (5), Winterspring (14), Silithus (1), The Barrens (1), Westfall (2), Stormwind City (1), Elwynn Forest (1), Redridge Mountains (1), The Hinterlands (3), Tanaris (1), Teldrassil (2), Eastern Plaguelands (1) |
-| Class quests left out | MAGE: 1879 (an exclusive quest is taken instead), 1880 (an exclusive quest is taken instead), 1952 (it needs quest 1951 first, which no step of this route can take), 1957 (it needs one of quests 1956 first, which no step of this route can take), 1958 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8381 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 97286 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PRIEST: 8379 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 94817 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94819 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94821 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94822 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94824 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98574 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); ROGUE: 8378 (it needs one of quests 8315 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARLOCK: 1598 (an exclusive quest is taken instead), 1688 (an exclusive quest is taken instead), 1716 (an exclusive quest is taken instead), 1738 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4488 (an exclusive quest is taken instead), 4736 (an exclusive quest is taken instead), 4781 (it needs one of quests 1796 first, which no step of this route can take), 4782 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4783 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4784 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4786 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4963 (an exclusive quest is taken instead), 4964 (it needs quest -4962 first, which no step of this route can take), 4965 (an exclusive quest is taken instead), 4975 (an exclusive quest is taken instead), 8381 (it needs one of quests 8315 first, which no step of this route can take), 8419 (an exclusive quest is taken instead), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 65602 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 65603 (the route never offers it (a prerequisite, an exclusive quest or its level cap)); WARRIOR: 1638 (an exclusive quest is taken instead), 1678 (an exclusive quest is taken instead), 1679 (an exclusive quest is taken instead), 1683 (an exclusive quest is taken instead), 1684 (an exclusive quest is taken instead), 1704 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1705 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1706 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1708 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1709 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1710 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1711 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1782 (it needs one of quests 1701 first, which no step of this route can take), 8316 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take) |
+| Quests above the level allowed, far below the player's level | 0, 129 of 1181 quest steps |
+| Walks through dangerous zones | none |
+| Zones in order (steps there) | Dun Morogh (81), Loch Modan (15), Elwynn Forest (66), Dun Morogh (6), Westfall (34), Loch Modan (37), Redridge Mountains (20), Westfall (10), Redridge Mountains (4), Loch Modan (12), Ironforge (7), Loch Modan (10), Darkshore (108), Duskwood (56), Westfall (1), Duskwood (6), Redridge Mountains (28), Wetlands (48), Duskwood (16), Ashenvale (1), Stonetalon Mountains (16), Ashenvale (77), Darkshore (1), Ashenvale (2), Duskwood (29), Thousand Needles (13), Wetlands (21), Arathi Highlands (1), Wetlands (1), Ashenvale (11), Hillsbrad Foothills (10), Alterac Mountains (1), Hillsbrad Foothills (10), Stranglethorn Vale (29), Desolace (29), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (1), Dustwallow Marsh (15), Stranglethorn Vale (18), Stormwind City (12), Duskwood (17), Stranglethorn Vale (25), Hillsbrad Foothills (3), Alterac Mountains (1), Hillsbrad Foothills (1), Arathi Highlands (23), Badlands (13), Swamp of Sorrows (12), Dustwallow Marsh (6), Desolace (12), Stranglethorn Vale (19), Wetlands (4), Stormwind City (4), Arathi Highlands (20), Dustwallow Marsh (16), Desolace (10), Badlands (20), Stranglethorn Vale (16), Arathi Highlands (16), Stranglethorn Vale (21), Ironforge (2), Desolace (21), Loch Modan (4), Badlands (1), Loch Modan (4), Feralas (10), Thousand Needles (3), Badlands (14), Ironforge (8), Stranglethorn Vale (8), The Barrens (4), Thousand Needles (9), Stranglethorn Vale (21), Feralas (11), Dustwallow Marsh (1), Hillsbrad Foothills (1), Alterac Mountains (4), Hillsbrad Foothills (2), Arathi Highlands (9), Stranglethorn Vale (26), Tanaris (24), Feralas (17), Badlands (8), Searing Gorge (9), Feralas (24), Tanaris (24), Searing Gorge (15), Teldrassil (5), Tanaris (1), Stranglethorn Vale (6), Blasted Lands (16), Searing Gorge (30), Darnassus (7), The Hinterlands (15), Un'Goro Crater (18), Burning Steppes (9), Darnassus (5), Tanaris (18), Feralas (8), Felwood (9), Un'Goro Crater (23), Azshara (7), Western Plaguelands (21), Felwood (11), Burning Steppes (12), Ironforge (9), Searing Gorge (11), Tanaris (3), Un'Goro Crater (1), Tanaris (1), Un'Goro Crater (18), Western Plaguelands (29), Eastern Plaguelands (25), Silithus (22), Winterspring (25), Western Plaguelands (18), Blasted Lands (8), Swamp of Sorrows (6), Blasted Lands (1), Swamp of Sorrows (6), Felwood (9), Eastern Plaguelands (13), Silithus (35), Winterspring (12), The Barrens (1), Stranglethorn Vale (1), Stormwind City (2), Ironforge (1), Loch Modan (1), The Hinterlands (2), Alterac Mountains (1), Ironforge (1), Teldrassil (1), Tanaris (2), Thousand Needles (2), Blasted Lands (1) |
+| Class quests left out | MAGE: 1879 (an exclusive quest is taken instead), 1880 (an exclusive quest is taken instead), 1952 (it needs quest 1951 first, which no step of this route can take), 1957 (it needs one of quests 1956 first, which no step of this route can take), 1958 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 97286 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PRIEST: 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 94817 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94819 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94821 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94822 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94824 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98574 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); ROGUE: 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARLOCK: 397 (it needs one of quests 336 first, which no step of this route can take), 1598 (an exclusive quest is taken instead), 1688 (an exclusive quest is taken instead), 1716 (an exclusive quest is taken instead), 1738 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4488 (an exclusive quest is taken instead), 4736 (an exclusive quest is taken instead), 4781 (it needs one of quests 1796 first, which no step of this route can take), 4782 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4783 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4784 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4786 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4961 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4962 (an exclusive quest is taken instead), 4964 (an exclusive quest is taken instead), 4968 (an exclusive quest is taken instead), 4975 (it needs quest -4963 first, which no step of this route can take), 4976 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8419 (an exclusive quest is taken instead), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 65602 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 65603 (the route never offers it (a prerequisite, an exclusive quest or its level cap)); WARRIOR: 1638 (an exclusive quest is taken instead), 1678 (an exclusive quest is taken instead), 1679 (an exclusive quest is taken instead), 1683 (an exclusive quest is taken instead), 1684 (an exclusive quest is taken instead), 1704 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1705 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1706 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1708 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1709 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1710 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1711 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1782 (it needs one of quests 1701 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take) |
 | Errors | 0 |
 | Warnings | none |
 
@@ -884,120 +909,124 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,707, 1,908 (70%) |
-| Steps in the route file | 2,115 |
-| Sections | 69 |
-| Profession steps written | p164-2, p165-2, p171-2, p182-2, p186-2, p197-2, p202-2, p333-2, p393-2, p186-3, p182-3, p393-3, p165-3, p171-3, p186-4, p164-4, p197-4, p171-4, p333-4, p182-4 |
-| Profession ranks without a step | Blacksmithing Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section gnome-19-21-darkshore; Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-stranglethorn-vale; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section gnome-19-21-darkshore; Engineering Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section gnome-19-21-darkshore; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-stranglethorn-vale; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section gnome-19-21-darkshore; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-stranglethorn-vale |
-| Class trainer visits | MAGE: 2, 4, 6, 10, 12, 14, 20, 24, 26, 28, 30, 32, 34, 36, 40, 42, 44, 48, 52, 57; PRIEST: 2, 4, 6, 8, 10, 12, 22, 26, 28, 30, 34, 40, 42, 44, 48, 50, 52, 56, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 50, 52, 56, 58; WARLOCK: 2, 4, 6, 10, 12, 17, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 48, 52, 57; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 18, 22, 27, 30, 34, 36, 38, 40, 42, 44, 48, 50, 52, 54, 56, 58 |
-| Class trainer gaps | PRIEST 12 to 22: the cheapest trip to a trainer adds 311 seconds (at most 300) |
-| Planner notes | none |
+| Actions before bundling, steps after | 2,593, 1,794 (69%) |
+| Steps in the route file | 1,995 |
+| Sections | 72 |
+| Profession steps written | p171-2, p186-2, p202-2, p164-2, p165-2, p182-2, p197-2, p333-2, p393-2, p186-3, p182-3, p164-3, p202-3, p393-3, p165-3, p171-3, p182-4, p197-4, p164-4, p186-4, p393-4 |
+| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-arathi-highlands; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-arathi-highlands; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section gnome-20-21-darkshore; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-arathi-highlands; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section gnome-20-21-darkshore; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-arathi-highlands |
+| Class trainer visits | MAGE: 2, 4, 6, 8, 10, 12, 16, 18, 28, 30, 32, 34, 38, 40, 45, 49, 55, 58; PRIEST: 2, 4, 6, 8, 10, 16, 30, 32, 34, 38, 42, 47, 51, 55, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 18, 20, 24, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 55, 58; WARLOCK: 2, 4, 6, 8, 10, 12, 17, 24, 30, 32, 34, 36, 38, 42, 47, 51, 55, 58; WARRIOR: 2, 4, 6, 8, 10, 14, 18, 22, 24, 28, 30, 32, 34, 36, 38, 40, 45, 48, 50, 55, 58 |
+| Class trainer gaps | MAGE 18 to 28: the cheapest trip to a trainer adds 313 seconds (at most 300); PRIEST 16 to 30: the cheapest trip to a trainer adds 303 seconds (at most 300); WARLOCK 17 to 24: the cheapest trip to a trainer adds 302 seconds (at most 300) |
+| Planner notes | Gnome step a2241: quest 2241 gives XP only up to level 18, but the estimated level there is 20; with "skip content you outlevel" the step and its quest's later lines are skipped; Gnome step a1686: quest 1686 gives XP only up to level 18, but the estimated level there is 20; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| gnome-01-09-dun-morogh | 1-9 Dun Morogh | 79 | 1-12 |
-| gnome-09-12-teldrassil | 9-12 Teldrassil | 109 | 9-15 |
-| gnome-12-13-elwynn-forest | 12-13 Elwynn Forest | 64 | 12-16 |
-| gnome-13-15-westfall | 13-15 Westfall | 51 | 13-18 |
-| gnome-15-18-darkshore | 15-18 Darkshore | 76 | 15-21 |
-| gnome-18-19-loch-modan | 18-19 Loch Modan | 40 | 18-22 |
-| gnome-19-21-darkshore | 19-21 Darkshore | 40 | 19-24 |
-| gnome-21-21-redridge-mountains | 21 Redridge Mountains | 23 | 21-24 |
-| gnome-21-22-ashenvale | 21-22 Ashenvale | 26 | 21-25 |
-| gnome-22-23-wetlands | 22-23 Wetlands | 28 | 22-26 |
-| gnome-23-23-loch-modan | 23 Loch Modan | 11 | 23-26 |
-| gnome-23-24-stonetalon-mountains | 23-24 Stonetalon Mountains | 17 | 23-27 |
-| gnome-24-24-ashenvale | 24 Ashenvale | 22 | 24-27 |
-| gnome-24-26-duskwood | 24-26 Duskwood | 59 | 24-29 |
-| gnome-26-26-wetlands | 26 Wetlands | 21 | 26-29 |
-| gnome-26-27-redridge-mountains | 26-27 Redridge Mountains | 41 | 26-30 |
-| gnome-27-28-duskwood | 27-28 Duskwood | 17 | 27-31 |
-| gnome-28-28-ashenvale | 28 Ashenvale | 13 | 28-31 |
-| gnome-28-30-stormwind-city | 28-30 Stormwind City | 60 | 28-33 |
-| gnome-30-30-ashenvale | 30 Ashenvale | 19 | 30-33 |
-| gnome-30-31-duskwood | 30-31 Duskwood | 22 | 30-34 |
-| gnome-31-31-thousand-needles | 31 Thousand Needles | 11 | 31-34 |
-| gnome-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 13 | 31-34 |
-| gnome-31-32-hillsbrad-foothills | 31-32 Hillsbrad Foothills | 12 | 31-35 |
-| gnome-32-32-wetlands | 32 Wetlands | 20 | 32-35 |
-| gnome-32-33-stormwind-city | 32-33 Stormwind City | 25 | 32-36 |
-| gnome-33-33-stranglethorn-vale | 33 Stranglethorn Vale | 16 | 33-36 |
-| gnome-33-33-ashenvale | 33 Ashenvale | 17 | 33-36 |
-| gnome-33-34-desolace | 33-34 Desolace | 38 | 33-37 |
-| gnome-34-35-stranglethorn-vale | 34-35 Stranglethorn Vale | 33 | 34-38 |
-| gnome-35-35-duskwood | 35 Duskwood | 23 | 35-38 |
-| gnome-35-35-dustwallow-marsh | 35 Dustwallow Marsh | 43 | 35-38 |
-| gnome-35-36-arathi-highlands | 35-36 Arathi Highlands | 11 | 35-39 |
-| gnome-36-37-badlands | 36-37 Badlands | 57 | 36-40 |
-| gnome-37-37-stranglethorn-vale | 37 Stranglethorn Vale | 44 | 37-40 |
-| gnome-37-38-arathi-highlands | 37-38 Arathi Highlands | 13 | 37-41 |
-| gnome-38-38-stranglethorn-vale | 38 Stranglethorn Vale | 21 | 38-41 |
-| gnome-38-38-dustwallow-marsh | 38 Dustwallow Marsh | 21 | 38-41 |
-| gnome-38-39-desolace | 38-39 Desolace | 21 | 38-42 |
-| gnome-39-39-arathi-highlands | 39 Arathi Highlands | 15 | 39-42 |
-| gnome-39-39-desolace | 39 Desolace | 10 | 39-42 |
-| gnome-39-40-badlands | 39-40 Badlands | 22 | 39-43 |
-| gnome-40-40-stranglethorn-vale | 40 Stranglethorn Vale | 15 | 40-43 |
-| gnome-40-41-arathi-highlands | 40-41 Arathi Highlands | 14 | 40-44 |
-| gnome-41-43-stranglethorn-vale | 41-43 Stranglethorn Vale | 93 | 41-46 |
-| gnome-43-43-badlands | 43 Badlands | 32 | 43-46 |
-| gnome-43-43-feralas | 43 Feralas | 15 | 43-46 |
-| gnome-43-45-tanaris | 43-45 Tanaris | 15 | 43-48 |
-| gnome-45-45-stranglethorn-vale | 45 Stranglethorn Vale | 38 | 45-48 |
-| gnome-45-45-the-hinterlands | 45 The Hinterlands | 27 | 45-48 |
-| gnome-45-48-feralas | 45-48 Feralas | 28 | 45-51 |
-| gnome-48-48-searing-gorge | 48 Searing Gorge | 15 | 48-51 |
-| gnome-48-50-tanaris | 48-50 Tanaris | 50 | 48-53 |
-| gnome-50-50-blasted-lands | 50 Blasted Lands | 7 | 50-53 |
-| gnome-50-50-searing-gorge | 50 Searing Gorge | 22 | 50-53 |
-| gnome-50-53-tanaris | 50-53 Tanaris | 24 | 50-56 |
-| gnome-53-53-un-goro-crater | 53 Un'Goro Crater | 34 | 53-56 |
-| gnome-53-53-azshara | 53 Azshara | 12 | 53-56 |
-| gnome-53-53-western-plaguelands | 53 Western Plaguelands | 15 | 53-56 |
-| gnome-53-54-burning-steppes | 53-54 Burning Steppes | 31 | 53-57 |
-| gnome-54-55-felwood | 54-55 Felwood | 28 | 54-58 |
-| gnome-55-55-western-plaguelands | 55 Western Plaguelands | 26 | 55-58 |
-| gnome-55-55-un-goro-crater | 55 Un'Goro Crater | 48 | 55-58 |
-| gnome-55-57-western-plaguelands | 55-57 Western Plaguelands | 29 | 55-60 |
-| gnome-57-58-eastern-plaguelands | 57-58 Eastern Plaguelands | 16 | 57-60 |
-| gnome-58-58-winterspring | 58 Winterspring | 24 | 58-60 |
-| gnome-58-58-silithus | 58 Silithus | 51 | 58-60 |
-| gnome-58-59-western-plaguelands | 58-59 Western Plaguelands | 23 | 58-60 |
-| gnome-59-60-winterspring | 59-60 Winterspring | 59 | 59-60 |
+| gnome-01-09-dun-morogh | 1-9 Dun Morogh | 82 | 1-12 |
+| gnome-09-10-loch-modan | 9-10 Loch Modan | 19 | 9-13 |
+| gnome-10-12-elwynn-forest | 10-12 Elwynn Forest | 64 | 10-15 |
+| gnome-12-13-stormwind-city | 12-13 Stormwind City | 23 | 12-16 |
+| gnome-13-15-westfall | 13-15 Westfall | 45 | 13-18 |
+| gnome-15-16-loch-modan | 15-16 Loch Modan | 33 | 15-19 |
+| gnome-16-18-redridge-mountains | 16-18 Redridge Mountains | 38 | 16-21 |
+| gnome-18-19-loch-modan | 18-19 Loch Modan | 36 | 18-22 |
+| gnome-19-20-darkshore | 19-20 Darkshore | 33 | 19-23 |
+| gnome-20-21-darkshore | 20-21 Darkshore | 67 | 20-24 |
+| gnome-21-23-duskwood | 21-23 Duskwood | 56 | 21-26 |
+| gnome-23-24-redridge-mountains | 23-24 Redridge Mountains | 25 | 23-27 |
+| gnome-24-25-wetlands | 24-25 Wetlands | 48 | 24-28 |
+| gnome-25-26-duskwood | 25-26 Duskwood | 28 | 25-29 |
+| gnome-26-26-stonetalon-mountains | 26 Stonetalon Mountains | 11 | 26-29 |
+| gnome-26-28-ashenvale | 26-28 Ashenvale | 56 | 26-31 |
+| gnome-28-29-duskwood | 28-29 Duskwood | 16 | 28-32 |
+| gnome-29-29-stormwind-city | 29 Stormwind City | 11 | 29-32 |
+| gnome-29-29-thousand-needles | 29 Thousand Needles | 20 | 29-32 |
+| gnome-29-30-wetlands | 29-30 Wetlands | 18 | 29-33 |
+| gnome-30-30-ashenvale | 30 Ashenvale | 11 | 30-33 |
+| gnome-30-31-hillsbrad-foothills | 30-31 Hillsbrad Foothills | 24 | 30-34 |
+| gnome-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 23 | 31-34 |
+| gnome-31-32-desolace | 31-32 Desolace | 42 | 31-35 |
+| gnome-32-33-dustwallow-marsh | 32-33 Dustwallow Marsh | 13 | 32-36 |
+| gnome-33-33-stranglethorn-vale | 33 Stranglethorn Vale | 18 | 33-36 |
+| gnome-33-33-stormwind-city | 33 Stormwind City | 24 | 33-36 |
+| gnome-33-34-duskwood | 33-34 Duskwood | 17 | 33-37 |
+| gnome-34-34-stranglethorn-vale | 34 Stranglethorn Vale | 23 | 34-37 |
+| gnome-34-35-arathi-highlands | 34-35 Arathi Highlands | 18 | 34-38 |
+| gnome-35-35-badlands | 35 Badlands | 13 | 35-38 |
+| gnome-35-35-swamp-of-sorrows | 35 Swamp of Sorrows | 57 | 35-38 |
+| gnome-35-36-desolace | 35-36 Desolace | 16 | 35-39 |
+| gnome-36-36-stranglethorn-vale | 36 Stranglethorn Vale | 39 | 36-39 |
+| gnome-36-37-arathi-highlands | 36-37 Arathi Highlands | 14 | 36-40 |
+| gnome-37-37-dustwallow-marsh | 37 Dustwallow Marsh | 21 | 37-40 |
+| gnome-37-38-badlands | 37-38 Badlands | 21 | 37-41 |
+| gnome-38-38-stranglethorn-vale | 38 Stranglethorn Vale | 16 | 38-41 |
+| gnome-38-39-arathi-highlands | 38-39 Arathi Highlands | 11 | 38-42 |
+| gnome-39-39-stranglethorn-vale | 39 Stranglethorn Vale | 23 | 39-42 |
+| gnome-39-40-desolace | 39-40 Desolace | 23 | 39-43 |
+| gnome-40-40-feralas | 40 Feralas | 19 | 40-43 |
+| gnome-40-40-badlands | 40 Badlands | 14 | 40-43 |
+| gnome-40-41-ironforge | 40-41 Ironforge | 31 | 40-44 |
+| gnome-41-43-stranglethorn-vale | 41-43 Stranglethorn Vale | 68 | 41-46 |
+| gnome-43-43-tanaris | 43 Tanaris | 13 | 43-46 |
+| gnome-43-45-feralas | 43-45 Feralas | 44 | 43-48 |
+| gnome-45-45-searing-gorge | 45 Searing Gorge | 5 | 45-48 |
+| gnome-45-46-feralas | 45-46 Feralas | 27 | 45-49 |
+| gnome-46-46-tanaris | 46 Tanaris | 18 | 46-49 |
+| gnome-46-47-searing-gorge | 46-47 Searing Gorge | 32 | 46-50 |
+| gnome-47-48-blasted-lands | 47-48 Blasted Lands | 6 | 47-51 |
+| gnome-48-48-searing-gorge | 48 Searing Gorge | 29 | 48-51 |
+| gnome-48-50-the-hinterlands | 48-50 The Hinterlands | 16 | 48-53 |
+| gnome-50-50-un-goro-crater | 50 Un'Goro Crater | 37 | 50-53 |
+| gnome-50-50-tanaris | 50 Tanaris | 25 | 50-53 |
+| gnome-50-50-felwood | 50 Felwood | 10 | 50-53 |
+| gnome-50-51-un-goro-crater | 50-51 Un'Goro Crater | 22 | 50-54 |
+| gnome-51-52-azshara | 51-52 Azshara | 23 | 51-55 |
+| gnome-52-52-western-plaguelands | 52 Western Plaguelands | 11 | 52-55 |
+| gnome-52-52-felwood | 52 Felwood | 17 | 52-55 |
+| gnome-52-52-burning-steppes | 52 Burning Steppes | 20 | 52-55 |
+| gnome-52-52-searing-gorge | 52 Searing Gorge | 21 | 52-55 |
+| gnome-52-53-un-goro-crater | 52-53 Un'Goro Crater | 15 | 52-56 |
+| gnome-53-54-western-plaguelands | 53-54 Western Plaguelands | 28 | 53-57 |
+| gnome-54-55-eastern-plaguelands | 54-55 Eastern Plaguelands | 22 | 54-58 |
+| gnome-55-56-silithus | 55-56 Silithus | 18 | 55-59 |
+| gnome-56-56-winterspring | 56 Winterspring | 27 | 56-59 |
+| gnome-56-56-western-plaguelands | 56 Western Plaguelands | 51 | 56-59 |
+| gnome-56-56-azshara | 56 Azshara | 14 | 56-59 |
+| gnome-56-58-eastern-plaguelands | 56-58 Eastern Plaguelands | 18 | 56-60 |
+| gnome-58-60-silithus | 58-60 Silithus | 98 | 58-60 |
 
 ### Level curve
 
 | Level | Reached at step |
 | --- | --- |
-| 10 | 108 |
-| 20 | 454 |
-| 30 | 854 |
-| 40 | 1,442 |
-| 50 | 1,862 |
-| 60 | 2,358 |
+| 10 | 88 |
+| 20 | 385 |
+| 30 | 791 |
+| 40 | 1,338 |
+| 50 | 1,750 |
+| 60 | 2,226 |
 
 ## Troll (Horde, `horde-troll`)
 
 | Fact | Value |
 | --- | --- |
 | Classes validated | HUNTER, MAGE, PRIEST, ROGUE, SHAMAN, WARLOCK, WARRIOR |
-| Steps | 2,306 |
-| Quests | 655 |
+| Steps | 2,250 |
+| Quests | 650 |
 | End level | 60 |
-| Zone changes | 166 (before: 206) |
-| Travel time | 49 h 27 min: on foot 35 h 25 min, in the air 10 h 41 min, on transports 3 h 06 min, hearthstone 0 h 16 min (before: 42 h 57 min) |
-| Walked | 866,508 yards (before: 920,085) |
-| Whole route, estimated | 165 h 54 min |
-| Flight points learned, flights taken | 31, 185 |
-| Transports taken | 48 |
-| Hearthstone bound, used | 66, 64 |
-| Grind steps | 15 (level 23 to 24, level 28 to 29, level 29 to 30, level 32 to 33, level 34 to 35, level 39 to 40, level 44 to 45, level 46 to 47, level 47 to 48, level 49 to 50, level 52 to 53, level 54 to 55, level 56 to 57, level 57 to 58, level 59 to 60) |
+| Zone changes | 156 (before: 206) |
+| Travel time | 49 h 53 min: on foot 36 h 07 min, in the air 10 h 25 min, on transports 3 h 04 min, hearthstone 0 h 17 min (before: 42 h 57 min) |
+| Walked | 880,953 yards (before: 920,085) |
+| Whole route, estimated | 158 h 58 min |
+| Flight points learned, flights taken | 30, 166 |
+| Transports taken | 47 |
+| Hearthstone bound, used | 59, 69 |
+| Grind steps | 12 (level 27 to 28, level 37 to 38, level 44 to 45, level 45 to 46, level 49 to 50, level 51 to 52, level 52 to 53, level 53 to 54, level 55 to 56, level 56 to 57, level 57 to 58, level 59 to 60) |
 | Unconfirmed transports used | none |
-| Hand-ins left behind | none |
-| Quests above the level allowed, far below the player's level | 0, 86 of 1165 quest steps |
-| Zones in order (steps there) | Durotar (65), Orgrimmar (1), Durotar (1), The Barrens (1), Durotar (1), Mulgore (49), Tirisfal Glades (61), Silverpine Forest (45), The Barrens (118), Stonetalon Mountains (1), The Barrens (1), Stonetalon Mountains (11), Westfall (9), The Barrens (34), Stonetalon Mountains (1), The Barrens (1), Stonetalon Mountains (20), Silverpine Forest (19), Hillsbrad Foothills (15), The Barrens (16), Ashenvale (19), Hillsbrad Foothills (4), Alterac Mountains (1), Hillsbrad Foothills (10), The Barrens (7), Stonetalon Mountains (14), Thousand Needles (13), Stonetalon Mountains (9), The Barrens (12), Ashenvale (13), Hillsbrad Foothills (7), Thousand Needles (6), Hillsbrad Foothills (12), Undercity (1), Thousand Needles (32), The Barrens (7), Thousand Needles (1), The Barrens (1), Stonetalon Mountains (5), Thunder Bluff (5), Thousand Needles (9), Stranglethorn Vale (13), Undercity (1), Hillsbrad Foothills (14), Orgrimmar (3), Thunder Bluff (2), Ashenvale (1), Thunder Bluff (2), Thousand Needles (9), Desolace (17), Hillsbrad Foothills (6), Alterac Mountains (2), Hillsbrad Foothills (6), Arathi Highlands (18), Stranglethorn Vale (27), Dustwallow Marsh (16), Desolace (14), Orgrimmar (2), Swamp of Sorrows (4), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (1), Alterac Mountains (2), Hillsbrad Foothills (2), Stranglethorn Vale (17), Desolace (7), Thousand Needles (4), Dustwallow Marsh (4), The Barrens (4), Orgrimmar (2), Thousand Needles (8), Stranglethorn Vale (1), Badlands (8), Stranglethorn Vale (19), Arathi Highlands (17), Dustwallow Marsh (12), Desolace (17), Arathi Highlands (7), Stranglethorn Vale (12), The Barrens (1), Thousand Needles (2), The Barrens (2), Swamp of Sorrows (4), Stranglethorn Vale (14), Badlands (19), Arathi Highlands (33), Stranglethorn Vale (36), Hillsbrad Foothills (4), Alterac Mountains (2), Hillsbrad Foothills (2), Desolace (9), Thousand Needles (9), Stranglethorn Vale (12), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (1), Arathi Highlands (15), Alterac Mountains (2), Badlands (12), Swamp of Sorrows (1), Duskwood (2), Swamp of Sorrows (9), Stranglethorn Vale (12), Dustwallow Marsh (15), Feralas (16), Badlands (3), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (1), Stranglethorn Vale (21), Tanaris (21), Feralas (15), Orgrimmar (4), Swamp of Sorrows (14), Searing Gorge (5), Stranglethorn Vale (17), Undercity (9), Tanaris (30), Feralas (20), The Hinterlands (30), Searing Gorge (41), Blasted Lands (15), Feralas (25), Undercity (1), The Hinterlands (29), Un'Goro Crater (6), Tanaris (17), Felwood (9), Orgrimmar (3), Swamp of Sorrows (7), Badlands (8), Azshara (13), Un'Goro Crater (33), Searing Gorge (5), Burning Steppes (7), Undercity (6), Tirisfal Glades (2), Western Plaguelands (1), Tirisfal Glades (4), Azshara (5), Felwood (23), Silithus (6), Un'Goro Crater (19), Western Plaguelands (17), Undercity (11), Eastern Plaguelands (26), Swamp of Sorrows (7), Blasted Lands (1), Swamp of Sorrows (7), Winterspring (28), Tirisfal Glades (3), Western Plaguelands (1), Tirisfal Glades (3), Eastern Plaguelands (7), Western Plaguelands (23), Blasted Lands (7), Orgrimmar (4), Azshara (7), Thunder Bluff (3), Tanaris (3), Un'Goro Crater (1), Tanaris (1), Silithus (20), Dustwallow Marsh (1), Stonetalon Mountains (1), Stranglethorn Vale (1), Arathi Highlands (2) |
-| Class quests left out | HUNTER: 6068 (an exclusive quest is taken instead), 6069 (an exclusive quest is taken instead), 8377 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); MAGE: 1883 (an exclusive quest is taken instead), 1884 (an exclusive quest is taken instead), 1952 (it needs quest 1951 first, which no step of this route can take), 1957 (it needs one of quests 1956 first, which no step of this route can take), 1958 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8381 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 97286 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PRIEST: 5642 (an exclusive quest is taken instead), 5643 (an exclusive quest is taken instead), 5654 (an exclusive quest is taken instead), 5655 (an exclusive quest is taken instead), 5656 (an exclusive quest is taken instead), 5657 (an exclusive quest is taken instead), 8379 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take); ROGUE: 2378 (an exclusive quest is taken instead), 8378 (it needs one of quests 8315 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); SHAMAN: 1519 (an exclusive quest is taken instead), 1522 (an exclusive quest is taken instead), 1523 (an exclusive quest is taken instead), 1529 (an exclusive quest is taken instead), 1531 (an exclusive quest is taken instead), 2983 (an exclusive quest is taken instead), 2985 (an exclusive quest is taken instead), 2986 (an exclusive quest is taken instead), 8380 (it needs one of quests 8315 first, which no step of this route can take), 8410 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 79358 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79361 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79362 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79363 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79364 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79365 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79366 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79442 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARLOCK: 1470 (an exclusive quest is taken instead), 1507 (an exclusive quest is taken instead), 1508 (an exclusive quest is taken instead), 1509 (an exclusive quest is taken instead), 1510 (an exclusive quest is taken instead), 1511 (an exclusive quest is taken instead), 1512 (an exclusive quest is taken instead), 1515 (an exclusive quest is taken instead), 3631 (an exclusive quest is taken instead), 4739 (an exclusive quest is taken instead), 4781 (it needs one of quests 1796 first, which no step of this route can take), 4782 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4783 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4784 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4786 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4963 (an exclusive quest is taken instead), 4964 (it needs quest -4962 first, which no step of this route can take), 4969 (an exclusive quest is taken instead), 4975 (an exclusive quest is taken instead), 8381 (it needs one of quests 8315 first, which no step of this route can take), 8420 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 65601 (an exclusive quest is taken instead), 65604 (an exclusive quest is taken instead), 65610 (an exclusive quest is taken instead), 98575 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARRIOR: 1498 (an exclusive quest is taken instead), 1505 (an exclusive quest is taken instead), 1839 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1840 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1841 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1842 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1843 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1844 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1845 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1846 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1847 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1848 (it needs one of quests 1838 first, which no step of this route can take), 8316 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take) |
+| Hand-ins left behind | step 181 (quest 438) |
+| Quests above the level allowed, far below the player's level | 0, 55 of 1155 quest steps |
+| Walks through dangerous zones | none |
+| Zones in order (steps there) | Durotar (65), Orgrimmar (1), Durotar (1), The Barrens (1), Durotar (1), Tirisfal Glades (72), Silverpine Forest (52), The Barrens (151), Stonetalon Mountains (1), The Barrens (1), Stonetalon Mountains (32), Silverpine Forest (12), Hillsbrad Foothills (16), Ashenvale (28), The Barrens (27), Thousand Needles (10), Stonetalon Mountains (25), Ashenvale (9), Hillsbrad Foothills (11), Thousand Needles (23), Hillsbrad Foothills (10), Alterac Mountains (1), Hillsbrad Foothills (12), Undercity (1), The Barrens (10), Thousand Needles (1), The Barrens (1), Thousand Needles (21), Thunder Bluff (3), Thousand Needles (3), Stonetalon Mountains (1), Desolace (5), Thousand Needles (1), Hillsbrad Foothills (3), Arathi Highlands (6), Undercity (2), Hillsbrad Foothills (8), The Barrens (3), Orgrimmar (5), Thousand Needles (1), Desolace (16), Hillsbrad Foothills (4), Alterac Mountains (2), Hillsbrad Foothills (6), Stranglethorn Vale (29), Arathi Highlands (13), Hillsbrad Foothills (3), Alterac Mountains (1), Hillsbrad Foothills (1), Alterac Mountains (1), Hillsbrad Foothills (1), Dustwallow Marsh (17), Desolace (13), Stranglethorn Vale (11), Thousand Needles (7), Stranglethorn Vale (12), Desolace (9), Thousand Needles (4), Dustwallow Marsh (7), Orgrimmar (2), The Barrens (5), Stranglethorn Vale (30), Arathi Highlands (17), Badlands (7), Desolace (19), Thousand Needles (8), Stranglethorn Vale (12), Arathi Highlands (10), Badlands (22), Arathi Highlands (27), Stranglethorn Vale (40), Hillsbrad Foothills (4), Alterac Mountains (2), Hillsbrad Foothills (2), Dustwallow Marsh (8), Swamp of Sorrows (11), Arathi Highlands (17), Badlands (11), Stranglethorn Vale (13), Thousand Needles (7), Dustwallow Marsh (15), Feralas (16), Stranglethorn Vale (13), Swamp of Sorrows (14), Stranglethorn Vale (18), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (1), Desolace (6), Thousand Needles (4), Tanaris (24), Orgrimmar (2), Feralas (16), Orgrimmar (1), Undercity (7), Badlands (6), Dustwallow Marsh (8), Orgrimmar (3), Stranglethorn Vale (30), Undercity (2), The Hinterlands (29), Feralas (16), Stranglethorn Vale (1), Searing Gorge (29), Tanaris (33), Azshara (6), The Hinterlands (18), Blasted Lands (15), Swamp of Sorrows (11), Feralas (7), Searing Gorge (21), Tanaris (9), Orgrimmar (6), The Hinterlands (21), Tanaris (1), Un'Goro Crater (17), Feralas (8), Orgrimmar (2), Undercity (10), Azshara (9), Felwood (13), Feralas (1), Un'Goro Crater (34), Azshara (7), Felwood (20), Un'Goro Crater (13), Western Plaguelands (24), Eastern Plaguelands (21), Undercity (9), Winterspring (16), Tirisfal Glades (3), Western Plaguelands (1), Tirisfal Glades (4), Silithus (29), Winterspring (15), Swamp of Sorrows (7), Blasted Lands (1), Swamp of Sorrows (5), Eastern Plaguelands (2), Swamp of Sorrows (1), Eastern Plaguelands (21), Silithus (29), Tirisfal Glades (1), Western Plaguelands (1), Tirisfal Glades (3), Western Plaguelands (9), Blasted Lands (7), Western Plaguelands (1), Alterac Mountains (3), Hillsbrad Foothills (1), Undercity (1), The Hinterlands (2), Feralas (1), Thunder Bluff (4), The Barrens (1), Undercity (1), Arathi Highlands (1) |
+| Class quests left out | HUNTER: 6068 (an exclusive quest is taken instead), 6070 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); MAGE: 1883 (an exclusive quest is taken instead), 1884 (an exclusive quest is taken instead), 1952 (it needs quest 1951 first, which no step of this route can take), 1957 (it needs one of quests 1956 first, which no step of this route can take), 1958 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 97286 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); PRIEST: 5642 (an exclusive quest is taken instead), 5643 (an exclusive quest is taken instead), 5654 (an exclusive quest is taken instead), 5655 (an exclusive quest is taken instead), 5656 (an exclusive quest is taken instead), 5657 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take); ROGUE: 2378 (an exclusive quest is taken instead), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); SHAMAN: 1519 (an exclusive quest is taken instead), 1522 (an exclusive quest is taken instead), 1523 (an exclusive quest is taken instead), 1529 (an exclusive quest is taken instead), 1531 (an exclusive quest is taken instead), 2984 (an exclusive quest is taken instead), 2985 (an exclusive quest is taken instead), 2986 (an exclusive quest is taken instead), 8410 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 79358 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79361 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79362 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79363 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79364 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79365 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79366 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79442 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARLOCK: 1470 (an exclusive quest is taken instead), 1507 (an exclusive quest is taken instead), 1508 (an exclusive quest is taken instead), 1509 (an exclusive quest is taken instead), 1510 (an exclusive quest is taken instead), 1511 (an exclusive quest is taken instead), 1512 (an exclusive quest is taken instead), 1515 (an exclusive quest is taken instead), 4489 (an exclusive quest is taken instead), 4739 (an exclusive quest is taken instead), 4781 (it needs one of quests 1796 first, which no step of this route can take), 4782 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4783 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4784 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4786 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 4963 (an exclusive quest is taken instead), 4964 (it needs quest -4962 first, which no step of this route can take), 4967 (an exclusive quest is taken instead), 4975 (an exclusive quest is taken instead), 8419 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 65601 (an exclusive quest is taken instead), 65604 (an exclusive quest is taken instead), 65610 (an exclusive quest is taken instead), 98575 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARRIOR: 1498 (an exclusive quest is taken instead), 1505 (an exclusive quest is taken instead), 1839 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1840 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1841 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1842 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1843 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1844 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1845 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1846 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1847 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1848 (it needs one of quests 1838 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take) |
 | Errors | 0 |
 | Warnings | none |
 
@@ -1005,118 +1034,121 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,726, 1,922 (71%) |
-| Steps in the route file | 2,180 |
-| Sections | 67 |
-| Profession steps written | p165-2, p202-2, p164-2, p171-2, p182-2, p186-2, p197-2, p333-2, p393-2, p164-3, p165-3, p171-3, p197-3, p182-3, p186-3, p202-3, p393-3, p333-3, p164-4, p171-4, p182-4, p186-4, p393-4, p197-4, p202-4 |
-| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section troll-34-35-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section troll-34-35-stranglethorn-vale |
-| Class trainer visits | HUNTER: 2, 4, 6, 8, 10, 14, 18, 23, 28, 30, 32, 34, 36, 38, 40, 42, 44, 48, 50, 52, 56; MAGE: 2, 4, 6, 8, 10, 12, 14, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 40, 42, 44, 46, 48, 50, 52, 54, 56; PRIEST: 2, 4, 6, 8, 10, 12, 14, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 40, 42, 44, 46, 48, 50, 52, 54, 56; ROGUE: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58; SHAMAN: 2, 4, 6, 8, 10, 14, 18, 22, 24, 26, 28, 30, 34, 36, 40, 42, 44, 46, 48, 50, 52, 56, 58; WARLOCK: 2, 4, 6, 8, 10, 12, 14, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 20, 22, 24, 26, 28, 30, 32, 34, 36, 40, 42, 44, 46, 48, 50, 52, 54, 56 |
-| Class trainer gaps | none |
-| Planner notes | none |
+| Actions before bundling, steps after | 2,660, 1,864 (70%) |
+| Steps in the route file | 2,114 |
+| Sections | 69 |
+| Profession steps written | p165-2, p171-2, p197-2, p333-2, p164-2, p202-2, p333-3, p164-3, p165-3, p197-3, p171-3, p182-3, p186-3, p202-3, p393-3, p164-4, p171-4, p182-4, p186-4, p197-4, p393-4, p202-4 |
+| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section troll-34-36-stranglethorn-vale; Herbalism Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section troll-09-13-tirisfal-glades; Mining Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section troll-09-13-tirisfal-glades; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section troll-34-36-stranglethorn-vale; Skinning Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section troll-09-13-tirisfal-glades |
+| Class trainer visits | HUNTER: 2, 4, 6, 8, 12, 14, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 56, 58; MAGE: 2, 4, 6, 8, 10, 12, 14, 20, 25, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 52, 56, 58; PRIEST: 2, 4, 6, 8, 10, 12, 14, 20, 24, 26, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 52, 56, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 18, 20, 25, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 52, 56, 58; SHAMAN: 2, 4, 6, 8, 14, 20, 25, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 52, 56, 58; WARLOCK: 2, 4, 6, 8, 10, 12, 14, 18, 20, 24, 26, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 52, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 20, 22, 24, 26, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 52, 54, 56, 58 |
+| Class trainer gaps | HUNTER 14 to 28: the cheapest trip to a trainer adds 377 seconds (at most 300); HUNTER 48 to 56: the cheapest trip to a trainer adds 341 seconds (at most 300) |
+| Planner notes | Troll step a1520: quest 1520 gives XP only up to level 12, but the estimated level there is 29; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| troll-01-10-durotar | 1-10 Durotar | 136 | 1-13 |
-| troll-10-11-mulgore | 10-11 Mulgore | 63 | 10-14 |
-| troll-11-14-tirisfal-glades | 11-14 Tirisfal Glades | 60 | 11-17 |
-| troll-14-15-silverpine-forest | 14-15 Silverpine Forest | 37 | 14-18 |
-| troll-15-19-the-barrens | 15-19 The Barrens | 104 | 15-22 |
-| troll-19-19-stonetalon-mountains | 19 Stonetalon Mountains | 15 | 19-22 |
-| troll-19-20-westfall | 19-20 Westfall | 29 | 19-23 |
-| troll-20-21-the-barrens | 20-21 The Barrens | 51 | 20-24 |
-| troll-21-22-stonetalon-mountains | 21-22 Stonetalon Mountains | 24 | 21-25 |
-| troll-22-22-silverpine-forest | 22 Silverpine Forest | 15 | 22-25 |
-| troll-22-23-hillsbrad-foothills | 22-23 Hillsbrad Foothills | 10 | 22-26 |
-| troll-23-24-the-barrens | 23-24 The Barrens | 40 | 23-27 |
-| troll-24-25-ashenvale | 24-25 Ashenvale | 34 | 24-28 |
-| troll-25-25-the-barrens | 25 The Barrens | 22 | 25-28 |
-| troll-25-25-stonetalon-mountains | 25 Stonetalon Mountains | 13 | 25-28 |
-| troll-25-26-thousand-needles | 25-26 Thousand Needles | 12 | 25-29 |
-| troll-26-26-stonetalon-mountains | 26 Stonetalon Mountains | 10 | 26-29 |
-| troll-26-27-the-barrens | 26-27 The Barrens | 14 | 26-30 |
-| troll-27-27-ashenvale | 27 Ashenvale | 15 | 27-30 |
-| troll-27-29-hillsbrad-foothills | 27-29 Hillsbrad Foothills | 72 | 27-32 |
-| troll-29-30-thousand-needles | 29-30 Thousand Needles | 22 | 29-33 |
-| troll-30-31-thousand-needles | 30-31 Thousand Needles | 59 | 30-34 |
-| troll-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 17 | 31-34 |
-| troll-31-33-hillsbrad-foothills | 31-33 Hillsbrad Foothills | 57 | 31-36 |
-| troll-33-33-desolace | 33 Desolace | 31 | 33-36 |
-| troll-33-34-arathi-highlands | 33-34 Arathi Highlands | 17 | 33-37 |
-| troll-34-35-stranglethorn-vale | 34-35 Stranglethorn Vale | 32 | 34-38 |
-| troll-35-35-dustwallow-marsh | 35 Dustwallow Marsh | 12 | 35-38 |
-| troll-35-36-desolace | 35-36 Desolace | 68 | 35-39 |
-| troll-36-37-stranglethorn-vale | 36-37 Stranglethorn Vale | 88 | 36-40 |
-| troll-37-37-arathi-highlands | 37 Arathi Highlands | 10 | 37-40 |
-| troll-37-37-dustwallow-marsh | 37 Dustwallow Marsh | 15 | 37-40 |
-| troll-37-38-desolace | 37-38 Desolace | 28 | 37-41 |
-| troll-38-40-stranglethorn-vale | 38-40 Stranglethorn Vale | 46 | 38-43 |
-| troll-40-40-badlands | 40 Badlands | 17 | 40-43 |
-| troll-40-41-arathi-highlands | 40-41 Arathi Highlands | 20 | 40-44 |
-| troll-41-42-stranglethorn-vale | 41-42 Stranglethorn Vale | 88 | 41-45 |
-| troll-42-42-arathi-highlands | 42 Arathi Highlands | 14 | 42-45 |
-| troll-42-43-badlands | 42-43 Badlands | 33 | 42-46 |
-| troll-43-43-stranglethorn-vale | 43 Stranglethorn Vale | 13 | 43-46 |
-| troll-43-43-dustwallow-marsh | 43 Dustwallow Marsh | 18 | 43-46 |
-| troll-43-44-feralas | 43-44 Feralas | 26 | 43-47 |
-| troll-44-45-stranglethorn-vale | 44-45 Stranglethorn Vale | 24 | 44-48 |
-| troll-45-45-tanaris | 45 Tanaris | 45 | 45-48 |
-| troll-45-46-swamp-of-sorrows | 45-46 Swamp of Sorrows | 16 | 45-49 |
-| troll-46-47-stranglethorn-vale | 46-47 Stranglethorn Vale | 33 | 46-50 |
-| troll-47-48-tanaris | 47-48 Tanaris | 27 | 47-51 |
-| troll-48-48-feralas | 48 Feralas | 15 | 48-51 |
-| troll-48-48-the-hinterlands | 48 The Hinterlands | 23 | 48-51 |
-| troll-48-50-searing-gorge | 48-50 Searing Gorge | 14 | 48-53 |
-| troll-50-50-searing-gorge | 50 Searing Gorge | 5 | 50-53 |
-| troll-50-50-blasted-lands | 50 Blasted Lands | 6 | 50-53 |
-| troll-50-50-feralas | 50 Feralas | 38 | 50-53 |
-| troll-50-51-the-hinterlands | 50-51 The Hinterlands | 31 | 50-54 |
-| troll-51-51-tanaris | 51 Tanaris | 15 | 51-54 |
-| troll-51-53-felwood | 51-53 Felwood | 38 | 51-56 |
-| troll-53-53-azshara | 53 Azshara | 17 | 53-56 |
-| troll-53-53-un-goro-crater | 53 Un'Goro Crater | 53 | 53-56 |
-| troll-53-55-azshara | 53-55 Azshara | 20 | 53-58 |
-| troll-55-55-felwood | 55 Felwood | 26 | 55-58 |
-| troll-55-55-un-goro-crater | 55 Un'Goro Crater | 20 | 55-58 |
-| troll-55-55-western-plaguelands | 55 Western Plaguelands | 20 | 55-58 |
-| troll-55-58-eastern-plaguelands | 55-58 Eastern Plaguelands | 47 | 55-60 |
-| troll-58-58-winterspring | 58 Winterspring | 43 | 58-60 |
-| troll-58-58-western-plaguelands | 58 Western Plaguelands | 36 | 58-60 |
-| troll-58-59-azshara | 58-59 Azshara | 19 | 58-60 |
-| troll-59-60-silithus | 59-60 Silithus | 42 | 59-60 |
+| troll-01-09-durotar | 1-9 Durotar | 114 | 1-12 |
+| troll-09-13-tirisfal-glades | 9-13 Tirisfal Glades | 76 | 9-16 |
+| troll-13-14-silverpine-forest | 13-14 Silverpine Forest | 32 | 13-17 |
+| troll-14-14-durotar | 14 Durotar | 19 | 14-17 |
+| troll-14-20-the-barrens | 14-20 The Barrens | 129 | 14-23 |
+| troll-20-20-the-barrens | 20 The Barrens | 24 | 20-23 |
+| troll-20-21-stonetalon-mountains | 20-21 Stonetalon Mountains | 43 | 20-24 |
+| troll-21-21-silverpine-forest | 21 Silverpine Forest | 12 | 21-24 |
+| troll-21-22-hillsbrad-foothills | 21-22 Hillsbrad Foothills | 26 | 21-25 |
+| troll-22-23-ashenvale | 22-23 Ashenvale | 33 | 22-26 |
+| troll-23-24-the-barrens | 23-24 The Barrens | 29 | 23-27 |
+| troll-24-24-thousand-needles | 24 Thousand Needles | 10 | 24-27 |
+| troll-24-25-stonetalon-mountains | 24-25 Stonetalon Mountains | 23 | 24-28 |
+| troll-25-26-ashenvale | 25-26 Ashenvale | 33 | 25-29 |
+| troll-26-26-hillsbrad-foothills | 26 Hillsbrad Foothills | 11 | 26-29 |
+| troll-26-28-thousand-needles | 26-28 Thousand Needles | 22 | 26-31 |
+| troll-28-29-hillsbrad-foothills | 28-29 Hillsbrad Foothills | 59 | 28-32 |
+| troll-29-29-thousand-needles | 29 Thousand Needles | 30 | 29-32 |
+| troll-29-30-hillsbrad-foothills | 29-30 Hillsbrad Foothills | 58 | 29-33 |
+| troll-30-31-desolace | 30-31 Desolace | 41 | 30-34 |
+| troll-31-32-stranglethorn-vale | 31-32 Stranglethorn Vale | 24 | 31-35 |
+| troll-32-32-arathi-highlands | 32 Arathi Highlands | 26 | 32-35 |
+| troll-32-33-dustwallow-marsh | 32-33 Dustwallow Marsh | 10 | 32-36 |
+| troll-33-34-desolace | 33-34 Desolace | 40 | 33-37 |
+| troll-34-34-stranglethorn-vale | 34 Stranglethorn Vale | 16 | 34-37 |
+| troll-34-34-desolace | 34 Desolace | 34 | 34-37 |
+| troll-34-34-the-barrens | 34 The Barrens | 5 | 34-37 |
+| troll-34-36-stranglethorn-vale | 34-36 Stranglethorn Vale | 72 | 34-39 |
+| troll-36-36-desolace | 36 Desolace | 29 | 36-39 |
+| troll-36-36-stranglethorn-vale | 36 Stranglethorn Vale | 16 | 36-39 |
+| troll-36-37-arathi-highlands | 36-37 Arathi Highlands | 8 | 36-40 |
+| troll-37-38-badlands | 37-38 Badlands | 22 | 37-41 |
+| troll-38-38-arathi-highlands | 38 Arathi Highlands | 13 | 38-41 |
+| troll-38-40-stranglethorn-vale | 38-40 Stranglethorn Vale | 70 | 38-43 |
+| troll-40-40-arathi-highlands | 40 Arathi Highlands | 12 | 40-43 |
+| troll-40-40-badlands | 40 Badlands | 10 | 40-43 |
+| troll-40-40-stranglethorn-vale | 40 Stranglethorn Vale | 22 | 40-43 |
+| troll-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 8 | 40-44 |
+| troll-41-41-feralas | 41 Feralas | 12 | 41-44 |
+| troll-41-41-stranglethorn-vale | 41 Stranglethorn Vale | 13 | 41-44 |
+| troll-41-42-swamp-of-sorrows | 41-42 Swamp of Sorrows | 15 | 41-45 |
+| troll-42-42-stranglethorn-vale | 42 Stranglethorn Vale | 48 | 42-45 |
+| troll-42-43-tanaris | 42-43 Tanaris | 17 | 42-46 |
+| troll-43-43-feralas | 43 Feralas | 37 | 43-46 |
+| troll-43-43-dustwallow-marsh | 43 Dustwallow Marsh | 31 | 43-46 |
+| troll-43-46-stranglethorn-vale | 43-46 Stranglethorn Vale | 36 | 43-49 |
+| troll-46-46-the-hinterlands | 46 The Hinterlands | 19 | 46-49 |
+| troll-46-46-feralas | 46 Feralas | 25 | 46-49 |
+| troll-46-47-searing-gorge | 46-47 Searing Gorge | 17 | 46-50 |
+| troll-47-47-tanaris | 47 Tanaris | 29 | 47-50 |
+| troll-47-48-the-hinterlands | 47-48 The Hinterlands | 19 | 47-51 |
+| troll-48-48-blasted-lands | 48 Blasted Lands | 6 | 48-51 |
+| troll-48-48-swamp-of-sorrows | 48 Swamp of Sorrows | 23 | 48-51 |
+| troll-48-49-searing-gorge | 48-49 Searing Gorge | 33 | 48-52 |
+| troll-49-50-the-hinterlands | 49-50 The Hinterlands | 22 | 49-53 |
+| troll-50-50-un-goro-crater | 50 Un'Goro Crater | 42 | 50-53 |
+| troll-50-50-azshara | 50 Azshara | 12 | 50-53 |
+| troll-50-51-felwood | 50-51 Felwood | 16 | 50-54 |
+| troll-51-52-un-goro-crater | 51-52 Un'Goro Crater | 26 | 51-55 |
+| troll-52-53-azshara | 52-53 Azshara | 22 | 52-56 |
+| troll-53-53-felwood | 53 Felwood | 31 | 53-56 |
+| troll-53-54-un-goro-crater | 53-54 Un'Goro Crater | 26 | 53-57 |
+| troll-54-54-western-plaguelands | 54 Western Plaguelands | 14 | 54-57 |
+| troll-54-54-eastern-plaguelands | 54 Eastern Plaguelands | 28 | 54-57 |
+| troll-54-55-winterspring | 54-55 Winterspring | 31 | 54-58 |
+| troll-55-57-silithus | 55-57 Silithus | 24 | 55-60 |
+| troll-57-58-winterspring | 57-58 Winterspring | 48 | 57-60 |
+| troll-58-58-eastern-plaguelands | 58 Eastern Plaguelands | 32 | 58-60 |
+| troll-58-60-silithus | 58-60 Silithus | 99 | 58-60 |
 
 ### Level curve
 
 | Level | Reached at step |
 | --- | --- |
-| 10 | 85 |
-| 20 | 401 |
-| 30 | 741 |
-| 40 | 1,246 |
-| 50 | 1,770 |
-| 60 | 2,296 |
+| 10 | 86 |
+| 20 | 364 |
+| 30 | 708 |
+| 40 | 1,234 |
+| 50 | 1,802 |
+| 60 | 2,220 |
 
 ## HighOrder (Alliance, `alliance-highorder`)
 
 | Fact | Value |
 | --- | --- |
 | Classes validated | DRUID, HUNTER, MAGE, ROGUE, WARRIOR |
-| Steps | 2,321 |
-| Quests | 714 |
+| Steps | 2,310 |
+| Quests | 728 |
 | End level | 60 |
-| Zone changes | 146 (before: 212) |
-| Travel time | 50 h 42 min: on foot 37 h 54 min, in the air 9 h 20 min, on transports 3 h 12 min, hearthstone 0 h 16 min (before: 43 h 10 min) |
-| Walked | 908,518 yards (before: 915,714) |
-| Whole route, estimated | 161 h 55 min |
-| Flight points learned, flights taken | 32, 156 |
-| Transports taken | 60 |
-| Hearthstone bound, used | 39, 65 |
-| Grind steps | 13 (level 29 to 30, level 34 to 35, level 42 to 43, level 44 to 45, level 46 to 47, level 47 to 48, level 49 to 50, level 51 to 52, level 52 to 53, level 54 to 55, level 57 to 58, level 58 to 59, level 59 to 60) |
+| Zone changes | 140 (before: 212) |
+| Travel time | 49 h 24 min: on foot 37 h 56 min, in the air 8 h 29 min, on transports 2 h 43 min, hearthstone 0 h 15 min (before: 43 h 10 min) |
+| Walked | 932,292 yards (before: 915,714) |
+| Whole route, estimated | 155 h 43 min |
+| Flight points learned, flights taken | 32, 130 |
+| Transports taken | 52 |
+| Hearthstone bound, used | 33, 61 |
+| Grind steps | 10 (level 42 to 43, level 44 to 45, level 45 to 46, level 47 to 48, level 49 to 50, level 50 to 51, level 54 to 55, level 56 to 57, level 57 to 58, level 59 to 60) |
 | Unconfirmed transports used | Menethil Harbor to Auberdine (boat; not confirmed: route); Skyborne Portal to Stormwind (portal; not confirmed: route, boarding, arrival); Skycutter from Zephras Isle to Dalaran (boat; not confirmed: boarding, arrival, kind); Deeprun Tram (tram; not confirmed: route) |
 | Hand-ins left behind | none |
-| Quests above the level allowed, far below the player's level | 0, 95 of 1201 quest steps |
-| Zones in order (steps there) | Zephras Isle (228), Alterac Mountains (3), Stormwind City (2), Westfall (33), Loch Modan (34), Darkshore (124), Ashenvale (30), Loch Modan (22), Redridge Mountains (25), Stonetalon Mountains (16), Wetlands (27), Ashenvale (15), Darkshore (1), Ashenvale (7), Duskwood (49), Westfall (1), Duskwood (6), Wetlands (13), Redridge Mountains (16), Wetlands (6), Stonetalon Mountains (5), Ashenvale (3), Dun Morogh (4), Duskwood (11), Ashenvale (14), Wetlands (6), Stormwind City (11), Elwynn Forest (3), Duskwood (6), Stormwind City (5), Ironforge (1), Wetlands (14), Ashenvale (18), Duskwood (30), Thousand Needles (13), Stranglethorn Vale (13), Hillsbrad Foothills (18), Ashenvale (11), Wetlands (10), Arathi Highlands (1), Wetlands (2), Stormwind City (12), Stranglethorn Vale (17), Desolace (19), Wetlands (1), Hillsbrad Foothills (3), Alterac Mountains (1), Hillsbrad Foothills (1), Arathi Highlands (7), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (1), Stranglethorn Vale (19), Wetlands (10), Dustwallow Marsh (17), Duskwood (12), Badlands (10), Arathi Highlands (10), Dustwallow Marsh (5), Desolace (13), Thousand Needles (4), Stranglethorn Vale (31), Swamp of Sorrows (9), Arathi Highlands (10), Hillsbrad Foothills (3), Alterac Mountains (1), Hillsbrad Foothills (1), Badlands (4), Dustwallow Marsh (12), Stranglethorn Vale (14), Arathi Highlands (3), Alterac Mountains (4), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (1), Ironforge (4), Desolace (33), Arathi Highlands (14), Loch Modan (4), Badlands (1), Loch Modan (1), Badlands (24), Stranglethorn Vale (18), Arathi Highlands (19), Stranglethorn Vale (22), Dustwallow Marsh (10), Stormwind City (3), Desolace (8), Hillsbrad Foothills (5), Alterac Mountains (2), Hillsbrad Foothills (2), Swamp of Sorrows (8), Stranglethorn Vale (19), Ironforge (2), Badlands (11), Thousand Needles (5), Feralas (13), Arathi Highlands (4), Loch Modan (4), Tanaris (9), Feralas (18), Stranglethorn Vale (18), Tanaris (14), Ironforge (10), Badlands (9), The Hinterlands (7), Tanaris (23), Searing Gorge (21), Feralas (27), Stranglethorn Vale (7), Redridge Mountains (1), Searing Gorge (32), Blasted Lands (16), Teldrassil (5), Azshara (6), Tanaris (19), Felwood (12), Un'Goro Crater (39), Ironforge (9), Azshara (8), Burning Steppes (24), Western Plaguelands (33), Felwood (4), Winterspring (1), Felwood (18), Silithus (6), Un'Goro Crater (22), Winterspring (21), Eastern Plaguelands (24), Western Plaguelands (19), Darnassus (10), Eastern Plaguelands (8), Western Plaguelands (1), Silithus (19), Winterspring (18), Western Plaguelands (20), Tanaris (1), The Barrens (1), Moonglade (1), Ironforge (1), Redridge Mountains (2), Westfall (2), Stormwind City (1), The Hinterlands (1), Tanaris (1), Stonetalon Mountains (1), Stormwind City (1) |
-| Class quests left out | DRUID: 272 (it needs one of quests 29 first, which no step of this route can take), 8382 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 81924 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94912 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94914 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98341 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98393 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98397 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98404 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98738 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); HUNTER: 8377 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94792 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94793 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94863 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94864 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); MAGE: 1952 (it needs quest 1951 first, which no step of this route can take), 1957 (it needs one of quests 1956 first, which no step of this route can take), 1958 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8381 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 97286 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); ROGUE: 8378 (it needs one of quests 8315 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARRIOR: 1638 (an exclusive quest is taken instead), 1678 (an exclusive quest is taken instead), 1679 (an exclusive quest is taken instead), 1683 (an exclusive quest is taken instead), 1684 (an exclusive quest is taken instead), 1705 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1706 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1708 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1709 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1710 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1711 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1782 (it needs one of quests 1701 first, which no step of this route can take), 8316 (it needs one of quests 8315 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take) |
+| Quests above the level allowed, far below the player's level | 0, 118 of 1229 quest steps |
+| Walks through dangerous zones | none |
+| Zones in order (steps there) | Zephras Isle (222), Alterac Mountains (3), Stormwind City (2), Westfall (37), Loch Modan (53), Redridge Mountains (28), Darkshore (108), Duskwood (47), Westfall (1), Duskwood (18), Redridge Mountains (19), Ashenvale (64), Darkshore (1), Ashenvale (2), Stonetalon Mountains (16), Wetlands (56), Duskwood (40), Thousand Needles (13), Ashenvale (27), Hillsbrad Foothills (19), Alterac Mountains (1), Hillsbrad Foothills (1), Stranglethorn Vale (29), Desolace (29), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (1), Dustwallow Marsh (14), Stranglethorn Vale (18), Stormwind City (8), Duskwood (16), Arathi Highlands (17), Stranglethorn Vale (25), Wetlands (8), Swamp of Sorrows (12), Badlands (13), Arathi Highlands (8), Dustwallow Marsh (7), Desolace (12), Stranglethorn Vale (18), Arathi Highlands (4), Hillsbrad Foothills (3), Alterac Mountains (1), Hillsbrad Foothills (1), Dustwallow Marsh (14), Arathi Highlands (17), Loch Modan (3), Badlands (1), Loch Modan (1), Desolace (10), Stranglethorn Vale (16), Badlands (22), Arathi Highlands (16), Stranglethorn Vale (20), Badlands (3), Ironforge (7), Desolace (21), Feralas (10), Thousand Needles (3), The Barrens (2), Stranglethorn Vale (9), Ironforge (2), Arathi Highlands (6), Badlands (10), Ironforge (1), Stormwind City (11), Hillsbrad Foothills (1), Alterac Mountains (5), Stranglethorn Vale (21), Feralas (11), Swamp of Sorrows (6), Stormwind City (2), Loch Modan (5), Badlands (1), Loch Modan (1), Thousand Needles (5), Stranglethorn Vale (18), Tanaris (24), Feralas (17), Dustwallow Marsh (1), Badlands (7), Searing Gorge (25), Feralas (20), Tanaris (22), Dustwallow Marsh (1), Hillsbrad Foothills (2), The Hinterlands (15), Searing Gorge (28), Blasted Lands (18), Tanaris (19), Un'Goro Crater (17), Burning Steppes (9), Ironforge (8), Un'Goro Crater (24), Azshara (8), Western Plaguelands (13), Felwood (22), Feralas (7), Burning Steppes (12), Ironforge (5), Teldrassil (2), Darnassus (5), Tanaris (6), Un'Goro Crater (1), Tanaris (1), Un'Goro Crater (14), Tanaris (1), Searing Gorge (8), Western Plaguelands (20), Un'Goro Crater (13), The Barrens (4), Felwood (14), Winterspring (11), Western Plaguelands (1), Eastern Plaguelands (26), Western Plaguelands (28), Silithus (13), Ironforge (1), Stormwind City (6), Tanaris (3), Un'Goro Crater (1), Tanaris (2), Darnassus (12), Winterspring (37), Silithus (44), Eastern Plaguelands (16), Blasted Lands (7), Stormwind City (5), Western Plaguelands (10), Eastern Plaguelands (1), Western Plaguelands (6), Alterac Mountains (1), Ironforge (1), The Hinterlands (1), Stranglethorn Vale (2), Swamp of Sorrows (1), Tanaris (1), Un'Goro Crater (1), The Barrens (1), Desolace (1), Moonglade (1) |
+| Class quests left out | DRUID: 272 (it needs one of quests 29 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 81924 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94912 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94914 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98341 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98393 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98397 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98404 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98738 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); HUNTER: 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94792 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94793 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94863 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94864 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); MAGE: 1952 (it needs quest 1951 first, which no step of this route can take), 1957 (it needs one of quests 1956 first, which no step of this route can take), 1958 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 97286 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); ROGUE: 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARRIOR: 1638 (an exclusive quest is taken instead), 1678 (an exclusive quest is taken instead), 1679 (an exclusive quest is taken instead), 1683 (an exclusive quest is taken instead), 1684 (an exclusive quest is taken instead), 1705 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1706 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1708 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1709 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1710 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1711 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1782 (it needs one of quests 1701 first, which no step of this route can take), 8922 (it needs one of quests 8905, 8906, 8907, 8908, 8909, 8910, 8911, 8912 first, which no step of this route can take), 8929 (it needs one of quests 8926, 8931, 8932, 8933, 8934, 8935, 8936, 8937 first, which no step of this route can take) |
 | Errors | 0 |
 | Warnings | none |
 
@@ -1124,116 +1156,115 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,607, 1,783 (68%) |
-| Steps in the route file | 1,956 |
-| Sections | 65 |
-| Profession steps written | p164-2, p165-2, p171-2, p182-2, p186-2, p197-2, p202-2, p333-2, p393-2, p186-3, p165-3, p171-3, p182-3, p393-3, p186-4, p164-4, p182-4, p197-4 |
-| Profession ranks without a step | Blacksmithing Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-20-21-darkshore; Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-stranglethorn-vale; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-stranglethorn-vale; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-20-21-darkshore; Engineering Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-20-21-darkshore; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-stranglethorn-vale; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-20-21-darkshore; Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-stranglethorn-vale; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-stranglethorn-vale |
-| Class trainer visits | DRUID: 2, 4, 6, 8, 10, 12, 14, 16, 18, 27, 31, 40, 50, 54, 56, 58; HUNTER: 2, 4, 6, 8, 10, 12, 14, 16, 20, 22, 26, 28, 30, 32, 36, 38, 40, 42, 44, 46, 50, 52, 54, 56, 58; MAGE: 2, 4, 8, 10, 12, 14, 26, 28, 32, 36, 40, 42, 44, 48, 52, 56, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 16, 21, 25, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 52, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 21, 25, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 52, 56, 58 |
-| Class trainer gaps | DRUID 18 to 27: the cheapest trip to a trainer adds 377 seconds (at most 300); DRUID 31 to 40: the cheapest trip to a trainer adds 344 seconds (at most 300); DRUID 40 to 50: the cheapest trip to a trainer adds 302 seconds (at most 300); MAGE 14 to 26: the cheapest trip to a trainer adds 302 seconds (at most 300); WARRIOR 14 to 21: the cheapest trip to a trainer adds 306 seconds (at most 300) |
-| Planner notes | none |
+| Actions before bundling, steps after | 2,587, 1,738 (67%) |
+| Steps in the route file | 1,933 |
+| Sections | 63 |
+| Profession steps written | p164-2, p165-2, p171-2, p182-2, p186-2, p197-2, p202-2, p333-2, p393-2, p186-3, p164-3, p202-3, p182-3, p393-3, p165-3, p171-3, p182-4, p197-4, p164-4, p186-4, p333-4 |
+| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-swamp-of-sorrows; Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-swamp-of-sorrows; Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-20-22-darkshore; Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-swamp-of-sorrows; Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-20-22-darkshore; Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-swamp-of-sorrows |
+| Class trainer visits | DRUID: 2, 4, 6, 8, 10, 12, 23, 30, 38, 42, 46, 50, 52, 54, 56, 58; HUNTER: 2, 4, 6, 8, 10, 12, 14, 16, 21, 24, 28, 32, 36, 38, 40, 44, 46, 48, 50, 52, 54, 56, 58; MAGE: 2, 4, 6, 8, 10, 12, 14, 23, 30, 32, 38, 40, 44, 49, 54, 56, 58; ROGUE: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 26, 30, 32, 34, 36, 38, 40, 42, 46, 48, 50, 54, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 27, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 54, 56, 58 |
+| Class trainer gaps | DRUID 12 to 23: the cheapest trip to a trainer adds 306 seconds (at most 300); DRUID 23 to 30: the cheapest trip to a trainer adds 424 seconds (at most 300); DRUID 30 to 38: the cheapest trip to a trainer adds 432 seconds (at most 300); MAGE 14 to 23: the cheapest trip to a trainer adds 316 seconds (at most 300); MAGE 23 to 30: the cheapest trip to a trainer adds 333 seconds (at most 300) |
+| Planner notes | HighOrder step a2241: quest 2241 gives XP only up to level 18, but the estimated level there is 20; with "skip content you outlevel" the step and its quest's later lines are skipped; HighOrder step a1686: quest 1686 gives XP only up to level 18, but the estimated level there is 20; with "skip content you outlevel" the step and its quest's later lines are skipped; HighOrder step a6121.a9063: quest 6121 gives XP only up to level 22, below the step's minLevel 50; the step gets no maxLevel |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| highorder-01-15-zephras-isle | 1-15 Zephras Isle | 232 | 1-18 |
-| highorder-15-16-westfall | 15-16 Westfall | 45 | 15-19 |
-| highorder-16-17-loch-modan | 16-17 Loch Modan | 29 | 16-20 |
-| highorder-17-20-darkshore | 17-20 Darkshore | 72 | 17-23 |
-| highorder-20-21-darkshore | 20-21 Darkshore | 27 | 20-24 |
-| highorder-21-22-ashenvale | 21-22 Ashenvale | 41 | 21-25 |
-| highorder-22-22-loch-modan | 22 Loch Modan | 21 | 22-25 |
-| highorder-22-23-redridge-mountains | 22-23 Redridge Mountains | 22 | 22-26 |
-| highorder-23-23-stonetalon-mountains | 23 Stonetalon Mountains | 24 | 23-26 |
-| highorder-23-24-wetlands | 23-24 Wetlands | 18 | 23-27 |
-| highorder-24-25-ashenvale | 24-25 Ashenvale | 31 | 24-28 |
-| highorder-25-26-duskwood | 25-26 Duskwood | 42 | 25-29 |
-| highorder-26-26-wetlands | 26 Wetlands | 11 | 26-29 |
-| highorder-26-28-redridge-mountains | 26-28 Redridge Mountains | 47 | 26-31 |
-| highorder-28-28-duskwood | 28 Duskwood | 14 | 28-31 |
-| highorder-28-28-ashenvale | 28 Ashenvale | 22 | 28-31 |
-| highorder-28-29-stormwind-city | 28-29 Stormwind City | 35 | 28-32 |
-| highorder-29-30-wetlands | 29-30 Wetlands | 12 | 29-33 |
-| highorder-30-30-ashenvale | 30 Ashenvale | 19 | 30-33 |
-| highorder-30-31-duskwood | 30-31 Duskwood | 20 | 30-34 |
-| highorder-31-31-thousand-needles | 31 Thousand Needles | 11 | 31-34 |
-| highorder-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 15 | 31-34 |
-| highorder-31-32-hillsbrad-foothills | 31-32 Hillsbrad Foothills | 14 | 31-35 |
-| highorder-32-32-ashenvale | 32 Ashenvale | 27 | 32-35 |
-| highorder-32-33-stormwind-city | 32-33 Stormwind City | 14 | 32-36 |
-| highorder-33-33-stranglethorn-vale | 33 Stranglethorn Vale | 20 | 33-36 |
-| highorder-33-34-desolace | 33-34 Desolace | 41 | 33-37 |
-| highorder-34-35-stranglethorn-vale | 34-35 Stranglethorn Vale | 36 | 34-38 |
-| highorder-35-35-dustwallow-marsh | 35 Dustwallow Marsh | 13 | 35-38 |
-| highorder-35-36-duskwood | 35-36 Duskwood | 27 | 35-39 |
-| highorder-36-36-arathi-highlands | 36 Arathi Highlands | 16 | 36-39 |
-| highorder-36-36-desolace | 36 Desolace | 18 | 36-39 |
-| highorder-36-37-stranglethorn-vale | 36-37 Stranglethorn Vale | 58 | 36-40 |
-| highorder-37-38-dustwallow-marsh | 37-38 Dustwallow Marsh | 11 | 37-41 |
-| highorder-38-38-stranglethorn-vale | 38 Stranglethorn Vale | 36 | 38-41 |
-| highorder-38-39-desolace | 38-39 Desolace | 31 | 38-42 |
-| highorder-39-39-arathi-highlands | 39 Arathi Highlands | 17 | 39-42 |
-| highorder-39-40-badlands | 39-40 Badlands | 20 | 39-43 |
-| highorder-40-40-stranglethorn-vale | 40 Stranglethorn Vale | 16 | 40-43 |
-| highorder-40-41-arathi-highlands | 40-41 Arathi Highlands | 15 | 40-44 |
-| highorder-41-43-stranglethorn-vale | 41-43 Stranglethorn Vale | 84 | 41-46 |
-| highorder-43-43-badlands | 43 Badlands | 22 | 43-46 |
-| highorder-43-45-feralas | 43-45 Feralas | 49 | 43-48 |
-| highorder-45-45-stranglethorn-vale | 45 Stranglethorn Vale | 12 | 45-48 |
-| highorder-45-48-tanaris | 45-48 Tanaris | 67 | 45-51 |
-| highorder-48-48-searing-gorge | 48 Searing Gorge | 15 | 48-51 |
-| highorder-48-48-feralas | 48 Feralas | 35 | 48-51 |
-| highorder-48-50-searing-gorge | 48-50 Searing Gorge | 13 | 48-53 |
-| highorder-50-50-searing-gorge | 50 Searing Gorge | 6 | 50-53 |
-| highorder-50-50-blasted-lands | 50 Blasted Lands | 17 | 50-53 |
-| highorder-50-50-tanaris | 50 Tanaris | 14 | 50-53 |
-| highorder-50-53-felwood | 50-53 Felwood | 16 | 50-56 |
-| highorder-53-53-un-goro-crater | 53 Un'Goro Crater | 47 | 53-56 |
-| highorder-53-53-azshara | 53 Azshara | 20 | 53-56 |
-| highorder-53-55-burning-steppes | 53-55 Burning Steppes | 27 | 53-58 |
+| highorder-01-14-zephras-isle | 1-14 Zephras Isle | 202 | 1-17 |
+| highorder-14-16-westfall | 14-16 Westfall | 52 | 14-19 |
+| highorder-16-18-loch-modan | 16-18 Loch Modan | 39 | 16-21 |
+| highorder-18-19-redridge-mountains | 18-19 Redridge Mountains | 22 | 18-22 |
+| highorder-19-20-darkshore | 19-20 Darkshore | 23 | 19-23 |
+| highorder-20-22-darkshore | 20-22 Darkshore | 83 | 20-25 |
+| highorder-22-24-duskwood | 22-24 Duskwood | 51 | 22-27 |
+| highorder-24-24-stormwind-city | 24 Stormwind City | 8 | 24-27 |
+| highorder-24-24-redridge-mountains | 24 Redridge Mountains | 25 | 24-27 |
+| highorder-24-26-ashenvale | 24-26 Ashenvale | 62 | 24-29 |
+| highorder-26-26-stonetalon-mountains | 26 Stonetalon Mountains | 12 | 26-29 |
+| highorder-26-28-wetlands | 26-28 Wetlands | 44 | 26-31 |
+| highorder-28-29-duskwood | 28-29 Duskwood | 31 | 28-32 |
+| highorder-29-29-thousand-needles | 29 Thousand Needles | 11 | 29-32 |
+| highorder-29-30-ashenvale | 29-30 Ashenvale | 29 | 29-33 |
+| highorder-30-31-hillsbrad-foothills | 30-31 Hillsbrad Foothills | 17 | 30-34 |
+| highorder-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 27 | 31-34 |
+| highorder-31-32-desolace | 31-32 Desolace | 39 | 31-35 |
+| highorder-32-33-dustwallow-marsh | 32-33 Dustwallow Marsh | 13 | 32-36 |
+| highorder-33-33-stranglethorn-vale | 33 Stranglethorn Vale | 27 | 33-36 |
+| highorder-33-33-duskwood | 33 Duskwood | 18 | 33-36 |
+| highorder-33-34-arathi-highlands | 33-34 Arathi Highlands | 13 | 33-37 |
+| highorder-34-34-stranglethorn-vale | 34 Stranglethorn Vale | 29 | 34-37 |
+| highorder-34-35-swamp-of-sorrows | 34-35 Swamp of Sorrows | 14 | 34-38 |
+| highorder-35-35-badlands | 35 Badlands | 42 | 35-38 |
+| highorder-35-36-desolace | 35-36 Desolace | 16 | 35-39 |
+| highorder-36-36-stranglethorn-vale | 36 Stranglethorn Vale | 34 | 36-39 |
+| highorder-36-37-dustwallow-marsh | 36-37 Dustwallow Marsh | 10 | 36-40 |
+| highorder-37-38-arathi-highlands | 37-38 Arathi Highlands | 31 | 37-41 |
+| highorder-38-38-stranglethorn-vale | 38 Stranglethorn Vale | 17 | 38-41 |
+| highorder-38-38-badlands | 38 Badlands | 20 | 38-41 |
+| highorder-38-39-arathi-highlands | 38-39 Arathi Highlands | 9 | 38-42 |
+| highorder-39-39-stranglethorn-vale | 39 Stranglethorn Vale | 28 | 39-42 |
+| highorder-39-40-desolace | 39-40 Desolace | 12 | 39-43 |
+| highorder-40-41-alterac-mountains | 40-41 Alterac Mountains | 72 | 40-44 |
+| highorder-41-43-stranglethorn-vale | 41-43 Stranglethorn Vale | 75 | 41-46 |
+| highorder-43-43-tanaris | 43 Tanaris | 13 | 43-46 |
+| highorder-43-45-feralas | 43-45 Feralas | 37 | 43-48 |
+| highorder-45-46-searing-gorge | 45-46 Searing Gorge | 21 | 45-49 |
+| highorder-46-46-feralas | 46 Feralas | 17 | 46-49 |
+| highorder-46-47-tanaris | 46-47 Tanaris | 27 | 46-50 |
+| highorder-47-48-the-hinterlands | 47-48 The Hinterlands | 17 | 47-51 |
+| highorder-48-48-searing-gorge | 48 Searing Gorge | 12 | 48-51 |
+| highorder-48-48-blasted-lands | 48 Blasted Lands | 8 | 48-51 |
+| highorder-48-50-tanaris | 48-50 Tanaris | 18 | 48-53 |
+| highorder-50-51-un-goro-crater | 50-51 Un'Goro Crater | 62 | 50-54 |
+| highorder-51-51-azshara | 51 Azshara | 18 | 51-54 |
+| highorder-51-51-western-plaguelands | 51 Western Plaguelands | 7 | 51-54 |
+| highorder-51-52-felwood | 51-52 Felwood | 28 | 51-55 |
+| highorder-52-52-burning-steppes | 52 Burning Steppes | 31 | 52-55 |
+| highorder-52-53-un-goro-crater | 52-53 Un'Goro Crater | 22 | 52-56 |
+| highorder-53-53-western-plaguelands | 53 Western Plaguelands | 13 | 53-56 |
+| highorder-53-53-un-goro-crater | 53 Un'Goro Crater | 19 | 53-56 |
+| highorder-53-53-felwood | 53 Felwood | 36 | 53-56 |
+| highorder-53-55-eastern-plaguelands | 53-55 Eastern Plaguelands | 22 | 53-58 |
 | highorder-55-55-western-plaguelands | 55 Western Plaguelands | 22 | 55-58 |
-| highorder-55-55-felwood | 55 Felwood | 15 | 55-58 |
-| highorder-55-55-azshara | 55 Azshara | 17 | 55-58 |
-| highorder-55-56-un-goro-crater | 55-56 Un'Goro Crater | 18 | 55-59 |
-| highorder-56-56-winterspring | 56 Winterspring | 14 | 56-59 |
-| highorder-56-56-eastern-plaguelands | 56 Eastern Plaguelands | 25 | 56-59 |
-| highorder-56-58-western-plaguelands | 56-58 Western Plaguelands | 61 | 56-60 |
-| highorder-58-59-silithus | 58-59 Silithus | 17 | 58-60 |
-| highorder-59-59-winterspring | 59 Winterspring | 18 | 59-60 |
-| highorder-59-60-western-plaguelands | 59-60 Western Plaguelands | 65 | 59-60 |
+| highorder-55-55-silithus | 55 Silithus | 47 | 55-58 |
+| highorder-55-55-darnassus | 55 Darnassus | 7 | 55-58 |
+| highorder-55-56-winterspring | 55-56 Winterspring | 17 | 55-59 |
+| highorder-56-56-azshara | 56 Azshara | 18 | 56-59 |
+| highorder-56-58-winterspring | 56-58 Winterspring | 15 | 56-60 |
+| highorder-58-58-silithus | 58 Silithus | 33 | 58-60 |
+| highorder-58-60-eastern-plaguelands | 58-60 Eastern Plaguelands | 89 | 58-60 |
 
 ### Level curve
 
 | Level | Reached at step |
 | --- | --- |
 | 10 | 102 |
-| 20 | 417 |
-| 30 | 831 |
-| 40 | 1,405 |
-| 50 | 1,836 |
-| 60 | 2,287 |
+| 20 | 398 |
+| 30 | 806 |
+| 40 | 1,342 |
+| 50 | 1,746 |
+| 60 | 2,279 |
 
 ## Windshaper (Horde, `horde-windshaper`)
 
 | Fact | Value |
 | --- | --- |
 | Classes validated | DRUID, HUNTER, ROGUE, SHAMAN, WARRIOR |
-| Steps | 2,347 |
-| Quests | 669 |
+| Steps | 2,329 |
+| Quests | 687 |
 | End level | 60 |
 | Zone changes | 160 (before: 200) |
-| Travel time | 48 h 57 min: on foot 34 h 30 min, in the air 11 h 04 min, on transports 3 h 07 min, hearthstone 0 h 16 min (before: 42 h 23 min) |
-| Walked | 848,064 yards (before: 891,664) |
-| Whole route, estimated | 164 h 54 min |
-| Flight points learned, flights taken | 31, 195 |
-| Transports taken | 48 |
-| Hearthstone bound, used | 63, 64 |
-| Grind steps | 15 (level 23 to 24, level 28 to 29, level 29 to 30, level 32 to 33, level 34 to 35, level 39 to 40, level 44 to 45, level 46 to 47, level 47 to 48, level 49 to 50, level 52 to 53, level 54 to 55, level 56 to 57, level 57 to 58, level 59 to 60) |
+| Travel time | 49 h 24 min: on foot 35 h 55 min, in the air 10 h 32 min, on transports 2 h 41 min, hearthstone 0 h 16 min (before: 42 h 23 min) |
+| Walked | 887,528 yards (before: 891,664) |
+| Whole route, estimated | 158 h 49 min |
+| Flight points learned, flights taken | 31, 161 |
+| Transports taken | 42 |
+| Hearthstone bound, used | 56, 65 |
+| Grind steps | 10 (level 27 to 28, level 30 to 31, level 45 to 46, level 47 to 48, level 50 to 51, level 52 to 53, level 55 to 56, level 56 to 57, level 57 to 58, level 59 to 60) |
 | Unconfirmed transports used | Skycutter from Zephras Isle to Mulgore (boat; not confirmed: boarding, arrival, kind) |
-| Hand-ins left behind | step 365 (quest 438) |
-| Quests above the level allowed, far below the player's level | 0, 69 of 1190 quest steps |
-| Zones in order (steps there) | Zephras Isle (222), Mulgore (2), Orgrimmar (3), The Barrens (85), Silverpine Forest (51), Westfall (6), The Barrens (65), Stonetalon Mountains (1), The Barrens (1), Stonetalon Mountains (29), Hillsbrad Foothills (14), The Barrens (19), Ashenvale (19), Hillsbrad Foothills (4), Alterac Mountains (1), Hillsbrad Foothills (10), The Barrens (7), Stonetalon Mountains (14), Thousand Needles (13), Stonetalon Mountains (9), The Barrens (12), Ashenvale (13), Hillsbrad Foothills (7), Thousand Needles (6), Hillsbrad Foothills (12), Undercity (1), Thousand Needles (32), The Barrens (7), Thousand Needles (1), The Barrens (1), Stonetalon Mountains (5), Thunder Bluff (6), Thousand Needles (9), Stranglethorn Vale (13), Undercity (1), Hillsbrad Foothills (14), Orgrimmar (3), Durotar (1), Orgrimmar (1), Thunder Bluff (2), Ashenvale (1), Thunder Bluff (2), Thousand Needles (9), Desolace (17), Hillsbrad Foothills (6), Alterac Mountains (2), Hillsbrad Foothills (6), Arathi Highlands (18), Stranglethorn Vale (27), Dustwallow Marsh (16), Desolace (14), Orgrimmar (2), Swamp of Sorrows (4), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (1), Alterac Mountains (2), Hillsbrad Foothills (2), Stranglethorn Vale (17), Desolace (7), Thousand Needles (4), Dustwallow Marsh (4), The Barrens (4), Orgrimmar (2), Thousand Needles (8), Stranglethorn Vale (1), Badlands (8), Stranglethorn Vale (19), Arathi Highlands (17), Dustwallow Marsh (12), Desolace (17), Arathi Highlands (7), Stranglethorn Vale (12), The Barrens (1), Thousand Needles (2), The Barrens (2), Swamp of Sorrows (4), Stranglethorn Vale (14), Badlands (19), Arathi Highlands (33), Stranglethorn Vale (36), Hillsbrad Foothills (4), Alterac Mountains (2), Hillsbrad Foothills (2), Desolace (9), Thousand Needles (9), Stranglethorn Vale (12), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (1), Arathi Highlands (15), Alterac Mountains (2), Badlands (12), Swamp of Sorrows (1), Duskwood (2), Swamp of Sorrows (9), Stranglethorn Vale (12), Dustwallow Marsh (15), Feralas (16), Badlands (3), Hillsbrad Foothills (2), Alterac Mountains (1), Hillsbrad Foothills (1), Stranglethorn Vale (21), Tanaris (21), Feralas (15), Orgrimmar (4), Swamp of Sorrows (14), Searing Gorge (5), Stranglethorn Vale (17), Undercity (9), Tanaris (30), Feralas (20), The Hinterlands (30), Searing Gorge (41), Blasted Lands (15), Feralas (25), Undercity (1), The Hinterlands (29), Un'Goro Crater (6), Tanaris (17), Felwood (9), Orgrimmar (3), Swamp of Sorrows (7), Badlands (8), Azshara (13), Un'Goro Crater (33), Searing Gorge (5), Burning Steppes (7), Undercity (6), Tirisfal Glades (2), Western Plaguelands (1), Tirisfal Glades (4), Azshara (5), Felwood (23), Silithus (6), Un'Goro Crater (19), Western Plaguelands (17), Undercity (11), Eastern Plaguelands (26), Swamp of Sorrows (7), Blasted Lands (1), Swamp of Sorrows (7), Winterspring (28), Tirisfal Glades (3), Western Plaguelands (1), Tirisfal Glades (3), Eastern Plaguelands (7), Western Plaguelands (23), Blasted Lands (7), Orgrimmar (4), Azshara (7), Thunder Bluff (3), Tanaris (3), Un'Goro Crater (1), Tanaris (1), Silithus (20), Dustwallow Marsh (1), Stonetalon Mountains (1), Stranglethorn Vale (1), Arathi Highlands (2) |
-| Class quests left out | DRUID: 8382 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 81924 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94911 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94913 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98340 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98341 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98362 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98738 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); HUNTER: 8377 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); ROGUE: 2380 (an exclusive quest is taken instead), 8378 (it needs one of quests 8315 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); SHAMAN: 1516 (an exclusive quest is taken instead), 1517 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1518 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1519 (an exclusive quest is taken instead), 1520 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1521 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1523 (an exclusive quest is taken instead), 1529 (an exclusive quest is taken instead), 1531 (an exclusive quest is taken instead), 2983 (an exclusive quest is taken instead), 2984 (an exclusive quest is taken instead), 2985 (an exclusive quest is taken instead), 2986 (an exclusive quest is taken instead), 8380 (it needs one of quests 8315 first, which no step of this route can take), 8410 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 79358 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79364 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79366 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARRIOR: 1818 (an exclusive quest is taken instead), 1819 (an exclusive quest is taken instead), 1839 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1840 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1841 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1842 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1843 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1844 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1845 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1846 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1847 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1848 (it needs one of quests 1838 first, which no step of this route can take), 8316 (it needs one of quests 8315 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take) |
+| Hand-ins left behind | none |
+| Quests above the level allowed, far below the player's level | 0, 64 of 1223 quest steps |
+| Walks through dangerous zones | none |
+| Zones in order (steps there) | Zephras Isle (216), Mulgore (2), Orgrimmar (4), The Barrens (155), Stonetalon Mountains (1), The Barrens (1), Stonetalon Mountains (32), Silverpine Forest (30), Hillsbrad Foothills (12), Ashenvale (28), The Barrens (28), Stonetalon Mountains (25), Thousand Needles (16), Ashenvale (9), Hillsbrad Foothills (12), Thousand Needles (17), Hillsbrad Foothills (14), Alterac Mountains (1), Hillsbrad Foothills (8), Undercity (1), The Barrens (10), Thousand Needles (1), The Barrens (1), Thousand Needles (21), Thunder Bluff (6), Thousand Needles (5), Desolace (12), Hillsbrad Foothills (6), Alterac Mountains (2), Hillsbrad Foothills (6), Stranglethorn Vale (29), Arathi Highlands (18), Hillsbrad Foothills (3), Alterac Mountains (1), Hillsbrad Foothills (1), Alterac Mountains (1), Hillsbrad Foothills (1), Dustwallow Marsh (17), Desolace (13), Stranglethorn Vale (11), Orgrimmar (5), Durotar (1), Orgrimmar (1), Desolace (16), Stranglethorn Vale (18), The Barrens (2), Orgrimmar (2), Thousand Needles (12), Dustwallow Marsh (15), Stranglethorn Vale (17), Arathi Highlands (17), Desolace (21), The Barrens (4), Stranglethorn Vale (17), Arathi Highlands (10), Badlands (19), Undercity (3), Hillsbrad Foothills (9), Alterac Mountains (2), Hillsbrad Foothills (3), Desolace (6), Arathi Highlands (27), Badlands (10), Stranglethorn Vale (39), Undercity (1), Hillsbrad Foothills (3), Alterac Mountains (2), Hillsbrad Foothills (2), Thousand Needles (9), Arathi Highlands (17), Badlands (11), Stranglethorn Vale (11), Swamp of Sorrows (10), Dustwallow Marsh (15), Feralas (16), Stranglethorn Vale (12), Swamp of Sorrows (14), Stranglethorn Vale (16), Thousand Needles (1), Tanaris (1), Dustwallow Marsh (8), Tanaris (11), Orgrimmar (5), Feralas (17), Tanaris (14), Orgrimmar (1), Badlands (5), The Hinterlands (1), Hillsbrad Foothills (1), Alterac Mountains (3), Hillsbrad Foothills (5), Alterac Mountains (1), Hillsbrad Foothills (2), Undercity (10), Alterac Mountains (4), Hillsbrad Foothills (1), Undercity (1), Stranglethorn Vale (24), Searing Gorge (5), Tanaris (11), Orgrimmar (3), Swamp of Sorrows (4), Feralas (20), Orgrimmar (1), Searing Gorge (15), The Hinterlands (32), Tanaris (30), Feralas (25), Orgrimmar (1), Stranglethorn Vale (1), Blasted Lands (15), Searing Gorge (30), The Hinterlands (29), Swamp of Sorrows (7), Un'Goro Crater (16), Azshara (16), Badlands (7), Un'Goro Crater (25), Felwood (12), Undercity (7), Tirisfal Glades (2), Western Plaguelands (1), Tirisfal Glades (4), Azshara (7), Burning Steppes (14), Felwood (20), Un'Goro Crater (18), Badlands (1), Hillsbrad Foothills (1), Western Plaguelands (17), Blasted Lands (6), Swamp of Sorrows (3), Eastern Plaguelands (22), Undercity (8), Western Plaguelands (14), Thunder Bluff (7), Un'Goro Crater (5), Searing Gorge (1), Un'Goro Crater (5), Winterspring (21), Tirisfal Glades (5), Western Plaguelands (1), Tirisfal Glades (3), Silithus (22), Winterspring (27), Silithus (34), Eastern Plaguelands (22), Tirisfal Glades (4), Western Plaguelands (2), Tirisfal Glades (2), Western Plaguelands (4), Arathi Highlands (2), Orgrimmar (1), Azshara (1), The Barrens (1), Thunder Bluff (1), Dustwallow Marsh (1), Thousand Needles (1), Felwood (1), Moonglade (1), Stonetalon Mountains (1) |
+| Class quests left out | DRUID: 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 81924 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94911 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 94913 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98340 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98341 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98362 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 98738 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); HUNTER: 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78830 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); ROGUE: 2378 (an exclusive quest is taken instead), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 78261 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 78270 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 80526 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96779 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 96783 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); SHAMAN: 1516 (an exclusive quest is taken instead), 1517 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1518 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1519 (an exclusive quest is taken instead), 1520 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1521 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1523 (an exclusive quest is taken instead), 1529 (an exclusive quest is taken instead), 1532 (an exclusive quest is taken instead), 2983 (an exclusive quest is taken instead), 2984 (an exclusive quest is taken instead), 2985 (an exclusive quest is taken instead), 2986 (an exclusive quest is taken instead), 8410 (an exclusive quest is taken instead), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take), 79358 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79364 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)), 79366 (not a classic quest and not given on Zephras Isle (only those are routed, as in the shared route)); WARRIOR: 1818 (an exclusive quest is taken instead), 1819 (an exclusive quest is taken instead), 1839 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1840 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1841 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1842 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1843 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1844 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1845 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1846 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1847 (the route never offers it (a prerequisite, an exclusive quest or its level cap)), 1848 (it needs one of quests 1838 first, which no step of this route can take), 8923 (it needs one of quests 8913, 8914, 8915, 8916, 8917, 8918, 8919, 8920 first, which no step of this route can take), 8930 (it needs one of quests 8927, 8938, 8939, 8940, 8941, 8942, 8943, 8944 first, which no step of this route can take) |
 | Errors | 0 |
 | Warnings | none |
 
@@ -1241,89 +1272,92 @@ what its class steps add to the shared route's numbers, which the race's section
 
 | Fact | Value |
 | --- | --- |
-| Actions before bundling, steps after | 2,596, 1,796 (69%) |
-| Steps in the route file | 1,989 |
-| Sections | 63 |
-| Profession steps written | p164-2, p165-2, p171-2, p182-2, p186-2, p197-2, p202-2, p333-2, p393-2, p333-3, p164-3, p165-3, p197-3, p171-3, p182-3, p186-3, p202-3, p393-3, p164-4, p171-4, p182-4, p186-4, p393-4, p197-4, p202-4 |
-| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section windshaper-34-35-stranglethorn-vale; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section windshaper-34-35-stranglethorn-vale |
-| Class trainer visits | DRUID: 2, 4, 6, 8, 10, 12, 23, 28, 30, 42, 44, 46, 48, 52, 56; HUNTER: 2, 4, 6, 8, 10, 12, 14, 18, 22, 28, 30, 32, 34, 36, 38, 40, 42, 44, 48, 50, 52, 56; ROGUE: 2, 4, 6, 8, 10, 12, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58; SHAMAN: 2, 4, 6, 8, 10, 12, 14, 18, 20, 24, 26, 28, 30, 34, 36, 40, 42, 44, 46, 48, 50, 52, 56, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 40, 42, 44, 46, 48, 50, 52, 54, 56 |
-| Class trainer gaps | DRUID 12 to 23: the cheapest trip to a trainer adds 388 seconds (at most 300); DRUID 30 to 42: the cheapest trip to a trainer adds 412 seconds (at most 300) |
+| Actions before bundling, steps after | 2,583, 1,737 (67%) |
+| Steps in the route file | 1,927 |
+| Sections | 66 |
+| Profession steps written | p164-2, p165-2, p171-2, p182-2, p186-2, p197-2, p202-2, p333-2, p393-2, p333-3, p164-3, p165-3, p197-3, p171-3, p182-3, p186-3, p202-3, p393-3, p171-4, p182-4, p186-4, p197-4, p393-4, p202-4, p164-4 |
+| Profession ranks without a step | Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section windshaper-34-35-dustwallow-marsh; Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section windshaper-34-35-dustwallow-marsh |
+| Class trainer visits | DRUID: 2, 4, 6, 8, 10, 12, 28, 40, 42, 44, 46, 52, 56, 58; HUNTER: 2, 4, 6, 8, 10, 12, 14, 28, 30, 32, 34, 38, 40, 42, 44, 46, 48, 52, 58; ROGUE: 2, 4, 6, 8, 10, 12, 16, 20, 24, 26, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58; SHAMAN: 2, 4, 6, 8, 10, 12, 14, 20, 25, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 58; WARRIOR: 2, 4, 6, 8, 10, 12, 14, 20, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 48, 50, 52, 54, 56, 58 |
+| Class trainer gaps | DRUID 12 to 28: the cheapest trip to a trainer adds 414 seconds (at most 300); DRUID 28 to 40: the cheapest trip to a trainer adds 458 seconds (at most 300); HUNTER 14 to 28: the cheapest trip to a trainer adds 377 seconds (at most 300) |
 | Planner notes | Windshaper step a792: quest 792 gives XP only up to level 12, but the estimated level there is 14; with "skip content you outlevel" the step and its quest's later lines are skipped; Windshaper step a792#2: quest 792 gives XP only up to level 12, but the estimated level there is 14; with "skip content you outlevel" the step and its quest's later lines are skipped; Windshaper step a792#3: quest 792 gives XP only up to level 12, but the estimated level there is 14; with "skip content you outlevel" the step and its quest's later lines are skipped; Windshaper step a792#4: quest 792 gives XP only up to level 12, but the estimated level there is 14; with "skip content you outlevel" the step and its quest's later lines are skipped; Windshaper step a792#5: quest 792 gives XP only up to level 12, but the estimated level there is 14; with "skip content you outlevel" the step and its quest's later lines are skipped |
 | Format 3 errors | 0 |
 
 | Section | Name | Steps | Levels |
 | --- | --- | --- | --- |
-| windshaper-01-14-zephras-isle | 1-14 Zephras Isle | 192 | 1-17 |
-| windshaper-14-14-durotar | 14 Durotar | 19 | 14-17 |
-| windshaper-14-17-the-barrens | 14-17 The Barrens | 80 | 14-20 |
-| windshaper-17-19-silverpine-forest | 17-19 Silverpine Forest | 47 | 17-22 |
-| windshaper-19-20-the-barrens | 19-20 The Barrens | 29 | 19-23 |
-| windshaper-20-21-the-barrens | 20-21 The Barrens | 50 | 20-24 |
-| windshaper-21-22-stonetalon-mountains | 21-22 Stonetalon Mountains | 29 | 21-25 |
-| windshaper-22-22-hillsbrad-foothills | 22 Hillsbrad Foothills | 15 | 22-25 |
-| windshaper-22-24-the-barrens | 22-24 The Barrens | 43 | 22-27 |
-| windshaper-24-25-ashenvale | 24-25 Ashenvale | 59 | 24-28 |
-| windshaper-25-25-stonetalon-mountains | 25 Stonetalon Mountains | 20 | 25-28 |
-| windshaper-25-26-thousand-needles | 25-26 Thousand Needles | 12 | 25-29 |
-| windshaper-26-26-stonetalon-mountains | 26 Stonetalon Mountains | 10 | 26-29 |
-| windshaper-26-27-the-barrens | 26-27 The Barrens | 16 | 26-30 |
-| windshaper-27-27-ashenvale | 27 Ashenvale | 15 | 27-30 |
-| windshaper-27-29-hillsbrad-foothills | 27-29 Hillsbrad Foothills | 56 | 27-32 |
-| windshaper-29-30-thousand-needles | 29-30 Thousand Needles | 18 | 29-33 |
-| windshaper-30-31-thousand-needles | 30-31 Thousand Needles | 63 | 30-34 |
-| windshaper-31-31-stranglethorn-vale | 31 Stranglethorn Vale | 16 | 31-34 |
-| windshaper-31-33-hillsbrad-foothills | 31-33 Hillsbrad Foothills | 49 | 31-36 |
-| windshaper-33-33-desolace | 33 Desolace | 30 | 33-36 |
-| windshaper-33-34-arathi-highlands | 33-34 Arathi Highlands | 13 | 33-37 |
-| windshaper-34-35-stranglethorn-vale | 34-35 Stranglethorn Vale | 32 | 34-38 |
-| windshaper-35-35-dustwallow-marsh | 35 Dustwallow Marsh | 12 | 35-38 |
-| windshaper-35-36-desolace | 35-36 Desolace | 48 | 35-39 |
-| windshaper-36-37-stranglethorn-vale | 36-37 Stranglethorn Vale | 87 | 36-40 |
-| windshaper-37-37-arathi-highlands | 37 Arathi Highlands | 10 | 37-40 |
-| windshaper-37-37-dustwallow-marsh | 37 Dustwallow Marsh | 13 | 37-40 |
-| windshaper-37-38-desolace | 37-38 Desolace | 28 | 37-41 |
-| windshaper-38-40-stranglethorn-vale | 38-40 Stranglethorn Vale | 44 | 38-43 |
-| windshaper-40-40-badlands | 40 Badlands | 17 | 40-43 |
-| windshaper-40-41-arathi-highlands | 40-41 Arathi Highlands | 18 | 40-44 |
-| windshaper-41-42-stranglethorn-vale | 41-42 Stranglethorn Vale | 83 | 41-45 |
-| windshaper-42-42-arathi-highlands | 42 Arathi Highlands | 14 | 42-45 |
-| windshaper-42-43-badlands | 42-43 Badlands | 31 | 42-46 |
-| windshaper-43-43-stranglethorn-vale | 43 Stranglethorn Vale | 13 | 43-46 |
-| windshaper-43-43-dustwallow-marsh | 43 Dustwallow Marsh | 11 | 43-46 |
-| windshaper-43-44-feralas | 43-44 Feralas | 25 | 43-47 |
-| windshaper-44-45-stranglethorn-vale | 44-45 Stranglethorn Vale | 22 | 44-48 |
-| windshaper-45-45-tanaris | 45 Tanaris | 12 | 45-48 |
-| windshaper-45-45-feralas | 45 Feralas | 19 | 45-48 |
-| windshaper-45-46-swamp-of-sorrows | 45-46 Swamp of Sorrows | 16 | 45-49 |
-| windshaper-46-47-stranglethorn-vale | 46-47 Stranglethorn Vale | 28 | 46-50 |
-| windshaper-47-48-tanaris | 47-48 Tanaris | 27 | 47-51 |
-| windshaper-48-48-feralas | 48 Feralas | 16 | 48-51 |
-| windshaper-48-48-the-hinterlands | 48 The Hinterlands | 23 | 48-51 |
-| windshaper-48-50-searing-gorge | 48-50 Searing Gorge | 14 | 48-53 |
-| windshaper-50-50-searing-gorge | 50 Searing Gorge | 5 | 50-53 |
-| windshaper-50-50-blasted-lands | 50 Blasted Lands | 6 | 50-53 |
-| windshaper-50-50-feralas | 50 Feralas | 36 | 50-53 |
-| windshaper-50-51-the-hinterlands | 50-51 The Hinterlands | 29 | 50-54 |
-| windshaper-51-51-tanaris | 51 Tanaris | 15 | 51-54 |
-| windshaper-51-53-felwood | 51-53 Felwood | 36 | 51-56 |
-| windshaper-53-53-azshara | 53 Azshara | 14 | 53-56 |
-| windshaper-53-53-un-goro-crater | 53 Un'Goro Crater | 52 | 53-56 |
-| windshaper-53-55-azshara | 53-55 Azshara | 12 | 53-58 |
-| windshaper-55-55-felwood | 55 Felwood | 23 | 55-58 |
-| windshaper-55-55-un-goro-crater | 55 Un'Goro Crater | 21 | 55-58 |
-| windshaper-55-55-western-plaguelands | 55 Western Plaguelands | 17 | 55-58 |
-| windshaper-55-58-eastern-plaguelands | 55-58 Eastern Plaguelands | 47 | 55-60 |
-| windshaper-58-58-winterspring | 58 Winterspring | 41 | 58-60 |
-| windshaper-58-59-western-plaguelands | 58-59 Western Plaguelands | 49 | 58-60 |
-| windshaper-59-60-silithus | 59-60 Silithus | 42 | 59-60 |
+| windshaper-01-14-zephras-isle | 1-14 Zephras Isle | 190 | 1-17 |
+| windshaper-14-14-the-barrens | 14 The Barrens | 8 | 14-17 |
+| windshaper-14-14-durotar | 14 Durotar | 18 | 14-17 |
+| windshaper-14-20-the-barrens | 14-20 The Barrens | 107 | 14-23 |
+| windshaper-20-20-the-barrens | 20 The Barrens | 23 | 20-23 |
+| windshaper-20-21-stonetalon-mountains | 20-21 Stonetalon Mountains | 37 | 20-24 |
+| windshaper-21-22-silverpine-forest | 21-22 Silverpine Forest | 17 | 21-25 |
+| windshaper-22-22-hillsbrad-foothills | 22 Hillsbrad Foothills | 25 | 22-25 |
+| windshaper-22-23-ashenvale | 22-23 Ashenvale | 23 | 22-26 |
+| windshaper-23-24-the-barrens | 23-24 The Barrens | 31 | 23-27 |
+| windshaper-24-25-stonetalon-mountains | 24-25 Stonetalon Mountains | 39 | 24-28 |
+| windshaper-25-26-thousand-needles | 25-26 Thousand Needles | 13 | 25-29 |
+| windshaper-26-26-ashenvale | 26 Ashenvale | 18 | 26-29 |
+| windshaper-26-26-hillsbrad-foothills | 26 Hillsbrad Foothills | 10 | 26-29 |
+| windshaper-26-28-thousand-needles | 26-28 Thousand Needles | 15 | 26-31 |
+| windshaper-28-29-hillsbrad-foothills | 28-29 Hillsbrad Foothills | 59 | 28-32 |
+| windshaper-29-30-thousand-needles | 29-30 Thousand Needles | 38 | 29-33 |
+| windshaper-30-31-hillsbrad-foothills | 30-31 Hillsbrad Foothills | 30 | 30-34 |
+| windshaper-31-32-stranglethorn-vale | 31-32 Stranglethorn Vale | 26 | 31-35 |
+| windshaper-32-32-arathi-highlands | 32 Arathi Highlands | 19 | 32-35 |
+| windshaper-32-33-dustwallow-marsh | 32-33 Dustwallow Marsh | 16 | 32-36 |
+| windshaper-33-34-desolace | 33-34 Desolace | 54 | 33-37 |
+| windshaper-34-34-stranglethorn-vale | 34 Stranglethorn Vale | 24 | 34-37 |
+| windshaper-34-34-thousand-needles | 34 Thousand Needles | 13 | 34-37 |
+| windshaper-34-35-dustwallow-marsh | 34-35 Dustwallow Marsh | 13 | 34-38 |
+| windshaper-35-35-stranglethorn-vale | 35 Stranglethorn Vale | 37 | 35-38 |
+| windshaper-35-36-desolace | 35-36 Desolace | 31 | 35-39 |
+| windshaper-36-36-stranglethorn-vale | 36 Stranglethorn Vale | 18 | 36-39 |
+| windshaper-36-37-arathi-highlands | 36-37 Arathi Highlands | 10 | 36-40 |
+| windshaper-37-37-badlands | 37 Badlands | 42 | 37-40 |
+| windshaper-37-38-arathi-highlands | 37-38 Arathi Highlands | 24 | 37-41 |
+| windshaper-38-40-stranglethorn-vale | 38-40 Stranglethorn Vale | 51 | 38-43 |
+| windshaper-40-40-arathi-highlands | 40 Arathi Highlands | 12 | 40-43 |
+| windshaper-40-40-badlands | 40 Badlands | 36 | 40-43 |
+| windshaper-40-41-dustwallow-marsh | 40-41 Dustwallow Marsh | 10 | 40-44 |
+| windshaper-41-41-feralas | 41 Feralas | 13 | 41-44 |
+| windshaper-41-41-stranglethorn-vale | 41 Stranglethorn Vale | 13 | 41-44 |
+| windshaper-41-42-swamp-of-sorrows | 41-42 Swamp of Sorrows | 14 | 41-45 |
+| windshaper-42-42-stranglethorn-vale | 42 Stranglethorn Vale | 26 | 42-45 |
+| windshaper-42-42-tanaris | 42 Tanaris | 11 | 42-45 |
+| windshaper-42-43-feralas | 42-43 Feralas | 15 | 42-46 |
+| windshaper-43-43-alterac-mountains | 43 Alterac Mountains | 52 | 43-46 |
+| windshaper-43-44-stranglethorn-vale | 43-44 Stranglethorn Vale | 54 | 43-47 |
+| windshaper-44-46-feralas | 44-46 Feralas | 26 | 44-49 |
+| windshaper-46-46-searing-gorge | 46 Searing Gorge | 10 | 46-49 |
+| windshaper-46-46-the-hinterlands | 46 The Hinterlands | 21 | 46-49 |
+| windshaper-46-48-tanaris | 46-48 Tanaris | 26 | 46-51 |
+| windshaper-48-48-feralas | 48 Feralas | 28 | 48-51 |
+| windshaper-48-49-blasted-lands | 48-49 Blasted Lands | 6 | 48-52 |
+| windshaper-49-49-searing-gorge | 49 Searing Gorge | 12 | 49-52 |
+| windshaper-49-49-the-hinterlands | 49 The Hinterlands | 21 | 49-52 |
+| windshaper-49-50-un-goro-crater | 49-50 Un'Goro Crater | 19 | 49-53 |
+| windshaper-50-50-azshara | 50 Azshara | 21 | 50-53 |
+| windshaper-50-51-un-goro-crater | 50-51 Un'Goro Crater | 22 | 50-54 |
+| windshaper-51-51-felwood | 51 Felwood | 35 | 51-54 |
+| windshaper-51-53-burning-steppes | 51-53 Burning Steppes | 10 | 51-56 |
+| windshaper-53-53-felwood | 53 Felwood | 24 | 53-56 |
+| windshaper-53-53-un-goro-crater | 53 Un'Goro Crater | 26 | 53-56 |
+| windshaper-53-53-western-plaguelands | 53 Western Plaguelands | 22 | 53-56 |
+| windshaper-53-54-eastern-plaguelands | 53-54 Eastern Plaguelands | 25 | 53-57 |
+| windshaper-54-54-western-plaguelands | 54 Western Plaguelands | 46 | 54-57 |
+| windshaper-54-55-winterspring | 54-55 Winterspring | 28 | 54-58 |
+| windshaper-55-56-silithus | 55-56 Silithus | 21 | 55-59 |
+| windshaper-56-58-winterspring | 56-58 Winterspring | 30 | 56-60 |
+| windshaper-58-58-silithus | 58 Silithus | 32 | 58-60 |
+| windshaper-58-60-eastern-plaguelands | 58-60 Eastern Plaguelands | 81 | 58-60 |
 
 ### Level curve
 
 | Level | Reached at step |
 | --- | --- |
 | 10 | 103 |
-| 20 | 441 |
-| 30 | 775 |
-| 40 | 1,287 |
-| 50 | 1,811 |
-| 60 | 2,337 |
+| 20 | 392 |
+| 30 | 751 |
+| 40 | 1,272 |
+| 50 | 1,846 |
+| 60 | 2,297 |

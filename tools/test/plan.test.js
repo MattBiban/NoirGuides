@@ -342,7 +342,8 @@ test("a level is ground where creatures of the level stand, and the way there is
   assert.ok(a.at("accept", 2) > a.names.indexOf("grind"));
   // none in Westland: the wolves are over the border in Eastland, and the walk there is a step of the route
   const far = world();
-  far.npc(30, 200, 50, 50); far.kill(9, 30, 30, 200, { requiredLevel: 9, questLevel: 9 }); // Eastland has quests, none for now
+  // Eastland has quests, none for now; of level 5, so a level 1 character may walk there (planner/tuning.js DANGER_LEVELS)
+  far.npc(30, 200, 50, 50); far.kill(9, 30, 30, 200, { requiredLevel: 5, questLevel: 5 });
   far.pack(50, 200, 20, 50, 1, 320);
   const b = run(far, null, { maxLevel: 3 });
   assert.deepStrictEqual(b.checked.errors, []);
