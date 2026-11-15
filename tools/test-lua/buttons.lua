@@ -223,6 +223,32 @@ test("target buttons target the exact name and set markers by position", functio
   eq(f:offScreen(), {})
 end)
 
+test("a grind step with a place and creatures to kill: the arrow leads there and the creatures are on target buttons", function()
+  -- As the planner writes a grind step (tools/planner/plan.js, bundle.js, texts.js): a place, enemy targets, a text.
+  local function spot(client)
+    for _, step in ipairs(client.G.Noir.Routes.Get("horde-undead").sections[3].steps) do
+      if step.id == "l6@130" then
+        step.targets = { enemy = { 1765 } }
+        step.text = "Kill Worgs in the north of Silverpine Forest until you reach level 6."
+      end
+    end
+  end
+  local c, Noir, Buttons = at("l6@130", { section = SILVERPINE, level = 5, zone = 130, x = 50, y = 50, afterLoad = spot })
+  eq(placeId(Noir), "l6@130")
+  eq(Buttons.Targets(), { enemy = { "Worg" }, friend = {} })
+  ok(c.G.NoirGuidesEnemy1:IsVisible(), "the creature to kill is on the first enemy button")
+  local target = Noir.Arrow.Target()
+  ok(target, "the arrow has a target")
+  eq({ target.at.zone, target.at.x, target.at.y }, { 130, 50, 30 }, "the place to grind at")
+  local card = Noir.Progress.Cards()[1]
+  eq(card.lines[1].line.kind, "grind")
+  -- The level ends the step, wherever the player stands.
+  c:setLevel(6)
+  c:advance(1)
+  ok(placeId(Noir) ~= "l6@130", "the level is reached: the step is passed")
+  eq(c:offScreen(), {})
+end)
+
 test("a friendly target talked to is removed", function()
   local c, Noir, Buttons = at("tg1950", { section = SILVERPINE, level = 6, zone = 130, afterLoad = holdEscort })
   eq(Buttons.Targets().friend, { "Rane Yorick" })

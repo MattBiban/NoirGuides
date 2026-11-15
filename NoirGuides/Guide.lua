@@ -25,7 +25,11 @@
 --                                        guide.how and fires NOIR_SECTION (id, how, previous id). Refuses an unknown
 --                                        or non-applying section; "hand" may pick any registered section
 --   Guide.Next() -> id or nil            spec 2.4: the next section, chosen and selected with how "next"; without
---                                        one fires NOIR_ROUTE_DONE (id) and returns nil
+--                                        one fires NOIR_ROUTE_DONE (id) and returns nil. Sections above their
+--                                        maxLevel are passed over while "outlevel" is on, unless they have an
+--                                        objective or hand-in of a quest in the log, or the section after them
+--                                        begins on another continent than the player stands on (they hold the way
+--                                        there)
 --   Guide.Chain(fromId) -> { ids }       the sections from fromId along `next` for this character, in order
 --   Guide.Reset()                        "Reset guide progress for this character" (settings, Profiles): forgets the
 --                                        section and every saved place (the wizard and setup answers stay), writes a
@@ -349,19 +353,57 @@ function Guide.Select(id, how)
   return true
 end
 
+-- Whether the section begins on another continent than the player stands on (Data.zones; false when either is not
+-- known): its first step with a place, for this character.
+local function beginsElsewhere(section)
+  local here = State.zone and Noir.Data.zones[State.zone]
+  if type(here) ~= "table" or here.continent == nil then return false end
+  local steps = Guide.Steps(section.id)
+  for i = 1, #steps do
+    local place = steps[i].at
+    for k = 1, #steps[i].lines do place = place or steps[i].lines[k].at end
+    if place then
+      local there = Noir.Data.zones[place.zone]
+      return type(there) == "table" and there.continent ~= nil and there.continent ~= here.continent
+    end
+  end
+  return false
+end
+
+-- Whether the section has an objective or a hand-in of a quest in the log, for this character.
+local LOG_WORK = { objective = true, collect = true, turnin = true }
+local function hasLogWork(section)
+  local steps = Guide.Steps(section.id)
+  for i = 1, #steps do
+    for k = 1, #steps[i].lines do
+      local line = steps[i].lines[k]
+      if LOG_WORK[line.kind] and line.quest and Guide.When(line.when) and State.HasQuest(line.quest) then return true end
+    end
+  end
+  return false
+end
+
+-- A section Next passes over: above its maxLevel while "outlevel" is on, with nothing in it for a quest in the log.
+local function passedOver(section)
+  return outleveled(section) and not hasLogWork(section)
+end
+
 function Guide.Next()
   local current = Guide.Section(Guide.Current())
   if not current then return nil end
   local chosen, seen = pick(current), { [current.id] = true }
   -- A section excluded by "outlevel" hands over to its own next; when that leads nowhere it is taken after all.
   local excluded = nil
-  while chosen and outleveled(chosen) and not seen[chosen.id] do
+  while chosen and passedOver(chosen) and not seen[chosen.id] do
     seen[chosen.id] = true
     excluded = excluded or chosen
     chosen = pick(chosen)
   end
   -- Stopped on a circle of excluded sections: none of them is better than the first.
-  if chosen and outleveled(chosen) then chosen = nil end
+  if chosen and passedOver(chosen) then chosen = nil end
+  -- The sections passed over hold the way to the one chosen: when it begins on another continent than the player
+  -- stands on, the first of them is taken after all (its outleveled steps pass one by one, its moves stay).
+  if chosen and excluded and beginsElsewhere(chosen) then chosen = nil end
   chosen = chosen or excluded
   if not chosen then
     Noir.Fire("NOIR_ROUTE_DONE", current.id)

@@ -235,6 +235,18 @@ test("getflight then fly at one flight master is one step", () => {
   assert.deepStrictEqual(out.steps[1].at, { zone: 200, x: 30, y: 50, r: RADIUS.flightmaster });
 });
 
+test("a grind step at a place to grind carries the creatures there as enemy targets", () => {
+  const w = testWorld();
+  w.npc(10, 100, 22, 51); w.herd(40, 100, 5, 5); w.kill(1, 10, 40, 100); // Westland is open country with quests
+  w.pack(50, 100, 60, 70, 4, 8); w.pack(51, 100, 61, 70, 5, 14);
+  const out = bundle(w, [{ action: "grind", level: 5, at: M(100, 60.5, 70) }, { action: "grind", level: 5, at: M(100, 20, 20) }, { action: "grind", level: 9, at: M(100, 60.5, 70) }]);
+  const [spot, nowhere, outgrown] = out.steps;
+  assert.deepStrictEqual(spot, { id: "l5@100", at: { zone: 100, x: 60.5, y: 70 }, lines: [{ kind: "grind", level: 5 }], targets: { enemy: [51, 50] } });
+  assert.strictEqual(nowhere.targets, undefined, "nothing of the level stands there");
+  assert.strictEqual(outgrown.targets, undefined, "the wolves are no longer of the level");
+  assert.deepStrictEqual(flatten(out.steps)[0], { action: "grind", level: 5, at: { zone: 100, x: 60.5, y: 70 } });
+});
+
 test("travel, transport and hearth are steps of their own with the radius of their kind", () => {
   const w = testWorld();
   w.npc(10, 100, 22, 51); w.kill(1, 10, 10, 100);

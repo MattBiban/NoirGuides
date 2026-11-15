@@ -173,6 +173,50 @@ test("a joiner at the second sample section's level is placed there and plays on
   eq(Sim.problems(r, 7), {})
 end)
 
+test("the world gives the planner's share of the estimated XP, and grind cards are counted with their places", function()
+  -- pace.YIELD (tools/lib/xp.js PACE.YIELD) scales every XP of the world, like --xp-scale: a prepared joiner needs
+  -- more of the route to reach a level at a lower yield.
+  local function playedTo(level, yield, scale)
+    local facts = sampleFacts("ROGUE")
+    facts.pace.YIELD = yield
+    facts.flat = sampleFlat("ROGUE")
+    local p = Sim.prepareJoin(facts, level, scale)
+    return { p.expectedFrom, p.server.level, p.server.xp }
+  end
+  ok(playedTo(3, 0.6)[1] > playedTo(3)[1], "a yield of 0.6 gives less than the whole estimate")
+  eq(playedTo(3, 0.6), playedTo(3, nil, 0.6), "the yield and the XP scale are the same factor")
+  -- A slow player meets steps under their level: every grind card is counted, and those without a place to grind at.
+  local facts = sampleFacts("ROGUE")
+  facts.pace.YIELD = 0.3
+  local r = play(facts)
+  eq(Sim.problems(r, 7), {})
+  ok(r.grindCards > 0, "the slow player saw a grind card")
+  ok(r.grindNoPlace >= 0 and r.grindNoPlace <= r.grindCards, "grind cards without a place are among them")
+  eq(r.gatedAims, 0, "the arrow never aimed at a step under its level")
+end)
+
+test("the player does not act on a card in the instant it appears: steps that pass by themselves are waited out", function()
+  -- Found by the simulator's joiners: after a run of steps that passed by themselves, a flight on the other continent
+  -- became the place at the very end of the player's wait. It was moot (the next move came back to where the player
+  -- stood) and would have passed a moment later, but the player had already walked to it: a step it "cannot do".
+  for notes = 0, 10 do
+    local r = play(sampleFacts("ROGUE"), { afterLoad = function(c)
+      local steps = c.G.Noir.Routes.Get("horde-undead").sections[1].steps
+      local at = 2
+      for n = 1, notes do
+        table.insert(steps, at, { id = "note" .. n, lines = { { kind = "note", text = "Nothing to do here." } } })
+        at = at + 1
+      end
+      table.insert(steps, at, { id = "g14x", at = { zone = 14, x = 51, y = 13.9, r = 20 },
+        lines = { { kind = "goto", at = { zone = 14, x = 51, y = 13.9, r = 20 } } } })
+      table.insert(steps, at + 1, { id = "zep85", at = { zone = 14, x = 51, y = 13.9, r = 15 },
+        lines = { { kind = "transport", mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 }, to = { zone = 85, x = 60.7, y = 58.8 } } } })
+    end })
+    eq(r.cannot, {}, "with " .. notes .. " steps passing before the moot walk")
+    eq(Sim.problems(r, 7), {})
+  end
+end)
+
 test("a stuck card is ticked with the mouse and reported", function()
   local facts = sampleFacts("ROGUE")
   -- Executor Arren takes nothing back in this world: the hand-in of Rattling the Rattlecages cannot be done.

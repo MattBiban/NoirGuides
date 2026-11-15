@@ -14,7 +14,10 @@
 //   transport  "Take the <mode> from <dock zone> to <destination zone>."
 //   hearth     "Use your hearthstone to return to <bind place>."
 //   goto       "Head <direction> into <zone>."                    only into a zone the previous step is not in
-//   grind      "Kill creatures around <zone> until you reach level <L>."
+//   grind      "Kill <creatures> in the <part> of <zone> until you reach level <L>." when the step has enemy targets
+//              (the creatures at its place, planner/grindspots.js: the first, or the first two); the part is the
+//              compass direction of the place from the middle of the zone's map, "the middle" within MIDDLE percent
+//              of it. Without targets: "Kill creatures around <zone> until you reach level <L>."
 //   objective  "<Name> is <direction> of <previous NPC or your last stop>." for one named creature, an object or an
 //              item ("are" for a plural object or item name); "The <plural> are ..." for a kill objective that needs
 //              more than one; "The <name> is ..." for one creature that is not a named one. Only when more than
@@ -32,6 +35,7 @@ const { toPoint, distance } = require("../lib/geo");
 const MAX_TEXT = 160;
 const FAR_YARDS = 200;
 const NAMED_SPAWNS = 3;
+const MIDDLE = 12;      // map percent: a place this close to the middle of its zone's map is "in the middle of" it
 const DIRECTIONS = ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"];
 
 const zoneOnly = (p) => p.x === 0 && p.y === 0;
@@ -47,6 +51,15 @@ function compass(db, from, to) {
   return DIRECTIONS[((Math.round(degrees / 45) % 8) + 8) % 8];
 }
 
+// The part of its zone's map a place is in: "the north", ..., "the middle"; undefined for a zone without a place.
+function partOfZone(at) {
+  if (!at || zoneOnly(at)) return undefined;
+  const east = at.x - 50, north = 50 - at.y; // map y grows to the south
+  if (Math.hypot(east, north) <= MIDDLE) return "the middle";
+  const degrees = (Math.atan2(east, north) * 180) / Math.PI;
+  return "the " + DIRECTIONS[((Math.round(degrees / 45) % 8) + 8) % 8];
+}
+
 const zoneName = (db, zone) => { const a = db.areas.get(zone); return a && a.name ? a.name : undefined; };
 const nodeName = (db, id) => { const t = db.taxi.find((n) => n.id === id); return t && t.name ? t.name : undefined; };
 const npcName = (db, id) => { const n = db.npcs.get(id); return n && n.name ? n.name : undefined; };
@@ -55,7 +68,7 @@ const placeOf = (step) => (step ? step.at || (step.lines.find((l) => l.at) || {}
 const fits = (text) => (text !== undefined && Buffer.byteLength(text, "utf8") <= MAX_TEXT ? text : undefined);
 
 // English plurals of creature names: the last word, or the word before " of " ("Spirits of the Glade").
-const SAME = new Set(["vermin", "sheep", "deer", "fish", "folk", "kin", "people", "swine", "moose", "trout", "kodo"]);
+const SAME = new Set(["vermin", "sheep", "deer", "fish", "folk", "kin", "people", "swine", "moose", "trout", "kodo", "felsworn"]);
 const MAN = new Set(["shaman", "human", "talisman", "caiman", "ottoman"]);
 const VES = { wolf: "wolves", elf: "elves", thief: "thieves", dwarf: "dwarves", calf: "calves", half: "halves", leaf: "leaves", wife: "wives", knife: "knives", life: "lives" };
 function pluralWord(word) {
@@ -65,6 +78,7 @@ function pluralWord(word) {
   if (VES[lower]) return keep(VES[lower]);
   if (/man$/.test(lower) && !MAN.has(lower)) return word.slice(0, -3) + "men";
   if (/[^aeiou]y$/.test(lower)) return word.slice(0, -1) + "ies";
+  if (/arch$/.test(lower)) return word + "s"; // patriarchs, matriarchs
   if (/(s|x|z|ch|sh)$/.test(lower)) return word + "es";
   return word + "s";
 }
@@ -177,7 +191,13 @@ function stepText(db, step, context = {}) {
     const at = placeOf(step);
     const name = zoneName(db, at ? at.zone : context.section && context.section.zone);
     const level = Math.max(...lines.map((l) => l.level));
-    return name ? fits(`Kill creatures around ${name} until you reach level ${level}.`) : undefined;
+    if (!name) return undefined;
+    // what to kill and where: the creatures at the step's place, each name once
+    const creatures = [];
+    for (const id of (step.targets && step.targets.enemy) || []) { const n = npcName(db, id); if (n && !creatures.includes(plural(n))) creatures.push(plural(n)); }
+    const part = partOfZone(at);
+    const exact = creatures.length && part ? fits(`Kill ${creatures.slice(0, 2).join(" and ")} in ${part} of ${name} until you reach level ${level}.`) : undefined;
+    return exact || fits(`Kill creatures around ${name} until you reach level ${level}.`);
   }
   if (lines.length && lines.every((l) => l.kind === "objective")) {
     const from = placeOf(previous), here = placeOf(step);

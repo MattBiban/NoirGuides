@@ -32,11 +32,13 @@
 //     are one step, and the hand-ins come after the area is done.
 //   - a getflight followed by a fly from that node is one step; every other fly, transport, travel, hearth and grind
 //     is a step of its own
+//   - a grind step's enemy targets are the creatures of the level that stand at its place (planner/grindspots.js)
 //   - actions with different `when` never share a step; the step carries the `when`
 //   - a line more than OWN_PLACE_YARDS from the step's place carries its own place
 //   - the step's place is the first action's, with the radius of its kind (RADIUS)
 const { toPoint, distance, spawnPoints } = require("../lib/geo");
 const { objectiveList, starterItems, sourceItems, prerequisites } = require("../lib/quests");
+const { grindTargets } = require("./grindspots");
 
 // Arrival radii in yards, by kind of place. zoneOnly is for a place the planner wrote as x = y = 0 (the zone, place
 // unknown): a pin, no arrow, arrival = being in the zone.
@@ -278,6 +280,11 @@ function makeStep(db, actions, handedIn, near) {
     const far = (id) => (here ? Math.min(Infinity, ...spawnPoints(db, "npc", id).map((p) => distance(here, p))) : Infinity);
     const ranked = enemies.map((id) => ({ id, d: far(id) })).sort((a, b) => a.d - b.d || a.id - b.id);
     targets.enemy = ranked.slice(0, MAX_TARGETS).map((e) => e.id);
+  }
+  // a grind step: what stands at its place for the level it starts at, most spawns first
+  if (first.action === "grind" && first.at && !zoneOnly(first.at)) {
+    const creatures = grindTargets(db, first.at, first.level - 1).filter((id) => named(db.npcs, id)).slice(0, MAX_TARGETS);
+    if (creatures.length) targets.enemy = creatures;
   }
   if (friends.length) targets.friend = friends;
   if (targets.enemy || targets.friend) step.targets = targets;

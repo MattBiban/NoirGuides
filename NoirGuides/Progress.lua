@@ -43,7 +43,10 @@
 --   Progress.Locate(chain) -> sectionId, index, score, left
 --                                   placement from quest history over the sections of `chain`, in order: a quest in
 --                                   the log +4 (at its accept line only), handed in +2, missing -1, a known flight point +2 (an unknown one 0),
---                                   each quest once at its first line; the place is just after the highest score,
+--                                   each quest once at its first line (a later hand-in line of a quest handed in
+--                                   counts 0, a tie, when it is on the continent the character stands on, a step
+--                                   since the best evidence is on another one, and no quest first met since then
+--                                   is in neither the log nor the history); the place is just after the highest score,
 --                                   latest on ties (on that step while one of its quest lines is still to do). Steps and sections the character outlevels (above maxLevel while
 --                                   "outlevel" is on) and steps under their minLevel are not counted as missing.
 --                                   Score 0 means no evidence. left: the quests before the place counted missing
@@ -72,26 +75,30 @@
 --     ahead: the scan runs from the step after it to WORK_AHEAD_STEPS past the earliest step still waiting for its
 --     level, passes steps that pass by themselves (hidden, reminders, done, outleveled, a skip condition holds),
 --     defers every step under its level and every step that needs a deferred one (it uses a quest a deferred step
---     still has to accept, accepts a quest that needs one a deferred step still hands in or accepts, or `requires`
---     its label), and takes the first other step if it is work (no movement step) in the gated step's zone within
---     WORK_AHEAD_YARDS of the player or the gated step; any other step ends the scan with nothing found. While a step
+--     still has to accept, hands in a quest with an objective still to do on a deferred step, accepts a quest that
+--     needs one a deferred step still hands in or accepts, or `requires` its label), and takes the first other step
+--     if it is work (no movement step) in the gated step's zone within WORK_AHEAD_YARDS of the player or the gated
+--     step; any other step ends the scan with nothing found. While a step
 --     waits for its level, a later step at the place that needs it is deferred the same way, and one the scan would
 --     not take (too far in steps or yards, a movement step, a hub elsewhere) is not shown: a grind card stands in its
 --     place until the level comes. A deferred step stays hidden until its level, then comes back as a "deferred" card
 --     (first, so the arrow points at it) until its lines are done (no why), it is already done when it comes back
---     (why "done"), outleveled or skipped by a condition. Deferred steps with work left hold the end of the section
---     like reminders; a reminder whose `ends` step is deferred stays open until that step is done. Never for a step the
---     player jumped to;
+--     (why "done"), outleveled or skipped by a condition. While a deferred step still has to accept a quest, a line
+--     that would be passed because that quest is not in the log (skipIfMissing) waits. Deferred steps with work left
+--     hold the end of the section like reminders; a reminder whose `ends` step is deferred stays open until that step
+--     is done. Never for a step the player jumped to;
 --   * a step under its minLevel that is not deferred (nothing to work on ahead, workAhead off, or jumped to) shows a
 --     synthetic grind line first and waits; the card is `gated` and the grind line's place is the gated step's own
 --     objective area, else the area of the last objective, collect or grind step before it in the section in the same
---     zone (not deferred), else none: never the gated step's NPC;
+--     zone (not deferred), else the last such area on the same continent (a trainer in a city: the fields the player
+--     came from), else none: never the gated step's NPC;
 --   * a step whose active lines are all done, skipped or ticked completes, unless its `requires` label is on screen or
 --     ahead, or it is under its minLevel (the grind line). Done before it was ever shown: why "done"; finished by a
 --     tick: why "tick";
 --   * a movement step whose next work step is already done is passed (why "moot") unless the work left lies that way
---     or the player jumped to it; a movement step is also passed (why "moot") when a later move of its journey
---     (up to the next work step) goes to the zone the player already stands in.
+--     (or the move crosses to the continent that work is on) or the player jumped to it; a movement step is also
+--     passed (why "moot") when a later move of its journey (up to the next work step, into the next section when no
+--     work is left in this one) goes to the zone the player already stands in.
 -- Nearby: while the current step is an objective step (only objective and collect lines), the objective steps right
 -- after it whose areas lie within NEARBY_YARDS of its area, whose quests are in the log, that are at or above their
 -- level and need nothing the current step does, show as "nearby" cards (at most NEARBY_CARDS; steps already done are
@@ -211,6 +218,24 @@ local function applies(line)
   return Lines.Applies(line.when)
 end
 
+-- Whether a deferred step (waiting for its level, or back at it and not done yet) still has to accept `quest`: a line
+-- that would be passed for a quest not in the log (skipIfMissing) waits for it instead.
+local function deferredAccepts(quest)
+  local all = saved and saved.deferred
+  if type(all) ~= "table" or next(all) == nil then return false end
+  if State.HasQuest(quest) or State.IsDone(quest) then return false end
+  for r = 1, math.min(index - 1, #steps) do
+    local step = steps[r]
+    if type(all[step.id]) == "number" then
+      for i = 1, #step.lines do
+        local line = step.lines[i]
+        if line.kind == "accept" and line.quest == quest and applies(line) then return true end
+      end
+    end
+  end
+  return false
+end
+
 local function labelIndex(label)
   if type(label) ~= "string" then return nil end
   for i = 1, #steps do
@@ -304,6 +329,11 @@ local function doneNow(step)
     local line = step.lines[i]
     local state = Lines.Check(line, step, ctx)
     if Lines.Active(line) and state ~= "hidden" and state ~= "done" and state ~= "skip" and not ticks[i] then
+      return false
+    end
+    -- Not passed while a deferred step still accepts its quest: the quest is coming.
+    if state == "skip" and line.skipIfMissing and line.quest and Lines.Active(line) and not ticks[i]
+      and deferredAccepts(line.quest) then
       return false
     end
   end
@@ -502,9 +532,10 @@ local function evaluate(step, at, asCurrent)
   for i = 1, #step.lines do
     local line = step.lines[i]
     local state, evidence, counter = Lines.Check(line, step, ctx)
-    -- A skipIfMissing line whose quest an earlier open line of this step accepts is not missing: the quest is coming.
+    -- A skipIfMissing line whose quest an earlier open line of this step accepts, or a deferred step, is not missing:
+    -- the quest is coming.
     if state == "skip" and line.skipIfMissing and line.quest and not State.HasQuest(line.quest)
-      and acceptedEarlierIn(step, line.quest, i) then
+      and (acceptedEarlierIn(step, line.quest, i) or deferredAccepts(line.quest)) then
       state, evidence = "missing", nil
     end
     if state ~= "hidden" then
@@ -616,9 +647,22 @@ local function placeOf(step)
   return nil
 end
 
+-- A step of another section has a line still to do, as the game shows it now (no ticks: they belong to the section
+-- on screen).
+local function openElsewhere(step)
+  for k = 1, #step.lines do
+    local line = step.lines[k]
+    local state = Lines.Check(line, step, { since = now() })
+    if Lines.Active(line) and state ~= "hidden" and state ~= "done" and state ~= "skip" then return true end
+  end
+  return false
+end
+
 -- A later move of the journey this move starts (the moves after it, up to the first work step still to do) that goes
 -- to the zone the player already stands in, while this move goes elsewhere: the player is past this move on the way
--- (it was left behind by work that passed). Returns that step's index or nil.
+-- (it was left behind by work that passed). With no work left in the section the journey goes on into the next one
+-- (a section that ends with the flight to the dock, the next one beginning with the boat). Returns that step (and
+-- its index when it is of this section) or nil.
 local function pastOnJourney(step, i)
   local own = destination(step)
   if own and inZone(own) then return nil end
@@ -628,7 +672,19 @@ local function pastOnJourney(step, i)
       if isWork(other) and not doneNow(other) then return nil end
       if isMove(other) then
         local zone = destination(other)
-        if zone and inZone(zone) and not sameZone(zone, own) then return j end
+        if zone and inZone(zone) and not sameZone(zone, own) then return other, j end
+      end
+    end
+  end
+  local chain = current and Guide.Chain(current) or {}
+  local list = chain[2] and Guide.Steps(chain[2]) or {}
+  for j = 1, #list do
+    local other = list[j]
+    if not other.reminder then
+      if isWork(other) and openElsewhere(other) then return nil end
+      if isMove(other) then
+        local zone = destination(other)
+        if zone and inZone(zone) and not sameZone(zone, own) then return other end
       end
     end
   end
@@ -646,7 +702,13 @@ end
 -- the zone it goes to (and the player is not in that zone), or the next work step still to do lies in that zone and
 -- the player is not there yet; or the journey it starts (it and the open moves after it, up to the next work step)
 -- ends in the zone of the next work step still to do; or no work is left in the section after it and the next section
--- begins somewhere the player is not (leadsIntoNext).
+-- begins somewhere the player is not (leadsIntoNext). A move to another continent than the player's also leads while
+-- the next work step still to do lies on that continent, whatever its zone (a zeppelin lands beside the city).
+local function continentOf(zone)
+  local z = Noir.Data.zones[zone]
+  return type(z) == "table" and z.continent or nil
+end
+
 local function leadsIntoNext(zone)
   local chain = current and Guide.Chain(current) or {}
   local nextId = chain[2]
@@ -715,7 +777,10 @@ local function stillLeads(step, i)
     local other = steps[j]
     if not other.reminder and isWork(other) and not doneNow(other) then
       local place = placeOf(other)
-      return place ~= nil and sameZone(place.zone, zone) and not inZone(place.zone)
+      if place == nil then return false end
+      if sameZone(place.zone, zone) and not inZone(place.zone) then return true end
+      local to, here = continentOf(zone), continentOf(State.zone)
+      return to ~= nil and here ~= nil and to ~= here and continentOf(place.zone) == to
     end
   end
   -- No work left in the section after it: the move leads into the next section, unless that section begins where
@@ -753,7 +818,8 @@ local function workArea(step)
 end
 
 -- Where to grind while step `at` waits for its level: its own objective area, else the area of the last objective,
--- collect or grind step before it in the section, in the same zone and not deferred. Never the gated step's NPC.
+-- collect or grind step before it in the section, in the same zone and not deferred, else the last one on the same
+-- continent (the data's; a step in a city has no field of its own zone). Never the gated step's NPC.
 -- The place has no radius: the arrow points at it and it never completes on arrival.
 grindPlace = function(at)
   local step = steps[at]
@@ -764,6 +830,7 @@ grindPlace = function(at)
   if not found then
     local own = placeOf(step)
     local zone = own and own.zone or State.zone
+    local continent, near = continentOf(zone), nil
     for j = at - 1, 1, -1 do
       local other = steps[j]
       if not other.reminder and not deferredLevel(other) then
@@ -772,19 +839,22 @@ grindPlace = function(at)
           found = area
           break
         end
+        if area and not near and continent ~= nil and continentOf(area.zone) == continent then near = area end
       end
     end
+    found = found or near
   end
   local place = found and { zone = found.zone, x = found.x, y = found.y } or false
   grindPlaces[step.id] = place
   return place or nil
 end
 
--- Whether `step` needs `other` done first: it `requires` other's label, uses a quest other still has to accept, or
--- accepts a quest whose prerequisite (requires, ifDone) other still hands in or accepts.
+-- Whether `step` needs `other` done first: it `requires` other's label, uses a quest other still has to accept,
+-- hands in a quest with an objective still to do on other, or accepts a quest whose prerequisite (requires, ifDone)
+-- other still hands in or accepts.
 local function needsStep(step, other)
   if type(step.requires) == "string" and step.requires == other.label then return true end
-  local accepts, turnins = {}, {}
+  local accepts, turnins, objectives = {}, {}, {}
   for i = 1, #other.lines do
     local line = other.lines[i]
     if line.quest and applies(line) then
@@ -792,6 +862,8 @@ local function needsStep(step, other)
         accepts[line.quest] = true
       elseif line.kind == "turnin" and not State.IsDone(line.quest) then
         turnins[line.quest] = true
+      elseif NEARBY_WORK[line.kind] and Lines.Check(line, other, {}) == "todo" then
+        objectives[line.quest] = true
       end
     end
   end
@@ -799,6 +871,7 @@ local function needsStep(step, other)
     local line = step.lines[i]
     if applies(line) then
       if line.quest and line.kind ~= "accept" and accepts[line.quest] then return true end
+      if line.kind == "turnin" and objectives[line.quest] then return true end
       if line.kind == "accept" then
         local list = type(line.requires) == "table" and line.requires or {}
         for r = 1, #list do
@@ -972,7 +1045,7 @@ local function judgeCurrent(step, onScreen)
           text = string.format("the step it leads to (step %s, %s) is already done", tostring(steps[j].n), Why.Describe(steps[j])) }
       elseif k then
         decision = { to = index + 1, kind = "moot",
-          text = string.format("you already stand where a later move of the way (step %s, %s) goes", tostring(steps[k].n), Why.Describe(steps[k])) }
+          text = string.format("you already stand where a later move of the way (step %s, %s) goes", tostring(k.n), Why.Describe(k)) }
       end
     end
   end
@@ -1420,6 +1493,8 @@ local function locate(chain)
   local running_, best = 0, 0
   local bestSection, bestStep, bestPos = nil, 0, 0
   local counted, flights, missing = {}, {}, {}
+  local absent, absentAtBest = 0, 0
+  local here, across = continentOf(State.zone), false
   local order = {}
   local pos = 0
   for c = 1, #(chain or {}) do
@@ -1431,6 +1506,9 @@ local function locate(chain)
         local step = list[i]
         pos = pos + 1
         local exempt = notMissing(step, sec)
+        local where = placeOf(step)
+        local there = where and continentOf(where.zone) or nil
+        if here ~= nil and there ~= nil and there ~= here then across = true end
         for k = 1, #step.lines do
           local line = step.lines[k]
           if applies(line) then
@@ -1443,10 +1521,20 @@ local function locate(chain)
                 if line.kind == "accept" then evidence = 4 end
               elseif State.IsDone(line.quest) then
                 evidence = 2
-              elseif not exempt then
-                running_ = running_ - 1
-                missing[#missing + 1] = pos
+              else
+                absent = absent + 1
+                if not exempt then
+                  running_ = running_ - 1
+                  missing[#missing + 1] = pos
+                end
               end
+            elseif line.kind == "turnin" and line.quest and across and there == here and absent == absentAtBest
+              and State.IsDone(line.quest) then
+              -- A hand-in the character has done (its quest counted at its first line) on the continent the
+              -- character stands on, after steps across the sea: the character is past that crossing, and its
+              -- moves and flight points (which the client cannot tell are known) are behind it. The place is here
+              -- when no quest first met since the best evidence is absent from the log and the history.
+              evidence = 0
             elseif line.kind == "getflight" and line.node and not flights[line.node] then
               flights[line.node] = true
               -- The client tells which flight points are known only while a flight map is open: an unknown one
@@ -1455,7 +1543,10 @@ local function locate(chain)
             end
             if evidence then
               running_ = running_ + evidence
-              if running_ >= best then best, bestSection, bestStep, bestPos = running_, #order, i, pos end
+              if running_ >= best then
+                best, bestSection, bestStep, bestPos = running_, #order, i, pos
+                absentAtBest, across = absent, false
+              end
             end
           end
         end

@@ -4,7 +4,8 @@
 //   hub batching      at a hub everything is handed in and taken; the objectives are one loop; the hub is returned
 //                     to once, when all its quests are ready (planner/session.js orders the loop)
 //   cost-based        every way is costed in seconds by lib/travel.js travelPlan, and its legs become the steps
-//   pacing            XP and time come from lib/xp.js; a grind step bridges one level, never two in a row
+//   pacing            XP and time come from lib/xp.js; a grind step bridges one level, never two in a row, at a
+//                     place where creatures of the level stand (planner/grindspots.js)
 // The route's state changes in one place, emit(), from nothing but the step it is given: that is the rule the
 // validator replays on its own, so the two agree on position, level and clock at every step.
 const { zoneOf, toPoint, distance } = require("../lib/geo");
@@ -14,17 +15,20 @@ const { CHOICES: C } = require("./tuning");
 const { emptyGraph, plannerGraph, buildContext } = require("./context");
 const { makePolicy } = require("./policy");
 const { nextTask } = require("./session");
-const { bestZone, urgentZone } = require("./zonepick");
+const { bestZone, urgentZone, entryOf } = require("./zonepick");
+const { supplyZone } = require("./supply");
+const { grindSpots } = require("./grindspots");
 
 function planRoute(db, ch, options = {}) {
   const maxLevel = options.maxLevel || 60;
   const id = `${ch.faction.toLowerCase()}-${ch.race.toLowerCase()}`;
-  const graph = plannerGraph(options.graph || emptyGraph(db));
+  const graph = plannerGraph(db, options.graph || emptyGraph(db));
   const ctx = buildContext(db, ch, graph, options.inns || []);
   const { info, byZone, bands } = ctx;
   const st = { level: 1, xp: 0, pos: null, started: false, zone: zoneOf(db, ch.startArea), log: new Map(), done: new Set(), have: new Set(),
     flights: new Set(), hearth: null, lastHearth: -Infinity, clock: 0, steps: [], levelAt: [0, 0], links: new Map(),
-    announce: false, skip: new Set(), barren: new Set(), chosen: false, finishing: false, hopped: new Set(), grinds: 0, relaxed: false, urgent: false };
+    announce: false, skip: new Set(), barren: new Set(), chosen: false, finishing: false, hopped: new Set(), grinds: 0, relaxed: false, urgent: false, errands: false,
+    inRun: false }; // inRun: the last quest step was an objective, so the next objective goes on with the same loop
 
   const speed = () => (st.level >= ESTIMATES.MOUNT_LEVEL ? ESTIMATES.MOUNT_SPEED : ESTIMATES.RUN_SPEED);
   const wrapUp = () => st.level >= maxLevel || st.finishing; // no new quests: what is in the log is finished
@@ -84,10 +88,10 @@ function planRoute(db, ch, options = {}) {
       st.level = step.level;
       st.xp = 0;
     }
-    if (i) { st.barren.clear(); st.chosen = false; st.announce = false; }
+    if (i) { st.barren.clear(); st.chosen = false; st.announce = false; st.inRun = step.action === "objective"; }
     st.steps.push(step);
     for (let level = before + 1; level <= st.level; level++) st.levelAt[level] = st.steps.length - 1;
-    if (st.level > before) st.relaxed = false;
+    if (st.level > before) { st.relaxed = false; st.errands = false; }
   }
   // the legs of a flight, a transport and a hearth move the player without a walk
   function emitLeg(leg) {
@@ -102,6 +106,10 @@ function planRoute(db, ch, options = {}) {
       emit({ action: "transport", kind: leg.kind, at: place(leg.at), to });
       st.clock += leg.seconds;
       st.pos = toPoint(db, to.zone, to.x, to.y);
+      // A transport that asks for a quest leaves a place for good (the skycutter off Zephras Isle). A hearthstone still
+      // bound there is no way the route counts on: with the walks through dangerous zones gone (planner/danger.js),
+      // home to the isle and off it again had become the fastest way from Loch Modan to Stormwind.
+      if (leg.requires && st.hearth && st.hearth.zone === leg.at.zone) st.hearth = null;
       if (!leg.verified) st.links.set(leg.link, { id: leg.link, name: leg.name, kind: leg.kind, assumed: leg.assumed });
     } else if (leg.action === "hearth") {
       const to = place(leg.to);
@@ -196,9 +204,18 @@ function planRoute(db, ch, options = {}) {
       candidates = stay.length ? stay : ready;
     }
     for (const t of candidates) t.cost = seconds(st.pos, t.point);
+    // one loop: the quests around are taken before the first objective (GATHER_SECONDS), and while objectives are
+    // open a hand-in that is not on the way waits for the end of the loop (LOOP_SHARE). Objectives over the border
+    // do not count: they are the end of the visit, and what is ready is handed in before the crossing.
+    if (candidates.some((t) => t.kind === "accept" && t.cost <= C.GATHER_SECONDS)) candidates = candidates.filter((t) => t.kind !== "objective");
+    const open = candidates.filter((t) => t.kind === "objective" && !hop(t));
+    if (open.length) {
+      const nearest = Math.min(...open.map((t) => t.cost));
+      candidates = candidates.filter((t) => t.kind !== "turnin" || t.cost <= nearest * C.LOOP_SHARE);
+    }
     const between = (a, b) => walkSeconds(graph, st.level, a.point, b.point);
     const home = waiting.length ? (t) => Math.min(...waiting.map((w) => walkSeconds(graph, st.level, t.point, w.point))) : null;
-    return nextTask(candidates, between, home);
+    return nextTask(candidates, between, home, st.inRun);
   }
   const stepOf = (t) => {
     const place = t.kind === "accept" ? t.i.start : t.kind === "turnin" ? t.i.end : t.i.obj;
@@ -228,6 +245,7 @@ function planRoute(db, ch, options = {}) {
     const objectives = tasks(st.zone).filter((t) => t.kind === "objective" && apart(t.i.end.point, anchor));
     if (!objectives.length) return;
     const back = Math.max(...objectives.map((t) => walkSeconds(graph, st.level, t.point, inn.point)));
+    if (back === Infinity) return; // an objective no safe way leads back from (planner/danger.js): nothing to count on
     const detour = 2 * walkSeconds(graph, st.level, st.pos, inn.point) + PACE.TALK_SECONDS;
     if (back - ESTIMATES.HEARTH_SECONDS - detour < C.HEARTH_MIN_SAVING) return;
     if (go(inn.point)) emit({ action: "sethearth", at: inn.at, npc: inn.npc });
@@ -243,6 +261,54 @@ function planRoute(db, ch, options = {}) {
     emit(stepOf(t));
     if (t.kind !== "objective") hub(st.pos);
     else if (t.point.zone !== st.zone) st.hopped.add(t.point.zone);
+  }
+
+  // ---- where a level is ground --------------------------------------------------------------------------------
+  // Where the route goes once the level is ground: on in this zone when the next level opens something here, else
+  // the zone the look-ahead picks then. { zone, point } or null (the last level, or nothing to go on to).
+  function afterLevel() {
+    if (st.level + 1 >= maxLevel) return null;
+    const kept = { level: st.level, xp: st.xp, barren: st.barren };
+    st.level++; st.xp = 0; st.barren = new Set();
+    const here = tasks(st.zone).filter((t) => t.kind !== "getflight" && !st.skip.has(key(t)));
+    let out = null;
+    if (here.length) out = { zone: st.zone, point: here.sort((a, b) => distance(st.pos, a.point) - distance(st.pos, b.point) || (key(a) < key(b) ? -1 : 1))[0].point };
+    else {
+      const zone = bestZone(view, { cap: maxLevel, ground: true }).zone;
+      const point = zone ? entryOf(view, st, zone, st.pos) : null;
+      if (point) out = { zone, point };
+    }
+    st.level = kept.level; st.xp = kept.xp; st.barren = kept.barren;
+    return out;
+  }
+  // The place the rest of the level is ground at (planner/grindspots.js), or null when the data has none.
+  //   - the zone the player stands in comes first: of its places, the one that takes the route least out of its way,
+  //     from here to the place and on to where the route goes after the level;
+  //   - a city, or a zone whose creatures are not of the level, has none: then the same is asked of the nearest
+  //     GRIND_LOOK places and of those in the zone the route goes to next. A place in a zone the route does not go
+  //     to next is a change of zone of its own (GRIND_ZONE_SECONDS).
+  // Measured on the ten routes against grinding where the player stands: with the first rule a route changes zone
+  // between 15 times less and 4 times more often; without it (the least way round, wherever the place is) Undead
+  // changes zone 27 times more often, over the limit of planner/report.js.
+  function grindSpot() {
+    const spots = grindSpots(db, st.level);
+    if (!spots.length) return null;
+    const next = afterLevel();
+    const nearest = (list, from) => list.map((s) => ({ s, d: distance(from, s.point) })).filter((e) => e.d < Infinity)
+      .sort((a, b) => a.d - b.d || a.s.at.zone - b.s.at.zone || a.s.at.x - b.s.at.x || a.s.at.y - b.s.at.y).slice(0, C.GRIND_LOOK).map((e) => e.s);
+    const local = nearest(spots.filter((s) => s.at.zone === st.pos.zone), st.pos);
+    const weighed = new Set(local.length ? local : nearest(spots, st.pos));
+    if (!local.length && next) for (const s of nearest(spots.filter((x) => x.at.zone === next.zone), next.point)) weighed.add(s);
+    if (!weighed.size) for (const s of spots.slice(0, C.GRIND_LOOK)) weighed.add(s); // none on this continent: the densest
+    const direct = next ? secondsAt(st.pos, next.point, st.level + 1) : Infinity;
+    let best = null;
+    for (const s of weighed) {
+      let cost = secondsAt(st.pos, s.point, st.level);
+      if (direct < Infinity) cost += secondsAt(s.point, next.point, st.level + 1) - direct;
+      if (s.at.zone !== st.pos.zone && !(next && s.at.zone === next.zone)) cost += C.GRIND_ZONE_SECONDS;
+      if (cost < Infinity && (!best || cost < best.cost || (cost === best.cost && s.count > best.s.count))) best = { s, cost };
+    }
+    return best && best.s;
   }
 
   // ---- the route ----------------------------------------------------------------------------------------------
@@ -279,15 +345,34 @@ function planRoute(db, ch, options = {}) {
     if (!pick.grind) {
       // Nothing where the route was going: until the next level, quests are taken even where it was not going.
       if (!st.relaxed) { st.relaxed = true; st.barren.clear(); st.chosen = false; continue; }
+      // Nothing the look-ahead finds worth a visit. Before a grind step is written, an errand (planner/supply.js): a
+      // visit that earns nothing itself but puts quests in the log or moves them on, when what it leads to is worth
+      // the way. From here to the next level a quest out to another zone and back is taken too (planner/policy.js).
+      st.errands = true;
+      const supply = supplyZone(view);
+      if (supply) {
+        st.zone = supply; st.announce = true; st.chosen = true; st.urgent = false; st.skip.clear(); st.hopped.clear(); st.plan = null;
+        continue;
+      }
       // Nothing anywhere at this level: one level of grinding when that opens something, or is the last level.
       // Otherwise the route ends here, short of the cap, once the log is empty.
-      if (ground || (st.level + 1 < maxLevel && !bestZone(view, { level: st.level + 1 }).zone)) {
+      // (pick.wait: small visits are left for later, zonepick.js rule 4; the rest of this level is a grind step)
+      if (!pick.wait && (ground || (st.level + 1 < maxLevel && !bestZone(view, { level: st.level + 1 }).zone))) {
         st.finishing = true; st.barren.clear(); st.chosen = false;
         continue;
       }
     }
+    // The rest of the level is ground where creatures of the level stand. The way there is part of the route: its
+    // legs are steps (a walk into the next zone too), the last walk is the grind step's own. Without such a place
+    // (a world without creature levels) the level is ground where the player stands.
+    const level = st.level, announce = st.announce;
+    const spot = grindSpot();
+    st.announce = true;
+    const there = !!spot && go(spot.point);
+    st.announce = announce;
+    if (st.level > level) continue; // the fights on the way there made the level
     st.grinds++;
-    emit({ action: "grind", level: st.level + 1, at: { zone: st.pos.zone, x: Math.round(st.pos.x * 100) / 100, y: Math.round(st.pos.y * 100) / 100 } });
+    emit({ action: "grind", level: st.level + 1, at: there ? spot.at : { zone: st.pos.zone, x: Math.round(st.pos.x * 100) / 100, y: Math.round(st.pos.y * 100) / 100 } });
     st.barren.clear();
     st.chosen = false;
   }

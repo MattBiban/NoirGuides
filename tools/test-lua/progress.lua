@@ -482,6 +482,46 @@ test("a journey goes on past a work step already done in its middle: its first m
   ok(not (e and e.kind == "moot"), "not passed as moot")
 end)
 
+test("a boat to the continent of the work left is not moot, though the work lies in the zone next to its landing", function()
+  -- Found by the simulator at the 0.6 pace: "take the zeppelin to Tirisfal", a trainer visit in Undercity already
+  -- done, then a class quest in Undercity, with the walk into the city written after them: the zeppelin was passed as
+  -- moot (the work is not in the zone it lands in) and the quest was shown on the other continent.
+  local c = sample3({ class = "MAGE", level = 6, zone = 14, x = 50, y = 14, saved = savedAt(SILVERPINE, "zepT"),
+    afterLoad = function(client)
+      local sec = client.G.Noir.Routes.Get("horde-undead").sections[3]
+      sec.steps = {
+        { id = "zepT", at = { zone = 14, x = 51, y = 13.9, r = 15 },
+          lines = { { kind = "transport", mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 }, to = { zone = 85, x = 60.6, y = 58.9 } } } },
+        { id = "a363x", at = { zone = 1497, x = 60, y = 50, r = 8 }, lines = { { kind = "accept", quest = 363, npc = 1568 } } },
+        { id = "a435x", at = { zone = 1497, x = 62, y = 50, r = 10 }, lines = { { kind = "accept", quest = 435, npc = 1950 } } },
+        { id = "g1497", at = { zone = 1497, x = 63.3, y = 48.5, r = 20 }, lines = { { kind = "goto", at = { zone = 1497, x = 63.3, y = 48.5, r = 20 } } } },
+      }
+    end })
+  c:markCompleted(363)
+  c:login()
+  local Noir, P = c.G.Noir, c.G.Noir.Progress
+  c:advance(1)
+  eq(place(P), "zepT", "the zeppelin crosses to the continent of the work left")
+  local e = Noir.Why.ForStep(SILVERPINE, "zepT")
+  ok(not (e and e.kind == "moot"), "not passed as moot")
+  -- Across the sea the same step is moot: the player stands on the work's continent already.
+  local there = sample3({ class = "MAGE", level = 6, zone = 130, x = 50, y = 50, saved = savedAt(SILVERPINE, "zepT"),
+    afterLoad = function(client)
+      local sec = client.G.Noir.Routes.Get("horde-undead").sections[3]
+      sec.steps = {
+        { id = "zepT", at = { zone = 14, x = 51, y = 13.9, r = 15 },
+          lines = { { kind = "transport", mode = "zeppelin", at = { zone = 14, x = 51, y = 13.9, r = 15 }, to = { zone = 85, x = 60.6, y = 58.9 } } } },
+        { id = "a363x", at = { zone = 1497, x = 60, y = 50, r = 8 }, lines = { { kind = "accept", quest = 363, npc = 1568 } } },
+        { id = "a435x", at = { zone = 1497, x = 62, y = 50, r = 10 }, lines = { { kind = "accept", quest = 435, npc = 1950 } } },
+      }
+    end })
+  there:markCompleted(363)
+  there:login()
+  there:advance(1)
+  eq(place(there.G.Noir.Progress), "a435x")
+  eq(there.G.Noir.Why.ForStep(SILVERPINE, "zepT").kind, "moot")
+end)
+
 test("a move near the end of a section with no work left after it is not moot: it leads into the next section", function()
   -- Found by the simulator (task X1): "take the boat to Wetlands" with only a skipped hand-in after it in its section
   -- was passed as moot, and the next section began with a walk in Hillsbrad the character could not reach.
@@ -561,6 +601,48 @@ test("a move the player is already past on its journey is passed as moot", funct
   c2:login()
   c2:advance(1)
   eq(place(c2.G.Noir.Progress), "g85x")
+end)
+
+test("a move at the end of a section is moot when the next section's first move goes to where the player stands", function()
+  -- Found by the simulator's joiners: a section ended with "go to Thalanaar" and "fly to Ratchet", the next one began
+  -- with the boat to Booty Bay, and a joiner standing in Booty Bay was sent to the other continent and back. The
+  -- journey of a move goes on into the next section when no work is left in its own.
+  local function steps(client)
+    local sections = client.G.Noir.Routes.Get("horde-undead").sections
+    sections[2].steps = {
+      { id = "g130x", at = { zone = 130, x = 45, y = 42, r = 20 }, lines = { { kind = "goto", at = { zone = 130, x = 45, y = 42, r = 20 } } } },
+    }
+    sections[3].steps = {
+      { id = "zep14", at = { zone = 130, x = 45, y = 42, r = 15 },
+        lines = { { kind = "transport", mode = "zeppelin", at = { zone = 130, x = 45, y = 42, r = 15 }, to = { zone = 14, x = 51, y = 13.9 } } } },
+      { id = "a435x", at = { zone = 14, x = 50, y = 20, r = 10 }, lines = { { kind = "accept", quest = 435, npc = 1950 } } },
+    }
+  end
+  local c = sample3({ class = "MAGE", level = 5, zone = 14, x = 50, y = 30, saved = savedAt(TIRISFAL, "g130x"), afterLoad = steps })
+  c:login()
+  local Noir, P = c.G.Noir, c.G.Noir.Progress
+  c:advance(2)
+  eq(Noir.Guide.Current(), SILVERPINE, "in Durotar already: the walk to the zeppelin is passed and the next section loads")
+  eq(place(P), "a435x", "the zeppelin to where the player stands is done")
+  local e = Noir.Why.ForStep(TIRISFAL, "g130x")
+  ok(e and e.kind == "moot", "the walk is logged as moot")
+  has(e.text, "later move of the way")
+  -- In Tirisfal the walk still leads to the zeppelin.
+  local c2 = sample3({ class = "MAGE", level = 5, zone = 85, x = 50, y = 50, saved = savedAt(TIRISFAL, "g130x"), afterLoad = steps })
+  c2:login()
+  c2:advance(2)
+  eq(c2.G.Noir.Guide.Current(), TIRISFAL)
+  eq(place(c2.G.Noir.Progress), "g130x")
+  -- Work still to do in the next section before the move back ends the journey: the walk leads to it.
+  local c3 = sample3({ class = "MAGE", level = 5, zone = 14, x = 50, y = 30, saved = savedAt(TIRISFAL, "g130x"),
+    afterLoad = function(client)
+      steps(client)
+      table.insert(client.G.Noir.Routes.Get("horde-undead").sections[3].steps, 1,
+        { id = "a367x", at = { zone = 130, x = 45, y = 42, r = 10 }, lines = { { kind = "accept", quest = 367, npc = 1518 } } })
+    end })
+  c3:login()
+  c3:advance(2)
+  eq(place(c3.G.Noir.Progress), "g130x")
 end)
 
 test("Jump goes back and forward without confirmation and logs it", function()

@@ -177,15 +177,22 @@ test("the level at each step counts quest, objective and walking XP", () => {
     { action: "objective", quest: 5, at: M(100, 90, 50), npc: 20 },
     { action: "turnin", quest: 5, at: M(100, 30, 50), npc: 10 },
   ];
-  const quiet = check(steps, null, (w) => { w.npc(20, 100, 90, 50, ""); w.kill(5, 10, 20, 100); });
-  const wild = check(steps, null, (w) => { w.herd(20, 100, 90, 50); w.kill(5, 10, 20, 100); });
+  // two kinds of creature to kill: the fights alone reach level 2, at the share of the estimate that is counted
+  // (lib/xp.js YIELD, applied to every gain)
+  const two = { objectives: [[[20, null, 0], [21, null, 0]]] };
+  const quiet = check(steps, null, (w) => { w.npc(20, 100, 90, 50, ""); w.npc(21, 100, 90, 50, ""); w.kill(5, 10, 20, 100, two); });
+  const wild = check(steps, null, (w) => { w.herd(20, 100, 90, 50); w.npc(21, 100, 90, 50, ""); w.kill(5, 10, 20, 100, two); });
   assert.deepStrictEqual(quiet.errors, []);
   assert.deepStrictEqual(wild.errors, []);
   const total = (r) => { let sum = r.xp; for (let level = 1; level < r.endLevel; level++) sum += [0, 400, 900, 1400][level]; return sum; };
-  assert.strictEqual(total(quiet), PACE.OBJECTIVE_KILLS * mobXp(1, 1) + 110);
+  const counted = (xp) => Math.round(xp * PACE.YIELD);
+  const kills = 2 * PACE.OBJECTIVE_KILLS * mobXp(1, 1);
+  assert.strictEqual(total(quiet), counted(kills) + counted(110));
+  assert.ok(total(quiet) < kills + 110, "less than the whole estimate");
   // 600 yards out at level 1, 600 back at level 2 (the kills gave it): creatures of level 1 both times
   const band = { min: 1, max: 1, wild: true };
-  assert.strictEqual(total(wild), walkXp(600, band, 1) + PACE.OBJECTIVE_KILLS * mobXp(1, 1) + walkXp(600, band, 2) + 110);
+  assert.notStrictEqual(walkXp(600, band, 1), walkXp(600, band, 2));
+  assert.strictEqual(total(wild), counted(walkXp(600, band, 1)) + counted(kills) + counted(walkXp(600, band, 2)) + counted(110));
   assert.deepStrictEqual(wild.levels, [1, 1, 2]);
 });
 test("replays when a quest is offered: its top level, a quest in the log that hides it, one that ends it, one that opens it, and exclusive quests", () => {

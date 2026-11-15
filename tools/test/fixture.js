@@ -18,8 +18,8 @@ function fixtureDb() {
   quest(13, { name: "Horde Errand", startedBy: [[7]], finishedBy: [[7]], requiredLevel: 1, questLevel: 2, requiredRaces: 178, zoneOrSort: 1000 });
   quest(14, { name: "Too High", startedBy: [[1]], finishedBy: [[1]], requiredLevel: 40, questLevel: 45, zoneOrSort: 1000 });
   quest(15, { name: "Daily", startedBy: [[1]], finishedBy: [[1]], requiredLevel: 1, questLevel: 2, specialFlags: 1, zoneOrSort: 1000 });
-  quest(20, { name: "Far Beasts", startedBy: [[5]], finishedBy: [[5]], requiredLevel: 4, questLevel: 4, objectives: [[[6, null, 0]]], zoneOrSort: 2000 });
-  quest(21, { name: "Far Report", startedBy: [[5]], finishedBy: [[5]], requiredLevel: 5, questLevel: 5, preQuestSingle: [20], zoneOrSort: 2000 });
+  quest(20, { name: "Far Beasts", startedBy: [[5]], finishedBy: [[5]], requiredLevel: 3, questLevel: 4, objectives: [[[6, null, 0]]], zoneOrSort: 2000 });
+  quest(21, { name: "Far Report", startedBy: [[5]], finishedBy: [[5]], requiredLevel: 4, questLevel: 5, preQuestSingle: [20], zoneOrSort: 2000 });
   return db;
 }
 module.exports = { fixtureDb };

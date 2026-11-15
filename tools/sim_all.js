@@ -193,7 +193,7 @@ function buildFacts(db, graph, inns, route3, ch, options = {}) {
   const first = route3.sections.length && chainOf(route3, ch).flatMap((s) => s.steps).find((s) => applies(s.when, ch) && s.at && zones[s.at.zone]);
   const facts = {
     race: ch.race, class: ch.cls, start: first ? { ...first.at } : undefined,
-    xpToLevel, pace: { OBJECTIVE_KILLS: PACE.OBJECTIVE_KILLS, ITEM_KILL_FACTOR: PACE.ITEM_KILL_FACTOR, INCIDENTAL_YARDS: PACE.INCIDENTAL_YARDS },
+    xpToLevel, pace: { OBJECTIVE_KILLS: PACE.OBJECTIVE_KILLS, ITEM_KILL_FACTOR: PACE.ITEM_KILL_FACTOR, INCIDENTAL_YARDS: PACE.INCIDENTAL_YARDS, YIELD: PACE.YIELD },
     continents, zones, quests, npcs, objects, taxi, flat: mine,
   };
   if (professions.length) {
@@ -282,7 +282,8 @@ function summarize(results) {
     unexplained: count("unexplained"), errors: count("errors"), manual: count("manual"), finished: results.filter((r) => r.finished).length,
     slash: results.reduce((sum, r) => sum + (r.slash || 0), 0), offScreen: count("offScreen"),
     deferrals: results.reduce((sum, r) => sum + ((r.passed && r.passed.deferred) || 0), 0),
-    grindCards: results.reduce((sum, r) => sum + (r.grindCards || 0), 0), gatedAims: results.reduce((sum, r) => sum + (r.gatedAims || 0), 0),
+    outleveled: results.reduce((sum, r) => sum + ((r.passed && r.passed.outleveled) || 0), 0),
+    grindCards: results.reduce((sum, r) => sum + (r.grindCards || 0), 0), grindNoPlace: results.reduce((sum, r) => sum + (r.grindNoPlace || 0), 0), gatedAims: results.reduce((sum, r) => sum + (r.gatedAims || 0), 0),
     joiners: results.filter((r) => r.join).length, inside: results.filter((r) => r.join && r.placement && r.placement.inside).length };
   s.passed = results.filter(passed).length;
   s.ok = s.characters > 0 && s.passed === s.characters;
@@ -479,7 +480,9 @@ async function main(argv) {
           const p = r.placement;
           console.log(`${passed(r) ? "pass" : "FAIL"}  ${name(r)}: level ${r.level}, ${r.shown} steps shown, ${r.stuck.length} stuck, ` +
             `${r.cannot.length} cannot, ${r.unexplained.length} unexplained, ${r.errors.length} errors, ${r.slash || 0} slash, ` +
-            `${(r.offScreen || []).length} off screen, ${r.sellLines || 0} sell lines (${r.sold || 0}c), ${r.skillRaised || 0} skill raises, ${(r.passed && r.passed.deferred) || 0} deferrals, ${r.grindCards || 0} grind cards, ${r.gatedAims || 0} gated arrow aims${p ? `, placed at ${p.landed} (window ${p.from} to ${p.to})` : ""} (${r.seconds} s)`);
+            `${(r.offScreen || []).length} off screen, ${r.sellLines || 0} sell lines (${r.sold || 0}c), ${r.skillRaised || 0} skill raises, ${(r.passed && r.passed.deferred) || 0} deferrals, ${(r.passed && r.passed.outleveled) || 0} outleveled, ${r.grindCards || 0} grind cards (${r.grindNoPlace || 0} without a place), ${r.gatedAims || 0} gated arrow aims${p ? `, placed at ${p.landed} (window ${p.from} to ${p.to})` : ""} (${r.seconds} s)`);
+          // What failed, as the report words it (a run of some races or at another pace writes no report).
+          if (!passed(r)) for (const l of failureLines(r)) console.log(`      ${l}`);
           status(done);
           if (done === all.length) resolve();
           feed();
@@ -497,7 +500,7 @@ async function main(argv) {
   }
   console.log(`${f.passed} of ${f.characters} fresh and ${j.passed} of ${j.characters} joiners pass: ${s.at60} at level 60, ${s.stuck} stuck, ` +
     `${s.cannot} cannot, ${s.unexplained} unexplained, ${s.errors} Lua errors, ${s.slash} slash, ${s.offScreen} off screen, ` +
-    `${j.inside} of ${j.joiners} joiners inside their window; ${s.deferrals} deferrals, ${s.grindCards} grind cards, ${s.gatedAims} arrow aims at a step under its level (${Math.round((Date.now() - started) / 1000)} s)`);
+    `${j.inside} of ${j.joiners} joiners inside their window; ${s.deferrals} deferrals, ${s.outleveled} steps passed as outleveled, ${s.grindCards} grind cards (${s.grindNoPlace} without a place), ${s.gatedAims} arrow aims at a step under its level (${Math.round((Date.now() - started) / 1000)} s)`);
   return s.ok ? 0 : 1;
 }
 

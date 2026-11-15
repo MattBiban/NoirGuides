@@ -9,7 +9,7 @@ const path = require("node:path");
 const { toPoint } = require("../lib/geo");
 const { readCsv } = require("../lib/csv");
 const { loadDb } = require("../lib/db");
-const { ESTIMATES, buildGraph, loadTravel, walkYards, walkSeconds, travelPlan, toSteps, pointAt } = require("../lib/travel");
+const { ESTIMATES, buildGraph, loadTravel, walkYards, walkZones, walkSeconds, travelPlan, toSteps, pointAt } = require("../lib/travel");
 
 const DATA = path.join(__dirname, "..", "data");
 const real = fs.existsSync(path.join(DATA, "forever_db.json")) && fs.existsSync(path.join(DATA, "wago", "TaxiPathNode.csv"));
@@ -440,6 +440,39 @@ test("fixture: two places close together across a border are walked straight, no
   const a = P(100, 60, 20), b = P(200, 40, 20);
   assert.ok(dist2(a, b) > E.NEAR_BORDER);
   assert.ok(near(walkYards(graph, a, b).yards, 2 * Math.hypot(400, 300)));
+});
+test("fixture: a walk names the zones it crosses, and on a graph with safe levels none is walked below its level", () => {
+  // Uncharted gets a pass at Eastland's east edge: Westland | Eastland | Uncharted in a row
+  const { db, graph, P } = fixture((src) => { src.transports.passes.push({ a: 200, b: 600, at: { zone: 200, x: 100, y: 50 }, source: "map", verified: false }); });
+  const from = P(100, 50, 50), to = P(600, 50, 50);
+  assert.deepStrictEqual(walkZones(graph, from, to), [100, 200, 600]);
+  assert.deepStrictEqual(walkZones(graph, to, from), [600, 200, 100]);
+  assert.deepStrictEqual(walkZones(graph, from, P(100, 60, 50)), [100]);
+  assert.strictEqual(walkZones(graph, from, P(300, 50, 50)), null);
+  // without the table a walk is a walk at any level
+  assert.ok(near(walkSeconds(graph, 1, from, to), walkTime(2000, 1)));
+  graph.safeLevel = new Map([[200, 20]]); // Eastland is safe from level 20
+  assert.strictEqual(walkSeconds(graph, 19, from, to), Infinity);
+  assert.ok(near(walkSeconds(graph, 20, from, to), walkTime(2000, 20)));
+  assert.ok(near(walkSeconds(graph, 19, from, P(100, 60, 50)), walkTime(100, 19)), "Westland itself is safe");
+  const at = (level) => alliance([1, 2, 3], { level });
+  // through it and into it: no way, though the flight points are learned
+  assert.strictEqual(travelPlan(db, graph, at(19), from, to).seconds, Infinity);
+  assert.strictEqual(travelPlan(db, graph, at(19), from, P(200, 50, 50)).seconds, Infinity);
+  assert.strictEqual(travelPlan(db, graph, at(19), P(200, 50, 50), from).seconds, Infinity, "and none out of it on foot");
+  assert.ok(travelPlan(db, graph, at(20), from, to).seconds < Infinity);
+  // flying in and standing where the flight lands is no walk; a hundred yards on is
+  const camp = graph.nodes.get(2).masters.Alliance.point;
+  const flown = travelPlan(db, graph, at(19), from, camp, { pickups: false });
+  assert.deepStrictEqual(actions(flown), ["walk", "fly"]);
+  checkPlan(graph, at(19), from, camp, flown);
+  const on = P(200, 85.5, 60);
+  assert.strictEqual(travelPlan(db, graph, at(19), from, on, { pickups: false }).seconds, Infinity);
+  assert.deepStrictEqual(actions(travelPlan(db, graph, at(20), from, on, { pickups: false })).slice(-2), ["fly", "walk"]);
+  // a haven: within its reach a walk is safe at any level, a step past it is not
+  graph.havens = [{ point: camp, yards: 150 }];
+  assert.deepStrictEqual(actions(travelPlan(db, graph, at(19), from, on, { pickups: false })), ["walk", "fly", "walk"]);
+  assert.strictEqual(travelPlan(db, graph, at(19), from, P(200, 60, 50), { pickups: false }).seconds, Infinity);
 });
 test("fixture: toSteps writes format 2 steps and leaves out the walking inside a zone", () => {
   const { db, graph, P } = fixture();

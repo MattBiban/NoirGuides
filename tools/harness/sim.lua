@@ -21,24 +21,27 @@
 --                     (done before the step's other lines, as a player told to sell before training would)
 --   skill             raise the profession to the line's value (SKILL_LINES_CHANGED)
 --   manual            click the line's tick box in the window (Window.Tick)
--- It never types a command. When the cards are unchanged after TRIES attempts, the player ticks every open line with
--- the mouse (Window.Tick) and each such card counts as stuck. A level 1 character closes the setup wizard with its
+-- It acts once the place has stood still for STILL seconds (steps that pass by themselves are on screen for a moment
+-- each: nobody acts on those). It never types a command. When the cards are unchanged after TRIES attempts, the
+-- player ticks every open line with the mouse (Window.Tick) and each such card counts as stuck. A level 1 character closes the setup wizard with its
 -- close button when it appears.
 --
 -- The world comes from the quest data (tools/sim_all.js writes it as `facts`, see Sim.world): which NPC offers and
 -- takes back which quest, what a quest needs before it is offered, its objectives, the flight masters and
 -- innkeepers, the zones' maps, and the character's flattened route (facts.flat). The character's XP follows the pace
--- of tools/lib/xp.js (its constants come in `facts`), so the level the engine sees is the level the planner counted
--- on. The Hearthstone has no cooldown here: the simulated clock does not run at the speed of play.
+-- of tools/lib/xp.js (its constants come in `facts`; every XP the world gives is the estimate times pace.YIELD, as in
+-- the planner's gain), so the level the engine sees is the level the planner counted on. The Hearthstone has no
+-- cooldown here: the simulated clock does not run at the speed of play.
 -- Money: every quest handed in pays TURNIN_COPPER; every objective done leaves one grey item (GREY, real quality 0
 -- and a sell price) in the bags, which the automation sells at merchants. A character with facts.professions has
 -- learned them at skill 1 before it starts.
 --
 -- Sim.play(facts, opts) -> { race, class, join, stuck, cannot, unexplained, errors, slash, offScreen,
 --                            placement = { expectedFrom, landed, from, to, inside, passedSteps, landedAt }, level,
---                            finished, shown, passed, manual, ticked, wizardClosed, grindCards, gatedAims,
---                            gatedAimSteps }
---   grindCards: times a grind card (a gated current card) appeared; gatedAims: rounds in which the arrow aimed at a
+--                            finished, shown, passed, manual, ticked, wizardClosed, grindCards, grindNoPlace,
+--                            gatedAims, gatedAimSteps }
+--   grindCards: times a grind card (a gated current card) appeared, grindNoPlace: how many of them had no place to
+--   grind at (no arrow); gatedAims: rounds in which the arrow aimed at a
 --   step whose minLevel is above the character's level (not at a grind place), with the first such in gatedAimSteps;
 --   passed.deferred: steps deferred until a level (work ahead).
 --   opts: join = level (the character joins there: Sim.prepareJoin), api ("classic"), xpScale (every XP the world
@@ -65,6 +68,8 @@ Sim.JOIN_BACK = 40   -- flattened actions a joiner may be placed before the last
 Sim.TRIES = 2        -- times the player does the cards before they count as stuck
 Sim.SETTLE = 1.5     -- seconds after each round of the player's actions
 Sim.FRAME = 0.25     -- the frame length inside SETTLE
+Sim.STILL = 0.5      -- the place has to stand still this long before the player acts on the cards
+Sim.STILL_ROUNDS = 400
 Sim.END_LEVEL = 60
 -- Why-log kinds that carry the game's evidence or describe placement.
 Sim.EXPLAINED = { done = true, moot = true, condition = true, outleveled = true, place = true, section = true, route = true,
@@ -141,7 +146,9 @@ end
 -- facts:
 --   race, class                      the character (route names: "Undead", "HighOrder", ...)
 --   start = place                    where a fresh character stands
---   xpToLevel = { ... }              XP to finish each level; pace = { OBJECTIVE_KILLS, ITEM_KILL_FACTOR, INCIDENTAL_YARDS }
+--   xpToLevel = { ... }              XP to finish each level
+--   pace = { OBJECTIVE_KILLS, ITEM_KILL_FACTOR, INCIDENTAL_YARDS, YIELD }   tools/lib/xp.js PACE; YIELD (1 when left
+--                                    out) is the share of the estimated XP the world gives, as the planner counts it
 --   continents[mapId] = { uiMap, name, top, left, width, height }   world yards (top: north edge, left: west edge)
 --   zones[area] = { uiMap, name, continent = mapId, minX, maxX, minY, maxY [, band = { min, max, wild }] }
 --   quests[id] = { title, level, minLevel, maxLevel, pre, preAny, exclusive, closed, kills, objects, items, credits,
@@ -343,7 +350,7 @@ local function actionDone(c, a, leftOut)
 end
 
 function Sim.prepareJoin(facts, level, xpScale)
-  local function sx(n) return round(n * (xpScale or 1)) end
+  local function sx(n) return round(n * (xpScale or 1) * (facts.pace.YIELD or 1)) end
   local world = Sim.world(facts)
   local flat = facts.flat or {}
   local start = startOf(facts)
@@ -489,13 +496,14 @@ function Sim.play(facts, opts)
   local info = Client.RACES[facts.race]
   local flat = facts.flat or {}
   local result = { race = facts.race, class = facts.class, join = opts.join, stuck = {}, cannot = {}, unexplained = {},
-    errors = {}, manual = {}, shown = 0, passed = {}, ticked = 0, grindCards = 0, gatedAims = 0, gatedAimSteps = {} }
+    errors = {}, manual = {}, shown = 0, passed = {}, ticked = 0, grindCards = 0, grindNoPlace = 0, gatedAims = 0,
+    gatedAimSteps = {} }
   local tickAllowance = 0
   local whyLog = {}
   local capturing, landed = true, nil
 
   local prepared = opts.join and Sim.prepareJoin(facts, opts.join, opts.xpScale) or nil
-  local function sx(n) return round(n * (opts.xpScale or 1)) end
+  local function sx(n) return round(n * (opts.xpScale or 1) * (facts.pace.YIELD or 1)) end
   local start = startOf(facts)
   local startZone = start and facts.zones[start.zone]
   local clientOpts = {
@@ -960,6 +968,19 @@ function Sim.play(facts, opts)
     if button and c:click(button) then result.wizardClosed = true end
   end
 
+  -- The engine passes the steps that need nothing one per pass, each on screen for a moment. The player does not act
+  -- on a card in the instant it appears: it waits until the place stands still.
+  local function settle(seconds)
+    if seconds > 0 then c:advance(seconds, Sim.FRAME) end
+    for _ = 1, Sim.STILL_ROUNDS do
+      local section, index = P.Place()
+      c:advance(Sim.STILL, Sim.FRAME)
+      local section2, index2 = P.Place()
+      if section == section2 and index == index2 then break end
+    end
+  end
+
+  settle(0)
   local seen = {}
   local trace = opts.trace and {} or nil
   result.trace = trace
@@ -977,7 +998,7 @@ function Sim.play(facts, opts)
     if #cards == 0 then
       idle = idle + 1
       if idle > 5 then break end
-      c:advance(Sim.SETTLE, Sim.FRAME)
+      settle(Sim.SETTLE)
     else
       idle = 0
       local currentCard = cards[#cards]
@@ -989,7 +1010,11 @@ function Sim.play(facts, opts)
       local grindKey = nil
       if currentCard.gated then
         grindKey = tostring(P.Place()) .. "/" .. tostring(currentCard.step.id) .. "/" .. tostring(currentCard.lines[1] and currentCard.lines[1].line.level)
-        if grindKey ~= lastGrind then result.grindCards = result.grindCards + 1 end
+        if grindKey ~= lastGrind then
+          result.grindCards = result.grindCards + 1
+          local first = currentCard.lines[1]
+          if not (first and first.line.kind == "grind" and first.line.at) then result.grindNoPlace = result.grindNoPlace + 1 end
+        end
       end
       lastGrind = grindKey
       -- The arrow must never aim at a step the character's level does not allow yet.
@@ -1069,7 +1094,7 @@ function Sim.play(facts, opts)
           end
         end
       end
-      c:advance(Sim.SETTLE, Sim.FRAME)
+      settle(Sim.SETTLE)
     end
   end
 

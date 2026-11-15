@@ -3,10 +3,10 @@
 // zone (planner/zonepick.js), so what the look-ahead expects of a zone is what the route then does there.
 //   S, the state the rules read: { level, done, log, hopped }, where done has has(), log is a Map of quest ID ->
 //   { needsObjective } (or anything with has, keys, entries and size), and hopped is the set of neighbouring zones
-//   this session has already crossed into.
+//   this session has already crossed into. Of the route itself also plan, relaxed and errands (see travelWanted).
 const { questXp, objectiveXp } = require("../lib/xp");
 const { canAccept } = require("../lib/quests");
-const { CHOICES: C } = require("./tuning");
+const { CHOICES: C, above } = require("./tuning");
 
 function makePolicy(ctx) {
   const { info, byZone } = ctx;
@@ -16,7 +16,7 @@ function makePolicy(ctx) {
   for (const i of info.values()) for (const pre of [...(i.q.preAll || []), ...(i.q.preAny || [])]) gates.add(pre);
   // worth doing at this level: it gives XP, it is not above the player (HARD, HARD_TALK), and it is not more than
   // EASY levels below, unless a travel link or another quest needs it
-  const worth = (i, level) => questXp(i.q.level, level) + objectiveXp(i.q, level) > 0 && !(i.q.level > level + (i.kills ? C.HARD : C.HARD_TALK)) && (i.q.level >= level - C.EASY || ctx.linkQuests.has(i.q.id) || gates.has(i.q.id));
+  const worth = (i, level) => questXp(i.q.level, level) + objectiveXp(i.q, level) > 0 && !(i.q.level > level + above(level, i.kills)) && (i.q.level >= level - C.EASY || ctx.linkQuests.has(i.q.id) || gates.has(i.q.id));
   // true when the quest's objective is over the border of the zone it starts in and is done from there (a hop)
   const hops = (i) => i.objNear && i.obj.point.zone !== i.endZone;
   // true when the quest's objective is done in a session of this zone
@@ -40,7 +40,7 @@ function makePolicy(ctx) {
     for (const other of byZone.get(zone) || []) {
       const q = other.q;
       if (S.done.has(q.id) || S.log.has(q.id) || q.minLevel > S.level + C.CARRY_AHEAD || questXp(q.level, Math.max(S.level, q.minLevel)) <= 0) continue;
-      if (!later || q.minLevel > S.level || (other.kills && q.level > S.level + C.HARD)) n++;
+      if (!later || q.minLevel > S.level || (other.kills && q.level > S.level + above(S.level, true))) n++;
     }
     return n;
   }
@@ -53,8 +53,9 @@ function makePolicy(ctx) {
     if (i.obj && i.obj.point.zone !== i.zone && !hops(i) && !going(i.obj.point.zone)) return false;
     if (i.endZone !== i.zone) return going(i.endZone);
     // out and back: the route has to return to this zone as well. Not even when relaxed: a quest that is two
-    // crossings of a border for one reward is only taken when the route comes back here anyway
-    return business(S, i.zone, i.q.id) || (S.plan ? S.plan.has(i.zone) : offers(S, i.zone, true) >= C.RETURN_MIN_QUESTS);
+    // crossings of a border for one reward is only taken when the route comes back here anyway, or on an errand
+    // (S.errands: the next step would be a grind step, and planner/supply.js has weighed the crossings)
+    return business(S, i.zone, i.q.id) || !!S.errands || (S.plan ? S.plan.has(i.zone) : offers(S, i.zone, true) >= C.RETURN_MIN_QUESTS);
   }
   function wanted(i, S) {
     if (!canAccept(i.q, S) || !worth(i, S.level)) return false;

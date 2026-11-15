@@ -45,6 +45,10 @@
 --                          place, or no map size)
 --   Lines.Arrived(place) -> true | false | nil          within place.r yards (in the zone when x = y = 0); false
 --                                                       without a positive radius; nil without a position
+--   Lines.GrindLeft(line) -> xp, level or nil           the XP still to earn for a grind line, from UnitXP and
+--                                                       UnitXPMax: to the line's target (level nil), or, further
+--                                                       under it, to the next level (`level`: the client knows the
+--                                                       XP of the current level only). nil when reached or unknown
 --   Lines.GrindCounter(line) -> xp, needed or nil       the XP a grind line counts at the current level: at `level`
 --                                                       for a percent, at level - 1 for a plain "reach level"
 --   Lines.ProfessionName(skillLine) -> name             Data.professions, then the client's, then "skill <id>"
@@ -399,7 +403,10 @@ check.getflight = function(line, _, ctx)
   if pick and within(pick.time, ctx.since) and (pick.from == node or pick.to == node) then
     return "done", "flown from or to it"
   end
-  if within(State.discoveredAt, ctx.since) then return "done", "new flight path discovered" end
+  -- The message does not say which flight point; one that State could tell was another's is not this line's.
+  if within(State.discoveredAt, ctx.since) and (State.discoveredNode == nil or State.discoveredNode == node) then
+    return "done", "new flight path discovered"
+  end
   return "todo"
 end
 
@@ -472,6 +479,25 @@ local function grindCounter(line)
   return nil
 end
 Lines.GrindCounter = grindCounter
+
+-- The XP still to earn: to the line's target, or to the next level (returned second) while further under it.
+function Lines.GrindLeft(line)
+  local level, xp, max = State.level, State.xp or 0, State.xpMax or 0
+  if type(level) ~= "number" or type(line.level) ~= "number" or max <= 0 then return nil end
+  local percent = line.percent
+  local last = line.level - 1 -- the level whose end is the target
+  if percent and percent > 0 then
+    if level > line.level then return nil end
+    if level == line.level then
+      local left = math.ceil(max * percent / 100) - xp
+      return left > 0 and left or nil
+    end
+    last = line.level
+  end
+  if level > last or xp >= max then return nil end
+  if level == last then return max - xp end
+  return max - xp, level + 1
+end
 
 -- The level or percent into it is reached.
 local function reached(level, percent)

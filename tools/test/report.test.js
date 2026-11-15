@@ -43,8 +43,11 @@ test("the report sets the routes beside the baseline and says whether each accep
   assert.match(md, /commit `abc1234`/);
   const row = md.split("\n").find((l) => l.startsWith("| Human | "));
   assert.match(row, /^\| Human \| 10 \| 1 \| -90% \| 27 h 47 min \| 0 h \d\d min \| -\d+% \| 4,000 \| [\d,]+ \| [-+]\d+% \| 90 \| \d+ \| 30 \| 5 \| 1 \| \d \| \d+ \|$/);
-  assert.match(md, /\| Zone changes down by at least 40% for every race \| yes \| least: Human, 10 to 1 \(-90%\) \|/);
-  assert.match(md, /\| Travel time not worse for any race \| yes \|/);
+  assert.match(md, /\| Zone changes at most 90% of the baseline for every race \| yes \| least saved: Human, 10 to 1 \(-90%\) \|/);
+  assert.match(md, /\| Travel time at most 125% of the baseline for every race \| yes \| most: Human, 27 h 47 min to 0 h \d\d min \(-\d+%\) \|/);
+  assert.match(md, /\| At most 20 grind steps in any race \| yes \| most: \d \|/);
+  assert.match(md, /The planner counts on 60% of the estimated XP/);
+  assert.match(md, /about 70% more\nquests to reach level 60/);
   assert.match(md, /\| No validator errors \| yes \| 0 errors \|/);
   assert.match(md, /\| Every race reaches level 60 \| \*\*no\*\* \| short: Human \(\d+\) \|/);
   assert.match(md, /\| Walked \| [\d,]+ yards \(before: 4,000\) \|/);
@@ -60,12 +63,25 @@ test("an acceptance line that is not met is reported as not met", () => {
   const { db, result } = built();
   const s = summarize(db, result);
   const rows = (b) => [{ race: "Human", s, before: b.races.Human }];
-  // 1 zone change before, 1 now: none fewer is not 40%
+  // 1 zone change before, 1 now: that is not 90% of the baseline or less
   const few = acceptance(rows(before(1, 100000)));
-  assert.deepStrictEqual([few[0].met, few[0].detail], [false, "least: Human, 1 to 1 (-0%)"]);
-  // travel got slower
-  const slow = acceptance(rows(before(10, 1)));
-  assert.deepStrictEqual([slow[1].met, slow[1].detail], [false, "slower: Human"]);
+  assert.deepStrictEqual([few[0].met, few[0].detail], [false, "least saved: Human, 1 to 1 (-0%)"]);
+  // 10 before, 9 now is just enough; 10 now is not
+  const nine = (zoneChanges) => acceptance([{ race: "Human", s: { ...s, zoneChanges }, before: before(10, 100000).races.Human }])[0].met;
+  assert.deepStrictEqual([nine(9), nine(10)], [true, false]);
+  // travel may take a quarter longer than the baseline's, not more
+  const travel = (travelSeconds) => acceptance([{ race: "Human", s: { ...s, travelSeconds }, before: before(10, 1000).races.Human }])[1];
+  assert.deepStrictEqual([travel(1250).met, travel(1250).detail], [true, "most: Human, 0 h 17 min to 0 h 21 min (+25%)"]);
+  assert.deepStrictEqual([travel(1251).met, travel(1251).detail], [false, "over: Human"]);
+  // twenty grind steps a route, not one more
+  const grind = (n) => acceptance([{ race: "Human", s: { ...s, grinds: Array.from({ length: n }, (_, k) => ({ from: k + 1, to: k + 2 })) }, before: before(10, 100000).races.Human }]).find((a) => /grind steps/.test(a.name));
+  assert.deepStrictEqual([grind(20).met, grind(20).detail], [true, "most: 20"]);
+  assert.deepStrictEqual([grind(21).met, grind(21).detail], [false, "over: Human (21)"]);
+  // one walk through a zone far above the player is one too many
+  const walk = (n) => acceptance([{ race: "Human", s: { ...s, dangerous: Array.from({ length: n }, (_, k) => ({ step: k, level: 19, from: 33, to: 40, zone: 33, min: 36, cls: "WARRIOR" })) }, before: before(10, 100000).races.Human }]).find((a) => /No walk through/.test(a.name));
+  assert.deepStrictEqual([walk(0).met, walk(0).detail], [true, "none"]);
+  assert.deepStrictEqual([walk(1).met, walk(1).detail], [false, "over: Human (1)"]);
+  assert.deepStrictEqual(s.dangerous, [], "a result without the check has none to show");
   // an error counts
   const bad = acceptance([{ race: "Human", s: { ...s, errors: ["WARRIOR: step 1: x"] }, before: before(10, 100000).races.Human }]);
   assert.deepStrictEqual([bad[2].met, bad[2].detail], [false, "1 errors"]);

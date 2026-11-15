@@ -208,6 +208,35 @@ test("the dialogue picks a guide hand-in before an accept", function()
   eq(c:callsTo("AcceptQuest"), { { "AcceptQuest", 364 }, { "AcceptQuest", 376 } })
 end)
 
+-- Parts of a chain often share one title, and the old lists give titles only. A hand-in line stays eligible for the
+-- session, so a part handed in earlier must not lend its title to the next part in the log, which the guide hands
+-- in at a later step: picking it would open that quest's page at every talk and keep the list's offers away.
+test("a title in the list is never taken for a quest of that title that was handed in", function()
+  local later = { title = "Rude Awakening", level = 1, objectives = {} }
+  local c, Noir = at("t363.a364.a376", { done = { 363 }, world = { quests = { [9200] = later } }, log = { 9200 } })
+  eq(placeId(Noir), "t363.a364.a376")
+  c:talkTo(1569, { name = SARVIS, ends = { 9200 }, offers = { 364 } })
+  eq(callNames(c, { "SelectGossipActiveQuest", "SelectGossipAvailableQuest" }), { "SelectGossipAvailableQuest" })
+  eq(c:callsTo("AcceptQuest"), { { "AcceptQuest", 364 } })
+  ok(Noir.State.HasQuest(9200), "the later part stays in the log")
+  -- On the reward page too (a client without GetQuestID reads the page's title): the later part is not handed in
+  -- as the earlier one.
+  c.G.GetQuestID = nil
+  c:talkTo(1569, { name = SARVIS, ends = { 9200 } })
+  eq(c.dialog and c.dialog.quest, 9200, "its page is the player's")
+  eq(c:callsTo("GetQuestReward"), {})
+end)
+
+test("a title on offer is the part of the chain that is neither done nor in the log", function()
+  -- Two accept lines on the card share a title; the first part is handed in, so the offer can only be the second.
+  local second = { title = "The Mindless Ones", level = 2, objectives = {} }
+  local c, Noir = at("t363.a364.a376", { done = { 363, 364 }, world = { quests = { [376] = second } },
+    afterLoad = function(client) client.G.Noir.Data.quests[376] = second.title end })
+  eq(placeId(Noir), "t363.a364.a376")
+  c:talkTo(1569, { name = SARVIS, offers = { 376 }, alwaysGossip = true })
+  eq(c:callsTo("AcceptQuest"), { { "AcceptQuest", 376 } })
+end)
+
 test("the dialogue opens an unfinished guide quest whose only objective is talking to this NPC", function()
   local talk = { title = "Speak with Sarvis", level = 1, objectives = { { text = "Speak with Sarvis", type = "event", need = 1 } } }
   local c = at("a363", { world = { quests = { [9100] = talk } }, log = { 9100 },

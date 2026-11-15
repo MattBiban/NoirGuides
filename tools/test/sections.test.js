@@ -546,10 +546,12 @@ test("a split gated step keeps load on its first part only, and a reminder step 
 const ROUTES = require("node:path").join(__dirname, "..", "..", "NoirGuides", "Routes");
 const DATA_DIR = require("node:path").join(__dirname, "..", "data");
 const haveReal = fs.existsSync(require("node:path").join(DATA_DIR, "forever_db.json")) && fs.existsSync(require("node:path").join(ROUTES, "horde-orc.lua"));
-test("real route: March of the Silithid (4494), which either 32 or 7732 unlocks, has one accept line per prerequisite wherever a route takes it", { skip: !haveReal }, (t) => {
+test("real route: March of the Silithid (4494), which either 32 or 7732 unlocks, has one accept line per prerequisite the route hands in wherever a route takes it", { skip: !haveReal }, (t) => {
   // Review 2 of task X1: the route emitted ifDone = 7732 and a "notturnedin 32" skip, so a character who had handed in
   // only one of them had 4494 passed while the game offered it, and its chain (4496 ifDone 4494) was lost. The routes
-  // of 0.4.0 took it on horde-orc; a route that reaches 60 without the chain leaves the check to the tests above.
+  // of 0.4.0 took it on horde-orc after handing in both; the routes planned for 60% of the estimated XP hand in 32
+  // only, and the accept is one line that waits for it (planner/sections.js: of the any-of members, those the route
+  // hands in). A route that reaches 60 without the chain leaves the check to the tests above.
   const { loadDb } = require("../lib/db");
   const { parseRoute } = require("../sim_all");
   const q = loadDb(DATA_DIR).quests.get(4494);
@@ -562,7 +564,9 @@ test("real route: March of the Silithid (4494), which either 32 or 7732 unlocks,
     for (const sec of route.sections) for (const st of sec.steps) for (const l of st.lines) if (l.kind === "accept" && l.quest === 4494) hits.push({ st, l });
     if (!hits.length) continue;
     routes++;
-    assert.deepStrictEqual(hits.map((h) => h.l.ifDone).sort((a, b) => a - b), [32, 7732], file);
+    const handedIn = [32, 7732].filter((p) => route.sections.some((sec) => sec.steps.some((st) => st.lines.some((l) => l.kind === "turnin" && l.quest === p))));
+    assert.ok(handedIn.length > 0, `${file}: hands in one of the two`);
+    assert.deepStrictEqual(hits.map((h) => h.l.ifDone).sort((a, b) => a - b), handedIn, file);
     assert.ok(hits.every((h) => h.st === hits[0].st), `${file}: in one step`);
     assert.ok(!(hits[0].st.skip || []).some((c) => c.kind === "notturnedin"), `${file}: no any-of member gates the step`);
   }

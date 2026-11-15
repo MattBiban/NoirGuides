@@ -6,7 +6,7 @@ const test = require("node:test");
 const assert = require("node:assert");
 const { testWorld, at } = require("./world");
 const { createVm } = require("../harness/vm");
-const { mobXp, questXp, walkXp, objectiveXp, XP_TO_LEVEL } = require("../lib/xp");
+const { mobXp, questXp, walkXp, objectiveXp, XP_TO_LEVEL, PACE } = require("../lib/xp");
 const { emitRoute3 } = require("../planner/emit3");
 const { buildFacts, flattenFor, parseRoute, toLua, simulate, summarize, passed, joinerList } = require("../sim_all");
 
@@ -92,7 +92,7 @@ test("the world is built from the flattened steps", () => {
     section("orc-01-02-westland", "1-2 Westland", [
       { id: "a1.a2", at: npcPlace(30, 30), lines: [{ kind: "accept", quest: 1, npc: 10 }, { kind: "accept", quest: 2, npc: 10 }] },
       { id: "a3", at: npcPlace(30, 30), when: { class: "MAGE" }, lines: [{ kind: "accept", quest: 3, npc: 10 }] },
-      { id: "o1", at: { ...at(100, 50, 50), r: 40 }, lines: [{ kind: "objective", quest: 1, index: 1, npc: 12 }] },
+      { id: "o1", at: { ...at(100, 50, 50), r: 40 }, lines: [{ kind: "objective", quest: 1, index: 1, npc: 12 }, { kind: "objective", quest: 1, index: 2, npc: 13 }] },
       { id: "a4", at: npcPlace(60, 60), lines: [{ kind: "accept", quest: 4, object: 500 }, { kind: "accept", quest: 3, npc: 10, when: { class: "MAGE" } }] },
       { id: "b", at: npcPlace(22, 50), lines: [{ kind: "sethearth", npc: 800 }] },
     ], { start: true, next: [{ section: "orc-02-03-eastland" }] }),
@@ -208,8 +208,10 @@ test("a whole character played by the real addon in the simulated world", () => 
   // The shipped addon with its shipped routes needs the fetched data; this plays a small hand-written world
   // through the same runner instead, with the route registered by the simulator.
   const w = testWorld();
-  w.npc(10, 100, 30, 30, "AH", "Giver"); w.npc(12, 100, 50, 50, "", "Wolf");
-  w.kill(1, 10, 12, 100, { questLevel: 1 });
+  w.npc(10, 100, 30, 30, "AH", "Giver"); w.npc(12, 100, 50, 50, "", "Wolf"); w.npc(13, 100, 50, 50, "", "Boar");
+  // two kinds of creature: the simulated world gives the share of the XP the planner counts on (lib/xp.js YIELD),
+  // and one kind's fights and the reward would leave the character at level 1
+  w.kill(1, 10, 12, 100, { questLevel: 1, objectives: [[[12, null, 0], [13, null, 0]]] });
   const route = route3([section("orc-01-02-westland", "1-2 Westland", [
     { id: "a1", at: npcPlace(30, 30), lines: [{ kind: "accept", quest: 1, npc: 10 }] },
     { id: "o1", at: { ...at(100, 50, 50), r: 40 }, lines: [{ kind: "objective", quest: 1, index: 1, npc: 12 }] },
@@ -221,6 +223,7 @@ test("a whole character played by the real addon in the simulated world", () => 
   assert.ok(f.route, "the route is carried for registering");
   const r = simulate(f, { register: true });
   assert.deepStrictEqual([r.finished, r.stuck, r.cannot, r.unexplained, r.errors, r.slash, r.offScreen], [true, [], [], [], [], 0, []]);
+  assert.strictEqual(f.pace.YIELD, PACE.YIELD, "the world plays at the planner's pace");
   assert.strictEqual(r.level, 2);
   assert.strictEqual(passed(r), false, "a run that ends below level 60 fails");
   assert.strictEqual(passed({ ...r, level: 60 }), true);

@@ -20,104 +20,80 @@ previous rank's trainer step there) and stays to that section's second-to-last s
 
 ## Human
 
-- Blacksmithing Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section human-20-21-darkshore
-- Leatherworking Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within five sections of section human-01-11-dun-morogh
-- Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-35-36-stranglethorn-vale
-- Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-35-36-stranglethorn-vale
-- Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-35-36-stranglethorn-vale
+- Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-35-desolace
+- Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-35-desolace
 - Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section human-20-21-darkshore
-- Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-35-36-stranglethorn-vale
-- Engineering Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section human-20-21-darkshore
-- Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-35-36-stranglethorn-vale
-- Enchanting Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within five sections of section human-01-11-dun-morogh
+- Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-35-desolace
 - Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section human-20-21-darkshore
-- Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-35-36-stranglethorn-vale
-- Skinning Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within five sections of section human-01-11-dun-morogh
-- Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-35-36-stranglethorn-vale
+- Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section human-34-35-desolace
 
 ## Orc
 
-- Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section orc-34-35-desolace
+- Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section orc-34-36-stranglethorn-vale
 - Herbalism Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section orc-09-13-tirisfal-glades
 - Mining Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section orc-09-13-tirisfal-glades
-- Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section orc-34-35-desolace
+- Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section orc-34-36-stranglethorn-vale
 - Skinning Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section orc-09-13-tirisfal-glades
 
 ## Dwarf
 
-- Blacksmithing Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section dwarf-20-21-darkshore
-- Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-thousand-needles
-- Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-thousand-needles
-- Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-thousand-needles
+- Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-arathi-highlands
+- Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-arathi-highlands
 - Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section dwarf-20-21-darkshore
-- Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-thousand-needles
-- Engineering Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section dwarf-20-21-darkshore
-- Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-thousand-needles
+- Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-arathi-highlands
 - Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section dwarf-20-21-darkshore
-- Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-thousand-needles
-- Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-thousand-needles
+- Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section dwarf-34-35-arathi-highlands
 
 ## NightElf
 
-- Blacksmithing Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section nightelf-20-21-darkshore
 - Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-desolace
 - Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-desolace
-- Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section nightelf-20-21-darkshore
-- Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-desolace
-- Engineering Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section nightelf-20-21-darkshore
+- Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-desolace
 - Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-desolace
-- Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section nightelf-20-21-darkshore
 - Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-desolace
+- Skinning Journeyman (rank 2, level 10): no Alliance trainer in a zone of the route within five sections of section nightelf-01-10-teldrassil
 - Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section nightelf-34-35-desolace
 
 ## Undead
 
-- Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section undead-34-35-desolace
-- Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section undead-34-35-desolace
+- Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section undead-34-36-stranglethorn-vale
+- Herbalism Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section undead-09-11-tirisfal-glades
+- Mining Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section undead-09-11-tirisfal-glades
+- Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section undead-34-36-stranglethorn-vale
+- Skinning Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section undead-09-11-tirisfal-glades
 
 ## Tauren
 
-- Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section tauren-34-35-desolace
-- Herbalism Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section tauren-09-13-tirisfal-glades
-- Mining Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section tauren-09-13-tirisfal-glades
-- Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section tauren-34-35-desolace
-- Skinning Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section tauren-09-13-tirisfal-glades
+- Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section tauren-34-36-stranglethorn-vale
+- Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section tauren-34-36-stranglethorn-vale
 
 ## Gnome
 
-- Blacksmithing Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section gnome-20-21-darkshore
-- Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-thousand-needles
-- Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-thousand-needles
-- Herbalism Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-thousand-needles
+- Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-arathi-highlands
+- Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-arathi-highlands
 - Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section gnome-20-21-darkshore
-- Tailoring Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-thousand-needles
-- Engineering Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section gnome-20-21-darkshore
-- Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-thousand-needles
+- Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-arathi-highlands
 - Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section gnome-20-21-darkshore
-- Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-thousand-needles
-- Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-thousand-needles
+- Enchanting Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section gnome-34-35-arathi-highlands
 
 ## Troll
 
-- Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section troll-34-35-desolace
+- Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section troll-34-36-stranglethorn-vale
 - Herbalism Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section troll-09-13-tirisfal-glades
 - Mining Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section troll-09-13-tirisfal-glades
-- Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section troll-34-35-desolace
+- Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section troll-34-36-stranglethorn-vale
 - Skinning Journeyman (rank 2, level 10): no Horde trainer in a zone of the route within five sections of section troll-09-13-tirisfal-glades
 
 ## HighOrder
 
-- Blacksmithing Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-20-20-loch-modan
-- Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-thousand-needles
-- Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-thousand-needles
-- Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-20-20-loch-modan
-- Engineering Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-20-20-loch-modan
-- Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-20-20-loch-modan
+- Leatherworking Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-swamp-of-sorrows
+- Alchemy Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-swamp-of-sorrows
+- Tailoring Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-20-22-darkshore
+- Engineering Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-swamp-of-sorrows
+- Enchanting Expert (rank 3, level 20): no Alliance trainer in a zone of the route within five sections of section highorder-20-22-darkshore
+- Skinning Artisan (rank 4, level 35): no Alliance trainer in a zone of the route within five sections of section highorder-34-35-swamp-of-sorrows
 
 ## Windshaper
 
-- Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section windshaper-34-35-stranglethorn-vale
-- Herbalism Expert (rank 3, level 20): no Horde trainer in a zone of the route within five sections of section windshaper-20-24-the-barrens
-- Mining Expert (rank 3, level 20): no Horde trainer in a zone of the route within five sections of section windshaper-20-24-the-barrens
-- Engineering Expert (rank 3, level 20): no Horde trainer in a zone of the route within five sections of section windshaper-20-24-the-barrens
-- Skinning Expert (rank 3, level 20): no Horde trainer in a zone of the route within five sections of section windshaper-20-24-the-barrens
+- Leatherworking Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section windshaper-34-35-dustwallow-marsh
+- Enchanting Artisan (rank 4, level 35): no Horde trainer in a zone of the route within five sections of section windshaper-34-35-dustwallow-marsh

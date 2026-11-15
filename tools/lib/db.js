@@ -109,17 +109,20 @@ function applyDataRules(db) {
 function loadDb(dataDir) {
   const raw = JSON.parse(fs.readFileSync(path.join(dataDir, "forever_db.json"), "utf8"));
   const era = JSON.parse(fs.readFileSync(path.join(dataDir, "vanilla_db.json"), "utf8"));
-  const db = { quests: new Map(), npcs: new Map(), objects: new Map(), items: new Map(), areas: new Map(), maps: new Map(), taxi: [], eraQuestIds: new Set() };
+  const db = { quests: new Map(), npcs: new Map(), objects: new Map(), items: new Map(), areas: new Map(), maps: new Map(), taxi: [], eraQuestIds: new Set(), eraNpcIds: new Set() };
   for (const [id, q] of Object.entries(raw.Quest)) db.quests.set(+id, normalizeQuest(id, q));
   // subName: the title under the name ("Warrior Trainer", "Journeyman Blacksmith"), "" when there is none
   // vendor: QuestieDB npcFlags has the merchant bit (VENDOR_FLAG): the NPC buys and sells items
+  // minLevel, maxLevel: the creature's levels (0 when the data has none); rank: QuestieDB's rank, 0 an ordinary
+  // creature, 1 elite, 2 rare elite, 3 boss, 4 rare
   for (const [id, n] of Object.entries(raw.Npc)) db.npcs.set(+id, { id: +id, name: n.name || "", friendly: n.friendlyToFaction || "", subName: n.subName || "",
-    vendor: ((n.npcFlags || 0) & VENDOR_FLAG) !== 0, spawns: areaMap(n.spawns) });
+    vendor: ((n.npcFlags || 0) & VENDOR_FLAG) !== 0, minLevel: n.minLevel || 0, maxLevel: n.maxLevel || 0, rank: n.rank || 0, spawns: areaMap(n.spawns) });
   for (const [id, o] of Object.entries(raw.Object)) db.objects.set(+id, { id: +id, name: o.name || "", spawns: areaMap(o.spawns) });
   // otherSources: the item is also sold by a vendor or found inside another item, so a drop is not the only way to it
   for (const [id, i] of Object.entries(raw.Item)) db.items.set(+id, { id: +id, name: i.name || "", npcDrops: i.npcDrops || [], objectDrops: i.objectDrops || [],
     otherSources: !!((i.vendors && i.vendors.length) || (i.itemDrops && i.itemDrops.length)) });
   for (const id of Object.keys(era.Quest)) db.eraQuestIds.add(+id);
+  for (const id of Object.keys(era.Npc)) db.eraNpcIds.add(+id); // the classic creatures: Forever adds its own (mounts on show, event creatures)
   const wago = (name) => readCsv(path.join(dataDir, "wago", name + ".csv"));
   for (const a of wago("AreaTable")) db.areas.set(+a.ID, { id: +a.ID, name: a.AreaName_lang, parent: +a.ParentAreaID, continent: +a.ContinentID });
   // world bounds of each zone map: the full-map assignment row (UiMin 0,0 to UiMax 1,1) with the lowest OrderIndex.

@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.0
+
+- **A realistic pace.** The routes used to expect you to level about twice as fast as players do, so you fell behind the guide within a few levels. Every route was rebuilt for the pace players really level at: about 140 to 165 quests by level 22, where 0.4.1 planned 80 to 100.
+- **Quests up to two levels above you.** With more quests needed, the routes now take quests with fights up to two levels above your level, and deliveries up to three. Nothing harder than that is planned in.
+- **Your own starting zone to level 9 or 10.** Every race now finishes its own starting zone first. 0.4.1 sent Orcs and Trolls to Tirisfal Glades at level 2 and started Taurens in Durotar.
+- **No walks through deadly zones.** The routes no longer walk you through a zone far above your level to reach a quest or a boat.
+- **More done per trip.** Each trip out of town covers more objectives (1.7 to 1.9 on average below level 22, 1.4 before), and a zone is only visited when there is enough to do there.
+- **Real grind spots.** When there are too few quests for your level (10 to 13 times per route, mostly after level 23), the step names the creatures and the place, for example "Kill Ghostpaw Howlers in the south of Ashenvale until you reach level 24", and the arrow takes you there. The window shows how much is left: "Grind to level 14 in Westfall: 2,300 XP to go".
+- **Installing mid-way works across the sea.** If you install the addon at a higher level and stand on the other continent, the guide no longer shows a walk on the continent you are not on.
+- **Fixed: zeppelin and boat steps were sometimes skipped,** leaving the next step on another continent.
+- **Fixed: two flight points in a row.** The second one was not shown, so a later flight could not be taken.
+- **Fixed: a quest was not accepted for you** when an earlier quest in its chain had the same title (Druids at "The New Frontier").
+
 ## 0.4.1
 
 - **Quests at your level.** The routes no longer send you to quests above your level. Every route was rebuilt so each quest is taken at your level or up to three levels below it; before, quests up to three levels higher were planned in, and players a little behind met quests three and four levels up. Easier quests are only kept when a quest chain or a boat or zeppelin needs them. The routes move between zones a little more often to stay at your level.

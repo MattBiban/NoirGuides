@@ -21,7 +21,7 @@ const { eligible, CLASS_SORTS, SKYBORNE_CONTINENT } = require("../lib/characters
 const { instanced, instanceBound, startPoint, endPoint, objectivePoint, canAccept } = require("../lib/quests");
 const { ESTIMATES, travelPlan, walkYards, walkSeconds, toSteps } = require("../lib/travel");
 const { validateRoute } = require("./validate");
-const { CHOICES: C } = require("./tuning");
+const { CHOICES: C, above } = require("./tuning");
 const { emptyGraph, plannerGraph, spot } = require("./context");
 
 const ZEPHRAS_ISLE = 16593; // the Skyborne starting zone (AreaTable): its quests are Forever's own and still taken
@@ -39,7 +39,7 @@ const LAYER = Object.freeze({
 // find, below the level cap, and with every place reachable. Returns [{ q, start, end, obj, kills }] by level and ID.
 // options: { graph (as loadTravel gives it), maxLevel }.
 function classQuests(db, ch, options = {}) {
-  return candidates(db, ch, plannerGraph(options.graph || emptyGraph(db)), options.maxLevel || 60).routable;
+  return candidates(db, ch, plannerGraph(db, options.graph || emptyGraph(db)), options.maxLevel || 60).routable;
 }
 // Whether a quest is from the Skyborne start: given on Zephras Isle. A quest filed under a class sort has no zone, so
 // this is read from where it is given, not from the quest's zone.
@@ -217,7 +217,7 @@ function layerClass(db, graph, facts, ch, maxLevel) {
       const inWindow = (k) => k >= 1 && levels[k] <= top;
       const offered = [];
       for (let k = 1; k <= n; k++) {
-        if (!inWindow(k) || levels[k] < Math.max(q.minLevel, q.level - C.HARD_TALK)) continue; // never taken above the level (tuning.js)
+        if (!inWindow(k) || levels[k] < Math.max(q.minLevel, q.level - above(Math.floor(levels[k]), false))) continue; // never taken above the level (tuning.js)
         if (!canAccept(q, view(k))) { reason = "the route never offers it (a prerequisite, an exclusive quest or its level cap)"; continue; }
         if (logPeak[k] + occupied[k] + 1 > C.LOG_LIMIT) { reason = "the quest log is full wherever it is offered"; continue; }
         offered.push(k);
@@ -233,7 +233,7 @@ function layerClass(db, graph, facts, ch, maxLevel) {
         push(plan[0], c);
         let ok = true, from = a.k;
         if (c.obj) {
-          const o = cheapest(range(from, (k) => !c.kills || levels[k] >= q.level - C.HARD), c.obj.point);
+          const o = cheapest(range(from, (k) => !c.kills || levels[k] >= q.level - above(Math.floor(levels[k]), true)), c.obj.point);
           if (!o) ok = false;
           else { plan.push({ k: o.k, action: "objective", place: c.obj, cost: o.cost }); push(plan[plan.length - 1], c); from = o.k; }
         }
@@ -333,7 +333,7 @@ function layerClass(db, graph, facts, ch, maxLevel) {
 function layerClasses(db, route, characters, options = {}) {
   const maxLevel = options.maxLevel || 60;
   const rawGraph = options.graph || emptyGraph(db);
-  const graph = plannerGraph(rawGraph);
+  const graph = plannerGraph(db, rawGraph);
   const classes = {};
   const inserts = new Map();
   if (characters.length) {
